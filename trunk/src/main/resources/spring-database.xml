@@ -8,7 +8,7 @@
         destroy-method="close">
 
         <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/reinsDB" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/sportsLotteryDB" />
         <property name="username" value="postgres" />
         <property name="password" value="postgres" />
         <property name="initialSize" value="10" />
