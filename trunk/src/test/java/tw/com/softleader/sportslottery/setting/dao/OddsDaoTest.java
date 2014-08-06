@@ -35,7 +35,7 @@ public class OddsDaoTest extends BaseTest {
 		
 		OddsEntity entity = new OddsEntity();
 		entity.setGameId(gameDao.findById(1L));
-		entity.setOddType("SU_A");
+		entity.setOddType("EVEN");
 		BigDecimal combination = new BigDecimal("1");
 		entity.setOddCombination(combination);
 		BigDecimal value = new BigDecimal("1");
@@ -49,7 +49,25 @@ public class OddsDaoTest extends BaseTest {
 			currentSize = entitys.size();
 		}
 		
-		assertEquals(originSize + 1,currentSize);
+		assertEquals(originSize + 1, currentSize);
+		
+		entity = oddsDao.findById(entity.getId());
+		log.debug("entity = {}", entity);
+		
+		entity.setOddType("ODD");
+		
+		oddsDao.update(entity);
+		log.debug("updated entity = {}", entity);
+		
+		oddsDao.delete(entity);
+		
+		entitys = oddsDao.findAll();
+		
+		if(entitys != null) {
+			currentSize = entitys.size();
+		}
+		
+		assertEquals(originSize, currentSize);
 	}
 
 }
