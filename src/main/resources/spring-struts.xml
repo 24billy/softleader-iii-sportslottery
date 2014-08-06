@@ -19,6 +19,6 @@
 	
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
-
+	<bean id="teamAction" class="tw.com.softleader.sportslottery.setting.web.TeamAction" scope="prototype"/>
 	
 </beans>
