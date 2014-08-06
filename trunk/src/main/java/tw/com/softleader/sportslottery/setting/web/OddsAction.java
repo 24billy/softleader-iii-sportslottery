@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
@@ -21,6 +22,8 @@ public class OddsAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(OddsAction.class);
     private OddsEntity entity;
     private List<OddsEntity> entitys;
+    
+    @Autowired
     private OddsService service;
     
     @Override
