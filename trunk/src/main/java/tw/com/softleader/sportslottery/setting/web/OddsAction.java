@@ -20,46 +20,74 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class OddsAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(OddsAction.class);
-    private OddsEntity entity;
-    private List<OddsEntity> entitys;
+    private OddsEntity model;
+    private List<OddsEntity> models;
+    private String modelsJson;
     
     @Autowired
     private OddsService service;
     
-    @Override
+    public OddsEntity getModel() {
+		return model;
+	}
+
+	public void setModel(OddsEntity model) {
+		this.model = model;
+	}
+
+	public List<OddsEntity> getModels() {
+		return models;
+	}
+
+	public void setModels(List<OddsEntity> models) {
+		this.models = models;
+	}
+
+	public String getModelsJson() {
+		return modelsJson;
+	}
+
+	public void setModelsJson(String modelsJson) {
+		this.modelsJson = modelsJson;
+	}
+	
+	@Override
 	public void validate() {
 	}
-    
-    public String select() throws Exception {
+
+	public String select() throws Exception {
     	log.debug("select...");
-    	entity = service.getById(entity.getId());
-    	log.debug("entity = {}", entity);
+    	model = service.getById(model.getId());
+    	log.debug("model = {}", model);
     	return Action.SUCCESS;
     }
     
     public String insert() throws Exception {
     	log.debug("insert...");
-    	service.insert(entity);
+    	service.insert(model);
     	return Action.SUCCESS;
     }
     
     public String update() throws Exception {
     	log.debug("update...");
-    	service.update(entity);
+    	service.update(model);
     	return Action.SUCCESS;
     }
     
     public String delete() throws Exception {
     	log.debug("delete...");
-    	service.delete(entity);
+    	service.delete(model);
     	return Action.SUCCESS;
     }
 
 	@Override
 	public String execute() throws Exception {
 		log.debug("service...");
-		entitys = service.getAll();
-		log.debug("entitys = {}", entitys);
+		models = service.getAll();
+		log.debug("models = {}", models);
+		
+		modelsJson = service.getAllJSON();
+		log.debug("modelsJson = {}", modelsJson);
 		return Action.SUCCESS;
 	}
     
