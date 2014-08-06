@@ -16,7 +16,7 @@ public abstract class GenericEntity implements Serializable {
 	
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//the database will geneate id automatically
 	protected Long id;
 	//http://docs.oracle.com/javaee/7/api/javax/persistence/GenerationType.html#IDENTITY
         
