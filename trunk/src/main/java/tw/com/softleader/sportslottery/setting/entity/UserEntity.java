@@ -16,7 +16,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
  */
 
 @Entity
-@Table(name="USER")
+@Table(name="USERN")
 public class UserEntity extends GenericEntity {
 	
 	@Override
