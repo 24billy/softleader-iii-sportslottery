@@ -27,7 +27,7 @@ public class UserEntity extends GenericEntity {
 				+ USER_GENDER + ", USER_PHONE=" + USER_PHONE + ", USER_EMAIL="
 				+ USER_EMAIL + "]";
 	}
-
+        //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
 	@Column(name="USER_ACCOUNT", length=50, nullable=true)
 	private String USER_ACCOUNT;
