@@ -1,6 +1,8 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
@@ -13,6 +15,8 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
  *
  */
 
+@Entity
+@Table(name="USER")
 public class UserEntity extends GenericEntity {
 	
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
