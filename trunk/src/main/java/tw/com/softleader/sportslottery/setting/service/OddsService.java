@@ -9,7 +9,7 @@ import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 @Service
-public class OddsService extends GenericService {
+public class OddsService extends GenericService<OddsEntity> {
 	
 	@Autowired
 	private OddsDao dao;
