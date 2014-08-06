@@ -15,22 +15,24 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 public class TeamEntity extends GenericEntity {
 
 	@Column(name = "TEAM_NAME", length = 50)
-	private String teamNmae;
+	private String teamName;
 
-	public String getTeamNmae() {
-		return teamNmae;
+	public String getTeamName() {
+		return teamName;
 	}
 
-	public void setTeamNmae(String teamNmae) {
-		this.teamNmae = teamNmae;
+	public void setTeamNmae(String teamName) {
+		this.teamName = teamName;
 	}
 
 	@Override
 	public String toString() {
-		return "teamEntity [teamNmae=" + teamNmae + ", id=" + id
+		return "TeamEntity [teamName=" + teamName + ", id=" + id
 				+ ", createTime=" + createTime + ", creator=" + creator
 				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
 				+ "]";
 	}
+
+	
 	
 }
