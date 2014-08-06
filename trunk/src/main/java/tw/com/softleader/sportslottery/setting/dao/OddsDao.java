@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 
 @Repository
-public class BetDao extends GenericDao {
+public class OddsDao extends GenericDao {
 	
 }

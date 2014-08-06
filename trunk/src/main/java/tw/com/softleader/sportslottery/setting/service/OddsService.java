@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
-import tw.com.softleader.sportslottery.setting.dao.BetDao;
+import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 
 @Service
-public class BetService extends GenericService {
+public class OddsService extends GenericService {
 	
 	@Autowired
-	private BetDao dao;
+	private OddsDao dao;
 	
 	@Override
 	protected GenericDao getDao() {
