@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDateTime;
+import org.joda.time.LocalDate;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
@@ -42,8 +42,8 @@ public class UserEntity extends GenericEntity {
 	
 	//USER_BIRTHDAY	生日		timesemp	JODA_TIME
 	@Column(name="USER_BIRTHDAY")
-	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	protected LocalDateTime USER_BIRTHDAY;	
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+	protected LocalDate USER_BIRTHDAY;	
 	
 	//USER_GENDER	性別		varchar		String		10	
 	@Column(name="USER_GENDER", length=10)
@@ -81,14 +81,6 @@ public class UserEntity extends GenericEntity {
 		USER_NAME = uSER_NAME;
 	}
 
-	public LocalDateTime getUSER_BIRTHDAY() {
-		return USER_BIRTHDAY;
-	}
-
-	public void setUSER_BIRTHDAY(LocalDateTime uSER_BIRTHDAY) {
-		USER_BIRTHDAY = uSER_BIRTHDAY;
-	}
-
 	public String getUSER_GENDER() {
 		return USER_GENDER;
 	}
@@ -111,6 +103,14 @@ public class UserEntity extends GenericEntity {
 
 	public void setUSER_EMAIL(String uSER_EMAIL) {
 		USER_EMAIL = uSER_EMAIL;
+	}
+
+	public LocalDate getUSER_BIRTHDAY() {
+		return USER_BIRTHDAY;
+	}
+
+	public void setUSER_BIRTHDAY(LocalDate uSER_BIRTHDAY) {
+		USER_BIRTHDAY = uSER_BIRTHDAY;
 	}
 
 	
