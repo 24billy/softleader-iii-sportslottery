@@ -13,7 +13,22 @@
 </div>
 
 <script>
+(function($) {
+	var json = '${modelsJson}';
 
+	var odds = $.parseJSON(json);
+	$.each(odds, function(index, value) {
+		console.log("-=ODDS=-");
+		$.each(value, function(key, value) {
+			console.log(key + ":" + value);
+		});
+		console.log("-=GAME=-");
+		$.each(value.gameId, function(key, value) {
+			console.log(key + ":" + value);
+		});
+	});
+
+})(jQuery);
 </script>
 </body>
 </html>
