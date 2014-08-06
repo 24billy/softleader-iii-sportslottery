@@ -1,5 +1,8 @@
 package tw.com.softleader.sportslottery.common.test;
 
+
+
+
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
