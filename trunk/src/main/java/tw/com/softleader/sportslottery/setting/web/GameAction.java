@@ -53,7 +53,6 @@ public class GameAction extends ActionSupport {
 	}
 	
 	
-	
 	public String execute(){
 		log.debug("execute GameAction");
 

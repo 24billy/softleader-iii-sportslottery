@@ -1,5 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,36 @@ public class GameService extends GenericService<GameEntity> {
 	protected GenericDao<GameEntity> getDao() {
 		
 		return dao;
+	}
+	
+	@Override
+	public List<GameEntity> getAll() {
+		// TODO Auto-generated method stub
+		return super.getAll();
+	}
+
+	@Override
+	public GameEntity getById(Long id) {
+		// TODO Auto-generated method stub
+		return super.getById(id);
+	}
+
+	@Override
+	public GameEntity insert(GameEntity entity) {
+		// TODO Auto-generated method stub
+		return super.insert(entity);
+	}
+
+	@Override
+	public GameEntity update(GameEntity entity) {
+		// TODO Auto-generated method stub
+		return super.update(entity);
+	}
+
+	@Override
+	public void delete(GameEntity entity) {
+		// TODO Auto-generated method stub
+		super.delete(entity);
 	}
 
 }
