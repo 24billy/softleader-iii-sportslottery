@@ -54,6 +54,7 @@ public class OddsAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
+		log.debug("service...");
 		entitys = service.getAll();
 		log.debug("entitys = {}", entitys);
 		return Action.SUCCESS;
