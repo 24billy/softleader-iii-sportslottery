@@ -15,5 +15,11 @@
 		<result name="input">/Match.jsp</result>
 		<allowed-methods></allowed-methods>
 	</action> 
+	
+	<action name="odds" class="oddsAction" method="execute">
+		<result name="success">Json/oddsJson.jsp</result>
+		<result name="input">Json/oddsJson.jsp</result>
+		<allowed-methods>select,insert,update,delete</allowed-methods>
+	</action>
   </package>
 </struts>
