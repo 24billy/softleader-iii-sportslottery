@@ -2,6 +2,8 @@ package tw.com.softleader.sportslottery.setting.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -24,11 +26,13 @@ public class GameEntity extends GenericEntity{
 	@Column(name="GAME_NUM")
 	private Long gameNum;
 	
-	@Column(name="TEAM_HOME")
-	private Long teamHome;
+	@ManyToOne
+	@JoinColumn(name="TEAM_HOME")
+	private TeamEntity teamHome;
 	
-	@Column(name="TEAM_AWAY")
-	private Long teamAway;
+	@ManyToOne	
+	@JoinColumn(name="TEAM_AWAY")
+	private TeamEntity teamAway;
 	
 	@Column(name="GAME_SCORE_HOME")
 	private Long gameScoreHome;
@@ -69,19 +73,19 @@ public class GameEntity extends GenericEntity{
 		this.gameNum = gameNum;
 	}
 
-	public Long getTeamHome() {
+	public TeamEntity getTeamHome() {
 		return teamHome;
 	}
 
-	public void setTeamHome(Long teamHome) {
+	public void setTeamHome(TeamEntity teamHome) {
 		this.teamHome = teamHome;
 	}
 
-	public Long getTeamAway() {
+	public TeamEntity getTeamAway() {
 		return teamAway;
 	}
 
-	public void setTeamAway(Long teamAway) {
+	public void setTeamAway(TeamEntity teamAway) {
 		this.teamAway = teamAway;
 	}
 
