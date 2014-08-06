@@ -18,7 +18,7 @@ public class UserDaoTest extends BaseTest {
 		entity.setUSER_NAME("Ken");
 		entity.setUSER_EMAIL("ken@gmail.com");
 		entity.setUSER_GENDER("male");
-		entity.setUSER_PHONE("0988-123-456");
+		entity.setUSER_PHONE("0988123456");
 		LocalDate birthDate = new LocalDate();
 		entity.setUSER_BIRTHDAY(birthDate);
 		log.debug(entity.toString());
