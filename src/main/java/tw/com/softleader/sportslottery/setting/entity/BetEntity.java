@@ -3,11 +3,15 @@ package tw.com.softleader.sportslottery.setting.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
+@Entity
+@Table(name = "BET")
 public class BetEntity extends GenericEntity {
 	
 	@OneToOne
