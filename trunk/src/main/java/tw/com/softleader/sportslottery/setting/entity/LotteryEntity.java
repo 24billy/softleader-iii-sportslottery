@@ -17,49 +17,36 @@ public class LotteryEntity extends GenericEntity{
 	private UserEntity userId;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_1")
-	private StakeEntity stakeId1;
+	@JoinColumn(name="ODDS_ID_1")
+	private OddsEntity oddsId1;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_2")
-	private StakeEntity stakeId2;
+	@JoinColumn(name="ODDS_ID_2")
+	private OddsEntity oddsId2;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_3")
-	private StakeEntity stakeId3;
+	@JoinColumn(name="ODDS_ID_3")
+	private OddsEntity oddsId3;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_4")
-	private StakeEntity stakeId4;
+	@JoinColumn(name="ODDS_ID_4")
+	private OddsEntity oddsId4;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_5")
-	private StakeEntity stakeId5;
+	@JoinColumn(name="ODDS_ID_5")
+	private OddsEntity oddsId5;
 		
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_6")
-	private StakeEntity stakeId6;
+	@JoinColumn(name="ODDS_ID_6")
+	private OddsEntity oddsId6;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_7")
-	private StakeEntity stakeId7;
+	@JoinColumn(name="ODDS_ID_7")
+	private OddsEntity oddsId7;
 	
 	@ManyToOne	
-	@JoinColumn(name="STAKE_ID_8")
-	private StakeEntity stakeId8;
-
-	
-	
-	@Override
-	public String toString() {
-		return "LotteryEntity [userId=" + userId + ", stakeId1=" + stakeId1
-				+ ", stakeId2=" + stakeId2 + ", stakeId3=" + stakeId3
-				+ ", stakeId4=" + stakeId4 + ", stakeId5=" + stakeId5
-				+ ", stakeId6=" + stakeId6 + ", stakeId7=" + stakeId7
-				+ ", stakeId8=" + stakeId8 + ", id=" + id + ", createTime="
-				+ createTime + ", creator=" + creator + ", modifiedTime="
-				+ modifiedTime + ", modifier=" + modifier + "]";
-	}
+	@JoinColumn(name="ODDS_ID_8")
+	private OddsEntity oddsId8;
 
 	public UserEntity getUserId() {
 		return userId;
@@ -69,69 +56,84 @@ public class LotteryEntity extends GenericEntity{
 		this.userId = userId;
 	}
 
-	public StakeEntity getStakeId1() {
-		return stakeId1;
+	public OddsEntity getOddsId1() {
+		return oddsId1;
 	}
 
-	public void setStakeId1(StakeEntity stakeId1) {
-		this.stakeId1 = stakeId1;
+	public void setOddsId1(OddsEntity oddsId1) {
+		this.oddsId1 = oddsId1;
 	}
 
-	public StakeEntity getStakeId2() {
-		return stakeId2;
+	public OddsEntity getOddsId2() {
+		return oddsId2;
 	}
 
-	public void setStakeId2(StakeEntity stakeId2) {
-		this.stakeId2 = stakeId2;
+	public void setOddsId2(OddsEntity oddsId2) {
+		this.oddsId2 = oddsId2;
 	}
 
-	public StakeEntity getStakeId3() {
-		return stakeId3;
+	public OddsEntity getOddsId3() {
+		return oddsId3;
 	}
 
-	public void setStakeId3(StakeEntity stakeId3) {
-		this.stakeId3 = stakeId3;
+	public void setOddsId3(OddsEntity oddsId3) {
+		this.oddsId3 = oddsId3;
 	}
 
-	public StakeEntity getStakeId4() {
-		return stakeId4;
+	public OddsEntity getOddsId4() {
+		return oddsId4;
 	}
 
-	public void setStakeId4(StakeEntity stakeId4) {
-		this.stakeId4 = stakeId4;
+	public void setOddsId4(OddsEntity oddsId4) {
+		this.oddsId4 = oddsId4;
 	}
 
-	public StakeEntity getStakeId5() {
-		return stakeId5;
+	public OddsEntity getOddsId5() {
+		return oddsId5;
 	}
 
-	public void setStakeId5(StakeEntity stakeId5) {
-		this.stakeId5 = stakeId5;
+	public void setOddsId5(OddsEntity oddsId5) {
+		this.oddsId5 = oddsId5;
 	}
 
-	public StakeEntity getStakeId6() {
-		return stakeId6;
+	public OddsEntity getOddsId6() {
+		return oddsId6;
 	}
 
-	public void setStakeId6(StakeEntity stakeId6) {
-		this.stakeId6 = stakeId6;
+	public void setOddsId6(OddsEntity oddsId6) {
+		this.oddsId6 = oddsId6;
 	}
 
-	public StakeEntity getStakeId7() {
-		return stakeId7;
+	public OddsEntity getOddsId7() {
+		return oddsId7;
 	}
 
-	public void setStakeId7(StakeEntity stakeId7) {
-		this.stakeId7 = stakeId7;
+	public void setOddsId7(OddsEntity oddsId7) {
+		this.oddsId7 = oddsId7;
 	}
 
-	public StakeEntity getStakeId8() {
-		return stakeId8;
+	public OddsEntity getOddsId8() {
+		return oddsId8;
 	}
 
-	public void setStakeId8(StakeEntity stakeId8) {
-		this.stakeId8 = stakeId8;
+	public void setOddsId8(OddsEntity oddsId8) {
+		this.oddsId8 = oddsId8;
 	}
+
+	@Override
+	public String toString() {
+		return "LotteryEntity [userId=" + userId + ", oddsId1=" + oddsId1
+				+ ", oddsId2=" + oddsId2 + ", oddsId3=" + oddsId3
+				+ ", oddsId4=" + oddsId4 + ", oddsId5=" + oddsId5
+				+ ", oddsId6=" + oddsId6 + ", oddsId7=" + oddsId7
+				+ ", oddsId8=" + oddsId8 + ", id=" + id + ", createTime="
+				+ createTime + ", creator=" + creator + ", modifiedTime="
+				+ modifiedTime + ", modifier=" + modifier + "]";
+	}
+
+	
+	
+	
 	
 	
 }
