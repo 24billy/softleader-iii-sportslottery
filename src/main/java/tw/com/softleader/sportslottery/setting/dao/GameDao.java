@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 
 /**
  * 
@@ -12,7 +13,7 @@ import tw.com.softleader.sportslottery.common.dao.GenericDao;
  *
  */
 @Repository
-public class GameDao extends GenericDao{
+public class GameDao extends GenericDao<GameEntity>{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
