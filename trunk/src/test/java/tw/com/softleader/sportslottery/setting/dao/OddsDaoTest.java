@@ -8,9 +8,10 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import tw.com.softleader.sportslottery.common.test.BaseTest;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
-public class OddsDaoTest {
+public class OddsDaoTest extends BaseTest {
 	
 	@Autowired
 	private OddsDao oddsDao;
