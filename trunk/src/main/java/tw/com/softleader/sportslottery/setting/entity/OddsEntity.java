@@ -18,13 +18,13 @@ public class OddsEntity extends GenericEntity {
 	@JoinColumn(name = "GAME_ID")
 	private GameEntity gameId;
 	
-	@Column(name = "ODD_TYPE")
+	@Column(name = "ODD_TYPE", length = 10)
 	private String oddType;
 	
-	@Column(name = "ODD_COMBINATION")
+	@Column(name = "ODD_COMBINATION", columnDefinition = "NUMERIC(8,3)")
 	private BigDecimal oddCombination;
 	
-	@Column(name = "ODD_VALUE")
+	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3)")
 	private BigDecimal oddValue;
 	
 	@Override
