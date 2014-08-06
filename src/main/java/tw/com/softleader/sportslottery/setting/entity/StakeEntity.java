@@ -12,4 +12,9 @@ package tw.com.softleader.sportslottery.setting.entity;
  */
 public class StakeEntity {
     
+    private Long ID;
+    private String BET_TYPE;
+    private Long BET_ID;
+    private String AWAY_HOME;
+    
 }
