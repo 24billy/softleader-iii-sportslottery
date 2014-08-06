@@ -9,3 +9,7 @@ insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) valu
 insert into lottery ( create_time, creator, modified_time, modifier) values (CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
 insert into lottery ( create_time, creator, modified_time, modifier) values (CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
 insert into lottery ( create_time, creator, modified_time, modifier) values (CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
+
+insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (1, 'SU_H', 1, 1, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (2, 'SU_H', 2, 2, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (3, 'SU_H', 3, 3, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
