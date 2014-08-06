@@ -16,7 +16,6 @@ public class OddsService extends GenericService<OddsEntity> {
 	
 	@Override
 	protected GenericDao<OddsEntity> getDao() {
-		// TODO Auto-generated method stub
 		return dao;
 	}
 	
