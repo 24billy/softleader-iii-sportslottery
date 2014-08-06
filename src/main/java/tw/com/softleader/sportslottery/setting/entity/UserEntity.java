@@ -19,6 +19,15 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Table(name="USER")
 public class UserEntity extends GenericEntity {
 	
+	@Override
+	public String toString() {
+		return "UserEntity [USER_ACCOUNT=" + USER_ACCOUNT + ", USER_PASSWORD="
+				+ USER_PASSWORD + ", USER_NAME=" + USER_NAME
+				+ ", USER_BIRTHDAY=" + USER_BIRTHDAY + ", USER_GENDER="
+				+ USER_GENDER + ", USER_PHONE=" + USER_PHONE + ", USER_EMAIL="
+				+ USER_EMAIL + "]";
+	}
+
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
 	@Column(name="USER_ACCOUNT", length=50, nullable=true)
 	private String USER_ACCOUNT;
