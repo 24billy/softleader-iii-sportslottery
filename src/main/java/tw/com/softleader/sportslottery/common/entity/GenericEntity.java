@@ -18,7 +18,8 @@ public abstract class GenericEntity implements Serializable {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	
+	//http://docs.oracle.com/javaee/7/api/javax/persistence/GenerationType.html#IDENTITY
+        
 	@Column(name="CREATE_TIME")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	protected LocalDateTime createTime;
