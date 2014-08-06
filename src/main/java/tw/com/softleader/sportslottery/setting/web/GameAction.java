@@ -24,7 +24,7 @@ public class GameAction extends ActionSupport {
 	
 	private List<GameEntity> models;
 	
-	private Logger log = LoggerFactory.getLogger(TeamAction.class);
+	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	
 	public GameService getService() {
 		return service;
