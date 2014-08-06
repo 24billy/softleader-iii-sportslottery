@@ -9,6 +9,7 @@ import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 @Repository
 public class UserDao extends GenericDao<UserEntity> {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
