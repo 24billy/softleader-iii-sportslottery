@@ -24,12 +24,4 @@ public class OddsService extends GenericService<OddsEntity> {
 	protected GenericDao<OddsEntity> getDao() {
 		return dao;
 	}
-
-	public String getAllJSON() {
-
-		String toJson = new Gson().toJson(dao.findAll());
-		return toJson;
-	}
-	
-	
 }
