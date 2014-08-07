@@ -9,7 +9,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
+
 <style>
 body {
 	background: #999999;
@@ -98,57 +101,49 @@ article {
 
 	<article>
 		<div id="matchBoard">
-			<div class="date">
-				<s:iterator value="models">
-					<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
-					<div class="dateLabel">${dateJoda}</div>
-					<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
-					<div class="match">
-						<div class="matchNum">${gameNum}</div>
-						<div class="matchTime">${timeJoda}</div>
-						<div class="matchAway">${teamAway.teamName}</div>
-						<div class="matchHome">${teamHome.teamName}</div>
-					</div>
-				</s:iterator>
-			</div>
+
 		</div>
 	</article>
 	
 	
 
 	<script>
-	(function($){
-		var items = [];
-		<s:iterator value="models">   
-			<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
-			<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
-			var item = new Object;
-			item.gameNum = '${gameNum}';
-			item.dateJoda = '${dateJoda}';
-			item.timeJoda = '${timeJoda}';
-			item.teamAway = '${teamAway.teamName}';
-			item.teamHome = '${teamHome.teamName}';
-			items.push(item);
-		</s:iterator>
-		
-		$.each(items,function(index,item){
-			$.each(item,function(key,value){
-				console.log(key + "-" + value);
-			});
-		});
-		
-		console.log("----------------------------");
-		
+	(function($){		
 		var json = '${modelsJson}';
 		var models = $.parseJSON(json);
+		var items = [];
+		$.each(models, function(index,model){
+			var item = new Object;
+			
+			item.gameNum = model.gameNum;
+			item.date = millisecondToDate(model.gameTime.iLocalMillis);
+			item.time = millisecondToTime(model.gameTime.iLocalMillis);
+			item.teamAway = model.teamAway.teamName;
+			item.teamHome = model.teamHome.teamName;
+			item.leagueName = model.leagueName;
+			item.ballType = model.ballType;
+			
+			items.push(item);
+		});
 		
-		$.each(models,function(index,model){
-			console.log(model.gameNum);
-			var d = new Date(model.gameTime.iLocalMillis);
-			console.log(d.toLocaleDateString());
-			console.log(d.toLocaleTimeString());
-			console.log(model.teamAway.teamName);
-			console.log(model.teamHome.teamName);
+		var matchDate = getMatchDates(models);
+		
+		$.each(matchDate, function(index,date){
+			var strHtml = '<div class="date">';
+				strHtml += '<div class="dateLabel">' + date + '</div>';
+				strHtml += '<div class="match">';
+			$.each(items, function(index,item){
+				if(date == item.date){
+					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
+					strHtml += '<div class="matchTime">' + item.time + '</div>';
+					strHtml += '<div class="matchAway">' + item.teamAway + '</div>';
+					strHtml += '<div class="matchHome">' + item.teamHome + '</div>';
+					strHtml += '<br>'
+				}
+			});
+			strHtml += '</div>';
+			strHtml += '</div>';
+			$('#matchBoard').append(strHtml);
 		});
 	})(jQuery);
 	</script>
