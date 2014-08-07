@@ -34,7 +34,9 @@ public abstract class GenericService<T extends GenericEntity> {
 	}
 	
 	public String getAllJSON() {
-		String toJson = new Gson().toJson(getDao().findAll());
+		String toJson = new Gson().toJson(getDao().findAll()); 
+		//import com.google.gson.Gson;
+		//用 new Gson().toJson 與用 將findAll()得出的bean list 轉成Json型態
 		return toJson;
 	}
 	
