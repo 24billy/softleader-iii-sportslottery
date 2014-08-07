@@ -29,15 +29,15 @@ public class UserEntity extends GenericEntity {
 	}
         //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
-	@Column(name="USER_ACCOUNT", length=50, nullable=true)
+	@Column(name="USER_ACCOUNT", length=50, nullable=false)
 	private String USER_ACCOUNT;
 	
 	//USER_PASSWORD	密碼		varchar		String		50	NOT NULL
-	@Column(name="USER_PASSWORD", length=50, nullable=true)
+	@Column(name="USER_PASSWORD", length=50, nullable=false)
 	private String USER_PASSWORD;
 	
 	//USER_NAME		名字		varchar		String		50	NOT NULL
-	@Column(name="USER_NAME", length=50, nullable=true)
+	@Column(name="USER_NAME", length=50, nullable=false)
 	private String USER_NAME;
 	
 	//USER_BIRTHDAY	生日		timesemp	JODA_TIME
@@ -54,7 +54,7 @@ public class UserEntity extends GenericEntity {
 	private String USER_PHONE;
 	
 	//USER_EMAIL	電子信箱	varchar		String		50	NOT NULL
-	@Column(name="USER_EMAIL", length=50, nullable=true)
+	@Column(name="USER_EMAIL", length=50, nullable=false)
 	private String USER_EMAIL;
 
 	public String getUSER_ACCOUNT() {
