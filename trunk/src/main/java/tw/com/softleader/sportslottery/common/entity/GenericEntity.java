@@ -16,22 +16,22 @@ public abstract class GenericEntity implements Serializable {
 	
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//the database will geneate id automatically
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//the database will generate id automatically
 	protected Long id;
 	//http://docs.oracle.com/javaee/7/api/javax/persistence/GenerationType.html#IDENTITY
         
-	@Column(name="CREATE_TIME")
+	@Column(name="CREATE_TIME")//data inserted time
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	protected LocalDateTime createTime;
 	
-	@Column(name="CREATOR")
+	@Column(name="CREATOR") //who input the data 
 	protected String creator;
 	
 	@Column(name="MODIFIED_TIME")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	protected LocalDateTime modifiedTime;
 	
-	@Column(name="MODIFIER")
+	@Column(name="MODIFIER")//who modifies the data
 	protected String modifier;
 
 	@Override
@@ -41,6 +41,7 @@ public abstract class GenericEntity implements Serializable {
 				+ ", modifier=" + modifier + "]";
 	}
 
+	//getter and setter
 	public Long getId() {
 		return id;
 	}
