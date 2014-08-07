@@ -12,9 +12,9 @@
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   
     <action name="game" class="gameAction" method="execute"> 
-    <!-- 網址 http://localhost:8080/softleader-iii-sportslottery/game -->
-    <!-- execute 是GameAction.java裡 的exectue() -->
-    <!-- GameAction.java的位置需要去spring-struts查   -->
+    <!-- 網址 http://localhost:8080/softleader-iii-sportslottery/game
+    		 execute 是GameAction.java裡 的exectue()
+    		 GameAction.java的位置需要去spring-struts.xml查                                                 -->
     
 		<result name="success">/Match.jsp</result>
 		<!-- execute()執行完成功後，就會執行Match.jsp --> 
@@ -25,8 +25,9 @@
 	</action> 
 	
 	<action name="odds" class="oddsAction" method="execute">
-	<!-- 網址 http://localhost:8080/softleader-iii-sportslottery/odds -->
-	<!-- execute 是oddsAction.java裡 的exectue() -->
+	<!-- 網址 http://localhost:8080/softleader-iii-sportslottery/odds 
+			 execute 是oddsAction.java裡 的exectue() 
+			 oddsAction.java的位置需要去spring-struts.xml查           														-->
 	
 		<result name="success">Json/oddsJson.jsp</result>
 		<!-- execute()執行完成功後，就會執行oddsJson.jsp --> 
