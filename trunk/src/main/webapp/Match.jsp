@@ -118,25 +118,24 @@ article {
 
 	<script>
 	(function($){
-		var json = '${modelsJson}';
-		var models = $.parseJSON(json);
-		$.each(models, function(index, model) {
-			console.log(model.gameNum);
-			console.log(model.gameTime);
-			console.log(model.teamAway.teamName);
-			console.log(model.teamHome.teamName);
+		var items = [];
+		<s:iterator value="models">   
+			<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
+			<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
+			var item = new Object;
+			item.gameNum = '${gameNum}';
+			item.dateJoda = '${dateJoda}';
+			item.timeJoda = '${timeJoda}';
+			item.teamAway = '${teamAway.teamName}';
+			item.teamHome = '${teamHome.teamName}';
+			items.push(item);
+		</s:iterator>
+		
+		$.each(items,function(index,item){
+			$.each(item,function(key,value){
+				console.log(key + "-" + value);
+			});
 		});
-		
-		
-		//<s:iterator value="models">   
-		//	<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
-		//	<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
-		//	console.log('${gameNum}');
-		//	console.log('${dateJoda}');
-		//	console.log('${timeJoda}');
-		//	console.log('${teamAway.teamName}');
-		//	console.log('${teamHome.teamName}');
-		//</s:iterator>
 	})(jQuery);
 	</script>
 </body>
