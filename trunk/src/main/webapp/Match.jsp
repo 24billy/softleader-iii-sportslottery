@@ -36,7 +36,6 @@ article {
 .date {
 	margin: 20px auto;
 	padding: 10px;
-	box-shadow: 0px 0px 2px 2px #999999;
 }
 
 .dateLabel {
@@ -70,47 +69,61 @@ article {
 	border-bottom: 2px solid #76C0E8;
 }
 
-.matchHome {
+.matchTeam {
 	width: 200px;
 	border-bottom: 2px solid #1e69de;
+	cursor: pointer;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
 }
 
-.matchHome:HOVER {
+.matchTeam:HOVER {
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
 		rgba(225, 225, 225, 1) 16%, rgba(225, 225, 225, 1) 16%,
 		rgba(241, 241, 241, 1) 17%, rgba(255, 255, 255, 1) 88%,
 		rgba(246, 246, 246, 1) 100%);
 }
 
-.matchAway {
-	width: 200px;
-	border-bottom: 2px solid #1e69de;
+#teamDetails{
+	font-size: 16px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
+	color: #ffffff;
+	text-align: center;
+	line-height:20px;
+
+	display: none;
+	position: absolute;
+	width:200px;
+	height:40px;
+	background: #333333;
+	border-radius: 10px 10px 10px 0px;
+	top:20px;
+	left:20px;
+	pointer-events: none;
 }
 
-.matchAway:HOVER {
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
-		rgba(225, 225, 225, 1) 16%, rgba(225, 225, 225, 1) 16%,
-		rgba(241, 241, 241, 1) 17%, rgba(255, 255, 255, 1) 88%,
-		rgba(246, 246, 246, 1) 100%);
-}
 </style>
 
 </head>
 <body>
 
-
 	<article>
+		<div id="teamDetails"></div>
 		<div id="matchBoard">
 
 		</div>
 	</article>
-	
-	
 
 	<script>
-	(function($){		
+	(function($){
+		//取得資料
+		//將findAll的資料以JSON格式取出，使用google的API來轉換
 		var json = '${modelsJson}';
 		var models = $.parseJSON(json);
+		
+		//轉換資料
+		//使用一個item陣列儲存model裡的資料，時間資料則經由misc.js裡的方法來格式化
 		var items = [];
 		$.each(models, function(index,model){
 			var item = new Object;
@@ -126,24 +139,51 @@ article {
 			items.push(item);
 		});
 		
+		//顯示頁面
+		//將賽事資料以日期做分類，使同日期的賽事顯示在同一個區塊中
 		var matchDate = getMatchDates(models);
-		
+		matchDate.reverse();
 		$.each(matchDate, function(index,date){
-			var strHtml = '<div class="date">';
+			var strHtml =  '<div class="date">';
 				strHtml += '<div class="dateLabel">' + date + '</div>';
 				strHtml += '<div class="match">';
 			$.each(items, function(index,item){
 				if(date == item.date){
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchAway">' + item.teamAway + '</div>';
-					strHtml += '<div class="matchHome">' + item.teamHome + '</div>';
-					strHtml += '<br>'
+					strHtml += '<div class="matchTeam">' + item.teamAway + '</div>';
+					strHtml += '<div class="matchTeam">' + item.teamHome + '</div>';
+					strHtml += '<br>';
 				}
 			});
 			strHtml += '</div>';
 			strHtml += '</div>';
 			$('#matchBoard').append(strHtml);
+		});
+		
+		//此部分處理滑鼠移到隊伍上時顯示的詳細資訊
+		$('.matchTeam').mousemove(function(event){
+			$('#teamDetails').css('display','block');
+			$('#teamDetails').css('left',event.pageX);
+			$('#teamDetails').css('top',event.pageY-40);
+			
+			var detail = '';
+			var thisTeam = $(this).text();
+			var hasGet = false;
+			$.each(items, function(index,item){
+				if(!hasGet && (item.teamAway ==thisTeam || item.teamHome == thisTeam)){
+					detail += item.ballType + ' - ' +item.leagueName + '<br>';
+					hasGet = true;
+				}
+			});
+			detail += thisTeam;
+			$('#teamDetails').html(detail);
+		});
+		//處理滑鼠移開的動作
+		$('.matchTeam').mouseout(function(event){
+			$('#teamDetails').css('display','none');
+			$('#teamDetails').css('left','0px');
+			$('#teamDetails').css('top','0px');
 		});
 	})(jQuery);
 	</script>
