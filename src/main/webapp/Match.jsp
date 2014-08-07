@@ -136,6 +136,20 @@ article {
 				console.log(key + "-" + value);
 			});
 		});
+		
+		console.log("----------------------------");
+		
+		var json = '${modelsJson}';
+		var models = $.parseJSON(json);
+		
+		$.each(models,function(index,model){
+			console.log(model.gameNum);
+			var d = new Date(model.gameTime.iLocalMillis);
+			console.log(d.toLocaleDateString());
+			console.log(d.toLocaleTimeString());
+			console.log(model.teamAway.teamName);
+			console.log(model.teamHome.teamName);
+		});
 	})(jQuery);
 	</script>
 </body>
