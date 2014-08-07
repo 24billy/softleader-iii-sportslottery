@@ -25,4 +25,15 @@
 	<bean id="userAction" class="tw.com.softleader.sportslottery.setting.web.UserAction" scope="prototype"/>
 	<bean id="gameAction" class="tw.com.softleader.sportslottery.setting.web.GameAction" scope="prototype"/>
 	
+	<!-- 此頁提供 xxxxAction的程式碼位置-->
+	<!-- 以下以gameAction為例:
+			<bean id ="gameAction" ....>的值對應到 struts.xml裡的  
+			<action name="game" class="gameAction" method="execute"> --> 
+			
+	<!-- scope="prototype" 是每寄一次http://localhost:8080/softleader-iii-sportslottery/game, 
+			就會重新new 一個game的bean  
+			game bean的位置: 
+			/softleader/sportslottery/setting/entity/GameEntity.java
+			/softleader/sportslottery/common/entity/GenericEntity.java	
+	-->
 </beans>
