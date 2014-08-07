@@ -15,6 +15,6 @@ import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 @Repository
 public class GameDao extends GenericDao<GameEntity>{
 	@Autowired
-	private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory; //Hibernate
 	
 }
