@@ -11,7 +11,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
  */
 @Entity
 @Table(name="LOTTERY")
-public class LotteryEntity extends GenericEntity{
+public class LotteryEntity extends GenericEntity {
 	@ManyToOne	
 	@JoinColumn(name="USER_ID")
 	private UserEntity userId;
