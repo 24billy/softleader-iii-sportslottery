@@ -19,13 +19,17 @@ public class GameAction extends ActionSupport {
  
 	@Autowired
 	private GameService service;
-	
 	private GameEntity model;
-	
 	private List<GameEntity> models;
-	
+	private String modelsJson;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	
+	public String getModelsJson() {
+		return modelsJson;
+	}
+	public void setModelsJson(String modelsJson) {
+		this.modelsJson = modelsJson;
+	}
 	public GameService getService() {
 		return service;
 	}
@@ -58,6 +62,9 @@ public class GameAction extends ActionSupport {
 
 		models = service.getAll();
 		log.debug("Models = {}", models);
+		
+		modelsJson = service.getAllJSON();
+		log.debug("modelsJson = {}", modelsJson);
 		
 		return SUCCESS;
 	} 

@@ -25,35 +25,5 @@ public class GameService extends GenericService<GameEntity> {
 		
 		return dao;
 	}
-	
-	@Override
-	public List<GameEntity> getAll() {
-		// TODO Auto-generated method stub
-		return super.getAll();
-	}
-
-	@Override
-	public GameEntity getById(Long id) {
-		// TODO Auto-generated method stub
-		return super.getById(id);
-	}
-
-	@Override
-	public GameEntity insert(GameEntity entity) {
-		// TODO Auto-generated method stub
-		return super.insert(entity);
-	}
-
-	@Override
-	public GameEntity update(GameEntity entity) {
-		// TODO Auto-generated method stub
-		return super.update(entity);
-	}
-
-	@Override
-	public void delete(GameEntity entity) {
-		// TODO Auto-generated method stub
-		super.delete(entity);
-	}
 
 }

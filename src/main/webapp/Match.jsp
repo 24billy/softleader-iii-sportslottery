@@ -118,15 +118,25 @@ article {
 
 	<script>
 	(function($){
-		<s:iterator value="models">   
-			<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
-			<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
-			console.log('${gameNum}');
-			console.log('${dateJoda}');
-			console.log('${timeJoda}');
-			console.log('${teamAway.teamName}');
-			console.log('${teamHome.teamName}');
-		</s:iterator>
+		var json = '${modelsJson}';
+		var models = $.parseJSON(json);
+		$.each(models, function(index, model) {
+			console.log(model.gameNum);
+			console.log(model.gameTime);
+			console.log(model.teamAway.teamName);
+			console.log(model.teamHome.teamName);
+		});
+		
+		
+		//<s:iterator value="models">   
+		//	<joda:format var="dateJoda" value="${gameTime}" pattern="yyyy-MM-dd" />
+		//	<joda:format var="timeJoda" value="${gameTime}" pattern="HH:mm:ss" />
+		//	console.log('${gameNum}');
+		//	console.log('${dateJoda}');
+		//	console.log('${timeJoda}');
+		//	console.log('${teamAway.teamName}');
+		//	console.log('${teamHome.teamName}');
+		//</s:iterator>
 	})(jQuery);
 	</script>
 </body>
