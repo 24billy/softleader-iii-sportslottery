@@ -63,7 +63,7 @@ public class GameAction extends ActionSupport {
 		models = service.getAll();
 		log.debug("Models = {}", models);
 		
-		modelsJson = service.getAllJSON();
+		modelsJson = service.getAllJSON();//將Game的讀出資料轉為Json
 		log.debug("modelsJson = {}", modelsJson);
 		
 		return SUCCESS;
