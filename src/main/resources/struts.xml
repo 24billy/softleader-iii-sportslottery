@@ -10,14 +10,27 @@
   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
   
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
-    <action name="game" class="gameAction" method="execute">
+  
+    <action name="game" class="gameAction" method="execute"> 
+    <!-- 網址 http://localhost:8080/softleader-iii-sportslottery/game -->
+    <!-- execute 是GameAction.java裡 的exectue() -->
+    <!-- GameAction.java的位置需要去spring-struts查   -->
+    
 		<result name="success">/Match.jsp</result>
+		<!-- execute()執行完成功後，就會執行Match.jsp --> 
+		
 		<result name="input">/Match.jsp</result>
+		
 		<allowed-methods></allowed-methods>
 	</action> 
 	
 	<action name="odds" class="oddsAction" method="execute">
+	<!-- 網址 http://localhost:8080/softleader-iii-sportslottery/odds -->
+	<!-- execute 是oddsAction.java裡 的exectue() -->
+	
 		<result name="success">Json/oddsJson.jsp</result>
+		<!-- execute()執行完成功後，就會執行oddsJson.jsp --> 
+		
 		<result name="input">Json/oddsJson.jsp</result>
 		<allowed-methods>select,insert,update,delete</allowed-methods>
 	</action>
