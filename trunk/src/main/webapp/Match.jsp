@@ -53,9 +53,7 @@ article {
 	display: inline-block;
 	margin: 1px 1px;
 	padding: 1px 10px;
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
-		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
-		rgba(246, 246, 246, 1) 100%);
+
 	border-left: 1px solid #999999;
 	border-right: 1px solid #999999;
 	border-top: 1px solid #999999;
@@ -70,6 +68,9 @@ article {
 }
 
 .matchTeam {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
+		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
+		rgba(246, 246, 246, 1) 100%);
 	width: 200px;
 	border-bottom: 2px solid #1e69de;
 	cursor: pointer;
@@ -83,6 +84,30 @@ article {
 		rgba(225, 225, 225, 1) 16%, rgba(225, 225, 225, 1) 16%,
 		rgba(241, 241, 241, 1) 17%, rgba(255, 255, 255, 1) 88%,
 		rgba(246, 246, 246, 1) 100%);
+}
+
+.matchTeamChoose {
+	background: linear-gradient(to bottom, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+	color: #ffffff;
+	
+	width: 200px;
+	border-bottom: 2px solid #1e69de;
+	cursor: pointer;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+}
+
+.matchTeamChoose:HOVER {
+	background: linear-gradient(to bottom, rgba(14,14,14,1) 0%,rgba(125,126,125,1) 100%);
+	color: #ffffff;
+	
+	width: 200px;
+	border-bottom: 2px solid #1e69de;
+	cursor: pointer;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
 }
 
 #teamDetails{
@@ -161,7 +186,7 @@ article {
 			$('#matchBoard').append(strHtml);
 		});
 		
-		//此部分處理滑鼠移到隊伍上時顯示的詳細資訊
+		//處理滑鼠移到隊伍上時顯示的詳細資訊
 		$('.matchTeam').mousemove(function(event){
 			$('#teamDetails').css('display','block');
 			$('#teamDetails').css('left',event.pageX);
@@ -185,6 +210,24 @@ article {
 			$('#teamDetails').css('left','0px');
 			$('#teamDetails').css('top','0px');
 		});
+		
+		//處理選擇的情形
+		//最多選擇八種玩法
+		var oddsTotal = 0;
+		$('.matchTeam').click(function(event){
+			$(this).toggleClass('matchTeamChoose');
+			if($(this).hasClass('matchTeamChoose')){
+				if(oddsTotal<8){
+					oddsTotal += 1;
+				} else {
+					$(this).toggleClass('matchTeamChoose');
+					alert('您最多只能選擇8種玩法');//暫時處置
+				}
+			} else {
+				oddsTotal -= 1;
+			}
+		});
+		
 	})(jQuery);
 	</script>
 </body>
