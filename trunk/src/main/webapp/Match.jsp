@@ -110,6 +110,15 @@ article {
 	-ms-user-select: none;      /* IE 10+ */
 }
 
+#detailBox{
+	opacity: 0.7;
+	display: none;
+	position: absolute;
+	width:200px;
+	height:60px;
+	pointer-events: none;
+}
+
 #teamDetails{
 	font-size: 16px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
@@ -117,27 +126,32 @@ article {
 	text-align: center;
 	line-height:20px;
 
-	display: none;
-	position: absolute;
 	width:200px;
 	height:40px;
 	background: #333333;
-	border-radius: 10px 10px 10px 0px;
-	top:20px;
-	left:20px;
+	border-radius: 20px 20px 20px 0px;
 	pointer-events: none;
+}
+
+#arrow{
+	width:20px;
+	heght:20px;
+	border-top:20px; 
+	pointer-events: none;
+	margin: 0px auto;
 }
 
 </style>
 
 </head>
 <body>
-
 	<article>
-		<div id="teamDetails"></div>
-		<div id="matchBoard">
-
+		<div id="detailBox">
+			<div id="teamDetails"></div>
+			<div id="arrow"></div>
 		</div>
+		
+		<div id="matchBoard"></div>
 	</article>
 
 	<script>
@@ -176,8 +190,8 @@ article {
 				if(date == item.date){
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchTeam">' + item.teamAway + '</div>';
-					strHtml += '<div class="matchTeam">' + item.teamHome + '</div>';
+					strHtml += '<div class="matchTeam" name="away">' + item.teamAway + '</div>';
+					strHtml += '<div class="matchTeam" name="home">' + item.teamHome + '</div>';
 					strHtml += '<br>';
 				}
 			});
@@ -188,9 +202,9 @@ article {
 		
 		//處理滑鼠移到隊伍上時顯示的詳細資訊
 		$('.matchTeam').mousemove(function(event){
-			$('#teamDetails').css('display','block');
-			$('#teamDetails').css('left',event.pageX);
-			$('#teamDetails').css('top',event.pageY-40);
+			$('#detailBox').css('display','block');
+			$('#detailBox').css('left',event.pageX);
+			$('#detailBox').css('top',event.pageY-40);
 			
 			var detail = '';
 			var thisTeam = $(this).text();
@@ -206,9 +220,10 @@ article {
 		});
 		//處理滑鼠移開的動作
 		$('.matchTeam').mouseout(function(event){
-			$('#teamDetails').css('display','none');
-			$('#teamDetails').css('left','0px');
-			$('#teamDetails').css('top','0px');
+			$('#detailBox').css('display','none');
+			$('#detailBox').css('left','0px');
+			$('#detailBox').css('top','0px');
+			$('#teamDetails').html('');
 		});
 		
 		//處理選擇的情形
