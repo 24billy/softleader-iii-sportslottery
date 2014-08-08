@@ -20,7 +20,6 @@ import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
-@Path("/OddsService")
 @Service
 public class OddsService extends GenericService<OddsEntity> {
 	
@@ -36,41 +35,30 @@ public class OddsService extends GenericService<OddsEntity> {
 	
 	}
 	
-	@GET
-	@Produces({"application/xml", "application/json"})
 	@Override
 	public List<OddsEntity> getAll() {
 		// TODO Auto-generated method stub
 		return super.getAll();
 	}
 	
-	@GET
-	@Path("/{id}")
-	@Produces({"application/xml", "application/json"})
 	@Override
-	public OddsEntity getById(@PathParam("id") Long id) {
+	public OddsEntity getById(Long id) {
 		// TODO Auto-generated method stub
 		return super.getById(id);
 	}
 	
-	@POST
-	@Consumes({"application/xml", "application/json"})
 	@Override
 	public OddsEntity insert(OddsEntity entity) {
 		// TODO Auto-generated method stub
 		return super.insert(entity);
 	}
 
-	@PUT
-	@Consumes({"application/xml", "application/json"})
 	@Override
 	public OddsEntity update(OddsEntity entity) {
 		// TODO Auto-generated method stub
 		return super.update(entity);
 	}
 	
-	@DELETE
-	@Consumes({"application/xml", "application/json"})
 	@Override
 	public void delete(OddsEntity entity) {
 		// TODO Auto-generated method stub

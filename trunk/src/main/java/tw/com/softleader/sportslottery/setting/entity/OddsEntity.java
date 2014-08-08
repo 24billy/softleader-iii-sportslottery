@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
-@XmlRootElement
 @Entity
 @Table(name = "ODDS")
 public class OddsEntity extends GenericEntity {
