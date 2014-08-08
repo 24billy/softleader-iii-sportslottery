@@ -14,6 +14,7 @@
 <script src="<c:url value="/js/misc.js"/>"></script>
 
 <style>
+
 body {
 	background: #999999;
 }
@@ -120,23 +121,25 @@ article {
 }
 
 #teamDetails{
-	font-size: 16px;
+	font-size: 14px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
 	color: #ffffff;
 	text-align: center;
-	line-height:20px;
+	line-height:18px;
 
 	width:200px;
 	height:40px;
 	background: #333333;
-	border-radius: 20px 20px 20px 0px;
 	pointer-events: none;
 }
 
 #arrow{
-	width:20px;
-	heght:20px;
-	border-top:20px; 
+	border-style:solid;
+	border-color:#333333 rgba(225, 225, 225, 0) rgba(225, 225, 225, 0) rgba(225, 225, 225, 0);
+	border-width:10px;
+	width:0px;
+	height:0px;
+
 	pointer-events: none;
 	margin: 0px auto;
 }
@@ -203,8 +206,8 @@ article {
 		//處理滑鼠移到隊伍上時顯示的詳細資訊
 		$('.matchTeam').mousemove(function(event){
 			$('#detailBox').css('display','block');
-			$('#detailBox').css('left',event.pageX);
-			$('#detailBox').css('top',event.pageY-40);
+			$('#detailBox').css('left',event.pageX-99);
+			$('#detailBox').css('top',event.pageY-55);
 			
 			var detail = '';
 			var thisTeam = $(this).text();
