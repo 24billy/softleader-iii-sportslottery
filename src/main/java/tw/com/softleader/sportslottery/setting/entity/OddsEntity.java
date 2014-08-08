@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
+@XmlRootElement
 @Entity
 @Table(name = "ODDS")
 public class OddsEntity extends GenericEntity {
