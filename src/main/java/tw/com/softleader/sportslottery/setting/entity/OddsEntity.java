@@ -10,6 +10,12 @@ import javax.persistence.Table;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
+/**
+ * 
+ * @author Ebi
+ *
+ */
+
 @Entity
 @Table(name = "ODDS")
 public class OddsEntity extends GenericEntity {

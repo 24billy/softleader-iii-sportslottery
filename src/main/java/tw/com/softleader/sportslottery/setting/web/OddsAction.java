@@ -18,6 +18,12 @@ import tw.com.softleader.sportslottery.setting.service.OddsService;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 
+ * @author Ebi
+ *
+ */
+
 public class OddsAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(OddsAction.class);
     private OddsEntity model;
