@@ -11,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.common.test.BaseTest;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
+/**
+ * 
+ * @author ebikyatto
+ *
+ */
+
 public class OddsDaoTest extends BaseTest {
 	
 	@Autowired
