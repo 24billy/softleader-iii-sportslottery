@@ -44,6 +44,9 @@ public class GameDaoTest extends BaseTest{
 		
 		log.debug("after insert totalSize = {}", ts);
 		assertEquals(os + 1, ts);
+		
+		models = dao.findByBallType("Baseball");
+		log.debug("findByBallType models = {}", models);
 	}
 
 }
