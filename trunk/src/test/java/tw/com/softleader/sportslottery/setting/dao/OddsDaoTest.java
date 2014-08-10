@@ -65,6 +65,9 @@ public class OddsDaoTest extends BaseTest {
 		oddsDao.update(entity);
 		log.debug("updated entity = {}", entity);
 		
+		entitys = oddsDao.findByOddType("ODD");
+		log.debug("findByOddType entitys = {}", entitys);
+		
 		oddsDao.delete(entity);
 		
 		entitys = oddsDao.findAll();
