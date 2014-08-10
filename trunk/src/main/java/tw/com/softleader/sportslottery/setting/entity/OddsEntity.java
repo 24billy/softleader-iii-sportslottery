@@ -12,7 +12,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
 /**
  * 
- * @author Ebi
+ * @author ebikyatto
  *
  */
 

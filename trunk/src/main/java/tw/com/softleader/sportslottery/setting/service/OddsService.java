@@ -10,7 +10,7 @@ import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 /**
  * 
- * @author Ebi
+ * @author ebikyatto
  *
  */
 
