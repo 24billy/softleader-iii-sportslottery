@@ -28,15 +28,15 @@ public class OddsDaoTest extends BaseTest {
 	@Test
 	public void crud() {
 		
-		List<OddsEntity> entitys = null;
+		List<OddsEntity> models = null;
 		
 		int originSize = 0;
 		int currentSize = 0;
 		
-		entitys = oddsDao.findAll();
+		models = oddsDao.findAll();
 		
-		if(entitys != null) {
-			originSize = entitys.size();
+		if(models != null) {
+			originSize = models.size();
 		}
 		
 		OddsEntity entity = new OddsEntity();
@@ -49,10 +49,10 @@ public class OddsDaoTest extends BaseTest {
 		
 		oddsDao.insert(entity);
 		
-		entitys = oddsDao.findAll();
+		models = oddsDao.findAll();
 		
-		if(entitys != null) {
-			currentSize = entitys.size();
+		if(models != null) {
+			currentSize = models.size();
 		}
 		
 		assertEquals(originSize + 1, currentSize);
@@ -65,15 +65,15 @@ public class OddsDaoTest extends BaseTest {
 		oddsDao.update(entity);
 		log.debug("updated entity = {}", entity);
 		
-		entitys = oddsDao.findByOddType("ODD");
-		log.debug("findByOddType entitys = {}", entitys);
+		models = oddsDao.findByOddType("ODD");
+		log.debug("findByOddType models = {}", models);
 		
 		oddsDao.delete(entity);
 		
-		entitys = oddsDao.findAll();
+		models = oddsDao.findAll();
 		
-		if(entitys != null) {
-			currentSize = entitys.size();
+		if(models != null) {
+			currentSize = models.size();
 		}
 		
 		assertEquals(originSize, currentSize);
