@@ -21,16 +21,16 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 public class OddsEntity extends GenericEntity {
 	
 	@ManyToOne
-	@JoinColumn(name = "GAME_ID")
+	@JoinColumn(name = "GAME_ID", nullable = false)
 	private GameEntity gameId;
 	
-	@Column(name = "ODD_TYPE", length = 10)
+	@Column(name = "ODD_TYPE", length = 10, nullable = false)
 	private String oddType;
 	
-	@Column(name = "ODD_COMBINATION", columnDefinition = "NUMERIC(8,3)")
+	@Column(name = "ODD_COMBINATION", columnDefinition = "NUMERIC(8,3)", nullable = false)
 	private BigDecimal oddCombination;
 	
-	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3)")
+	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3)", nullable = false)
 	private BigDecimal oddValue;
 	
 	@Override
