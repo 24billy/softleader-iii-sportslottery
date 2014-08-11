@@ -29,7 +29,12 @@ function millisecondToTime(millisecond){
 		day = "大老你開掛吧";
 	}
 
-	var str = d.getUTCHours() + ":" + (d.getUTCMinutes()) + "(" + day + ")";
+	var min = d.getUTCMinutes();
+	if(min<10){
+		min = "0" + min;	
+	}
+	
+	var str = d.getUTCHours() + ":" + (min) + "(" + day + ")";
 	return str;
 }
 
