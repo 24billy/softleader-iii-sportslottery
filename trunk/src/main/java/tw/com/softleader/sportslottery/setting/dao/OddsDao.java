@@ -31,8 +31,15 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 	public List<OddsEntity> findByOddType(String oddType) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity where odd_type = :oddType");
+		Query query = session.createQuery("from OddsEntity where odd_Type = :oddType");
 		return query.setString("oddType", oddType).list();
+		
+	}
+	
+	public List<OddsEntity> findAllGame() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from OddsEntity where odd_Type = 'SU_H'");
+		return query.list();
 		
 	}
 }
