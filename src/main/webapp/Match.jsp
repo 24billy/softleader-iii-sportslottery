@@ -27,6 +27,13 @@ article {
 	box-shadow: 0px 0px 10px 5px #333333;
 }
 
+aside {
+	background: #ffffff;
+	margin: 10px auto;
+	width: 98%;
+	border-radius: 5px;
+}
+
 #matchBoard {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
 	width: 70%;
@@ -165,6 +172,12 @@ article {
 		
 		<div id="matchBoard"></div>
 	</article>
+	<aside>
+		<div>
+			
+		</div>
+		<div id="lottery"></div>
+	</aside>
 
 	<script>
 	(function($){
@@ -258,6 +271,7 @@ article {
 			if($(this).hasClass('matchTeamChoose')){
 				if(oddsTotal<8){
 					oddsTotal += 1;
+					xxx(this);
 				} else {
 					$(this).toggleClass('matchTeamChoose');
 					alert('您最多只能選擇8種玩法');//暫時處置
@@ -266,6 +280,17 @@ article {
 				oddsTotal -= 1;
 			}
 		});
+		
+		function xxx(input){
+			//var eleChild=$(input).text();
+			var home=$(input).parent().find("div[name='home']");
+			var away=$(input).parent().find("div[name='away']");
+			
+			// var nextOne=$(this).next();
+			//var nextChild=nextOne.text();
+			$('#lottery').append("<div>"+away.text()+":"+home.text()+"</div>");
+		
+		}
 		
 	})(jQuery);
 	</script>
