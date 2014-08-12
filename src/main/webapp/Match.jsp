@@ -112,8 +112,8 @@ article {
 }
 
 #detailBox{
-	opacity: 0.7;
-	display: none;
+	transition: opacity 220ms ease;
+	opacity: 0;
 	position: absolute;
 	width:200px;
 	height:60px;
@@ -162,7 +162,20 @@ article {
 		//取得資料
 		//將findAll的資料以JSON格式取出，使用google的API來轉換
 		var json = '${modelsJson}';
-		var models = $.parseJSON(json);
+		var odds = $.parseJSON(json);
+		var models = [];
+		$.each(odds, function(index,odd){
+			var hasGet = false;
+			$.each(models, function(index,model){
+				if(odd.gameId.gameNum == model.gameNum){
+					hasGet = true;
+				}
+			});
+			if(!hasGet){
+				models.push(odd.gameId);
+				console.log(odd.gameId);
+			}
+		});
 		
 		//轉換資料
 		//使用一個item陣列儲存model裡的資料，時間資料則經由misc.js裡的方法來格式化
@@ -204,7 +217,7 @@ article {
 		
 		//處理滑鼠移到隊伍上時顯示的詳細資訊
 		$('.matchTeam').mousemove(function(event){
-			$('#detailBox').css('display','block');
+			$('#detailBox').css('opacity','0.7');
 			$('#detailBox').css('left',$(this).position().left+11);
 			$('#detailBox').css('top',$(this).position().top-55);
 			
@@ -222,9 +235,7 @@ article {
 		});
 		//處理滑鼠移開的動作
 		$('.matchTeam').mouseout(function(event){
-			$('#detailBox').css('display','none');
-			$('#detailBox').css('left','0px');
-			$('#detailBox').css('top','0px');
+			$('#detailBox').css('opacity','0');
 			$('#teamDetails').html('');
 		});
 		

@@ -1,5 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,10 @@ public class OddsService extends GenericService<OddsEntity> {
 	protected GenericDao<OddsEntity> getDao() {
 		return dao;
 	
+	}
+	
+	public List<OddsEntity> getAllGame(){
+		return dao.findAllGame();
 	}
 	
 }
