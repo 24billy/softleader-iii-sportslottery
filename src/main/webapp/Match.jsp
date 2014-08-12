@@ -205,8 +205,8 @@ article {
 		//處理滑鼠移到隊伍上時顯示的詳細資訊
 		$('.matchTeam').mousemove(function(event){
 			$('#detailBox').css('display','block');
-			$('#detailBox').css('left',event.pageX-99);
-			$('#detailBox').css('top',event.pageY-55);
+			$('#detailBox').css('left',$(this).position().left+11);
+			$('#detailBox').css('top',$(this).position().top-55);
 			
 			var detail = '';
 			var thisTeam = $(this).text();
