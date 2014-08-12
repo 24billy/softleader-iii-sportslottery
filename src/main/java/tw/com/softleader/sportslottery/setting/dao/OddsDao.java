@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 /**
@@ -21,6 +22,12 @@ import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 public class OddsDao extends GenericDao<OddsEntity> {
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Override
+	public List<OddsEntity> findAll() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createQuery("from OddsEntity odds order by odds.gameId.gameTime").list();
+	}
 	
 	public List<OddsEntity> findByOddType(String oddType) {
 		Session session = sessionFactory.getCurrentSession();
