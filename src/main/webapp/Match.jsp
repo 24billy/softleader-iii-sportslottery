@@ -184,7 +184,6 @@ article {
 		//顯示頁面
 		//將賽事資料以日期做分類，使同日期的賽事顯示在同一個區塊中
 		var matchDate = getMatchDates(models);
-		matchDate.reverse();
 		$.each(matchDate, function(index,date){
 			var strHtml =  '<div class="date">';
 				strHtml += '<div class="dateLabel">' + date + '</div>';
