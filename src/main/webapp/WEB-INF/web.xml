@@ -16,7 +16,10 @@
        </param-value>
 	</context-param>	
 	
+	<!-- explain filter.StrutsPrepareAndExecuteFilter
+	http://www.concretepage.com/struts-2/struts-2-strutsprepareandexecutefilter-web-xml
 	
+	 -->
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>
