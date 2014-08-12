@@ -60,6 +60,15 @@ article {
 	border-top: 1px solid #999999;
 }
 
+.match div[name="noneBox"] {
+	height: auto;
+	display: inline-block;
+	margin: auto;
+	padding: auto;
+
+	border: none;
+}
+
 .matchNum {
 	border-bottom: 2px solid #1e69de;
 }
@@ -203,10 +212,12 @@ article {
 				strHtml += '<div class="match">';
 			$.each(items, function(index,item){
 				if(date == item.date){
+					strHtml += '<div name="noneBox">';
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
 					strHtml += '<div class="matchTeam" name="away">' + item.teamAway + '</div>';
 					strHtml += '<div class="matchTeam" name="home">' + item.teamHome + '</div>';
+					strHtml += '</div>';
 					strHtml += '<br>';
 				}
 			});
