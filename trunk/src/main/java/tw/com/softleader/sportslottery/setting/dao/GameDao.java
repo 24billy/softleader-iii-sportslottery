@@ -21,6 +21,12 @@ public class GameDao extends GenericDao<GameEntity>{
 	@Autowired
 	private SessionFactory sessionFactory; //Hibernate
 	
+	@Override
+	public List<GameEntity> findAll() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createQuery("from GameEntity order by game_time").list();
+	}
+
 	public List<GameEntity> findByBallType(String ballType) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from GameEntity where ball_type = :ballType");
