@@ -36,10 +36,18 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 	}
 	
+	public List<OddsEntity> findByGameId(Long gameId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from OddsEntity where game_id = :gameId");
+		return query.setLong("gameId", gameId).list();
+	}
+	
+	/*
 	public List<OddsEntity> findAllGame() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from OddsEntity where odd_Type = 'SU_H'");
 		return query.list();
 		
 	}
+	*/
 }
