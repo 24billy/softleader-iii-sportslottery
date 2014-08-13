@@ -68,6 +68,9 @@ public class OddsDaoTest extends BaseTest {
 		models = oddsDao.findByOddType("ODD");
 		log.debug("findByOddType models = {}", models);
 		
+		models = oddsDao.findByGameId(1L);
+		log.debug("findByGameId models = {}", models);
+		
 		oddsDao.delete(entity);
 		
 		models = oddsDao.findAll();
