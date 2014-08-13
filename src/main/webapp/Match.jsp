@@ -127,6 +127,10 @@ aside {
 	-ms-user-select: none;      /* IE 10+ */
 }
 
+.oddValue {
+	float: right;
+}
+
 #detailBox{
 	transition: opacity 220ms ease;
 	opacity: 0;
@@ -212,6 +216,7 @@ aside {
 			item.teamHome = model.teamHome.teamName;
 			item.leagueName = model.leagueName;
 			item.ballType = model.ballType;
+			item.id = model.id;
 			
 			items.push(item);
 		});
@@ -228,8 +233,8 @@ aside {
 					strHtml += '<div name="noneBox">';
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchTeam" name="away">' + item.teamAway + '</div>';
-					strHtml += '<div class="matchTeam" name="home">' + item.teamHome + '</div>';
+					strHtml += '<div class="matchTeam" name="away">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
+					strHtml += '<div class="matchTeam" name="home">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
 					strHtml += '</div>';
 					strHtml += '<br>';
 				}
@@ -290,6 +295,17 @@ aside {
 			//var nextChild=nextOne.text();
 			$('#lottery').append("<div>"+away.text()+":"+home.text()+"</div>");
 		
+		}
+		
+		function getOddValue(gameId, oddType) {
+			var oddValue = 0;
+			$.each(odds, function(index, odd){
+				if (odd.gameId.id == gameId && odd.oddType == oddType) {
+					oddValue = odd.oddValue;
+					return false;
+				}
+			});
+			return oddValue;
 		}
 		
 	})(jQuery);
