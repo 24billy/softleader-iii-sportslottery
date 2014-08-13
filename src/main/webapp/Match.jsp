@@ -195,7 +195,7 @@ aside {
 			});
 			if(!hasGet){
 				models.push(odd.gameId);
-				console.log(odd.gameId);
+				console.log(odd);
 			}
 		});
 		
