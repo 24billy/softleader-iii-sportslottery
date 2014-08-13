@@ -103,12 +103,13 @@ public class OddsAction extends ActionSupport {
 		
 		if (gameId != null && gameId > 0L) {
 			modelsJson = service.getByGameIdJson(gameId);
+			log.debug("modelsJson = {}", modelsJson);
+			return "byGameId";
 		} else {
 			modelsJson = service.getByOddTypeJson("SU");
+			log.debug("modelsJson = {}", modelsJson);
+			return Action.SUCCESS;
 		}
-		//modelsJson = service.getAllJSON();
-		log.debug("modelsJson = {}", modelsJson);
-		return Action.SUCCESS;
 	}
     
 }
