@@ -51,10 +51,4 @@ public class OddsService extends GenericService<OddsEntity> {
 		return oddValue;
 	}
 	
-	/*
-	public List<OddsEntity> getAllGame(){
-		return dao.findAllGame();
-	}
-	*/
-	
 }
