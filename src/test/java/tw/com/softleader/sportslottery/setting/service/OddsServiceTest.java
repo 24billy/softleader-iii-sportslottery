@@ -28,9 +28,15 @@ public class OddsServiceTest extends BaseTest {
 		
 		log.debug("getByOddType('SU_H') models = {}", models);
 		
-		Long gameId = models.get(0).getGameId().getId();
-		Double oddValue = models.get(0).getOddValue().doubleValue();
-		String oddType = models.get(0).getOddType();
+		Long gameId = 0L;
+		Double oddValue = 0.00;
+		String oddType = "";
+		
+		if (models.get(0) != null) {
+			gameId = models.get(0).getGameId().getId();
+			oddValue = models.get(0).getOddValue().doubleValue();
+			oddType = models.get(0).getOddType();
+		}
 		
 		assertEquals(oddValue, oddsService.getOddValue(gameId, oddType));
 	}
