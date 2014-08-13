@@ -42,12 +42,4 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		return query.setLong("gameId", gameId).list();
 	}
 	
-	/*
-	public List<OddsEntity> findAllGame() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity where odd_Type = 'SU_H'");
-		return query.list();
-		
-	}
-	*/
 }
