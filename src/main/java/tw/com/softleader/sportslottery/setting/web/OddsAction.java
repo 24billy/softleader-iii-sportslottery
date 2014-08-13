@@ -29,6 +29,7 @@ public class OddsAction extends ActionSupport {
     private OddsEntity model;
     private List<OddsEntity> models;
     private String modelsJson;
+    private Long gameId;
     
     @Autowired
     private OddsService service;
@@ -57,6 +58,14 @@ public class OddsAction extends ActionSupport {
 		this.modelsJson = modelsJson;
 	}
 	
+	public Long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
+	}
+
 	@Override
 	public void validate() {
 	}
@@ -92,7 +101,12 @@ public class OddsAction extends ActionSupport {
 		models = service.getAll();
 		log.debug("models = {}", models);
 		
-		modelsJson = service.getAllJSON();
+		if (gameId != null && gameId > 0L) {
+			modelsJson = service.getByGameIdJson(gameId);
+		} else {
+			modelsJson = service.getByOddTypeJson("SU");
+		}
+		//modelsJson = service.getAllJSON();
 		log.debug("modelsJson = {}", modelsJson);
 		return Action.SUCCESS;
 	}

@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,14 +31,21 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 	public List<OddsEntity> findByOddType(String oddType) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity where odd_Type = :oddType");
-		return query.setString("oddType", oddType).list();
+		Query query = session.createQuery("from OddsEntity odds where ODD_TYPE like :oddType order by odds.gameId.gameTime");
+		
+		StringBuffer sb = new StringBuffer();
+		if (StringUtils.isNotEmpty(oddType)) {
+			sb.append(oddType);
+		}
+		sb.append("%");
+		
+		return query.setString("oddType", sb.toString()).list();
 		
 	}
 	
 	public List<OddsEntity> findByGameId(Long gameId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity where game_id = :gameId");
+		Query query = session.createQuery("from OddsEntity odds where GAME_ID = :gameId order by odds.gameId.gameTime");
 		return query.setLong("gameId", gameId).list();
 	}
 	

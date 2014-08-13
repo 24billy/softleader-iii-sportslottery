@@ -24,12 +24,12 @@ public class GameDao extends GenericDao<GameEntity>{
 	@Override
 	public List<GameEntity> findAll() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("from GameEntity order by game_time").list();
+		return session.createQuery("from GameEntity order by GAME_TIME").list();
 	}
 
 	public List<GameEntity> findByBallType(String ballType) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from GameEntity where ball_type = :ballType");
+		Query query = session.createQuery("from GameEntity where BALL_TYPE = :ballType order by GAME_TIME");
 		return query.setString("ballType", ballType).list();
 		
 	}

@@ -10,6 +10,8 @@ import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
+import com.google.gson.Gson;
+
 /**
  * 
  * @author ebikyatto
@@ -31,8 +33,18 @@ public class OddsService extends GenericService<OddsEntity> {
 		return dao.findByOddType(oddType);
 	}
 	
+	public String getByOddTypeJson(String oddType) {
+		String toJson = new Gson().toJson(dao.findByOddType(oddType));
+		return toJson;
+	}
+	
 	public List<OddsEntity> getByGameId(Long gameId) {
 		return dao.findByGameId(gameId);
+	}
+	
+	public String getByGameIdJson(Long gameId) {
+		String toJson = new Gson().toJson(dao.findByGameId(gameId));
+		return toJson;
 	}
 	
 	public Double getOddValue(Long gameId, String oddType) {
