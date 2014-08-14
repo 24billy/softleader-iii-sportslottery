@@ -298,19 +298,17 @@ aside {
 			var homeAway = $(input).attr("name");
 
 			if(homeAway == 'home'){
-				var hasGet = false;
 				$.each(odds, function(index, odd){
-					if(!hasGet && thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+					if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
 						userOddStorge.push(odd);
-						hasGet = true;
+						return false;
 					}
 				});
 			} else if(homeAway == 'away'){
-				var hasGet = false;
 				$.each(odds, function(index, odd){
-					if(!hasGet && thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+					if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
 						userOddStorge.push(odd);
-						hasGet = true;
+						return false;
 					}
 				});
 			} else {
@@ -328,21 +326,19 @@ aside {
 			var homeAway = $(input).attr("name");
 			
 			if(homeAway == 'home'){
-				var hasGet = false;
 				$.each(odds, function(index, odd){
-					if(!hasGet && thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+					if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
 						console.log(userOddStorge.indexOf(odd));
 						userOddStorge.splice(userOddStorge.indexOf(odd),1);
-						hasGet = true;
+						return false;
 					}
 				});
 			} else if(homeAway == 'away'){
-				var hasGet = false;
 				$.each(odds, function(index, odd){
-					if(!hasGet && thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+					if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
 						console.log(userOddStorge.indexOf(odd));
 						userOddStorge.splice(userOddStorge.indexOf(odd),1);
-						hasGet = true;
+						return false;
 					}
 				});
 			} else {
