@@ -234,8 +234,8 @@ aside {
 					strHtml += '<div name="noneBox">';
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchTeam" name="away" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
-					strHtml += '<div class="matchTeam" name="home" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
+					strHtml += '<div class="matchTeam" name="away" gameId="' + item.gameNum + '" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
+					strHtml += '<div class="matchTeam" name="home" gameId="' + item.gameNum + '" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
 					strHtml += '</div>';
 					strHtml += '<br>';
 				}
@@ -277,25 +277,83 @@ aside {
 			if($(this).hasClass('matchTeamChoose')){
 				if(oddsTotal<8){
 					oddsTotal += 1;
-					oddStorage(this);
+					addOdd(this);
 				} else {
 					$(this).toggleClass('matchTeamChoose');
 					alert('您最多只能選擇8種玩法');//暫時處置
 				}
 			} else {
 				oddsTotal -= 1;
+				removeOdd(this);
 			}
 		});
 		
-		function oddStorage(input){
-			//var eleChild=$(input).text();
-			var home=$(input).parent().find("div[name='home']");
-			var away=$(input).parent().find("div[name='away']");
-			
-			// var nextOne=$(this).next();
-			//var nextChild=nextOne.text();
-			$('#lottery').append("<div>"+away.attr("team")+":"+home.attr("team")+"</div>");
+		var userOddStorge = [];
+		//紀錄已經下注的訂單
+		function addOdd(input){
+			//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
+			//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
+			var thisTeam = $(input).attr("team");
+			var thisGame = $(input).attr("gameId");
+			var homeAway = $(input).attr("name");
+
+			if(homeAway == 'home'){
+				var hasGet = false;
+				$.each(odds, function(index, odd){
+					if(!hasGet && thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+						userOddStorge.push(odd);
+						hasGet = true;
+					}
+				});
+			} else if(homeAway == 'away'){
+				var hasGet = false;
+				$.each(odds, function(index, odd){
+					if(!hasGet && thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+						userOddStorge.push(odd);
+						hasGet = true;
+					}
+				});
+			} else {
+				alert('大老你又開掛了');
+			}
+			refresh();
+		}
 		
+		//刪除已經下注的訂單
+		function removeOdd(input){
+			//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
+			//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
+			var thisTeam = $(input).attr("team");
+			var thisGame = $(input).attr("gameId");
+			var homeAway = $(input).attr("name");
+			
+			if(homeAway == 'home'){
+				var hasGet = false;
+				$.each(odds, function(index, odd){
+					if(!hasGet && thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+						console.log(userOddStorge.indexOf(odd));
+						userOddStorge.splice(userOddStorge.indexOf(odd),1);
+						hasGet = true;
+					}
+				});
+			} else if(homeAway == 'away'){
+				var hasGet = false;
+				$.each(odds, function(index, odd){
+					if(!hasGet && thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+						console.log(userOddStorge.indexOf(odd));
+						userOddStorge.splice(userOddStorge.indexOf(odd),1);
+						hasGet = true;
+					}
+				});
+			} else {
+				alert('大老你又開掛了');
+			}
+			refresh();
+		}
+		
+		//刷新清單顯示
+		function refresh(){
+			console.log(userOddStorge);
 		}
 		
 		function getOddValue(gameId, oddType) {
