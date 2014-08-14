@@ -51,13 +51,14 @@ aside {
 }
 
 .match {
-	font-size: 12px;
+	font-size: 13px;
 	padding: 1px 10px;
 	border-left: 4px solid #1e69de;
 }
 
 .match div {
-	height: 15px;
+	line-height: 20px;
+	height: 20px;
 	display: inline-block;
 	margin: 1px 1px;
 	padding: 1px 10px;
@@ -233,8 +234,8 @@ aside {
 					strHtml += '<div name="noneBox">';
 					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchTeam" name="away">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
-					strHtml += '<div class="matchTeam" name="home">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
+					strHtml += '<div class="matchTeam" name="away" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
+					strHtml += '<div class="matchTeam" name="home" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
 					strHtml += '</div>';
 					strHtml += '<br>';
 				}
@@ -251,10 +252,10 @@ aside {
 			$('#detailBox').css('top',$(this).position().top-55);
 			
 			var detail = '';
-			var thisTeam = $(this).text();
+			var thisTeam = $(this).attr("team");
 			var hasGet = false;
 			$.each(items, function(index,item){
-				if(!hasGet && (item.teamAway ==thisTeam || item.teamHome == thisTeam)){
+				if(!hasGet && (item.teamAway == thisTeam || item.teamHome == thisTeam)){
 					detail += item.ballType + ' - ' +item.leagueName + '<br>';
 					hasGet = true;
 				}
@@ -276,7 +277,7 @@ aside {
 			if($(this).hasClass('matchTeamChoose')){
 				if(oddsTotal<8){
 					oddsTotal += 1;
-					xxx(this);
+					oddStorage(this);
 				} else {
 					$(this).toggleClass('matchTeamChoose');
 					alert('您最多只能選擇8種玩法');//暫時處置
@@ -286,14 +287,14 @@ aside {
 			}
 		});
 		
-		function xxx(input){
+		function oddStorage(input){
 			//var eleChild=$(input).text();
 			var home=$(input).parent().find("div[name='home']");
 			var away=$(input).parent().find("div[name='away']");
 			
 			// var nextOne=$(this).next();
 			//var nextChild=nextOne.text();
-			$('#lottery').append("<div>"+away.text()+":"+home.text()+"</div>");
+			$('#lottery').append("<div>"+away.attr("team")+":"+home.attr("team")+"</div>");
 		
 		}
 		
