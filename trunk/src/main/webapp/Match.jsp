@@ -142,19 +142,18 @@ aside {
 }
 
 .lotteryHead{
-	text-align:center;
-	padding:10px 0px 0px 0px;
+	padding:10px 5px 0px 5px;
 }
 
 .lotteryBody{
-	padding:5px 5px;
-	margin:0px 0px 5px 0px;
+	margin:0px 5px 10px 5px;
 }
 .bodyTime{
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
 		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
 		rgba(246, 246, 246, 1) 100%);color:gray;
 	text-align:left;
+
 }
 .bodyTeam{
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
@@ -390,12 +389,12 @@ aside {
 			var strHtml = '';
 			$.each(userOddStorge, function(index, odd){
 				var winner='';
-				if("SU_H"==odd.Type){winner=odd.gameId.teamHome.teamName}else{winner=odd.gameId.teamAway.teamName}
-				strHtml +='<div class="lotteryBody">'
+				if("SU_H"==odd.Type){winner=odd.gameId.teamHome.teamName}else{winner=odd.gameId.teamAway.teamName;}
+				strHtml +='<div class="lotteryBody">';
 				strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
 				strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
 				strHtml +='<div class="bodyOdds">'+odd.oddType+':'+odd.oddValue+'('+winner+')';
-				strHtml +='<img class="icon" src="<c:url value='/images/delete.png'/>" >' +'</div>';
+				strHtml +='<img class="icon" src="<c:url value='/images/delete.png'/>" ></div>' ;
 				strHtml +='</div>';
 			});
 			$('#lottery').html(strHtml);
