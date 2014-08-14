@@ -21,22 +21,26 @@ body {
 
 article {
 	background: #ffffff;
-	width: 98%;
-	margin: 10px auto;
+	width: 70%;
+	margin: 10px 0px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px 5px #333333;
+	float:left;
 }
 
 aside {
 	background: #ffffff;
-	margin: 10px auto;
-	width: 98%;
+	margin: 10px 0px;
+	width: 28%;
 	border-radius: 5px;
+	box-shadow: 0px 0px 10px 5px #333333;
+	padding: 5px;
+	float:right;
 }
 
 #matchBoard {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
-	width: 70%;
+	width: 700px;
 	padding: 5px;
 	margin: 20px auto;
 }
@@ -132,6 +136,39 @@ aside {
 	float: right;
 }
 
+.icon{
+	width:16px;
+	text-align:right;
+}
+
+.lotteryHead{
+	text-align:center;
+	padding:10px 0px 0px 0px;
+}
+
+.lotteryBody{
+	padding:5px 5px;
+	margin:0px 0px 5px 0px;
+}
+.bodyTime{
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
+		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
+		rgba(246, 246, 246, 1) 100%);color:gray;
+	text-align:left;
+}
+.bodyTeam{
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
+		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
+		rgba(246, 246, 246, 1) 100%);
+	text-align:left;
+}
+
+.bodyOdds{
+	text-align:left;
+	background: linear-gradient(to bottom, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
+	color: #ffffff;
+}
+
 #detailBox{
 	transition: opacity 220ms ease;
 	opacity: 0;
@@ -153,6 +190,8 @@ aside {
 	background: #333333;
 	pointer-events: none;
 }
+
+
 
 #arrow{
 	border-style:solid;
@@ -178,10 +217,8 @@ aside {
 		<div id="matchBoard"></div>
 	</article>
 	<aside>
-		<div>
-			
-		</div>
-		<div id="lottery"></div>
+		<div class='lotteryHead'><img class="icon" src="<c:url value='/images/coins.gif'/>" >投注區</div>			
+		<div id="lottery" class='lotteryBody'></div>
 	</aside>
 
 	<script>
@@ -349,7 +386,19 @@ aside {
 		
 		//刷新清單顯示
 		function refresh(){
-			console.log(userOddStorge);
+			//console.log(userOddStorge);
+			var strHtml = '';
+			$.each(userOddStorge, function(index, odd){
+				var winner='';
+				if("SU_H"==odd.Type){winner=odd.gameId.teamHome.teamName}else{winner=odd.gameId.teamAway.teamName}
+				strHtml +='<div class="lotteryBody">'
+				strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
+				strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
+				strHtml +='<div class="bodyOdds">'+odd.oddType+':'+odd.oddValue+'('+winner+')';
+				strHtml +='<img class="icon" src="<c:url value='/images/delete.png'/>" >' +'</div>';
+				strHtml +='</div>';
+			});
+			$('#lottery').html(strHtml);
 		}
 		
 		function getOddValue(gameId, oddType) {
