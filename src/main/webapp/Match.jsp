@@ -29,6 +29,8 @@ article {
 }
 
 aside {
+	font-size: 14px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
 	background: #ffffff;
 	margin: 10px 0px;
 	width: 28%;
@@ -139,33 +141,40 @@ aside {
 .icon{
 	width:16px;
 	text-align:right;
-}
 
+}
+.icon_cancel{
+	width:16px;
+	float:right;
+}
 .lotteryHead{
+	
 	padding:10px 5px 0px 5px;
 }
 
 .lotteryBody{
-	margin:0px 5px 10px 5px;
+	margin:0px 5px 15px 5px;
 }
 .bodyTime{
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
-		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
-		rgba(246, 246, 246, 1) 100%);color:gray;
+		rgba(225, 225, 225, 1) 16%, rgba(225, 225, 225, 1) 16%,
+		rgba(241, 241, 241, 1) 17%, rgba(255, 255, 255, 1) 88%,
+		rgba(255, 255, 255, 1) 100%);
+	color:gray;
 	text-align:left;
-
+	padding:3px 6px;
 }
 .bodyTeam{
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
-		rgba(241, 241, 241, 1) 86%, rgba(225, 225, 225, 1) 88%,
-		rgba(246, 246, 246, 1) 100%);
+
 	text-align:left;
+	padding:3px 6px;
 }
 
 .bodyOdds{
 	text-align:left;
 	background: linear-gradient(to bottom, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);
 	color: #ffffff;
+	padding:3px 6px;
 }
 
 #detailBox{
@@ -389,12 +398,17 @@ aside {
 			var strHtml = '';
 			$.each(userOddStorge, function(index, odd){
 				var winner='';
-				if("SU_H"==odd.Type){winner=odd.gameId.teamHome.teamName}else{winner=odd.gameId.teamAway.teamName;}
+				if("SU_H"==odd.oddType){
+					winner=odd.gameId.teamHome.teamName;
+				}else{
+					winner=odd.gameId.teamAway.teamName;
+				}
+				console.log(winner);
 				strHtml +='<div class="lotteryBody">';
 				strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
 				strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
 				strHtml +='<div class="bodyOdds">'+odd.oddType+':'+odd.oddValue+'('+winner+')';
-				strHtml +='<img class="icon" src="<c:url value='/images/delete.png'/>" ></div>' ;
+				strHtml +='<img class="icon_cancel" src="<c:url value='/images/delete.png'/>" ></div>' ;
 				strHtml +='</div>';
 			});
 			$('#lottery').html(strHtml);
