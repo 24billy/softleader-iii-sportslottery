@@ -38,11 +38,11 @@ aside {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", "微軟正黑體";
 	width: 70%;
 	padding: 5px;
-	margin: 0px auto;
+	margin: 20px auto;
 }
 
 .date {
-	margin: 20px auto;
+	margin: 0px auto;
 	padding: 10px;
 }
 
@@ -72,7 +72,7 @@ aside {
 	height: auto;
 	display: inline-block;
 	margin: auto;
-	padding: auto;
+	padding: 0px;
 
 	border: none;
 }
