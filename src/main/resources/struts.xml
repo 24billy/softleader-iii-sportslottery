@@ -22,9 +22,9 @@
 	</action> 
 	
 	<action name="odds" class="oddsAction" method="execute"> 
-		<result name="success">/Match.jsp</result>
-		<result name="byGameId">/Match.jsp</result>
-		<result name="input">/Match.jsp</result>
+		<result name="success">/jsonPoster.jsp</result>
+		<result name="byGameId">/jsonPoster.jsp</result>
+		<result name="input">/jsonPoster.jsp</result>
 		<allowed-methods></allowed-methods>
 	</action> 
 	<!--
