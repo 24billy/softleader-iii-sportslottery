@@ -11,7 +11,7 @@ insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NA
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE, create_time, creator, modified_time, modifier,TEAM_HOME,TEAM_AWAY) values ('2014-08-11T10:50:20', 106,0,9,'MLB','BaseBall', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system', 1, 3);
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE, create_time, creator, modified_time, modifier,TEAM_HOME,TEAM_AWAY) values ('2014-08-12T10:50:20', 107,0,9,'MLB','BaseBall', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system', 1, 3);
 
-insert into USERN (USER_ACCOUNT,USER_PASSWORD,USER_NAME,USER_BIRTHDAY,USER_GENDER,USER_PHONE,USER_EMAIL, create_time, creator, modified_time, modifier) values ('wang','a654321','王大蠻','2014-02-28','male','0910123456','wang@gmail.com',CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
+insert into USERN (USER_ACCOUNT,USER_PASSWORD,USER_NAME,USER_BIRTHDAY,USER_GENDER,USER_PHONE,USER_EMAIL, create_time, creator, modified_time, modifier) values ('wang','a123456','王大蠻','2014-02-28','male','0910123456','wang@gmail.com',CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
 
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (1, 'SU_H', 1, 1.70, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (1, 'SU_A', 1, 1.25, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
