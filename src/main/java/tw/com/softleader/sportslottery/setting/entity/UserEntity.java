@@ -27,7 +27,8 @@ public class UserEntity extends GenericEntity {
 				+ USER_GENDER + ", USER_PHONE=" + USER_PHONE + ", USER_EMAIL="
 				+ USER_EMAIL + "]";
 	}
-        //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
+    //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
+	
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
 	@Column(name="USER_ACCOUNT", length=50, nullable=false)
 	private String USER_ACCOUNT;
@@ -56,6 +57,17 @@ public class UserEntity extends GenericEntity {
 	//USER_EMAIL	電子信箱	varchar		String		50	NOT NULL
 	@Column(name="USER_EMAIL", length=50, nullable=false)
 	private String USER_EMAIL;
+	
+	@Column(name="COINS")
+	private Long COINS;
+	
+	public Long getCOINS() {
+		return COINS;
+	}
+
+	public void setCOINS(Long cOINS) {
+		COINS = cOINS;
+	}
 
 	public String getUSER_ACCOUNT() {
 		return USER_ACCOUNT;
