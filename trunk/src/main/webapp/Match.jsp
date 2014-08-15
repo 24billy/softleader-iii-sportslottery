@@ -233,198 +233,205 @@ aside {
 	(function($){
 		//取得資料
 		//將findAll的資料以JSON格式取出，使用google的API來轉換
-		var json = '${modelsJson}';
-		var odds = $.parseJSON(json);
-		var models = [];
-		$.each(odds, function(index,odd){
-			var hasGet = false;
-			$.each(models, function(index,model){
-				if(odd.gameId.gameNum == model.gameNum){
-					hasGet = true;
-				}
-			});
-			if(!hasGet){
-				models.push(odd.gameId);
-				console.log(odd);
-			}
-		});
-		
-		//轉換資料
-		//使用一個item陣列儲存model裡的資料，時間資料則經由misc.js裡的方法來格式化
-		var items = [];
-		$.each(models, function(index,model){
-			var item = new Object;
-			
-			item.gameNum = model.gameNum;
-			item.date = millisecondToDate(model.gameTime.iLocalMillis);
-			item.time = millisecondToTime(model.gameTime.iLocalMillis);
-			item.teamAway = model.teamAway.teamName;
-			item.teamHome = model.teamHome.teamName;
-			item.leagueName = model.leagueName;
-			item.ballType = model.ballType;
-			item.id = model.id;
-			
-			items.push(item);
-		});
-		
-		//顯示頁面
-		//將賽事資料以日期做分類，使同日期的賽事顯示在同一個區塊中
-		var matchDate = getMatchDates(models);
-		$.each(matchDate, function(index,date){
-			var strHtml =  '<div class="date">';
-				strHtml += '<div class="dateLabel">' + date + '</div>';
-				strHtml += '<div class="match">';
-			$.each(items, function(index,item){
-				if(date == item.date){
-					strHtml += '<div name="noneBox">';
-					strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
-					strHtml += '<div class="matchTime">' + item.time + '</div>';
-					strHtml += '<div class="matchTeam" name="away" gameId="' + item.gameNum + '" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
-					strHtml += '<div class="matchTeam" name="home" gameId="' + item.gameNum + '" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
-					strHtml += '</div>';
-					strHtml += '<br>';
-				}
-			});
-			strHtml += '</div>';
-			strHtml += '</div>';
-			$('#matchBoard').append(strHtml);
-		});
-		
-		//處理滑鼠移到隊伍上時顯示的詳細資訊
-		$('.matchTeam').mousemove(function(event){
-			$('#detailBox').css('opacity','0.7');
-			$('#detailBox').css('left',$(this).position().left+11);
-			$('#detailBox').css('top',$(this).position().top-55);
-			
-			var detail = '';
-			var thisTeam = $(this).attr("team");
-			var hasGet = false;
-			$.each(items, function(index,item){
-				if(!hasGet && (item.teamAway == thisTeam || item.teamHome == thisTeam)){
-					detail += item.ballType + ' - ' +item.leagueName + '<br>';
-					hasGet = true;
-				}
-			});
-			detail += thisTeam;
-			$('#teamDetails').html(detail);
-		});
-		//處理滑鼠移開的動作
-		$('.matchTeam').mouseout(function(event){
-			$('#detailBox').css('opacity','0');
-			$('#teamDetails').html('');
-		});
-		
-		//處理選擇的情形
-		//最多選擇八種玩法
-		var oddsTotal = 0;
-		$('.matchTeam').click(function(event){
-			$(this).toggleClass('matchTeamChoose');
-			if($(this).hasClass('matchTeamChoose')){
-				if(oddsTotal<8){
-					oddsTotal += 1;
-					addOdd(this);
-				} else {
-					$(this).toggleClass('matchTeamChoose');
-					alert('您最多只能選擇8種玩法');//暫時處置
-				}
-			} else {
-				oddsTotal -= 1;
-				removeOdd(this);
-			}
-		});
-		
-		var userOddStorge = [];
-		//紀錄已經下注的訂單
-		function addOdd(input){
-			//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
-			//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
-			var thisTeam = $(input).attr("team");
-			var thisGame = $(input).attr("gameId");
-			var homeAway = $(input).attr("name");
+		var odds = [];
+		$.getJSON('odds', {}, function(data){
+			odds = data;
 
-			if(homeAway == 'home'){
-				$.each(odds, function(index, odd){
-					if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
-						userOddStorge.push(odd);
-						return false;
+			//var json = '${modelsJson}';
+			//var odds = $.parseJSON(json);
+			var models = [];
+			$.each(odds, function(index,odd){
+				var hasGet = false;
+				$.each(models, function(index,model){
+					if(odd.gameId.gameNum == model.gameNum){
+						hasGet = true;
 					}
 				});
-			} else if(homeAway == 'away'){
-				$.each(odds, function(index, odd){
-					if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
-						userOddStorge.push(odd);
-						return false;
-					}
-				});
-			} else {
-				alert('大老你又開掛了');
-			}
-			refresh();
-		}
-		
-		//刪除已經下注的訂單
-		function removeOdd(input){
-			//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
-			//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
-			var thisTeam = $(input).attr("team");
-			var thisGame = $(input).attr("gameId");
-			var homeAway = $(input).attr("name");
+				if(!hasGet){
+					models.push(odd.gameId);
+					console.log(odd);
+				}
+			});
 			
-			if(homeAway == 'home'){
-				$.each(odds, function(index, odd){
-					if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
-						console.log(userOddStorge.indexOf(odd));
-						userOddStorge.splice(userOddStorge.indexOf(odd),1);
-						return false;
-					}
-				});
-			} else if(homeAway == 'away'){
-				$.each(odds, function(index, odd){
-					if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
-						console.log(userOddStorge.indexOf(odd));
-						userOddStorge.splice(userOddStorge.indexOf(odd),1);
-						return false;
-					}
-				});
-			} else {
-				alert('大老你又開掛了');
-			}
-			refresh();
-		}
-		
-		//刷新清單顯示
-		function refresh(){
-			//console.log(userOddStorge);
-			var strHtml = '';
-			$.each(userOddStorge, function(index, odd){
-				var winner='';
-				if("SU_H"==odd.oddType){
-					winner=odd.gameId.teamHome.teamName;
-				}else{
-					winner=odd.gameId.teamAway.teamName;
-				}
-				console.log(winner);
-				strHtml +='<div class="lotteryBody">';
-				strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
-				strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
-				strHtml +='<div class="bodyOdds">'+ castOddType(odd.oddType) +':'+odd.oddValue+'('+winner+')';
-				strHtml +='<img class="icon_cancel" src="<c:url value='/images/delete.png'/>" ></div>' ;
-				strHtml +='</div>';
-			});
-			$('#lottery').html(strHtml);
-		}
+			//轉換資料
+			//使用一個item陣列儲存model裡的資料，時間資料則經由misc.js裡的方法來格式化
+			var items = [];
+			$.each(models, function(index,model){
+				var item = new Object;
 				
-		//取得OddValue
-		function getOddValue(gameId, oddType) {
-			var oddValue = 0;
-			$.each(odds, function(index, odd){
-				if (odd.gameId.id == gameId && odd.oddType == oddType) {
-					oddValue = odd.oddValue;
-					return false;
+				item.gameNum = model.gameNum;
+				item.date = millisecondToDate(model.gameTime.iLocalMillis);
+				item.time = millisecondToTime(model.gameTime.iLocalMillis);
+				item.teamAway = model.teamAway.teamName;
+				item.teamHome = model.teamHome.teamName;
+				item.leagueName = model.leagueName;
+				item.ballType = model.ballType;
+				item.id = model.id;
+				
+				items.push(item);
+			});
+			
+			//顯示頁面
+			//將賽事資料以日期做分類，使同日期的賽事顯示在同一個區塊中
+			var matchDate = getMatchDates(models);
+			$.each(matchDate, function(index,date){
+				var strHtml =  '<div class="date">';
+					strHtml += '<div class="dateLabel">' + date + '</div>';
+					strHtml += '<div class="match">';
+				$.each(items, function(index,item){
+					if(date == item.date){
+						strHtml += '<div name="noneBox">';
+						strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
+						strHtml += '<div class="matchTime">' + item.time + '</div>';
+						strHtml += '<div class="matchTeam" name="away" gameId="' + item.gameNum + '" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
+						strHtml += '<div class="matchTeam" name="home" gameId="' + item.gameNum + '" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
+						strHtml += '</div>';
+						strHtml += '<br>';
+					}
+				});
+				strHtml += '</div>';
+				strHtml += '</div>';
+				$('#matchBoard').append(strHtml);
+			});
+			
+			//處理滑鼠移到隊伍上時顯示的詳細資訊
+			$('.matchTeam').mousemove(function(event){
+				$('#detailBox').css('opacity','0.7');
+				$('#detailBox').css('left',$(this).position().left+11);
+				$('#detailBox').css('top',$(this).position().top-55);
+				
+				var detail = '';
+				var thisTeam = $(this).attr("team");
+				var hasGet = false;
+				$.each(items, function(index,item){
+					if(!hasGet && (item.teamAway == thisTeam || item.teamHome == thisTeam)){
+						detail += item.ballType + ' - ' +item.leagueName + '<br>';
+						hasGet = true;
+					}
+				});
+				detail += thisTeam;
+				$('#teamDetails').html(detail);
+			});
+			//處理滑鼠移開的動作
+			$('.matchTeam').mouseout(function(event){
+				$('#detailBox').css('opacity','0');
+				$('#teamDetails').html('');
+			});
+			
+			//處理選擇的情形
+			//最多選擇八種玩法
+			var oddsTotal = 0;
+			$('.matchTeam').click(function(event){
+				$(this).toggleClass('matchTeamChoose');
+				if($(this).hasClass('matchTeamChoose')){
+					if(oddsTotal<8){
+						oddsTotal += 1;
+						addOdd(this);
+					} else {
+						$(this).toggleClass('matchTeamChoose');
+						alert('您最多只能選擇8種玩法');//暫時處置
+					}
+				} else {
+					oddsTotal -= 1;
+					removeOdd(this);
 				}
 			});
-			return oddValue;
-		}
+			
+			var userOddStorge = [];
+			//紀錄已經下注的訂單
+			function addOdd(input){
+				//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
+				//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
+				var thisTeam = $(input).attr("team");
+				var thisGame = $(input).attr("gameId");
+				var homeAway = $(input).attr("name");
+
+				if(homeAway == 'home'){
+					$.each(odds, function(index, odd){
+						if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+							userOddStorge.push(odd);
+							return false;
+						}
+					});
+				} else if(homeAway == 'away'){
+					$.each(odds, function(index, odd){
+						if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+							userOddStorge.push(odd);
+							return false;
+						}
+					});
+				} else {
+					alert('大老你又開掛了');
+				}
+				refresh();
+			}
+			
+			//刪除已經下注的訂單
+			function removeOdd(input){
+				//userOdd.home=$(input).parent().find("div[name='home']").attr("team");
+				//userOdd.away=$(input).parent().find("div[name='away']").attr("team");
+				var thisTeam = $(input).attr("team");
+				var thisGame = $(input).attr("gameId");
+				var homeAway = $(input).attr("name");
+				
+				if(homeAway == 'home'){
+					$.each(odds, function(index, odd){
+						if(thisTeam == odd.gameId.teamHome.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_H"){
+							console.log(userOddStorge.indexOf(odd));
+							userOddStorge.splice(userOddStorge.indexOf(odd),1);
+							return false;
+						}
+					});
+				} else if(homeAway == 'away'){
+					$.each(odds, function(index, odd){
+						if(thisTeam == odd.gameId.teamAway.teamName && thisGame == odd.gameId.gameNum && odd.oddType == "SU_A"){
+							console.log(userOddStorge.indexOf(odd));
+							userOddStorge.splice(userOddStorge.indexOf(odd),1);
+							return false;
+						}
+					});
+				} else {
+					alert('大老你又開掛了');
+				}
+				refresh();
+			}
+			
+			//刷新清單顯示
+			function refresh(){
+				//console.log(userOddStorge);
+				var strHtml = '';
+				$.each(userOddStorge, function(index, odd){
+					var winner='';
+					if("SU_H"==odd.oddType){
+						winner=odd.gameId.teamHome.teamName;
+					}else{
+						winner=odd.gameId.teamAway.teamName;
+					}
+					console.log(winner);
+					strHtml +='<div class="lotteryBody">';
+					strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
+					strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
+					strHtml +='<div class="bodyOdds">'+ castOddType(odd.oddType) +':'+odd.oddValue+'('+winner+')';
+					strHtml +='<img class="icon_cancel" src="<c:url value='/images/delete.png'/>" ></div>' ;
+					strHtml +='</div>';
+				});
+				$('#lottery').html(strHtml);
+			}
+					
+			//取得OddValue
+			function getOddValue(gameId, oddType) {
+				var oddValue = 0;
+				$.each(odds, function(index, odd){
+					if (odd.gameId.id == gameId && odd.oddType == oddType) {
+						oddValue = odd.oddValue;
+						return false;
+					}
+				});
+				return oddValue;
+			}
+		});
+		
+
 		
 	})(jQuery);
 	</script>
