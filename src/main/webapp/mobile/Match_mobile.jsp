@@ -14,22 +14,25 @@
 	<body>
 		<div data-role ="page" id="page_main">
 			<div data-role="header">
-				<h3>Page Demos</h3>
+				<h3>賽事表</h3>
 			</div>
 			<div data-role="content">
 				<p>These are demos of pages and dialogs.</p>
-				<a data-role="button"  href="#page_internal" >Internal Page-default</a> 
-				<a data-role="button" href="#page_internal" data-transition="flip" >Internal Page-flip</a> 
-				<a data-role="button" href="#page_internal" data-transition="turn" >Internal Page-turn</a> 
-				<a data-role="button" href="#page_internal" data-transition="flow" >Internal Page-flow</a> 
-				<a data-role="button" href="#page_internal" data-transition="slide" >Internal Page-slide</a> 
-				<a data-role="button" href="#page_internal" data-transition="slidefade" >Internal Page-slidefade</a> 
-				<a data-role="button" href="#page_internal" data-transition="slideup" >Internal Page-slideup</a> 
-				<a data-role="button" href="#page_internal" data-transition="slidedown" >Internal Page-slidedown</a> 
-				<a data-role="button" href="#page_internal" data-transition="none" >Internal Page-none</a> 
+				
+				<a data-role="button" href="#page_internal" data-transition="flip" data-inline="true">Internal Page-flip</a> 
+				<a data-role="button" href="#page_internal" data-transition="turn" data-inline="true">Internal Page-turn</a> 
+				<br>
+				<a data-role="button" href="#page_internal" data-transition="flow" data-inline="true">Internal Page-flow</a> 
+				<a data-role="button" href="#page_internal" data-transition="slide" data-inline="true">Internal Page-slide</a> 
+				<br>
+				<a data-role="button" href="#page_internal" data-transition="slidefade" data-inline="true">Internal Page-slidefade</a> 
+				<a data-role="button" href="#page_internal" data-transition="slideup" data-inline="true">Internal Page-slideup</a> 
+				<br>
+				<a data-role="button" href="#page_internal" data-transition="slidedown" data-inline="true">Internal Page-slidedown</a> 
+				<a data-role="button" href="#page_internal" data-transition="none" data-inline="true">Internal Page-none</a> 
 
-				<hr>
-				<a href="external.html"  data-role="button" data-icon="android" data-iconpos="right">External Page</a>
+				<br>
+				<a href="external.html"  data-role="button" data-icon="android" data-iconpos="right" data-inline="true">External Page</a>
 				<a href="#page_dialog">Dialog</a>
 
 			</div>
