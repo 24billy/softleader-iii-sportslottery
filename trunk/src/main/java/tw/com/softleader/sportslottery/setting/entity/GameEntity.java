@@ -45,6 +45,9 @@ public class GameEntity extends GenericEntity{
 	
 	@Column(name="BALL_TYPE", length=10)
 	private String ballType;
+	
+	@Column(name="IS_END")
+	private Boolean isEnd;
 
 	@Override
 	public String toString() {
@@ -52,9 +55,18 @@ public class GameEntity extends GenericEntity{
 				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
 				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
 				+ gameScoreAway + ", leagueName=" + leagueName + ", ballType="
-				+ ballType + ", id=" + id + ", createTime=" + createTime
-				+ ", creator=" + creator + ", modifiedTime=" + modifiedTime
-				+ ", modifier=" + modifier + "]";
+				+ ballType + ", isEnd=" + isEnd + ", id=" + id
+				+ ", createTime=" + createTime + ", creator=" + creator
+				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
+				+ "]";
+	}
+
+	public Boolean getIsEnd() {
+		return isEnd;
+	}
+
+	public void setIsEnd(Boolean isEnd) {
+		this.isEnd = isEnd;
 	}
 
 	public LocalDateTime getGameTime() {

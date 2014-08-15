@@ -234,7 +234,7 @@ aside {
 		//取得資料
 		//將findAll的資料以JSON格式取出，使用google的API來轉換
 		var odds = [];
-		$.getJSON('odds', {}, function(data){
+		$.getJSON('<c:url value="/odds" />', {}, function(data){
 			odds = data;
 
 			//var json = '${modelsJson}';
