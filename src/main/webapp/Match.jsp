@@ -283,8 +283,8 @@ aside {
 						strHtml += '<div name="noneBox">';
 						strHtml += '<div class="matchNum">' + item.gameNum + '</div>';
 						strHtml += '<div class="matchTime">' + item.time + '</div>';
-						strHtml += '<div class="matchTeam" name="away" gameId="' + item.gameNum + '" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
-						strHtml += '<div class="matchTeam" name="home" gameId="' + item.gameNum + '" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
+						strHtml += '<div class="matchTeam" oddId="' + item.id + '" name="away" gameId="' + item.gameNum + '" team="' + item.teamAway + '">' + item.teamAway + '<span class="oddValue">' + getOddValue(item.id, "SU_A").toFixed(2) + '</span></div>';
+						strHtml += '<div class="matchTeam" oddId="' + item.id + '" name="home" gameId="' + item.gameNum + '" team="' + item.teamHome + '">' + item.teamHome + '<span class="oddValue">' + getOddValue(item.id, "SU_H").toFixed(2) + '</span></div>';
 						strHtml += '</div>';
 						strHtml += '<br>';
 					}
@@ -408,7 +408,7 @@ aside {
 						winner=odd.gameId.teamAway.teamName;
 					}
 					console.log(winner);
-					strHtml +='<div class="lotteryBody">';
+					strHtml +='<div class="lotteryBody" oddId="' + odd.id + '">';
 					strHtml +='<div class="bodyTime">' + odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+ '</div>' ; 
 					strHtml +='<div class="bodyTeam"><label>編號:</label>' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+ '</div>' ;
 					strHtml +='<div class="bodyOdds">'+ castOddType(odd.oddType) +':'+odd.oddValue+'('+winner+')';
