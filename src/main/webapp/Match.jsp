@@ -413,20 +413,6 @@ aside {
 			});
 			$('#lottery').html(strHtml);
 		}
-		
-		//把OddType轉換成中文
-		function castOddType(oddType) {
-			switch(true) {
-				case (oddType.charAt('SU') != -1):
-					return '不讓分';
-					break;
-				case (oddType.charAt('ATS') != -1):
-					return '讓分';
-					break;
-				default:
-					alert('轉換失敗');
-			}	
-		}
 				
 		//取得OddValue
 		function getOddValue(gameId, oddType) {
