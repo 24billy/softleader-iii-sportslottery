@@ -32,6 +32,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	public List<OddsEntity> findByOddType(String oddType) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from OddsEntity odds where ODD_TYPE like :oddType order by odds.gameId.gameTime");
+		             //from OddsEntity odds where odds.gameId.gameTime < {inputtime} && odds.gameId.isEnd == 'true'
 		
 		StringBuffer sb = new StringBuffer();
 		if (StringUtils.isNotEmpty(oddType)) {
