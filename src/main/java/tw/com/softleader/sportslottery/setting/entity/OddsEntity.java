@@ -33,13 +33,37 @@ public class OddsEntity extends GenericEntity {
 	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3)", nullable = false)
 	private BigDecimal oddValue;
 	
+	@Column(name = "COUNT")
+	private Long count; 
+	
+	@Column(name = "IS_PASS")
+	private Boolean isPass;
+	
+
 	@Override
 	public String toString() {
 		return "OddsEntity [gameId=" + gameId + ", oddType=" + oddType
 				+ ", oddCombination=" + oddCombination + ", oddValue="
-				+ oddValue + ", id=" + id + ", createTime=" + createTime
-				+ ", creator=" + creator + ", modifiedTime=" + modifiedTime
-				+ ", modifier=" + modifier + "]";
+				+ oddValue + ", count=" + count + ", isPass=" + isPass
+				+ ", id=" + id + ", createTime=" + createTime + ", creator="
+				+ creator + ", modifiedTime=" + modifiedTime + ", modifier="
+				+ modifier + "]";
+	}
+
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public Boolean getIsPass() {
+		return isPass;
+	}
+
+	public void setIsPass(Boolean isPass) {
+		this.isPass = isPass;
 	}
 
 	public GameEntity getGameId() {
