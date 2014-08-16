@@ -46,7 +46,7 @@ public class GameEntity extends GenericEntity{
 	@Column(name="BALL_TYPE", length=10)
 	private String ballType;
 	
-	@Column(name="IS_END")
+	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
 	private Boolean isEnd;
 
 	@Override

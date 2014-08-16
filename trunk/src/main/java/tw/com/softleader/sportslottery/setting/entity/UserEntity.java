@@ -58,7 +58,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_EMAIL", length=50, nullable=false)
 	private String USER_EMAIL;
 	
-	@Column(name="COINS")
+	@Column(name="COINS", columnDefinition = "BIGINT default 0")
 	private Long COINS;
 	
 	public Long getCOINS() {

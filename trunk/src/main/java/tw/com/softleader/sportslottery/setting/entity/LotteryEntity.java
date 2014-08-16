@@ -17,7 +17,7 @@ public class LotteryEntity extends GenericEntity {
 	private UserEntity userId;
 	
 	@ManyToOne	
-	@JoinColumn(name="ODDS_ID_1")
+	@JoinColumn(name="ODDS_ID_1", nullable = false)
 	private OddsEntity oddsId1;
 	
 	@ManyToOne	
