@@ -33,10 +33,10 @@ public class OddsEntity extends GenericEntity {
 	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3)", nullable = false)
 	private BigDecimal oddValue;
 	
-	@Column(name = "COUNT")
+	@Column(name = "COUNT", columnDefinition = "BIGINT default 0")
 	private Long count; 
 	
-	@Column(name = "IS_PASS")
+	@Column(name = "IS_PASS", columnDefinition = "BOOLEAN default FALSE")
 	private Boolean isPass;
 	
 
