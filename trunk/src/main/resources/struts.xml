@@ -27,6 +27,14 @@
 		<result name="input">/jsonPoster.jsp</result>
 		<allowed-methods></allowed-methods>
 	</action> 
+	
+	<action name="team" class="teamAction" method="execute">
+		<result name="success" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">modelsJson</param>
+		</result>
+		<allowed-methods></allowed-methods>
+	</action>
 	<!--
 	<action name="odds" class="oddsAction" method="execute">
 		<result name="success">Json/oddsJson.jsp</result>

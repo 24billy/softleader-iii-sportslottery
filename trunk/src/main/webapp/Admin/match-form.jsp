@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/admin-style.css">
+<link rel="stylesheet" href="css/jquery.datetimepicker.css">
 <style>
 </style>
 </head>
@@ -79,17 +81,19 @@
 						<form role="form">
 							<div class="form-group">
 								<label>BALL TYPE</label>
-								<select class="form-control">
+								<select class="form-control form-ball-type">
 									<option value="Baseball" selected>棒球</option>
 									<option value="Basketball">籃球</option>
 									<option value="Basketball">足球</option>
 								</select>
 								<label>TEAM HOME</label>
-								<select class="form-control">
+								<select class="form-control form-team">
 								</select>
 								<label>TEAM AWAY</label>
-								<select class="form-control">
+								<select class="form-control form-team">
 								</select>
+								<label>GAME TIME</label>
+           						<input class="form-control form-game-time" type="text">
 							</div>
 						</form>
 					</div>
@@ -112,10 +116,30 @@
 	<!-- #wrapper -->
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="js/jquery.datetimepicker.js"></script>
 <script>
 	(function($) {
+		listTeam();
 		$('#match-manager').collapse();
+		$('.form-ball-type').change(listTeam);
+		
+		function listTeam() {
+			$('.form-team').empty();
+			
+			var url = '<c:url value="/team"/>';
+			$.getJSON(url, function(data) {
+								
+				$.each(data, function(key, value) {
+					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					$('.form-team').append(str);
+				});
+			});
+		}
+		
+		$('.form-game-time').datetimepicker();
+		
 	})(jQuery)
 </script>
 </body>
