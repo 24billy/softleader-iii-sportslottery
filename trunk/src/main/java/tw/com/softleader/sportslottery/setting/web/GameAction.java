@@ -30,12 +30,6 @@ public class GameAction extends ActionSupport {
 	public void setModelsJson(String modelsJson) {
 		this.modelsJson = modelsJson;
 	}
-	public GameService getService() {
-		return service;
-	}
-	public void setService(GameService service) {
-		this.service = service;
-	}
 	public GameEntity getModel() {
 		return model;
 	}
@@ -48,14 +42,6 @@ public class GameAction extends ActionSupport {
 	public void setModels(List<GameEntity> models) {
 		this.models = models;
 	}
-	
-	public Logger getLog() {
-		return log;
-	}
-	public void setLog(Logger log) {
-		this.log = log;
-	}
-	
 	
 	public String execute(){
 		log.debug("execute GameAction");

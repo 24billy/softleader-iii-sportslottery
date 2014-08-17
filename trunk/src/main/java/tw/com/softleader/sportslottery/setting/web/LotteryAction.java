@@ -24,14 +24,6 @@ public class LotteryAction extends ActionSupport  {
 	
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 
-	public LotteryService getService() {
-		return service;
-	}
-
-	public void setService(LotteryService service) {
-		this.service = service;
-	}
-
 	public LotteryEntity getModel() {
 		return model;
 	}
@@ -46,14 +38,6 @@ public class LotteryAction extends ActionSupport  {
 
 	public void setModels(List<LotteryEntity> models) {
 		this.models = models;
-	}
-
-	public Logger getLog() {
-		return log;
-	}
-
-	public void setLog(Logger log) {
-		this.log = log;
 	}
 
 	@Override

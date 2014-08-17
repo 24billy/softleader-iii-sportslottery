@@ -42,14 +42,6 @@ public class UserAction extends ActionSupport {
 		super.validate();
 	}
 
-	public UserService getService() {
-		return service;
-	}
-
-	public void setService(UserService service) {
-		this.service = service;
-	}
-
 	public UserEntity getModel() {
 		return model;
 	}
