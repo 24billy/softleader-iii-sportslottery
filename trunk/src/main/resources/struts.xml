@@ -18,7 +18,9 @@
 		<result name="success">/Match.jsp</result>
 		<!-- execute()執行完成功後，就會執行Match.jsp --> 
 		<result name="input">/Match.jsp</result>
-		<allowed-methods></allowed-methods>
+		<result name="inserted">/Admin/match-list.jsp</result>
+		<result name="insertFailed">/Admin/match-form.jsp</result>
+		<allowed-methods>insert</allowed-methods>
 	</action> 
 	
 	<action name="odds" class="oddsAction" method="execute"> 
