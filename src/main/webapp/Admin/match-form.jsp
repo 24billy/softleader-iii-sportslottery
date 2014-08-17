@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sports Lottery Manager</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/admin-style.css">
 <link rel="stylesheet" href="css/jquery.datetimepicker.css">
@@ -86,15 +85,31 @@
 									<option value="Basketball">籃球</option>
 									<option value="Basketball">足球</option>
 								</select>
+							</div>
+							<div class="form-group">
+								<label>LEAGUE NAME</label>
+								<select class="form-control">
+									<option value="MLB" selected>美國職棒</option>
+								</select>
+							</div>
+							<div class="form-group">
 								<label>TEAM HOME</label>
 								<select class="form-control form-team">
 								</select>
+							</div>
+							<div class="form-group">
 								<label>TEAM AWAY</label>
 								<select class="form-control form-team">
 								</select>
+							</div>
+							<div class="form-group">
 								<label>GAME TIME</label>
            						<input class="form-control form-game-time" type="text">
-							</div>
+           					</div>
+           					
+           					<button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
 						</form>
 					</div>
 				</div>
