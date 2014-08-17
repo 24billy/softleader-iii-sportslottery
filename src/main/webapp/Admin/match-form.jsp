@@ -138,7 +138,9 @@
 			});
 		}
 		
-		$('.form-game-time').datetimepicker();
+		$('.form-game-time').datetimepicker({
+			minDate: new Date()
+		});
 		
 	})(jQuery)
 </script>
