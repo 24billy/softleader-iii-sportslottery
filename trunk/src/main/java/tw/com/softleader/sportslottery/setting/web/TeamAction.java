@@ -23,7 +23,7 @@ public class TeamAction extends ActionSupport {
 	
 	private List<TeamEntity> models;
 	
-	private InputStream modelsJson;
+	private InputStream inputStream;
 	
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
 
@@ -43,12 +43,12 @@ public class TeamAction extends ActionSupport {
 		this.models = models;
 	}
 	
-	public InputStream getModelsJson() {
-		return modelsJson;
+	public InputStream getInputStream() {
+		return inputStream;
 	}
 
-	public void setModelsJson(InputStream modelsJson) {
-		this.modelsJson = modelsJson;
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class TeamAction extends ActionSupport {
 		models = service.getAll();
 		log.debug("Models = {}", models);
 		
-		modelsJson = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
