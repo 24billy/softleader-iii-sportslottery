@@ -27,7 +27,7 @@ public class OddsEntity extends GenericEntity {
 	@Column(name = "ODD_TYPE", length = 10, nullable = false)
 	private String oddType;
 	
-	@Column(name = "ODD_COMBINATION", columnDefinition = "NUMERIC(8,3) default 0", nullable = false)
+	@Column(name = "ODD_COMBINATION", columnDefinition = "NUMERIC(8,3) default 0")
 	private BigDecimal oddCombination;
 	
 	@Column(name = "ODD_VALUE", columnDefinition = "NUMERIC(8,3) default 0", nullable = false)
