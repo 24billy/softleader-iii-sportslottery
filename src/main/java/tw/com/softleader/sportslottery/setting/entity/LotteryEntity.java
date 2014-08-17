@@ -13,7 +13,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Table(name="LOTTERY")
 public class LotteryEntity extends GenericEntity {
 	@ManyToOne	
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID", nullable = false)
 	private UserEntity userId;
 	
 	@ManyToOne	

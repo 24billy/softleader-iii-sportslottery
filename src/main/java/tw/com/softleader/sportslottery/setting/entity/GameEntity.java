@@ -27,17 +27,17 @@ public class GameEntity extends GenericEntity{
 	private Long gameNum;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM_HOME")
+	@JoinColumn(name="TEAM_HOME", nullable = false)
 	private TeamEntity teamHome;
 	
 	@ManyToOne	
-	@JoinColumn(name="TEAM_AWAY")
+	@JoinColumn(name="TEAM_AWAY", nullable = false)
 	private TeamEntity teamAway;
 	
-	@Column(name="GAME_SCORE_HOME")
+	@Column(name="GAME_SCORE_HOME", columnDefinition="BIGINT default 0")
 	private Long gameScoreHome;
 	
-	@Column(name="GAME_SCORE_AWAY")
+	@Column(name="GAME_SCORE_AWAY", columnDefinition="BIGINT default 0")
 	private Long gameScoreAway;
 	
 	@Column(name="LEAGUE_NAME", length=50)
