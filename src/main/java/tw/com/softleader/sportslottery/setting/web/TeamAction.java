@@ -1,5 +1,8 @@
 package tw.com.softleader.sportslottery.setting.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.joda.time.LocalDateTime;
@@ -20,6 +23,8 @@ public class TeamAction extends ActionSupport {
 	
 	private List<TeamEntity> models;
 	
+	private InputStream modelsJson;
+	
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
 
 	public TeamEntity getModel() {
@@ -38,6 +43,14 @@ public class TeamAction extends ActionSupport {
 		this.models = models;
 	}
 	
+	public InputStream getModelsJson() {
+		return modelsJson;
+	}
+
+	public void setModelsJson(InputStream modelsJson) {
+		this.modelsJson = modelsJson;
+	}
+
 	@Override
 	public void validate() {
 		
@@ -45,9 +58,11 @@ public class TeamAction extends ActionSupport {
 	
 	public String execute(){
 		log.debug("execute TeamAction");
-
+		
 		models = service.getAll();
 		log.debug("Models = {}", models);
+		
+		modelsJson = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
