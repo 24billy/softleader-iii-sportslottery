@@ -22,14 +22,6 @@ public class TeamAction extends ActionSupport {
 	
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
 
-	public TeamService getService() {
-		return service;
-	}
-
-	public void setService(TeamService service) {
-		this.service = service;
-	}
-
 	public TeamEntity getModel() {
 		return model;
 	}
@@ -44,14 +36,6 @@ public class TeamAction extends ActionSupport {
 
 	public void setModels(List<TeamEntity> models) {
 		this.models = models;
-	}
-
-	public Logger getLog() {
-		return log;
-	}
-
-	public void setLog(Logger log) {
-		this.log = log;
 	}
 	
 	@Override
