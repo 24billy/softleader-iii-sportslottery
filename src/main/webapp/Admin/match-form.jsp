@@ -9,8 +9,9 @@
 <title>Sports Lottery Manager</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/admin-style.css">
-<link rel="stylesheet" href="css/jquery.datetimepicker.css">
+<link rel="stylesheet" href="<c:url value="/Admin/css/admin-style.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
+
 <style>
 </style>
 </head>
@@ -77,10 +78,10 @@
 				
 				<div class="row">
 					<div class="col-lg-6">
-						<form role="form">
+						<form role="form" action="<c:url value="/game.action"/>">
 							<div class="form-group">
 								<label>BALL TYPE</label>
-								<select class="form-control form-ball-type">
+								<select class="form-control form-ball-type" name="model.ballType">
 									<option value="Baseball" selected>棒球</option>
 									<option value="Basketball">籃球</option>
 									<option value="Basketball">足球</option>
@@ -88,27 +89,27 @@
 							</div>
 							<div class="form-group">
 								<label>LEAGUE NAME</label>
-								<select class="form-control">
+								<select class="form-control" name="model.leagueName">
 									<option value="MLB" selected>美國職棒</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label>TEAM HOME</label>
-								<select class="form-control form-team">
+								<select class="form-control form-team" name="teamHomeId">
 								</select>
 							</div>
 							<div class="form-group">
 								<label>TEAM AWAY</label>
-								<select class="form-control form-team">
+								<select class="form-control form-team" name="teamAwayId">
 								</select>
 							</div>
 							<div class="form-group">
 								<label>GAME TIME</label>
-           						<input class="form-control form-game-time" type="text">
+           						<input class="form-control form-game-time" type="text" name="model.gameTime">
            					</div>
            					
-           					<button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+           					<button class="btn btn-default" type="submit" name="method:insert">Submit Button</button>
+                            <button class="btn btn-default" type="reset" >Reset Button</button>
 
 						</form>
 					</div>
@@ -133,7 +134,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="js/jquery.datetimepicker.js"></script>
+
+<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
 <script>
 	(function($) {
 		listTeam();
@@ -143,7 +145,7 @@
 		function listTeam() {
 			$('.form-team').empty();
 			
-			var url = '<c:url value="/team"/>';
+			var url = '<c:url value="/team.action"/>';
 			$.getJSON(url, function(data) {
 								
 				$.each(data, function(key, value) {
@@ -154,7 +156,8 @@
 		}
 		
 		$('.form-game-time').datetimepicker({
-			minDate: new Date()
+			minDate: new Date(),
+			format: 'Y-m-d H:i:s'
 		});
 		
 	})(jQuery)

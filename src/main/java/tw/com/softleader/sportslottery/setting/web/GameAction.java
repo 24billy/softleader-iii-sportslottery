@@ -1,5 +1,8 @@
 package tw.com.softleader.sportslottery.setting.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
+import tw.com.softleader.sportslottery.setting.service.TeamService;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 
@@ -19,10 +24,14 @@ public class GameAction extends ActionSupport {
  
 	@Autowired
 	private GameService service;
+	@Autowired
+	private TeamService teamService;
 	private GameEntity model;
 	private List<GameEntity> models;
 	private String modelsJson;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
+	private Long teamAwayId;
+	private Long teamHomeId;
 	
 	public String getModelsJson() {
 		return modelsJson;
@@ -43,6 +52,18 @@ public class GameAction extends ActionSupport {
 		this.models = models;
 	}
 	
+	public Long getTeamAwayId() {
+		return teamAwayId;
+	}
+	public void setTeamAwayId(Long teamAwayId) {
+		this.teamAwayId = teamAwayId;
+	}
+	public Long getTeamHomeId() {
+		return teamHomeId;
+	}
+	public void setTeamHomeId(Long teamHomeId) {
+		this.teamHomeId = teamHomeId;
+	}
 	public String execute(){
 		log.debug("execute GameAction");
 
@@ -53,5 +74,22 @@ public class GameAction extends ActionSupport {
 		log.debug("modelsJson = {}", modelsJson);
 		
 		return SUCCESS;
-	} 
+	}
+	
+	public String insert() {
+		log.debug("insert...");
+	
+
+		model.setTeamHome(teamService.getById(teamHomeId));
+		
+		model.setTeamAway(teamService.getById(teamAwayId));
+		try {
+			service.insert(model);
+			return "inserted";
+		} catch (Exception e) {
+			return "insertFailed";
+		}
+
+	}
+	
 }
