@@ -19,7 +19,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Table(name="GAME")
 public class GameEntity extends GenericEntity{
 
-	@Column(name="GAME_TIME")
+	@Column(name="GAME_TIME", nullable = false)
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	private LocalDateTime gameTime;
 	
@@ -40,10 +40,10 @@ public class GameEntity extends GenericEntity{
 	@Column(name="GAME_SCORE_AWAY", columnDefinition="BIGINT default 0")
 	private Long gameScoreAway;
 	
-	@Column(name="LEAGUE_NAME", length=50)
+	@Column(name="LEAGUE_NAME", length=50, nullable = false)
 	private String leagueName;
 	
-	@Column(name="BALL_TYPE", length=10)
+	@Column(name="BALL_TYPE", length=10, nullable = false)
 	private String ballType;
 	
 	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
