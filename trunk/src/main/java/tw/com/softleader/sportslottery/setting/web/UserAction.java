@@ -8,6 +8,7 @@ package tw.com.softleader.sportslottery.setting.web;
 
 import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +27,10 @@ public class UserAction extends ActionSupport {
 	
 	private List<UserEntity> models;
 	
+	private String modelsJson;
+	
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
 	
-	@Override
-	public String execute() throws Exception {
-		System.out.println("here is execute");
-		// TODO Auto-generated method stub
-		return super.execute();
-	}
-
-	@Override
-	public void validate() {
-		System.out.println("here is validate");
-		// TODO Auto-generated method stub
-		super.validate();
-	}
-
 	public UserEntity getModel() {
 		return model;
 	}
@@ -57,5 +46,85 @@ public class UserAction extends ActionSupport {
 	public void setModels(List<UserEntity> models) {
 		this.models = models;
 	}
+	
+	public String getModelsJson() {
+		return modelsJson;
+	}
+
+	public void setModelsJson(String modelsJson) {
+		this.modelsJson = modelsJson;
+	}
+
+	@Override
+	public void validate() {
+//		log.debug("here is validate");
+//		
+//		if(model!=null) {
+//			if(model.getUSER_ACCOUNT() != null) {
+//				log.debug("帳號已存在");
+//				addFieldError("QueryFail","帳號已存在");
+//			}
+//			if(model.getUSER_PHONE() != null) {
+//				log.debug("電話已存在");
+//				addFieldError("QueryFail","此電話已註冊");
+//			}
+//			if(model.getUSER_EMAIL() != null) {
+//				log.debug("信箱已存在");
+//				addFieldError("QueryFail","此信箱已註冊");
+//			}
+//		}
+	}
+	
+	@Override
+	public String execute() throws Exception {
+		System.out.println("here is execute");
+		
+		models = service.getAll();
+		log.debug("Models = {}", models);
+		
+		modelsJson = service.getAllJSON();
+		log.debug("modelsJson = {}", modelsJson);
+		return SUCCESS;
+	}
+
+	public String insert() {
+		log.debug("新增會員資料");
+		
+		model.setCreator("Guest"); //變數
+		model.setModifier("Guest"); //變數
+		model.setCreateTime(LocalDateTime.now());
+		model.setModifiedTime(LocalDateTime.now());
+		
+		log.debug("Model = {}", model);
+		
+		try {
+			service.insert(model);
+		} catch (Exception e) {
+			log.debug("!!新增錯誤!!");
+			addFieldError("QueryFail","帳號已存在");
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String update() {
+		
+		log.debug("do update");
+		model.setModifier("Guest");
+		model.setModifiedTime(LocalDateTime.now());
+		log.debug("Model = {}", model);
+		
+		try {
+			service.update(model);
+		} catch (Exception e) {
+			log.debug("!!修改錯誤!!");
+			e.printStackTrace();
+		}
+
+		//models = service.getAll();
+		
+		return SUCCESS;
+	}
+	
 	
 }
