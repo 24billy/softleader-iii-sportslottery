@@ -26,22 +26,22 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp">Sports Lottery Admin</a>
+				<a class="navbar-brand" href="<c:url value="/Admin/index.jsp"/>">Sports Lottery Admin</a>
 			</div>
 			
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li>
-						<a href="index.jsp"><i class="fa fa-fw fa-home"></i> 首頁</a>
+						<a href="<c:url value="/Admin/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 					</li>
 					<li class="active">
 						<a href="javascript:;" data-toggle="collapse" data-target="#match-manager"><i class="fa fa-fw fa-list"></i> 賽事管理<i class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="match-manager" class="collapse">
 							<li>
-								<a href="match-form.jsp"><i class="fa fa-fw fa-pencil-square-o"></i> 新增</a>
+								<a href="<c:url value="/Admin/match-form.jsp"/>"><i class="fa fa-fw fa-pencil-square-o"></i> 新增</a>
 							</li>
 							<li class="open">
-								<a href="match-list.jsp"><i class="fa fa-fw fa-table"></i> 查詢</a>
+								<a href="<c:url value="/Admin/match-list.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
 							</li>
 						</ul>
 					</li>
@@ -61,7 +61,7 @@
 						</h1>
 						<ol class="breadcrumb">
 							<li>
-								<a href="index.jsp"><i class="fa fa-fw fa-home"></i> 首頁</a>
+								<a href="<c:url value="/Admin/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 							</li>
 							<li>
 								<i class="fa fa-fw fa-list"></i> 賽事管理
@@ -89,7 +89,7 @@
 <script>
 	(function($) {
 		$('#match-manager').collapse();
-	})(jQuery)
+	})(jQuery);
 </script>
 </body>
 </html>
