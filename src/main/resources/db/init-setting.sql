@@ -1,6 +1,18 @@
-insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('小熊隊', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
-insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('天使隊', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
-insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('運動家隊', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('巴爾的摩金鶯', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('波士頓紅襪', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('紐約洋基', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('坦帕灣光芒', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('多倫多藍鳥', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('芝加哥白襪', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('克里夫蘭印地安人', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('底特律老虎', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('堪薩斯市皇家', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('明尼蘇達雙城', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('休士頓太空人', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('洛杉磯安那罕天使', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('奧克蘭運動家', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('西雅圖水手', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('德州遊騎兵', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE, create_time, creator, modified_time, modifier,TEAM_HOME,TEAM_AWAY) values (CURRENT_TIMESTAMP, 100,2,3,'MLB','Baseball', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system', 1, 2);
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE, create_time, creator, modified_time, modifier,TEAM_HOME,TEAM_AWAY) values (CURRENT_TIMESTAMP, 101,10,1,'MLB','Baseball', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system', 2, 3);
@@ -30,6 +42,6 @@ insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, cr
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (8, 'SU_H', 1, 1.25, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, create_time, creator, modified_time, modifier) values (8, 'SU_A', 1, 2.15, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,1,2,3,null,null,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,3,1,3,null,null,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,2,3,1,null,null,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,1,2,3,3,4,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,3,1,3,4,5,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, create_time, creator, modified_time, modifier) values (1,2,3,1,6,7,null,null,null,CURRENT_TIMESTAMP,'system', CURRENT_TIMESTAMP, 'system');
