@@ -1,5 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,8 @@ import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 /**
 @Author:Billy 
@@ -24,7 +28,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		return dao;
 	}
 	
-	protected LotteryDao getLotteryDao(){
-		return dao;
+	public List<UserEntity> getByUserId(Long userId) {
+		return dao.findByUserId(userId);
 	}
 }
