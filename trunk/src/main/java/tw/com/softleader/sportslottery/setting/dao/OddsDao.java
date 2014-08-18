@@ -50,4 +50,36 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		return query.setLong("gameId", gameId).list();
 	}
 	
+	public List<OddsEntity> findForHistory(String teamName, String beforeGametime, String afterGametime){
+        List<OddsEntity> result= null;
+        Session session = sessionFactory.getCurrentSession();
+        	
+        //hibernate query http://docs.jboss.org/hibernate/core/3.3/reference/en/html/queryhql.html
+      
+        String isEndString = " odds.gamId.isEnd=True";
+        String beforeGrameTimeString="adds.gamId.gameTime > :beforeGametime";
+        String afterGameTimeString="adds.gamId.gameTime < :afterGametime";
+        String awayTeamNameString="odds.gameId.teamAway.teamName like :teamName";
+        String homeTeamNameString="odds.gameId.teamHome.teamName like :teamName";
+        
+       Query query = session.createQuery("from OddsEntity odds where"+
+               isEndString + "and "+
+               beforeGrameTimeString + "and "+
+               afterGameTimeString + "and ("+
+               awayTeamNameString +"or"+
+               homeTeamNameString + ")"
+               );
+       
+        
+       //Interface Query http://docs.jboss.org/hibernate/core/3.2/api/org/hibernate/Query.html
+        query.setString("beforeGametime", beforeGametime);// A value,"beforeGametime", is bound to the String parameter :beforeGametime by calling query.setString("beforeGametime", beforeGametime);
+        query.setString("afterGameTimeString", afterGameTimeString);
+
+        query.setString("teamName", teamName+"%");
+        result=query.list();
+    
+        return result;
+    
+}
+	
 }
