@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-<c:url value=""/>
+
 	<div id="wrapper">
 		
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
