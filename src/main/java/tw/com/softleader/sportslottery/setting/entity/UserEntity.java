@@ -30,7 +30,7 @@ public class UserEntity extends GenericEntity {
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
-	@Column(name="USER_ACCOUNT", length=50, nullable=false)
+	@Column(name="USER_ACCOUNT", length=50, nullable=false,unique = true)
 	private String USER_ACCOUNT;
 	
 	//USER_PASSWORD	密碼		varchar		String		50	NOT NULL
