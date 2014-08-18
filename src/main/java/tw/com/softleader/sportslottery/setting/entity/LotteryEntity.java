@@ -1,5 +1,6 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -47,6 +48,12 @@ public class LotteryEntity extends GenericEntity {
 	@ManyToOne	
 	@JoinColumn(name="ODDS_ID_8")
 	private OddsEntity oddsId8;
+	
+	@Column(name="WIN")
+	private Long win;
+	
+	@Column(name="CAPITAL")
+	private Long capital;
 
 	public UserEntity getUserId() {
 		return userId;
@@ -120,16 +127,35 @@ public class LotteryEntity extends GenericEntity {
 		this.oddsId8 = oddsId8;
 	}
 
+	public Long getWin() {
+		return win;
+	}
+
+	public void setWin(Long win) {
+		this.win = win;
+	}
+
+	public Long getCapital() {
+		return capital;
+	}
+
+	public void setCapital(Long capital) {
+		this.capital = capital;
+	}
+
 	@Override
 	public String toString() {
 		return "LotteryEntity [userId=" + userId + ", oddsId1=" + oddsId1
 				+ ", oddsId2=" + oddsId2 + ", oddsId3=" + oddsId3
 				+ ", oddsId4=" + oddsId4 + ", oddsId5=" + oddsId5
 				+ ", oddsId6=" + oddsId6 + ", oddsId7=" + oddsId7
-				+ ", oddsId8=" + oddsId8 + ", id=" + id + ", createTime="
-				+ createTime + ", creator=" + creator + ", modifiedTime="
-				+ modifiedTime + ", modifier=" + modifier + "]";
+				+ ", oddsId8=" + oddsId8 + ", win=" + win + ", capital="
+				+ capital + ", id=" + id + ", createTime=" + createTime
+				+ ", creator=" + creator + ", modifiedTime=" + modifiedTime
+				+ ", modifier=" + modifier + "]";
 	}
+
+
 
 	
 	
