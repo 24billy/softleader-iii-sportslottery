@@ -71,10 +71,40 @@
 							</li>
 						</ol>
 					</div>
-					<ol>
-					</ol>
 				</div>
-			
+				<!-- .row -->
+				
+				<div class="row">
+                    <div class="col-lg-6">
+                    	<h2>TABLE</h2>
+                    	<form role="form" class="form-inline pull-right">
+                    		<div class="form-group">
+                    			<label>BALL TYPE</label>
+                    			<select class="form-control form-ball-type" name="model.ballType">
+									<option value="Baseball" selected>棒球</option>
+									<option value="Basketball">籃球</option>
+									<option value="Basketball">足球</option>
+								</select>
+                    		</div>
+                    	</form>
+						<div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                            	<thead>
+                            		<tr>
+                            			<th>HEAD</th>
+                            		</tr>
+                            	</thead>
+                            	<tbody>
+                            		<tr>
+                            			<td>BODY</td>
+                            		</tr>
+                            	</tbody>
+                            </table>
+                        </div>
+                        <!-- .table-responsive -->                    
+                    </div>
+                </div>
+				<!-- .row -->
 			
 			</div>
 			<!-- .container-fluid -->
