@@ -19,111 +19,116 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Table(name="USERN")
 public class UserEntity extends GenericEntity {
 	
-	@Override
-	public String toString() {
-		return "UserEntity [USER_ACCOUNT=" + USER_ACCOUNT + ", USER_PASSWORD="
-				+ USER_PASSWORD + ", USER_NAME=" + USER_NAME
-				+ ", USER_BIRTHDAY=" + USER_BIRTHDAY + ", USER_GENDER="
-				+ USER_GENDER + ", USER_PHONE=" + USER_PHONE + ", USER_EMAIL="
-				+ USER_EMAIL + "]";
-	}
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	
 	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
 	@Column(name="USER_ACCOUNT", length=50, nullable=false,unique = true)
-	private String USER_ACCOUNT;
+	private String userAccount;
 	
 	//USER_PASSWORD	密碼		varchar		String		50	NOT NULL
 	@Column(name="USER_PASSWORD", length=50, nullable=false)
-	private String USER_PASSWORD;
+	private String userPassword;
 	
 	//USER_NAME		名字		varchar		String		50	NOT NULL
 	@Column(name="USER_NAME", length=50, nullable=false)
-	private String USER_NAME;
+	private String userName;
 	
 	//USER_BIRTHDAY	生日		timesemp	JODA_TIME
 	@Column(name="USER_BIRTHDAY")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-	protected LocalDate USER_BIRTHDAY;	
+	protected LocalDate userBirthday;	
 	
 	//USER_GENDER	性別		varchar		String		10	
 	@Column(name="USER_GENDER", length=10)
-	private String USER_GENDER;
+	private String userGender;
 	
 	//USER_PHONE	電話		varchar		String		20
 	@Column(name="USER_PHONE", length=10)
-	private String USER_PHONE;
+	private String userPhone;
 	
 	//USER_EMAIL	電子信箱	varchar		String		50	NOT NULL
 	@Column(name="USER_EMAIL", length=50, nullable=false)
-	private String USER_EMAIL;
+	private String userEmail;
 	
 	@Column(name="COINS", columnDefinition = "BIGINT default 0")
-	private Long COINS;
+	private Long coins;
+
 	
-	public Long getCOINS() {
-		return COINS;
+	@Override
+	public String toString() {
+		return "UserEntity [userAccount=" + userAccount + ", userPassword="
+				+ userPassword + ", userName=" + userName + ", userBirthday="
+				+ userBirthday + ", userGender=" + userGender + ", userPhone="
+				+ userPhone + ", userEmail=" + userEmail + ", coins=" + coins
+				+ ", id=" + id + ", createTime=" + createTime + ", creator="
+				+ creator + ", modifiedTime=" + modifiedTime + ", modifier="
+				+ modifier + "]";
 	}
 
-	public void setCOINS(Long cOINS) {
-		COINS = cOINS;
+	public String getUserAccount() {
+		return userAccount;
 	}
 
-	public String getUSER_ACCOUNT() {
-		return USER_ACCOUNT;
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
 	}
 
-	public void setUSER_ACCOUNT(String uSER_ACCOUNT) {
-		USER_ACCOUNT = uSER_ACCOUNT;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public String getUSER_PASSWORD() {
-		return USER_PASSWORD;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public void setUSER_PASSWORD(String uSER_PASSWORD) {
-		USER_PASSWORD = uSER_PASSWORD;
+	public String getUserName() {
+		return userName;
 	}
 
-	public String getUSER_NAME() {
-		return USER_NAME;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public void setUSER_NAME(String uSER_NAME) {
-		USER_NAME = uSER_NAME;
+	public LocalDate getUserBirthday() {
+		return userBirthday;
 	}
 
-	public String getUSER_GENDER() {
-		return USER_GENDER;
+	public void setUserBirthday(LocalDate userBirthday) {
+		this.userBirthday = userBirthday;
 	}
 
-	public void setUSER_GENDER(String uSER_GENDER) {
-		USER_GENDER = uSER_GENDER;
+	public String getUserGender() {
+		return userGender;
 	}
 
-	public String getUSER_PHONE() {
-		return USER_PHONE;
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
 	}
 
-	public void setUSER_PHONE(String uSER_PHONE) {
-		USER_PHONE = uSER_PHONE;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
-	public String getUSER_EMAIL() {
-		return USER_EMAIL;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
-	public void setUSER_EMAIL(String uSER_EMAIL) {
-		USER_EMAIL = uSER_EMAIL;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public LocalDate getUSER_BIRTHDAY() {
-		return USER_BIRTHDAY;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	public void setUSER_BIRTHDAY(LocalDate uSER_BIRTHDAY) {
-		USER_BIRTHDAY = uSER_BIRTHDAY;
+	public Long getCoins() {
+		return coins;
 	}
 
+	public void setCoins(Long coins) {
+		this.coins = coins;
+	}
+	
+	
 	
 }

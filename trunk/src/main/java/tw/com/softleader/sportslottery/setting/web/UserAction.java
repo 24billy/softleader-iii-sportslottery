@@ -128,10 +128,10 @@ public class UserAction extends ActionSupport {
 	
 	public String check() {
 		log.debug("check...");
-		log.debug("檢查帳號是否存在" + model.getUSER_ACCOUNT());
+		log.debug("檢查帳號是否存在" + model.getUserAccount());
 		
 		String result;
-		boolean check = service.getByUserAccount(model.getUSER_ACCOUNT());
+		boolean check = service.getByUserAccount(model.getUserAccount());
 		if(check) {
 			log.debug("不存在");
 			addFieldError("QueryFail","此帳號可以使用");
