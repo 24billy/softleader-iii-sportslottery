@@ -30,8 +30,9 @@
 		<allowed-methods></allowed-methods>
 	</action> 
 	
-	<action name="chekAccount" class="userAction" method="chek">
+	<action name="chekAccount" class="userAction" method="check">
 		<result name="success">/Security/success.jsp</result>
+		<result name="success">/Security/fail.jsp</result>
 	</action>
 	
 	

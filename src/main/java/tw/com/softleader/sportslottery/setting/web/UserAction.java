@@ -86,7 +86,7 @@ public class UserAction extends ActionSupport {
 		log.debug("modelsJson = {}", modelsJson);
 		return SUCCESS;
 	}
-
+	
 	public String insert() {
 		log.debug("新增會員資料");
 		
@@ -127,14 +127,19 @@ public class UserAction extends ActionSupport {
 	}
 	
 	public String check() {
-		log.debug("檢查帳號是否存在");
+		log.debug("check...");
+		log.debug("檢查帳號是否存在" + model.getUSER_ACCOUNT());
+		log.debug("check2...");
+		String result;
 		String check = service.getByUserAccount(model.getUSER_ACCOUNT());
 		if(check!=null) {
 			addFieldError("QueryFail","帳號已存在");
+			result="f";
 		} else {
 			addFieldError("QueryFail","此帳號可以使用");
+			result="t";
 		}
-		return SUCCESS;
+		return result;
 	}
 	
 }

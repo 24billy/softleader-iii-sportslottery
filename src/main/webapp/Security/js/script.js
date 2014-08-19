@@ -1,45 +1,40 @@
 $(document).ready(function(){
 
 
-		$('#registration-form').validate({
-	    rules: {
-		 username: {
-	        minlength: 6,
-	        required: true
-	      },
+	$('#registration-form').validate({
+		rules: {
+				'model.USER_ACCOUNT': {
+				minlength: 6,
+				required: true
+			},
 		  
-		  password: {
+			'model.USER_PASSWORD': {
 				required: true,
 				minlength: 6
 			},
+			
 			confirm_password: {
 				required: true,
 				minlength: 6,
 				equalTo: "#password"
 			},
 		  
-	      email: {
-	        required: true,
-	        email: true
-	      },
+			'model.USER_EMAIL': {
+				required: true,
+				email: true
+			},
 		  
-	     
-		   address: {
-	      	minlength: 10,
-	        required: true
-	      },
-		  
-		  agree: "required"
+			agree: "required"
 		  
 	    },
-			highlight: function(element) {
-				$(element).closest('.control-group').removeClass('success').addClass('error');
-			},
-			success: function(element) {
-				element
-				.text('OK!').addClass('valid')
-				.closest('.control-group').removeClass('error').addClass('success');
-			}
-	  });
+		highlight: function(element) {
+			$(element).closest('.control-group').removeClass('success').addClass('error');
+		},
+		success: function(element) {
+			element
+			.text('OK!').addClass('valid')
+			.closest('.control-group').removeClass('error').addClass('success');
+		}
+	});
 
 }); // end document.ready
