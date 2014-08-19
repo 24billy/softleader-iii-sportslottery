@@ -71,7 +71,7 @@
 				<div class="row" name="event_list" id="sample" date="">
 					<div class="col-lg-9">
 						<h3>2014年4月20日</h3>
-						<table class="table table-striped">
+						<table class="table table-striped table-hover">
 							<tr>
 								<th width="100px">賽事編號</th>
 								<th width="100px">比賽時間</th>
