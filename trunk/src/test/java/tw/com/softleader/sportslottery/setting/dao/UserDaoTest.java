@@ -13,14 +13,14 @@ public class UserDaoTest extends BaseTest {
 		UserDao dao = new UserDao();
 		UserEntity entity = new UserEntity();
 		//entity.setCreator("Ken123");
-		entity.setUSER_ACCOUNT("ken");
-		entity.setUSER_PASSWORD("a123456");
-		entity.setUSER_NAME("Ken");
-		entity.setUSER_EMAIL("ken@gmail.com");
-		entity.setUSER_GENDER("male");
-		entity.setUSER_PHONE("0988123456");
+		entity.setModifier("ken");
+		entity.setUserPassword("a123456");
+		entity.setUserName("Ken");
+		entity.setUserEmail("ken@gmail.com");
+		entity.setUserGender("male");
+		entity.setUserPhone("0988123456");
 		LocalDate birthDate = new LocalDate();
-		entity.setUSER_BIRTHDAY(birthDate);
+		entity.setUserBirthday(birthDate);
 		log.debug(entity.toString());
 		dao.insert(entity);
 		
