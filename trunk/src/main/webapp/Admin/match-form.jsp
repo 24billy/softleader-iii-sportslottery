@@ -108,6 +108,11 @@
            						<input class="form-control form-game-time" type="text" name="model.gameTime">
            					</div>
            					
+           					<div class="form-group">
+								<label>ODD VALUE</label>
+           						<input class="form-control form-odd-value" type="text" name="odds.oddValue">
+           					</div>
+           					
            					<button class="btn btn-default" type="submit" name="method:insert">Submit Button</button>
                             <button class="btn btn-default" type="reset" >Reset Button</button>
 
@@ -146,8 +151,7 @@
 			$('.form-team').empty();
 			
 			var url = '<c:url value="/team.action"/>';
-			$.getJSON(url, function(data) {
-								
+			$.getJSON(url, function(data) {	
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('.form-team').append(str);
