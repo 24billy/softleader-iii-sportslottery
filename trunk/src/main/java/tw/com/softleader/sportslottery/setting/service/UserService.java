@@ -21,7 +21,7 @@ public class UserService extends GenericService<UserEntity> {
 		// TODO Auto-generated method stub
 		return dao;
 	}
-	public String getByUserAccount(String USER_ACCOUNT) {
+	public boolean getByUserAccount(String USER_ACCOUNT) {
 		return dao.findByUserAccount(USER_ACCOUNT);
 	}
 	

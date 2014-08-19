@@ -31,8 +31,8 @@
 	</action> 
 	
 	<action name="chekAccount" class="userAction" method="check">
-		<result name="success">/Security/success.jsp</result>
-		<result name="success">/Security/fail.jsp</result>
+		<result name="t">/Security/success.jsp</result>
+		<result name="f">/Security/fail.jsp</result>
 	</action>
 	
 	
