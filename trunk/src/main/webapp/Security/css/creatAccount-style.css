@@ -4,15 +4,15 @@
 }
 .sing-up {
 	margin:0px 20px 50px 20px;
-	float:left;
+	float:right;
 	background-color: #DDDDDD;
 	width: 300px;
 	opacity:0.6;
 }
 .createaccount-body {
 	float:right;
-	background-color: #DDDDDD;
 }
+
 .create-title {
 	text-align:center;
 	color:#666666;
