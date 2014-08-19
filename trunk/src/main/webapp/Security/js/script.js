@@ -3,12 +3,12 @@ $(document).ready(function(){
 
 	$('#registration-form').validate({
 		rules: {
-				'model.USER_ACCOUNT': {
+			'model.userAccount': {
 				minlength: 6,
 				required: true
 			},
 		  
-			'model.USER_PASSWORD': {
+			'model.userPassword': {
 				required: true,
 				minlength: 6
 			},
@@ -19,7 +19,7 @@ $(document).ready(function(){
 				equalTo: "#password"
 			},
 		  
-			'model.USER_EMAIL': {
+			'model.userEmail': {
 				required: true,
 				email: true
 			},
