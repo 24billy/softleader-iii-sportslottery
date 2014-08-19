@@ -30,6 +30,11 @@
 		<allowed-methods></allowed-methods>
 	</action> 
 	
+	<action name="chekAccount" class="userAction" method="chek">
+		<result name="success">/Security/success.jsp</result>
+	</action>
+	
+	
 	<action name="team" class="teamAction" method="execute">
 		<result name="success" type="stream">
 			<param name="contentType">text/plain</param>
