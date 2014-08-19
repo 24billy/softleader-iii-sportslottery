@@ -109,7 +109,7 @@ public class UserAction extends ActionSupport {
 	
 	public String update() {
 		
-		log.debug("do update");
+		log.debug("修改會員資料");
 		model.setModifier("Guest");
 		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
@@ -126,5 +126,15 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String check() {
+		log.debug("檢查帳號是否存在");
+		String check = service.getByUserAccount(model.getUSER_ACCOUNT());
+		if(check!=null) {
+			addFieldError("QueryFail","帳號已存在");
+		} else {
+			addFieldError("QueryFail","此帳號可以使用");
+		}
+		return SUCCESS;
+	}
 	
 }
