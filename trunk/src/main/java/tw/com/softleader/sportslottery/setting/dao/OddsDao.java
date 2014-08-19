@@ -56,26 +56,34 @@ public class OddsDao extends GenericDao<OddsEntity> {
         	
         //hibernate query http://docs.jboss.org/hibernate/core/3.3/reference/en/html/queryhql.html
       
-        String isEndString = " odds.gamId.isEnd=True";
-        String beforeGrameTimeString="adds.gamId.gameTime > :beforeGametime";
-        String afterGameTimeString="adds.gamId.gameTime < :afterGametime";
+        String isEndString = " odds.gameId.isEnd = 'f'";
+        String beforeGrameTimeString="odds.gameId.gameTime >= :beforeGametime";
+        String afterGameTimeString="odds.gameId.gameTime < :afterGametime";
         String awayTeamNameString="odds.gameId.teamAway.teamName like :teamName";
         String homeTeamNameString="odds.gameId.teamHome.teamName like :teamName";
         
+        
+        String sql = "from OddsEntity odds where odds.gameId.isEnd = 'f' and (odds.gameId.teamAway.teamName like '巴%' or odds.gameId.teamHome.teamName like '巴%')";
+        
+        /*
        Query query = session.createQuery("from OddsEntity odds where"+
-               isEndString + "and "+
-               beforeGrameTimeString + "and "+
-               afterGameTimeString + "and ("+
-               awayTeamNameString +"or"+
+               isEndString + " and "+
+               beforeGrameTimeString + " and "+
+               afterGameTimeString + " and ("+
+               awayTeamNameString +" or "+
                homeTeamNameString + ")"
                );
        
-        
+        */
+        Query query = session.createQuery(sql);
        //Interface Query http://docs.jboss.org/hibernate/core/3.2/api/org/hibernate/Query.html
-        query.setString("beforeGametime", beforeGametime);// A value,"beforeGametime", is bound to the String parameter :beforeGametime by calling query.setString("beforeGametime", beforeGametime);
-        query.setString("afterGameTimeString", afterGameTimeString);
-
-        query.setString("teamName", teamName+"%");
+        //query.setString("beforeGametime", beforeGametime);// A value,"beforeGametime", is bound to the String parameter :beforeGametime by calling query.setString("beforeGametime", beforeGametime);
+        //query.setString("afterGametime", afterGametime);
+        //if ( teamName != null)
+        //	query.setString("teamName", teamName+"%");
+        //else {
+        //	query.setString("teamName", "%");
+       // }
         result=query.list();
     
         return result;

@@ -80,6 +80,11 @@ public class OddsDaoTest extends BaseTest {
 		}
 		
 		assertEquals(originSize, currentSize);
+		
+		
+		models = oddsDao.findForHistory("巴", "CURRENT_TIMESTAMP", "CURRENT_TIMESTAMP + 1");
+		log.debug("findForHistory = {}", models);
+		
 	}
 
 }
