@@ -77,7 +77,9 @@
 				$.ajax( {
 					url:"<c:url value='/chekAccount'/>",
 					type:"get",
-					data:{},
+					data:{
+						'model.USER_ACCOUNT': $('#username').val()
+					},
 					success: function(data) {
 						alert(data);
 					}
