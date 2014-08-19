@@ -16,13 +16,13 @@ public class UserDao extends GenericDao<UserEntity> {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public boolean findByUserAccount(String USER_ACCOUNT) {
+	public boolean findByUserAccount(String userAccount) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from UserEntity u where u.USER_ACCOUNT = :ACCOUNT");
-		query.setString("ACCOUNT", USER_ACCOUNT);
+		Query query = session.createQuery("from UserEntity u where USER_ACCOUNT = :ACCOUNT");
+		query.setString("ACCOUNT", userAccount);
 		boolean result;
 		UserEntity e = null;
-		System.out.println("檢查點...:" + USER_ACCOUNT);
+		System.out.println("檢查點...:" + userAccount);
 		try {
 			e = (UserEntity)query.uniqueResult();
 		} catch (HibernateException e1) {
