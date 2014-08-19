@@ -58,7 +58,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							<div >投注區</div>
+							<div>投注區</div>
 						</h1>						
 						<table class="table table-striped table-hover" id="lottery">
   							<tr>
