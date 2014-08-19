@@ -18,13 +18,13 @@
 			<form class="form-horizontal" id="registration-form">
 				<label>
 					<strong>帳號</strong><br>
-					<input class="input-xlarge" name="model.USER_ACCOUNT" id="username" type="text">
+					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
 				</label>
 				<div class="error" id="acountIn"></div>
 				
 				<label>
 					<strong>密碼</strong><br>
-					<input class="input-xlarge" name="model.USER_PASSWORD" id="password" type="password">
+					<input class="input-xlarge" name="model.userPassword" id="password" type="password">
 				</label>
 				<div class="error" id="pwdIn"></div>
 				
@@ -36,26 +36,26 @@
 				
 				<label id="label-account">
 					<strong>姓名</strong><br>
-					<input class="input-xlarge" name="model.USER_NAME" type="text">
+					<input class="input-xlarge" name="model.userName" type="text">
 				</label>
 				<label id="label-account">
 					<strong>E-mail</strong><br>
-					<input class="input-xlarge" name="model.USER_EMAIL" type="text">
+					<input class="input-xlarge" name="model.userEmail" type="text">
 				</label>
 				<label id="label-account">
 					<strong>電話</strong><br>
-					<input class="input-xlarge" name="model.USER_PHONE" type="text">
+					<input class="input-xlarge" name="model.userPhone" type="text">
 				</label>
 				<div class="error" id="acountIn"></div>
 				<label id="label-account">
 					<strong>
-						<span>男</span><input type="radio" name="model.USER_GENDER" value="男">
-						<span>女</span><input type="radio" name="model.USER_GENDER" value="女">
+						<span>男</span><input type="radio" name="model.userGender" value="男">
+						<span>女</span><input type="radio" name="model.userGender" value="女">
 					</strong>
 				</label><br>
 				<label id="label-account">
 					<strong>生日</strong><br>
-					<input class="input-xlarge" name="model.USER_BIRTHDAY" id="form-element-name" type="text">
+					<input class="input-xlarge" name="model.userBirthday" id="form-element-name" type="text">
 				</label><br>
 				
 				<button type="submit" class="btn btn-success">註冊</button>
@@ -68,26 +68,22 @@
 	<script src="js/jquery.validate.js"></script> 
 	<script src="js/script.js"></script> 
 	
-	<script type="text/javascript">
-	
+	<script>
 		(function($){
-			
 			$('#username').focusout(chekAc);
 			function chekAc() {
 				$.ajax( {
 					url:"<c:url value='/chekAccount'/>",
 					type:"get",
 					data:{
-						'model.USER_ACCOUNT': $('#username').val()
+						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
 						alert(data);
 					}
 				});
-			};
-			
+			};		
 		})(jQuery);
-		
 	</script>
 	
 </body>
