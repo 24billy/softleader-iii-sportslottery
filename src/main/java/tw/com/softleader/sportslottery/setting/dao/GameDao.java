@@ -1,5 +1,6 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -14,7 +15,7 @@ import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 /**
  * 
  * @author nick
- *
+ * modified by Billy 
  */
 @Repository
 public class GameDao extends GenericDao<GameEntity>{
@@ -32,5 +33,16 @@ public class GameDao extends GenericDao<GameEntity>{
 		Query query = session.createQuery("from GameEntity where BALL_TYPE = :ballType order by GAME_TIME");
 		return query.setString("ballType", ballType).list();
 		
+	}
+	
+	public List<GameEntity> findGameTime(Date gameTime){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from GameEntity where GAME_TIME = :gameTime order by GAME_TIME");
+		return query.setDate("gameTime", gameTime).list();
+	}
+	public  List<GameEntity> findGameIsEnd(boolean gameIsEnd){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from GameEntity where IS_END = :gameIsEnd order by GAME_TIME");
+		return query.setBoolean("gameIsEnd", gameIsEnd).list();
 	}
 }

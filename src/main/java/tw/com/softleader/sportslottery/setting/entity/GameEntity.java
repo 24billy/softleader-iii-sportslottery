@@ -13,7 +13,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 /**
  * 
  * @author nick
- *
+ *  modified by Billy 
  */
 @Entity
 @Table(name="GAME")
