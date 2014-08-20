@@ -1,5 +1,6 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,19 @@ public class UserService extends GenericService<UserEntity> {
 		return dao.findByUserAccount(USER_ACCOUNT);
 	}
 	
-	public UserEntity login(String userAccount,String userPassword) {
+	public UserEntity checkLogin(String userAccount,String userPassword) {
 		UserEntity entity = dao.findByUserAccount(userAccount);
-		
-		
-		
+		if(entity!=null) {
+			if(userPassword!=null) {
+				String MemberPass = entity.getUserPassword();
+				String GuestPass = userPassword;
+				System.out.println(MemberPass+" : "+GuestPass);
+				if(MemberPass.equals(GuestPass)) {
+					System.out.println("驗鄭成功");
+					return entity;
+				}
+			}
+		}
 		return null;
 	}
 }

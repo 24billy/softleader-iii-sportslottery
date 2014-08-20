@@ -87,13 +87,13 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String insert() {
+	public String insert() throws Exception {
 		log.debug("新增會員資料");
 		
-//		model.setCreator("Guest"); //變數
-//		model.setModifier("Guest"); //變數
-//		model.setCreateTime(LocalDateTime.now());
-//		model.setModifiedTime(LocalDateTime.now());
+		model.setCreator("Guest"); //變數
+		model.setModifier("Guest"); //變數
+		model.setCreateTime(LocalDateTime.now());
+		model.setModifiedTime(LocalDateTime.now());
 		
 		log.debug("Model = {}", model);
 		
@@ -104,11 +104,10 @@ public class UserAction extends ActionSupport {
 			e.printStackTrace();
 			return "FIAL";
 		}
-		
 		return SUCCESS;
 	}
 	
-	public String update() {
+	public String update() throws Exception {
 		
 		log.debug("修改會員資料");
 //		model.setModifier("Guest");
@@ -121,13 +120,10 @@ public class UserAction extends ActionSupport {
 			log.debug("!!修改錯誤!!");
 			e.printStackTrace();
 		}
-
-		//models = service.getAll();
-		
 		return SUCCESS;
 	}
 	
-	public String check() {
+	public String check() throws Exception {
 		log.debug("check...");
 		log.debug("檢查帳號是否存在" + model.getUserAccount());
 		
@@ -145,6 +141,16 @@ public class UserAction extends ActionSupport {
 		return result;
 	}
 	
-	
-	
+	public String login() throws Exception {
+		log.debug("login...");
+		UserEntity entity = service.checkLogin(model.getUserAccount(), model.getUserPassword());
+		if(entity!=null) {
+			log.debug("可登入");
+			return SUCCESS;
+		} else {
+			log.debug("帳號不存在");
+			addFieldError("LoginFail","帳號或密碼不正確");
+			return INPUT;
+		}
+	}
 }
