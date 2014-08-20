@@ -17,6 +17,14 @@ insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) valu
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('匹茲堡海盜', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('亞歷桑那響尾蛇', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('華盛頓國民', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('聖地牙哥教士', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('洛杉磯道奇', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('樂天金鷹', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('日本火腿鬥士', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('中日龍', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('阪神虎', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('廣島東洋鯉魚', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+
 
 
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE, create_time, creator, modified_time, modifier,TEAM_HOME,TEAM_AWAY) values ('2014-08-08T10:50:20', 100,2,3,'MLB','Baseball', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system', 1, 2);
