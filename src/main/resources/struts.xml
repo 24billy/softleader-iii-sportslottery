@@ -34,6 +34,11 @@
 		<result name="t">/Security/success.jsp</result>
 		<result name="f">/Security/fail.jsp</result>
 	</action>
+	<action name="addAccount" class="userAction" method="insert">
+		<result name="success">/index.jsp</result>
+		<result name="FIAL">/Security/addUser.jsp</result>
+		
+	</action>
 	
 	
 	<action name="team" class="teamAction" method="execute">
