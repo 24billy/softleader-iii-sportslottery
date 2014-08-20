@@ -36,7 +36,7 @@ public class GameDao extends GenericDao<GameEntity>{
 	
 	public List<GameEntity> findGameIsNotEnd(String ballType) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from GameEntity where IS_END != true and :ballType order by GAME_TIME");
+		Query query = session.createQuery("from GameEntity where IS_END != true and BALL_TYPE = :ballType order by GAME_TIME");
 		return query.setString("ballType", ballType).list();
 	}
 	
