@@ -24,6 +24,26 @@ insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) valu
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('中日龍', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('阪神虎', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('廣島東洋鯉魚', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('紐約大都會', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('橫濱海灣之星', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('西武獅', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('軟體銀行鷹', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('歐力士猛牛', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('羅德海洋', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('多倫多藍鳥', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('密爾瓦基釀酒人', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('巴爾地摩金鶯', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('芝加哥白襪', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('LG雙子', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('耐克森英雄', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('斗山熊', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('SK飛龍', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('三星獅', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('起亞老虎', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('Lamigo桃猿', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('中信兄弟象', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('費城費城人', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+insert into team (TEAM_NAME, create_time, creator, modified_time, modifier) values ('耐克森英雄', CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
 
 
 
