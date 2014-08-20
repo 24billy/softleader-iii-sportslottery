@@ -18,11 +18,18 @@ public class UserService extends GenericService<UserEntity> {
 
 	@Override
 	protected GenericDao<UserEntity> getDao() {
-		// TODO Auto-generated method stub
 		return dao;
 	}
-	public boolean getByUserAccount(String USER_ACCOUNT) {
+	
+	public UserEntity getByUserAccount(String USER_ACCOUNT) {
 		return dao.findByUserAccount(USER_ACCOUNT);
 	}
 	
+	public UserEntity login(String userAccount,String userPassword) {
+		UserEntity entity = dao.findByUserAccount(userAccount);
+		
+		
+		
+		return null;
+	}
 }
