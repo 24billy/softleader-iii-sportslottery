@@ -11,14 +11,20 @@
 <link rel="stylesheet" href="<c:url value="/Security/css/creatAccount-style.css"/>">
 <link href="css/style.css" rel="stylesheet">
 </head>
+	<script src="js/jquery-1.7.1.min.js"></script> 
+	<script src="js/bootstrap.js"></script> 
+	<script src="js/button.js"></script> 
+	<script src="js/jquery.validate.js"></script> 
+	<script src="js/script.js"></script> 
 <body>
 	<div class="createaccount-body">
 		<h1 class="create-title">註冊系統</h1>
 		<div class="sing-up">
-			<form class="form-horizontal" id="registration-form">
-				<label>
+			<form class="form-horizontal" id="registration-form" action="<c:url value='/addAccount'/>">
+				<label class="input-label">
 					<strong>帳號</strong><br>
 					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
+					<button type="button" id="loading-example-btn" class="btn btn-primary" data-loading-text="Loading...">檢查帳號</button>
 				</label>
 				<div class="error" id="acountIn"></div>
 				
@@ -64,13 +70,35 @@
 		</div>
 	</div>
 	
-	<script src="js/jquery-1.7.1.min.js"></script> 
-	<script src="js/jquery.validate.js"></script> 
-	<script src="js/script.js"></script> 
+	
 	
 	<script>
 		(function($){
-			$('#username').focusout(chekAc);
+			$('#loading-example-btn').click(function () {
+		   	 	var btn = $(this);
+			    btn.button('loading');
+		    	$.ajax({
+		    		url:"<c:url value='/chekAccount'/>",
+					type:"get",
+					data:{
+						'model.userAccount': $('#username').val()
+					},
+					success: function(data) {
+						//alert(data);
+						
+					}
+				}).always(function () {
+					setTimeout(a() ,1250);
+					function a() {
+						btn.button('reset');
+					}
+		    	});
+		 	});
+		
+		
+		/*
+		(function($){
+			$('#btn-check').click(chekAc);
 			function chekAc() {
 				$.ajax( {
 					url:"<c:url value='/chekAccount'/>",
@@ -80,9 +108,12 @@
 					},
 					success: function(data) {
 						alert(data);
+						setTimeout("alert('123')" ,1250);
 					}
 				});
 			};		
+		*/
+		
 		})(jQuery);
 	</script>
 	
