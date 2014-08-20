@@ -25,8 +25,8 @@
 					<strong>帳號</strong><br>
 					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
 					<button type="button" id="loading-example-btn" class="btn btn-primary" data-loading-text="Loading...">檢查帳號</button>
+					<span class="error" id="acountIn"></span>
 				</label>
-				<div class="error" id="acountIn"></div>
 				
 				<label>
 					<strong>密碼</strong><br>
@@ -84,7 +84,14 @@
 						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
-						alert(data);
+						
+						console.log(data);
+						if(data=="fail") {
+							$('#acountIn').removeClass("account-success").html('帳號重複');	
+						}else {
+							$('#acountIn').addClass("account-success").html('帳號可使用');
+							
+						}
 						
 					}
 				}).always(function () {
