@@ -2,6 +2,15 @@
 .form-createaccount > lable {
 	margin-right: 50px;
 }
+
+.error {
+	font-size: 1em;
+	color: red;
+}
+.account-success {
+	color: green;
+}
+
 .sing-up {
 	margin:0px 20px 50px 20px;
 	float:right;
