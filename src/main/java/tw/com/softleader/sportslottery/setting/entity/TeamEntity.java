@@ -13,8 +13,8 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Entity
 @Table(name = "TEAM")
 public class TeamEntity extends GenericEntity {
-
-	@Column(name = "TEAM_NAME", length = 50, nullable=false)
+	//隊伍名稱唯一
+	@Column(name = "TEAM_NAME", length = 50, nullable=false, unique = true)
 	private String teamName;
 
 	public String getTeamName() {
