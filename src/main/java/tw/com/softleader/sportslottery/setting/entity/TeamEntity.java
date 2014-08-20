@@ -27,11 +27,10 @@ public class TeamEntity extends GenericEntity {
 
 	@Override
 	public String toString() {
-		return "TeamEntity [teamName=" + teamName + ", id=" + id
-				+ ", createTime=" + createTime + ", creator=" + creator
-				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
-				+ "]";
+		return "TeamEntity [teamName=" + teamName + ", id=" + id + "]";
 	}
+
+
 
 	
 	

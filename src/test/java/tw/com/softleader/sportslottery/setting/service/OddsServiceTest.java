@@ -33,7 +33,7 @@ public class OddsServiceTest extends BaseTest {
 		String oddType = "";
 		
 		if (models.get(0) != null) {
-			gameId = models.get(0).getGameId().getId();
+//			gameId = models.get(0).getGameId().getId();
 			oddValue = models.get(0).getOddValue().doubleValue();
 			oddType = models.get(0).getOddType();
 		}

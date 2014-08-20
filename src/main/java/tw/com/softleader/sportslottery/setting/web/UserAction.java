@@ -90,10 +90,10 @@ public class UserAction extends ActionSupport {
 	public String insert() {
 		log.debug("新增會員資料");
 		
-		model.setCreator("Guest"); //變數
-		model.setModifier("Guest"); //變數
-		model.setCreateTime(LocalDateTime.now());
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setCreator("Guest"); //變數
+//		model.setModifier("Guest"); //變數
+//		model.setCreateTime(LocalDateTime.now());
+//		model.setModifiedTime(LocalDateTime.now());
 		
 		log.debug("Model = {}", model);
 		
@@ -111,8 +111,8 @@ public class UserAction extends ActionSupport {
 	public String update() {
 		
 		log.debug("修改會員資料");
-		model.setModifier("Guest");
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setModifier("Guest");
+//		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
 		
 		try {

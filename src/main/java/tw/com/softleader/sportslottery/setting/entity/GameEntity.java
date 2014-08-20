@@ -1,9 +1,13 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -17,7 +21,7 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
  */
 @Entity
 @Table(name="GAME")
-public class GameEntity extends GenericEntity{
+public class GameEntity extends GenericEntity {
 
 	@Column(name="GAME_TIME", nullable = false)
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -48,6 +52,18 @@ public class GameEntity extends GenericEntity{
 	
 	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
 	private Boolean isEnd;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId")
+	private List<OddsEntity> odds;
+
+	public List<OddsEntity> getOdds() {
+		return odds;
+	}
+
+	public void setOdds(List<OddsEntity> odds) {
+		this.odds = odds;
+	}
+
 
 	@Override
 	public String toString() {
@@ -55,10 +71,8 @@ public class GameEntity extends GenericEntity{
 				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
 				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
 				+ gameScoreAway + ", leagueName=" + leagueName + ", ballType="
-				+ ballType + ", isEnd=" + isEnd + ", id=" + id
-				+ ", createTime=" + createTime + ", creator=" + creator
-				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
-				+ "]";
+				+ ballType + ", isEnd=" + isEnd + ", odds=" + odds + ", id="
+				+ id + "]";
 	}
 
 	public Boolean getIsEnd() {

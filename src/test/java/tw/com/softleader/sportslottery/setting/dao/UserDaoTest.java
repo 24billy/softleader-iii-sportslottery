@@ -13,7 +13,7 @@ public class UserDaoTest extends BaseTest {
 		UserDao dao = new UserDao();
 		UserEntity entity = new UserEntity();
 		//entity.setCreator("Ken123");
-		entity.setModifier("ken");
+//		entity.setModifier("ken");
 		entity.setUserPassword("a123456");
 		entity.setUserName("Ken");
 		entity.setUserEmail("ken@gmail.com");
