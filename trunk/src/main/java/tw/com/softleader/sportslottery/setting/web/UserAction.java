@@ -102,6 +102,7 @@ public class UserAction extends ActionSupport {
 		} catch (Exception e) {
 			log.debug("!!新增錯誤!!");
 			e.printStackTrace();
+			return "FIAL";
 		}
 		
 		return SUCCESS;
