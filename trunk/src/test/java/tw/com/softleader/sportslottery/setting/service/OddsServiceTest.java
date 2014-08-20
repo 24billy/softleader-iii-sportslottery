@@ -17,7 +17,7 @@ public class OddsServiceTest extends BaseTest {
 	
 	@Test
 	public void service() {
-		
+	
 		List<OddsEntity> models = null;
 		
 		models = oddsService.getByGameId(1L);
