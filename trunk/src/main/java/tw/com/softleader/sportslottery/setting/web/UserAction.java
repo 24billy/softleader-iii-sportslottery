@@ -101,7 +101,7 @@ public class UserAction extends ActionSupport {
 			service.insert(model);
 		} catch (Exception e) {
 			log.debug("!!新增錯誤!!");
-			addFieldError("QueryFail","帳號已存在");
+			e.printStackTrace();
 		}
 		
 		return SUCCESS;
@@ -131,8 +131,8 @@ public class UserAction extends ActionSupport {
 		log.debug("檢查帳號是否存在" + model.getUserAccount());
 		
 		String result;
-		boolean check = service.getByUserAccount(model.getUserAccount());
-		if(check) {
+		UserEntity check = service.getByUserAccount(model.getUserAccount());
+		if(check == null) {
 			log.debug("不存在");
 			addFieldError("QueryFail","此帳號可以使用");
 			result="t";
@@ -143,5 +143,7 @@ public class UserAction extends ActionSupport {
 		}
 		return result;
 	}
+	
+	
 	
 }
