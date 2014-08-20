@@ -33,12 +33,16 @@
 		<result name="t">/Security/success.jsp</result>
 		<result name="f">/Security/fail.jsp</result>
 	</action>
+	
 	<action name="addAccount" class="userAction" method="insert">
 		<result name="success">/index.jsp</result>
 		<result name="FIAL">/Security/addUser.jsp</result>
-		
 	</action>
 	
+	<action name="checkLogin" class="userAction" method="login">
+		<result name="success">/home.jsp</result>
+		<result name="input">/index.jsp</result>
+	</action>
 	
 	<action name="team" class="teamAction" method="execute">
 		<result name="success" type="stream">

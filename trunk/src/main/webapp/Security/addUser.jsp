@@ -78,13 +78,13 @@
 		   	 	var btn = $(this);
 			    btn.button('loading');
 		    	$.ajax({
-		    		url:"<c:url value='/chekAccount'/>",
+		    		url:"<c:url value='/checkAccount'/>",
 					type:"get",
 					data:{
 						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
-						//alert(data);
+						alert(data);
 						
 					}
 				}).always(function () {
@@ -101,7 +101,7 @@
 			$('#btn-check').click(chekAc);
 			function chekAc() {
 				$.ajax( {
-					url:"<c:url value='/chekAccount'/>",
+					url:"<c:url value='/checkAccount'/>",
 					type:"get",
 					data:{
 						'model.userAccount': $('#username').val()
