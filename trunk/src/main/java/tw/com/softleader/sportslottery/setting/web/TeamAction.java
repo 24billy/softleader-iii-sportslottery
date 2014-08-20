@@ -84,8 +84,8 @@ public class TeamAction extends ActionSupport {
 	
 	public String update() {
 		log.debug("TeamAction update");
-		model.setModifier("guest");
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setModifier("guest");
+//		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
 		try {
 			service.update(model);
@@ -102,10 +102,10 @@ public class TeamAction extends ActionSupport {
 	public String insert() {
 		log.debug("TeamAction insert");
 		
-		model.setCreator("guest");
-		model.setModifier("guest");
-		model.setCreateTime(LocalDateTime.now());
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setCreator("guest");
+//		model.setModifier("guest");
+//		model.setCreateTime(LocalDateTime.now());
+//		model.setModifiedTime(LocalDateTime.now());
 		
 		log.debug("Model = {}", model);
 		try {

@@ -72,8 +72,8 @@ public class LotteryAction extends ActionSupport  {
 	
 	public String update() {
 		log.debug("LotteryAction update");
-		model.setModifier("guest");
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setModifier("guest");
+//		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
 		try {
 			service.update(model);
@@ -90,10 +90,10 @@ public class LotteryAction extends ActionSupport  {
 	public String insert() {
 		log.debug("LotteryAction insert");
 		
-		model.setCreator("guest");
-		model.setModifier("guest");
-		model.setCreateTime(LocalDateTime.now());
-		model.setModifiedTime(LocalDateTime.now());
+//		model.setCreator("guest");
+//		model.setModifier("guest");
+//		model.setCreateTime(LocalDateTime.now());
+//		model.setModifiedTime(LocalDateTime.now());
 		
 		log.debug("Model = {}", model);
 		try {

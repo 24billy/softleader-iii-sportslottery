@@ -150,10 +150,9 @@ public class LotteryEntity extends GenericEntity {
 				+ ", oddsId4=" + oddsId4 + ", oddsId5=" + oddsId5
 				+ ", oddsId6=" + oddsId6 + ", oddsId7=" + oddsId7
 				+ ", oddsId8=" + oddsId8 + ", win=" + win + ", capital="
-				+ capital + ", id=" + id + ", createTime=" + createTime
-				+ ", creator=" + creator + ", modifiedTime=" + modifiedTime
-				+ ", modifier=" + modifier + "]";
+				+ capital + ", id=" + id + "]";
 	}
+
 
 
 

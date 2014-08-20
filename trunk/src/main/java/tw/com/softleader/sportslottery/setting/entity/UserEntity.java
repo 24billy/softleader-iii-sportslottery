@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
@@ -52,17 +53,30 @@ public class UserEntity extends GenericEntity {
 	
 	@Column(name="COINS", columnDefinition = "BIGINT default 0")
 	private Long coins;
-
 	
+	@Column(name="CREATE_TIME")//data inserted time
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	protected LocalDateTime createTime;
+	
+	@Column(name="CREATOR") //who input the data 
+	protected String creator;
+	
+	@Column(name="MODIFIED_TIME")
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	protected LocalDateTime modifiedTime;
+	
+	@Column(name="MODIFIER")//who modifies the data
+	protected String modifier;
+
 	@Override
 	public String toString() {
 		return "UserEntity [userAccount=" + userAccount + ", userPassword="
 				+ userPassword + ", userName=" + userName + ", userBirthday="
 				+ userBirthday + ", userGender=" + userGender + ", userPhone="
 				+ userPhone + ", userEmail=" + userEmail + ", coins=" + coins
-				+ ", id=" + id + ", createTime=" + createTime + ", creator="
-				+ creator + ", modifiedTime=" + modifiedTime + ", modifier="
-				+ modifier + "]";
+				+ ", createTime=" + createTime + ", creator=" + creator
+				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
+				+ ", id=" + id + "]";
 	}
 
 	public String getUserAccount() {
@@ -127,6 +141,38 @@ public class UserEntity extends GenericEntity {
 
 	public void setCoins(Long coins) {
 		this.coins = coins;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public LocalDateTime getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(LocalDateTime modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
+
+	public String getModifier() {
+		return modifier;
+	}
+
+	public void setModifier(String modifier) {
+		this.modifier = modifier;
 	}
 	
 	

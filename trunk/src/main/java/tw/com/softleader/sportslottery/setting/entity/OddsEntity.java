@@ -20,9 +20,10 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Table(name = "ODDS")
 public class OddsEntity extends GenericEntity {
 	
-	@ManyToOne
-	@JoinColumn(name = "GAME_ID", nullable = false)
-	private GameEntity gameId;
+// 	@ManyToOne
+// 	@JoinColumn(name = "GAME_ID", nullable = false)
+	@Column(name = "GAME_ID") 
+	private Long gameId;
 	
 	@Column(name = "ODD_TYPE", length = 10, nullable = false)
 	private String oddType;
@@ -38,16 +39,13 @@ public class OddsEntity extends GenericEntity {
 	
 	@Column(name = "IS_PASS", columnDefinition = "BOOLEAN default FALSE")
 	private Boolean isPass;
-	
 
 	@Override
 	public String toString() {
-		return "OddsEntity [gameId=" + gameId + ", oddType=" + oddType
+		return "OddsEntity [oddType=" + oddType
 				+ ", oddCombination=" + oddCombination + ", oddValue="
 				+ oddValue + ", count=" + count + ", isPass=" + isPass
-				+ ", id=" + id + ", createTime=" + createTime + ", creator="
-				+ creator + ", modifiedTime=" + modifiedTime + ", modifier="
-				+ modifier + "]";
+				+ ", id=" + id + "]";
 	}
 
 	public Long getCount() {
@@ -66,11 +64,11 @@ public class OddsEntity extends GenericEntity {
 		this.isPass = isPass;
 	}
 
-	public GameEntity getGameId() {
+	public Long getGameId() {
 		return gameId;
 	}
 
-	public void setGameId(GameEntity gameId) {
+	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
 

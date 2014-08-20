@@ -13,6 +13,7 @@ import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 /**
@@ -32,6 +33,7 @@ public class GameAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	private Long teamAwayId;
 	private Long teamHomeId;
+	private InputStream inputStream;
 	
 	public String getModelsJson() {
 		return modelsJson;
@@ -64,14 +66,25 @@ public class GameAction extends ActionSupport {
 	public void setTeamHomeId(Long teamHomeId) {
 		this.teamHomeId = teamHomeId;
 	}
+	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+	
 	public String execute(){
 		log.debug("execute GameAction");
 
 		models = service.getAll();
 		log.debug("Models = {}", models);
 		
-		modelsJson = service.getAllJSON();//將Game的讀出資料轉為Json
-		log.debug("modelsJson = {}", modelsJson);
+		inputStream = new ByteArrayInputStream((new Gson().toJson(models).getBytes(StandardCharsets.UTF_8)));
+		//inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		//modelsJson = service.getAllJSON();//將Game的讀出資料轉為Json
+		//log.debug("modelsJson = {}", modelsJson);
 		
 		return SUCCESS;
 	}
