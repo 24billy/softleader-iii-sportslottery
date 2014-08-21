@@ -65,6 +65,9 @@ function castOddType(oddType) {
 		case (oddType.charAt('ATS') != -1):
 			return '讓分';
 			break;
+		case (oddType.charAt('SC') != -1):
+			return '總分';
+			break;
 		default:
 			alert('轉換失敗');
 	}	
