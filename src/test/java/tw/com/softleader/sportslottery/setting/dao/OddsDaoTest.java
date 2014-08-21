@@ -82,7 +82,7 @@ public class OddsDaoTest extends BaseTest {
 //		assertEquals(originSize, currentSize);
 //		
 		
-		models = oddsDao.findForHistory("巴", "2014-08-08T10:50:20", "2014-08-19T10:50:20");
+		//models = oddsDao.findForHistory("巴", "2014-08-08T10:50:20", "2014-08-19T10:50:20");
 		log.debug("findForHistory = {}", models);
 		System.out.println("size of the searching result: "+models.size());
 		

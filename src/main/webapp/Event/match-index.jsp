@@ -180,19 +180,24 @@
 	(function($) {
 		$('#match-manager').collapse();
 		
+		//以AJAX讀數資料
 		$.getJSON('<c:url value="/game" />', {}, function(datas){
 			var games = [];
 			var odds = [];
+			//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
 			$.each(datas, function(index, data){
 				games[data.gameNum] = data;
 				$.each(data.odds, function(index, odd){
 					odds[odd.id] = odd;
 				});
 			});
-			console.log(games);
-			console.log('-----------');
-			console.log(odds);
 			
+			//debug用
+			//console.log(games);
+			//console.log('-----------');
+			//console.log(odds);
+			
+			//此段作備忘用 無意義
 			//var userOddIds = sessionStorage.userOdds.split(',');
 			//$.each(userOddIds, function(index, userOddId){
 			//	games[odds[userOddId].gameId];
@@ -200,13 +205,14 @@
 			//});
 				
 			
-			//資料處理
+			//game資料進一步處理 將odds中的資料往上提方便後續使用
 			$.each(games, function(index, game){
 				if(game != null){
 					game.iMillis = game.gameTime.iLocalMillis
 					game.date = millisecondToDate(game.iMillis);
 					game.time = millisecondToTime(game.iMillis);
 					
+					//根據odd的內容來建立game的屬性
 					$.each(game.odds, function(index, odd){
 						switch(odd.oddType) {
 					    case 'SU_A':
@@ -249,9 +255,9 @@
 					});
 				
 					//生成畫面
+					//主隊與客隊的標籤上的span是彈出式的說明字串
 					if(game != null){
-						
-						
+						//當該日期已存在的情況下，直接加入
 						if($('div.row[date="' + game.date + '"]').length > 0){
 							$('div.row[date="' + game.date + '"] table').append(
 									"<tr class='trClick' gameId=" + game.gameNum + ">"+
@@ -263,6 +269,7 @@
 									"<td>" + game.suH + "</td>"+
 									"<tr>"
 							);
+						//日期不存在的情況下，新增日期標籤，並加入在後續
 						} else {
 							var tempTag = $('#sample').clone();
 							tempTag.attr('date', game.date);
@@ -285,22 +292,24 @@
 					}
 				}
 			});
-			//JQuery UI及BootStrap效果套用
+			//畫面生成完畢後 進行JQuery UI及BootStrap效果套用
 			$('span').popover({trigger: 'hover'});
 			
 			//點選建立dialog的處理
 			$('.trClick').click(function(){
+				//如果session存在,則取得使用者的臨時下注紀錄
 				var userOdds = [];
 				if(sessionStorage.userOdds){
 					userOdds = sessionStorage.userOdds.split(',');
 				}
 				
+				//從已存在的dialog複製出新的物件
 				var tempDialog = $('#dialog').clone();
 				tempDialog.attr('title', '賽事編號 ' + $(this).attr('gameId'));
 				tempDialog.attr('id', '');
 				tempDialog.attr('name', 'dialogToggle');
-				//tempDialog.text('測試');
 				
+				//設定dialog的詳細內容(所有玩法的按鈕,以及按鈕上的文字)
 				var thisGame = games[$(this).attr('gameId')];
 				var count = 0;			
 				$.each(thisGame.odds, function(index, odd){					
@@ -316,7 +325,7 @@
 						thisCheckbox.prop('checked', true);
 					}
 					
-					
+					//根據odd的類型來生成按鈕的標籤文字
 					labelText = '';
 					switch(odd.oddType) {
 				    case 'SU_A':
@@ -353,8 +362,11 @@
 					
 					count++;
 				});
+				//套用JQuery UI的效果
 				$('input',tempDialog).button();
 				$('#event_board').append(tempDialog);
+				
+				//右上角X的作用模式(刪除此dialog)
 				$('div[name="dialogToggle"]').dialog({
 					width: 700,
 					modal: true,
@@ -363,6 +375,8 @@
 					}
 				});
 				
+				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
+				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
 				$('input',tempDialog).click(function(){
 					if($(this).prop('checked')){
 						userOdds.push($(this).attr('oddId'));	
