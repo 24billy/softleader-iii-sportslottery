@@ -102,99 +102,89 @@
 	(function($) {
 		$('#match-manager').collapse();
 		
-		$.getJSON('<c:url value="/odds" />', {}, function(data){
-			var odds = data;
+		$.getJSON('<c:url value="/game" />', {}, function(data){
+			var games = data;
+			console.log(games);
 			
-			var events = [];
-			$.each(odds, function(index, odd){
-				var event = new Object;
-				if(events[odd.gameId.gameNum] != null){
-					event = events[odd.gameId.gameNum];
-				}
+			$.each(games, function(index, game){
+				game.iMillis = game.gameTime.iLocalMillis
+				game.date = millisecondToDate(game.iMillis);
+				game.time = millisecondToTime(game.iMillis);
 				
-				event.id = odd.gameId.gameNum;
-				event.millis = odd.gameId.gameTime.iLocalMillis;
-				event.date = millisecondToDate(event.millis);
-				event.time = millisecondToTime(event.millis);
-				event.balltype = odd.gameId.ballType;
-				event.leagueName = odd.gameId.leagueName;
-				event.away = odd.gameId.teamAway.teamName;
-				event.home = odd.gameId.teamHome.teamName;
-				switch(odd.oddType) {
-			    case 'SU_A':
-			    	event.suA = odd.oddValue;
-			    	event.suCom = odd.oddCombination;
-			    	break;
-			    case 'SU_H':
-					event.suH = odd.oddValue;
-					event.suCom = odd.oddCombination;
-					break;
-			    case 'ATS_A':
-			    	event.atsA = odd.oddValue;
-			    	event.atsCom = odd.oddCombination;
-			    	break;
-			    case 'ATS_H':
-			    	event.atsH = odd.oddValue;
-			    	event.atsCom = odd.oddCombination;
-			    	break;
-			    case 'SC_A':
-			    	event.scA = odd.oddValue;
-			    	event.scCom = odd.oddCombination;
-			    	break;
-			    case 'SC_H':
-			    	event.scH = odd.oddValue;
-			    	event.scCom = odd.oddCombination;
-			    	break;
-			    case 'ODD_A':
-			    	event.oddA = odd.oddValue;
-			    	event.oddCom = odd.oddCombination;
-			    	break;
-			    case 'ODD_H':
-			    	event.oddH = odd.oddValue;
-			    	event.oddCom = odd.oddCombination;
-			    	break;
-			    default:
-			    	break;
-			}
-				events[event.id] = event;
-			});
-			
-			console.log(events);
-			
-			$.each(events, function(index, event){
-				if(event != null){
-					if($('div.row[date="' + event.date + '"]').length > 0){
-						$('div.row[date="' + event.date + '"] table').append(
+				$.each(game.odds, function(index, odd){
+					switch(odd.oddType) {
+				    case 'SU_A':
+				    	game.suA = odd.oddValue;
+				    	game.suCom = odd.oddCombination;
+				    	break;
+				    case 'SU_H':
+				    	game.suH = odd.oddValue;
+				    	game.suCom = odd.oddCombination;
+						break;
+				    case 'ATS_A':
+				    	game.atsA = odd.oddValue;
+				    	game.atsCom = odd.oddCombination;
+				    	break;
+				    case 'ATS_H':
+				    	game.atsH = odd.oddValue;
+				    	game.atsCom = odd.oddCombination;
+				    	break;
+				    case 'SC_A':
+				    	game.scA = odd.oddValue;
+				    	game.scCom = odd.oddCombination;
+				    	break;
+				    case 'SC_H':
+				    	game.scH = odd.oddValue;
+				    	game.scCom = odd.oddCombination;
+				    	break;
+				    case 'ODD_A':
+				    	game.oddA = odd.oddValue;
+				    	game.oddCom = odd.oddCombination;
+				    	break;
+				    case 'ODD_H':
+				    	game.oddH = odd.oddValue;
+				    	game.oddCom = odd.oddCombination;
+				    	break;
+				    default:
+				    	break;
+					}	
+				});
+				
+				if(game != null){
+					if($('div.row[date="' + game.date + '"]').length > 0){
+						$('div.row[date="' + game.date + '"] table').append(
 								"<tr>"+
-								"<td>" + event.id + "</td>"+
-								"<td>" + event.time + "</td>"+
-								"<td>" + event.away + "</td>"+
-								"<td>" + event.suA + "</td>"+
-								"<td>" + event.home + "</td>"+
-								"<td>" + event.suH + "</td>"+
+								"<td>" + game.gameNum + "</td>"+
+								"<td>" + game.time + "</td>"+
+								"<td>" + game.teamAway.teamName + "</td>"+
+								"<td>" + game.suA + "</td>"+
+								"<td>" + game.teamHome.teamName + "</td>"+
+								"<td>" + game.suH + "</td>"+
 								"<tr>"
 						);
 					} else {
 						var tempTag = $('#sample').clone();
-						tempTag.attr('date', event.date);
+						tempTag.attr('date', game.date);
 						tempTag.attr('id', "");
 						
 						$('#event_board').append(tempTag);
 						
-						$('div.row[date="' + event.date + '"] h3').text(event.date);
-						$('div.row[date="' + event.date + '"] table').append(
+						$('div.row[date="' + game.date + '"] h3').text(game.date);
+						$('div.row[date="' + game.date + '"] table').append(
 								"<tr>"+
-								"<td>" + event.id + "</td>"+
-								"<td>" + event.time + "</td>"+
-								"<td>" + event.away + "</td>"+
-								"<td>" + event.suA + "</td>"+
-								"<td>" + event.home + "</td>"+
-								"<td>" + event.suH + "</td>"+
+								"<td>" + game.gameNum + "</td>"+
+								"<td>" + game.time + "</td>"+
+								"<td>" + game.teamAway.teamName + "</td>"+
+								"<td>" + game.suA + "</td>"+
+								"<td>" + game.teamHome.teamName + "</td>"+
+								"<td>" + game.suH + "</td>"+
 								"<tr>"
 						);
 					}
 				}
 			});
+			
+			
 		});
 
 	})(jQuery);
