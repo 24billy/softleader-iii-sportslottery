@@ -92,10 +92,8 @@
 						}
 					}
 				}).always(function () {
-					setTimeout(a() ,1250);
-					function a() {
-						btn.button('reset');
-					}
+					//setTimeout("" ,1250);
+					btn.button('reset');
 		    	});
 		    	
 		    	//$('#birth').datetimepicker({
