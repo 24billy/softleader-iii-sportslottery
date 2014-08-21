@@ -86,10 +86,10 @@ public class GameDao extends GenericDao<GameEntity>{
 	    
 		//根據加入的sql敘述帶入變數
 		if (hasTimeFrom) {
-			query.setDate("timeAfter", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
+			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
 		}
 		if (hasTimeTo) {
-			query.setDate("timeBefore", timeTo.toDate());
+			query.setDate("timeTo", timeTo.toDate());
 		}
 		if (hasTeamName) {
 			query.setString("teamName", teamName + "%");//因為使用 LIKE讓我們依據一個模式 (pattern) 來找出我們要的資料, 所以要搭配%這樣的萬用字元
