@@ -35,8 +35,8 @@
 
 	<form id="form" class="form-inline" action="<c:url value="checkLogin"/>" >
 		<div>
-			<input type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
-			<input type="password" class="info" name="model.userPassword" placeholder="請輸入密碼" required>
+			<input value="jackychen" type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
+			<input value="a123456" type="password" class="info" name="model.userPassword" placeholder="請輸入密碼" required>
 			<s:submit cssClass="btn btn-success" value="登入" method="login"/>
 		</div>
 		<div>
@@ -50,15 +50,16 @@
 	(function($){
 		$("#reg").click(function(){
 			$.XYTipsWindow({
-				___title:"",
+				___title:"會員註冊",
 				___content:"iframe:Security/addUser.jsp",
-				___width:"400",
-				___height:"500",
+				___width:"450",
+				___height:"550",
 				___showbg:true,
 				___drag:"___boxTitle"
 			});
 		});
 	})(jQuery);
+	
 </script>
 
 </body>

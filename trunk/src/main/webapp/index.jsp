@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <body>
 <h2>Hello World!</h2>
 <a href="odds">odds</a><br>
@@ -15,7 +17,13 @@
 <a href="http://getbootstrap.com/">BootStrap</a><br>
 <a href="http://fortawesome.github.io/Font-Awesome/">BootStrap.icon</a><br>
 
-<!-- 先去spring-struts.xml找出oddsAction的位置去執行oddsAction裡的execute()，成功後，執行Json/oddsJson.jsp
+<hr>
+<button type="button" class="btn btn-success"><a href="123">Modify</a></button>
+<button type="button" class="btn btn-primary"><a href="<c:url value="/Security/logout.jsp"/>">LogOut</a></button>
+
+
+
+<!-- åå»spring-struts.xmlæ¾åºoddsActionçä½ç½®å»å·è¡oddsActionè£¡çexecute()ï¼æåå¾ï¼å·è¡Json/oddsJson.jsp
 	struts.xml:
 	<action name="odds" class="oddsAction" method="execute">
 		<result name="success">Json/oddsJson.jsp</result>

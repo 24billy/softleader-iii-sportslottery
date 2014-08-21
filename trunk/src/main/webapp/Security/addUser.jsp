@@ -18,7 +18,6 @@
 	<script src="js/script.js"></script> 
 <body>
 	<div class="createaccount-body">
-		<h1 class="create-title">註冊系統</h1>
 		<div class="sing-up">
 			<form class="form-horizontal" id="registration-form" action="<c:url value='/addAccount'/>">
 				<label class="input-label">
