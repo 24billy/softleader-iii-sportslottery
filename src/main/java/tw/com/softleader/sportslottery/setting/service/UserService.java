@@ -34,7 +34,7 @@ public class UserService extends GenericService<UserEntity> {
 				String GuestPass = userPassword;
 				System.out.println(MemberPass+" : "+GuestPass);
 				if(MemberPass.equals(GuestPass)) {
-					System.out.println("驗鄭成功");
+					System.out.println("驗證成功");
 					return entity;
 				}
 			}
