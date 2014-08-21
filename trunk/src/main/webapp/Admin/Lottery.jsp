@@ -56,22 +56,91 @@
 		<div id="page-wrapper">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">
-						<h1 class="page-header">
-							<div>投注區</div>
-						</h1>						
-						<table class="table table-striped table-hover" id="lottery">
+					<div class="panel panel-default col-lg-8"></div>
+					<div class="panel panel-primary col-lg-4">
+					
+						<div class="panel-heading " >
+							投注區
+						</div>
+						<!-- 
+
+						
+						<div class="panel panel-success" id=lottery2>
+							<div class="panel-heading">編號:</div>
+							<div class="panel-body">時間:</div>
+							<div class="panel-body">隊伍:</div>
+							<div class="panel-footer">贏家:</div>
+						</div>
+						-->
+						<table class="table table-striped  table-hover" >
   							<tr>
-  								<td >
-  									<button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  								<td id=lottery1>
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div> 																
   								</td>
   							</tr>
-							
+  							<tr>
+  								<td id="lottery2">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>									  								
+  								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery3">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>									  								
+  								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery4">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery5">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>   								
+  								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery6">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>								
+  								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery7">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>								
+  								</td>
+  							</tr>
+  							<tr>
+  								<td id="lottery8">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>						
+  								</td>
+  							</tr>
 						</table>
 					</div>
 				</div>
-			
-			
+
 			</div>
 			<!-- .container-fluid -->
 		</div>
@@ -86,52 +155,32 @@
 	(function($){
 		//取得資料
 		//將findAll的資料以JSON格式取出，使用google的API來轉換
-		var odds = [];
-
-		$.getJSON('<c:url value="/odds" />', {}, function(data){
-			odds = data;
-
-			//var json = '${modelsJson}';
-			//var odds = $.parseJSON(json);
-			var models = [];
-			$.each(odds, function(index,odd){
-				var hasGet = false;
-				$.each(models, function(index,model){
-					if(odd.gameId.gameNum == model.gameNum){
-						hasGet = true;
-					}
-				});
-				if(!hasGet){
-					models.push(odd.gameId);
-					console.log(odd);
-				}
-			});
-
-			//刷新清單顯示
-
-				//console.log(userOddStorge);
-				var strHtml = '';
-				$.each(odds, function(index, odd){
-					var winner='';
-					if("SU_H"==odd.oddType){
-						winner=odd.gameId.teamHome.teamName;
-					}else{
-						winner=odd.gameId.teamAway.teamName;
-					}
-					strHtml +='<tr><td>';
-					strHtml +='<button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-					strHtml += odd.gameId.ballType +','+ millisecondToDate(odd.gameId.gameTime.iLocalMillis) + millisecondToTime(odd.gameId.gameTime.iLocalMillis)+'<br>' ; 
-					strHtml +='編號:' +odd.gameId.gameNum+odd.gameId.teamAway.teamName +'@'+odd.gameId.teamHome.teamName+'<br>' ;
-					strHtml +=castOddType(odd.oddType) +':'+odd.oddValue+'('+winner+')';
-					strHtml +='</td></tr>';
-				});
-				$('#lottery').html(strHtml);
-
-					
-
-		});
+		$.getJSON('<c:url value="/game" />', {}, function(data){
+			var games = data;
+			//console.log(games);
 		
-
+			var lotteryId=0;
+			$.each(games, function(index, game){
+				//console.log(game);
+					if("SU_H"==game.odds.oddType){
+						winner=game.teamHome.teamName;
+					}else{
+						winner=game.teamAway.teamName;
+					}
+					$('#lottery'+lotteryId+'> div:eq(0)').append(game.gameNum+" "+game.ballType);				
+					$('#lottery'+lotteryId+'> div:eq(1)').append(millisecondToDate(game.gameTime.iLocalMillis)+millisecondToTime(game.gameTime.iLocalMillis));
+					$('#lottery'+lotteryId+'> div:eq(2)').append(game.teamAway.teamName+"vs"+game.teamHome.teamName);
+					$('#lottery'+lotteryId+'> div:eq(3)').append(winner+'<button type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+					lotteryId++;					
+				if(lotteryId>8){
+					return false;
+				}
+			});			
+			
+			$('.close').click(function(){
+				$(this).parent().parent().remove();
+			});
+		});  //end of getJSON
 		
 	})(jQuery);
 </script>
