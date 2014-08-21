@@ -22,9 +22,9 @@
 		<div class="sing-up">
 			<form class="form-horizontal" id="registration-form" action="<c:url value='/addAccount'/>">
 				<label class="input-label">
-					<strong>帳號</strong><br>
+					<strong>帳號</strong>
+					<button type="button" id="loading-example-btn" class="btn btn-primary" data-loading-text="Loading...">檢查帳號</button><br>
 					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
-					<button type="button" id="loading-example-btn" class="btn btn-primary" data-loading-text="Loading...">檢查帳號</button>
 					<span class="error" id="acountIn"></span>
 				</label>
 				
@@ -84,15 +84,12 @@
 						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
-						
 						console.log(data);
 						if(data=="fail") {
 							$('#acountIn').removeClass("account-success").html('帳號重複');	
 						}else {
 							$('#acountIn').addClass("account-success").html('帳號可使用');
-							
 						}
-						
 					}
 				}).always(function () {
 					setTimeout(a() ,1250);
@@ -100,6 +97,11 @@
 						btn.button('reset');
 					}
 		    	});
+		    	
+		    	//$('#birth').datetimepicker({
+				//	minDate: new Date(),
+				//	format: 'Y-m-d H:i:s'
+				//});
 		 	});
 		
 		
@@ -123,6 +125,7 @@
 		
 		})(jQuery);
 	</script>
+	
 	
 </body>
 </html>
