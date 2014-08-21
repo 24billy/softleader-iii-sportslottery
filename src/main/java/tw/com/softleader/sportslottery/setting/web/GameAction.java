@@ -78,11 +78,11 @@ public class GameAction extends ActionSupport {
 	public String execute(){
 		log.debug("execute GameAction");
 
-		models = service.getAll();
-		log.debug("Models = {}", models);
+		//models = service.getAll();
+		//log.debug("Models = {}", models);
 		
-		inputStream = new ByteArrayInputStream((new Gson().toJson(models).getBytes(StandardCharsets.UTF_8)));
-		//inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		//inputStream = new ByteArrayInputStream((new Gson().toJson(models).getBytes(StandardCharsets.UTF_8)));
+		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
 		//modelsJson = service.getAllJSON();//將Game的讀出資料轉為Json
 		//log.debug("modelsJson = {}", modelsJson);
 		
