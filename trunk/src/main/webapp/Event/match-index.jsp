@@ -71,8 +71,8 @@
 				<div class="row" name="event_list" id="sample" date="">
 					<div class="col-lg-9">
 						<h3>2014年4月20日</h3>
-						<table class="table table-striped table-hover">
-							<tr>
+						<table class="table table-hover">
+							<tr class="info">
 								<th width="100px">賽事編號</th>
 								<th width="100px">比賽時間</th>
 								<th width="200px">客場對伍</th>
@@ -115,39 +115,41 @@
 					switch(odd.oddType) {
 				    case 'SU_A':
 				    	game.suA = odd.oddValue;
-				    	game.suCom = odd.oddCombination;
+				    	game.suACom = odd.oddCombination;
 				    	break;
 				    case 'SU_H':
 				    	game.suH = odd.oddValue;
-				    	game.suCom = odd.oddCombination;
+				    	game.suHCom = odd.oddCombination;
 						break;
 				    case 'ATS_A':
 				    	game.atsA = odd.oddValue;
-				    	game.atsCom = odd.oddCombination;
+				    	game.atsACom = odd.oddCombination;
 				    	break;
 				    case 'ATS_H':
 				    	game.atsH = odd.oddValue;
-				    	game.atsCom = odd.oddCombination;
-				    	break;
-				    case 'SC_A':
-				    	game.scA = odd.oddValue;
-				    	game.scCom = odd.oddCombination;
+				    	game.atsHCom = odd.oddCombination;
 				    	break;
 				    case 'SC_H':
 				    	game.scH = odd.oddValue;
 				    	game.scCom = odd.oddCombination;
 				    	break;
-				    case 'ODD_A':
-				    	game.oddA = odd.oddValue;
-				    	game.oddCom = odd.oddCombination;
+				    case 'SC_L':
+				    	game.scL = odd.oddValue;
+				    	game.scCom = odd.oddCombination;
 				    	break;
-				    case 'ODD_H':
-				    	game.oddH = odd.oddValue;
-				    	game.oddCom = odd.oddCombination;
+				    case 'ODD':
+				    	game.oeOdd = odd.oddValue;
+				    	game.oeCom = odd.oddCombination;
+				    	break;
+				    case 'EVEN':
+				    	game.oeEven = odd.oddValue;
+				    	game.oeCom = odd.oddCombination;
 				    	break;
 				    default:
 				    	break;
 					}	
+					game.detialAway = "不讓分:" + game.suHCom  + " 賠率:" + game.suH + "/讓分:" + game.atsHCom + " 賠率:" + game.atsH;
+					game.detialHome = "不讓分:" + game.suACom  + " 賠率:" + game.suA + "/讓分:" + game.atsACom + " 賠率:" + game.atsA;
 				});
 				
 				if(game != null){
@@ -156,9 +158,9 @@
 								"<tr>"+
 								"<td>" + game.gameNum + "</td>"+
 								"<td>" + game.time + "</td>"+
-								"<td>" + game.teamAway.teamName + "</td>"+
+								"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialAway + "'>" + game.teamAway.teamName + "</span></td>"+
 								"<td>" + game.suA + "</td>"+
-								"<td>" + game.teamHome.teamName + "</td>"+
+								"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialHome + "'>" + game.teamHome.teamName + "</span></td>"+
 								"<td>" + game.suH + "</td>"+
 								"<tr>"
 						);
@@ -174,9 +176,9 @@
 								"<tr>"+
 								"<td>" + game.gameNum + "</td>"+
 								"<td>" + game.time + "</td>"+
-								"<td>" + game.teamAway.teamName + "</td>"+
+								"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialAway + "'>" + game.teamAway.teamName + "</span></td>"+
 								"<td>" + game.suA + "</td>"+
-								"<td>" + game.teamHome.teamName + "</td>"+
+								"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialHome + "'>" + game.teamHome.teamName + "</span></td>"+
 								"<td>" + game.suH + "</td>"+
 								"<tr>"
 						);
@@ -184,9 +186,8 @@
 				}
 			});
 			
-			
+			$('span').popover({trigger: 'hover'})
 		});
-
 	})(jQuery);
 </script>
 </body>

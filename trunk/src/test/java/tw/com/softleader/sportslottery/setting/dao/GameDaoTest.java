@@ -49,13 +49,11 @@ public class GameDaoTest extends BaseTest{
 //		log.debug("findByBallType models = {}", models);
 		
 		LocalDateTime date1 = new LocalDateTime();
-		date1.parse("2014-08-08T10:15:30");//將時間自串轉成 LocalDateTime
-		
+		date1 = LocalDateTime.parse("2014-08-08T10:15:30");//將時間自串轉成 LocalDateTime
 		LocalDateTime date2 = new LocalDateTime();
-		date2.parse("2014-08-19T07:04:00");
+		date2 = LocalDateTime.parse("2014-08-19T07:04:00");
 		LocalDateTime date3 = new LocalDateTime();
-		date3.parse("2014-08-20T10:15:30");
-		
+		date3 = LocalDateTime.parse("2014-08-20T10:15:30");
 		
 //		models = dao.findForHistory(date1, null, null);//結果數據不對, 得空值
 //		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
