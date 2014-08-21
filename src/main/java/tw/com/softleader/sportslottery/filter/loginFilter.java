@@ -42,6 +42,7 @@ public class loginFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
+			System.out.println("diFilter...");
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
 			servletPath = req.getServletPath();  
@@ -53,10 +54,11 @@ public class loginFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {				//  需要登入，尚未登入
 				HttpSession session = req.getSession();
-//				if (!isRequestedSessionIdValid ) {
-//					session.setAttribute("timeOut", "使用逾時，請重新登入");
-//				}
-				resp.sendRedirect("/home.jsp");
+				if (!isRequestedSessionIdValid ) {
+					session.setAttribute("timeOut", "使用逾時，請重新登入");
+				}
+				resp.sendRedirect(contextPath + "/home.jsp");
+				//chain.doFilter(request, response);
 				return;
 			}
 
@@ -67,6 +69,7 @@ public class loginFilter implements Filter {
 	}
 
 	private boolean checkLogin(HttpServletRequest req) {
+		System.out.println("checkLogin...");
 		HttpSession session = req.getSession();
 		UserEntity loginToken = (UserEntity) session.getAttribute("user");
 		if (loginToken == null) {
