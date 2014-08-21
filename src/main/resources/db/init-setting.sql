@@ -42,6 +42,8 @@ insert into team (TEAM_NAME) values ('中信兄弟象');
 insert into team (TEAM_NAME) values ('費城費城人');
 insert into team (TEAM_NAME) values ('耐克森英雄');
 
+
+
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE,TEAM_HOME,TEAM_AWAY) values ('2014-08-08T10:50:20', 100,2,3,'MLB','Baseball', 1, 2);
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE,TEAM_HOME,TEAM_AWAY) values ('2014-08-08T10:50:20', 101,10,1,'MLB','Baseball', 2, 3);
 insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,LEAGUE_NAME,BALL_TYPE,TEAM_HOME,TEAM_AWAY) values ('2014-08-08T10:50:20', 102,0,9,'MLB','Baseball', 1, 3);
