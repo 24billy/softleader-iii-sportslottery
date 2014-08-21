@@ -32,6 +32,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
  
+ 	
   	<!-- Run 整個專案會執行index.jsp -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

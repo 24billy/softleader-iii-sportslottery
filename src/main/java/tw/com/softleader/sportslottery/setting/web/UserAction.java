@@ -7,16 +7,18 @@
 package tw.com.softleader.sportslottery.setting.web;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.UserService;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 
 public class UserAction extends ActionSupport {
@@ -146,6 +148,8 @@ public class UserAction extends ActionSupport {
 		UserEntity entity = service.checkLogin(model.getUserAccount(), model.getUserPassword());
 		if(entity!=null) {
 			log.debug("可登入");
+			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
+			session.put("user", entity);
 			return SUCCESS;
 		} else {
 			log.debug("帳號不存在");

@@ -42,8 +42,8 @@
 	</action>
 	
 	<action name="checkLogin" class="userAction" method="login">
-		<result name="success">/home.jsp</result>
-		<result name="input">/index.jsp</result>
+		<result name="success">/index.jsp</result>
+		<result name="input">/home.jsp</result>
 	</action>
 	
 	<action name="team" class="teamAction" method="execute">
