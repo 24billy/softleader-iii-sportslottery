@@ -19,6 +19,8 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
+		<result name="inserted">/Admin/match-list.jsp</result>
+		<result name="insertFailed">/Admin/match-form.jsp</result>
 		<allowed-methods>insert</allowed-methods>
 	</action> 
 	
