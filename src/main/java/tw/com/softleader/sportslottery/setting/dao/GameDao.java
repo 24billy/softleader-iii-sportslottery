@@ -47,29 +47,29 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.setDate("gameTime", gameTime).list();
 	}
 	
-	public List<GameEntity> findForHistory(LocalDateTime timeAfter, LocalDateTime timeBefore,String teamName){		
+	public List<GameEntity> findForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){		
 		Session session = sessionFactory.getCurrentSession();
 		
 		//設定sql字串
-		//HQL的帶入變數為 timeAfter, timeBefore, teamName
-		String sql = "from GameEntity games where games.isEnd = 'f'";
-		String sql1 = " and games.gameTime >= :timeAfter";
-		String sql2 = " and games.gameTime <= :timeBefore";
-		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
+		//HQL的帶入變數為 timeFrom, timeTo, teamName
+		String sql = "from GameEntity games where games.isEnd = 'true'";//察遜比菜是否已經結束, 要找已經結束
+		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
+		String sql2 = " and games.gameTime <= :timeTo";//搜尋小於 timeTo的時間
+		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";//搜訊teamName符合部分字串
 		String sql4 = " order by games.gameTime";
 		
-		//判斷是否有timeAfter 如有責加入sql1的敘述
-		boolean hasTimeAfter = false;
-		if(timeAfter != null){
+		//判斷是否有timeFrom 如有責加入sql1的敘述
+		boolean hasTimeFrom = false;
+		if(timeFrom != null){
 			sql += sql1;
-			hasTimeAfter = true;
+			hasTimeFrom = true;
 		}
 		
-		//判斷是否有timeBefore 如有責加入sql2的敘述
-		boolean hasTimeBefore = false;
-		if (timeBefore != null) {
+		//判斷是否有timeTo 如有責加入sql2的敘述
+		boolean hasTimeTo = false;
+		if (timeTo != null) {
 			sql += sql2;
-			hasTimeBefore = true;
+			hasTimeTo = true;
 		}
 		
 		//判斷是否有teamName 如有責加入sql3的敘述
@@ -85,14 +85,14 @@ public class GameDao extends GenericDao<GameEntity>{
 		Query query = session.createQuery(sql);
 	    
 		//根據加入的sql敘述帶入變數
-		if (hasTimeAfter) {
-			query.setDate("timeAfter", timeAfter.toDate());
+		if (hasTimeFrom) {
+			query.setDate("timeAfter", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
 		}
-		if (hasTimeBefore) {
-			query.setDate("timeBefore", timeBefore.toDate());
+		if (hasTimeTo) {
+			query.setDate("timeBefore", timeTo.toDate());
 		}
 		if (hasTeamName) {
-			query.setString("teamName", teamName + "%");
+			query.setString("teamName", teamName + "%");//因為使用 LIKE讓我們依據一個模式 (pattern) 來找出我們要的資料, 所以要搭配%這樣的萬用字元
 		}
 
 		return query.list();
