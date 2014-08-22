@@ -76,22 +76,14 @@
 		
 		<div id="page-wrapper">
 		
-			<div class="container-fluid" id="event_board">
+			<div class="container-fluid" >
 			
 				<div class="row">
-					<div class="col-lg-8">
-						<h1 class="page-header">
-							近期賽事
-						</h1>
-					</div>
-					
-					<div class="col-lg-4">
-						<h1 class="page-header">
-							投注區
-						</h1>
-					</div>
-					
-					<div class="col-lg-8" name="event_list" id="sample" date="">
+					<div class="col-lg-8"  id="event_board" >
+						<div class="page-header">
+							<h1>近期賽事</h1>
+						</div>
+						<div name="event_list" id="sample" date="">
 						<h3>2014年4月20日</h3>
 						<table class="table table-hover">
 							<tr class="info">
@@ -103,11 +95,91 @@
 								<th width="50px"></th>
 							</tr>
 						</table>
+						</div>
 					</div>
-					
-				</div>
-				
 
+					<div class="panel panel-primary col-lg-4">
+						<div class="panel-heading ">投注區</div>
+
+						<table class="table table-striped  table-hover">
+							<tr>
+								<td id="lottery1" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery2" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery3" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery4" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery5" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery6" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery7" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="lottery8" hidden="true">
+									<div>編號:</div>
+									<div>時間:</div>
+									<div>隊伍:</div>
+									<div class="bg-success">贏家:</div>
+								</td>
+							</tr>
+						</table>
+						<!-- 
+
+						
+						<div class="panel panel-success" id=lottery2>
+							<div class="panel-heading">編號:</div>
+							<div class="panel-body">時間:</div>
+							<div class="panel-body">隊伍:</div>
+							<div class="panel-footer">贏家:</div>
+						</div>
+						-->
+					</div>
+				</div>
+				</div>
 				
 				<div id="dialog" title="Basic dialog">
 					<div class="panel panel-default">
@@ -203,7 +275,7 @@
 			console.log(games);
 			console.log('-----------');
 			console.log(odds);
-			
+			console.log('-----------');
 			//此段作備忘用 無意義
 			//var userOddIds = sessionStorage.userOdds.split(',');
 			//$.each(userOddIds, function(index, userOddId){
@@ -363,7 +435,12 @@
 					width: 700,
 					modal: true,
 					close: function() {
-						$(this).remove();
+					$(this).remove();
+
+						
+						
+						
+
 					}
 				});
 				
@@ -385,8 +462,37 @@
 						userOddsCount--;
 					}
 					sessionStorage.userOdds = userOdds;
+					odds_refresh();
 				});
 			});
+			odds_refresh();
+			//-----------------------------------------------------
+			function odds_refresh(){
+				//取出投注
+				var userOddIds = [];
+				if(sessionStorage.userOdds){
+					userOddIds  = sessionStorage.userOdds.split(',');
+				}
+				//顯示投注區
+				var lotteryId=0;
+				$.each(userOddIds, function(index, userOddId){
+					//var temp = games[odds[userOddId].gameId].date;
+					var oddType=odds[userOddId].labelText;
+					var oddValue=odds[userOddId].oddValue;
+	
+					var bet = games[odds[userOddId].gameNum];
+					$('#lottery'+lotteryId).attr("hidden",false);
+					$('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);				
+					$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
+					$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
+					$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+					lotteryId++;
+				});
+				$('.close').click(function(){
+					$(this).parent().parent().parent().remove();
+					$(this).parent();
+				});
+			}
 		});
 		
 		
