@@ -93,12 +93,13 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary col-lg-4">
+					<div class="panel panel-primary  col-lg-4">
 						<div class="panel-heading ">投注區</div>
 
 						<table class="table table-striped  table-hover">
 							<tr>
 								<td id="lottery1" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -107,6 +108,7 @@
 							</tr>
 							<tr>
 								<td id="lottery2" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -115,6 +117,7 @@
 							</tr>
 							<tr>
 								<td id="lottery3" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -123,6 +126,7 @@
 							</tr>
 							<tr>
 								<td id="lottery4" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -131,6 +135,7 @@
 							</tr>
 							<tr>
 								<td id="lottery5" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -139,6 +144,7 @@
 							</tr>
 							<tr>
 								<td id="lottery6" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -147,6 +153,7 @@
 							</tr>
 							<tr>
 								<td id="lottery7" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -155,6 +162,7 @@
 							</tr>
 							<tr>
 								<td id="lottery8" hidden="true">
+									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -475,8 +483,9 @@
 				if(sessionStorage.userOdds){
 					userOddIds  = sessionStorage.userOdds.split(',');
 				}
+				console.log(userOddIds);
 				//顯示投注區
-				var lotteryId=0;
+				var lotteryId=1;
 				$.each(userOddIds, function(index, userOddId){
 					//var temp = games[odds[userOddId].gameId].date;
 					var oddType=odds[userOddId].labelText;
@@ -484,15 +493,16 @@
 	
 					var bet = games[odds[userOddId].gameNum];
 					$('#lottery'+lotteryId).attr("hidden",false);
-					$('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);				
-					$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
-					$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
-					$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+					$('#lottery'+lotteryId+'> div:eq(1)').html("編號:"+bet.gameNum+" "+bet.ballType);				
+					$('#lottery'+lotteryId+'> div:eq(2)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
+					$('#lottery'+lotteryId+'> div:eq(3)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
+					$('#lottery'+lotteryId+'> div:eq(4)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
 					lotteryId++;
 				});
 				$('.close').click(function(){
 					$(this).parent().parent().parent().remove();
-					$(this).parent();
+					console.log($(this).attr("oddId"));
+					
 				});
 			}
 		});
