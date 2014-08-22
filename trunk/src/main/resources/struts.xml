@@ -15,13 +15,13 @@
     <!-- 網址 http://localhost:8080/softleader-iii-sportslottery/game
     		 execute 是GameAction.java裡 的exectue()
     		 GameAction.java的位置需要去spring-struts.xml查                                                 -->
-		<result name="success" type="stream">
+		<result name="select" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
 		<result name="inserted">/Admin/match-list.jsp</result>
 		<result name="insertFailed">/Admin/match-form.jsp</result>
-		<allowed-methods>insert</allowed-methods>
+		<allowed-methods>select,insert</allowed-methods>
 	</action> 
 	
 	<action name="odds" class="oddsAction" method="execute"> 

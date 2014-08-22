@@ -89,6 +89,14 @@ public class GameAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String select() {
+		log.debug("select...");
+		
+		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		
+		return "select";
+	}
+	
 	public String insert() {
 		log.debug("insert...");
 	
@@ -104,5 +112,7 @@ public class GameAction extends ActionSupport {
 		}
 
 	}
+	
+	
 	
 }
