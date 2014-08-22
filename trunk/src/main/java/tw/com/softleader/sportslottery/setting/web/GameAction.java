@@ -13,8 +13,6 @@ import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
-import com.google.gson.Gson;
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 
@@ -23,6 +21,8 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class GameAction extends ActionSupport {
  
+	private static final long serialVersionUID = 2014L;
+	
 	@Autowired
 	private GameService service;
 	@Autowired
@@ -38,31 +38,23 @@ public class GameAction extends ActionSupport {
 	public String getModelsJson() {
 		return modelsJson;
 	}
-	public void setModelsJson(String modelsJson) {
-		this.modelsJson = modelsJson;
-	}
+	
 	public GameEntity getModel() {
 		return model;
 	}
+	
 	public void setModel(GameEntity model) {
 		this.model = model;
 	}
+	
 	public List<GameEntity> getModels() {
 		return models;
 	}
-	public void setModels(List<GameEntity> models) {
-		this.models = models;
-	}
 	
-	public Long getTeamAwayId() {
-		return teamAwayId;
-	}
 	public void setTeamAwayId(Long teamAwayId) {
 		this.teamAwayId = teamAwayId;
 	}
-	public Long getTeamHomeId() {
-		return teamHomeId;
-	}
+	
 	public void setTeamHomeId(Long teamHomeId) {
 		this.teamHomeId = teamHomeId;
 	}
@@ -71,10 +63,6 @@ public class GameAction extends ActionSupport {
 		return inputStream;
 	}
 
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-	
 	public String execute(){
 		log.debug("execute...");
 		
@@ -89,13 +77,17 @@ public class GameAction extends ActionSupport {
 		return "select";
 	}
 	
+	
+	
+	
+	
 	public String insert() {
 		log.debug("insert...");
 		model.setTeamHome(teamService.getById(teamHomeId));
 		model.setTeamAway(teamService.getById(teamAwayId));
 		String result = null;
 		try {
-			service.insert(model);
+			service.update(model);
 			result = "SUCCESS";
 		} catch (Exception e) {
 			result = "FAILED";
@@ -104,6 +96,14 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
 		return "insert";
 		
+	}
+	
+	public String manager() {
+		log.debug("manager");
+		
+		modelsJson = service.getAllJSON();
+		
+		return "manager";
 	}
 	
 }
