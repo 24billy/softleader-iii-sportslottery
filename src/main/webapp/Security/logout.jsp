@@ -19,7 +19,7 @@
 	<h3>您已經登出，三秒後倒入首頁</h3><BR>
 </font>
 <script type="text/javascript">
-	setTimeout('document.location.href="<c:url value='/home.jsp'/>"' ,3000);
+	setTimeout('document.location.href="<c:url value='/index.jsp'/>"' ,3000);
 	
 </script>
 <%
