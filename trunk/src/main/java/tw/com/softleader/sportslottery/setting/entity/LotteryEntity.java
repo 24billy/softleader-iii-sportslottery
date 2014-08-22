@@ -6,6 +6,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
+
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 /**
 @Author:Billy 
@@ -54,6 +57,10 @@ public class LotteryEntity extends GenericEntity {
 	
 	@Column(name="CAPITAL")
 	private Long capital;
+	
+	@Column(name="CONFIRM_TIME")
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	protected LocalDateTime confirmTime;
 
 	public UserEntity getUserId() {
 		return userId;
@@ -143,6 +150,14 @@ public class LotteryEntity extends GenericEntity {
 		this.capital = capital;
 	}
 
+	public LocalDateTime getConfirmTime() {
+		return confirmTime;
+	}
+
+	public void setConfirmTime(LocalDateTime confirmTime) {
+		this.confirmTime = confirmTime;
+	}
+
 	@Override
 	public String toString() {
 		return "LotteryEntity [userId=" + userId + ", oddsId1=" + oddsId1
@@ -150,9 +165,8 @@ public class LotteryEntity extends GenericEntity {
 				+ ", oddsId4=" + oddsId4 + ", oddsId5=" + oddsId5
 				+ ", oddsId6=" + oddsId6 + ", oddsId7=" + oddsId7
 				+ ", oddsId8=" + oddsId8 + ", win=" + win + ", capital="
-				+ capital + ", id=" + id + "]";
+				+ capital + ", confirmTime=" + confirmTime + ", id=" + id + "]";
 	}
-
 
 
 
