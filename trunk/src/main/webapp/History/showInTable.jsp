@@ -83,7 +83,7 @@
 				<!-- .row -->
 				
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<form role="form" action="<c:url value="/game.action"/>">
 
 							<div class="form-group">
@@ -106,7 +106,7 @@
            					</div>
 
            					
-           					<button class="btn btn-default" type="submit" name="method:insert">Submit Button</button>
+           					<button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
                             <button class="btn btn-default" type="reset" >Reset Button</button>
 
 						</form>
@@ -118,7 +118,7 @@
 				<!-- .row -->
 				
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 					</div>
 				</div>
 				<!-- .row -->
@@ -142,7 +142,25 @@
 	(function($) {
 		listTeam();
 		$('#history-manager').collapse();
-		listGame();
+		/* $('#submitButton').click(listGame); */
+		//var btnClick = document.getElementById("submitButton");
+		//btnClick.addEventListener("click",listGame,false);
+		
+		$('#submitButton').click(function(){
+			var url = '<c:url value="/game"/>';
+			$.getJSON(url, function(data) {
+				$.each(data, function(key, value) {
+					var millis = value.gameTime.iLocalMillis;
+					//gameTime還是物件，所以還是要繼續取毫秒數
+					//millisecondToDate可將毫秒數轉為日期，位址在/js/misc.js 
+					var str = '<p>' + millisecondToDate(millis) + millisecondToTime(millis) + ', ' + value.teamHome.teamName + '</p>';
+					
+					console.log(str);
+					$('#result').append(str);
+				});
+			});
+		});
+		
 
 		
 		function listTeam() {
@@ -164,16 +182,7 @@
 		});
 		
 		function listGame(){
-			var url = '<c:url value="/game.action"/>';
-			$.getJSON(url, function(data) {
-				$.each(data, function(key, value) {
-					var millis = value.gameTime.iLocalMillis;
-					//gameTime還是物件，所以還是要繼續取毫秒數
-					//millisecondToDate可將毫秒數轉為日期，位址在/js/misc.js 
-					var str = '<p>' + millisecondToDate(millis) + millisecondToTime(millis) + ', ' + value.teamHome.teamName + '</p>';
-					$('#result').append(str);
-				});
-			});
+
 			
 		}
 		
