@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeamAction extends ActionSupport {
+	private static final long serialVersionUID = 2014L;
+
 	@Autowired
 	private TeamService service;
 	
@@ -26,7 +27,12 @@ public class TeamAction extends ActionSupport {
 	private InputStream inputStream;
 	
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
-
+	
+	private String json;
+	
+	public String getJson() {
+		return json;
+	}
 	public TeamEntity getModel() {
 		return model;
 	}
@@ -38,17 +44,9 @@ public class TeamAction extends ActionSupport {
 	public List<TeamEntity> getModels() {
 		return models;
 	}
-
-	public void setModels(List<TeamEntity> models) {
-		this.models = models;
-	}
 	
 	public InputStream getInputStream() {
 		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
 	}
 
 	@Override
@@ -58,9 +56,6 @@ public class TeamAction extends ActionSupport {
 	
 	public String execute(){
 		log.debug("execute TeamAction");
-		
-		models = service.getAll();
-		log.debug("Models = {}", models);
 		
 		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
 		

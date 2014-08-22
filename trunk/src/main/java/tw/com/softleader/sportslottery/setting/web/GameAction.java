@@ -29,14 +29,14 @@ public class GameAction extends ActionSupport {
 	private TeamService teamService;
 	private GameEntity model;
 	private List<GameEntity> models;
-	private String modelsJson;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	private Long teamAwayId;
 	private Long teamHomeId;
 	private InputStream inputStream;
+	private String json;
 	
-	public String getModelsJson() {
-		return modelsJson;
+	public String getJson() {
+		return json;
 	}
 	
 	public GameEntity getModel() {
@@ -101,7 +101,7 @@ public class GameAction extends ActionSupport {
 	public String manager() {
 		log.debug("manager");
 		
-		modelsJson = service.getAllJSON();
+		json = service.getAllJSON();
 		
 		return "manager";
 	}
