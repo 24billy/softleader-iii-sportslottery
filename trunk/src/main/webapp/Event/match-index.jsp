@@ -276,7 +276,7 @@
 		var userOddsCount = 0;
 		
 		//以AJAX讀數資料
-		$.getJSON('<c:url value="/game" />', {}, function(datas){
+		$.getJSON('<c:url value="/game?method:select" />', {}, function(datas){
 			var games = [];
 			var odds = [];
 			//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
@@ -303,7 +303,7 @@
 			//game資料進一步處理 將odds中的資料往上提方便後續使用
 			$.each(games, function(index, game){
 				if(game != null){
-					game.iMillis = game.gameTime.iLocalMillis
+					game.iMillis = game.gameTime.iLocalMillis;
 					game.date = millisecondToDate(game.iMillis);
 					game.time = millisecondToTime(game.iMillis);
 					//根據odd的內容來建立game的屬性
@@ -401,6 +401,7 @@
 			
 			//點選建立dialog的處理
 			$('.trClick').click(function(){
+				$('div[name="dialogToggle"]').remove();
 				//如果session存在,則取得使用者的臨時下注紀錄
 				var userOdds = [];
 				if(sessionStorage.userOdds){
@@ -449,7 +450,7 @@
 				//套用Bootstrap效果
 				$('div[name="dialogToggle"]').modal();
 				$('div[name="dialogToggle"]').on('hidden.bs.modal', function (e) {
-					$(this).remove();
+					$('div[name="dialogToggle"]').remove();
 				});
 
 				
@@ -460,9 +461,9 @@
 						console.log($(this));
 						userOddsCount++;
 						if(userOddsCount>8){
-							$(this).removeClass('active');
+							$(this).addClass('active');
 							userOddsCount--;
-							alert('下注超過八個');
+							//alert('下注超過八個');
 						} else {
 							userOdds.push($(this).attr('oddId'));	
 						}
@@ -478,6 +479,7 @@
 			odds_refresh();
 			//-----------------------------------------------------
 			function odds_refresh(){
+				
 				//取出投注
 				var userOddIds = [];
 				if(sessionStorage.userOdds){
@@ -501,8 +503,7 @@
 				});
 				$('.close').click(function(){
 					$(this).parent().parent().parent().remove();
-					console.log($(this).attr("oddId"));
-					
+					console.log($(this).attr("oddId"));	
 				});
 			}
 		});
