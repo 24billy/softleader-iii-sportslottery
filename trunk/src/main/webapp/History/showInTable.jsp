@@ -83,31 +83,31 @@
 				<!-- .row -->
 				
 				<div class="row">
-					<div class="col-lg-4">
-						<form role="form" action="<c:url value="/game.action"/>">
+					<div class="col-lg-12">
+						<form class="form-inline" role="form" action="<c:url value="/game.action"/>">
 
 							<div class="form-group">
 								
-								<label>From:</label>
-           						<input class="form-control form-game-time" type="text" name="model.gameTime">
+                                                                <label class="sr-only" for="from">From:</label>
+                                                                <input class="form-control form-game-time"  id="from" placeholder="From" type="text" name="model.gameTime">
  
            						</div>
-           					<div class="form-group">
-           						<label>To:</label>
-           						<input class="form-control form-game-time" type="text" name="model.gameTime">
-           					
-           					</div>
+                                                        <div class="form-group">
+                                                                <label class="sr-only" for="to">To:</label>
+                                                                <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="model.gameTime">
 
-           					<div class="form-group">
-           						<label>隊名:</label>
-           						<select class="form-control form-team" name="teamHomeId">
-								</select>
-           					
-           					</div>
+                                                        </div>
 
-           					
-           					<button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
-                            <button class="btn btn-default" type="reset" >Reset Button</button>
+                                                        <div class="form-group">
+                                                                <label class="sr-only" for="teamName">隊名:</label>
+                                                                <select class="form-control form-team" id="teamName" name="teamHomeId"></select>
+
+                                                        </div>
+
+                                                
+                                                        <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
+                                                        <button class="btn btn-default" type="reset" >Reset Button</button>
+                                               
 
 						</form>
 					</div>
