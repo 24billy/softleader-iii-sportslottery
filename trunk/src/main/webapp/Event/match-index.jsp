@@ -25,6 +25,10 @@
 		display:none;
 	}
 	
+	.trClick{
+		cursor: pointer;
+	}
+	
 	ul[name='checkbox_list']{
 		text-align: center;
 	}
@@ -86,10 +90,8 @@
 							投注區
 						</h1>
 					</div>
-				</div>
-				
-				<div class="row" name="event_list" id="sample" date="">
-					<div class="col-lg-8">
+					
+					<div class="col-lg-8" name="event_list" id="sample" date="">
 						<h3>2014年4月20日</h3>
 						<table class="table table-hover">
 							<tr class="info">
@@ -102,7 +104,10 @@
 							</tr>
 						</table>
 					</div>
+					
 				</div>
+				
+
 				
 				<div id="dialog" title="Basic dialog">
 					<div class="panel panel-default">
@@ -180,6 +185,8 @@
 	(function($) {
 		$('#match-manager').collapse();
 		
+		var userOddsCount = 0;
+		
 		//以AJAX讀數資料
 		$.getJSON('<c:url value="/game" />', {}, function(datas){
 			var games = [];
@@ -218,34 +225,42 @@
 					    case 'SU_A':
 					    	game.suA = odd.oddValue;
 					    	game.suACom = odd.oddCombination;
+					    	odd.labelText = game.teamAway.teamName;
 					    	break;
 					    case 'SU_H':
 					    	game.suH = odd.oddValue;
 					    	game.suHCom = odd.oddCombination;
+					    	odd.labelText = game.teamHome.teamName;
 							break;
 					    case 'ATS_A':
 					    	game.atsA = odd.oddValue;
 					    	game.atsACom = odd.oddCombination;
+					    	odd.labelText = game.teamAway.teamName;
 					    	break;
 					    case 'ATS_H':
 					    	game.atsH = odd.oddValue;
 					    	game.atsHCom = odd.oddCombination;
+					    	odd.labelText = game.teamHome.teamName;
 					    	break;
 					    case 'SC_H':
 					    	game.scH = odd.oddValue;
 					    	game.scCom = odd.oddCombination;
+					    	odd.labelText = "總分合大於";
 					    	break;
 					    case 'SC_L':
 					    	game.scL = odd.oddValue;
 					    	game.scCom = odd.oddCombination;
+					    	odd.labelText = "總分合小於";
 					    	break;
 					    case 'ODD':
 					    	game.oeOdd = odd.oddValue;
 					    	game.oeCom = odd.oddCombination;
+					    	odd.labelText = "總分合為單數";
 					    	break;
 					    case 'EVEN':
 					    	game.oeEven = odd.oddValue;
 					    	game.oeCom = odd.oddCombination;
+					    	odd.labelText = "總分合為偶數";
 					    	break;
 					    default:
 					    	break;
@@ -258,8 +273,8 @@
 					//主隊與客隊的標籤上的span是彈出式的說明字串
 					if(game != null){
 						//當該日期已存在的情況下，直接加入
-						if($('div.row[date="' + game.date + '"]').length > 0){
-							$('div.row[date="' + game.date + '"] table').append(
+						if($('div[name = "event_list"][date="' + game.date + '"]').length > 0){
+							$('div[name = "event_list"][date="' + game.date + '"] table').append(
 									"<tr class='trClick' gameId=" + game.gameNum + ">"+
 									"<td>" + game.gameNum + "</td>"+
 									"<td>" + game.time + "</td>"+
@@ -277,8 +292,8 @@
 							
 							$('#event_board').append(tempTag);
 							
-							$('div.row[date="' + game.date + '"] h3').text(game.date);
-							$('div.row[date="' + game.date + '"] table').append(
+							$('div[name = "event_list"][date="' + game.date + '"] h3').text(game.date);
+							$('div[name = "event_list"][date="' + game.date + '"] table').append(
 									"<tr class='trClick' gameId=" + game.gameNum + ">"+
 									"<td>" + game.gameNum + "</td>"+
 									"<td>" + game.time + "</td>"+
@@ -301,6 +316,8 @@
 				var userOdds = [];
 				if(sessionStorage.userOdds){
 					userOdds = sessionStorage.userOdds.split(',');
+					userOddsCount = userOdds.length;
+					console.log(userOddsCount);
 				}
 				
 				//從已存在的dialog複製出新的物件
@@ -327,34 +344,8 @@
 					
 					//根據odd的類型來生成按鈕的標籤文字
 					labelText = '';
-					switch(odd.oddType) {
-				    case 'SU_A':
-				    	labelText += thisGame.teamAway.teamName;
-				    	break;
-				    case 'SU_H':
-				    	labelText += thisGame.teamHome.teamName;
-						break;
-				    case 'ATS_A':
-				    	labelText += thisGame.teamAway.teamName;
-				    	break;
-				    case 'ATS_H':
-				    	labelText += thisGame.teamHome.teamName;
-				    	break;
-				    case 'SC_H':
-				    	labelText += "總分合大於";
-				    	break;
-				    case 'SC_L':
-				    	labelText += "總分合小於";
-				    	break;
-				    case 'ODD':
-				    	labelText += "總分合為單數";
-				    	break;
-				    case 'EVEN':
-				    	labelText += "總分合為偶數";
-				    	break;
-				    default:
-				    	break;
-					}
+					labelText += odd.labelText;
+					
 					
 					labelText += '(' + odd.oddCombination + ')';
 					$('samp:eq(0)', thislabel).text(labelText);
@@ -379,9 +370,18 @@
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
 				$('input',tempDialog).click(function(){
 					if($(this).prop('checked')){
-						userOdds.push($(this).attr('oddId'));	
+						userOddsCount++;
+						if(userOddsCount>8){
+							$('+ label' , this).removeClass('ui-state-active');
+							$(this).prop('checked', false);
+							userOddsCount--;
+							alert('下注超過八個');
+						} else {
+							userOdds.push($(this).attr('oddId'));	
+						}
 					} else {
 						userOdds.splice(userOdds.indexOf($(this).attr('oddId')),1);
+						userOddsCount--;
 					}
 					sessionStorage.userOdds = userOdds;
 				});
