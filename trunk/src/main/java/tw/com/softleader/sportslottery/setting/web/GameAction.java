@@ -76,15 +76,7 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String execute(){
-		log.debug("execute GameAction");
-
-		//models = service.getAll();
-		//log.debug("Models = {}", models);
-		
-		//inputStream = new ByteArrayInputStream((new Gson().toJson(models).getBytes(StandardCharsets.UTF_8)));
-		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
-		//modelsJson = service.getAllJSON();//將Game的讀出資料轉為Json
-		//log.debug("modelsJson = {}", modelsJson);
+		log.debug("execute...");
 		
 		return SUCCESS;
 	}
@@ -99,20 +91,19 @@ public class GameAction extends ActionSupport {
 	
 	public String insert() {
 		log.debug("insert...");
-	
-
 		model.setTeamHome(teamService.getById(teamHomeId));
-		
 		model.setTeamAway(teamService.getById(teamAwayId));
+		String result = null;
 		try {
 			service.insert(model);
-			return "inserted";
+			result = "SUCCESS";
 		} catch (Exception e) {
-			return "insertFailed";
+			result = "FAILED";
 		}
-
+		
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "insert";
+		
 	}
-	
-	
 	
 }
