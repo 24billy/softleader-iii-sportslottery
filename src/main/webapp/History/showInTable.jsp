@@ -30,26 +30,48 @@
 				</button>
 				<a class="navbar-brand" href="<c:url value="/History/historyIndex.jsp"/>">Sports Lottery Hisory</a>
 			</div>
+<!--                        	<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li>
+						<a href="<c:url value="/Admin/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
+					</li>
+					<li class="active">
+						<a href="javascript:;" data-toggle="collapse" data-target="#match-manager"><i class="fa fa-fw fa-list"></i> 賽事管理<i class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="match-manager" class="collapse">
+							<li class="open">
+								<a href="<c:url value="/Admin/match-form.jsp"/>"><i class="fa fa-fw fa-pencil-square-o"></i> 新增</a>
+							</li>
+							<li>
+								<a href="<c:url value="/Admin/match-list.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>-->
 			
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li>
-						<a href="<c:url value="/History/historyIndex.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
+						<a href="<c:url value="/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 					</li>
 					<li class="active">
 						<a href="javascript:;" data-toggle="collapse" data-target="#history-manager"><i class="fa fa-fw fa-list"></i> 歷史資訊<i class="fa fa-fw fa-caret-down"></i></a>
-						<!-- 可隱藏下拉選單 -->
-						<ul id="match-manager" class="collapse">
+<!--						 可隱藏下拉選單 -->
+						<ul id="history-manager" class="collapse">
 							<li class="open">
-<%-- 							<a href="<c:url value="/Admin/match-form.jsp"/>"><i class="fa fa-fw fa-pencil-square-o"></i> 新增</a>
- --%>
  								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
  
 							</li>
-<%-- 						<li>
-								<a href="<c:url value="/Admin/match-list.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
+                                                        <li class="open">
+ 								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> Statistics</a>
+ 
 							</li>
- --%>
+                                                        <li class="open">
+ 								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> Comparisions on Map</a>
+ 
+							</li>
+                                                        
+
 						</ul>
 					</li>
 				</ul>
@@ -156,7 +178,7 @@
 					var str = '<p>' + millisecondToDate(millis) + millisecondToTime(millis) + ', ' + value.teamHome.teamName + '</p>';
 					
 					console.log(str);
-					$('#result').append(str);
+					$('#result').append(str);//show results on screen line by line
 				});
 			});
 		});
