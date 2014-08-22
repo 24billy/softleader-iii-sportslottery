@@ -29,14 +29,9 @@
 		cursor: pointer;
 	}
 	
-	ul[name='checkbox_list']{
+	.btn{
 		text-align: center;
-	}
-	
-	ul[name='checkbox_list'] label{
-		margin:auto;
-		width:250px;
-		text-align: left;
+		width: 250px;
 	}
 
 </style>
@@ -181,70 +176,83 @@
 				</div>
 				</div>
 				
-				<div id="dialog" title="Basic dialog">
-					<div class="panel panel-default">
-						<ul name="checkbox_list" class="list-group">
-							<li class="list-group-item">
-								<span>不讓分</span>
-								<input type="checkbox" id="checkSample1">
-								<label id="labelSample1" for="checkSample1">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-								<input type="checkbox" id="checkSample2">
-								<label id="labelSample2" for="checkSample2">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-							</li>
-							<li class="list-group-item">
-								<span>　讓分</span>
-								<input type="checkbox" id="checkSample3">
-								<label id="labelSample3" for="checkSample3">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-								<input type="checkbox" id="checkSample4">
-								<label id="labelSample4" for="checkSample4">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-							</li>
-							<li class="list-group-item">
-								<span>　總分</span>
-								<input type="checkbox" id="checkSample5">
-								<label id="labelSample5" for="checkSample5">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-								<input type="checkbox" id="checkSample6">
-								<label id="labelSample6" for="checkSample6">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-							</li>
-							<li class="list-group-item">
-								<span>　單雙</span>
-								<input type="checkbox" id="checkSample7">
-								<label id="labelSample7" for="checkSample7">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-								<input type="checkbox" id="checkSample8">
-								<label id="labelSample8" for="checkSample8">
-									<samp></samp>
-									<samp style="float:right"></samp>
-								</label>
-							</li>
-						</ul>
-					</div>
-				</div>
-			
+				<div id="dialog" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+								<h4 class="modal-title">Basic dialog</h4>
+							</div>
+							<div class="modal-body">
+							<ul name="checkbox_list" class="list-group">
+								<li class="list-group-item">
+									<span>不讓分</span>
+									<div class="btn-group" data-toggle="buttons">
+										<label id="labelSample1" class="btn btn-primary">
+											<input type="checkbox" id="checkSample1">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+										<label id="labelSample2" class="btn btn-primary">
+											<input type="checkbox" id="checkSample2">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<span>　讓分</span>
+									<div class="btn-group" data-toggle="buttons">
+										<label id="labelSample3" class="btn btn-primary">
+											<input type="checkbox" id="checkSample3">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+										<label id="labelSample4" class="btn btn-primary">
+											<input type="checkbox" id="checkSample4">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<span>　總分</span>
+									<div class="btn-group" data-toggle="buttons">
+										<label id="labelSample5" class="btn btn-primary">
+											<input type="checkbox" id="checkSample5">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+										<label id="labelSample6" class="btn btn-primary">
+											<input type="checkbox" id="checkSample6">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<span>　單雙</span>
+									<div class="btn-group" data-toggle="buttons">
+										<label id="labelSample7" class="btn btn-primary">
+											<input type="checkbox" id="checkSample7">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+										<label id="labelSample8" class="btn btn-primary">
+											<input type="checkbox" id="checkSample8">
+											<samp></samp>
+											<samp style="float:right"></samp>
+										</label>
+									</div>
+								</li>
+							</ul>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
 			</div>
 			<!-- .container-fluid -->
 		</div>
 		<!-- #page-wrapper -->
-	
 	</div>
 	<!-- #wrapper -->
 	
@@ -395,8 +403,8 @@
 				
 				//從已存在的dialog複製出新的物件
 				var tempDialog = $('#dialog').clone();
-				tempDialog.attr('title', '賽事編號 ' + $(this).attr('gameId'));
-				tempDialog.attr('id', '');
+				$('div.modal-title', tempDialog).text('賽事編號 ' + $(this).attr('gameId'));
+				tempDialog.removeAttr('id');
 				tempDialog.attr('name', 'dialogToggle');
 				
 				//設定dialog的詳細內容(所有玩法的按鈕,以及按鈕上的文字)
@@ -406,13 +414,13 @@
 					thisCheckbox = $('input:eq(' + count + ')', tempDialog);
 					thislabel = $('label:eq(' + count + ')', tempDialog);
 					thisCheckbox.attr('id', 'cb' + odd.id);
-					thisCheckbox.attr('oddId', odd.id);
+					thislabel.attr('oddId', odd.id);
 					thislabel.attr('for', 'cb' + odd.id);
 					thislabel.attr('id', '');
 					
 					if(userOdds.indexOf(odd.id+"") != -1){
 						console.log('found!');
-						thisCheckbox.prop('checked', true);
+						thislabel.addClass('active');
 					}
 					
 					//根據odd的類型來生成按鈕的標籤文字
@@ -430,28 +438,21 @@
 				$('input',tempDialog).button();
 				$('#event_board').append(tempDialog);
 				
-				//右上角X的作用模式(刪除此dialog)
-				$('div[name="dialogToggle"]').dialog({
-					width: 700,
-					modal: true,
-					close: function() {
+				//套用Bootstrap效果
+				$('div[name="dialogToggle"]').modal();
+				$('div[name="dialogToggle"]').on('hidden.bs.modal', function (e) {
 					$(this).remove();
-
-						
-						
-						
-
-					}
 				});
+
 				
 				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
-				$('input',tempDialog).click(function(){
-					if($(this).prop('checked')){
+				$('label',tempDialog).click(function(){
+					if(!$(this).hasClass('active')){
+						console.log($(this));
 						userOddsCount++;
 						if(userOddsCount>8){
-							$('+ label' , this).removeClass('ui-state-active');
-							$(this).prop('checked', false);
+							$(this).removeClass('active');
 							userOddsCount--;
 							alert('下注超過八個');
 						} else {
@@ -462,6 +463,7 @@
 						userOddsCount--;
 					}
 					sessionStorage.userOdds = userOdds;
+					console.log(userOddsCount);
 					odds_refresh();
 				});
 			});
