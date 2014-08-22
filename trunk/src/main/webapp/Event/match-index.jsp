@@ -200,9 +200,9 @@
 			});
 			
 			//debug用
-			//console.log(games);
-			//console.log('-----------');
-			//console.log(odds);
+			console.log(games);
+			console.log('-----------');
+			console.log(odds);
 			
 			//此段作備忘用 無意義
 			//var userOddIds = sessionStorage.userOdds.split(',');
@@ -218,9 +218,10 @@
 					game.iMillis = game.gameTime.iLocalMillis
 					game.date = millisecondToDate(game.iMillis);
 					game.time = millisecondToTime(game.iMillis);
-					
 					//根據odd的內容來建立game的屬性
+
 					$.each(game.odds, function(index, odd){
+						odd.gameNum = game.gameNum;
 						switch(odd.oddType) {
 					    case 'SU_A':
 					    	game.suA = odd.oddValue;
