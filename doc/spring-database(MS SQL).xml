@@ -10,7 +10,7 @@
         destroy-method="close">
 
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-        <property name="url" value="jdbc:sqlserver://mayzcnc7ui.database.windows.net:1433;DatabaseName=sportlottery" />
+        <property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=sportlottery" />
         <property name="username" value="sportlottery@mayzcnc7ui" />
         <property name="password" value="User@1234" />
         <property name="initialSize" value="10" />
