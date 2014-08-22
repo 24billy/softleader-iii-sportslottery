@@ -77,31 +77,47 @@
 				<div class="row">
                     <div class="col-lg-6">
                     	<h2>TABLE</h2>
-                    	<form role="form" class="form-inline pull-right">
-                    		<div class="form-group">
-                    			<label>BALL TYPE</label>
-                    			<select class="form-control form-ball-type" name="model.ballType">
+                    </div>
+                </div>
+                <!-- .row -->
+                
+                <div class="row">
+                	<div class="col-lg-6">
+                		<div role="form" class="form-inline pull-left">
+                			<div class="form-group">
+		                		<label>BALL TYPE</label>
+		                    	<select class="form-control form-ball-type" name="model.ballType">
 									<option value="Baseball" selected>棒球</option>
 									<option value="Basketball">籃球</option>
 									<option value="Basketball">足球</option>
 								</select>
-                    		</div>
-                    	</form>
+	                    	</div>
+	                    	<button class="btn btn-primary" type="button">Submit</button>
+                    	</div>
+                    	<button class="btn btn-success pull-right" type="button">Add Game</button>
+                	</div>
+                </div>
+                <!-- .row -->
+                
+                <div class="row top20">
+                	<div class="col-lg-6">
 						<div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                            	<thead>
-                            		<tr>
-                            			<th>HEAD</th>
-                            		</tr>
-                            	</thead>
-                            	<tbody>
-                            		<tr>
-                            			<td>BODY</td>
-                            		</tr>
-                            	</tbody>
-                            </table>
-                        </div>
-                        <!-- .table-responsive -->                    
+	                    	<table class="table table-hover table-striped table-bordered">
+	                    	   	<thead>
+	                            	<tr>
+	                            		<th>GAME_NUM</th>
+	                            		<th>TEAM_AWAY</th>
+	                            		<th>TEAM_HOME</th>
+	                            	</tr>
+	                            </thead>
+	                            <tbody>
+	                            	<tr>
+	                            		<td>BODY</td>
+	                            	</tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                    <!-- .table-responsive -->
                     </div>
                 </div>
 				<!-- .row -->

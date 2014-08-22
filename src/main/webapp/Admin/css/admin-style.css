@@ -4,7 +4,6 @@
 body {
 	margin-top: 100px;
 	background-color: #222;
-	font-weight: bold;
 }
 @media(min-width:768px) {
     body {
@@ -66,4 +65,20 @@ body {
         outline: none;
         background-color: #000 !important;
     }
+}
+
+.top5 {
+	margin-top:5px;
+}
+
+.top10 {
+	margin-top:10px;
+}
+
+.top15 {
+	margin-top:15px;
+}
+
+.top20 {
+	margin-top:20px;
 }
