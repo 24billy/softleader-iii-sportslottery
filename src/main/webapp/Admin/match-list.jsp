@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<c:url value="/Admin/css/admin-style.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <style>
 </style>
 </head>
@@ -57,7 +58,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							查詢賽事
+							賽事管理
 						</h1>
 						<ol class="breadcrumb">
 							<li>
@@ -73,19 +74,11 @@
 					</div>
 				</div>
 				<!-- .row -->
-				
-				<div class="row">
-                    <div class="col-lg-6">
-                    	<h2>TABLE</h2>
-                    </div>
-                </div>
-                <!-- .row -->
                 
                 <div class="row">
-                	<div class="col-lg-6">
+                	<div class="col-lg-12">
                 		<div role="form" class="form-inline pull-left">
                 			<div class="form-group">
-		                		<label>BALL TYPE</label>
 		                    	<select class="form-control form-ball-type" name="model.ballType">
 									<option value="Baseball" selected>棒球</option>
 									<option value="Basketball">籃球</option>
@@ -100,20 +93,21 @@
                 <!-- .row -->
                 
                 <div class="row top20">
-                	<div class="col-lg-6">
+                	<div class="col-lg-12">
 						<div class="table-responsive">
 	                    	<table class="table table-hover table-striped table-bordered">
 	                    	   	<thead>
 	                            	<tr>
-	                            		<th>GAME_NUM</th>
-	                            		<th>TEAM_AWAY</th>
-	                            		<th>TEAM_HOME</th>
+	                            		<th>賽事編號</th>
+	                            		<th>比賽時間</th>
+	                            		<th>客隊隊伍</th>
+	                            		<th>客隊分數</th>
+	                            		<th>主隊隊伍</th>
+	                            		<th>主隊分數</th>
 	                            	</tr>
 	                            </thead>
 	                            <tbody>
-	                            	<tr>
-	                            		<td>BODY</td>
-	                            	</tr>
+	                            	
 	                            </tbody>
 	                        </table>
 	                    </div>
@@ -121,7 +115,14 @@
                     </div>
                 </div>
 				<!-- .row -->
-			
+				
+				<div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="新增賽事" aria-hidden="true">
+					 <div class="modal-dialog modal-sm">
+					 	<div class="modal-content">
+					 	</div>
+					 </div>
+				</div>
+				
 			</div>
 			<!-- .container-fluid -->
 		</div>
@@ -131,7 +132,9 @@
 	<!-- #wrapper -->
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
 <script>
 	(function($) {
 		$('#match-manager').collapse();
