@@ -35,15 +35,7 @@
 						<a href="<c:url value="/Admin/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 					</li>
 					<li>
-						<a href="javascript:;" data-toggle="collapse" data-target="#match-manager"><i class="fa fa-fw fa-list"></i> 賽事管理<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="match-manager" class="collapse">
-							<li>
-								<a href="<c:url value="/Admin/match-form.jsp"/>"><i class="fa fa-fw fa-pencil-square-o"></i> 新增</a>
-							</li>
-							<li>
-								<a href="<c:url value="/Admin/match-list.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
-							</li>
-						</ul>
+						<a href="<c:url value="/gameManager"/>"><i class="fa fa-fw fa-table"></i> 賽事管理</a>
 					</li>
 				</ul>
 			</div>
