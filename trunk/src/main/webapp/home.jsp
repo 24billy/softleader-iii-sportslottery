@@ -13,7 +13,10 @@
 <script src="<c:url value="Security/js/bootstrap.js"/>"></script>
 
 <style>
-#form{
+#form1{
+	float:right;
+}
+#form2{
 	float:right;
 }
 .info{
@@ -32,19 +35,32 @@
 </style>
 </head>
 <body>
-
-	<form id="form" class="form-inline" action="<c:url value="checkLogin"/>" >
-		<div>
-			<input value="jackychen" type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
-			<input value="a123456" type="password" class="info" name="model.userPassword" placeholder="請輸入密碼" required>
-			<s:submit cssClass="btn btn-success" value="登入" method="login"/>
-		</div>
-		<div>
-			<button type="button" class="btn btn-link">忘記密碼</button>
-			<span class="error">${errors.LoginFail}</span>
-			<button type="button" id="reg" class="btn btn-info">註冊</button>
-		</div>
-	</form>
+	<c:if test="${empty user}">
+		<form id="form1" class="form-inline" action="<c:url value="checkLogin"/>" >
+			<div>
+				<input value="jackychen" type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
+				<input value="a123456" type="password" class="info" name="model.userPassword" placeholder="請輸入密碼" required>
+				<s:submit cssClass="btn btn-success" value="登入" method="login"/>
+			</div>
+			<div>
+				<button type="button" class="btn btn-link">忘記密碼</button>
+				<span class="error">${errors.LoginFail}</span>
+				<button type="button" id="reg" class="btn btn-info">註冊</button>
+			</div>
+		</form>
+	</c:if>
+	
+	<c:if test="${ !empty user }">
+		<form id="form2" class="form-inline" action="<c:url value="/Security/logout.jsp"/>" >
+			
+			<div>
+				<button type="button" class="btn btn-info">修改資料</button>
+				<button type="sumit" class="btn btn-info">登出</button>
+			</div>
+		</form>
+	</c:if>
+	
+	
 
 <script>
 	(function($){

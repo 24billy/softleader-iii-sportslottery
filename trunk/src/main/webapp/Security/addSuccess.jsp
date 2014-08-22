@@ -13,7 +13,7 @@
 	} catch (e) {
 	    logMyErrors(e); // 把例外物件傳給錯誤處理器
 	} finally{
-		document.location.href="<c:url value='/home.jsp'/>";
+		document.location.href="<c:url value='/index.jsp'/>";
 	}
 </script>
 <body>

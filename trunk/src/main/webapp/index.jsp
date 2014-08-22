@@ -1,9 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <body>
-<h2>Hello World!</h2>
+<jsp:include page="/home.jsp" />
+<h2>Hello! ${user.userAccount} </h2>
 <a href="odds">odds</a><br>
 <a href="Match.jsp">Match</a><br>
 <a href="odds?gameId=1">OddType(Id=1)</a><br>
@@ -16,11 +19,6 @@
 <hr>
 <a href="http://getbootstrap.com/">BootStrap</a><br>
 <a href="http://fortawesome.github.io/Font-Awesome/">BootStrap.icon</a><br>
-
-<hr>
-<button type="button" class="btn btn-success"><a href="123">Modify</a></button>
-<button type="button" class="btn btn-primary"><a href="<c:url value="/Security/logout.jsp"/>">LogOut</a></button>
-
 
 
 <!-- åå»spring-struts.xmlæ¾åºoddsActionçä½ç½®å»å·è¡oddsActionè£¡çexecute()ï¼æåå¾ï¼å·è¡Json/oddsJson.jsp
