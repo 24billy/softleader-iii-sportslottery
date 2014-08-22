@@ -25,14 +25,21 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 
 public class OddsAction extends ActionSupport {
+	private static final long serialVersionUID = 2014L;
+	
 	private Logger log = LoggerFactory.getLogger(OddsAction.class);
     private OddsEntity model;
     private List<OddsEntity> models;
-    private String modelsJson;
     private Long gameId;
     
     @Autowired
     private OddsService service;
+    
+    private String json;
+	
+	public String getJson() {
+		return json;
+	}
     
     public OddsEntity getModel() {
 		return model;
@@ -44,22 +51,6 @@ public class OddsAction extends ActionSupport {
 
 	public List<OddsEntity> getModels() {
 		return models;
-	}
-
-	public void setModels(List<OddsEntity> models) {
-		this.models = models;
-	}
-
-	public String getModelsJson() {
-		return modelsJson;
-	}
-
-	public void setModelsJson(String modelsJson) {
-		this.modelsJson = modelsJson;
-	}
-	
-	public Long getGameId() {
-		return gameId;
 	}
 
 	public void setGameId(Long gameId) {
@@ -102,12 +93,12 @@ public class OddsAction extends ActionSupport {
 		log.debug("models = {}", models);
 		
 		if (gameId != null && gameId > 0L) {
-			modelsJson = service.getByGameIdJson(gameId);
-			log.debug("modelsJson = {}", modelsJson);
+			json = service.getByGameIdJson(gameId);
+			log.debug("json = {}", json);
 			return "byGameId";
 		} else {
-			modelsJson = service.getByOddTypeJson("SU");
-			log.debug("modelsJson = {}", modelsJson);
+			json = service.getByOddTypeJson("SU");
+			log.debug("json = {}", json);
 			return Action.SUCCESS;
 		}
 	}

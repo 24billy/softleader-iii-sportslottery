@@ -22,6 +22,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 public class UserAction extends ActionSupport {
+	private static final long serialVersionUID = 2014L;
+
 	@Autowired
 	private UserService service;
 	
@@ -29,9 +31,13 @@ public class UserAction extends ActionSupport {
 	
 	private List<UserEntity> models;
 	
-	private String modelsJson;
-	
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
+	
+	private String json;
+	
+	public String getJson() {
+		return json;
+	}
 	
 	public UserEntity getModel() {
 		return model;
@@ -43,18 +49,6 @@ public class UserAction extends ActionSupport {
 
 	public List<UserEntity> getModels() {
 		return models;
-	}
-
-	public void setModels(List<UserEntity> models) {
-		this.models = models;
-	}
-	
-	public String getModelsJson() {
-		return modelsJson;
-	}
-
-	public void setModelsJson(String modelsJson) {
-		this.modelsJson = modelsJson;
 	}
 
 	@Override
@@ -84,8 +78,8 @@ public class UserAction extends ActionSupport {
 		models = service.getAll();
 		log.debug("Models = {}", models);
 		
-		modelsJson = service.getAllJSON();
-		log.debug("modelsJson = {}", modelsJson);
+		json = service.getAllJSON();
+		log.debug("json = {}", json);
 		return SUCCESS;
 	}
 	

@@ -2,7 +2,6 @@ package tw.com.softleader.sportslottery.setting.web;
 
 import java.util.List;
 
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Author:Billy 
  */
 public class LotteryAction extends ActionSupport  {
+	private static final long serialVersionUID = 2014L;
+
 	@Autowired
 	private LotteryService service;
 	
@@ -24,6 +25,12 @@ public class LotteryAction extends ActionSupport  {
 	
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 
+	private String json;
+	
+	public String getJson() {
+		return json;
+	}
+	
 	public LotteryEntity getModel() {
 		return model;
 	}
@@ -34,10 +41,6 @@ public class LotteryAction extends ActionSupport  {
 
 	public List<LotteryEntity> getModels() {
 		return models;
-	}
-
-	public void setModels(List<LotteryEntity> models) {
-		this.models = models;
 	}
 
 	@Override
