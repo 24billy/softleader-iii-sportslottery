@@ -39,7 +39,7 @@
     </filter>
  	<filter-mapping>
     	<filter-name>LoginFilter</filter-name>
-    	<url-pattern>/Secutiry/*</url-pattern>
+    	<url-pattern>/Security/*</url-pattern>
   	</filter-mapping>
   	
   	<!-- Run 整個專案會執行index.jsp -->
