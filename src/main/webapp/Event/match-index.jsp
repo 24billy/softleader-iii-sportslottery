@@ -452,7 +452,6 @@
 				$('div[name="dialogToggle"]').on('hidden.bs.modal', function (e) {
 					$('div[name="dialogToggle"]').remove();
 				});
-
 				
 				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
