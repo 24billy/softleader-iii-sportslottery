@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
@@ -136,7 +137,41 @@
 								<input class="form-control" id="gameTime" type="text" name="model.gameTime">
 							</div>
 						</div>
-						<!-- .row -->	
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<h4 class="text-center">不讓分</h4>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-6">
+								<input class="form-control form-decimal" type="text">
+							</div>
+							<div class="col-xs-6">
+								<input class="form-control form-decimal" type="text">
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<h4 class="text-center">讓分</h4>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-6">
+								<input class="form-control form-decimal" type="text">
+							</div>
+							<div class="col-xs-6">
+								<input class="form-control form-decimal" type="text">
+							</div>
+						</div>
+						<!-- .row -->			
 					</form>
 					<!-- .form -->
       			</div>
@@ -158,6 +193,7 @@
 <script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script>
 	(function($) {
 		
@@ -218,6 +254,12 @@
 		$('#gameTime').datetimepicker({
 			minDate: new Date(),
 			format: 'Y-m-d H:i:s'
+		});
+		
+		$('.form-decimal').TouchSpin({
+			initval: 1,
+			step: 0.05,
+			decimals: 2
 		});
 	})(jQuery);
 </script>
