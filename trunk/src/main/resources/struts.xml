@@ -12,7 +12,7 @@
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   	
   	<action name="gameManager" class="gameAction" method="manager">
-  		<result name="manager">/Admin/match-list.jsp</result>
+  		<result name="manager">/Admin/gameManager.jsp</result>
   		<result name="insert" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>

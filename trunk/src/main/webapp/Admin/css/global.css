@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.top5 {
+	margin-top:5px;
+}
+
+.top10 {
+	margin-top:10px;
+}
+
+.top15 {
+	margin-top:15px;
+}
+
+.top20 {
+	margin-top:20px;
+}
+
+.modal-left {
+	width: 40%;
+	float: left;
+}
+
+.modal-right {
+	width: 40%;
+	float: right;
+}
