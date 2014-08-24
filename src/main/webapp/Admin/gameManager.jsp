@@ -29,7 +29,8 @@
 					<form role="form" class="form-inline pull-left">
 						<div class="form-group">
 							<select class="form-control form-ball-type" name="model.ballType">
-								<option value="Baseball" selected>棒球</option>
+								<option value="" selected>所有類型</option>
+								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
 							</select>

@@ -26,8 +26,12 @@ public class GameService extends GenericService<GameEntity> {
 		return dao;
 	}
 	
-	private List<GameEntity> getGameIsNotEnd(String ballType){
+	public List<GameEntity> getGameIsNotEnd(String ballType){
 		return dao.findGameIsNotEnd(ballType);		
+	}
+	
+	public List<GameEntity> getByBallType(String ballType) {
+		return dao.findByBallType(ballType);
 	}
 
 }
