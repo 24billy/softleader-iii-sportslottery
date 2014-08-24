@@ -8,11 +8,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 
@@ -34,6 +36,7 @@ public class GameAction extends ActionSupport {
 	private Long teamHomeId;
 	private InputStream inputStream;
 	private String json;
+	private String catagory;
 	
 	public String getJson() {
 		return json;
@@ -61,6 +64,10 @@ public class GameAction extends ActionSupport {
 	
 	public InputStream getInputStream() {
 		return inputStream;
+	}
+	
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
 	}
 
 	public String execute(){
@@ -101,7 +108,11 @@ public class GameAction extends ActionSupport {
 	public String manager() {
 		log.debug("manager");
 		
-		json = service.getAllJSON();
+		if (!StringUtils.isEmpty(catagory)) {
+			json = new Gson().toJson(service.getByBallType(catagory));
+		} else {
+			json = new Gson().toJson(service.getAll());
+		}
 		
 		return "manager";
 	}
