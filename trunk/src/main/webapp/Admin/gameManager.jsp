@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-switch.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
@@ -30,7 +31,6 @@
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
 							<select class="form-control form-ball-type" id="catagory" name="catagory">
-								<option value="" selected>所有類型</option>
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
@@ -78,11 +78,10 @@
 					<h3 class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
+				<form role="form" action="<c:url value="/game.action"/>">
 				
-				<div class="modal-body">
+					<div class="modal-body">
 				
-					<form role="form" action="<c:url value="/game.action"/>">
-					
 						<div class="row">
 							<div class="col-xs-12">
 								<h4 class="text-center">聯盟名稱</h4>
@@ -143,48 +142,59 @@
 						
 						<div class="row">
 							<div class="col-xs-12">
-								<h4 class="text-center">不讓分</h4>
+								<h4 class="text-center">
+									不讓分<input type="checkbox" id="chkSU">
+								</h4>
+								
 							</div>
 						</div>
 						<!-- .row -->
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text">
+								<input class="form-control form-decimal" type="text" name="SUAwayValue">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text">
+								<input class="form-control form-decimal" type="text" name="SUHomeValue">
 							</div>
 						</div>
 						<!-- .row -->
 						
 						<div class="row">
 							<div class="col-xs-12">
-								<h4 class="text-center">讓分</h4>
+								<h4 class="text-center">
+									讓分<input type="checkbox" id="chkATS">
+								</h4>
 							</div>
 						</div>
 						<!-- .row -->
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text">
+								<input class="form-control form-decimal" type="text" name="ATSAwayValue">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text">
+								<input class="form-control form-decimal" type="text" name="ATSHomeValue">
 							</div>
 						</div>
-						<!-- .row -->			
-					</form>
-					<!-- .form -->
-      			</div>
-      			<!-- .modal-body -->
+						<!-- .row -->
+						
+	      			</div>
+	      			<!-- .modal-body -->
+	      			
+	      			<div class="modal-footer">
+	      				<button type="button" class="btn btn-primary" id="btnInsert">新增</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	      			</div>
+      			</form>
+				<!-- .form -->
 			</div>
 			<!-- .modal-content -->
 		</div>
 		<!-- .modal-dialog -->
 	</div>
 	<!-- End of Modal -->
-
+	
 <!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
@@ -196,9 +206,10 @@
 <script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
 <script>
 	(function($) {
-		
+		$('.form-decimal').prop('disabled', true);
 		$('#btnAddGame').click(listTeam);
 			
 		var gameList = $.parseJSON('${json}');
@@ -270,6 +281,43 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
+		
+		$(':checkbox').bootstrapSwitch();
+		$(':checkbox').on('switchChange.bootstrapSwitch', function(event, state) {
+			var type = $(this).attr('id');
+			type = type.replace('chk', '');  
+			if (state) {
+				$('.form-decimal[name^=' + type + ']').prop('disabled', false);
+			} else {
+				$('.form-decimal[name^=' + type + ']').prop('disabled', true);
+			}
+		});
+		
+		
+		$('#btnInsert').click(function() {
+			console.log('test');
+			
+			$.ajax({
+				url: '<c:url value="/gameManager?method:insert"/>',
+				type: 'post',
+				data: {
+					'model.ballType':$('[name="catagory"]').val(),
+					'model.leagueName':$('[name="model.leagueName"]').val(),
+					'model.gameTime':$('[name="model.gameTime"]').val(),
+					'teamAwayId':$('[name="teamAwayId"]').val(),
+					'teamHomeId':$('[name="teamHomeId"]').val()
+				},
+				success: function(result) {
+					if (result == 'SUCCESS') {
+						window.location.replace('<c:url value="/gameManager"/>');
+					} else {
+						
+					}
+				}
+			});
+			
+			
+		});
 	})(jQuery);
 </script>
 </body>
