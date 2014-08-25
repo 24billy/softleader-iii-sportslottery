@@ -30,32 +30,30 @@ public class OddsDaoTest extends BaseTest {
 		
 		List<OddsEntity> models = null;
 		
-//		int originSize = 0;
-//		int currentSize = 0;
+		int originSize = 0;
+		int currentSize = 0;
+		
+		models = oddsDao.findAll();
+		
+		if(models != null) {
+			originSize = models.size();
+		}
 //		
-//		models = oddsDao.findAll();
+		OddsEntity entity = new OddsEntity();
+		entity.setGameId(1L);
+		entity.setOddType("EVEN");
+		BigDecimal value = new BigDecimal("1");
+		entity.setOddValue(value);
+		
+		oddsDao.insert(entity);
 //		
-//		if(models != null) {
-//			originSize = models.size();
-//		}
+		models = oddsDao.findAll();
 //		
-//		OddsEntity entity = new OddsEntity();
-//		entity.setGameId(gameDao.findById(1L));
-//		entity.setOddType("EVEN");
-//		BigDecimal combination = new BigDecimal("1");
-//		entity.setOddCombination(combination);
-//		BigDecimal value = new BigDecimal("1");
-//		entity.setOddValue(value);
+		if(models != null) {
+			currentSize = models.size();
+		}
 //		
-//		oddsDao.insert(entity);
-//		
-//		models = oddsDao.findAll();
-//		
-//		if(models != null) {
-//			currentSize = models.size();
-//		}
-//		
-//		assertEquals(originSize + 1, currentSize);
+		assertEquals(originSize + 1, currentSize);
 //		
 //		entity = oddsDao.findById(entity.getId());
 //		log.debug("entity = {}", entity);
@@ -83,8 +81,11 @@ public class OddsDaoTest extends BaseTest {
 //		
 		
 		//models = oddsDao.findForHistory("巴", "2014-08-08T10:50:20", "2014-08-19T10:50:20");
+		/*
 		log.debug("findForHistory = {}", models);
 		System.out.println("size of the searching result: "+models.size());
+		*/
+		
 		
 	}
 

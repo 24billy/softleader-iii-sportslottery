@@ -168,10 +168,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SUAwayValue">
+								<input class="form-control form-decimal" type="text" name="SU_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SUHomeValue">
+								<input class="form-control form-decimal" type="text" name="SU_H">
 							</div>
 						</div>
 						<!-- .row -->
@@ -187,10 +187,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATSAwayValue">
+								<input class="form-control form-decimal" type="text" name="ATS_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATSHomeValue">
+								<input class="form-control form-decimal" type="text" name="ATS_H">
 							</div>
 						</div>
 						<!-- .row -->
@@ -232,7 +232,6 @@
 		var gameList = $.parseJSON('${json}');
 		$.each(gameList, function(index, game) {
 			var child = '';
-			console.log(game.gameTime);
 			child += '<tr>';
 			child += '<td>' + game.gameNum + '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
@@ -316,11 +315,10 @@
 		
 		
 		$('#btnInsert').click(function() {
-			console.log('test');
 			
 			$.ajax({
 				url: '<c:url value="/gameManager?method:insert"/>',
-				type: 'post',
+				type: 'get',
 				data: {
 					'model.ballType':$('[name="catagory"]').val(),
 					'model.leagueName':$('[name="model.leagueName"]').val(),
@@ -329,9 +327,11 @@
 					'teamAwayId':$('[name="teamAwayId"]').val(),
 					'teamHomeId':$('[name="teamHomeId"]').val()
 				},
-				success: function(result) {
-					if (result == 'SUCCESS') {
-						window.location.replace('<c:url value="/gameManager"/>');
+				success: function(data) {
+					if (data != 'FAILED') {
+						var gameId = $.parseJSON(data).id;
+						addOdds(gameId);
+						window.location.replace('<c:url value="/gameManager"/>');	
 					} else {
 						
 					}
@@ -340,6 +340,37 @@
 			
 			
 		});
+		
+		function addOdds(gameId) {
+			
+			$('input:checked').each(function() {
+				
+				var type = $(this).attr('id');
+				type = type.replace('chk', ''); 
+				$('.form-decimal[name^=' + type + ']').each(function() {
+					
+					$.ajax({
+						url: '<c:url value="/odds?method:insert"/>',
+					    type: 'get',
+					    data: {
+					    	'model.gameId':gameId,
+					    	'model.oddType':$(this).attr('name'),
+					    	'model.oddValue':$(this).val()
+					    },
+					    success: function(data) {
+					    	if (data == 'SUCCESS') {
+					    			
+					    	} else {
+					    		
+					    	}
+					    	
+					    }
+					});
+					
+				});
+					
+			});
+		};
 	})(jQuery);
 </script>
 </body>

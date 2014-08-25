@@ -6,6 +6,9 @@
 
 package tw.com.softleader.sportslottery.setting.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,6 +34,7 @@ public class OddsAction extends ActionSupport {
     private OddsEntity model;
     private List<OddsEntity> models;
     private Long gameId;
+    private InputStream inputStream;
     
     @Autowired
     private OddsService service;
@@ -57,6 +61,10 @@ public class OddsAction extends ActionSupport {
 		this.gameId = gameId;
 	}
 
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
 	@Override
 	public void validate() {
 	}
@@ -68,10 +76,18 @@ public class OddsAction extends ActionSupport {
     	return Action.SUCCESS;
     }
     
-    public String insert() throws Exception {
+    public String insert() {
     	log.debug("insert...");
-    	service.insert(model);
-    	return Action.SUCCESS;
+    	String result = null;
+    	try {
+    		service.insert(model);
+    		result = "SUCCESS";
+    	} catch (Exception e) {
+    		result = "FAILED";
+    	}
+    	
+    	inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+    	return "insert";
     }
     
     public String update() throws Exception {

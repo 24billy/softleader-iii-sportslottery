@@ -48,10 +48,11 @@
 	
 	
 	<action name="odds" class="oddsAction" method="execute"> 
-		<result name="success">/jsonPoster.jsp</result>
-		<result name="byGameId">/jsonPoster.jsp</result>
-		<result name="input">/jsonPoster.jsp</result>
-		<allowed-methods></allowed-methods>
+		<result name="insert" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert</allowed-methods>
 	</action> 
 	
 	<action name="checkAccount" class="userAction" method="check">
