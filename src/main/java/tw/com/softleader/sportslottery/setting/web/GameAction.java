@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class GameAction extends ActionSupport {
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
+	private LocalDateTime timeFrom, timeTo;
+	private String teamName;
 	
 	public String getJson() {
 		return json;
@@ -84,7 +87,7 @@ public class GameAction extends ActionSupport {
 		log.debug("select...");
 		
 		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
-		
+	
 		return "select";
 	}
 	
@@ -120,4 +123,10 @@ public class GameAction extends ActionSupport {
 		return "manager";
 	}
 	
+	public String searchHistoryMethod(){
+		log.debug("searchHistoryMethod...");
+		inputStream = new ByteArrayInputStream(service.getForHistory(timeFrom, timeTo, teamName).getBytes(StandardCharsets.UTF_8));
+		
+		return SUCCESS;
+	}
 }
