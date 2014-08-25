@@ -15,7 +15,6 @@
 	<script src="js/bootstrap.js"></script> 
 	<script src="js/button.js"></script> 
 	<script src="js/jquery.validate.js"></script> 
-	<script src="js/script.js"></script> 
 <body>
 	<div class="createaccount-body">
 		<div class="sing-up">
@@ -91,35 +90,90 @@
 						}
 					}
 				}).always(function () {
-					//setTimeout("" ,1250);
 					btn.button('reset');
 		    	});
 		    	
-		    	//$('#birth').datetimepicker({
-				//	minDate: new Date(),
-				//	format: 'Y-m-d H:i:s'
-				//});
 		 	});
 		
-		
-		/*
-		(function($){
-			$('#btn-check').click(chekAc);
-			function chekAc() {
-				$.ajax( {
-					url:"<c:url value='/checkAccount'/>",
+			jQuery.validator.addMethod("checkPsw", function() {
+				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
+
+		        if (re.test($('#password').val())) {
+		            checkPsw = true;
+		        }else {
+		        	checkPsw = false;
+		        }
+		        return checkPsw;
+			}, "Non-compliance");
+			jQuery.validator.addMethod("checkAccount", function() {
+				
+				var btn = $(this);
+			    btn.button('loading');
+		    	$.ajax({
+		    		url:"<c:url value='/checkAccount'/>",
 					type:"get",
 					data:{
 						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
-						alert(data);
-						setTimeout("alert('123')" ,1250);
+						console.log(data);
+						if(data=="fail") {
+							checeAccount = false;	
+						}else {
+							checeAccount = true;	
+						}
 					}
-				});
-			};		
-		*/
-		
+				}).always(function () {
+					btn.button('reset');
+		    	});
+				
+		        return checeAccount;
+			}, "Repeat Account");
+			
+			
+			$('#registration-form').validate({
+				rules: {
+					'model.userAccount': {
+						minlength: 6,
+						required: true,
+						checkAccount: true
+					},
+				  
+					'model.userPassword': {
+						required: true,
+						minlength: 6,
+						checkPsw : true 
+					},
+					
+					confirm_password: {
+						required: true,
+						minlength: 6,
+						equalTo: "#password"
+					},
+				  
+					'model.userEmail': {
+						required: true,
+						email: true
+					},
+				  
+					agree: "required"
+				  
+			    },
+				highlight: function(element) {
+					console.log("fail");
+					
+					$(element).closest('.control-group').removeClass('success').addClass('error');
+				},
+				success: function(element) {
+					console.log("success");
+					element
+					.text('OK!').addClass('valid')
+					.closest('.control-group').removeClass('error').addClass('success');
+				}
+			});
+			
+			
+			
 		})(jQuery);
 	</script>
 	
