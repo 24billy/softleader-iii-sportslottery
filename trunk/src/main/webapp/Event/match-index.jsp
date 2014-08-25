@@ -99,7 +99,6 @@
 						<table class="table table-striped  table-hover">
 							<tr>
 								<td id="lottery1" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -108,7 +107,6 @@
 							</tr>
 							<tr>
 								<td id="lottery2" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -117,7 +115,6 @@
 							</tr>
 							<tr>
 								<td id="lottery3" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -126,7 +123,6 @@
 							</tr>
 							<tr>
 								<td id="lottery4" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -135,7 +131,6 @@
 							</tr>
 							<tr>
 								<td id="lottery5" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -144,7 +139,6 @@
 							</tr>
 							<tr>
 								<td id="lottery6" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -153,7 +147,6 @@
 							</tr>
 							<tr>
 								<td id="lottery7" hidden="true">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -456,6 +449,8 @@
 				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
 				$('label',tempDialog).click(function(){
+					var counter=1;
+					if(counter=1){
 					if(!$(this).hasClass('active')){
 						console.log($(this));
 						userOddsCount++;
@@ -472,7 +467,12 @@
 					}
 					sessionStorage.userOdds = userOdds;
 					console.log(userOddsCount);
+					counter++;
+					}
+					if(counter=2){
 					odds_refresh();
+					
+					}
 				});
 			});
 			odds_refresh();
@@ -484,20 +484,27 @@
 				if(sessionStorage.userOdds){
 					userOddIds  = sessionStorage.userOdds.split(',');
 				}
+				
+				//console.log(userOddIds.length);
 				console.log(userOddIds);
 				//顯示投注區
 				var lotteryId=1;
+				var lotteryMax=userOddIds.length;
 				$.each(userOddIds, function(index, userOddId){
 					//var temp = games[odds[userOddId].gameId].date;
 					var oddType=odds[userOddId].labelText;
 					var oddValue=odds[userOddId].oddValue;
-	
+					if(lotteryId<=lotteryMax){
 					var bet = games[odds[userOddId].gameNum];
-					$('#lottery'+lotteryId).attr("hidden",false);
-					$('#lottery'+lotteryId+'> div:eq(1)').html("編號:"+bet.gameNum+" "+bet.ballType);				
-					$('#lottery'+lotteryId+'> div:eq(2)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
-					$('#lottery'+lotteryId+'> div:eq(3)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
-					$('#lottery'+lotteryId+'> div:eq(4)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+						$('#lottery'+lotteryId).css("display","table-row");
+						$('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);				
+						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
+						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
+						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+						
+					}else{
+						$('#lottery'+lotteryId).css("display","none");
+					}
 					lotteryId++;
 				});
 				$('.close').click(function(){
