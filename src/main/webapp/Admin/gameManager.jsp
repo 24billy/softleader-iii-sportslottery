@@ -26,16 +26,17 @@
 			
 			<div class="row">
 				<div class="col-lg-12">
-					<form role="form" class="form-inline pull-left">
+					
+					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" name="model.ballType">
+							<select class="form-control form-ball-type" name="catagory">
 								<option value="" selected>所有類型</option>
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-						<button class="btn btn-primary" type="button">Submit</button>
+						<button class="btn btn-primary" type="submit">Submit</button>
 					</form>
 					<button id="btnAddGame" class="btn btn-success pull-right" type="button" data-toggle="modal" data-target="#addGameModal">Add Game</button>
 				</div>
