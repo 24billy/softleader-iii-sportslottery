@@ -53,6 +53,7 @@
 									<th>客隊隊伍</th>
 									<th>主隊隊伍</th>
 									<th>已結束</th>
+									<th>Action</th>
 	                            </tr>
 							</thead>
 							<tbody id="gameList">
@@ -237,6 +238,10 @@
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
+			child += '<td>';
+			child += '<button type="button" class="btn btn-primary">Edit</button>';
+			child += '<button type="button" class="btn btn-danger">Delete</button>';
+			child += '</td>';
 			child += '</tr>';
 			
 			$('#gameList').append(child);
