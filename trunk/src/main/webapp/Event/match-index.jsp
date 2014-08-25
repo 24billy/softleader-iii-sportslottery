@@ -489,27 +489,27 @@
 				console.log(userOddIds);
 				//顯示投注區
 				var lotteryId=1;
-				var lotteryMax=userOddIds.length;
+				
 				$.each(userOddIds, function(index, userOddId){
 					//var temp = games[odds[userOddId].gameId].date;
 					var oddType=odds[userOddId].labelText;
 					var oddValue=odds[userOddId].oddValue;
-					if(lotteryId<=lotteryMax){
 					var bet = games[odds[userOddId].gameNum];
-						$('#lottery'+lotteryId).css("display","table-row");
+						$('#lottery'+lotteryId).attr("hidden",false);
 						$('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);				
 						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
-						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" id=delBet"'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
-						
-					}else{
-						$('#lottery'+lotteryId).css("display","none");
-					}
+						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
 					lotteryId++;
 				});
+				while(lotteryId<=8){
+					$('#lottery'+lotteryId).attr("hidden",true);
+					lotteryId++;
+				}
 				$('.close').click(function(){
-					$(this).parent().parent().parent().remove();
-					console.log($(this).attr("oddId"));	
+					userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
+					sessionStorage.userOdds = userOddIds;
+					$(this).parent().parent().parent().remove();						
 				});
 			}
 		});
