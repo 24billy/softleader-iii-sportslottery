@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,10 @@ public class GameService extends GenericService<GameEntity> {
 	
 	public List<GameEntity> getByBallType(String ballType) {
 		return dao.findByBallType(ballType);
+	}
+	
+	public List<GameEntity> getForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){
+		return dao.findForHistory(timeFrom, timeTo, teamName);
 	}
 
 }
