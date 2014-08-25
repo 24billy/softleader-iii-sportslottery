@@ -141,14 +141,9 @@
 				<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table class="table table-hover table-striped table-bordered">
-							<thead>
-								<tr>
-									<th>賽事編號</th>
-									<th>客隊隊伍</th>
-									<th>主隊隊伍</th>
-									<th>已結束</th>
-	                            </tr>
+						<table class="table table-hover table-striped table-bordered" id="gameTable">
+							<thead id="teamListHead">
+								
 							</thead>
 							<tbody id="gameList">
 							</tbody>
@@ -245,6 +240,7 @@
 					'timeTo':$('#to').val()	
 				},
 				success:function(data) {
+					$('#teamListHead').html("<tr><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th></tr>");
 					var gameList = $.parseJSON(data);
 					$.each(gameList, function(index, game) {
 						console.log(game);
@@ -254,7 +250,7 @@
 						child += '<td>' + game.gameNum + '</td>';
 						child += '<td>' + game.teamAway.teamName + '</td>';
 						child += '<td>' + game.teamHome.teamName + '</td>';
-						child += '<td>' + game.isEnd + '</td>';
+						
 						child += '</tr>';
 						
 						$('#gameList').append(child);
