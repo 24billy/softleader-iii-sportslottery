@@ -10,8 +10,8 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<c:url value="/Admin/css/admin-style.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/History/css/admin-style.css"/>">
+<link rel="stylesheet" href="<c:url value="/History/css/jquery.datetimepicker.css"/>">
 
 
 </head>
@@ -111,18 +111,18 @@
 							<div class="form-group">
 								
                                                                 <label class="sr-only" for="from">From:</label>
-                                                                <input class="form-control form-game-time"  id="from" placeholder="From" type="text" name="model.gameTime">
+                                                                <input class="form-control form-game-time"  id="from" placeholder="From" type="text" name="timeFrom">
  
            						</div>
                                                         <div class="form-group">
                                                                 <label class="sr-only" for="to">To:</label>
-                                                                <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="model.gameTime">
+                                                                <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
 
                                                         </div>
 
                                                         <div class="form-group">
                                                                 <label class="sr-only" for="teamName">隊名:</label>
-                                                                <select class="form-control form-team" id="teamName" name="teamHomeId"></select>
+                                                                <select class="form-control form-team" id="teamName" name="teamName"></select>
 
                                                         </div>
 
@@ -137,6 +137,26 @@
 				<div id="result">
 				
 				</div>
+				
+				<div class="row top20">
+				<div class="col-lg-12">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>賽事編號</th>
+									<th>客隊隊伍</th>
+									<th>主隊隊伍</th>
+									<th>已結束</th>
+	                            </tr>
+							</thead>
+							<tbody id="gameList">
+							</tbody>
+						</table>
+					</div>
+					<!-- .table-responsive -->
+				</div>
+			</div>
 				<!-- .row -->
 				
 				<div class="row">
@@ -158,7 +178,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/History/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
@@ -168,8 +188,11 @@
 		//var btnClick = document.getElementById("submitButton");
 		//btnClick.addEventListener("click",listGame,false);
 		
-		$('#submitButton').click(function(){
-			var url = '<c:url value="/game"/>';
+		/* $('#submitButton').click(function(){
+			$('#result').empty();
+			var url = '<c:url value="/searchHistory"/>';
+			
+			
 			$.getJSON(url, function(data) {
 				$.each(data, function(key, value) {
 					var millis = value.gameTime.iLocalMillis;
@@ -181,6 +204,12 @@
 					$('#result').append(str);//show results on screen line by line
 				});
 			});
+		}); */
+		
+		$('#submitButton').click(function(){
+			listGame();
+			
+		
 		});
 		
 
@@ -198,12 +227,26 @@
 		}
 		
 		$('.form-game-time').datetimepicker({
-			minDate: new Date(),
-			format: 'Y-m-d H:i:s'
+			
+			format: 'Y-m-d',
+			timepicker: false //取消掉顯示時間
 			
 		});
 		
 		function listGame(){
+			var gameList = $.parseJSON('${json}');
+			$.each(gameList, function(index, game) {
+				var child = '';
+				console.log(game.gameTime);
+				child += '<tr>';
+				child += '<td>' + game.gameNum + '</td>';
+				child += '<td>' + game.teamAway.teamName + '</td>';
+				child += '<td>' + game.teamHome.teamName + '</td>';
+				child += '<td>' + game.isEnd + '</td>';
+				child += '</tr>';
+				
+				$('#gameList').append(child);
+			});
 
 			
 		}
