@@ -112,5 +112,11 @@ public class GameDao extends GenericDao<GameEntity>{
 		//用 new Gson().toJson 與用 將findForHistory()得出的List<GameEntity> 轉成Json型態
 		return toJson;
 	}
+	
+	public GameEntity findByGameNum(Long gameNum) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from GameEntity game where game.gameNum = :gameNum");
+		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
+	}
 
 }

@@ -103,10 +103,6 @@ public class GameAction extends ActionSupport {
 		return "select";
 	}
 	
-	
-	
-	
-	
 	public String insert() {
 		log.debug("insert...");
 		model.setTeamHome(teamService.getById(teamHomeId));
@@ -115,7 +111,7 @@ public class GameAction extends ActionSupport {
 		String result = null;
 		try {
 			service.update(model);
-			result = "SUCCESS";
+			result = new Gson().toJson(service.getByGameNum(model.getGameNum()));
 		} catch (Exception e) {
 			result = "FAILED";
 		}
