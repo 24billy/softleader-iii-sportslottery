@@ -36,9 +36,9 @@
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit">送出</button>
 					</form>
-					<button id="btnAddGame" class="btn btn-success pull-right" type="button" data-toggle="modal" data-target="#addGameModal">Add Game</button>
+					<button id="btnAddGame" class="btn btn-success pull-right" type="button" data-toggle="modal" data-target="#addGameModal">新增賽事</button>
 				</div>
 			</div>
 			<!-- .row -->
@@ -46,14 +46,14 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table class="table table-hover table-striped table-bordered">
+						<table class="table table-hover table-condensed table-bordered">
 							<thead>
 								<tr>
 									<th>賽事編號</th>
 									<th>客隊隊伍</th>
 									<th>主隊隊伍</th>
 									<th>已結束</th>
-									<th>Action</th>
+									<th>功能</th>
 	                            </tr>
 							</thead>
 							<tbody id="gameList">
@@ -239,8 +239,8 @@
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
-			child += '<button type="button" class="btn btn-primary">Edit</button>';
-			child += '<button type="button" class="btn btn-danger">Delete</button>';
+			child += '<button type="button" class="btn btn-primary">編輯</button>';
+			child += '<button type="button" class="btn btn-danger left10">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
