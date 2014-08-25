@@ -110,7 +110,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
-									<input class="form-control" id="gameTime" type="text" name="model.gameNum">
+									<input class="form-control" type="text" name="model.gameNum">
 								</div>
 							</div>
 						</div>
@@ -227,7 +227,8 @@
 	(function($) {
 		$('.form-decimal').prop('disabled', true);
 		$('#btnAddGame').click(listTeam);
-			
+		
+		var gameNumArray = new Array();
 		var gameList = $.parseJSON('${json}');
 		$.each(gameList, function(index, game) {
 			var child = '';
@@ -240,7 +241,11 @@
 			child += '</tr>';
 			
 			$('#gameList').append(child);
+			gameNumArray.push(game.gameNum);
 		});
+		
+		var maxGameNum = Math.max.apply(Math, gameNumArray);
+		$('[name="model.gameNum"]').val(maxGameNum + 1);
 		
 		function setEditButton() {
 			
@@ -282,7 +287,7 @@
 		
 		$('#gameTime').datetimepicker({
 			minDate: new Date(),
-			format: 'Y-m-d H:i:s'
+			format: 'Y-m-d H:i:s',
 		});
 		
 		$('.form-decimal').TouchSpin({
@@ -319,6 +324,7 @@
 				data: {
 					'model.ballType':$('[name="catagory"]').val(),
 					'model.leagueName':$('[name="model.leagueName"]').val(),
+					'model.gameNum':$('[name="model.gameNum"]').val(),
 					'model.gameTime':$('[name="model.gameTime"]').val(),
 					'teamAwayId':$('[name="teamAwayId"]').val(),
 					'teamHomeId':$('[name="teamHomeId"]').val()
