@@ -12,54 +12,53 @@
 <link href="css/style.css" rel="stylesheet">
 </head>
 	<script src="js/jquery-1.7.1.min.js"></script> 
-	<script src="js/bootstrap.js"></script> 
+	<script src="js/bootstrap.min.js"></script> 
 	<script src="js/button.js"></script> 
-	<script src="js/jquery.validate.js"></script> 
+	<script src="js/jquery.validate.min.js"></script> 
 <body>
 	<div class="createaccount-body">
 		<div class="sing-up">
 			<form class="form-horizontal" id="registration-form" action="<c:url value='/addAccount'/>">
 				<label class="input-label">
 					<strong>帳號</strong>
-					<button type="button" id="loading-example-btn" class="btn btn-primary" data-loading-text="Loading...">檢查帳號</button><br>
 					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
-					<span class="error" id="acountIn"></span>
 				</label>
 				
 				<label>
 					<strong>密碼</strong><br>
 					<input class="input-xlarge" name="model.userPassword" id="password" type="password">
 				</label>
-				<div class="error" id="pwdIn"></div>
 				
 				<label>
 					<strong>確認密碼</strong><br>
 					<input class="input-xlarge" name="confirm_password" id="confirm_password" type="password">
 				</label>
-				<div class="error" id="chek_pwdIn"></div>
 				
 				<label id="label-account">
 					<strong>姓名</strong><br>
 					<input class="input-xlarge" name="model.userName" type="text">
 				</label>
+				
 				<label id="label-account">
 					<strong>E-mail</strong><br>
 					<input class="input-xlarge" name="model.userEmail" type="text">
 				</label>
+				
 				<label id="label-account">
 					<strong>電話</strong><br>
 					<input class="input-xlarge" name="model.userPhone" type="text">
 				</label>
-				<div class="error" id="acountIn"></div>
+				
 				<label id="label-account">
 					<strong>
 						<span>男</span><input type="radio" name="model.userGender" value="男">
 						<span>女</span><input type="radio" name="model.userGender" value="女">
 					</strong>
 				</label><br>
+				
 				<label id="label-account">
 					<strong>生日</strong><br>
-					<input class="input-xlarge" name="model.userBirthday" id="form-element-name" type="text">
+					<input class="input-xlarge" name="model.userBirthday" id="birth" type="text">
 				</label><br>
 				
 				<button type="submit" class="btn btn-success">註冊</button>
@@ -72,29 +71,8 @@
 	
 	<script>
 		(function($){
-			$('#loading-example-btn').click(function () {
-		   	 	var btn = $(this);
-			    btn.button('loading');
-		    	$.ajax({
-		    		url:"<c:url value='/checkAccount'/>",
-					type:"get",
-					data:{
-						'model.userAccount': $('#username').val()
-					},
-					success: function(data) {
-						console.log(data);
-						if(data=="fail") {
-							$('#acountIn').removeClass("account-success").html('帳號重複');	
-						}else {
-							$('#acountIn').addClass("account-success").html('帳號可使用');
-						}
-					}
-				}).always(function () {
-					btn.button('reset');
-		    	});
-		    	
-		 	});
-		
+			
+			//密碼規則驗證
 			jQuery.validator.addMethod("checkPsw", function() {
 				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
 
@@ -105,6 +83,8 @@
 		        }
 		        return checkPsw;
 			}, "Non-compliance");
+			
+			//帳號重複驗證
 			jQuery.validator.addMethod("checkAccount", function() {
 				
 				var btn = $(this);
