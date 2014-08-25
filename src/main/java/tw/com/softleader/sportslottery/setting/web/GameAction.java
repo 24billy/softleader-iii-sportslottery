@@ -66,6 +66,10 @@ public class GameAction extends ActionSupport {
 		return inputStream;
 	}
 	
+	public String getCatagory() {
+		return catagory;
+	}
+
 	public void setCatagory(String catagory) {
 		this.catagory = catagory;
 	}
@@ -107,7 +111,6 @@ public class GameAction extends ActionSupport {
 	
 	public String manager() {
 		log.debug("manager");
-		
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));
 		} else {
