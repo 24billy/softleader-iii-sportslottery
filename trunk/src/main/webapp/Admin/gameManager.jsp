@@ -29,7 +29,7 @@
 					
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" name="catagory">
+							<select class="form-control form-ball-type" id="catagory" name="catagory">
 								<option value="" selected>所有類型</option>
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
@@ -263,6 +263,13 @@
 			step: 0.05,
 			decimals: 2
 		});
+		
+		var catagory = '${catagory}';
+		if (catagory == null || catagory == "") {
+			$('#catagory')[0].selectedIndex = 0;
+		} else {
+			$('#catagory').val(catagory);
+		}
 	})(jQuery);
 </script>
 </body>
