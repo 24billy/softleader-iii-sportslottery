@@ -42,5 +42,9 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){
 		return dao.findForHistory(timeFrom, timeTo, teamName);
 	}
+	
+	public List<GameEntity> getByLeagueName(String leagueName){
+		return dao.findGameByLeagueName(leagueName);
+	}
 
 }
