@@ -49,6 +49,12 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.setDate("gameTime", gameTime).list();
 	}
 	
+	public List<GameEntity> findGameByLeagueName(String leagueName){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from GameEntity where league_name = :leagueName order by GAME_TIME");
+		return query.setString("leagueName", leagueName).list();
+	}
+	
 	public List<GameEntity> findForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){		
 		Session session = sessionFactory.getCurrentSession();
 		
