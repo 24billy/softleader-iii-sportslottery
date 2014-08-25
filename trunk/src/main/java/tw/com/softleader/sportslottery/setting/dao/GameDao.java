@@ -10,6 +10,8 @@ import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 
@@ -96,6 +98,13 @@ public class GameDao extends GenericDao<GameEntity>{
 		}
 
 		return query.list();
+	}
+	
+	public String getHistoryJSON(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName) {
+		String toJson = new Gson().toJson(this.findForHistory(timeFrom, timeTo, teamName)); 
+		//import com.google.gson.Gson;
+		//用 new Gson().toJson 與用 將findForHistory()得出的List<GameEntity> 轉成Json型態
+		return toJson;
 	}
 
 }
