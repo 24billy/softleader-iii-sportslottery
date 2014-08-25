@@ -228,14 +228,47 @@
 		
 		$('.form-game-time').datetimepicker({
 			
-			format: 'Y-m-d',
+			format: 'Y-m-d H:i:s',
 			timepicker: false //取消掉顯示時間
 			
 		});
 		
 		function listGame(){
-			var gameList = $.parseJSON('${json}');
+			
+			
+			$.ajax({
+				url:'<c:url value="/searchHistory?method:searchHistoryMethod"/>',
+				type:'post',
+				data:{
+					'teamName':$('#teamName>option:selected').text(),
+					'timeFrom':$('#from').val(),
+					'timeTo':$('#to').val()	
+				},
+				success:function(data) {
+					var gameList = $.parseJSON(data);
+					$.each(gameList, function(index, game) {
+						console.log(game);
+						var child = '';
+						console.log(game.gameTime);
+						child += '<tr>';
+						child += '<td>' + game.gameNum + '</td>';
+						child += '<td>' + game.teamAway.teamName + '</td>';
+						child += '<td>' + game.teamHome.teamName + '</td>';
+						child += '<td>' + game.isEnd + '</td>';
+						child += '</tr>';
+						
+						$('#gameList').append(child);
+					});
+				}
+			});
+			
+			
+			
+			
+			/*
+			var gameList = $.getJSON('<c:url value="/searchHistory?method:searchHistoryMethod"/>');
 			$.each(gameList, function(index, game) {
+				console.log(game);
 				var child = '';
 				console.log(game.gameTime);
 				child += '<tr>';
@@ -248,7 +281,7 @@
 				$('#gameList').append(child);
 			});
 
-			
+			*/
 		}
 		
 	})(jQuery);

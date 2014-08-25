@@ -37,9 +37,13 @@
 		<allowed-methods>select</allowed-methods>
 	</action> 
 	
-	<action name="searchHistory" class="gameAction" method="searchHistoryMethod">
+	<action name="searchHistory" class="gameAction" method="gameHistory">
 		<result name="success" >/History/showInTable.jsp</result>
-		
+		<result name="searchHistoryMethod" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>searchHistoryMethod</allowed-methods>
 	</action>
 	
 	
