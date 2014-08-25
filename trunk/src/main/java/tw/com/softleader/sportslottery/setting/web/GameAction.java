@@ -117,7 +117,7 @@ public class GameAction extends ActionSupport {
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));
 		} else {
-			json = new Gson().toJson(service.getAll());
+			json = new Gson().toJson(service.getByBallType("Baseball"));
 		}
 		
 		return "manager";
@@ -125,7 +125,8 @@ public class GameAction extends ActionSupport {
 	
 	public String searchHistoryMethod(){
 		log.debug("searchHistoryMethod...");
-		inputStream = new ByteArrayInputStream(service.getForHistory(timeFrom, timeTo, teamName).getBytes(StandardCharsets.UTF_8));
+		json = new Gson().toJson(service.getForHistory(timeFrom, timeTo, teamName));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
