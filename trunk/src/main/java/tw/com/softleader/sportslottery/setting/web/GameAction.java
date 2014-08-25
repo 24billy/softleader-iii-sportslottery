@@ -77,6 +77,18 @@ public class GameAction extends ActionSupport {
 		this.catagory = catagory;
 	}
 
+	public void setTimeFrom(LocalDateTime timeFrom) {
+		this.timeFrom = timeFrom;
+	}
+
+	public void setTimeTo(LocalDateTime timeTo) {
+		this.timeTo = timeTo;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
 	public String execute(){
 		log.debug("execute...");
 		
@@ -131,10 +143,16 @@ public class GameAction extends ActionSupport {
 		return SUCCESS;
 	}*/
 	
+	public String gameHistory() {
+		log.debug("gameHistory...");
+		return SUCCESS;
+	}
+	
 	public String searchHistoryMethod(){
 		log.debug("searchHistoryMethod...");
 		json = new Gson().toJson(service.getForHistory(timeFrom, timeTo, teamName));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
-		return SUCCESS;
+		return "searchHistoryMethod";
 	}
 }
