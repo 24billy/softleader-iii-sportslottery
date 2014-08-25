@@ -111,6 +111,7 @@ public class GameAction extends ActionSupport {
 		log.debug("insert...");
 		model.setTeamHome(teamService.getById(teamHomeId));
 		model.setTeamAway(teamService.getById(teamAwayId));
+		model.setIsEnd(false);
 		String result = null;
 		try {
 			service.update(model);
