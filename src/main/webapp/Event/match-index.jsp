@@ -442,17 +442,13 @@
 				
 				//套用Bootstrap效果
 				$('div[name="dialogToggle"]').modal();
-				$('div[name="dialogToggle"]').on('hidden.bs.modal', function (e) {
-					$('div[name="dialogToggle"]').remove();
-				});
+				//$('div[name="dialogToggle"]').on('hidden.bs.modal', function (e) {
+				//});
 				
 				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
 				$('label',tempDialog).click(function(){
-					var counter=1;
-					if(counter=1){
 					if(!$(this).hasClass('active')){
-						console.log($(this));
 						userOddsCount++;
 						if(userOddsCount>8){
 							$(this).addClass('active');
@@ -461,18 +457,13 @@
 						} else {
 							userOdds.push($(this).attr('oddId'));	
 						}
-					} else {
+					} else if ($(this).hasClass('active')){
 						userOdds.splice(userOdds.indexOf($(this).attr('oddId')),1);
 						userOddsCount--;
 					}
 					sessionStorage.userOdds = userOdds;
 					console.log(userOddsCount);
-					counter++;
-					}
-					if(counter=2){
 					odds_refresh();
-					
-					}
 				});
 			});
 			odds_refresh();
@@ -509,7 +500,7 @@
 				$('.close').click(function(){
 					userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
 					sessionStorage.userOdds = userOddIds;
-					$(this).parent().parent().parent().remove();						
+					$(this).parent().parent().parent().attr("hidden",true);						
 				});
 			}
 		});
