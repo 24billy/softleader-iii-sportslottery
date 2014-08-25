@@ -98,7 +98,7 @@
 
 						<table class="table table-striped  table-hover">
 							<tr>
-								<td id="lottery1" hidden="true">
+								<td id="lottery1" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -106,7 +106,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery2" hidden="true">
+								<td id="lottery2" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -114,7 +114,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery3" hidden="true">
+								<td id="lottery3" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -122,7 +122,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery4" hidden="true">
+								<td id="lottery4" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -130,7 +130,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery5" hidden="true">
+								<td id="lottery5" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -138,7 +138,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery6" hidden="true">
+								<td id="lottery6" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -146,7 +146,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery7" hidden="true">
+								<td id="lottery7" hidden="true" name="oddList">
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -154,7 +154,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="lottery8" hidden="true">
+								<td id="lottery8" hidden="true" name="oddList">
 									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
@@ -462,7 +462,6 @@
 						userOddsCount--;
 					}
 					sessionStorage.userOdds = userOdds;
-					console.log(userOddsCount);
 					odds_refresh();
 				});
 			});
@@ -497,7 +496,7 @@
 					$('#lottery'+lotteryId).attr("hidden",true);
 					lotteryId++;
 				}
-				$('.close').click(function(){
+				$('td.oddList .close').click(function(){
 					userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
 					sessionStorage.userOdds = userOddIds;
 					$(this).parent().parent().parent().attr("hidden",true);						
