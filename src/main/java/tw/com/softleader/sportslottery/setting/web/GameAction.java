@@ -123,10 +123,17 @@ public class GameAction extends ActionSupport {
 		return "manager";
 	}
 	
-	public String searchHistoryMethod(){
+	/*public String searchHistoryMethod(){
 		log.debug("searchHistoryMethod...");
 		json = new Gson().toJson(service.getForHistory(timeFrom, timeTo, teamName));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
+		return SUCCESS;
+	}*/
+	
+	public String searchHistoryMethod(){
+		log.debug("searchHistoryMethod...");
+		json = new Gson().toJson(service.getForHistory(timeFrom, timeTo, teamName));
 		
 		return SUCCESS;
 	}
