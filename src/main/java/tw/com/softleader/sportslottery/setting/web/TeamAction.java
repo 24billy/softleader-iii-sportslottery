@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeamAction extends ActionSupport {
@@ -56,8 +57,8 @@ public class TeamAction extends ActionSupport {
 	
 	public String execute(){
 		log.debug("execute TeamAction");
-		
-		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
