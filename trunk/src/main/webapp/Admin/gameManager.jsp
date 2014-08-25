@@ -239,8 +239,8 @@
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
-			child += '<button type="button" class="btn btn-primary">編輯</button>';
-			child += '<button type="button" class="btn btn-danger left10">刪除</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-primary">編輯</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-danger left10">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
@@ -336,6 +336,7 @@
 					if (data != 'FAILED') {
 						var gameId = $.parseJSON(data).id;
 						addOdds(gameId);
+						$('#addGameModal').modal('hide');
 						window.location.replace('<c:url value="/gameManager"/>');	
 					} else {
 						
