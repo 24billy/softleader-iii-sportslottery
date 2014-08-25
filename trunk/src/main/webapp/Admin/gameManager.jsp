@@ -99,6 +99,22 @@
 							</div>
 						</div>
 						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<h4 class="text-center">賽事編號</h4>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<input class="form-control" id="gameTime" type="text" name="model.gameNum">
+								</div>
+							</div>
+						</div>
+						<!-- .row -->
 					
 						<div class="row">
 							<div class="col-xs-6">
