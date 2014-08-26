@@ -418,7 +418,9 @@
 	        });
 		});
 		
-		$('#gameTable').dataTable();
+		$('#gameTable').dataTable({
+			responsive: true
+		});
 	})(jQuery);
 </script>
 </body>
