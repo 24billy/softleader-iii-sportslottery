@@ -214,6 +214,7 @@
 			
 			var url = '<c:url value="/team.action"/>';
 			$.getJSON(url, function(data) { //透過team.action從資料庫，取回的Json型式的值，一條條成option	
+				console.log(data);
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('.form-team').append(str);
@@ -240,17 +241,24 @@
 					'timeTo':$('#to').val()	
 				},
 				success:function(data) {
-					$('#teamListHead').html("<tr><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th></tr>");
+				
+					$('#teamListHead').html("<tr><th>時間</th><th>聯盟名稱</th><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th><th colspan='2'>比分</th></tr>");
+					$('#gameList').empty();
+					
 					var gameList = $.parseJSON(data);
 					$.each(gameList, function(index, game) {
 						console.log(game);
 						var child = '';
+						var millis = game.gameTime.iLocalMillis;
 						console.log(game.gameTime);
 						child += '<tr>';
+						child += '<td>' + millisecondToDate(millis) + '</td>';
+						child += '<td>' + game.leagueName + '</td>';
 						child += '<td>' + game.gameNum + '</td>';
 						child += '<td>' + game.teamAway.teamName + '</td>';
 						child += '<td>' + game.teamHome.teamName + '</td>';
-						
+						child += '<td>' + game.gameScoreAway + '</td>';
+						child += '<td>' + game.gameScoreHome + '</td>';
 						child += '</tr>';
 						
 						$('#gameList').append(child);
