@@ -61,7 +61,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="CREATOR") //who input the data 
 	protected String creator;
 	
-	@Column(name="MODIFIED_TIME")
+	@Column(name="MODIFIED_TIME")//data updated time
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	protected LocalDateTime modifiedTime;
 	

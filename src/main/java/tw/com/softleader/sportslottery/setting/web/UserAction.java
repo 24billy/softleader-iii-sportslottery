@@ -6,12 +6,16 @@
 
 package tw.com.softleader.sportslottery.setting.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.UserService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -38,6 +43,19 @@ public class UserAction extends ActionSupport {
 	
 	private String json;
 	
+	private InputStream inputStream;
+	
+	private LocalDate time;
+	
+	
+	public void setTime(LocalDate time) {
+		this.time = time;
+	}
+
+	public void setModel(UserEntity model) {
+		this.model = model;
+	}
+	
 	public String getJson() {
 		return json;
 	}
@@ -46,43 +64,26 @@ public class UserAction extends ActionSupport {
 		return model;
 	}
 
-	public void setModel(UserEntity model) {
-		this.model = model;
-	}
-
 	public List<UserEntity> getModels() {
 		return models;
 	}
 
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	
 	@Override
 	public void validate() {
 		log.debug("here is userAction validate");
-//		
-//		if(model!=null) {
-//			if(model.getUSER_ACCOUNT() != null) {
-//				log.debug("帳號已存在");
-//				addFieldError("QueryFail","帳號已存在");
-//			}
-//			if(model.getUSER_PHONE() != null) {
-//				log.debug("電話已存在");
-//				addFieldError("QueryFail","此電話已註冊");
-//			}
-//			if(model.getUSER_EMAIL() != null) {
-//				log.debug("信箱已存在");
-//				addFieldError("QueryFail","此信箱已註冊");
-//			}
-//		}
+
 	}
 	
 	@Override
 	public String execute() throws Exception {
-		System.out.println("here is userAction execute");
+		System.out.println("UserAction execute");
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
-		models = service.getAll();
-		log.debug("Models = {}", models);
-		
-		json = service.getAllJSON();
-		log.debug("json = {}", json);
 		return SUCCESS;
 	}
 	
@@ -170,5 +171,23 @@ public class UserAction extends ActionSupport {
 			addFieldError("LoginFail","帳號或密碼不正確");
 			return INPUT;
 		}
+	}
+	
+	public String searchByAccount() throws Exception {
+		log.debug("searchByAccount...");
+		
+		json = new Gson().toJson(service.getByUserAccount(model.getUserAccount()));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
+		return "searchByAccount";
+	}
+	
+	public String searchByCreateTime() throws Exception {
+		log.debug("searchByCreateTime...");
+		
+		json = new Gson().toJson(service.getByCreateTime(time));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
+		return "searchByCreateTime";
 	}
 }
