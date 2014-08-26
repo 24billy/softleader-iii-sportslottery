@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Game Table</title>
+<title>賽事管理</title>
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -79,7 +79,7 @@
 					<h3 class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
-				<form role="form" action="<c:url value="/game.action"/>">
+				<form role="form">
 				
 					<div class="modal-body">
 				
@@ -129,16 +129,12 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<div class="form-group">
-									<select class="form-control" id="teamAwayList" name="teamAwayId">
-									</select>
-								</div>
+								<select class="form-control" id="teamAwayList" name="teamAwayId">
+								</select>
 							</div>
 							<div class="col-xs-6">
-								<div class="form-group">
-									<select class="form-control" id="teamHomeList" name="teamHomeId">
-									</select>
-								</div>
+								<select class="form-control" id="teamHomeList" name="teamHomeId">
+								</select>
 							</div>
 						</div>
 						<!-- .row -->
@@ -334,13 +330,14 @@
 				},
 				success: function(data) {
 					if (data != 'failed') {
-						var gameId = $.parseJSON(data).id;
-						addOdds(gameId);
+						console.log(data);
+						addOdds(data);
 						$('#addGameModal').modal('hide');
-						window.location.replace('<c:url value="/gameManager"/>');	
+							
 					} else {
 						
 					}
+					window.location.replace('<c:url value="/gameManager"/>');
 				}
 			});
 			
@@ -354,7 +351,7 @@
 				var type = $(this).attr('id');
 				type = type.replace('chk', ''); 
 				$('.form-decimal[name^=' + type + ']').each(function() {
-					
+					console.log($(this).attr('name'));
 					$.ajax({
 						url: '<c:url value="/odds?method:insert"/>',
 					    type: 'get',

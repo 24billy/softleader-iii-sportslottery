@@ -113,7 +113,8 @@ public class GameAction extends ActionSupport {
 		String result = null;
 		try {
 			service.update(model);
-			result = new Gson().toJson(service.getByGameNum(model.getGameNum()));
+			model = service.getByGameNum(model.getGameNum());
+			result = model.getId().toString();
 		} catch (Exception e) {
 			result = "failed";
 		}
@@ -131,6 +132,7 @@ public class GameAction extends ActionSupport {
 			service.delete(model);
 			result = "deleted";
 		} catch (Exception e) {
+			log.debug("ERRORRRRRRRRRR");
 			result = "failed";
 		}
 		
