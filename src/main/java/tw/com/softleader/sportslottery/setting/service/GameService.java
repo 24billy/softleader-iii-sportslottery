@@ -50,5 +50,9 @@ public class GameService extends GenericService<GameEntity> {
 	public GameEntity getByGameNum(Long gameNum) {
 		return dao.findByGameNum(gameNum);
 	}
+	
+	public List<GameEntity> getComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd) {
+		return dao.findComplex(gameNum, teamName, isEnd, timeBegin, timeEnd);
+	}
 
 }

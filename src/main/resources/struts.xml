@@ -21,16 +21,16 @@
   	</action>
   	
     <action name="game" class="gameAction" method="execute"> 
-    <!-- 網址 http://localhost:8080/softleader-iii-sportslottery/game
-    		 execute 是GameAction.java裡 的exectue()
-    		 GameAction.java的位置需要去spring-struts.xml查  -->
     	<result name="success">/Event/match-index.jsp</result>
 		<result name="select" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		
-		<allowed-methods>select</allowed-methods>
+		<result name="selectNearDays" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>execute,select,selectNearDays</allowed-methods>
 	</action> 
 	
 	<action name="searchHistory" class="gameAction" method="gameHistory">
