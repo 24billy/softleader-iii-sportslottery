@@ -16,6 +16,7 @@ import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 
@@ -100,7 +101,7 @@ public class GameAction extends ActionSupport {
 		
 		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
 	
-		return "select";
+		return "message";
 	}
 	
 	public String insert() {
@@ -113,12 +114,27 @@ public class GameAction extends ActionSupport {
 			service.update(model);
 			result = new Gson().toJson(service.getByGameNum(model.getGameNum()));
 		} catch (Exception e) {
-			result = "FAILED";
+			result = "failed";
 		}
 		
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
-		return "insert";
+		return "message";
 		
+	}
+	
+	public String delete() {
+		log.debug("delete...");
+		String result = null;
+		try {
+			model = service.getById(model.getId());
+			service.delete(model);
+			result = "deleted";
+		} catch (Exception e) {
+			result = "failed";
+		}
+		
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
 	}
 	
 	public String manager() {
@@ -129,7 +145,7 @@ public class GameAction extends ActionSupport {
 			json = new Gson().toJson(service.getByBallType("Baseball"));
 		}
 		
-		return "manager";
+		return Action.SUCCESS;
 	}
 	
 	/*public String searchHistoryMethod(){

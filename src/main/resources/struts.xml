@@ -12,16 +12,12 @@
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   	
   	<action name="gameManager" class="gameAction" method="manager">
-  		<result name="manager">/Admin/gameManager.jsp</result>
-  		<result name="insert" type="stream">
+  		<result name="success">/Admin/gameManager.jsp</result>
+  		<result name="message" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<result name="select" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>select,insert</allowed-methods>
+		<allowed-methods>select,insert,delete</allowed-methods>
   	</action>
   	
     <action name="game" class="gameAction" method="execute"> 
