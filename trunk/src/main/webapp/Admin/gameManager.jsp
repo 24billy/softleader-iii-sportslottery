@@ -200,8 +200,8 @@
 	      			<!-- .modal-body -->
 	      			
 	      			<div class="modal-footer">
-	      				<button type="button" class="btn btn-primary" id="btnInsert">新增</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-success" id="btnInsert">新增</button>
 	      			</div>
       			</form>
 				<!-- .form -->
@@ -239,8 +239,8 @@
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-primary">編輯</button>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-danger left10">刪除</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-primary btn-edit">編輯</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-del left10">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
@@ -377,6 +377,31 @@
 					
 			});
 		};
+		
+		$('.btn-edit').click(function() {
+			console.log($(this).val());
+		});
+		
+		$('.btn-del').click(function() {
+			BootstrapDialog.show({
+				closable: false,
+	            title: '刪除賽事',
+	            message: '確認刪除？',
+	            type: BootstrapDialog.TYPE_WARNING,
+				buttons: [{
+               		label: '取消',
+                	action: function(dialog) {
+                    dialog.close();
+               		}
+            	}, {
+	                label: '刪除',
+	                cssClass: 'btn-danger',
+	                action: function(dialog) {
+	                    dialog.close();
+                	}
+            	}]
+	        });
+		});
 	})(jQuery);
 </script>
 </body>
