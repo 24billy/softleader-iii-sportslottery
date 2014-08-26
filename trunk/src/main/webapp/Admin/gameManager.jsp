@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-switch.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
@@ -46,7 +47,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table class="table table-hover table-condensed table-bordered table-striped">
+						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped">
 							<thead>
 								<tr>
 									<th>賽事編號</th>
@@ -220,6 +221,7 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
 <script>
 	(function($) {
 		$('.form-decimal').prop('disabled', true);
@@ -414,6 +416,8 @@
             	}]
 	        });
 		});
+		
+		$('#gameTable').dataTable();
 	})(jQuery);
 </script>
 </body>
