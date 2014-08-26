@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,10 +25,10 @@ public class UserDao extends GenericDao<UserEntity> {
 		return  (UserEntity) query.setString("ACCOUNT", userAccount).uniqueResult();	
 	}
 	
-	public List<UserEntity> findByCreateTime(java.util.Date createTime) {
+	public List<UserEntity> findByCreateTime(LocalDate createTime) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from UserEntity u where CREATE_TIME= :createTime order by CREATE_TIME");
-		return  (List<UserEntity>) query.setDate("createTime", createTime).list();
+		Query query = session.createQuery("from UserEntity u where CREATE_TIME =:createTime order by CREATE_TIME");
+		return  query.setDate("createTime", createTime.toDate()).list();
 	}
 	
 }
