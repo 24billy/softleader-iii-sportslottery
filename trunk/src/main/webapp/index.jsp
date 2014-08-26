@@ -3,9 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
+<style>
+.home {
+	float:right;
+}
+</style>
 <body>
-<jsp:include page="/home.jsp" />
+<div class="home">
+	<jsp:include page="/home.jsp" />
+	<jsp:include page="/Security/updateUser.jsp" />
+
+</div>
 <h2>Hello! ${user.userAccount} </h2>
 <a href="odds">odds</a><br>
 <a href="Match.jsp">Match</a><br>

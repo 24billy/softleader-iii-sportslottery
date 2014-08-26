@@ -63,11 +63,15 @@
 	
 	<action name="checkLogin" class="userAction" method="login">
 		<result name="success">/index.jsp</result>
-		<result name="input">/home.jsp</result>
+		<result name="input">/index.jsp</result>
 	</action>
 	
 	<action name="userUpdate" class="userAction" method="update">
-		<result name="success">/Security/userInfo.jsp</result>
+		<result name="success">/index.jsp</result>
+	</action>
+	
+	<action name="goIndex" class="passToAction" method="goIndex">
+		<result name="success">/index.jsp</result>
 	</action>
 	
 	<action name="team" class="teamAction" method="execute">

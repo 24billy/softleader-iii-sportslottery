@@ -152,6 +152,9 @@
 						email: true
 					},
 				  
+					'model.userBirthday': {
+						dateISO:true
+					}
 			    },
 				highlight: function(element) {
 					console.log("fail");

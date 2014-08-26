@@ -35,6 +35,7 @@
 </style>
 </head>
 <body>
+<div>
 	<c:if test="${empty user}">
 		<form id="form1" class="form-inline" action="<c:url value="checkLogin"/>" >
 			<div>
@@ -56,17 +57,20 @@
 				<button type="sumit" class="btn btn-info">登出</button>
 			</div>
 		</form>
-		<form id="form2" class="form-inline" action="<c:url value="userUpdate"/>" >
-			<div>
-				<button type="sumit" class="btn btn-info">修改資料</button>
-			</div>
-		</form>
+		
+		<button id="update" class="btn btn-info">修改資料</button>
+		
 	</c:if>
-	
-	
+</div>
+
 
 <script>
 	(function($){
+		$('#update').click(function() {
+			$('.update-div').css("display","inline");
+		});
+		
+		
 		$("#reg").click(function(){
 			$.XYTipsWindow({
 				___title:"會員註冊",
