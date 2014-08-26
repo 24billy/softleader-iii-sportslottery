@@ -98,10 +98,11 @@ public class GameAction extends ActionSupport {
 	
 	public String select() {
 		log.debug("select...");
+		json = new Gson().toJson(service.getAll());
 		
-		inputStream = new ByteArrayInputStream(service.getAllJSON().getBytes(StandardCharsets.UTF_8));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
-		return "message";
+		return "select";
 	}
 	
 	public String insert() {
