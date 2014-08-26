@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="<c:url value="Security/js/jquery-1.7.1.min.js"/>"></script>
 <script src="<c:url value="Security/js/jquery.XYTipsWindow.min.2.8.js"/>"></script>
-<script src="<c:url value="Security/js/bootstrap.js"/>"></script>
+<script src="<c:url value="Security/js/bootstrap.min.js"/>"></script>
 
 <style>
 #form1{
@@ -51,11 +51,14 @@
 	</c:if>
 	
 	<c:if test="${ !empty user }">
-		<form id="form2" class="form-inline" action="<c:url value="/Security/logout.jsp"/>" >
-			
+		<form id="form2" class="form-inline" action="<c:url value="/Security/logout.jsp"/>" >	
 			<div>
-				<button type="button" class="btn btn-info">修改資料</button>
 				<button type="sumit" class="btn btn-info">登出</button>
+			</div>
+		</form>
+		<form id="form2" class="form-inline" action="<c:url value="userUpdate"/>" >
+			<div>
+				<button type="sumit" class="btn btn-info">修改資料</button>
 			</div>
 		</form>
 	</c:if>
