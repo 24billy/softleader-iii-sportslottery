@@ -333,7 +333,7 @@
 					'teamHomeId':$('[name="teamHomeId"]').val()
 				},
 				success: function(data) {
-					if (data != 'FAILED') {
+					if (data != 'failed') {
 						var gameId = $.parseJSON(data).id;
 						addOdds(gameId);
 						$('#addGameModal').modal('hide');
@@ -397,7 +397,23 @@
 	                label: '刪除',
 	                cssClass: 'btn-danger',
 	                action: function(dialog) {
-	                    dialog.close();
+	                	
+	                	$.ajax({
+	                		url: '<c:url value="/gameManager?method:delete"/>',
+	                		type: 'get',
+	                		data: {
+	                			'model.id':$(this).val()
+	                		},
+	                		success: function(result) {
+	                			
+	                			if (result == 'deleted') {
+	                				console.log('test');
+	                			}
+	                			dialog.close();
+	    	                	window.location.replace('<c:url value="/gameManager"/>');
+	                		}
+	                	});
+	                	
                 	}
             	}]
 	        });
