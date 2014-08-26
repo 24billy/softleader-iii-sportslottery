@@ -94,8 +94,25 @@
 					</div>
 
 					<div class="panel panel-primary  col-lg-4">
-						<div class="panel-heading ">投注區</div>
 
+					<div class="panel-heading ">投注區</div>
+
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="active"><a href="#single" role="tab"
+								data-toggle="tab">單場</a></li>
+							<li><a href="#pass" role="tab" data-toggle="tab">過關</a></li>
+							<li><a href="#passCom" role="tab" data-toggle="tab">過關組合</a></li>
+						</ul>
+					<div></div>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane active" id="single">單場</div>
+							<div class="tab-pane" id="pass">過關</div>
+							<div class="tab-pane" id="passCom">過關組合</div>
+
+						</div>
+	
 						<table class="table table-striped  table-hover">
 							<tr>
 								<td id="lottery1" hidden="true" name="oddList">
@@ -161,19 +178,51 @@
 									<div class="bg-success">贏家:</div>
 								</td>
 							</tr>
+							<tr>
+								<td id="clearLottery" hidden="true">
+									<div>
+										<button id="clearbtn" type="button"
+											class="btn btn-warning btn-xs">清除投注區</button>
+									</div>
+								</td>
+							</tr>
 						</table>
-						<!-- 
 
-						
-						<div class="panel panel-success" id=lottery2>
-							<div class="panel-heading">編號:</div>
-							<div class="panel-body">時間:</div>
-							<div class="panel-body">隊伍:</div>
-							<div class="panel-footer">贏家:</div>
-						</div>
-						-->
+
 					</div>
+					<!-- End of Lottery Panel   -->
+					<div id="betBoard" hidden="true"
+						class="panel panel-primary col-lg-4">
+						<!-- Begin of Bet Panel -->
+						<div class="panel-body">
+							<form class="form-inline">
+								<div class="form-group ">
+									<div style="display: inline-block" id="bet"></div>
+									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
+									<div style="display: inline-block">
+										<input style="width: 40px" type="text" id="betValue" value="1">
+									</div>
+								</div>
+
+								<div>
+									<div style="width: 50%; display: inline-block"" >總價</div>
+									<div id="capital" style="width: 50%; display: inline-block"
+										class="text-right"></div>
+								</div>
+								<div>
+									<div style="width: 50%; display: inline-block"" >最高中獎金額</div>
+									<div id="topPrice" style="width: 50%; display: inline-block"
+										class="text-right"></div>
+								</div>
+								<div>
+									<button class="btn btn-danger btn-xs" type="submit">投注</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- End of Bet Panel -->
 				</div>
+				
 				</div>
 				
 				<div id="dialog" class="modal fade">
@@ -472,6 +521,7 @@
 			});
 			odds_refresh();
 			//-----------------------------------------------------
+			//投注區更新
 			function odds_refresh(){
 				
 				//取出投注
@@ -479,14 +529,29 @@
 				if(sessionStorage.userOdds){
 					userOddIds  = sessionStorage.userOdds.split(',');
 				}
-				
-				//console.log(userOddIds.length);
 				console.log(userOddIds);
+
 				//顯示投注區
 				var lotteryId=1;
-				
+				var gameIsSelect=[];
+				var combination=true;
 				$.each(userOddIds, function(index, userOddId){
 					//var temp = games[odds[userOddId].gameId].date;
+					
+					
+					var oddGameNum=odds[userOddId].gameNum;
+					if(gameIsSelect[oddGameNum]!=-1 && gameIsSelect[oddGameNum]!=oddGameNum){
+						gameIsSelect[oddGameNum]=oddGameNum;
+
+						
+					}else{
+						gameIsSelect[oddGameNum]=-1;
+						combination=false;
+					}
+			
+					
+					
+
 					var oddType=odds[userOddId].labelText;
 					var oddValue=odds[userOddId].oddValue;
 					var bet = games[odds[userOddId].gameNum];
@@ -495,8 +560,18 @@
 						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
 						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+						
+						$('#bet').html(userOddIds.length);
 					lotteryId++;
 				});
+				console.log(combination);
+				if(combination){
+					$('#myTab li:eq(1) a').tab('show');
+
+				}else{
+					$('#myTab li:eq(0) a').tab('show');
+
+				}		
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);
 					lotteryId++;
@@ -504,9 +579,26 @@
 				$('td[name="oddList"] .close').click(function(){
 					userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
 					sessionStorage.userOdds = userOddIds;
-					$(this).parent().parent().parent().attr("hidden",true);						
+					$(this).parent().parent().parent().attr("hidden",true);	
+					odds_refresh();
+				});
+				if (userOddIds!=""){
+					$('#capital').attr("value",(userOddIds.length)*$('#betValue').attr("value"));
+					$('#betBoard').attr("hidden",false);
+					$('#clearLottery').attr("hidden",false);
+				}
+				else{
+					$('#betBoard').attr("hidden",true);
+					$('#clearLottery').attr("hidden",true);
+				}
+				
+				//清除投注區
+				$('#clearbtn').click(function(){
+					sessionStorage.userOdds="";
+					odds_refresh();
 				});
 			}
+
 		});
 		
 		
