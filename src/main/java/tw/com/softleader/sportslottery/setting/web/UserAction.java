@@ -126,7 +126,6 @@ public class UserAction extends ActionSupport {
 				userEntity.setUserPassword(model.getUserPassword());
 				userEntity.setUserGender(model.getUserGender());
 				
-				
 				service.update(userEntity);
 				request.setAttribute("updateSuccess", "修改成功");
 			}
