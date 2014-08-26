@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<link href="Security/css/style.css" rel="stylesheet">
+
 <style>
 .non-user-input {
 	display:none;
@@ -28,12 +28,12 @@
 			<input class="non-user-input" type="text" name="model.userAccount" value="${user.userAccount}">
 			<label>
 				<strong>修改密碼</strong><br>
-				<input class="input-xlarge" id="password" class="input-xlarge" name="model.userPassword" type="password" value="${user.userPassword}">
+				<input class="input-xlarge" id="password" name="model.userPassword" type="password" value="${user.userPassword}">
 			</label><br>
 			
 			<label>
 				<strong>確認密碼</strong><br>
-				<input class="input-xlarge" class="input-xlarge" name="confirm_password" type="password" value="${user.userPassword}">
+				<input class="input-xlarge" name="confirm_password" type="password" value="${user.userPassword}">
 			</label><br>
 			
 			<label>
@@ -64,10 +64,7 @@
 		
 	</div>
 
-<script src="<c:url value='/Security/js/jquery-1.7.1.min.js'/>"></script> 
-<script src="<c:url value='/Security/js/bootstrap.min.js'/>"></script> 
-<script src="<c:url value='/Security/js/button.js'/>"></script> 
-<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
+
 <script>
 		(function($){
 			$('#update').click(function() {
