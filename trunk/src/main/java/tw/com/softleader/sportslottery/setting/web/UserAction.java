@@ -76,6 +76,26 @@ public class UserAction extends ActionSupport {
 	public void validate() {
 		log.debug("here is userAction validate");
 
+//		
+//		if(model!=null) {
+//			if(model.getUserAccount() != null ) {
+//				
+//				
+//			} else {
+//				log.debug("帳號空白");
+//				addFieldError("QueryFail","帳號不可空白");
+//			}
+//			
+//			
+//			if(model.getUserPassword() != null) {
+//				log.debug("信箱已存在");
+//				addFieldError("QueryFail","此信箱已註冊");
+//			} else {
+//				log.debug("密碼空白");
+//				addFieldError("QueryFail","密碼不可空白");
+//			}
+//		}
+
 	}
 	
 	@Override
