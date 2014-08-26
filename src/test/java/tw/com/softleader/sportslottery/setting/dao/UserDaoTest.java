@@ -1,28 +1,37 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 public class UserDaoTest extends BaseTest {
 
+	@Autowired
+	private UserDao dao;
+	
 	@Test
-	public void test() {
-		UserDao dao = new UserDao();
-		UserEntity entity = new UserEntity();
-		//entity.setCreator("Ken123");
-//		entity.setModifier("ken");
-		entity.setUserPassword("a123456");
-		entity.setUserName("Ken");
-		entity.setUserEmail("ken@gmail.com");
-		entity.setUserGender("male");
-		entity.setUserPhone("0988123456");
-		LocalDate birthDate = new LocalDate();
-		entity.setUserBirthday(birthDate);
+	public void test() throws ParseException {
+		
+		UserEntity entity = dao.findById(1l);
+		
+		
 		log.debug(entity.toString());
-		dao.insert(entity);
+		
+		
+		//LocalDateTime date1 = new LocalDateTime();
+		//date1 = LocalDateTime.parse("2014-08-25");
+		
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		java.util.Date date = sFormat.parse("2014-08-26 13:30:38.315");
+		System.out.println("entity :" + dao.findByCreateTime(date));
+		//System.out.println(dao.findByUserAccount("jackychen"));
 		
 	}
 

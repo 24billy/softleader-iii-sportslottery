@@ -41,4 +41,8 @@ public class UserService extends GenericService<UserEntity> {
 		}
 		return null;
 	}
+	
+	public List<UserEntity> getByCreateTime(java.util.Date CREATE_TIME) {
+		return dao.findByCreateTime(CREATE_TIME);
+	}
 }
