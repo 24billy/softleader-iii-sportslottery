@@ -3,6 +3,7 @@ package tw.com.softleader.sportslottery.setting.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class UserService extends GenericService<UserEntity> {
 		return null;
 	}
 	
-	public List<UserEntity> getByCreateTime(java.util.Date CREATE_TIME) {
+	public List<UserEntity> getByCreateTime(LocalDate CREATE_TIME) {
 		return dao.findByCreateTime(CREATE_TIME);
 	}
 }
