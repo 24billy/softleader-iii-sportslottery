@@ -53,9 +53,9 @@ public class TeamAction extends ActionSupport {
 	@Override
 	public void validate() {
 		
-		if(model.getTeamName()==null| model.getTeamName().trim().length()==0){
-			this.addFieldError("teamName", "teamName must be inserted");
-		}
+//		if(model.getTeamName()==null|| model.getTeamName().trim().length()==0){
+//			this.addFieldError("teamName", "teamName must be inserted");
+//		}
 		
 		
 	}
