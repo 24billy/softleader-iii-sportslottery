@@ -16,19 +16,19 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-switch.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-switch.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
 	<!-- Begin of Game Table -->
 	<div id="page-wrapper">
 		
-		<div class="container-fluid top20">
+		<div class="container top20">
 			
 			<div class="row">
 				<div class="col-lg-12">
-					
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
 							<select class="form-control form-ball-type" id="catagory" name="catagory">
@@ -46,7 +46,7 @@
                 
 			<div class="row top20">
 				<div class="col-lg-12">
-					<div class="table-responsive">
+					<!-- <div class="table-responsive"> -->
 						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped">
 							<thead>
 								<tr>
@@ -60,7 +60,7 @@
 							<tbody id="gameList">
 							</tbody>
 						</table>
-					</div>
+					<!-- </div>  -->
 					<!-- .table-responsive -->
 				</div>
 			</div>
@@ -159,7 +159,6 @@
 								<h4 class="text-center">
 									不讓分<input type="checkbox" id="chkSU">
 								</h4>
-								
 							</div>
 						</div>
 						<!-- .row -->
@@ -220,8 +219,8 @@
 <script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
 <script>
 	(function($) {
 		$('.form-decimal').prop('disabled', true);
@@ -237,8 +236,8 @@
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-primary btn-edit">編輯</button>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-del left10">刪除</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-primary btn-xs btn-edit">編輯</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
@@ -248,14 +247,6 @@
 		
 		var maxGameNum = Math.max.apply(Math, gameNumArray);
 		$('[name="model.gameNum"]').val(maxGameNum + 1);
-		
-		function setEditButton() {
-			
-		};
-		
-		function setDeleteButton() {
-			
-		};
 		
 		function listTeam() {
 			$('#teamAwayList,#teamHomeList').empty();
@@ -316,7 +307,17 @@
 			}
 		});
 		
-		
+		/*
+		$(':checkbox').change(function() {
+			var type = $(this).attr('id');
+			type = type.replace('chk', ''); 
+			if ($(this).prop('checked')) {
+				$('.form-decimal[name^=' + type + ']').prop('disabled', false);
+			} else {
+				$('.form-decimal[name^=' + type + ']').prop('disabled', true);
+			}
+		});
+		*/
 		$('#btnInsert').click(function() {
 			
 			$.ajax({
