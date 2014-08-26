@@ -71,19 +71,6 @@
 	
 	<script>
 		(function($){
-			
-			//密碼規則驗證
-			jQuery.validator.addMethod("checkPsw", function() {
-				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
-
-		        if (re.test($('#password').val())) {
-		            checkPsw = true;
-		        }else {
-		        	checkPsw = false;
-		        }
-		        return checkPsw;
-			}, "Non-compliance");
-			
 			//帳號重複驗證
 			jQuery.validator.addMethod("checkAccount", function() {
 				
@@ -110,6 +97,34 @@
 		        return checeAccount;
 			}, "Repeat Account");
 			
+			//密碼規則驗證
+			jQuery.validator.addMethod("checkPswA", function() {
+				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
+		        if (re.test($('#password').val())) {
+		            checkPsw = true;
+		        }else {
+		        	checkPsw = false;
+		        }
+		        return checkPsw;
+			}, "Non-compliance");
+			jQuery.validator.addMethod("checkPsw1", function() {
+				var re1 = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])\S{6,}$/g;
+		        if (re1.test($('#password').val())) {
+		            checkPsw1 = true;
+		        }else {
+		        	checkPsw1 = false;
+		        }
+		        return checkPsw1;
+			}, "須包含數字");
+			jQuery.validator.addMethod("checkPsw2", function() {
+				var re2 = /^(?!.*[\u4E00-\u9FA5])(?=.*[a-zA-Z])\S{6,}$/g;
+		        if (re2.test($('#password').val())) {
+		            checkPsw2 = true;
+		        }else {
+		        	checkPsw2 = false;
+		        }
+		        return checkPsw2;
+			}, "須包含英文");
 			
 			$('#registration-form').validate({
 				rules: {
@@ -122,7 +137,8 @@
 					'model.userPassword': {
 						required: true,
 						minlength: 6,
-						checkPsw : true 
+						checkPsw1 : true,
+						checkPsw2 : true 
 					},
 					
 					confirm_password: {
@@ -135,8 +151,6 @@
 						required: true,
 						email: true
 					},
-				  
-					agree: "required"
 				  
 			    },
 				highlight: function(element) {
