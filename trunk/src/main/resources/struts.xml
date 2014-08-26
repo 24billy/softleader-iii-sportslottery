@@ -52,18 +52,22 @@
 	</action> 
 	
 	<action name="checkAccount" class="userAction" method="check">
-		<result name="t">/Security/success.jsp</result>
-		<result name="f">/Security/fail.jsp</result>
+		<result name="success">/Security/success.jsp</result>
+		<result name="fail">/Security/fail.jsp</result>
 	</action>
 	
 	<action name="addAccount" class="userAction" method="insert">
 		<result name="success">/Security/addSuccess.jsp</result>
-		<result name="FIAL">/Security/addUser.jsp</result>
+		<result name="fail">/Security/addUser.jsp</result>
 	</action>
 	
 	<action name="checkLogin" class="userAction" method="login">
 		<result name="success">/index.jsp</result>
 		<result name="input">/home.jsp</result>
+	</action>
+	
+	<action name="userUpdate" class="userAction" method="update">
+		<result name="success">/Security/userInfo.jsp</result>
 	</action>
 	
 	<action name="team" class="teamAction" method="execute">
