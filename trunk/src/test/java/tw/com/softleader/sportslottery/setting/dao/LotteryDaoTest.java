@@ -23,6 +23,9 @@ public class LotteryDaoTest extends BaseTest {
 		LocalDateTime date3 = new LocalDateTime();
 		date3 = LocalDateTime.parse("2014-08-11T00:00:00");
 		
+		System.out.println(date1);
+		System.out.println(date1.plusDays(1));
+		
 		System.out.println("--------Test:findByTime--------");
 		System.out.println(dao.findByTime(date1, null).size());
 		System.out.println(dao.findByTime(null, date2).size());
