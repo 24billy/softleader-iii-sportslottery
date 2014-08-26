@@ -155,7 +155,6 @@
 							</tr>
 							<tr>
 								<td id="lottery8" hidden="true" name="oddList">
-									<div></div>
 									<div>編號:</div>
 									<div>時間:</div>
 									<div>隊伍:</div>
@@ -448,6 +447,12 @@
 				//點選按鈕的情形,將結果以字串陣列的模式輸入到session,key為userOdds
 				//!注意! session無法直接儲存陣列,只能存為字串,因此取出時需要依賴split(',')來取出成陣列
 				$('label',tempDialog).click(function(){
+					if(sessionStorage.userOdds){
+						userOdds = sessionStorage.userOdds.split(',');
+						userOddsCount = userOdds.length;
+					} else {
+						userOddsCount = 0;
+					}
 					if(!$(this).hasClass('active')){
 						userOddsCount++;
 						if(userOddsCount>8){
@@ -457,7 +462,7 @@
 						} else {
 							userOdds.push($(this).attr('oddId'));	
 						}
-					} else if ($(this).hasClass('active')){
+					} else {
 						userOdds.splice(userOdds.indexOf($(this).attr('oddId')),1);
 						userOddsCount--;
 					}
@@ -496,7 +501,7 @@
 					$('#lottery'+lotteryId).attr("hidden",true);
 					lotteryId++;
 				}
-				$('td.oddList .close').click(function(){
+				$('td[name="oddList"] .close').click(function(){
 					userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
 					sessionStorage.userOdds = userOddIds;
 					$(this).parent().parent().parent().attr("hidden",true);						

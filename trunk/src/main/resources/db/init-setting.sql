@@ -160,6 +160,6 @@ insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE) values (11, 'OD
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE) values (11, 'EVEN', 0, 2.05);
 
 
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8) values (1,1,2,3,3,4,null,null,null);
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8) values (1,3,1,3,4,5,null,null,null);
-insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8) values (1,2,3,1,6,7,null,null,null);
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, CONFIRM_TIME) values (1,1,2,3,3,4,null,null,null,'2014-08-08T10:50:20');
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, CONFIRM_TIME) values (1,3,1,3,4,5,null,null,null,'2014-08-09T10:50:20');
+insert into lottery (USER_ID, ODDS_ID_1, ODDS_ID_2, ODDS_ID_3, ODDS_ID_4, ODDS_ID_5, ODDS_ID_6, ODDS_ID_7, ODDS_ID_8, CONFIRM_TIME) values (1,2,3,1,6,7,null,null,null,'2014-08-10T10:50:20');

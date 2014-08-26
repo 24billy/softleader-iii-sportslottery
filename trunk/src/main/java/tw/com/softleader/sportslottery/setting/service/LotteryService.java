@@ -28,7 +28,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		return dao;
 	}
 	
-	public List<UserEntity> getByUserId(Long userId) {
+	public List<LotteryEntity> getByUserId(Long userId) {
 		return dao.findByUserId(userId);
 	}
 }
