@@ -9,6 +9,8 @@ package tw.com.softleader.sportslottery.setting.web;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.UserService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -53,7 +56,7 @@ public class UserAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-//		log.debug("here is validate");
+		log.debug("here is userAction validate");
 //		
 //		if(model!=null) {
 //			if(model.getUSER_ACCOUNT() != null) {
@@ -73,7 +76,7 @@ public class UserAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-		System.out.println("here is execute");
+		System.out.println("here is userAction execute");
 		
 		models = service.getAll();
 		log.debug("Models = {}", models);
@@ -98,7 +101,7 @@ public class UserAction extends ActionSupport {
 		} catch (Exception e) {
 			log.debug("!!新增錯誤!!");
 			e.printStackTrace();
-			return "FIAL";
+			return "fail";
 		}
 		return SUCCESS;
 	}
@@ -106,16 +109,34 @@ public class UserAction extends ActionSupport {
 	public String update() throws Exception {
 		
 		log.debug("修改會員資料");
-//		model.setModifier("Guest");
-//		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
+		//model.setModifier("Guest");
+		//model.setModifiedTime(LocalDateTime.now());
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map upSuccess = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity)upSuccess.get("user");
+		
 		
 		try {
-			service.update(model);
+			if (model!=null) {
+				userEntity.setUserName(model.getUserName());
+				userEntity.setUserBirthday(model.getUserBirthday());
+				userEntity.setUserEmail(model.getUserEmail());
+				userEntity.setUserPhone(model.getUserPhone());
+				userEntity.setUserPassword(model.getUserPassword());
+				userEntity.setUserGender(model.getUserGender());
+				
+				
+				service.update(userEntity);
+				request.setAttribute("updateSuccess", "修改成功");
+			}
 		} catch (Exception e) {
 			log.debug("!!修改錯誤!!");
+			request.setAttribute("updateFail", "修改失敗");
 			e.printStackTrace();
 		}
+		
+		
 		return SUCCESS;
 	}
 	
@@ -128,11 +149,11 @@ public class UserAction extends ActionSupport {
 		if(check == null) {
 			log.debug("不存在");
 			addFieldError("QueryFail","此帳號可以使用");
-			result="t";
+			result="success";
 		} else {
 			log.debug("存在");
 			addFieldError("QueryFail","帳號已存在");
-			result="f";
+			result="fail";
 		}
 		return result;
 	}
