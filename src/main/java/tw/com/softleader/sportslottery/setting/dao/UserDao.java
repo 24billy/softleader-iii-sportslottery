@@ -27,8 +27,10 @@ public class UserDao extends GenericDao<UserEntity> {
 	
 	public List<UserEntity> findByCreateTime(LocalDate createTime) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from UserEntity u where CREATE_TIME =:createTime order by CREATE_TIME");
-		return  query.setDate("createTime", createTime.toDate()).list();
+		Query query = session.createQuery("from UserEntity u where CREATE_TIME >= :createTime1 and CREATE_TIME < :createTime2 order by CREATE_TIME");
+		query.setDate("createTime1", createTime.toDate());
+		query.setDate("createTime2", createTime.plusDays(1).toDate());
+		return query.list();
 	}
 	
 }
