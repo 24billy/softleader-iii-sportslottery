@@ -37,9 +37,9 @@
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-						<button class="btn btn-primary" type="submit">送出</button>
+						<button class="btn btn-primary btn-sm" type="submit">送出</button>
 					</form>
-					<button id="btnAddGame" class="btn btn-success pull-right" type="button" data-toggle="modal" data-target="#addGameModal">新增賽事</button>
+					<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#addGameModal">新增賽事</button>
 				</div>
 			</div>
 			<!-- .row -->
