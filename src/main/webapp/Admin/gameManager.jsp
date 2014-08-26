@@ -46,7 +46,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table class="table table-hover table-condensed table-bordered">
+						<table class="table table-hover table-condensed table-bordered table-striped">
 							<thead>
 								<tr>
 									<th>賽事編號</th>
@@ -319,7 +319,6 @@
 			
 			$.ajax({
 				url: '<c:url value="/gameManager?method:insert"/>',
-				type: 'get',
 				data: {
 					'model.ballType':$('[name="catagory"]').val(),
 					'model.leagueName':$('[name="model.leagueName"]').val(),
@@ -332,16 +331,17 @@
 					if (data != 'failed') {
 						console.log(data);
 						addOdds(data);
-						$('#addGameModal').modal('hide');
+						
 							
 					} else {
 						
 					}
-					window.location.replace('<c:url value="/gameManager"/>');
+					
 				}
+			}).done(function() {
+				$('#addGameModal').modal('hide');
+				window.location.reload(true);
 			});
-			
-			
 		});
 		
 		function addOdds(gameId) {
@@ -371,7 +371,6 @@
 					});
 					
 				});
-					
 			});
 		};
 		
@@ -397,7 +396,6 @@
 	                	
 	                	$.ajax({
 	                		url: '<c:url value="/gameManager?method:delete"/>',
-	                		type: 'get',
 	                		data: {
 	                			'model.id':$(this).val()
 	                		},
@@ -406,10 +404,11 @@
 	                			if (result == 'deleted') {
 	                				console.log('test');
 	                			}
-	                			dialog.close();
-	    	                	window.location.replace('<c:url value="/gameManager"/>');
-	                		}
-	                	});
+	                		},
+	                	}).done(function() {
+	                		dialog.close();
+	                		window.location.reload(true);
+	                	})
 	                	
                 	}
             	}]
