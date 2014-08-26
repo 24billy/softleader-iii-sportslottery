@@ -118,5 +118,67 @@ public class GameDao extends GenericDao<GameEntity>{
 		Query query = session.createQuery("from GameEntity game where game.gameNum = :gameNum");
 		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
 	}
+	
+	public List<GameEntity> findComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		String sql = "from GameEntity games where 1=1";
+		String sql1 = " and games.gameNum = :gameNum";
+		String sql2 = " and games.isEnd = :isEnd";
+		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
+		String sql4 = " and games.gameTime >= :timeBegin";
+		String sql5 = " and games.gameTime < :teamName";
+		String sql6 = " order by games.gameTime";
+		
+		boolean hasGameNum = false;
+		if (gameNum != null) {
+			sql += sql1;
+			hasGameNum = true;
+		}
+		boolean hasIsEnd = false;
+		if (isEnd != null) {
+			sql += sql2;
+			hasIsEnd = true;
+		}
+		boolean hasTeamName = false;
+		if (teamName != null) {
+			sql += sql3;
+			hasTeamName = true;
+		}
+		boolean hasTimeBegin = false;
+		if (timeBegin != null) {
+			sql += sql4;
+			hasTimeBegin = true;
+		}
+		boolean hasTimeEnd = false;
+		if (timeEnd != null) {
+			sql += sql5;
+			hasTimeEnd = true;
+		}
+		sql += sql6;
+		
+		System.out.println(sql);
+		
+		Query query = session.createQuery(sql);
+		
+		if (hasGameNum) {
+			query.setLong("gameNum", gameNum);
+		}
+		if (hasTeamName) {
+			query.setString("teamName", teamName + "%");
+		}
+		if (hasIsEnd) {
+			query.setBoolean("isEnd", isEnd);
+		}
+		if (hasTimeBegin) {
+			query.setDate("timeBegin", timeBegin.toDate());
+		}
+		if (hasTimeEnd) {
+			query.setDate("timeEnd", timeEnd.toDate());
+		}
+		
+		return query.list();
+	}
+	
 
 }

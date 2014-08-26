@@ -1,15 +1,11 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
-import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 
 public class GameDaoTest extends BaseTest{
 
@@ -64,9 +60,13 @@ public class GameDaoTest extends BaseTest{
 //		log.debug("findForHistory = {}", models);
 //		System.out.println("size of the searching result: "+models.size());
 //----------------------------------------------------------------------------------
-		List<GameEntity> models = dao.findGameByLeagueName("MLB");
-		log.debug("findGameByLeagueName = {}", models);
-		System.out.println("size of the searching result: "+models.size());
+//		List<GameEntity> models = dao.findGameByLeagueName("MLB");
+//		log.debug("findGameByLeagueName = {}", models);
+//		System.out.println("size of the searching result: "+models.size());
+		
+		LocalDateTime date1 = new LocalDateTime();
+		System.out.println(date1.minusDays(10).toDate());
+		System.out.println(dao.findComplex(null, null, false, date1.minusDays(3), null).size());
 		
 	}
 
