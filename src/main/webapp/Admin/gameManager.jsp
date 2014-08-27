@@ -302,7 +302,10 @@
 		
 		function listTeam(gameId) {
 			
-			if (gameId == null) {
+			if (gameId != null) {
+				
+				
+			} else {
 				$('#teamAwayList,#teamHomeList').empty();
 				
 				var url = '<c:url value="/team"/>';
