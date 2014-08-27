@@ -377,6 +377,7 @@
 			
 			$.ajax({
 				url: '<c:url value="/gameManager?method:insert"/>',
+				dataType: 'text',
 				data: {
 					'model.ballType':$('[name="catagory"]').val(),
 					'model.leagueName':$('[name="model.leagueName"]').val(),
@@ -411,7 +412,7 @@
 				alert(oddType);
 				$.ajax({
 					url: '<c:url value="/odds?method:insert"/>',
-				    type: 'get',
+				    dataType: 'text',
 				    data: {
 				    	'model.gameId':gameId,
 				    	'model.oddType':oddType,
@@ -448,6 +449,7 @@
 	                	
 	                	$.ajax({
 	                		url: '<c:url value="/gameManager?method:delete"/>',
+	                		dataType: 'text',
 	                		data: {
 	                			'model.id':gameId
 	                		},
@@ -459,7 +461,7 @@
 	                	}).done(function() {
 	                		dialog.close();
 	                		window.location.reload(true);
-	                	})
+	                	});
 	                	
                 	}
             	}]
