@@ -256,7 +256,6 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
 		
