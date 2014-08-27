@@ -71,11 +71,11 @@
 	<!-- End of Game Table -->
 	
 	<!-- Begin of Modal -->
-	<div class="modal fade" id="gameModal">
+	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			
-				<div id="gameModalHeader" class="modal-header bg-success">
+				<div id="gameModalHeader" class="modal-header ">
 					<h3 id="gameModalTitle" class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
@@ -243,7 +243,6 @@
 		<!-- .modal-dialog -->
 	</div>
 	<!-- End of Modal -->
-	
 <!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
@@ -279,17 +278,21 @@
 		});
 		
 		$('#btnAddGame').click(function() {
+			/*
 			$('#gameModalHeader').removeClass('bg-info');
 			$('#gameModalHeader').removeClass('bg-success');
 			$('#gameModalHeader').addClass('bg-success');
+			*/
 			$('#gameModalTitle').text("新增賽事");
 			listTeam(null);
 		});
 		
 		$('.btn-edit').click(function() {
+			/*
 			$('#gameModalHeader').removeClass('bg-info');
 			$('#gameModalHeader').removeClass('bg-success');
 			$('#gameModalHeader').addClass('bg-info');
+			*/
 			$('#gameModalTitle').text("編輯賽事");
 			listTeam($(this).val());
 		});
@@ -299,33 +302,36 @@
 		
 		function listTeam(gameId) {
 			
+			$('#teamAwayList,#teamHomeList').empty();
+			
+			var url = '<c:url value="/team"/>';
+			$.getJSON(url, function(data) {	
+				$.each(data, function(key, value) {
+					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					$('#teamAwayList,#teamHomeList').append(str);
+				});
+				
+				$('#teamAwayList')[0].selectedIndex = 0;
+				$('#teamAwayList').change();
+				$('#teamHomeList')[0].selectedIndex = 1;
+				$('#teamHomeList').change();
+			});
+			
+			
 			if (gameId != null) {
 				var url = '<c:url value="/gameManager?method:select"/>';
 				$.getJSON(url, {'model.id':gameId}, function(data) {
-					$('[name="model.leagueName"]').val(data.leagueName);
+					var date = new Date(data.gameTime.iLocalMillis);
+					var month = date.getUTCFullYear();
+					$('[name="model.leagueName"]>option').filter(function() {
+						return $(this).text() == data.leaguName;
+					}).prop('selected', true);
 					$('[name="model.gameNum"]').val(data.gameNum);
-					$('[name="model.gameTime"]').val(data.toDate());
-					$('[name="model.leagueName"]').val(data.leagueName);
-					$('[name="model.leagueName"]').val(data.leagueName);
-					$('[name="model.leagueName"]').val(data.leagueName);
+					$('#teamAwayList').val(data.teamAway.id);
+					$('#teamHomeList').val(data.teamHome.id);
 				});
 				
-			} else {
-				$('#teamAwayList,#teamHomeList').empty();
-				
-				var url = '<c:url value="/team"/>';
-				$.getJSON(url, function(data) {	
-					$.each(data, function(key, value) {
-						var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
-						$('#teamAwayList,#teamHomeList').append(str);
-					});
-					
-					$('#teamAwayList')[0].selectedIndex = 0;
-					$('#teamAwayList').change();
-					$('#teamHomeList')[0].selectedIndex = 1;
-					$('#teamHomeList').change();
-				});
-			}
+			} 
 		};
 		
 		$('#teamAwayList').change(function() {
@@ -342,8 +348,11 @@
 		
 		
 		$('#gameTime').datetimepicker({
+			defaultDate:new Date(),
 			minDate: new Date(),
 			format: 'Y-m-d H:i:s',
+			mask:true,
+			lang:'ch'
 		});
 		
 		$('.form-decimal').TouchSpin({
