@@ -119,6 +119,12 @@
                                                                 <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
 
                                                         </div>
+                                                        
+                                                        <div class="form-group">
+                                                                <label class="sr-only" for="country">隊名:</label>
+                                                                <select class="form-control form-country" id="country" name="country"></select>
+
+                                                        </div>
 
                                                         <div class="form-group">
                                                                 <label class="sr-only" for="teamName">隊名:</label>
