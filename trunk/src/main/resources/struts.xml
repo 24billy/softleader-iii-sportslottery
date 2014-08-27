@@ -74,7 +74,7 @@
 	
 	<action name="addAccount" class="userAction" method="insert">
 		<result name="success">/Security/addSuccess.jsp</result>
-		<result name="fail">/Security/addUser.jsp</result>
+		<result name="input">/Security/addUser.jsp</result>
 	</action>
 	
 	<action name="checkLogin" class="userAction" method="login">
