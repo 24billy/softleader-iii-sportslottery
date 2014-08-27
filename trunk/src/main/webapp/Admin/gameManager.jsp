@@ -382,6 +382,7 @@
 		});
 		
 		$('.btn-del').click(function() {
+			var gameId = $(this).val();
 			BootstrapDialog.show({
 				closable: false,
 	            title: '刪除賽事',
@@ -400,7 +401,7 @@
 	                	$.ajax({
 	                		url: '<c:url value="/gameManager?method:delete"/>',
 	                		data: {
-	                			'model.id':$(this).val()
+	                			'model.id':gameId
 	                		},
 	                		success: function(result) {
 	                			

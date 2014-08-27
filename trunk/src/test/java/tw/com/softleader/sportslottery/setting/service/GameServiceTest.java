@@ -40,7 +40,15 @@ public class GameServiceTest extends BaseTest  {
 
 	@Test
 	public void testDelete() {
-
+		List<GameEntity> models = gameService.getAll();
+		int originSize = models.size();
+		GameEntity entity = gameService.getById(11L);
+		log.debug("entity = {}", entity);
+		gameService.delete(entity);
+		
+		models = gameService.getAll();
+		int currentSize = models.size();
+		assertEquals(originSize - 1, currentSize);
 	}
 
 	@Test
