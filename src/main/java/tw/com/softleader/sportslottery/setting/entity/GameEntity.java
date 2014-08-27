@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +54,7 @@ public class GameEntity extends GenericEntity {
 	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
 	private Boolean isEnd;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId", cascade = {CascadeType.ALL})
 	private List<OddsEntity> odds;
 
 	public List<OddsEntity> getOdds() {
