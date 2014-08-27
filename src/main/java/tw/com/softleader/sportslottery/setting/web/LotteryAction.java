@@ -5,6 +5,10 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +21,9 @@ import com.opensymphony.xwork2.ActionSupport;
 /**
 @Author:Billy 
  */
-public class LotteryAction extends ActionSupport  {
+public class LotteryAction extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 2014L;
-
+	
 	@Autowired
 	private LotteryService service;
 	private LotteryEntity model;	
@@ -27,6 +31,13 @@ public class LotteryAction extends ActionSupport  {
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 	private InputStream inputStream;
 	private String json;
+	private HttpSession session;
+	
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		log.debug("get Session...");
+		session = request.getSession();
+	}
 	
 	public InputStream getInputStream() {
 		return inputStream;
@@ -112,5 +123,23 @@ public class LotteryAction extends ActionSupport  {
 		
 		return SUCCESS;
 	}
+	
+	public String selectByUser() {
+		log.debug("Lottery by User...");
+		
+		try {
+			LotteryEntity entity = (LotteryEntity)session.getAttribute("user");
+			Long id = entity.getId();
+			json = new Gson().toJson(service.getByUserId(id));
+		} catch (Exception e) {
+			log.debug("!!LotteryAction selectByUser Failed!!");
+			addFieldError("QueryFail","selectByUser Fail");
+			e.printStackTrace();
+		}
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return SUCCESS;
+	}
+
+	
 	
 }
