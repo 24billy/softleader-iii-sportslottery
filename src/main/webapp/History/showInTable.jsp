@@ -99,8 +99,11 @@
 								<!-- <i class="fa fa-fw fa-pencil-square-o"></i> 新增 -->
 								<i class="fa fa-fw fa-table"></i> 查詢
 							</li>
+
 						</ol>
+						
 					</div>
+					
 				</div>
 				<!-- .row -->
 				
@@ -141,11 +144,10 @@
 
                     
                             <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
-                            <button class="btn btn-default" type="reset" >Reset Button</button>
+                            <button class="btn btn-default" type="reset" id="reset" >Reset Button</button>
                             
-                            <div class="form-group">
-                                <label></label>
-                            </div>
+                            
+                            
                                  
 
 						</form>
@@ -223,6 +225,11 @@
 			
 		
 		});
+		
+/* 		$('#reset').click(function(){
+			$('#gameTable').empty();
+		});
+		 */
 		
 
 		
