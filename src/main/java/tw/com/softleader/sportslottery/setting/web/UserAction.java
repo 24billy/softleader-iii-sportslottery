@@ -75,18 +75,23 @@ public class UserAction extends ActionSupport {
 	@Override
 	public void validate() {
 		log.debug("here is userAction validate");
+		
 
-//		
-//		if(model!=null) {
-//			if(model.getUserAccount() != null ) {
-//				
-//				
-//			} else {
-//				log.debug("帳號空白");
-//				addFieldError("QueryFail","帳號不可空白");
-//			}
-//			
-//			
+		
+		if(model!=null) {
+			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
+			} else {
+				log.debug("帳號問題");
+				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
+			}
+			if(model.getUserPassword() != null && model.getUserPassword().length()>5) {
+			} else {
+				log.debug("密碼問題");
+				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
+			}
+			
+			
+		
 //			if(model.getUserPassword() != null) {
 //				log.debug("信箱已存在");
 //				addFieldError("QueryFail","此信箱已註冊");
@@ -94,7 +99,7 @@ public class UserAction extends ActionSupport {
 //				log.debug("密碼空白");
 //				addFieldError("QueryFail","密碼不可空白");
 //			}
-//		}
+		}
 
 	}
 	
@@ -109,22 +114,26 @@ public class UserAction extends ActionSupport {
 	
 	public String insert() throws Exception {
 		log.debug("新增會員資料");
-		
-		model.setCreator("Guest"); //變數
-		model.setModifier("Guest"); //變數
-		model.setCreateTime(LocalDateTime.now());
-		model.setModifiedTime(LocalDateTime.now());
-		
-		log.debug("Model = {}", model);
-		
-		try {
-			service.insert(model);
-		} catch (Exception e) {
-			log.debug("!!新增錯誤!!");
-			e.printStackTrace();
-			return "fail";
+		if(this.getFieldErrors().isEmpty()){
+			model.setCreator("Guest"); //變數
+			model.setModifier("Guest"); //變數
+			model.setCreateTime(LocalDateTime.now());
+			model.setModifiedTime(LocalDateTime.now());
+			
+			log.debug("Model = {}", model);
+			
+			try {
+				service.insert(model);
+			} catch (Exception e) {
+				log.debug("!!新增錯誤!!");
+				this.addFieldError("email", this.getText("invalid.fieldvalue.other"));
+				e.printStackTrace();
+				return INPUT;
+			}
+			return SUCCESS;
 		}
-		return SUCCESS;
+		log.debug("有誤");
+		return INPUT;
 	}
 	
 	public String update() throws Exception {
@@ -148,10 +157,12 @@ public class UserAction extends ActionSupport {
 				userEntity.setUserGender(model.getUserGender());
 				
 				service.update(userEntity);
+				log.debug("!!修改成功!!");
 				request.setAttribute("updateSuccess", "修改成功");
 			}
 		} catch (Exception e) {
-			log.debug("!!修改錯誤!!");
+			log.debug("!!新增錯誤!!");
+			this.addFieldError("email", this.getText("invalid.fieldvalue.other"));
 			request.setAttribute("updateFail", "修改失敗");
 			e.printStackTrace();
 		}

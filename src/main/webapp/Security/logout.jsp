@@ -14,12 +14,9 @@
 <c:remove var="user" scope="session" />
 <!-- 下列六行敘述設定登出後要顯示的感謝訊息 -->
 
-<font color='blue' ><BR>
-	<h1>訪客${ memberName }，感謝您使用本系統。</h1><BR>
-	<h3>您已經登出，三秒後倒入首頁</h3><BR>
-</font>
 <script type="text/javascript">
-	setTimeout('document.location.href="<c:url value='/index.jsp'/>"' ,3000);
+	document.location.href="<c:url value='/index.jsp'/>"
+	//setTimeout('document.location.href="<c:url value='/index.jsp'/>"' ,3000);
 	
 </script>
 <%

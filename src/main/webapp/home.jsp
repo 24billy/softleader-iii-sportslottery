@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 
-<link href="Security/css/style.css" rel="stylesheet">
+<link href="<c:url value="/Security/css/style.css"/>" rel="stylesheet">
 <script src="<c:url value="/Security/js/jquery-1.7.1.min.js"/>"></script>
 <script src="<c:url value="/Security/js/jquery.XYTipsWindow.min.2.8.js"/>"></script>
 <script src="<c:url value="/Security/js/bootstrap.min.js"/>"></script>
@@ -76,7 +76,7 @@
 		$("#reg").click(function(){
 			$.XYTipsWindow({
 				___title:"會員註冊",
-				___content:"iframe:Security/addUser.jsp",
+				___content:"iframe:<c:url value='/Security/addUser.jsp'/>",
 				___width:"450",
 				___height:"550",
 				___showbg:true,

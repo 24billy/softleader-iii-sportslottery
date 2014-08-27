@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +10,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add User</title>
 <link rel="stylesheet" href="<c:url value="/Security/css/creatAccount-style.css"/>">
-<link href="css/style.css" rel="stylesheet">
+<link href="<c:url value="/Security/css/style.css"/>" rel="stylesheet">
 </head>
-	<script src="js/jquery-1.7.1.min.js"></script> 
-	<script src="js/bootstrap.min.js"></script> 
-	<script src="js/button.js"></script> 
-	<script src="js/jquery.validate.min.js"></script> 
+	
+	<script src="<c:url value="/Security/js/jquery-1.7.1.min.js"/>"></script>
+	<script src="<c:url value="/Security/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value='/Security/js/button.js'/>"></script> 
+	<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
+	
+	
 <body>
 	<div class="createaccount-body">
 		<div class="sing-up">
@@ -23,11 +27,13 @@
 					<strong>帳號</strong>
 					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
 				</label>
+				<span class="error"><s:property value="fieldErrors.username"/></span>
 				
 				<label>
 					<strong>密碼</strong><br>
 					<input class="input-xlarge" name="model.userPassword" id="password" type="password">
 				</label>
+				<span class="error"><s:property value="fieldErrors.password"/></span>
 				
 				<label>
 					<strong>確認密碼</strong><br>
@@ -43,6 +49,7 @@
 					<strong>E-mail</strong><br>
 					<input class="input-xlarge" name="model.userEmail" type="text">
 				</label>
+				<span class="error"><s:property value="fieldErrors.email"/></span>
 				
 				<label id="label-account">
 					<strong>電話</strong><br>
@@ -63,6 +70,8 @@
 				
 				<button type="submit" class="btn btn-success">註冊</button>
 				<button type="reset" class="btn btn-info">清除</button>
+				<span class="error"><s:property value="fieldErrors.other"/></span>
+				
 			</form>
 		</div>
 	</div>
@@ -72,10 +81,12 @@
 	<script>
 		(function($){
 			//帳號重複驗證
+			jQuery.validator.addMethod("alnum", function(value, element) {
+  				return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+  	 		}, "只能包括英文字母和数字");
+			
 			jQuery.validator.addMethod("checkAccount", function() {
-				
-				var btn = $(this);
-			    btn.button('loading');
+			
 		    	$.ajax({
 		    		url:"<c:url value='/checkAccount'/>",
 					type:"get",
@@ -90,10 +101,7 @@
 							checeAccount = true;	
 						}
 					}
-				}).always(function () {
-					btn.button('reset');
-		    	});
-				
+				});
 		        return checeAccount;
 			}, "Repeat Account");
 			
@@ -131,7 +139,8 @@
 					'model.userAccount': {
 						minlength: 6,
 						required: true,
-						checkAccount: true
+						checkAccount: true,
+						alnum: true
 					},
 				  
 					'model.userPassword': {
