@@ -17,6 +17,10 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
 		<allowed-methods>select,insert,delete</allowed-methods>
   	</action>
   	
@@ -48,7 +52,11 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>insert</allowed-methods>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert</allowed-methods>
 	</action> 
 	
 	<action name="checkAccount" class="userAction" method="check">

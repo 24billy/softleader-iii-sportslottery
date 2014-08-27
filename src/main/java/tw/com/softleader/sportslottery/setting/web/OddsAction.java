@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -71,9 +72,17 @@ public class OddsAction extends ActionSupport {
 
 	public String select() throws Exception {
     	log.debug("select...");
-    	model = service.getById(model.getId());
-    	log.debug("model = {}", model);
-    	return Action.SUCCESS;
+    	
+    	Long gameId = model.getGameId();
+    	if (gameId != null && gameId > 0) {
+    		json = new Gson().toJson(service.getByGameId(gameId));
+    	} else {
+    		json = new Gson().toJson(service.getAll());
+    	}
+    	
+    	inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+    	
+    	return "select";
     }
     
     public String insert() {
