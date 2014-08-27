@@ -317,18 +317,31 @@
 				$('#teamHomeList').change();
 			});
 			
+			function addZero(str) {
+				if (str < 10) {
+					str = '0' + str;
+				}
+				return str;
+			}
+			
 			
 			if (gameId != null) {
 				var url = '<c:url value="/gameManager?method:select"/>';
 				$.getJSON(url, {'model.id':gameId}, function(data) {
-					var date = new Date(data.gameTime.iLocalMillis);
-					var month = date.getUTCFullYear();
+					var dateTime = new Date(data.gameTime.iLocalMillis);
+					var year = dateTime.getUTCFullYear();
+					var month = addZero(dateTime.getUTCMonth() + 1);
+					var date = addZero(dateTime.getUTCDate());
+					var hours = addZero(dateTime.getUTCHours());
+					var minutes = addZero(dateTime.getUTCMinutes());
 					$('[name="model.leagueName"]>option').filter(function() {
 						return $(this).text() == data.leaguName;
 					}).prop('selected', true);
 					$('[name="model.gameNum"]').val(data.gameNum);
 					$('#teamAwayList').val(data.teamAway.id);
 					$('#teamHomeList').val(data.teamHome.id);
+					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
+					
 				});
 				
 			} 
@@ -350,7 +363,7 @@
 		$('#gameTime').datetimepicker({
 			defaultDate:new Date(),
 			minDate: new Date(),
-			format: 'Y-m-d H:i:s',
+			format: 'Y-m-d H:i',
 			mask:true,
 			lang:'ch'
 		});
