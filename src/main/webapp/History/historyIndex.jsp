@@ -10,7 +10,7 @@
 <body>
 <h1>History Index</h1>
 
-<a class="navbar-brand" href="<c:url value="/History/showInTable.jsp"/>">賽事歷史查詢</a>
+<a class="navbar-brand" href="<c:url value="/searchHistory"/>">賽事歷史查詢</a>
 
 
 </body>
