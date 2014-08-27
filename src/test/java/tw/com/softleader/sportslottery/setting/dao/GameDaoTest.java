@@ -64,9 +64,9 @@ public class GameDaoTest extends BaseTest{
 //		log.debug("findGameByLeagueName = {}", models);
 //		System.out.println("size of the searching result: "+models.size());
 		
-		LocalDateTime date1 = new LocalDateTime();
-		System.out.println(date1.minusDays(10).toDate());
-		System.out.println(dao.findComplex(null, null, false, date1.minusDays(3), null).size());
+//		LocalDateTime date1 = new LocalDateTime();
+//		System.out.println(date1.minusDays(10).toDate());
+//		System.out.println(dao.findComplex(null, null, false, date1.minusDays(3), null).size());
 		
 	}
 

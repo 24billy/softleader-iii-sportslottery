@@ -119,7 +119,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
 	}
 	
-	public List<GameEntity> findComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd) {
+	public List<GameEntity> findComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd, String ballType) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "from GameEntity games where 1=1";
@@ -128,7 +128,8 @@ public class GameDao extends GenericDao<GameEntity>{
 		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
 		String sql4 = " and games.gameTime >= :timeBegin";
 		String sql5 = " and games.gameTime < :teamName";
-		String sql6 = " order by games.gameTime";
+		String sql6 = " and games.ballType = :ballType";
+		String sql7 = " order by games.gameTime";
 		
 		boolean hasGameNum = false;
 		if (gameNum != null) {
@@ -155,7 +156,12 @@ public class GameDao extends GenericDao<GameEntity>{
 			sql += sql5;
 			hasTimeEnd = true;
 		}
-		sql += sql6;
+		boolean hasBallType = false;
+		if (ballType != null) {
+			sql += sql6;
+			hasBallType = true;
+		}
+		sql += sql7;
 		
 		System.out.println(sql);
 		
@@ -175,6 +181,9 @@ public class GameDao extends GenericDao<GameEntity>{
 		}
 		if (hasTimeEnd) {
 			query.setDate("timeEnd", timeEnd.toDate());
+		}
+		if (hasBallType) {
+			query.setString("ballType", ballType + "%");
 		}
 		
 		return query.list();
