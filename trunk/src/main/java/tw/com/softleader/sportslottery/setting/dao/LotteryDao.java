@@ -25,7 +25,7 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 	public List<LotteryEntity> findByUserId(Long userId){
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from LotteryEntity where USER_ID = :userId");
-		return query.setLong("userId", userId).list();
+		return (List<LotteryEntity>)query.setLong("userId", userId).list();
 	}
 	
 	public List<LotteryEntity> findByTime(LocalDateTime timeBegin, LocalDateTime timeEnd){
