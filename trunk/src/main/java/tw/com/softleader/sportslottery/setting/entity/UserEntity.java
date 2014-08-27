@@ -22,32 +22,25 @@ public class UserEntity extends GenericEntity {
 	
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	
-	//USER_ACCOUNT	帳號		varchar		String		50	NOT NULL
 	@Column(name="USER_ACCOUNT", length=50, nullable=false,unique = true)
 	private String userAccount;
 	
-	//USER_PASSWORD	密碼		varchar		String		50	NOT NULL
 	@Column(name="USER_PASSWORD", length=50, nullable=false)
 	private String userPassword;
 	
-	//USER_NAME		名字		varchar		String		50	NOT NULL
 	@Column(name="USER_NAME", length=50, nullable=false)
 	private String userName;
 	
-	//USER_BIRTHDAY	生日		timesemp	JODA_TIME
 	@Column(name="USER_BIRTHDAY")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	protected LocalDate userBirthday;	
 	
-	//USER_GENDER	性別		varchar		String		10	
 	@Column(name="USER_GENDER", length=10)
 	private String userGender;
 	
-	//USER_PHONE	電話		varchar		String		20
 	@Column(name="USER_PHONE", length=10)
 	private String userPhone;
 	
-	//USER_EMAIL	電子信箱	varchar		String		50	NOT NULL
 	@Column(name="USER_EMAIL", length=50, nullable=false)
 	private String userEmail;
 	
