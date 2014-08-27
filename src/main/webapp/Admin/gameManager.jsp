@@ -39,7 +39,7 @@
 						</div>
 						<button class="btn btn-primary btn-sm" type="submit">送出</button>
 					</form>
-					<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#addGameModal">新增賽事</button>
+					<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal">新增賽事</button>
 				</div>
 			</div>
 			<!-- .row -->
@@ -72,12 +72,12 @@
 	<!-- End of Game Table -->
 	
 	<!-- Begin of Modal -->
-	<div class="modal fade" id="addGameModal">
+	<div class="modal fade" id="gameModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			
-				<div class="modal-header bg-primary">
-					<h3 class="modal-title">新增賽事</h3>
+				<div id="gameModalHeader" class="modal-header bg-success">
+					<h3 id="gameModalTitle" class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
 				<form role="form">
@@ -195,9 +195,9 @@
 	      			</div>
 	      			<!-- .modal-body -->
 	      			
-	      			<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-success" id="btnInsert">新增</button>
+	      			<div id="gameModalFooter" class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
 	      			</div>
       			</form>
 				<!-- .form -->
@@ -223,8 +223,6 @@
 <script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
 <script>
 	(function($) {
-		$('.form-decimal').prop('disabled', true);
-		$('#btnAddGame').click(listTeam);
 		
 		var gameNumArray = new Array();
 		var gameList = $.parseJSON('${json}');
@@ -236,7 +234,7 @@
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-primary btn-xs btn-edit">編輯</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
 			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
@@ -245,24 +243,44 @@
 			gameNumArray.push(game.gameNum);
 		});
 		
+		$('.form-decimal').prop('disabled', true);
+		$('#btnAddGame').click(function() {
+			$('#gameModalHeader').removeClass('bg-info');
+			$('#gameModalHeader').removeClass('bg-success');
+			$('#gameModalHeader').addClass('bg-success');
+			$('#gameModalTitle').text("新增賽事");
+			listTeam(null);
+		});
+		
+		$('.btn-edit').click(function() {
+			$('#gameModalHeader').removeClass('bg-info');
+			$('#gameModalHeader').removeClass('bg-success');
+			$('#gameModalHeader').addClass('bg-info');
+			$('#gameModalTitle').text("編輯賽事");
+			listTeam($(this).val());
+		});
+		
 		var maxGameNum = Math.max.apply(Math, gameNumArray);
 		$('[name="model.gameNum"]').val(maxGameNum + 1);
 		
-		function listTeam() {
-			$('#teamAwayList,#teamHomeList').empty();
+		function listTeam(gameId) {
 			
-			var url = '<c:url value="/team"/>';
-			$.getJSON(url, function(data) {	
-				$.each(data, function(key, value) {
-					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
-					$('#teamAwayList,#teamHomeList').append(str);
-				});
+			if (gameId == null) {
+				$('#teamAwayList,#teamHomeList').empty();
 				
-				$('#teamAwayList')[0].selectedIndex = 0;
-				$('#teamAwayList').change();
-				$('#teamHomeList')[0].selectedIndex = 1;
-				$('#teamHomeList').change();
-			});
+				var url = '<c:url value="/team"/>';
+				$.getJSON(url, function(data) {	
+					$.each(data, function(key, value) {
+						var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+						$('#teamAwayList,#teamHomeList').append(str);
+					});
+					
+					$('#teamAwayList')[0].selectedIndex = 0;
+					$('#teamAwayList').change();
+					$('#teamHomeList')[0].selectedIndex = 1;
+					$('#teamHomeList').change();
+				});
+			}
 		};
 		
 		$('#teamAwayList').change(function() {
@@ -318,7 +336,7 @@
 			}
 		});
 		*/
-		$('#btnInsert').click(function() {
+		$('#btnMerge').click(function() {
 			
 			$.ajax({
 				url: '<c:url value="/gameManager?method:insert"/>',
@@ -332,7 +350,6 @@
 				},
 				success: function(data) {
 					if (data != 'failed') {
-						console.log(data);
 						addOdds(data);
 						
 							
@@ -342,7 +359,7 @@
 					
 				}
 			}).done(function() {
-				$('#addGameModal').modal('hide');
+				$('#gameModal').modal('hide');
 				window.location.reload(true);
 			});
 		});
@@ -354,7 +371,6 @@
 				var type = $(this).attr('id');
 				type = type.replace('chk', ''); 
 				$('.form-decimal[name^=' + type + ']').each(function() {
-					console.log($(this).attr('name'));
 					$.ajax({
 						url: '<c:url value="/odds?method:insert"/>',
 					    type: 'get',
@@ -376,18 +392,14 @@
 				});
 			});
 		};
-		
-		$('.btn-edit').click(function() {
-			console.log($(this).val());
-		});
-		
+				
 		$('.btn-del').click(function() {
 			var gameId = $(this).val();
 			BootstrapDialog.show({
 				closable: false,
 	            title: '刪除賽事',
 	            message: '確認刪除？',
-	            type: BootstrapDialog.TYPE_WARNING,
+	            type: BootstrapDialog.TYPE_DANGER,
 				buttons: [{
                		label: '取消',
                 	action: function(dialog) {
@@ -395,7 +407,7 @@
                		}
             	}, {
 	                label: '刪除',
-	                cssClass: 'btn-danger',
+	                cssClass: 'btn-primary',
 	                action: function(dialog) {
 	                	
 	                	$.ajax({
@@ -406,7 +418,6 @@
 	                		success: function(result) {
 	                			
 	                			if (result == 'deleted') {
-	                				console.log('test');
 	                			}
 	                		},
 	                	}).done(function() {
