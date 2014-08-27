@@ -98,7 +98,7 @@
 					<div class="panel-heading ">投注區</div>
 
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
+						<ul class="nav nav-tabs" role="tablist" id="myTab">
 							<li class="active"><a href="#single" role="tab"
 								data-toggle="tab">單場</a></li>
 							<li><a href="#pass" role="tab" data-toggle="tab">過關</a></li>
@@ -112,6 +112,7 @@
 							<div class="tab-pane" id="passCom">過關組合</div>
 
 						</div>
+		
 	
 						<table class="table table-striped  table-hover">
 							<tr>
@@ -565,13 +566,15 @@
 					lotteryId++;
 				});
 				console.log(combination);
-				if(combination){
+				if((userOddIds.length>=2)&&combination){
 					$('#myTab li:eq(1) a').tab('show');
 
 				}else{
 					$('#myTab li:eq(0) a').tab('show');
 
-				}		
+				}
+
+				
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);
 					lotteryId++;
