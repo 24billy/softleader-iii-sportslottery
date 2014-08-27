@@ -256,6 +256,7 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
 		
@@ -300,7 +301,15 @@
 		function listTeam(gameId) {
 			
 			if (gameId != null) {
-				
+				var url = '<c:url value="/gameManager?method:select"/>';
+				$.getJSON(url, {'model.id':gameId}, function(data) {
+					$('[name="model.leagueName"]').val(data.leagueName);
+					$('[name="model.gameNum"]').val(data.gameNum);
+					$('[name="model.gameTime"]').val(data.toDate());
+					$('[name="model.leagueName"]').val(data.leagueName);
+					$('[name="model.leagueName"]').val(data.leagueName);
+					$('[name="model.leagueName"]').val(data.leagueName);
+				});
 				
 			} else {
 				$('#teamAwayList,#teamHomeList').empty();
@@ -441,9 +450,9 @@
 	                		data: {
 	                			'model.id':gameId
 	                		},
-	                		success: function(result) {
+	                		success: function(data) {
 	                			
-	                			if (result == 'deleted') {
+	                			if (data == 'deleted') {
 	                			}
 	                		},
 	                	}).done(function() {

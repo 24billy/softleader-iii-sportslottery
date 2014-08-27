@@ -98,7 +98,13 @@ public class GameAction extends ActionSupport {
 	
 	public String select() {
 		log.debug("select...");
-		json = new Gson().toJson(service.getAll());
+		
+		Long gameId = model.getId();
+		if (gameId != null && gameId > 0) {
+			json = new Gson().toJson(service.getById(gameId));
+		} else {
+			json = new Gson().toJson(service.getAll());
+		}
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
