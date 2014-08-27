@@ -42,6 +42,62 @@ public class GameAction extends ActionSupport {
 	private LocalDateTime timeFrom, timeTo;
 	private String teamName;
 	
+	private Long complexGameNum;
+	private String complexTeamName;
+	private Boolean complexIsEnd;
+	private LocalDateTime complexTimeBegin;
+	private LocalDateTime complexTimeEnd;
+	private String complexBallType;
+	
+	
+	public String getComplexBallType() {
+		return complexBallType;
+	}
+
+	public void setComplexBallType(String complexBallType) {
+		this.complexBallType = complexBallType;
+	}
+
+	public Long getComplexGameNum() {
+		return complexGameNum;
+	}
+
+	public void setComplexGameNum(Long complexGameNum) {
+		this.complexGameNum = complexGameNum;
+	}
+
+	public String getComplexTeamName() {
+		return complexTeamName;
+	}
+
+	public void setComplexTeamName(String complexTeamName) {
+		this.complexTeamName = complexTeamName;
+	}
+
+	public Boolean getComplexIsEnd() {
+		return complexIsEnd;
+	}
+
+	public void setComplexIsEnd(Boolean complexIsEnd) {
+		this.complexIsEnd = complexIsEnd;
+	}
+
+	public LocalDateTime getComplexTimeBegin() {
+		return complexTimeBegin;
+	}
+
+	public void setComplexTimeBegin(LocalDateTime complexTimeBegin) {
+		this.complexTimeBegin = complexTimeBegin;
+	}
+
+	public LocalDateTime getComplexTimeEnd() {
+		return complexTimeEnd;
+	}
+
+	public void setComplexTimeEnd(LocalDateTime complexTimeEnd) {
+		this.complexTimeEnd = complexTimeEnd;
+	}
+
 	public String getJson() {
 		return json;
 	}
@@ -98,8 +154,10 @@ public class GameAction extends ActionSupport {
 	
 	public String select() {
 		log.debug("select...");
-		
-		Long gameId = model.getId();
+		Long gameId = 0L;
+		if (model != null) {
+			gameId = model.getId();
+		}
 		if (gameId != null && gameId > 0) {
 			json = new Gson().toJson(service.getById(gameId));
 		} else {
@@ -113,7 +171,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDateTime().minusDays(3), null));
+		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDateTime().minusDays(3), null, null));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -185,5 +243,20 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "searchHistoryMethod";
+	}
+	
+	public String gameHistoryComplex() {
+		log.debug("gameHistoryComplex...");
+		return SUCCESS;
+	}
+	
+	public String searchHistoryComplexData() {
+		log.debug("searchHistoryComplexData...");
+		
+		json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, complexIsEnd, complexTimeBegin, complexTimeEnd, complexBallType));
+		
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+
+		return "searchHistoryComplexData";
 	}
 }
