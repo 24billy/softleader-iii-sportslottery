@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-switch.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
@@ -176,7 +175,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h4 class="text-center">
-									讓分<input type="checkbox" id="chkATS">
+									讓分
 								</h4>
 							</div>
 						</div>
@@ -184,10 +183,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="ATS_A">
+								<input class="form-control form-decimal" type="text" name="ATS_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="ATS_H">
+								<input class="form-control form-decimal" type="text" name="ATS_H">
 							</div>
 						</div>
 						<!-- .row -->
@@ -195,7 +194,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h4 class="text-center">
-									總分<input type="checkbox" id="chkSC">
+									總分
 								</h4>
 							</div>
 						</div>
@@ -203,10 +202,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="SC_H">
+								<input class="form-control form-decimal" type="text" name="SC_H">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="SC_L">
+								<input class="form-control form-decimal" type="text" name="SC_L">
 							</div>
 						</div>
 						<!-- .row -->
@@ -214,7 +213,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h4 class="text-center">
-									單雙<input type="checkbox" id="chkEO">
+									單雙
 								</h4>
 							</div>
 						</div>
@@ -222,10 +221,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="EO_EVEN">
+								<input class="form-control form-decimal" type="text" name="EO_EVEN">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal form-disabled" type="text" name="EO_ODD">
+								<input class="form-control form-decimal" type="text" name="EO_ODD">
 							</div>
 						</div>
 						<!-- .row -->
@@ -257,7 +256,6 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap-switch.min.js"/>"></script>
 <script>
 	(function($) {
 		
@@ -280,7 +278,6 @@
 			gameNumArray.push(game.gameNum);
 		});
 		
-		$('.form-disabled').prop('disabled', true);
 		$('#btnAddGame').click(function() {
 			$('#gameModalHeader').removeClass('bg-info');
 			$('#gameModalHeader').removeClass('bg-success');
@@ -342,7 +339,8 @@
 		});
 		
 		$('.form-decimal').TouchSpin({
-			initval: 1,
+			min: 0,
+			initval: 0,
 			step: 0.05,
 			decimals: 2
 		});
@@ -353,18 +351,6 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
-		
-		$(':checkbox').bootstrapSwitch();
-		$(':checkbox').on('switchChange.bootstrapSwitch', function(event, state) {
-			var type = $(this).attr('id');
-			type = type.replace('chk', '');  
-			if (state) {
-				$('.form-decimal[name^=' + type + ']').prop('disabled', false);
-			} else {
-				$('.form-decimal[name^=' + type + ']').prop('disabled', true);
-			}
-		});
-		
 		/*
 		$(':checkbox').change(function() {
 			var type = $(this).attr('id');
@@ -412,7 +398,6 @@
 				if (oddType.indexOf('EO_') != -1) {
 					oddType = oddType.replace('EO_', '');
 				}
-				alert(oddType);
 				$.ajax({
 					url: '<c:url value="/odds?method:insert"/>',
 				    dataType: 'text',
