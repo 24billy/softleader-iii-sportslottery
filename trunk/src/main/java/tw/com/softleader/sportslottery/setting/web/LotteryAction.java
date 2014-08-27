@@ -1,5 +1,8 @@
 package tw.com.softleader.sportslottery.setting.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 /**
 @Author:Billy 
@@ -18,15 +22,16 @@ public class LotteryAction extends ActionSupport  {
 
 	@Autowired
 	private LotteryService service;
-	
-	private LotteryEntity model;
-	
+	private LotteryEntity model;	
 	private List<LotteryEntity> models;
-	
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
-
+	private InputStream inputStream;
 	private String json;
 	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
 	public String getJson() {
 		return json;
 	}
@@ -51,8 +56,8 @@ public class LotteryAction extends ActionSupport  {
 	public String execute() throws Exception {
 		log.debug("execute LotteryAction");
 
-		models = service.getAll();
-		log.debug("Models = {}", models);
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
@@ -61,6 +66,7 @@ public class LotteryAction extends ActionSupport  {
 	public String delete(){
 		log.debug("LotteryAction delete");
 		log.debug("Model = {}", model);
+		
 		try {
 			service.delete(model);
 		} catch (Exception e) {
@@ -68,15 +74,14 @@ public class LotteryAction extends ActionSupport  {
 			addFieldError("QueryFail", "Delete Fail : has already been deleted");
 		}
 
-		models = service.getAll();
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
 	
 	public String update() {
 		log.debug("LotteryAction update");
-//		model.setModifier("guest");
-//		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
 		try {
 			service.update(model);
@@ -85,18 +90,14 @@ public class LotteryAction extends ActionSupport  {
 			addFieldError("QueryFail","Update Fail : update failed");
 		}
 
-		models = service.getAll();
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
 	
 	public String insert() {
 		log.debug("LotteryAction insert");
-		
-//		model.setCreator("guest");
-//		model.setModifier("guest");
-//		model.setCreateTime(LocalDateTime.now());
-//		model.setModifiedTime(LocalDateTime.now());
 		
 		log.debug("Model = {}", model);
 		try {
@@ -105,8 +106,9 @@ public class LotteryAction extends ActionSupport  {
 			log.debug("!!LotteryAction insert Failed!!");
 			addFieldError("QueryFail","Insert Fail : no target");
 		}
-		
-		models = service.getAll();
+
+		json = new Gson().toJson(service.getAll());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
