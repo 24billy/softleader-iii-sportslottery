@@ -46,6 +46,14 @@
 		<allowed-methods>searchHistoryMethod</allowed-methods>
 	</action>
 	
+	<action name="searchHistoryComplex" class="gameAction" method="gameHistoryComplex">
+		<result name="success" >/History/historyComplex.jsp</result>
+		<result name="searchHistoryComplexData" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>searchHistoryComplexData</allowed-methods>
+	</action>
 	
 	<action name="odds" class="oddsAction" method="execute"> 
 		<result name="insert" type="stream">
