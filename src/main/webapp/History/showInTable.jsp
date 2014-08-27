@@ -110,32 +110,43 @@
 
 							<div class="form-group">
 								
-                                                                <label class="sr-only" for="from">From:</label>
-                                                                <input class="form-control form-game-time"  id="from" placeholder="From" type="text" name="timeFrom">
- 
-           						</div>
-                                                        <div class="form-group">
-                                                                <label class="sr-only" for="to">To:</label>
-                                                                <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
+	                             <label class="sr-only" for="from">From:</label>
+	                             <input class="form-control form-game-time"  id="from" placeholder="From" type="text" name="timeFrom">
 
-                                                        </div>
-                                                        
-                                                        <div class="form-group">
-                                                                <label class="sr-only" for="country">隊名:</label>
-                                                                <select class="form-control form-country" id="country" name="country"></select>
+        					</div>
 
-                                                        </div>
+                            <div class="form-group">
+                                    <label class="sr-only" for="to">To:</label>
+                                    <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
 
-                                                        <div class="form-group">
-                                                                <label class="sr-only" for="teamName">隊名:</label>
-                                                                <select class="form-control form-team" id="teamName" name="teamName"></select>
+                            </div>
+                            
+                            <div class="form-group">
+                                    <label class="sr-only" for="country">隊名:</label>
+                                    <select class="form-control form-country" id="country" name="country">
+                                    	<option>中華職棒</option>
+                                    	<option>美國職棒</option>
+                                    	<option>日本職棒</option>
+                                    	<option>韓國職棒</option>
+                                    </select>
 
-                                                        </div>
+                            </div>
 
-                                                
-                                                        <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
-                                                        <button class="btn btn-default" type="reset" >Reset Button</button>
-                                               
+                            <div class="form-group">
+                                    <label class="sr-only" for="teamName">隊名:</label>
+                                    <select class="form-control form-team" id="teamName" name="teamName"></select>
+
+                            </div>
+
+
+                    
+                            <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
+                            <button class="btn btn-default" type="reset" >Reset Button</button>
+                            
+                            <div class="form-group">
+                                <label></label>
+                            </div>
+                                 
 
 						</form>
 					</div>
