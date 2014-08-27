@@ -157,7 +157,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h4 class="text-center">
-									不讓分<input type="checkbox" id="chkSU">
+									不讓分
 								</h4>
 							</div>
 						</div>
@@ -184,14 +184,51 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATS_A">
+								<input class="form-control form-decimal form-disabled" type="text" name="ATS_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATS_H">
+								<input class="form-control form-decimal form-disabled" type="text" name="ATS_H">
 							</div>
 						</div>
 						<!-- .row -->
 						
+						<div class="row">
+							<div class="col-xs-12">
+								<h4 class="text-center">
+									總分<input type="checkbox" id="chkSC">
+								</h4>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-6">
+								<input class="form-control form-decimal form-disabled" type="text" name="SC_H">
+							</div>
+							<div class="col-xs-6">
+								<input class="form-control form-decimal form-disabled" type="text" name="SC_L">
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<h4 class="text-center">
+									單雙<input type="checkbox" id="chkEO">
+								</h4>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-xs-6">
+								<input class="form-control form-decimal form-disabled" type="text" name="EO_EVEN">
+							</div>
+							<div class="col-xs-6">
+								<input class="form-control form-decimal form-disabled" type="text" name="EO_ODD">
+							</div>
+						</div>
+						<!-- .row -->
 	      			</div>
 	      			<!-- .modal-body -->
 	      			
@@ -243,7 +280,7 @@
 			gameNumArray.push(game.gameNum);
 		});
 		
-		$('.form-decimal').prop('disabled', true);
+		$('.form-disabled').prop('disabled', true);
 		$('#btnAddGame').click(function() {
 			$('#gameModalHeader').removeClass('bg-info');
 			$('#gameModalHeader').removeClass('bg-success');
@@ -366,29 +403,28 @@
 		
 		function addOdds(gameId) {
 			
-			$('input:checked').each(function() {
-				
-				var type = $(this).attr('id');
-				type = type.replace('chk', ''); 
-				$('.form-decimal[name^=' + type + ']').each(function() {
-					$.ajax({
-						url: '<c:url value="/odds?method:insert"/>',
-					    type: 'get',
-					    data: {
-					    	'model.gameId':gameId,
-					    	'model.oddType':$(this).attr('name'),
-					    	'model.oddValue':$(this).val()
-					    },
-					    success: function(data) {
-					    	if (data == 'SUCCESS') {
-					    			
-					    	} else {
-					    		
-					    	}
-					    	
-					    }
-					});
-					
+			$('.form-decimal:enabled').each(function() {
+				var oddType = $(this).attr('name');
+				if (oddType.indexOf('EO_') != -1) {
+					oddType = oddType.replace('EO_', '');
+				}
+				alert(oddType);
+				$.ajax({
+					url: '<c:url value="/odds?method:insert"/>',
+				    type: 'get',
+				    data: {
+				    	'model.gameId':gameId,
+				    	'model.oddType':oddType,
+				    	'model.oddValue':$(this).val()
+				    },
+				    success: function(data) {
+				    	if (data == 'SUCCESS') {
+				    			
+				    	} else {
+				    		
+				    	}
+				    	
+				    }
 				});
 			});
 		};
