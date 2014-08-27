@@ -16,6 +16,17 @@ public class TeamEntity extends GenericEntity {
 	//隊伍名稱唯一
 	@Column(name = "TEAM_NAME", length = 50, nullable=false, unique = true)
 	private String teamName;
+	
+	@Column(name = "COUNTRY", length = 50, nullable=false)
+	private String country;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getTeamName() {
 		return teamName;
@@ -27,8 +38,13 @@ public class TeamEntity extends GenericEntity {
 
 	@Override
 	public String toString() {
-		return "TeamEntity [teamName=" + teamName + ", id=" + id + "]";
+		return "TeamEntity [teamName=" + teamName + ", country=" + country
+				+ "]";
 	}
+
+	
+
+	
 
 
 
