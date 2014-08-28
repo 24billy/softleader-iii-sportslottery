@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
@@ -45,22 +45,19 @@
                 
 			<div class="row top20">
 				<div class="col-lg-12">
-					<!-- <div class="table-responsive"> -->
-						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>賽事編號</th>
-									<th>客隊隊伍</th>
-									<th>主隊隊伍</th>
-									<th>狀態</th>
-									<th>功能</th>
-	                            </tr>
-							</thead>
-							<tbody id="gameList">
-							</tbody>
-						</table>
-					<!-- </div>  -->
-					<!-- .table-responsive -->
+					<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
+						<thead>
+							<tr>
+								<th>賽事編號</th>
+								<th>客隊隊伍</th>
+								<th>主隊隊伍</th>
+								<th>狀態</th>
+								<th>功能</th>
+	                           </tr>
+						</thead>
+						<tbody id="gameList">
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<!-- .row -->
@@ -269,6 +266,7 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
 <script>
 	(function($) {
 		
@@ -552,7 +550,8 @@
 		});
 		
 		$('#gameTable').dataTable({
-			responsive: true
+			responsive: true,
+			autoWidth: false
 		});
 	})(jQuery);
 </script>
