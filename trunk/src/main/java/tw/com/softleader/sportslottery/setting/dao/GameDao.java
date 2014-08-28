@@ -56,7 +56,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.setString("leagueName", leagueName).list();
 	}
 	
-	public List<GameEntity> findForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){		
+	public List<GameEntity> findForHistory(LocalDate timeFrom, LocalDate timeTo,String teamName){		
 		Session session = sessionFactory.getCurrentSession();
 		
 		//設定sql字串
@@ -107,12 +107,12 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 	}
 	
-	public String getHistoryJSON(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName) {
-		String toJson = new Gson().toJson(this.findForHistory(timeFrom, timeTo, teamName)); 
-		//import com.google.gson.Gson;
-		//用 new Gson().toJson 與用 將findForHistory()得出的List<GameEntity> 轉成Json型態
-		return toJson;
-	}
+//	public String getHistoryJSON(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName) {
+//		String toJson = new Gson().toJson(this.findForHistory(timeFrom, timeTo, teamName)); 
+//		//import com.google.gson.Gson;
+//		//用 new Gson().toJson 與用 將findForHistory()得出的List<GameEntity> 轉成Json型態
+//		return toJson;
+//	}
 	
 	public GameEntity findByGameNum(Long gameNum) {
 		Session session = sessionFactory.getCurrentSession();
