@@ -30,7 +30,14 @@ public class TeamAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
 	
 	private String json;
+	private String country;
 	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	public String getJson() {
 		return json;
 	}
@@ -119,5 +126,16 @@ public class TeamAction extends ActionSupport {
 		models = service.getAll();
 		
 		return SUCCESS;
+	}
+	
+	public String teamsByCountry() {
+		log.debug("TeamsByCountry...");
+		return SUCCESS;
+	}
+	public String getTeamsByCountry(){
+		
+		json= new Gson().toJson(service.getTeamsByCountry(country));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "getTeamsByCountry";
 	}
 }
