@@ -145,30 +145,14 @@
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">不讓分(客)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="SU_A">
+											<label for="SU_A">不讓分(客)</label>
+											<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
 										</div>
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">不讓分(主)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="SU_H">
-										</div>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-6">
-										<div class="form-group">
-											<label for="">讓分(客)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
-										</div>
-									</div>
-									<div class="col-xs-6">
-										<div class="form-group">
-											<label for="">讓分(主)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
+											<label for="SU_H">不讓分(主)</label>
+											<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
 										</div>
 									</div>
 								</div>
@@ -177,14 +161,14 @@
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">總分(大)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="SC_H">
+											<label for="ATS_A">讓分(客)</label>
+											<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 										</div>
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">總分(小)</label>
-											<input class="form-control input-sm form-decimal" type="text" name="SC_L">
+											<label for="ATS_H">讓分(主)</label>
+											<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 										</div>
 									</div>
 								</div>
@@ -193,13 +177,29 @@
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">總分(單)</label>
+											<label for="SC_H">總分(大)</label>
+											<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<label for="SC_L">總分(小)</label>
+											<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
+										</div>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="form-group">
+											<label for="EVEN">總分(單)</label>
 											<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
 										</div>
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<label for="">總分(雙)</label>
+											<label for="ODD">總分(雙)</label>
 											<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
 										</div>
 									</div>
@@ -285,7 +285,7 @@
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 			} else {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-end">結束</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-end">進行中</button>';
 			}
 			
 			child += '<td>';
