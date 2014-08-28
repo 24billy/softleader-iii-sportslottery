@@ -230,24 +230,28 @@
 		
 		$('.form-game-time').datetimepicker({
 			
-			format: 'Y-m-d H:i:s',
+			format: 'Y-m-d',
 			timepicker: false //取消掉顯示時間
 			
 		});
 		
 		function listGame(){
 			
+			console.log($('#teamName').val());
+			console.log($('#from').val());
+			console.log($('#to').val());
+			
 			$.ajax({
 				url:'<c:url value="/searchHistory?method:searchHistoryMethod"/>',
 				type:'post',
-				dataType:'text',
+				dataType:'json',
 				data:{
 					'teamName':$('#teamName').val(),
 					'timeFrom':$('#from').val(),
 					'timeTo':$('#to').val()	
 				},
 				success:function(data) {
-	
+					console.log(data);
 					showResultTable(data);
 				}
 			});
@@ -257,9 +261,9 @@
 
 			$('#teamListHead').html("<tr><th>時間</th><th>聯盟名稱</th><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th><th colspan='2'>比分</th></tr>");
 			$('#gameList').empty();
-			
-			var gameList = $.parseJSON(data);
-			$.each(gameList, function(index, game) {
+			console.log(data);
+			/* var gameList = $.parseJSON(data); */
+			 $.each(data, function(index, game) {
 				console.log(game);
 				var child = '';
 				var millis = game.gameTime.iLocalMillis;
@@ -276,6 +280,8 @@
 				
 				$('#gameList').append(child);
 			});
+			
+		
 			
 		}
 		
