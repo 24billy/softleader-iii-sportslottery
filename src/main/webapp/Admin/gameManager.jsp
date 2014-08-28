@@ -75,7 +75,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 			
-				<div id="gameModalHeader" class="modal-header ">
+				<div id="gameModalHeader" class="modal-header">
 					<h3 id="gameModalTitle" class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
@@ -246,10 +246,10 @@
 	
 	<!-- Begin of deleteModal -->
 	<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 			
-				<div id="deleteModalHeader" class="modal-header ">
+				<div id="deleteModalHeader" class="modal-header">
 					<h3 id="deleteModalTitle" class="modal-title">刪除賽事</h3>
 				</div>
 				<!-- modal-header -->
