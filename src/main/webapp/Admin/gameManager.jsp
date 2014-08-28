@@ -30,7 +30,7 @@
 				<div class="col-lg-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" id="catagory" name="catagory">
+							<select class="form-control input-sm form-ball-type" id="catagory" name="catagory">
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
@@ -72,7 +72,7 @@
 	
 	<!-- Begin of gameModal -->
 	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 			
 				<div id="gameModalHeader" class="modal-header">
@@ -93,7 +93,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
-									<select class="form-control" name="model.leagueName">
+									<select class="form-control input-sm" name="model.leagueName">
 										<option value="MLB" selected>美國職棒</option>
 									</select>
 								</div>
@@ -111,7 +111,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
-									<input class="form-control" type="text" name="model.gameNum">
+									<input class="form-control input-sm" type="text" name="model.gameNum">
 								</div>
 							</div>
 						</div>
@@ -129,11 +129,11 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<select class="form-control" id="teamAwayList" name="teamAwayId">
+								<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
 								</select>
 							</div>
 							<div class="col-xs-6">
-								<select class="form-control" id="teamHomeList" name="teamHomeId">
+								<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
 								</select>
 							</div>
 						</div>
@@ -148,7 +148,7 @@
 						
 						<div class="row">
 							<div class="col-xs-12">
-								<input class="form-control" id="gameTime" type="text" name="model.gameTime">
+								<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 							</div>
 						</div>
 						<!-- .row -->
@@ -164,10 +164,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SU_A">
+								<input class="form-control input-sm form-decimal" type="text" name="SU_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SU_H">
+								<input class="form-control input-sm form-decimal" type="text" name="SU_H">
 							</div>
 						</div>
 						<!-- .row -->
@@ -183,10 +183,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATS_A">
+								<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="ATS_H">
+								<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
 							</div>
 						</div>
 						<!-- .row -->
@@ -202,10 +202,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SC_H">
+								<input class="form-control input-sm form-decimal" type="text" name="SC_H">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="SC_L">
+								<input class="form-control input-sm form-decimal" type="text" name="SC_L">
 							</div>
 						</div>
 						<!-- .row -->
@@ -221,10 +221,10 @@
 						
 						<div class="row">
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="EO_EVEN">
+								<input class="form-control input-sm form-decimal" type="text" name="EO_EVEN">
 							</div>
 							<div class="col-xs-6">
-								<input class="form-control form-decimal" type="text" name="EO_ODD">
+								<input class="form-control input-sm form-decimal" type="text" name="EO_ODD">
 							</div>
 						</div>
 						<!-- .row -->
@@ -302,7 +302,7 @@
 			console.log(game.isEnd);
 			
 			if (game.isEnd) {
-				child += '<td>已結束</td>';
+				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 			} else {
 				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-end">結束</button>';
 			}
