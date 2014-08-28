@@ -4,16 +4,19 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 
 import com.google.gson.Gson;
@@ -128,8 +131,13 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		log.debug("Lottery by User...");
 		
 		try {
-			LotteryEntity entity = (LotteryEntity)session.getAttribute("user");
+			Map<String, UserEntity> session2 = (Map) ServletActionContext.getContext().getSession();
+			UserEntity entity = (UserEntity) session2.get("user");
+			
+//			UserEntity entity = (UserEntity)session.getAttribute("user");
+			
 			Long id = entity.getId();
+			log.debug("id..." + id);
 			json = new Gson().toJson(service.getByUserId(id));
 		} catch (Exception e) {
 			log.debug("!!LotteryAction selectByUser Failed!!");
@@ -137,7 +145,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 			e.printStackTrace();
 		}
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-		return SUCCESS;
+		return "selectByUser";
 	}
 
 	

@@ -98,13 +98,13 @@
 		<allowed-methods></allowed-methods>
 	</action>
 	
-	<action name="userSearchOdds" class="lotteryAction" method="selectByUser">
+	<action name="userSearchOdds" class="lotteryAction" method="userOddsComplex">
 		<result name="success" >/Security/userOddsSearch.jsp</result>
-		<result name="userSearchOddsDate" type="stream">
+		<result name="selectByUser" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods></allowed-methods>
+		<allowed-methods>selectByUser</allowed-methods>
 	</action>
 	<!--
 	<action name="odds" class="oddsAction" method="execute">
