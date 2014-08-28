@@ -86,17 +86,12 @@
 						
 							<!-- Begin of gameInfo -->
 							<div class="col-xs-6">
-								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">聯盟名稱</h4>
-									</div>
-								</div>
-								<!-- .row -->
 								
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
-											<select class="form-control input-sm" name="model.leagueName">
+											<label for="leagueName">聯盟名稱</label>
+											<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 												<option value="MLB" selected>美國職棒</option>
 											</select>
 										</div>
@@ -106,15 +101,9 @@
 								
 								<div class="row">
 									<div class="col-xs-12">
-										<h4 class="text-center">賽事編號</h4>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-12">
 										<div class="form-group">
-											<input class="form-control input-sm" type="text" name="model.gameNum">
+											<label for="">賽事編號</label>
+											<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum">
 										</div>
 									</div>
 								</div>
@@ -122,36 +111,28 @@
 							
 								<div class="row">
 									<div class="col-xs-6">
-										<h4 class="text-center">客隊隊伍</h4>
+										<div class="form-group">
+											<label for="teamAwayList">客隊隊伍</label>
+											<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
+											</select>
+										</div>
 									</div>
 									<div class="col-xs-6">
-										<h4 class="text-center">主隊隊伍</h4>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-6">
-										<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
-										</select>
-									</div>
-									<div class="col-xs-6">
-										<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
-										</select>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">比賽時間</h4>
+										<div class="form-group">
+											<label for="teamHomeList">主隊隊伍</label>
+											<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
+											</select>
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
 								
 								<div class="row">
 									<div class="col-xs-12">
-										<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
+										<div class="form-group">
+											<label for="gameTime">比賽時間</label>
+											<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
@@ -160,78 +141,67 @@
 							
 							<!-- Begin of oddsInfo -->
 							<div class="col-xs-6">
+								
 								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">
-											不讓分
-										</h4>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<label for="">不讓分(客)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="SU_A">
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<label for="">不讓分(主)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="SU_H">
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
 								
 								<div class="row">
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="SU_A">
+										<div class="form-group">
+											<label for="">讓分(客)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
+										</div>
 									</div>
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="SU_H">
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">
-											讓分
-										</h4>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
-									</div>
-									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">
-											總分
-										</h4>
+										<div class="form-group">
+											<label for="">讓分(主)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
 								
 								<div class="row">
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="SC_H">
+										<div class="form-group">
+											<label for="">總分(大)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="SC_H">
+										</div>
 									</div>
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="SC_L">
+										<div class="form-group">
+											<label for="">總分(小)</label>
+											<input class="form-control input-sm form-decimal" type="text" name="SC_L">
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-12">
-										<h4 class="text-center">
-											單雙
-										</h4>
-									</div>
-								</div>
-								<!-- .row -->
-								
-								<div class="row">
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="EO_EVEN">
+										<div class="form-group">
+											<label for="">總分(單)</label>
+											<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
+										</div>
 									</div>
 									<div class="col-xs-6">
-										<input class="form-control input-sm form-decimal" type="text" name="EO_ODD">
+										<div class="form-group">
+											<label for="">總分(雙)</label>
+											<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
+										</div>
 									</div>
 								</div>
 								<!-- .row -->
@@ -450,7 +420,7 @@
 			step: 0.05,
 			decimals: 2,
 			buttondown_class: 'btn btn-info',
-            buttonup_class: 'btn btn-info'
+            buttonup_class: 'btn btn-success'
 		});
 		
 		var catagory = '${catagory}';
