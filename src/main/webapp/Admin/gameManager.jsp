@@ -268,6 +268,21 @@
 						</div>
 					</div>
 					<!-- .row -->
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="">客隊分數</label>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="">主隊分數</label>
+							</div>
+						</div>
+					</div>
+					<!-- .row -->
+					
 				</div>
 				<!-- .modal-body -->
 						
