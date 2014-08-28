@@ -473,7 +473,6 @@
 				if (oddType.indexOf('EO_') != -1) {
 					oddType = oddType.replace('EO_', '');
 				}
-				alert(oddType);
 				$.ajax({
 					url: '<c:url value="/odds?method:insert"/>',
 				    dataType: 'text',
