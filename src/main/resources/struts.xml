@@ -46,6 +46,15 @@
 		<allowed-methods>searchHistoryMethod</allowed-methods>
 	</action>
 	
+	<action name="teamsByCountry" class="teamAction" method="teamsByCountry">
+		<result name="success" >/History/showInTable.jsp</result>
+		<result name="getTeamsByCountry" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>getTeamsByCountry</allowed-methods>
+	</action>
+	
 	<action name="searchHistoryComplex" class="gameAction" method="gameHistoryComplex">
 		<result name="success" >/History/historyComplex.jsp</result>
 		<result name="searchHistoryComplexData" type="stream">
