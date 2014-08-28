@@ -29,8 +29,9 @@
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-                        <input class="form-control form-game-time" id="timeBegin" placeholder="起始時間" type="text" name="timeFrom">
-                        <input class="form-control form-game-time" id="timeEnd" placeholder="截止時間" type="text" name="timeFrom">
+                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" xname="timeFrom">
+                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" name="timeFrom">
+                        <input type="text" class="form-control" >
 					</form>
 				</div>
 			</div>
@@ -76,7 +77,7 @@
 	(function($) {
 		//data格式{"xxx":'ooo'}
 		$('.form-game-time').datetimepicker({
-			format: 'Y-m-d H:i:s',
+			format: 'Y-m-d',
 			timepicker: false //取消掉顯示時間
 		});
 		

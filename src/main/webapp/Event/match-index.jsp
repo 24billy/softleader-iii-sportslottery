@@ -453,13 +453,14 @@
 				}
 				
 				//從已存在的dialog複製出新的物件
-				var tempDialog = $('#dialog').clone();
-				$('div.modal-title', tempDialog).text('賽事編號 ' + $(this).attr('gameId'));
-				tempDialog.removeAttr('id');
-				tempDialog.attr('name', 'dialogToggle');
+				var tempDialog = $('#dialog').clone();		
 				
 				//設定dialog的詳細內容(所有玩法的按鈕,以及按鈕上的文字)
 				var thisGame = games[$(this).attr('gameId')];
+				$('h4.modal-title', tempDialog).text('[No.' + $(this).attr('gameId') + ']   ' + thisGame.teamAway.teamName + ' VS ' + thisGame.teamHome.teamName);
+				tempDialog.removeAttr('id');
+				tempDialog.attr('name', 'dialogToggle');
+				
 				var count = 0;			
 				$.each(thisGame.odds, function(index, odd){					
 					thisCheckbox = $('input:eq(' + count + ')', tempDialog);
