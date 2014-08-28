@@ -196,6 +196,8 @@ public class UserAction extends ActionSupport {
 			log.debug("可登入");
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
+			UserEntity e = session.get("user");
+			log.debug(e.getUserAccount());
 			return SUCCESS;
 		} else {
 			log.debug("帳號不存在");
