@@ -119,19 +119,18 @@
         					</div>
 
                             <div class="form-group">
-                                    <label class="sr-only" for="to">To:</label>
-                                    <input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
-
+                                <label class="sr-only" for="to">To:</label>
+                            	<input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
                             </div>
                             
                             <div class="form-group">
-                                    <label class="sr-only" for="country">隊名:</label>
-                                    <select class="form-control form-country" id="country" name="country">
-                                    	<option>中華職棒</option>
-                                    	<option>美國職棒</option>
-                                    	<option>日本職棒</option>
-                                    	<option>韓國職棒</option>
-                                    </select>
+                            	<label class="sr-only" for="country">隊名:</label>
+                                <select class="form-control form-country" id="country" name="country">
+                                  	<option>中華職棒</option>
+                                  	<option>美國職棒</option>
+                                  	<option>日本職棒</option>
+                                  	<option>韓國職棒</option>
+                                </select>
 
                             </div>
 
@@ -197,6 +196,13 @@
 <script>
 	(function($) {
 		listTeam();
+		$( ".form-country" ).change(function() {
+
+			  alert( "Handler for .change() called." );
+
+			});
+
+
 		$('#history-manager').collapse();
 		/* $('#submitButton').click(listGame); */
 		//var btnClick = document.getElementById("submitButton");
@@ -238,7 +244,7 @@
 			
 			var url = '<c:url value="/team.action"/>';
 			$.getJSON(url, function(data) { //透過team.action從資料庫，取回的Json型式的值，一條條成option	
-				console.log(data);
+				/* console.log(data); */
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('.form-team').append(str);
@@ -248,69 +254,63 @@
 		
 		$('.form-game-time').datetimepicker({
 			
-			format: 'Y-m-d H:i:s',
+			format: 'Y-m-d H:i',
 			timepicker: false //取消掉顯示時間
 			
 		});
 		
 		function listGame(){
 			
-			
 			$.ajax({
 				url:'<c:url value="/searchHistory?method:searchHistoryMethod"/>',
 				type:'post',
+				dataType:'text',
 				data:{
 					'teamName':$('#teamName>option:selected').text(),
 					'timeFrom':$('#from').val(),
 					'timeTo':$('#to').val()	
 				},
 				success:function(data) {
-				
-					$('#teamListHead').html("<tr><th>時間</th><th>聯盟名稱</th><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th><th colspan='2'>比分</th></tr>");
-					$('#gameList').empty();
-					
-					var gameList = $.parseJSON(data);
-					$.each(gameList, function(index, game) {
-						console.log(game);
-						var child = '';
-						var millis = game.gameTime.iLocalMillis;
-						console.log(game.gameTime);
-						child += '<tr>';
-						child += '<td>' + millisecondToDate(millis) + '</td>';
-						child += '<td>' + game.leagueName + '</td>';
-						child += '<td>' + game.gameNum + '</td>';
-						child += '<td>' + game.teamAway.teamName + '</td>';
-						child += '<td>' + game.teamHome.teamName + '</td>';
-						child += '<td>' + game.gameScoreAway + '</td>';
-						child += '<td>' + game.gameScoreHome + '</td>';
-						child += '</tr>';
+				 	/* if(data.length==0){
+						$('#result').append("<h2>查無搜尋</h2>"); 
 						
-						$('#gameList').append(child);
-					});
+					}else{
+						showResultTable(data);
+						
+					} */		
+					showResultTable(data);
 				}
 			});
+		}
 			
+		function showResultTable(data){
+
+			$('#teamListHead').html("<tr><th>時間</th><th>聯盟名稱</th><th>賽事編號</th><th>客隊隊伍</th><th>主隊隊伍</th><th colspan='2'>比分</th></tr>");
+			$('#gameList').empty();
 			
-			
-			
-			/*
-			var gameList = $.getJSON('<c:url value="/searchHistory?method:searchHistoryMethod"/>');
+			var gameList = $.parseJSON(data);
 			$.each(gameList, function(index, game) {
 				console.log(game);
 				var child = '';
+				var millis = game.gameTime.iLocalMillis;
 				console.log(game.gameTime);
 				child += '<tr>';
+				child += '<td>' + millisecondToDate(millis) + '</td>';
+				child += '<td>' + game.leagueName + '</td>';
 				child += '<td>' + game.gameNum + '</td>';
 				child += '<td>' + game.teamAway.teamName + '</td>';
 				child += '<td>' + game.teamHome.teamName + '</td>';
-				child += '<td>' + game.isEnd + '</td>';
+				child += '<td>' + game.gameScoreAway + '</td>';
+				child += '<td>' + game.gameScoreHome + '</td>';
 				child += '</tr>';
 				
 				$('#gameList').append(child);
 			});
-
-			*/
+			
 		}
+		
+		
+		
 		
 	})(jQuery);
 </script>
