@@ -1,5 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class TeamService extends GenericService<TeamEntity> {
 	
 	protected TeamDao getTeamDao(){
 		return dao;
+	}
+	
+	public List<TeamEntity> getTeamsByCountry(String country){
+		return dao.findByCountry(country);
 	}
 
 }
