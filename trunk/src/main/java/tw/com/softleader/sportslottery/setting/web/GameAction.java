@@ -206,16 +206,36 @@ public class GameAction extends ActionSupport {
 	
 	public String insert() {
 		log.debug("insert...");
-		model.setTeamHome(teamService.getById(teamHomeId));
-		model.setTeamAway(teamService.getById(teamAwayId));
-		model.setIsEnd(false);
 		String result = null;
-		try {
-			service.update(model);
-			model = service.getByGameNum(model.getGameNum());
-			result = model.getId().toString();
-		} catch (Exception e) {
-			result = "failed";
+		Long gameId = model.getId();
+		if (gameId != null && gameId > 0) {
+			GameEntity entity = service.getById(gameId);
+			entity.setBallType(model.getBallType());
+			entity.setGameNum(model.getGameNum());
+			entity.setLeagueName(model.getLeagueName());
+			entity.setGameTime(model.getGameTime());
+			entity.setTeamAway(teamService.getById(teamAwayId));
+			entity.setTeamHome(teamService.getById(teamHomeId));
+			
+			try {
+				service.update(entity);
+				result = gameId.toString();
+			} catch (Exception e) {
+				result = "failed";
+			}
+			
+		} else {
+			model.setTeamHome(teamService.getById(teamHomeId));
+			model.setTeamAway(teamService.getById(teamAwayId));
+			model.setIsEnd(false);
+			
+			try {
+				service.update(model);
+				model = service.getByGameNum(model.getGameNum());
+				result = model.getId().toString();
+			} catch (Exception e) {
+				result = "failed";
+			}
 		}
 		
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
