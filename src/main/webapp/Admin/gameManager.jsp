@@ -304,7 +304,7 @@
 			if (game.isEnd) {
 				child += '<td>已結束</td>';
 			} else {
-				child += '<td><button type="button" class="btn btn-warning">結束</button>"';
+				child += '<td><button type="button" class="btn btn-warning btn-xs">結束</button>';
 			}
 			
 			child += '<td>';
