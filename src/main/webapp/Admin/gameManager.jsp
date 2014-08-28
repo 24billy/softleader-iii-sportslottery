@@ -70,7 +70,7 @@
 	<!-- #page-wrapper -->
 	<!-- End of Game Table -->
 	
-	<!-- Begin of Modal -->
+	<!-- Begin of gameModal -->
 	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -242,7 +242,40 @@
 		</div>
 		<!-- .modal-dialog -->
 	</div>
-	<!-- End of Modal -->
+	<!-- End of gameModal -->
+	
+	<!-- Begin of deleteModal -->
+	<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			
+				<div id="deleteModalHeader" class="modal-header ">
+					<h3 id="deleteModalTitle" class="modal-title">刪除賽事</h3>
+				</div>
+				<!-- modal-header -->
+				
+				<div class="modal-body">
+				
+					<div class="row">
+						<div class="col-xs-12">
+							<h4 class="text-center">確認刪除？</h4>
+						</div>
+					</div>
+					<!-- .row -->
+				</div>
+				<!-- .modal-body -->
+						
+	      		<div id="deleteModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnDelete">確認</button>
+	      		</div>
+	      		<!-- .modal-footer -->
+			</div>
+			<!-- .modal-content -->
+		</div>
+		<!-- .modal-dialog -->
+	</div>
+	<!-- End of deleteModal -->
 <!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
@@ -269,7 +302,7 @@
 			child += '<td>' + game.isEnd + '</td>';
 			child += '<td>';
 			child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10">刪除</button>';
+			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
@@ -342,6 +375,9 @@
 					$('#teamHomeList').val(data.teamHome.id);
 					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					
+					$.each(data.odds, function(index, odd) {
+						$('[name$="' + odd.oddType + '"]').val(odd.oddValue);
+					});
 				});
 				
 			} 
@@ -428,6 +464,7 @@
 				if (oddType.indexOf('EO_') != -1) {
 					oddType = oddType.replace('EO_', '');
 				}
+				alert(oddType);
 				$.ajax({
 					url: '<c:url value="/odds?method:insert"/>',
 				    dataType: 'text',
@@ -449,12 +486,13 @@
 		};
 				
 		$('.btn-del').click(function() {
-			var gameId = $(this).val();
+			$('#btnDelete').val($(this).val());
+			/*
 			BootstrapDialog.show({
 				closable: false,
-	            title: '刪除賽事',
+	            title: '<h4>刪除賽事</h4>',
 	            message: '確認刪除？',
-	            type: BootstrapDialog.TYPE_DANGER,
+	            type: BootstrapDialog.TYPE_DEFAULT,
 				buttons: [{
                		label: '取消',
                 	action: function(dialog) {
@@ -484,6 +522,25 @@
                 	}
             	}]
 	        });
+			*/
+		});
+		
+		$('#btnDelete').click(function() {
+			$.ajax({
+        		url: '<c:url value="/gameManager?method:delete"/>',
+        		dataType: 'text',
+        		data: {
+        			'model.id':$(this).val()
+        		},
+        		success: function(data) {
+        			
+        			if (data == 'deleted') {
+        			}
+        		},
+        	}).done(function() {
+        		$('#deleteModal').modal('hide');
+        		window.location.reload(true);
+        	});
 		});
 		
 		$('#gameTable').dataTable({
