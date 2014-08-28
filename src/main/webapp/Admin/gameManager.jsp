@@ -280,7 +280,6 @@
 			child += '<td>' + game.gameNum + '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
-			console.log(game.isEnd);
 			
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
@@ -380,8 +379,6 @@
 					} else {
 						$('.form-decimal').val('0.00');
 					}
-					
-					console.log(data.isEnd);
 					
 					if (data.isEnd) {
 						$('#gameForm *').prop('disabled', true);
