@@ -7,14 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>賽事管理</title>
-<!-- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
- -->
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
@@ -27,7 +22,7 @@
 		<div class="container top20">
 			
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
 							<select class="form-control input-sm form-ball-type" id="catagory" name="catagory">
@@ -44,7 +39,7 @@
 			<!-- .row -->
                 
 			<div class="row top20">
-				<div class="col-lg-12">
+				<div class="col-sm-12">
 					<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
 						<thead>
 							<tr>
@@ -68,7 +63,7 @@
 	<!-- End of Game Table -->
 	
 	<!-- Begin of gameModal -->
-	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true">
+	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			
@@ -82,10 +77,10 @@
 						<div class="row">
 						
 							<!-- Begin of gameInfo -->
-							<div class="col-xs-6">
+							<div class="col-sm-6">
 								
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="leagueName">聯盟名稱</label>
 											<select class="form-control input-sm" id="leagueName" name="model.leagueName">
@@ -97,7 +92,7 @@
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="">賽事編號</label>
 											<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum">
@@ -107,14 +102,14 @@
 								<!-- .row -->
 							
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="teamAwayList">客隊隊伍</label>
 											<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
 											</select>
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="teamHomeList">主隊隊伍</label>
 											<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
@@ -125,7 +120,7 @@
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="gameTime">比賽時間</label>
 											<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
@@ -137,16 +132,16 @@
 							<!-- End of gameInfo -->
 							
 							<!-- Begin of oddsInfo -->
-							<div class="col-xs-6">
+							<div class="col-sm-6">
 								
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="SU_A">不讓分(客)</label>
 											<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="SU_H">不讓分(主)</label>
 											<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
@@ -156,13 +151,13 @@
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="ATS_A">讓分(客)</label>
 											<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="ATS_H">讓分(主)</label>
 											<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
@@ -172,13 +167,13 @@
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="SC_H">總分(大)</label>
 											<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="SC_L">總分(小)</label>
 											<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
@@ -188,13 +183,13 @@
 								<!-- .row -->
 								
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="EVEN">總分(單)</label>
 											<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
 										</div>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="ODD">總分(雙)</label>
 											<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
@@ -223,7 +218,7 @@
 	<!-- End of gameModal -->
 	
 	<!-- Begin of deleteModal -->
-	<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+	<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" tabindex="-1">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 			
@@ -235,8 +230,8 @@
 				<div class="modal-body">
 				
 					<div class="row">
-						<div class="col-xs-12">
-							<h4 class="text-center">確認刪除？</h4>
+						<div class="col-sm-12">
+							<h4 class="text-center">確認刪除賽事？</h4>
 						</div>
 					</div>
 					<!-- .row -->
@@ -254,16 +249,44 @@
 		<!-- .modal-dialog -->
 	</div>
 	<!-- End of deleteModal -->
-<!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
- -->
+	
+	<!-- Begin of statusModal -->
+	<div class="modal fade" id="statusModal" role="dialog" aria-labelledby="statusModalTitle" aria-hidden="true" tabindex="-1">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+			
+				<div id="statusModalHeader" class="modal-header">
+					<h3 id="statusModalTitle" class="modal-title">變更狀態</h3>
+				</div>
+				<!-- modal-header -->
+				
+				<div class="modal-body">
+				
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-center">確認變更狀態？</h4>
+						</div>
+					</div>
+					<!-- .row -->
+				</div>
+				<!-- .modal-body -->
+						
+	      		<div id="statusModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnStatus">確認</button>
+	      		</div>
+	      		<!-- .modal-footer -->
+			</div>
+			<!-- .modal-content -->
+		</div>
+		<!-- .modal-dialog -->
+	</div>
+	<!-- End of statusModal -->
+
 <script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
@@ -282,7 +305,7 @@
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 			} else {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-end">進行中</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button>';
 			}
 			
 			child += '<td>';
@@ -295,8 +318,11 @@
 			gameNumArray.push(game.gameNum);
 		});
 		
+		$('.btn-status').click(function() {
+			$('#btnStatus').val($(this).val());
+		});
 		
-		$('.btn-end').click(function() {
+		$('#btnStatus').click(function() {
 			$.post('<c:url value="/gameManager?method:update"/>', {
 				'model.id':$(this).val(),
 				'model.isEnd':true
@@ -306,21 +332,11 @@
 		});
 		
 		$('#btnAddGame').click(function() {
-			/*
-			$('#gameModalHeader').removeClass('bg-info');
-			$('#gameModalHeader').removeClass('bg-success');
-			$('#gameModalHeader').addClass('bg-success');
-			*/
 			$('#gameModalTitle').text("新增賽事");
 			listTeam(null);
 		});
 		
 		$('.btn-edit').click(function() {
-			/*
-			$('#gameModalHeader').removeClass('bg-info');
-			$('#gameModalHeader').removeClass('bg-success');
-			$('#gameModalHeader').addClass('bg-info');
-			*/
 			$('#gameModalTitle').text("編輯賽事");
 			listTeam($(this).val());
 		});
@@ -354,6 +370,7 @@
 			
 			
 			if (gameId != null) {
+				
 				var url = '<c:url value="/gameManager?method:select"/>';
 				$.getJSON(url, {'model.id':gameId}, function(data) {
 					var dateTime = new Date(data.gameTime.iLocalMillis);
@@ -369,7 +386,7 @@
 					$('#teamAwayList').val(data.teamAway.id);
 					$('#teamHomeList').val(data.teamHome.id);
 					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
-					
+					$('#btnMerge').val(data.id);
 					if (data.odds.length != 0) {
 						$.each(data.odds, function(index, odd) {
 							$('[name$="' + odd.oddType + '"]').val(odd.oddValue);
@@ -424,23 +441,14 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
-		/*
-		$(':checkbox').change(function() {
-			var type = $(this).attr('id');
-			type = type.replace('chk', ''); 
-			if ($(this).prop('checked')) {
-				$('.form-decimal[name^=' + type + ']').prop('disabled', false);
-			} else {
-				$('.form-decimal[name^=' + type + ']').prop('disabled', true);
-			}
-		});
-		*/
+		
 		$('#btnMerge').click(function() {
-			
+			var gameId = $(this).val();
 			$.ajax({
 				url: '<c:url value="/gameManager?method:insert"/>',
 				dataType: 'text',
 				data: {
+					'model.id':gameId,
 					'model.ballType':$('[name="catagory"]').val(),
 					'model.leagueName':$('[name="model.leagueName"]').val(),
 					'model.gameNum':$('[name="model.gameNum"]').val(),
@@ -493,42 +501,6 @@
 				
 		$('.btn-del').click(function() {
 			$('#btnDelete').val($(this).val());
-			/*
-			BootstrapDialog.show({
-				closable: false,
-	            title: '<h4>刪除賽事</h4>',
-	            message: '確認刪除？',
-	            type: BootstrapDialog.TYPE_DEFAULT,
-				buttons: [{
-               		label: '取消',
-                	action: function(dialog) {
-                    dialog.close();
-               		}
-            	}, {
-	                label: '刪除',
-	                cssClass: 'btn-primary',
-	                action: function(dialog) {
-	                	
-	                	$.ajax({
-	                		url: '<c:url value="/gameManager?method:delete"/>',
-	                		dataType: 'text',
-	                		data: {
-	                			'model.id':gameId
-	                		},
-	                		success: function(data) {
-	                			
-	                			if (data == 'deleted') {
-	                			}
-	                		},
-	                	}).done(function() {
-	                		dialog.close();
-	                		window.location.reload(true);
-	                	});
-	                	
-                	}
-            	}]
-	        });
-			*/
 		});
 		
 		$('#btnDelete').click(function() {
