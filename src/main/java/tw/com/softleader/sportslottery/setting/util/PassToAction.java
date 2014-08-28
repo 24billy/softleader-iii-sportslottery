@@ -1,4 +1,4 @@
-package tw.com.softleader.sportslottery.setting.web;
+package tw.com.softleader.sportslottery.setting.util;
 
 import com.opensymphony.xwork2.ActionSupport;
 

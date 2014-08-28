@@ -201,6 +201,13 @@
 			<version>4.11</version>
 			<type>jar</type>
 		</dependency>
+		
+		<!-- E-mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

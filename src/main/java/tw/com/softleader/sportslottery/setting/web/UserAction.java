@@ -11,7 +11,14 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -36,18 +43,35 @@ public class UserAction extends ActionSupport {
 	private UserService service;
 	
 	private UserEntity model;
-	
 	private List<UserEntity> models;
-	
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
-	
 	private String json;
-	
 	private InputStream inputStream;
-	
 	private LocalDate time;
+	private String from = "tsubasa1109";
+	private String password = "adcis1109";
+	private String to;
+	private String account;
 	
 	
+	
+	
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	public void setTime(LocalDate time) {
 		this.time = time;
 	}
@@ -102,6 +126,36 @@ public class UserAction extends ActionSupport {
 //		}
 
 	}
+	
+	
+	static Properties properties = new Properties();
+	static {
+		System.out.println("初始化Eamilproperites");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.socketFactory.port", "465");
+		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		properties.put("mail.smtp.auth", "true"); properties.put("mail.smtp.port", "465");
+	}
+	public String forgetPassword() {
+		log.debug(to);
+		String ret = SUCCESS;
+		try { Session session = Session.getDefaultInstance(properties, 
+				new javax.mail.Authenticator() { 
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(from, password); 
+					}
+				}); 
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message.setSubject("您的密碼來了"); message.setText("HAHAHA"); Transport.send(message);
+		} catch(Exception e) { 
+			ret = ERROR; 
+			e.printStackTrace(); 
+		} 
+		return ret; 
+	}
+	
 	
 	@Override
 	public String execute() throws Exception {
@@ -208,7 +262,6 @@ public class UserAction extends ActionSupport {
 	
 	public String searchByAccount() throws Exception {
 		log.debug("searchByAccount...");
-		
 		json = new Gson().toJson(service.getByUserAccount(model.getUserAccount()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
