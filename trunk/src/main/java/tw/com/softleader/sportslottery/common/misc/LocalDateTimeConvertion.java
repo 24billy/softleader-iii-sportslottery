@@ -15,7 +15,7 @@ public class LocalDateTimeConvertion extends StrutsTypeConverter {
 	public Object convertFromString(Map context, String[] values, Class toClass) {
 		if (values[0]!=null && values[0].length()!=0) {
 			try {
-				DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+				DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
 				return LocalDateTime.parse(values[0],formatter);
 			} catch (Exception e) {
 				e.printStackTrace();
