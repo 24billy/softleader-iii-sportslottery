@@ -178,6 +178,22 @@ public class GameAction extends ActionSupport {
 		return "selectNearDays";
 	}
 	
+	public String update() {
+		log.debug("update...");
+		boolean status = model.getIsEnd();
+		model = service.getById(model.getId());
+		model.setIsEnd(status);
+		String result = null;
+		try {
+			service.update(model);
+			result = "success";
+		} catch (Exception e) {
+			result = "failed";
+		}
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
+	}
+	
 	public String insert() {
 		log.debug("insert...");
 		model.setTeamHome(teamService.getById(teamHomeId));
