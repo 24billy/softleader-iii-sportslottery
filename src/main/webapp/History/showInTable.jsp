@@ -55,7 +55,7 @@
 						<a href="<c:url value="/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 					</li>
 					<li class="active">
-						<a href="javascript:;" data-toggle="collapse" data-target="#history-manager"><i class="fa fa-fw fa-list"></i> 歷史資訊<i class="fa fa-fw fa-caret-down"></i></a>
+						<a href="javascript:;" data-toggle="collapse" data-target="#history-manager"><i class="fa fa-fw fa-list"></i> 成績歷史資訊<i class="fa fa-fw fa-caret-down"></i></a>
 <!--						 可隱藏下拉選單 -->
 						<ul id="history-manager" class="collapse">
 							<li class="open">
@@ -86,14 +86,14 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header"><!-- 主部分標頭 -->
-							查詢賽事歷史
+							查詢賽事成績
 						</h1>
 						<ol class="breadcrumb">
 							<li>
 								<a href="<c:url value="/History/historyIndex.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 							</li>
 							<li>
-								<i class="fa fa-fw fa-list"></i> 歷史資訊
+								<i class="fa fa-fw fa-list"></i> 成績
 							</li>
 							<li class="active">
 								<!-- <i class="fa fa-fw fa-pencil-square-o"></i> 新增 -->
@@ -125,24 +125,26 @@
                             
                             <div class="form-group">
                             	<label class="sr-only" for="country">隊名:</label>
-                                <select class="form-control form-country" id="country" name="country">
-                                  	<option>中華職棒</option>
-                                  	<option>美國職棒</option>
-                                  	<option>日本職棒</option>
-                                  	<option>韓國職棒</option>
+                                <select class="form-control form-country" id="country" name="country"  >
+                                	<option >不選擇區域 </option>
+                                  	<option value="ROC">中華職棒</option>
+                                  	<option value="USA">美國職棒</option>
+                                  	<option value="JAPAN">日本職棒</option>
+                                  	<option value="KOREA">韓國職棒</option>
                                 </select>
 
                             </div>
 
                             <div class="form-group">
                                     <label class="sr-only" for="teamName">隊名:</label>
-                                    <select class="form-control form-team" id="teamName" name="teamName"></select>
+                                    <select class="form-control form-team" id="teamName" name="teamName" ></select>
 
                             </div>
 
 
                     
                             <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
+                            <h5>可直接按submit列出所有資訊</h5>
                             <button class="btn btn-default" type="reset" id="reset" >Reset Button</button>
                             
                             
@@ -196,65 +198,39 @@
 <script>
 	(function($) {
 		listTeam();
-		$( ".form-country" ).change(function() {
+		$( ".form-country" ).change(function() { 
 
-			  alert( "Handler for .change() called." );
+			getTeamsByCountry();
 
-			});
+		});
 
 
 		$('#history-manager').collapse();
-		/* $('#submitButton').click(listGame); */
-		//var btnClick = document.getElementById("submitButton");
-		//btnClick.addEventListener("click",listGame,false);
-		
-		/* $('#submitButton').click(function(){
-			$('#result').empty();
-			var url = '<c:url value="/searchHistory"/>';
-			
-			
-			$.getJSON(url, function(data) {
-				$.each(data, function(key, value) {
-					var millis = value.gameTime.iLocalMillis;
-					//gameTime還是物件，所以還是要繼續取毫秒數
-					//millisecondToDate可將毫秒數轉為日期，位址在/js/misc.js 
-					var str = '<p>' + millisecondToDate(millis) + millisecondToTime(millis) + ', ' + value.teamHome.teamName + '</p>';
-					
-					console.log(str);
-					$('#result').append(str);//show results on screen line by line
-				});
-			});
-		}); */
-		
+
 		$('#submitButton').click(function(){
 			listGame();
 			
 		
 		});
 		
-/* 		$('#reset').click(function(){
-			$('#gameTable').empty();
-		});
-		 */
-		
-
 		
 		function listTeam() {
-			$('.form-team').empty();
+		 	$('.form-team').empty(); 
 			
 			var url = '<c:url value="/team.action"/>';
-			$.getJSON(url, function(data) { //透過team.action從資料庫，取回的Json型式的值，一條條成option	
-				/* console.log(data); */
-				$.each(data, function(key, value) {
-					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
-					$('.form-team').append(str);
+			 $('.form-team').append('<option value="">不選擇隊伍 </option>'); 
+				
+			 $.getJSON(url, function(data) { //透過team.action從資料庫，取回的Json型式的值，一條條成option
+					$.each(data, function(key, value) {
+						var str = '<option value=' + value.teamName + '>' + value.teamName + '</option>';
+						$('.form-team').append(str);
+					});
 				});
-			});
 		}
 		
 		$('.form-game-time').datetimepicker({
 			
-			format: 'Y-m-d H:i',
+			format: 'Y-m-d H:i:s',
 			timepicker: false //取消掉顯示時間
 			
 		});
@@ -266,18 +242,12 @@
 				type:'post',
 				dataType:'text',
 				data:{
-					'teamName':$('#teamName>option:selected').text(),
+					'teamName':$('#teamName').val(),
 					'timeFrom':$('#from').val(),
 					'timeTo':$('#to').val()	
 				},
 				success:function(data) {
-				 	/* if(data.length==0){
-						$('#result').append("<h2>查無搜尋</h2>"); 
-						
-					}else{
-						showResultTable(data);
-						
-					} */		
+	
 					showResultTable(data);
 				}
 			});
@@ -309,9 +279,26 @@
 			
 		}
 		
-		
-		
-		
+		function getTeamsByCountry(){
+			
+			$.ajax({
+				url:'<c:url value="/teamsByCountry?method:getTeamsByCountry"/>',
+				type:'post',
+				dataType:'json',//不可為text, 不然不是物件
+				data:{
+					'country':$('#country').val()
+				},
+				success:function(data) {
+					$('.form-team').empty(); 
+					$.each(data, function(key, value) {
+						var str = '<option value=' + value.teamName + '>' + value.teamName + '</option>';
+						$('.form-team').append(str);
+					});
+				 	
+				}
+			});
+			
+		}
 	})(jQuery);
 </script>
 </body>
