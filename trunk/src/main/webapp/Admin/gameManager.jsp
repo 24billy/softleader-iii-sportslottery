@@ -448,7 +448,9 @@
 			min: 0,
 			initval: 0,
 			step: 0.05,
-			decimals: 2
+			decimals: 2,
+			buttondown_class: 'btn btn-info',
+            buttonup_class: 'btn btn-info'
 		});
 		
 		var catagory = '${catagory}';
