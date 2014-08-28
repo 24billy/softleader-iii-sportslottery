@@ -304,7 +304,7 @@
 			if (game.isEnd) {
 				child += '<td>已結束</td>';
 			} else {
-				child += '<td><button type="button" class="btn btn-warning btn-xs">結束</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-end">結束</button>';
 			}
 			
 			child += '<td>';
@@ -315,6 +315,16 @@
 			
 			$('#gameList').append(child);
 			gameNumArray.push(game.gameNum);
+		});
+		
+		
+		$('.btn-end').click(function() {
+			$.post('<c:url value="/gameManager?method:update"/>', {
+				'model.id':$(this).val(),
+				'model.isEnd':true
+			}, function(data) {
+				window.location.reload(true);
+			});
 		});
 		
 		$('#btnAddGame').click(function() {
