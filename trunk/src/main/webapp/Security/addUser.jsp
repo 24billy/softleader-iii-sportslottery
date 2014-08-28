@@ -86,7 +86,6 @@
   	 		}, "只能包括英文字母和数字");
 			
 			jQuery.validator.addMethod("checkAccount", function() {
-			
 		    	$.ajax({
 		    		url:"<c:url value='/checkAccount'/>",
 					type:"get",
@@ -106,6 +105,9 @@
 			}, "Repeat Account");
 			
 			//密碼規則驗證
+			jQuery.validator.addMethod("alnumpwd", function(value, element) {
+  				return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+  	 		}, "只能包括英文字母和数字");
 			jQuery.validator.addMethod("checkPswA", function() {
 				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
 		        if (re.test($('#password').val())) {
@@ -147,7 +149,8 @@
 						required: true,
 						minlength: 6,
 						checkPsw1 : true,
-						checkPsw2 : true 
+						checkPsw2 : true, 
+						alnumpwd: true
 					},
 					
 					confirm_password: {

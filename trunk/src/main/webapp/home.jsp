@@ -49,7 +49,8 @@
 				<s:submit cssClass="btn btn-success" value="登入" method="login"/>
 			</div>
 			<div>
-				<button type="button" class="btn btn-link">忘記密碼</button>
+			
+				<a href="<c:url value='/Security/Email/index.jsp'/>">忘記密碼</a>
 				<span class="error">${errors.LoginFail}</span>
 				<button type="button" id="reg" class="btn btn-info">註冊</button>
 			</div>

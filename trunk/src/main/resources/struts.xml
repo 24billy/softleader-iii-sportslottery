@@ -117,7 +117,13 @@
 		</result>
 		<allowed-methods>selectByUser</allowed-methods>
 	</action>
-	
+
+	<!-- email -->
+    <action name="emailer" class="userAction" method="forgetPassword">
+         <result name="success">/Security/Email/success.jsp</result>
+         <result name="error">/Security/Email/error.jsp</result>
+     </action>
+
 	<action name="lottery" class="lotteryAction" method="execute">
 		<result name="success">/Event/lottery.jsp</result>
 	</action>
