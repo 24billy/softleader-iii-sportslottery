@@ -78,17 +78,17 @@ public class UserAction extends ActionSupport {
 		
 
 		
-		if(model!=null) {
-			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
-			} else {
-				log.debug("帳號問題");
-				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
-			}
-			if(model.getUserPassword() != null && model.getUserPassword().length()>5) {
-			} else {
-				log.debug("密碼問題");
-				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
-			}
+//		if(model!=null) {
+//			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
+//			} else {
+//				log.debug("帳號問題");
+//				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
+//			}
+//			if(model.getUserPassword() != null && model.getUserPassword().length()>5) {
+//			} else {
+//				log.debug("密碼問題");
+//				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
+//			}
 			
 			
 		
@@ -99,7 +99,7 @@ public class UserAction extends ActionSupport {
 //				log.debug("密碼空白");
 //				addFieldError("QueryFail","密碼不可空白");
 //			}
-		}
+//		}
 
 	}
 	
