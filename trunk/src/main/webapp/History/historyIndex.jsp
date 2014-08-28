@@ -10,7 +10,15 @@
 <body>
 <h1>History Index</h1>
 
-<a class="navbar-brand" href="<c:url value="/searchHistory"/>">賽事歷史查詢</a>
+<ul>
+	<li><a class="navbar-brand" href="<c:url value="/searchHistory"/>">賽事成績查詢</a></li>
+	<li><a class="navbar-brand" href="<c:url value="/searchHistoryComplex"/>">複合查詢</a></li>
+
+
+
+
+</ul>
+
 
 
 </body>
