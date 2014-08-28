@@ -6,14 +6,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.google.gson.Gson;
-
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+
+import com.google.gson.Gson;
 
 /**
  * 
@@ -119,7 +120,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
 	}
 	
-	public List<GameEntity> findComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd, String ballType) {
+	public List<GameEntity> findComplex(Long gameNum, String teamName, Boolean isEnd, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "from GameEntity games where 1=1";
@@ -127,8 +128,8 @@ public class GameDao extends GenericDao<GameEntity>{
 		String sql2 = " and games.isEnd = :isEnd";
 		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
 		String sql4 = " and games.gameTime >= :timeBegin";
-		String sql5 = " and games.gameTime < :teamName";
-		String sql6 = " and games.ballType = :ballType";
+		String sql5 = " and games.gameTime < :timeEnd";
+		String sql6 = " and games.ballType like :ballType";
 		String sql7 = " order by games.gameTime";
 		
 		boolean hasGameNum = false;
@@ -183,7 +184,7 @@ public class GameDao extends GenericDao<GameEntity>{
 			query.setDate("timeEnd", timeEnd.toDate());
 		}
 		if (hasBallType) {
-			query.setString("ballType", ballType + "%");
+			query.setString("ballType", "%" + ballType + "%");
 		}
 		
 		return query.list();

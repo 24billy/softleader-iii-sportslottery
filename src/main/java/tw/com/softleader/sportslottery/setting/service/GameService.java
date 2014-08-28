@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.findByGameNum(gameNum);
 	}
 	
-	public List<GameEntity> getComplex(Long gameNum, String teamName, Boolean isEnd, LocalDateTime timeBegin, LocalDateTime timeEnd, String ballType) {
+	public List<GameEntity> getComplex(Long gameNum, String teamName, Boolean isEnd, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
 		return dao.findComplex(gameNum, teamName, isEnd, timeBegin, timeEnd, ballType);
 	}
 

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,11 +46,27 @@ public class GameAction extends ActionSupport {
 	private Long complexGameNum;
 	private String complexTeamName;
 	private Boolean complexIsEnd;
-	private LocalDateTime complexTimeBegin;
-	private LocalDateTime complexTimeEnd;
+	private LocalDate complexTimeBegin;
+	private LocalDate complexTimeEnd;
 	private String complexBallType;
 	
 	
+	public LocalDate getComplexTimeBegin() {
+		return complexTimeBegin;
+	}
+
+	public void setComplexTimeBegin(LocalDate complexTimeBegin) {
+		this.complexTimeBegin = complexTimeBegin;
+	}
+
+	public LocalDate getComplexTimeEnd() {
+		return complexTimeEnd;
+	}
+
+	public void setComplexTimeEnd(LocalDate complexTimeEnd) {
+		this.complexTimeEnd = complexTimeEnd;
+	}
+
 	public String getComplexBallType() {
 		return complexBallType;
 	}
@@ -80,22 +97,6 @@ public class GameAction extends ActionSupport {
 
 	public void setComplexIsEnd(Boolean complexIsEnd) {
 		this.complexIsEnd = complexIsEnd;
-	}
-
-	public LocalDateTime getComplexTimeBegin() {
-		return complexTimeBegin;
-	}
-
-	public void setComplexTimeBegin(LocalDateTime complexTimeBegin) {
-		this.complexTimeBegin = complexTimeBegin;
-	}
-
-	public LocalDateTime getComplexTimeEnd() {
-		return complexTimeEnd;
-	}
-
-	public void setComplexTimeEnd(LocalDateTime complexTimeEnd) {
-		this.complexTimeEnd = complexTimeEnd;
 	}
 
 	public String getJson() {
@@ -171,7 +172,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDateTime().minusDays(3), null, null));
+		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate().minusDays(3), null, null));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -268,6 +269,15 @@ public class GameAction extends ActionSupport {
 	
 	public String searchHistoryComplexData() {
 		log.debug("searchHistoryComplexData...");
+		
+		System.out.println(
+				"complexGameNum:" + complexGameNum+
+				"complexTeamName:" + complexTeamName+
+				"complexIsEnd:" + complexIsEnd+
+				"complexTimeBegin:" + complexTimeBegin+
+				"complexTimeEnd:" + complexTimeEnd+
+				"complexBallType:" + complexBallType
+				);
 		
 		json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, complexIsEnd, complexTimeBegin, complexTimeEnd, complexBallType));
 		

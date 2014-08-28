@@ -23,15 +23,27 @@
 				<div class="col-lg-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" id="catagory" name="catagory">
+							<select class="form-control form-ball-type" id="ballType">
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" xname="timeFrom">
-                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" name="timeFrom">
-                        <input type="text" class="form-control" >
+                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" value="" >
+                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" value="" >
+                        <input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
+                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
+							<label class="btn btn-default active" id="isEndLabelDefault">
+								<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
+							</label>
+							<label class="btn btn-success">
+								<input type="radio" name="isEnd" id="option2" value="true" >已完賽
+							</label>
+							<label class="btn btn-warning">
+								<input type="radio" name="isEnd" id="option3" value="false">未完賽
+							</label>
+						</div>
+						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
 					</form>
 				</div>
 			</div>
@@ -75,40 +87,101 @@
 
 <script>
 	(function($) {
-		//data格式{"xxx":'ooo'}
-		$('.form-game-time').datetimepicker({
+		$('#timeBegin').datetimepicker({
 			format: 'Y-m-d',
+			onShow:function( ct ){
+				//this.setOptions({
+				//	maxDate:$('#timeEnd').val()?$('#timeEnd').val():false
+				//});
+			},
+			onSelectDate:function(){
+				renewData();
+			},
 			timepicker: false //取消掉顯示時間
 		});
+		$('#timeEnd').datetimepicker({
+			format: 'Y-m-d',
+			onShow:function( ct ){
+				//this.setOptions({
+				//	minDate:$('#timeBegin').val()?$('#timeBegin').val():false
+				//});
+			},
+			onSelectDate:function(){
+				renewData();
+			},
+			timepicker: false //取消掉顯示時間
+		});
+		$('.btn').button();
 		
-		$.getJSON('<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />', {}, function(datas){
-			console.log(datas);
-			
-			
-			$.each(datas, function(index, game){
-				var dataString = "";
-				
-				timeString = "";
-				timeString += millisecondToDate(game.gameTime.iLocalMillis);
-				timeString += " ";
-				timeString += millisecondToTime(game.gameTime.iLocalMillis);
-				
-				dataString += "<tr>";
-				dataString += "<td>" + game.gameNum + "</td>";
-				dataString += "<td>" + timeString + "</td>";
-				dataString += "<td>" + game.teamAway.teamName + "</td>";
-				dataString += "<td>" + game.teamHome.teamName + "</td>";
-				dataString += "<td>" + "none" + "</td>";
-				dataString += "<td>" + game.isEnd + "</td>";
-				dataString += "</tr>";
-				$('#gameList').append(dataString);
-			});
-
-			$('#gameTable').dataTable({
-				responsive: true
-			});
+		$('#ballType').on('change', function(){renewData();});
+		$('#teamName').on('keyup', function(){renewData();});	
+		$('#isEndGroup>label>input').on('change', function(){
+			renewData();
+		});
+		$('#cleanQuery').on('click', function(){
+			$('#timeBegin').val('');
+			$('#timeEnd').val('');
+			$('#ballType').val('');
+			$('#teamName').val('');
+			$('#isEndGroup>label').removeClass('active');
+			$('#isEndGroup>label>input').prop('checked', false);
+			$('#isEndLabelDefault').addClass('active');
+			$('#isEndInputDefault').prop('checked', true);
+			renewData();
 		});
 		
+		var table;
+		function renewData(){
+			var isEnd;
+			if($('input:checked').val()!='none'){
+				isEnd = $('input:checked').val();
+			}
+			console.log(isEnd);
+			$.ajax({
+				url:'<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />',
+				type:'post',
+				dataType:'json',
+				data:{
+					'complexTimeBegin':$('#timeBegin').val(),
+					'complexTimeEnd':$('#timeEnd').val(),
+					'complexBallType':$('#ballType').val(),
+					'complexTeamName':$('#teamName').val(),
+					'complexIsEnd':isEnd
+					
+				},
+				success:function(datas){
+					console.log(datas);
+				
+					if(table){
+						$('#gameTable').DataTable().destroy();
+					}
+					$('#gameList').html("");
+					$.each(datas, function(index, game){
+						var dataString = "";
+						
+						timeString = "";
+						timeString += millisecondToDate(game.gameTime.iLocalMillis);
+						timeString += " ";
+						timeString += millisecondToTime(game.gameTime.iLocalMillis);
+						
+						dataString += "<tr>";
+						dataString += "<td>" + game.gameNum + "</td>";
+						dataString += "<td>" + timeString + "</td>";
+						dataString += "<td>" + game.teamAway.teamName + "</td>";
+						dataString += "<td>" + game.teamHome.teamName + "</td>";
+						dataString += "<td>" + "none" + "</td>";
+						dataString += "<td>" + game.isEnd + "</td>";
+						dataString += "</tr>";
+						$('#gameList').append(dataString);
+					});
+					table = $('#gameTable').dataTable({
+						responsive: true
+					});
+				}
+			});
+		}
+		
+		renewData();
 	})(jQuery);
 </script>
 </body>
