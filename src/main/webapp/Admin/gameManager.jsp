@@ -72,171 +72,182 @@
 	
 	<!-- Begin of gameModal -->
 	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 			
 				<div id="gameModalHeader" class="modal-header">
 					<h3 id="gameModalTitle" class="modal-title">新增賽事</h3>
 				</div>
 				<!-- modal-header -->
-				<form role="form">
+				<form role="form" id="gameForm">
 				
 					<div class="modal-body">
-				
 						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">聯盟名稱</h4>
-							</div>
-						</div>
-						<!-- .row -->
 						
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="form-group">
-									<select class="form-control input-sm" name="model.leagueName">
-										<option value="MLB" selected>美國職棒</option>
-									</select>
+							<!-- Begin of gameInfo -->
+							<div class="col-xs-6">
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">聯盟名稱</h4>
+									</div>
 								</div>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">賽事編號</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="form-group">
-									<input class="form-control input-sm" type="text" name="model.gameNum">
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<select class="form-control input-sm" name="model.leagueName">
+												<option value="MLB" selected>美國職棒</option>
+											</select>
+										</div>
+									</div>
 								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">賽事編號</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<input class="form-control input-sm" type="text" name="model.gameNum">
+										</div>
+									</div>
+								</div>
+								<!-- .row -->
+							
+								<div class="row">
+									<div class="col-xs-6">
+										<h4 class="text-center">客隊隊伍</h4>
+									</div>
+									<div class="col-xs-6">
+										<h4 class="text-center">主隊隊伍</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
+										</select>
+									</div>
+									<div class="col-xs-6">
+										<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
+										</select>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">比賽時間</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
+									</div>
+								</div>
+								<!-- .row -->
 							</div>
-						</div>
-						<!-- .row -->
-					
-						<div class="row">
+							<!-- End of gameInfo -->
+							
+							<!-- Begin of oddsInfo -->
 							<div class="col-xs-6">
-								<h4 class="text-center">客隊隊伍</h4>
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">
+											不讓分
+										</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="SU_A">
+									</div>
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="SU_H">
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">
+											讓分
+										</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
+									</div>
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">
+											總分
+										</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="SC_H">
+									</div>
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="SC_L">
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 class="text-center">
+											單雙
+										</h4>
+									</div>
+								</div>
+								<!-- .row -->
+								
+								<div class="row">
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="EO_EVEN">
+									</div>
+									<div class="col-xs-6">
+										<input class="form-control input-sm form-decimal" type="text" name="EO_ODD">
+									</div>
+								</div>
+								<!-- .row -->
 							</div>
-							<div class="col-xs-6">
-								<h4 class="text-center">主隊隊伍</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-6">
-								<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
-								</select>
-							</div>
-							<div class="col-xs-6">
-								<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
-								</select>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">比賽時間</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">
-									不讓分
-								</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="SU_A">
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="SU_H">
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">
-									讓分
-								</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="ATS_A">
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="ATS_H">
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">
-									總分
-								</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="SC_H">
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="SC_L">
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="text-center">
-									單雙
-								</h4>
-							</div>
-						</div>
-						<!-- .row -->
-						
-						<div class="row">
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="EO_EVEN">
-							</div>
-							<div class="col-xs-6">
-								<input class="form-control input-sm form-decimal" type="text" name="EO_ODD">
-							</div>
+							<!-- End of oddsInfo -->
 						</div>
 						<!-- .row -->
 	      			</div>
 	      			<!-- .modal-body -->
-	      			
-	      			<div id="gameModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
-	      			</div>
-      			</form>
-				<!-- .form -->
+	      		</form>
+				<!-- .form -->	
+	      		<div id="gameModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
+	      		</div>
+      			
 			</div>
 			<!-- .modal-content -->
 		</div>
@@ -398,6 +409,14 @@
 						});
 					} else {
 						$('.form-decimal').val('0.00');
+					}
+					
+					console.log(data.isEnd);
+					
+					if (data.isEnd) {
+						$('#gameForm *').prop('disabled', true);
+					} else {
+						$('#gameForm *').prop('disabled', false);
 					}
 				});
 				
