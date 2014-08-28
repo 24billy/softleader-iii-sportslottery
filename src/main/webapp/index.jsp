@@ -20,7 +20,6 @@
 <a href="odds?gameId=1">OddType(Id=1)</a><br>
 <a href="Admin/index.jsp">Game Manager</a><br>
 <a href="Event/match-index.jsp">Game info</a><br>
-<a href="Admin/Lottery.jsp">Lottery</a><br>
 <a href="<c:url value="/History/historyIndex.jsp"/>">History Index</a><br>
 
 
