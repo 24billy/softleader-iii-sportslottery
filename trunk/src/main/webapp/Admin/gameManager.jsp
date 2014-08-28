@@ -375,9 +375,13 @@
 					$('#teamHomeList').val(data.teamHome.id);
 					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					
-					$.each(data.odds, function(index, odd) {
-						$('[name$="' + odd.oddType + '"]').val(odd.oddValue);
-					});
+					if (data.odds.length != 0) {
+						$.each(data.odds, function(index, odd) {
+							$('[name$="' + odd.oddType + '"]').val(odd.oddValue);
+						});
+					} else {
+						$('.form-decimal').val('0.00');
+					}
 				});
 				
 			} 
