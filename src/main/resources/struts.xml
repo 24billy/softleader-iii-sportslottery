@@ -11,6 +11,8 @@
   
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   	
+
+  	
   	<action name="gameManager" class="gameAction" method="manager">
   		<result name="success">/Admin/gameManager.jsp</result>
   		<result name="message" type="stream">
@@ -115,6 +117,11 @@
 		</result>
 		<allowed-methods>selectByUser</allowed-methods>
 	</action>
+	
+	<action name="lottery" class="lotteryAction" method="execute">
+		<result name="success">/Event/lottery.jsp</result>
+	</action>
+
 	<!--
 	<action name="odds" class="oddsAction" method="execute">
 		<result name="success">Json/oddsJson.jsp</result>
