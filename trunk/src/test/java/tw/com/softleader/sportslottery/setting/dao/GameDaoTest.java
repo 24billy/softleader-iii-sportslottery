@@ -56,11 +56,11 @@ public class GameDaoTest extends BaseTest{
 		
 		List<GameEntity> models = null;
 		models = dao.findForHistory(date1, null, "Lamigo桃猿");
-		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
+/*		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
 		models = dao.findForHistory(null, date3, null);//結果數據正確
 		models = dao.findForHistory(null, date2, null);//結果數據正確
 		models = dao.findForHistory(date1, date2, null);//結果數據錯誤
-		
+*/		
 		log.debug("findForHistory = {}", models);
 ////		System.out.println("size of the searching result: "+models.size());
 //----------------------------------------------------------------------------------
