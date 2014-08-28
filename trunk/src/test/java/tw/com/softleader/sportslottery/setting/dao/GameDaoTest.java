@@ -48,21 +48,21 @@ public class GameDaoTest extends BaseTest{
 //		log.debug("findByBallType models = {}", models);
 		
 		LocalDateTime date1 = new LocalDateTime();
-		date1 = LocalDateTime.parse("2014-01-01T10:15:30");//將時間自串轉成 LocalDateTime
+		date1 = LocalDateTime.parse("2014-08-18T00:00:00");//將時間自串轉成 LocalDateTime
 		LocalDateTime date2 = new LocalDateTime();
-		date2 = LocalDateTime.parse("2014-12-31T07:04:00");
+		date2 = LocalDateTime.parse("2014-08-18T00:00:00");
 		LocalDateTime date3 = new LocalDateTime();
 		date3 = LocalDateTime.parse("2014-08-20T10:15:30");
 		
 		List<GameEntity> models = null;
-		models = dao.findForHistory(date1, null, "Lamigo桃猿");
+		models = dao.findForHistory(date1, date2, null);
 /*		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
 		models = dao.findForHistory(null, date3, null);//結果數據正確
 		models = dao.findForHistory(null, date2, null);//結果數據正確
 		models = dao.findForHistory(date1, date2, null);//結果數據錯誤
 */		
 		log.debug("findForHistory = {}", models);
-////		System.out.println("size of the searching result: "+models.size());
+		System.out.println("size of the searching result: "+models.size());
 //----------------------------------------------------------------------------------
 //		List<GameEntity> models = dao.findGameByLeagueName("MLB");
 //		log.debug("findGameByLeagueName = {}", models);
