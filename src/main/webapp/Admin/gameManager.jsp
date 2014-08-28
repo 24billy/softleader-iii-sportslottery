@@ -52,7 +52,7 @@
 									<th>賽事編號</th>
 									<th>客隊隊伍</th>
 									<th>主隊隊伍</th>
-									<th>已結束</th>
+									<th>狀態</th>
 									<th>功能</th>
 	                            </tr>
 							</thead>
@@ -299,7 +299,14 @@
 			child += '<td>' + game.gameNum + '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
-			child += '<td>' + game.isEnd + '</td>';
+			console.log(game.isEnd);
+			
+			if (game.isEnd) {
+				child += '<td>已結束</td>';
+			} else {
+				child += '<td><button type="button" class="btn btn-warning">結束</button>"';
+			}
+			
 			child += '<td>';
 			child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
 			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
