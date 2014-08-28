@@ -40,7 +40,7 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.getHistoryJSON(timeFrom, timeTo, teamName);
 	}*/
 	
-	public List<GameEntity> getForHistory(LocalDateTime timeFrom, LocalDateTime timeTo,String teamName){
+	public List<GameEntity> getForHistory(LocalDate timeFrom, LocalDate timeTo,String teamName){
 		return dao.findForHistory(timeFrom, timeTo, teamName);
 	}
 	

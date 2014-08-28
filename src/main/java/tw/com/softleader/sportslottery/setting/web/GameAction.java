@@ -40,7 +40,7 @@ public class GameAction extends ActionSupport {
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
-	private LocalDateTime timeFrom, timeTo;
+	private LocalDate timeFrom, timeTo;
 	private String teamName;
 	
 	private Long complexGameNum;
@@ -135,11 +135,20 @@ public class GameAction extends ActionSupport {
 		this.catagory = catagory;
 	}
 
-	public void setTimeFrom(LocalDateTime timeFrom) {
+
+	public LocalDate getTimeFrom() {
+		return timeFrom;
+	}
+
+	public void setTimeFrom(LocalDate timeFrom) {
 		this.timeFrom = timeFrom;
 	}
 
-	public void setTimeTo(LocalDateTime timeTo) {
+	public LocalDate getTimeTo() {
+		return timeTo;
+	}
+
+	public void setTimeTo(LocalDate timeTo) {
 		this.timeTo = timeTo;
 	}
 
