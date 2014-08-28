@@ -384,12 +384,14 @@
 					}).prop('selected', true);
 					$('[name="model.gameNum"]').val(data.gameNum);
 					$('#teamAwayList').val(data.teamAway.id);
+					$('#teamAwayList').change();
 					$('#teamHomeList').val(data.teamHome.id);
+					$('#teamHomeList').change();
 					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					$('#btnMerge').val(data.id);
 					if (data.odds.length != 0) {
 						$.each(data.odds, function(index, odd) {
-							$('[name$="' + odd.oddType + '"]').val(odd.oddValue);
+							$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
 						});
 					} else {
 						$('.form-decimal').val('0.00');
