@@ -70,7 +70,7 @@
 		</nav>
 		
 		<div id="page-wrapper">
-		
+	
 			<div class="container-fluid" >
 			
 				<div class="row">
@@ -94,9 +94,9 @@
 					</div>
 
 					<div class="panel panel-primary  col-lg-4">
-
-					<div class="panel-heading ">投注區</div>
-
+					  <div class="panel-heading ">
+					  	<h6>投注區</h3>
+					  </div>
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist" id="myTab">
 							<li class="active"><a href="#single" role="tab"
@@ -104,16 +104,7 @@
 							<li><a href="#pass" role="tab" data-toggle="tab">過關</a></li>
 							<li><a href="#passCom" role="tab" data-toggle="tab">過關組合</a></li>
 						</ul>
-					<div></div>
 						<!-- Tab panes -->
-						<!-- 
-						<div class="tab-content">
-							<div class="tab-pane active" id="single">單場</div>
-							<div class="tab-pane" id="pass">過關</div>
-							<div class="tab-pane" id="passCom">過關組合</div>
-						</div>
-		 				-->
-	
 						<table class="table table-striped  table-hover">
 							<tr>
 								<td id="lottery1" hidden="true" name="oddList">
@@ -188,20 +179,15 @@
 								</td>
 							</tr>
 						</table>
-
-
 					</div>
 					<!-- End of Lottery Panel   -->
-					<div id="betBoard" hidden="true"
-						class="panel panel-primary col-lg-4">
-												<!-- Tab panes -->
-					   
+					<div id="betBoard" hidden="true" class="panel panel-primary col-lg-4">
+					  <!-- Tab panes -->
 					  <div class="tab-content">
 						<div class="tab-pane active" id="single">
-						
-							<!-- Begin of Bet Panel -->
-						<div class="panel-body">
-							<form class="form-inline">
+					      <!-- Begin of Single Bet Panel -->
+						  <div class="panel-body">
+							<form class="form-inline" action="<c:url value="/lottery"/>">
 								<div class="form-group ">
 									<div style="display: inline-block" id="singleBet"></div>
 									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
@@ -212,7 +198,7 @@
 
 								<div>
 									<div style="width: 50%; display: inline-block" >總價</div>
-									<div id="singleCapital" style=" display: inline-block"
+									<div class="singleCapital" style=" display: inline-block"
 										 ></div>
 								</div>
 								<div>
@@ -220,19 +206,21 @@
 									<div id="singleTopPrice" style=" display: inline-block"
 										></div>
 								</div>
+								<div hidden="true">
+									<input type="text" class="singleCapital" name="model.capital" value="">
+								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
 								</div>
 							</form>
-						</div>
-						<!-- End of Bet Panel -->
+						  </div>
+						  <!-- End of Bet Panel -->
 						
 						</div>
-						<div class="tab-pane" id="pass">
-						
-						<!-- Begin of Bet Panel -->
-						<div class="panel-body">
-							<form class="form-inline">
+						<div class="tab-pane" id="pass"> 
+						  <!-- Begin of Pass Bet Panel -->
+						  <div class="panel-body">
+							<form class="form-inline" action="<c:url value="/lottery"/>">
 								<div class="form-group ">
 									<div style="display: inline-block" id="passBet"></div>
 									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
@@ -243,7 +231,7 @@
 
 								<div>
 									<div style="width: 50%; display: inline-block" >總價</div>
-									<div id="passCapital" style=" display: inline-block"
+									<div class="passCapital" style=" display: inline-block"
 										 ></div>
 								</div>
 								<div>
@@ -251,25 +239,26 @@
 									<div id="passTopPrice" style=" display: inline-block"
 										></div>
 								</div>
+								<div id="lotteryOdds" hidden="true">
+									<input type="text" class ="passCapital" name="model.capital" value="">
+								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
 								</div>
 							</form>
-						</div>
-						<!-- End of Bet Panel -->
-						
+						  </div>
+						  <!-- End of Bet Panel -->
 						</div>
 						<div class="tab-pane" id="passCom">
 						
 						</div>
 					  </div>
-		 			  
 						
 					</div>
 					
 				</div>
 				
-				</div>
+			</div>
 				
 				<div id="dialog" class="modal fade">
 					<div class="modal-dialog">
@@ -605,28 +594,35 @@
 						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
 						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
-						
+						$('#lotteryOdds > input:eq('+(lotteryId-1)+')').attr("value",userOddId);
 
 					lotteryId++;
 				});
 				//更新過關組合類型與計算金額
 				console.log("combination:"+combination);
-				$('#passBet').html(userOddIds.length);
-				capitalValue=capitalValue*(userOddIds.length)*$('#betValue').attr("value");
-				$('#passCapital').html(capitalValue+"元");
+				$('#passBet').html(1);
+				$('.passCapital').html($('#betValue').attr("value")*capitalValue+"元");
 				$('#passTopPrice').html(Math.floor(passPrice*100)+"元");
 
-				$('#singleBet').html(1);
-				$('#singleCapital').html(capitalValue+"元");
+				
+				$('#singleBet').html(userOddIds.length);
+				$('.singleCapital').html((userOddIds.length)*$('#betValue').attr("value")*capitalValue+"元");
 				$('#singleTopPrice').html(Math.floor(singlePrice*100)+"元");
+			
 				if((userOddIds.length>=2)&&combination){
 					//過關
 					$('#myTab li:eq(1) a').tab('show');
-				}else{
+					$('#myTab li:eq(1) a').off('click');
+				}
+				else{
 					//單場
 					$('#myTab li:eq(0) a').tab('show');
+					//若同一場賽事過關或過關組合僅能選擇一種遊戲玩法，凍結過關與過關組合
+					$('#myTab li:eq(1) a').on('click',function(){
+						return false;
+					});
 				}
-
+				
 				//隱藏未投注的投注區
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);

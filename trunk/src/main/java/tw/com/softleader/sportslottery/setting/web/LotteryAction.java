@@ -16,10 +16,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
+import tw.com.softleader.sportslottery.setting.service.OddsService;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 /**
 @Author:Billy 
@@ -76,6 +79,13 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return SUCCESS;
 	}
 
+	public String lottery() throws Exception {
+
+		log.debug("lottery:");
+		
+		return Action.SUCCESS;
+	}
+	
 
 	public String delete(){
 		log.debug("LotteryAction delete");
