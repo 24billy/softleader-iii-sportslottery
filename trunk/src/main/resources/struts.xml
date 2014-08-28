@@ -21,7 +21,7 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>select,insert,delete</allowed-methods>
+		<allowed-methods>select,insert,delete,update</allowed-methods>
   	</action>
   	
     <action name="game" class="gameAction" method="execute"> 
