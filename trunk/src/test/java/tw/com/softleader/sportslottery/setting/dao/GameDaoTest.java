@@ -47,12 +47,12 @@ public class GameDaoTest extends BaseTest{
 //		models = dao.findByBallType("Baseball");
 //		log.debug("findByBallType models = {}", models);
 		
-		LocalDateTime date1 = new LocalDateTime();
-		date1 = LocalDateTime.parse("2014-08-18T00:00:00");//將時間自串轉成 LocalDateTime
-		LocalDateTime date2 = new LocalDateTime();
-		date2 = LocalDateTime.parse("2014-08-18T00:00:00");
-		LocalDateTime date3 = new LocalDateTime();
-		date3 = LocalDateTime.parse("2014-08-20T10:15:30");
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-08-18");//將時間自串轉成 LocalDateTime
+		LocalDate date2 = new LocalDate();
+		date2 = LocalDate.parse("2014-08-18");
+		LocalDate date3 = new LocalDate();
+		date3 = LocalDate.parse("2014-08-20");
 		
 		List<GameEntity> models = null;
 		models = dao.findForHistory(date1, date2, null);
