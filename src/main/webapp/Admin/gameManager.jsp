@@ -256,28 +256,23 @@
 			<div class="modal-content">
 			
 				<div id="statusModalHeader" class="modal-header">
-					<h3 id="statusModalTitle" class="modal-title">變更狀態</h3>
+					<h3 id="statusModalTitle" class="modal-title">設定最後比分</h3>
 				</div>
 				<!-- modal-header -->
 				
 				<div class="modal-body">
 				
 					<div class="row">
-						<div class="col-sm-12">
-							<h4 class="text-center">確認變更狀態？</h4>
-						</div>
-					</div>
-					<!-- .row -->
-					
-					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="">客隊分數</label>
+								<input class="form-control input-sm form-score" id="gameScoreAway" type="text" name="model.gameScoreAway">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="">主隊分數</label>
+								<input class="form-control input-sm form-score" id="gameScoreHome" type="text" name="model.gameScoreHome">
 							</div>
 						</div>
 					</div>
@@ -340,7 +335,9 @@
 		$('#btnStatus').click(function() {
 			$.post('<c:url value="/gameManager?method:update"/>', {
 				'model.id':$(this).val(),
-				'model.isEnd':true
+				'model.isEnd':true,
+				'model.gameScoreAway':$('#gameScoreAway').val(),
+				'model.gameScoreHome':$('#gameScoreHome').val()
 			}, function(data) {
 				window.location.reload(true);
 			});
@@ -419,8 +416,8 @@
 					}
 				});
 				
-			} 
-		};
+			}
+		}
 		
 		$('#teamAwayList').change(function() {
 			var value = $(this).val();
@@ -448,6 +445,14 @@
 			initval: 0,
 			step: 0.05,
 			decimals: 2,
+			buttondown_class: 'btn btn-info',
+            buttonup_class: 'btn btn-success'
+		});
+		
+		$('.form-score').TouchSpin({
+			min: 0,
+			initval: 0,
+			step: 1,
 			buttondown_class: 'btn btn-info',
             buttonup_class: 'btn btn-success'
 		});
