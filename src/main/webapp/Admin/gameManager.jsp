@@ -304,6 +304,16 @@
 <script>
 	(function($) {
 		
+		//Begin of catagory
+		var catagory = '${catagory}';
+		if (catagory == null || catagory == "") {
+			$('#catagory')[0].selectedIndex = 0;
+		} else {
+			$('#catagory').val(catagory);
+		}
+		//End of catagory
+		
+		//Begin of gameTable
 		var gameNumArray = new Array();
 		var gameList = $.parseJSON('${json}');
 		$.each(gameList, function(index, game) {
@@ -333,23 +343,9 @@
 			$('#gameList').append(child);
 			gameNumArray.push(game.gameNum);
 		});
+		//End of gameTable
 		
-		$('.btn-status').click(function() {
-			$('#btnStatus').val($(this).val());
-		});
-		
-		$('#btnStatus').click(function() {
-			
-			$.post('<c:url value="/gameManager?method:update"/>', {
-				'model.id':$(this).val(),
-				'model.isEnd':true,
-				'model.gameScoreAway':$('#gameScoreAway').val(),
-				'model.gameScoreHome':$('#gameScoreHome').val()
-			}, function(data) {
-				window.location.reload(true);
-			});
-		});
-		
+		//Begin of listTeam
 		$('#btnAddGame').click(function() {
 			$('#gameModalTitle').text("新增賽事");
 			listTeam(null);
@@ -360,10 +356,9 @@
 			listTeam($(this).val());
 		});
 		
-		var maxGameNum = Math.max.apply(Math, gameNumArray);
-		$('[name="model.gameNum"]').val(maxGameNum + 1);
-		
 		function listTeam(gameId) {
+			var maxGameNum = Math.max.apply(Math, gameNumArray);
+			$('[name="model.gameNum"]').val(maxGameNum + 1);
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
@@ -386,7 +381,6 @@
 				}
 				return str;
 			}
-			
 			
 			if (gameId != null) {
 				var url = '<c:url value="/gameManager?method:select"/>';
@@ -419,7 +413,9 @@
 				
 			}
 		}
+		//End of listTeam
 		
+		//Begin of teamListChangeEvent
 		$('#teamAwayList').change(function() {
 			var value = $(this).val();
 			$('#teamHomeList>option').prop('disabled', false).css('display', 'inline');
@@ -431,8 +427,79 @@
 			$('#teamAwayList>option').prop('disabled', false).css('display', 'inline');
 			$('#teamAwayList>option[value=' + value + ']').prop('disabled', true).css('display', 'none');
 		});
+		//End of teamListChangeEvent
 		
+		//Begin of btnStatus
+		$('.btn-status').click(function() {
+			$('#btnStatus').val($(this).val());
+		});
 		
+		$('#btnStatus').click(function() {
+			
+			$.post('<c:url value="/gameManager?method:update"/>', {
+				'model.id':$(this).val(),
+				'model.isEnd':true,
+				'model.gameScoreAway':$('#gameScoreAway').val(),
+				'model.gameScoreHome':$('#gameScoreHome').val()
+			}, function(data) {
+				$('#statusModal').modal(hide);
+				window.location.reload(true);
+			});
+		});
+		//End of btnStatus
+		
+		//Begin of btnMerge
+		$('#btnMerge').click(function() {
+			var gameId = $(this).val();
+			$.post('<c:url value="/gameManager?method:insert"/>', {
+				'model.id':gameId,
+				'model.ballType':$('[name="catagory"]').val(),
+				'model.leagueName':$('[name="model.leagueName"]').val(),
+				'model.gameNum':$('[name="model.gameNum"]').val(),
+				'model.gameTime':$('[name="model.gameTime"]').val(),
+				'teamAwayId':$('[name="teamAwayId"]').val(),
+				'teamHomeId':$('[name="teamHomeId"]').val()
+			}, function(data) {
+				addOdds(data);
+			});
+			
+			function addOdds(gameId) {
+				
+				$('.form-decimal').each(function() {
+					var oddType = $(this).attr('name');
+					if (oddType.indexOf('EO_') != -1) {
+						oddType = oddType.replace('EO_', '');
+					}
+					$.post('<c:url value="/odds?method:insert"/>', {
+						'model.gameId':gameId,
+				    	'model.oddType':oddType,
+				    	'model.oddValue':$(this).val()
+					}, function(data) {
+						$('#gameModal').modal('hide');
+						window.location.reload(true);
+					});
+				});
+			}
+		});
+		//End of btnMerge
+		
+		//Begin of btnDelete		
+		$('.btn-del').click(function() {
+			$('#btnDelete').val($(this).val());
+		});
+		
+		$('#btnDelete').click(function() {
+			
+			$.post('<c:url value="/gameManager?method:delete"/>', {
+				'model.id':$(this).val()
+			}, function(data) {
+				$('#deleteModal').modal('hide');
+        		window.location.reload(true);
+			});
+		});
+		//End of btnDelete
+		
+		//Begin of styling
 		$('#gameTime').datetimepicker({
 			defaultDate:new Date(),
 			minDate: new Date(),
@@ -458,97 +525,13 @@
             buttonup_class: 'btn btn-success'
 		});
 		
-		var catagory = '${catagory}';
-		if (catagory == null || catagory == "") {
-			$('#catagory')[0].selectedIndex = 0;
-		} else {
-			$('#catagory').val(catagory);
-		}
-		
-		$('#btnMerge').click(function() {
-			var gameId = $(this).val();
-			$.ajax({
-				url: '<c:url value="/gameManager?method:insert"/>',
-				dataType: 'text',
-				data: {
-					'model.id':gameId,
-					'model.ballType':$('[name="catagory"]').val(),
-					'model.leagueName':$('[name="model.leagueName"]').val(),
-					'model.gameNum':$('[name="model.gameNum"]').val(),
-					'model.gameTime':$('[name="model.gameTime"]').val(),
-					'teamAwayId':$('[name="teamAwayId"]').val(),
-					'teamHomeId':$('[name="teamHomeId"]').val()
-				},
-				success: function(data) {
-					if (data != 'failed') {
-						addOdds(data);
-						
-							
-					} else {
-						
-					}
-					
-				}
-			}).done(function() {
-				$('#gameModal').modal('hide');
-				window.location.reload(true);
-			});
-		});
-		
-		function addOdds(gameId) {
-			
-			$('.form-decimal:enabled').each(function() {
-				var oddType = $(this).attr('name');
-				if (oddType.indexOf('EO_') != -1) {
-					oddType = oddType.replace('EO_', '');
-				}
-				$.ajax({
-					url: '<c:url value="/odds?method:insert"/>',
-				    dataType: 'text',
-				    data: {
-				    	'model.gameId':gameId,
-				    	'model.oddType':oddType,
-				    	'model.oddValue':$(this).val()
-				    },
-				    success: function(data) {
-				    	if (data == 'success') {
-				    			
-				    	} else {
-				    		
-				    	}
-				    	
-				    }
-				});
-			});
-		};
-				
-		$('.btn-del').click(function() {
-			$('#btnDelete').val($(this).val());
-		});
-		
-		$('#btnDelete').click(function() {
-			$.ajax({
-        		url: '<c:url value="/gameManager?method:delete"/>',
-        		dataType: 'text',
-        		data: {
-        			'model.id':$(this).val()
-        		},
-        		success: function(data) {
-        			
-        			if (data == 'deleted') {
-        			}
-        		},
-        	}).done(function() {
-        		$('#deleteModal').modal('hide');
-        		window.location.reload(true);
-        	});
-		});
-		
 		$('#gameTable').dataTable({
 			responsive: true,
 			autoWidth: false,
 			order: [[ 4, "desc" ]]
 		});
+		//End of styling
+		
 	})(jQuery);
 </script>
 </body>
