@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
+import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 import com.google.gson.Gson;
@@ -32,6 +32,8 @@ public class GameAction extends ActionSupport {
 	private GameService service;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private OddsService oddsService;
 	private GameEntity model;
 	private List<GameEntity> models;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
@@ -190,13 +192,48 @@ public class GameAction extends ActionSupport {
 	
 	public String update() {
 		log.debug("update...");
-		GameEntity entity = service.getById(model.getId());
+		
+		Long gameId = model.getId();
+		Long gameScoreAway = model.getGameScoreAway();
+		Long gameScoreHome = model.getGameScoreHome();
+		GameEntity entity = service.getById(gameId);
 		entity.setIsEnd(model.getIsEnd());
-		entity.setGameScoreAway((model.getGameScoreAway()));
-		entity.setGameScoreHome((model.getGameScoreHome()));
+		entity.setGameScoreAway(gameScoreAway);
+		entity.setGameScoreHome(gameScoreHome);
+		
+		String su = null;
+		String ats = null;
+		String sc = null;
+		String eo = null;
+		
+		if (gameScoreAway > gameScoreHome) {
+			su = "SU_A";
+		} else if (gameScoreAway < gameScoreHome) {
+			su = "SU_H";
+		}
+		
+		if (gameScoreAway > gameScoreHome + 1.5) {
+			su = "ATS_A";
+		} else if (gameScoreAway < gameScoreHome + 1.5) {
+			su = "ATS_H";
+		}
+		
+		if ((gameScoreAway + gameScoreHome) > 7.5) {
+			sc = "SC_H";
+		} else {
+			sc = "SC_L";
+		}
+		
+		if ((gameScoreAway + gameScoreHome) % 2 == 0) {
+			eo = "EVEN";
+		} else {
+			eo = "ODD";
+		}
+		
 		String result = null;
 		try {
 			service.update(entity);
+			oddsService.setIsPass(gameId, su, ats, sc, eo);
 			result = "success";
 		} catch (Exception e) {
 			result = "failed";

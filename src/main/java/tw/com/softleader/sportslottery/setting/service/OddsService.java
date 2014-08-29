@@ -62,7 +62,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		return oddValue;
 	}
 	
-	public void setIsPass(Long gameId, String su, String ats, String sc, String oe) {
+	public void setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
 		entity = dao.findByGameIdWithOddType(gameId, su).get(0);
 		entity.setIsPass(true);
@@ -73,7 +73,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		entity = dao.findByGameIdWithOddType(gameId, sc).get(0);
 		entity.setIsPass(true);
 		dao.update(entity);
-		entity = dao.findByGameIdWithOddType(gameId, oe).get(0);
+		entity = dao.findByGameIdWithOddType(gameId, eo).get(0);
 		entity.setIsPass(true);
 		dao.update(entity);
 		
