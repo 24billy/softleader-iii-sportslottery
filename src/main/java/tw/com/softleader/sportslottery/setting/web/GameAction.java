@@ -213,9 +213,9 @@ public class GameAction extends ActionSupport {
 		}
 		
 		if (gameScoreAway > gameScoreHome + 1.5) {
-			su = "ATS_A";
+			ats = "ATS_A";
 		} else if (gameScoreAway < gameScoreHome + 1.5) {
-			su = "ATS_H";
+			ats = "ATS_H";
 		}
 		
 		if ((gameScoreAway + gameScoreHome) > 7.5) {
@@ -229,7 +229,6 @@ public class GameAction extends ActionSupport {
 		} else {
 			eo = "ODD";
 		}
-		
 		String result = null;
 		try {
 			service.update(entity);

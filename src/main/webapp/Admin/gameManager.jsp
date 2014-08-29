@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 </head>
 <body>
-	<!-- Begin of Game Table -->
+	<!-- Begin of gameTable -->
 	<div id="page-wrapper">
 		
 		<div class="container top20">
@@ -61,7 +61,7 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-	<!-- End of Game Table -->
+	<!-- End of gameTable -->
 	
 	<!-- Begin of gameModal -->
 	<div class="modal fade" id="gameModal" role="dialog" aria-labelledby="gameModalTitle" aria-hidden="true" tabindex="-1">
@@ -85,7 +85,7 @@
 										<div class="form-group">
 											<label for="leagueName">聯盟名稱</label>
 											<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-												<option value="MLB" selected>美國職棒</option>
+												<option value="美國職棒" selected>美國職棒</option>
 											</select>
 										</div>
 									</div>
@@ -154,13 +154,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="ATS_A">讓分(客)</label>
+											<label for="ATS_A">讓分(客)(-1.5)</label>
 											<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="ATS_H">讓分(主)</label>
+											<label for="ATS_H">讓分(主)(+1.5)</label>
 											<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 										</div>
 									</div>
@@ -170,13 +170,13 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="SC_H">總分(大)</label>
+											<label for="SC_H">總分(大7.5)</label>
 											<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="SC_L">總分(小)</label>
+											<label for="SC_L">總分(小7.5)</label>
 											<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
 										</div>
 									</div>
@@ -357,12 +357,13 @@
 		});
 		
 		function listTeam(gameId) {
+			resetInput();
 			var maxGameNum = Math.max.apply(Math, gameNumArray);
 			$('[name="model.gameNum"]').val(maxGameNum + 1);
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
-			$.getJSON('<c:url value="/team"/>', function(data) {	
+			$.getJSON('<c:url value="/team"/>').done(function(data) {	
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
@@ -383,14 +384,14 @@
 			
 			if (gameId != null) {
 				var url = '<c:url value="/gameManager?method:select"/>';
-				$.getJSON(url, {'model.id':gameId}, function(data) {
+				$.getJSON(url, {'model.id':gameId}).done(function(data) {
 					var dateTime = new Date(data.gameTime.iLocalMillis);
 					var year = dateTime.getUTCFullYear();
 					var month = addZero(dateTime.getUTCMonth() + 1);
 					var date = addZero(dateTime.getUTCDate());
 					var hours = addZero(dateTime.getUTCHours());
 					var minutes = addZero(dateTime.getUTCMinutes());
-					$('[name="model.leagueName"]>option').filter(function() {
+					$('[name="model.leagueName"] option').filter(function() {
 						return $(this).text() == data.leaguName;
 					}).prop('selected', true);
 					$('[name="model.gameNum"]').val(data.gameNum);
@@ -417,14 +418,14 @@
 		//Begin of teamListChangeEvent
 		$('#teamAwayList').change(function() {
 			var value = $(this).val();
-			$('#teamHomeList>option').prop('disabled', false).css('display', 'inline');
-			$('#teamHomeList>option[value=' + value + ']').prop('disabled', true).css('display', 'none');
+			$('#teamHomeList option').prop('disabled', false).css('display', 'inline');
+			$('#teamHomeList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
 		});
 		
 		$('#teamHomeList').change(function() {
 			var value = $(this).val();
-			$('#teamAwayList>option').prop('disabled', false).css('display', 'inline');
-			$('#teamAwayList>option[value=' + value + ']').prop('disabled', true).css('display', 'none');
+			$('#teamAwayList option').prop('disabled', false).css('display', 'inline');
+			$('#teamAwayList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
 		});
 		//End of teamListChangeEvent
 		
@@ -440,7 +441,9 @@
 				'model.isEnd':true,
 				'model.gameScoreAway':$('#gameScoreAway').val(),
 				'model.gameScoreHome':$('#gameScoreHome').val()
-			}, function(data) {
+			});
+			
+			$(document).ajaxStop(function() {
 				window.location.reload(true);
 			});
 		});
@@ -456,27 +459,41 @@
 				'model.gameNum':$('[name="model.gameNum"]').val(),
 				'model.gameTime':$('[name="model.gameTime"]').val(),
 				'teamAwayId':$('[name="teamAwayId"]').val(),
-				'teamHomeId':$('[name="teamHomeId"]').val()
-			}, function(data) {
-				addOdds(data);
-			});
-			
-			function addOdds(gameId) {
+				'teamHomeId':$('[name="teamHomeId"]').val(),
+				'model.gameScoreAway':0,
+				'model.gameScoreHome':0
+			}).done(function(data) {
 				
 				$('.form-decimal').each(function() {
+					var oddCombination = 0;
+					
 					var oddType = $(this).attr('name');
 					if (oddType.indexOf('EO_') != -1) {
 						oddType = oddType.replace('EO_', '');
+					} else if (oddType == 'ATS_A') {
+						oddCombination = -1.5;
+					} else if (oddType == 'ATS_H') {
+						oddCombination = 1.5;
+					} else if (oddType.indexOf('SC_') != -1) {
+						oddCombination = 7.5;
 					}
+					alert(oddCombination);
 					$.post('<c:url value="/odds?method:insert"/>', {
-						'model.gameId':gameId,
+						'model.gameId':data,
 				    	'model.oddType':oddType,
-				    	'model.oddValue':$(this).val()
-					}, function(data) {
-						window.location.reload(true);
+				    	'model.oddValue':$(this).val(),
+				    	'model.oddCombination':oddCombination,
+				    	'model.count':0,
+				    	'model.isPass':false
+					}).done(function(data) {
+						return true;
 					});
 				});
-			}
+			});
+				
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
 		});
 		//End of btnMerge
 		
@@ -489,37 +506,46 @@
 			
 			$.post('<c:url value="/gameManager?method:delete"/>', {
 				'model.id':$(this).val()
-			}, function(data) {
-        		window.location.reload(true);
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
 			});
 		});
 		//End of btnDelete
 		
 		//Begin of styling
-		$('#gameTime').datetimepicker({
-			defaultDate:new Date(),
-			minDate: new Date(),
-			format: 'Y-m-d H:i',
-			mask:true,
-			lang:'ch'
-		});
+		function resetInput() {
+			$('#gameTime').val('');
+			$('.form-decimal').val('0.00')
+			
+			$('#gameTime').datetimepicker({
+				defaultDate:new Date(),
+				minDate: new Date(),
+				format: 'Y-m-d H:i',
+				mask:true,
+				lang:'ch'
+			});
+			
+			$('.form-decimal').TouchSpin({
+				min: 0,
+				initval: 0,
+				step: 0.05,
+				decimals: 2,
+				buttondown_class: 'btn btn-info',
+	            buttonup_class: 'btn btn-success'
+			});
+			
+			$('.form-score').TouchSpin({
+				min: 0,
+				initval: 0,
+				step: 1,
+				buttondown_class: 'btn btn-info',
+	            buttonup_class: 'btn btn-success'
+			});
+		}
 		
-		$('.form-decimal').TouchSpin({
-			min: 0,
-			initval: 0,
-			step: 0.05,
-			decimals: 2,
-			buttondown_class: 'btn btn-info',
-            buttonup_class: 'btn btn-success'
-		});
-		
-		$('.form-score').TouchSpin({
-			min: 0,
-			initval: 0,
-			step: 1,
-			buttondown_class: 'btn btn-info',
-            buttonup_class: 'btn btn-success'
-		});
+		resetInput();
 		
 		$('#gameTable').dataTable({
 			responsive: true,

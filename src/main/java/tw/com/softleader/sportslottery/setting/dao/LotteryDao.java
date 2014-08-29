@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
-import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 /**
  * @Author:Billy

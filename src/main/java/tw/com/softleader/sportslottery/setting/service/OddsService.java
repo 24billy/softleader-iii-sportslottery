@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,28 +63,37 @@ public class OddsService extends GenericService<OddsEntity> {
 		return oddValue;
 	}
 	
-	public void setIsPass(Long gameId, String su, String ats, String sc, String eo) {
+	public boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
-		
-		if (su != null) {
-			entity = dao.findByGameIdWithOddType(gameId, su).get(0);
-			entity.setIsPass(true);
-			dao.update(entity);
+		try {
+			if (StringUtils.isNotEmpty(su)) {
+				entity = dao.findByGameIdWithOddType(gameId, su).get(0);
+				entity.setIsPass(true);
+				dao.update(entity);
+			}
+			if (StringUtils.isNotEmpty(ats)) {
+				entity = dao.findByGameIdWithOddType(gameId, ats).get(0);
+				entity.setIsPass(true);
+				dao.update(entity);
+			}
+			if (StringUtils.isNotEmpty(sc)) {
+				entity = dao.findByGameIdWithOddType(gameId, sc).get(0);
+				entity.setIsPass(true);
+				dao.update(entity);
+			}
+			if (StringUtils.isNotEmpty(eo)) {
+				entity = dao.findByGameIdWithOddType(gameId, eo).get(0);
+				entity.setIsPass(true);
+				dao.update(entity);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		if (ats != null) {
-			entity = dao.findByGameIdWithOddType(gameId, ats).get(0);
-			entity.setIsPass(true);
-			dao.update(entity);
-		}
-		if (sc != null) {
-			entity = dao.findByGameIdWithOddType(gameId, sc).get(0);
-			entity.setIsPass(true);
-			dao.update(entity);
-		}
-		if (eo != null) {
-			entity = dao.findByGameIdWithOddType(gameId, eo).get(0);
-			entity.setIsPass(true);
-			dao.update(entity);
-		}
+	}
+	
+	public List<OddsEntity> getByGameIdWithOddType(Long gameId, String oddType) {
+		return dao.findByGameIdWithOddType(gameId, oddType);
 	}
 }
