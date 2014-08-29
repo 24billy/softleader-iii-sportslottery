@@ -15,8 +15,8 @@
 <!-- 下列六行敘述設定登出後要顯示的感謝訊息 -->
 
 <script type="text/javascript">
-	document.location.href="<c:url value='/index.jsp'/>"
-	//setTimeout('document.location.href="<c:url value='/index.jsp'/>"' ,3000);
+	document.location.href="<c:url value='/goIndex'/>";
+	// setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
 	
 </script>
 <%

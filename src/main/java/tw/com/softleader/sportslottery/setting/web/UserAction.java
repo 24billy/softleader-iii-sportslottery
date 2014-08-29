@@ -127,7 +127,7 @@ public class UserAction extends ActionSupport {
 
 	}
 	
-	
+	//忘記密碼 寄送新密碼到使用者email
 	static Properties properties = new Properties();
 	static {
 		System.out.println("初始化Eamilproperites");
@@ -137,8 +137,22 @@ public class UserAction extends ActionSupport {
 		properties.put("mail.smtp.auth", "true"); properties.put("mail.smtp.port", "465");
 	}
 	public String forgetPassword() {
-		log.debug(to);
+		log.debug(to + " : " + account);
 		String ret = SUCCESS;
+		String body=null;
+		UserEntity userEntity = service.getByUserAccount(account);
+		if(userEntity!=null) {
+			if(userEntity.getUserEmail().equals(to)) {
+				body = "您的密碼暫為:" + userEntity.getUserPassword(); 
+			}else {
+				log.debug("Email不正確");
+				this.addFieldError("emailCheck", this.getText("invalid.fieldvalue.forget.email"));
+			}
+		}else {
+			log.debug("帳號不正確");
+			this.addFieldError("accountCheck", this.getText("invalid.fieldvalue.forget.account"));
+		}
+		
 		try { Session session = Session.getDefaultInstance(properties, 
 				new javax.mail.Authenticator() { 
 					protected PasswordAuthentication getPasswordAuthentication() {
@@ -148,7 +162,7 @@ public class UserAction extends ActionSupport {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject("您的密碼來了"); message.setText("HAHAHA"); Transport.send(message);
+			message.setSubject("您的密碼來了,請盡快更改"); message.setText(body); Transport.send(message);
 		} catch(Exception e) { 
 			ret = ERROR; 
 			e.printStackTrace(); 
@@ -190,8 +204,8 @@ public class UserAction extends ActionSupport {
 		return INPUT;
 	}
 	
+	//更新使用者資料
 	public String update() throws Exception {
-		
 		log.debug("修改會員資料");
 		log.debug("Model = {}", model);
 		//model.setModifier("Guest");
@@ -199,8 +213,6 @@ public class UserAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map upSuccess = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)upSuccess.get("user");
-		
-		
 		try {
 			if (model!=null) {
 				userEntity.setUserName(model.getUserName());
@@ -220,10 +232,9 @@ public class UserAction extends ActionSupport {
 			request.setAttribute("updateFail", "修改失敗");
 			e.printStackTrace();
 		}
-		
-		
 		return SUCCESS;
 	}
+	
 	
 	public String check() throws Exception {
 		log.debug("check...");
