@@ -50,4 +50,19 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		return query.setLong("gameId", gameId).list();
 	}
 	
+	public List<OddsEntity> findByGameIdWithOddType(Long gameId, String oddType) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from OddsEntity odds where odds.gameId = :gameId and odds.oddType like :oddType");
+		             //from OddsEntity odds where odds.gameId.gameTime < {inputtime} and odds.gameId.isEnd == 'true'
+		
+		StringBuffer sb = new StringBuffer();
+		if (StringUtils.isNotEmpty(oddType)) {
+			sb.append(oddType);
+		}
+		sb.append("%");
+		
+		return query.setString("oddType", sb.toString()).list();
+		
+	}
+	
 }
