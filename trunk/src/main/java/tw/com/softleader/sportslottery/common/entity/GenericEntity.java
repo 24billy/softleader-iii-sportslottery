@@ -8,9 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDateTime;
-
 @MappedSuperclass
 public abstract class GenericEntity implements Serializable {
 	

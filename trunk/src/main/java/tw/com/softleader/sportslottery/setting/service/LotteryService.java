@@ -10,8 +10,6 @@ import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
-import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
-import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 /**
 @Author:Billy 

@@ -2,10 +2,10 @@ package tw.com.softleader.sportslottery.common.service;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
+
+import com.google.gson.Gson;
 
 public abstract class GenericService<T extends GenericEntity> {
 

@@ -1,6 +1,5 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.UserDao;
-import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 @Service
