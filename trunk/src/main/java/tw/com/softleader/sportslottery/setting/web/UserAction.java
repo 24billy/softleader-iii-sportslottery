@@ -48,8 +48,8 @@ public class UserAction extends ActionSupport {
 	private String json;
 	private InputStream inputStream;
 	private LocalDate time;
-	private String from = "tsubasa1109";
-	private String password = "adcis1109";
+	private String from = "sportslott123";
+	private String password = "forget123";
 	private String to;
 	private String account;
 	
