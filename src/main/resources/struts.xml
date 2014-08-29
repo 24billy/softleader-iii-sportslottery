@@ -124,7 +124,7 @@
          <result name="error">/Security/Email/index.jsp</result>
      </action>
 
-	<action name="lottery" class="lotteryAction" method="execute">
+	<action name="lottery" class="lotteryAction" method="lottery">
 		<result name="success">/Event/lottery.jsp</result>
 	</action>
 

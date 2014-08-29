@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
+import tw.com.softleader.sportslottery.setting.service.UserService;
+import tw.com.softleader.sportslottery.setting.util.OddsIdList;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
@@ -32,19 +35,36 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	
 	@Autowired
 	private LotteryService service;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private OddsService oddsService;
+	
 	private LotteryEntity model;	
 	private List<LotteryEntity> models;
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 	private InputStream inputStream;
 	private String json;
 	private HttpSession session;
-	
+	private OddsIdList oddsIdList;
+
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		log.debug("get Session...");
 		session = request.getSession();
 	}
 	
+	
+	public OddsIdList getOddsIdList() {
+		return oddsIdList;
+	}
+
+
+	public void setOddsIdList(OddsIdList oddsIdList) {
+		this.oddsIdList = oddsIdList;
+	}
+
+
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -80,9 +100,46 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 
 	public String lottery() throws Exception {
-
-		log.debug("lottery:");
+		System.out.println("oddsIdList="+oddsIdList);
 		
+		OddsEntity oddsEntity = new OddsEntity();
+		
+		model.setOddsId1(oddsService.getById(oddsIdList.getOddId1()));
+		if(oddsIdList.getOddId2()!=null){
+			model.setOddsId2(oddsService.getById(oddsIdList.getOddId2()));
+		}
+		if(oddsIdList.getOddId3()!=null){
+			model.setOddsId3(oddsService.getById(oddsIdList.getOddId3()));
+		}
+		if(oddsIdList.getOddId4()!=null){
+			model.setOddsId4(oddsService.getById(oddsIdList.getOddId4()));
+		}
+		if(oddsIdList.getOddId5()!=null){
+			model.setOddsId5(oddsService.getById(oddsIdList.getOddId5()));
+		}
+		if(oddsIdList.getOddId6()!=null){
+			model.setOddsId6(oddsService.getById(oddsIdList.getOddId6()));
+		}
+		if(oddsIdList.getOddId7()!=null){
+			model.setOddsId7(oddsService.getById(oddsIdList.getOddId7()));
+		}
+		if(oddsIdList.getOddId8()!=null){
+			model.setOddsId8(oddsService.getById(oddsIdList.getOddId8()));
+		}
+		
+		
+		UserEntity userEntity = new UserEntity();
+		userEntity =userService.getById(1L);
+		model.setUserId(userEntity);
+		model.setConfirmTime(new LocalDateTime());
+		log.debug("Execute lottery:");
+		System.out.println("model="+model);
+		try {
+			service.insert(model);
+		} catch (Exception e) {
+			log.debug("!!LotteryAction insertFail!!");
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
