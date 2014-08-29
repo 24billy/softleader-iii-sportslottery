@@ -210,10 +210,10 @@
 				    	var row = $('#gameTable').DataTable().row(tr);
 				    	if (row.child.isShown()) {
 				      		row.child.remove();
-				    		tr.removeClass('shown');
+				    		tr.removeClass('shown info');
 				    	}else {
 				    		row.child(formatDataRow(row.data())).show();
-				    		tr.addClass('shown');
+				    		tr.addClass('shown info');
 				    	}
 				    });
 				}
