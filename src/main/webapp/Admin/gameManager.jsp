@@ -339,6 +339,7 @@
 		});
 		
 		$('#btnStatus').click(function() {
+			
 			$.post('<c:url value="/gameManager?method:update"/>', {
 				'model.id':$(this).val(),
 				'model.isEnd':true,
