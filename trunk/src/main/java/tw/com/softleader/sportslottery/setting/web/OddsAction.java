@@ -8,6 +8,7 @@ package tw.com.softleader.sportslottery.setting.web;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -88,11 +89,15 @@ public class OddsAction extends ActionSupport {
     public String insert() {
     	log.debug("insert...");
     	String result = null;
+    	if (model.getOddCombination() == null) {
+    		model.setOddCombination(new BigDecimal("0"));
+    	}
+    	
     	try {
-    		service.insert(model);
-    		result = "SUCCESS";
+    		service.update(model);
+    		result = "success";
     	} catch (Exception e) {
-    		result = "FAILED";
+    		result = "failed";
     	}
     	
     	inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
