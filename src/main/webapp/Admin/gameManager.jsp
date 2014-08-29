@@ -44,6 +44,7 @@
 						<thead>
 							<tr>
 								<th>賽事編號</th>
+								<th>聯盟</th>
 								<th>客隊隊伍</th>
 								<th>主隊隊伍</th>
 								<th>狀態</th>
@@ -309,6 +310,7 @@
 			var child = '';
 			child += '<tr>';
 			child += '<td>' + game.gameNum + '</td>';
+			child += '<td>' + game.leagueName + '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			
@@ -319,7 +321,11 @@
 			}
 			
 			child += '<td>';
-			child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
+			if (game.isEnd) {
+				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
+			} else {
+				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
+			}
 			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
@@ -382,7 +388,6 @@
 			
 			
 			if (gameId != null) {
-				
 				var url = '<c:url value="/gameManager?method:select"/>';
 				$.getJSON(url, {'model.id':gameId}, function(data) {
 					var dateTime = new Date(data.gameTime.iLocalMillis);
@@ -409,11 +414,6 @@
 						$('.form-decimal').val('0.00');
 					}
 					
-					if (data.isEnd) {
-						$('#gameForm *').prop('disabled', true);
-					} else {
-						$('#gameForm *').prop('disabled', false);
-					}
 				});
 				
 			}
@@ -545,7 +545,8 @@
 		
 		$('#gameTable').dataTable({
 			responsive: true,
-			autoWidth: false
+			autoWidth: false,
+			order: [[ 4, "desc" ]]
 		});
 	})(jQuery);
 </script>
