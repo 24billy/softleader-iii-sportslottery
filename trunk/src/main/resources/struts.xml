@@ -121,7 +121,7 @@
 	<!-- email -->
     <action name="emailer" class="userAction" method="forgetPassword">
          <result name="success">/Security/Email/success.jsp</result>
-         <result name="error">/Security/Email/error.jsp</result>
+         <result name="error">/Security/Email/index.jsp</result>
      </action>
 
 	<action name="lottery" class="lotteryAction" method="execute">

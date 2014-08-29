@@ -14,10 +14,11 @@
    
    <label for="account">輸入您註冊的帳號</label><br/>
    <input type="text" name="account"/><br/>
+   <div>${fieldErrors.accountCheck}</div>
    
    <label for="to">輸入您註冊的Email</label><br/>
    <input type="text" name="to"/><br/>
-   
+   <div>${fieldErrors.emailCheck}</div>
    <input type="submit" value="發信" />
    <s:submit value="Send Email" method="execute"/>
    </s:form>
