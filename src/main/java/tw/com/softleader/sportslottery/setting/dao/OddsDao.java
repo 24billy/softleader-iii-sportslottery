@@ -61,7 +61,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		}
 		sb.append("%");
 		
-		return query.setString("oddType", sb.toString()).list();
+		return query.setLong("gameId", gameId).setString("oddType", sb.toString()).list();
 		
 	}
 	
