@@ -198,16 +198,23 @@
 
 								<div>
 									<div style="width: 50%; display: inline-block" >總價</div>
-									<div class="singleCapital" style=" display: inline-block"
-										 ></div>
+									<div id="singleCapital" style=" display: inline-block"										 ></div>
 								</div>
 								<div>
 									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
-									<div id="singleTopPrice" style=" display: inline-block"
-										></div>
+									<div id="singleTopPrice" style=" display: inline-block"										></div>
 								</div>
-								<div hidden="true">
-									<input type="text" class="singleCapital" name="model.capital" value="">
+								<div >
+									<input type="text" id="sCapital" name="model.capital" value="">
+									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
+									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
+									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
+									<input type="text" class="oddId4" name="oddsIdList.oddId4" value="">
+									<input type="text" class="oddId5" name="oddsIdList.oddId5" value="">
+									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
+									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
+									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
+									
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
@@ -231,16 +238,22 @@
 
 								<div>
 									<div style="width: 50%; display: inline-block" >總價</div>
-									<div class="passCapital" style=" display: inline-block"
-										 ></div>
+									<div id="passCapital" style=" display: inline-block"										 ></div>
 								</div>
 								<div>
 									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
-									<div id="passTopPrice" style=" display: inline-block"
-										></div>
+									<div id="passTopPrice" style=" display: inline-block"										></div>
 								</div>
-								<div id="lotteryOdds" hidden="true">
-									<input type="text" class ="passCapital" name="model.capital" value="">
+								<div id="lotteryOdds" >
+									<input type="text" id ="pCapital" name="model.capital" value="">
+									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
+									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
+									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
+									<input type="text" class="oddId4" name="oddsIdList.oddId4" value="">
+									<input type="text" class="oddId5" name="oddsIdList.oddId5" value="">
+									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
+									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
+									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
@@ -594,21 +607,22 @@
 						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
 						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
-						$('#lotteryOdds > input:eq('+(lotteryId-1)+')').attr("value",userOddId);
-
+						
+					//加入odd至投注form中
+					    $('.oddId'+lotteryId).val(userOddId);
 					lotteryId++;
 				});
 				//更新過關組合類型與計算金額
 				console.log("combination:"+combination);
 				$('#passBet').html(1);
-				$('.passCapital').html($('#betValue').attr("value")*capitalValue+"元");
+				$('#passCapital').html($('#betValue').attr("value")*capitalValue+"元");
 				$('#passTopPrice').html(Math.floor(passPrice*100)+"元");
-
+				$('#pCapital').val($('#betValue').attr("value")*capitalValue);
 				
 				$('#singleBet').html(userOddIds.length);
-				$('.singleCapital').html((userOddIds.length)*$('#betValue').attr("value")*capitalValue+"元");
+				$('#singleCapital').html((userOddIds.length)*$('#betValue').attr("value")*capitalValue+"元");
 				$('#singleTopPrice').html(Math.floor(singlePrice*100)+"元");
-			
+				$('#sCapital').val((userOddIds.length)*$('#betValue').attr("value")*capitalValue);
 				if((userOddIds.length>=2)&&combination){
 					//過關
 					$('#myTab li:eq(1) a').tab('show');
@@ -626,7 +640,9 @@
 				//隱藏未投注的投注區
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);
+					$('.oddId'+lotteryId).val("");
 					lotteryId++;
+					
 				}
 				//刪除指定投注
 				$('td[name="oddList"] .close').click(function(){
