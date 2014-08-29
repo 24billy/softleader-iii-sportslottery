@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 <style>
 	td.details-control {
@@ -29,7 +30,7 @@
 		<div class="container top20">
 			
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
 							<select class="form-control form-ball-type" id="ballType">
@@ -61,7 +62,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<!-- <div class="table-responsive"> -->
-						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped">
+						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped nowrap">
 							<thead>
 								<tr>
 									<th></th>
@@ -104,6 +105,7 @@
 <script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 
 <script>
@@ -187,7 +189,7 @@
 				        		'defaultContent': ''
 				        		},
 				        		{"data": "gameNum"},
-				        		{ "data": function(row, type, val, meta){
+				        		{"data": function(row, type, val, meta){
 				        			timeString = "";
 									timeString += millisecondToDate(row.gameTime.iLocalMillis);
 									timeString += " ";
@@ -199,8 +201,8 @@
 				        		{"data": null},
 				        		{"data": "isEnd"}
 				        ],
-				        "order": [[2, 'asc']],
-						'responsive': true
+				        
+				        "order": [[2, 'asc']]
 					});
 					
 					$('#gameList').on('click', 'td.details-control', function () {
@@ -229,51 +231,6 @@
 			        '</tr>'+
 			    '</table>';
 			}
-
-			/*
-			$.ajax({
-				url:'<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />',
-				type:'post',
-				dataType:'json',
-				data:{
-					'complexTimeBegin':$('#timeBegin').val(),
-					'complexTimeEnd':$('#timeEnd').val(),
-					'complexBallType':$('#ballType').val(),
-					'complexTeamName':$('#teamName').val(),
-					'complexIsEnd':isEnd
-				},
-				success:function(datas){
-					console.log(datas);
-				
-					if(table){
-						$('#gameTable').DataTable().destroy();
-					}
-					$('#gameList').html("");
-					$.each(datas, function(index, game){
-						var dataString = "";
-						
-						timeString = "";
-						timeString += millisecondToDate(game.gameTime.iLocalMillis);
-						timeString += " ";
-						timeString += millisecondToTime(game.gameTime.iLocalMillis);
-						
-						dataString += "<tr>";
-						dataString += "<td></td>";
-						dataString += "<td>" + game.gameNum + "</td>";
-						dataString += "<td>" + timeString + "</td>";
-						dataString += "<td>" + game.teamAway.teamName + "</td>";
-						dataString += "<td>" + game.teamHome.teamName + "</td>";
-						dataString += "<td>" + "none" + "</td>";
-						dataString += "<td>" + game.isEnd + "</td>";
-						dataString += "</tr>";
-						$('#gameList').append(dataString);
-					});
-					table = $('#gameTable').dataTable({
-						responsive: true
-					});
-				}
-			});
-			*/
 		}
 		
 		renewData();
