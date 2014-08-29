@@ -172,7 +172,7 @@ public class GameDao extends GenericDao<GameEntity>{
 			query.setLong("gameNum", gameNum);
 		}
 		if (hasTeamName) {
-			query.setString("teamName", teamName + "%");
+			query.setString("teamName", "%" + teamName + "%");
 		}
 		if (hasIsEnd) {
 			query.setBoolean("isEnd", isEnd);

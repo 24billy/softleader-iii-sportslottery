@@ -4,7 +4,15 @@
 
 function millisecondToDate(millisecond){
 	var d = new Date(millisecond);
-	var str = d.getUTCFullYear() + "年" + (d.getUTCMonth()+1) + "月" + d.getUTCDate() + "日";
+	var month = (d.getUTCMonth()+1);
+	if (month<10) {
+		month = "0" + month;
+	}
+	var day = d.getUTCDate();
+	if (day<10) {
+		day = "0" + day;
+	}
+	var str = d.getUTCFullYear() + "年" + month + "月" + day + "日";
 	return str;
 }
 
@@ -29,12 +37,17 @@ function millisecondToTime(millisecond){
 		day = "大老你開掛吧";
 	}
 
+	var hr = d.getUTCHours();
+	if (hr<10){
+		hr = "0" + hr;	
+	}
+	
 	var min = d.getUTCMinutes();
-	if(min<10){
+	if (min<10){
 		min = "0" + min;	
 	}
 	
-	var str = d.getUTCHours() + ":" + (min) + "(" + day + ")";
+	var str = hr + ":" + (min) + "(" + day + ")";
 	return str;
 }
 

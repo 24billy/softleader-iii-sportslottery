@@ -13,6 +13,15 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
+<style>
+	td.details-control {
+	    background: url('<c:url value="/History/images/details_open.png"/>') no-repeat center center;
+	    cursor: pointer;
+	}
+	tr.shown td.details-control {
+	    background: url('<c:url value="/History/images/details_close.png"/>') no-repeat center center;
+	}
+</style>
 </head>
 <body>
 	<div id="page-wrapper">
@@ -55,6 +64,7 @@
 						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped">
 							<thead>
 								<tr>
+									<th></th>
 									<th>賽事編號</th>
 									<th>比賽日期</th>
 									<th>客隊隊伍</th>
@@ -65,6 +75,17 @@
 							</thead>
 							<tbody id="gameList">
 							</tbody>
+							<tfoot>
+								<tr>
+									<th></th>
+									<th>賽事編號</th>
+									<th>比賽日期</th>
+									<th>客隊隊伍</th>
+									<th>主隊隊伍</th>
+									<th>投注比</th>
+									<th>已結束</th>
+	                            </tr>
+							</tfoot>
 						</table>
 					<!-- </div>  -->
 					<!-- .table-responsive -->
@@ -136,7 +157,7 @@
 			if($('input:checked').val()!='none'){
 				isEnd = $('input:checked').val();
 			}
-			console.log(isEnd);
+			
 			$.ajax({
 				url:'<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />',
 				type:'post',
@@ -147,7 +168,79 @@
 					'complexBallType':$('#ballType').val(),
 					'complexTeamName':$('#teamName').val(),
 					'complexIsEnd':isEnd
+				},
+				success:function(datas){
+					if(table){
+						$('#gameList').off('click');
+						$('#gameTable').DataTable().rows().remove();
+						$('#gameTable').DataTable().destroy();
+					}
 					
+					table = $('#gameTable').dataTable({
+						'data': datas,
+						
+				        'columns': [
+				        		{
+				        		'class':'details-control',
+				        		'orderable':false,
+				        		'data':null,
+				        		'defaultContent': ''
+				        		},
+				        		{"data": "gameNum"},
+				        		{ "data": function(row, type, val, meta){
+				        			timeString = "";
+									timeString += millisecondToDate(row.gameTime.iLocalMillis);
+									timeString += " ";
+									timeString += millisecondToTime(row.gameTime.iLocalMillis);
+									return timeString;
+				        		}},
+				        		{"data": "teamAway.teamName" },
+				        		{"data": "teamHome.teamName" },
+				        		{"data": null},
+				        		{"data": "isEnd"}
+				        ],
+				        "order": [[2, 'asc']],
+						'responsive': true
+					});
+					
+					$('#gameList').on('click', 'td.details-control', function () {
+				    	var tr = $(this).closest('tr');
+				    	var row = $('#gameTable').DataTable().row(tr);
+				    	if (row.child.isShown()) {
+				      		row.child.remove();
+				    		tr.removeClass('shown');
+				    	}else {
+				    		row.child(formatDataRow(row.data())).show();
+				    		tr.addClass('shown');
+				    	}
+				    });
+				}
+			});
+			$(window).unbind('formatDataRow');
+			function formatDataRow (dataRow) {
+			    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+			        '<tr>'+
+			            '<td>gameNum:</td>'+
+			            '<td>' + dataRow.gameNum + '</td>'+
+			        '</tr>'+
+			        '<tr>'+
+			            '<td>Extra info:</td>'+
+			            '<td>And any further details here (images etc)...</td>'+
+			        '</tr>'+
+			    '</table>';
+			}
+
+			/*
+			$.ajax({
+				url:'<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />',
+				type:'post',
+				dataType:'json',
+				data:{
+					'complexTimeBegin':$('#timeBegin').val(),
+					'complexTimeEnd':$('#timeEnd').val(),
+					'complexBallType':$('#ballType').val(),
+					'complexTeamName':$('#teamName').val(),
+					'complexIsEnd':isEnd
 				},
 				success:function(datas){
 					console.log(datas);
@@ -165,6 +258,7 @@
 						timeString += millisecondToTime(game.gameTime.iLocalMillis);
 						
 						dataString += "<tr>";
+						dataString += "<td></td>";
 						dataString += "<td>" + game.gameNum + "</td>";
 						dataString += "<td>" + timeString + "</td>";
 						dataString += "<td>" + game.teamAway.teamName + "</td>";
@@ -179,6 +273,7 @@
 					});
 				}
 			});
+			*/
 		}
 		
 		renewData();
