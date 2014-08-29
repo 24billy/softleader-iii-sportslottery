@@ -11,7 +11,7 @@
 <body>
 <div class="home">
 	<jsp:include page="/home.jsp" />
-	<jsp:include page="/Security/updateUser.jsp" />
+	<jsp:include page="/MustBeUser/updateUser.jsp" />
 
 </div>
 <h2>Hello! ${user.userAccount} </h2>
