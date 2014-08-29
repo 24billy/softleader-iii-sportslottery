@@ -442,7 +442,6 @@
 				'model.gameScoreAway':$('#gameScoreAway').val(),
 				'model.gameScoreHome':$('#gameScoreHome').val()
 			}, function(data) {
-				$('#statusModal').modal(hide);
 				window.location.reload(true);
 			});
 		});
@@ -475,7 +474,6 @@
 				    	'model.oddType':oddType,
 				    	'model.oddValue':$(this).val()
 					}, function(data) {
-						$('#gameModal').modal('hide');
 						window.location.reload(true);
 					});
 				});
@@ -493,7 +491,6 @@
 			$.post('<c:url value="/gameManager?method:delete"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
-				$('#deleteModal').modal('hide');
         		window.location.reload(true);
 			});
 		});
