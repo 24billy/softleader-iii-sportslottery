@@ -362,8 +362,7 @@
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
-			var url = '<c:url value="/team"/>';
-			$.getJSON(url, function(data) {	
+			$.getJSON('<c:url value="/team"/>', function(data) {	
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
