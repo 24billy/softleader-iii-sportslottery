@@ -511,7 +511,7 @@
 				    	'model.oddValue':$(this).val()
 				    },
 				    success: function(data) {
-				    	if (data == 'SUCCESS') {
+				    	if (data == 'success') {
 				    			
 				    	} else {
 				    		
