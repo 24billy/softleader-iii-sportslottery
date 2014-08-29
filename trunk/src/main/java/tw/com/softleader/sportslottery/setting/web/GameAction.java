@@ -190,12 +190,13 @@ public class GameAction extends ActionSupport {
 	
 	public String update() {
 		log.debug("update...");
-		boolean status = model.getIsEnd();
-		model = service.getById(model.getId());
-		model.setIsEnd(status);
+		GameEntity entity = service.getById(model.getId());
+		entity.setIsEnd(model.getIsEnd());
+		entity.setGameScoreAway((model.getGameScoreAway()));
+		entity.setGameScoreHome((model.getGameScoreHome()));
 		String result = null;
 		try {
-			service.update(model);
+			service.update(entity);
 			result = "success";
 		} catch (Exception e) {
 			result = "failed";
