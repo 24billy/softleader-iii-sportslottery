@@ -326,17 +326,15 @@
 			
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
+				child += '<td>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			} else {
 				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button>';
-			}
-			
-			child += '<td>';
-			if (game.isEnd) {
-				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
-			} else {
+				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			}
-			child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			child += '</td>';
 			child += '</tr>';
 			
@@ -550,7 +548,24 @@
 		$('#gameTable').dataTable({
 			responsive: true,
 			autoWidth: false,
-			order: [[ 4, "desc" ]]
+			order: [[ 4, "desc" ]],
+			oLanguage: {
+				'sProcessing':   '處理中...',
+				'sLengthMenu':   '顯示 _MENU_ 項結果',
+				'sZeroRecords':  '沒有匹配結果',
+				'sInfo':         '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+				'sInfoEmpty':    '顯示第 0 至 0 項結果，共 0 項',
+				'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
+				'sInfoPostFix':  '',
+				'sSearch':       '搜索:',
+				'sUrl':          '',
+				'oPaginate': {
+					'sFirst':    '首頁',
+					'sPrevious': '上頁',
+					'sNext':     '下頁',
+					'sLast':     '尾頁'
+				}
+			}
 		});
 		//End of styling
 		
