@@ -77,26 +77,31 @@
 		</result>
 		<allowed-methods>select,insert</allowed-methods>
 	</action> 
-	
+	<!-- 檢查帳號重複 -->
 	<action name="checkAccount" class="userAction" method="check">
-		<result name="success">/Security/success.jsp</result>
-		<result name="fail">/Security/fail.jsp</result>
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="fail">/Security/Result/fail.jsp</result>
 	</action>
-	
+	<!-- 註冊帳號 -->
 	<action name="addAccount" class="userAction" method="insert">
-		<result name="success">/Security/addSuccess.jsp</result>
+		<result name="success">/Security/Result/addSuccess.jsp</result>
 		<result name="input">/Security/addUser.jsp</result>
 	</action>
-	
+	<!-- 登入驗證 -->
 	<action name="checkLogin" class="userAction" method="login">
 		<result name="success">/index.jsp</result>
 		<result name="input">/index.jsp</result>
 	</action>
-	
+	<!-- 更新會員資料 -->
 	<action name="userUpdate" class="userAction" method="update">
 		<result name="success">/index.jsp</result>
 	</action>
+	<!-- 使用者點數修改 -->
+	<action name="userUpdate" class="userAction" method="coinsUpdate">
+		<result name="success">/index.jsp</result>
+	</action>
 	
+	<!-- 回首頁action -->
 	<action name="goIndex" class="passToAction" method="goIndex">
 		<result name="success">/index.jsp</result>
 	</action>

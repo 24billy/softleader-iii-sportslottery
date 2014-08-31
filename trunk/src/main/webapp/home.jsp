@@ -40,7 +40,7 @@
 </style>
 </head>
 <body>
-<div>
+<div class="body">
 	<c:if test="${empty user}">
 		<form id="form1" class="form-inline" action="<c:url value="checkLogin"/>" >
 			<div>
@@ -58,7 +58,7 @@
 	</c:if>
 	
 	<c:if test="${ !empty user }">
-		<form id="form2" class="form-inline" action="<c:url value="/Security/logout.jsp"/>" >	
+		<form id="form2" class="form-inline" action="<c:url value="/Security/Result/logout.jsp"/>" >	
 			<div>
 				<button type="sumit" class="btn btn-info">登出</button>
 			</div>
@@ -66,13 +66,48 @@
 		
 		<button id="update" class="btn btn-info">修改資料</button>
 		
+		<button id="deposit" class="btn btn-primary">充值</button>
 	</c:if>
+
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+	
 </div>
 
 
 <script>
 	(function($){
+		$('deposit').click(function() {
 		
+			BootstrapDialog.show({
+		    	title: 'Button Hotkey',
+				message: $('<textarea class="form-control" placeholder="Try to input multiple lines here..."></textarea>'),
+		        buttons: [{
+		        	label: '(Enter) Button A',
+		            cssClass: 'btn-primary',
+		            hotkey: 13, // Enter.
+		            action: function() {
+		                alert('You pressed Enter.');
+		            }
+		        }]
+			});
+	       
+		})
 		
 		$("#reg").click(function(){
 			$.XYTipsWindow({
