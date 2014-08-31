@@ -96,7 +96,7 @@
 									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="">賽事編號</label>
-											<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum">
+											<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
 										</div>
 									</div>
 								</div>
@@ -338,7 +338,7 @@
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			} else {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status" data-toggle="modal" data-target="#statusModal">尚未開始</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status disabled" data-toggle="modal" data-target="#statusModal">尚未開始</button>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
