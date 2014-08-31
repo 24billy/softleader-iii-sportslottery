@@ -28,7 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import tw.com.softleader.sportslottery.setting.entity.DepositCardEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
+import tw.com.softleader.sportslottery.setting.service.DepositCardService;
 import tw.com.softleader.sportslottery.setting.service.UserService;
 
 import com.google.gson.Gson;
@@ -41,6 +43,8 @@ public class UserAction extends ActionSupport {
 
 	@Autowired
 	private UserService service;
+	@Autowired
+	private DepositCardService cardService;
 	
 	private UserEntity model;
 	private List<UserEntity> models;
@@ -52,8 +56,34 @@ public class UserAction extends ActionSupport {
 	private String password = "forget123";
 	private String to;
 	private String account;
+	private String cardAccount;
+	private Long coins;		//把值送進coins讓使用者coins更新
 	
-	
+	public Long getCoins() {
+		return coins;
+	}
+
+	public void setCoins(Long coins) {
+		this.coins = coins;
+	}
+
+	public String getCardAccount() {
+		return cardAccount;
+	}
+
+	public void setCardAccount(String cardAccount) {
+		this.cardAccount = cardAccount;
+	}
+
+	public String getCardPassword() {
+		return cardPassword;
+	}
+
+	public void setCardPassword(String cardPassword) {
+		this.cardPassword = cardPassword;
+	}
+
+	private String cardPassword;
 	
 	
 	public String getTo() {
@@ -100,8 +130,6 @@ public class UserAction extends ActionSupport {
 	public void validate() {
 		log.debug("here is userAction validate");
 		
-
-		
 //		if(model!=null) {
 //			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
 //			} else {
@@ -125,6 +153,36 @@ public class UserAction extends ActionSupport {
 //			}
 //		}
 
+	}
+	
+	//會員儲值下注得獎coins修改
+	public String coinsUpdate() {
+		
+		Map session = ActionContext.getContext().getSession();
+		UserEntity user = (UserEntity)session.get("uesr");
+		
+		//儲值
+		DepositCardEntity card = cardService.findByCardAccount(cardAccount,cardPassword);
+		if(card!=null) {
+			try {
+				user.setCoins(user.getCoins() + card.getPoint());
+				service.update(user);
+				log.debug("儲值成功");
+				return SUCCESS;
+			} catch (Exception e) {
+				log.debug("coins修改異常");
+				this.addFieldError("cardError", this.getText("fieldvalue.card"));
+				e.printStackTrace();
+			}
+		} else {
+			log.debug("查無此點數卡");
+			this.addFieldError("cardError", this.getText("fieldvalue.card"));
+		}
+		
+		
+		//別的更改coins方式
+		
+		return INPUT;
 	}
 	
 	//忘記密碼 寄送新密碼到使用者email
@@ -170,7 +228,7 @@ public class UserAction extends ActionSupport {
 		return ret; 
 	}
 	
-	
+	//搜尋出所有會員資料
 	@Override
 	public String execute() throws Exception {
 		System.out.println("UserAction execute");
@@ -180,6 +238,7 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	//新增會員
 	public String insert() throws Exception {
 		log.debug("新增會員資料");
 		if(this.getFieldErrors().isEmpty()){
@@ -204,15 +263,15 @@ public class UserAction extends ActionSupport {
 		return INPUT;
 	}
 	
-	//更新使用者資料
+	//更新會員資料
 	public String update() throws Exception {
 		log.debug("修改會員資料");
 		log.debug("Model = {}", model);
 		//model.setModifier("Guest");
 		//model.setModifiedTime(LocalDateTime.now());
 		HttpServletRequest request = ServletActionContext.getRequest();
-		Map upSuccess = ActionContext.getContext().getSession();
-		UserEntity userEntity = (UserEntity)upSuccess.get("user");
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity)session.get("user");
 		try {
 			if (model!=null) {
 				userEntity.setUserName(model.getUserName());
@@ -228,14 +287,14 @@ public class UserAction extends ActionSupport {
 			}
 		} catch (Exception e) {
 			log.debug("!!新增錯誤!!");
-			this.addFieldError("email", this.getText("invalid.fieldvalue.other"));
+			this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
 			request.setAttribute("updateFail", "修改失敗");
 			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
 	
-	
+	//帳號重複驗證
 	public String check() throws Exception {
 		log.debug("check...");
 		log.debug("檢查帳號是否存在" + model.getUserAccount());
@@ -254,6 +313,7 @@ public class UserAction extends ActionSupport {
 		return result;
 	}
 	
+	//登入
 	public String login() throws Exception {
 		log.debug("login...");
 		UserEntity entity = service.checkLogin(model.getUserAccount(), model.getUserPassword());
@@ -271,6 +331,7 @@ public class UserAction extends ActionSupport {
 		}
 	}
 	
+	//依照帳號找會員
 	public String searchByAccount() throws Exception {
 		log.debug("searchByAccount...");
 		json = new Gson().toJson(service.getByUserAccount(model.getUserAccount()));
@@ -279,6 +340,7 @@ public class UserAction extends ActionSupport {
 		return "searchByAccount";
 	}
 	
+	//依照時間找會員
 	public String searchByCreateTime() throws Exception {
 		log.debug("searchByCreateTime...");
 		
