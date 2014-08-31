@@ -25,7 +25,8 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control input-sm form-ball-type" id="catagory" name="catagory">
+							<label for="catagory">運動項目</label>
+							<select class="form-control input-sm" id="catagory" name="catagory">
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
@@ -49,7 +50,7 @@
 								<th>主隊隊伍</th>
 								<th>狀態</th>
 								<th>功能</th>
-	                           </tr>
+							</tr>
 						</thead>
 						<tbody id="gameList">
 						</tbody>
@@ -208,7 +209,7 @@
 	      			</div>
 	      			<!-- .modal-body -->
 	      		</form>
-				<!-- .form -->	
+				<!-- #gameForm -->	
 	      		<div id="gameModalFooter" class="modal-footer">
 					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
@@ -336,12 +337,12 @@
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			} else if (currentDate > gameTime) {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
 			} else {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status disabled" data-toggle="modal" data-target="#statusModal">尚未開始</button>';
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status disabled" data-toggle="modal" data-target="#statusModal">尚未開始</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';

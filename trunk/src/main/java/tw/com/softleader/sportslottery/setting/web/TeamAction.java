@@ -8,11 +8,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeamAction extends ActionSupport {
@@ -109,12 +111,6 @@ public class TeamAction extends ActionSupport {
 	
 	public String insert() {
 		log.debug("TeamAction insert");
-		
-//		model.setCreator("guest");
-//		model.setModifier("guest");
-//		model.setCreateTime(LocalDateTime.now());
-//		model.setModifiedTime(LocalDateTime.now());
-		
 		log.debug("Model = {}", model);
 		try {
 			service.insert(model);
@@ -123,9 +119,21 @@ public class TeamAction extends ActionSupport {
 			addFieldError("QueryFail","Insert Fail : target not found");
 		}
 		
-		models = service.getAll();
+		json = new Gson().toJson(service.getAll());
 		
-		return SUCCESS;
+		return Action.SUCCESS;
+	}
+	
+	public String manager() {
+		log.debug("manager...");
+		
+		if (!StringUtils.isEmpty(country)) {
+			json = new Gson().toJson(service.getTeamsByCountry(country));
+		} else {
+			json = new Gson().toJson(service.getAll());
+		}
+		
+		return Action.SUCCESS;
 	}
 	
 	public String teamsByCountry() {
