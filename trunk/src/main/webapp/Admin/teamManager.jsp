@@ -60,7 +60,7 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-	<!-- End of gameTable -->
+	<!-- End of teamTable -->
 	
 	<!-- Begin of teamModal -->
 	<div class="modal fade" id="teamModal" role="dialog" aria-labelledby="teamModalTitle" aria-hidden="true" tabindex="-1">
@@ -72,7 +72,7 @@
 				</div>
 				<!-- modal-header -->
 				
-				<form role="form" id="teamForm" action="<c:url value="/teamManager"/>">
+				<form role="form" id="teamForm">
 					<div class="modal-body">
 					
 						<div class="row">
@@ -96,13 +96,13 @@
 						
 					</div>
 					<!-- .modal-body -->
-				
-		      		<div id="teamModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="submit" name="method:insert" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
-		      		</div>
-	      		</form>
+				</form>
 				<!-- #teamform -->
+		      	<div id="teamModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
+		      	</div>
+	      		
 	      		<!-- .modal-footer -->
 			</div>
 			<!-- .modal-content -->
@@ -110,6 +110,39 @@
 		<!-- .modal-dialog -->
 	</div>
 	<!-- End of teamModal -->
+	
+	<!-- Begin of deleteModal -->
+	<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" tabindex="-1">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+			
+				<div id="deleteModalHeader" class="modal-header">
+					<h3 id="deleteModalTitle" class="modal-title">刪除隊伍</h3>
+				</div>
+				<!-- modal-header -->
+				
+				<div class="modal-body">
+				
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-center">確認刪除隊伍？</h4>
+						</div>
+					</div>
+					<!-- .row -->
+				</div>
+				<!-- .modal-body -->
+						
+	      		<div id="deleteModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnDelete">確認</button>
+	      		</div>
+	      		<!-- .modal-footer -->
+			</div>
+			<!-- .modal-content -->
+		</div>
+		<!-- .modal-dialog -->
+	</div>
+	<!-- End of deleteModal -->
 
 <script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
@@ -146,7 +179,64 @@
 		});
 		//End of teamTable
 		
+		//Begin of listTeam
+		$('#btnAddTeam').click(function() {
+			$('#teamModalTitle').text('新增隊伍');
+			resetInput();
+		});
+		$('.btn-edit').click(function() {
+			$('#teamModalTitle').text('編輯隊伍');
+			$.getJSON('<c:url value="/teamManager?method:select"/>', {
+				'model.id':$(this).val()
+			}, function(data) {
+				$('#country').val(data.country);
+				$('#teamName').val(data.teamName);
+				$('#btnMerge').val(data.id);
+			});
+		});
+		//End of listTeam
+		
+		//Begin of btnMerge
+		$('#btnMerge').click(function() {
+			var teamId = $(this).val();
+			$.post('<c:url value="/teamManager?method:insert"/>',{
+				'model.id':teamId,
+				'model.country':$('#country').val(),
+				'model.teamName':$('#teamName').val()
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnMerge
+		
+		//Begin of btnDelete
+		$('.btn-del').click(function() {
+			$('#btnDelete').val($(this).val());
+			console.log($(this).val());
+		});
+		
+		$('#btnDelete').click(function() {
+			$.post('<c:url value="/teamManager?method:delete"/>', {
+				'model.id':$(this).val()
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnDelete
+		
 		//Begin of styling		
+		function resetInput() {
+			$('#country')[0].selectedIndex = 0;
+			$('#teamName').val('');
+			$('#btnMerge').val('');
+		}
+		
+		resetInput();
+		
 		$('#teamTable').dataTable({
 			responsive: true,
 			autoWidth: false,

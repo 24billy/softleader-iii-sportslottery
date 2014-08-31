@@ -32,14 +32,14 @@ public class TeamEntity extends GenericEntity {
 		return teamName;
 	}
 
-	public void setTeamNmae(String teamName) {
+	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
 	@Override
 	public String toString() {
 		return "TeamEntity [teamName=" + teamName + ", country=" + country
-				+ "]";
+				+ ", id=" + id + "]";
 	}
 
 	
