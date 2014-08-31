@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>賽事管理</title>
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
+<!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
@@ -324,13 +324,21 @@
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			
+			var currentDate = new Date().getTime();
+			var gameTime = new Date(game.gameTime.iLocalMillis - 8 * 60 * 60 * 1000).getTime();
+			
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
-			} else {
+			} else if (currentDate > gameTime) {
 				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button>';
+				child += '<td>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
+			} else {
+				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status" data-toggle="modal" data-target="#statusModal">尚未開始</button>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
@@ -475,7 +483,6 @@
 					} else if (oddType.indexOf('SC_') != -1) {
 						oddCombination = 7.5;
 					}
-					alert(oddCombination);
 					$.post('<c:url value="/odds?method:insert"/>', {
 						'model.gameId':data,
 				    	'model.oddType':oddType,
@@ -548,7 +555,7 @@
 		$('#gameTable').dataTable({
 			responsive: true,
 			autoWidth: false,
-			order: [[ 4, "desc" ]],
+			order: [[ 0, "desc" ]],
 			oLanguage: {
 				'sProcessing':   '處理中...',
 				'sLengthMenu':   '顯示 _MENU_ 項結果',
