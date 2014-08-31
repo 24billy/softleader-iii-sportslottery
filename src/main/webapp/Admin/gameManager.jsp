@@ -86,6 +86,9 @@
 											<label for="leagueName">聯盟名稱</label>
 											<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 												<option value="美國職棒" selected>美國職棒</option>
+												<option value="中華職棒" selected>中華職棒</option>
+												<option value="中央聯盟" selected>中央聯盟</option>
+												<option value="韓國職棒" selected>韓國職棒</option>
 											</select>
 										</div>
 									</div>
