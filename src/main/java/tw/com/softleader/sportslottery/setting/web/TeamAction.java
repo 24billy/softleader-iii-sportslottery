@@ -62,11 +62,20 @@ public class TeamAction extends ActionSupport {
 	@Override
 	public void validate() {
 		
-//		if(model.getTeamName()==null|| model.getTeamName().trim().length()==0){
-//			this.addFieldError("teamName", "teamName must be inserted");
-//		}
 		
 		
+	}
+	
+	public String select() {
+		log.debug("select...");
+		Long teamId = model.getId();
+		if (teamId != null && teamId > 0) {
+			json = new Gson().toJson(service.getById(teamId));
+		} else {
+			json = new Gson().toJson(service.getAll());
+		}
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "select";
 	}
 	
 	public String execute(){
@@ -80,16 +89,18 @@ public class TeamAction extends ActionSupport {
 	public String delete(){
 		log.debug("TeamAction delete");
 		log.debug("Model = {}", model);
+		
 		try {
+			model = service.getById(model.getId());
 			service.delete(model);
 		} catch (Exception e) {
 			log.debug("!!TeamAction deleteFail!!");
 			addFieldError("QueryFail", "Delete Fail : Target already delete");
 		}
 
-		models = service.getAll();
+		json = new Gson().toJson(service.getAll());
 		
-		return SUCCESS;
+		return Action.SUCCESS;
 	}
 	
 	public String update() {
@@ -113,7 +124,7 @@ public class TeamAction extends ActionSupport {
 		log.debug("TeamAction insert");
 		log.debug("Model = {}", model);
 		try {
-			service.insert(model);
+			service.update(model);
 		} catch (Exception e) {
 			log.debug("!!TeamAction insertFail!!");
 			addFieldError("QueryFail","Insert Fail : target not found");

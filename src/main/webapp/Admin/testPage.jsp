@@ -22,6 +22,7 @@
 		
 		<div class="container-fluid top20">
 			<a class="btn btn-success" type="button" href="<c:url value="/gameManager"/>">Game Table</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/teamManager"/>">Team Table</a>
 		</div>
 		<!-- .container-fluid -->
 	</div>

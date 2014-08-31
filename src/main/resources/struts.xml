@@ -28,7 +28,11 @@
   	
   	<action name="teamManager" class="teamAction" method="manager">
   		<result name="success">/Admin/teamManager.jsp</result>
-  		<allowed-methods>insert</allowed-methods>
+  		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert,select,delete</allowed-methods>
   	</action>
   	
     <action name="game" class="gameAction" method="execute"> 

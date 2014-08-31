@@ -526,6 +526,7 @@
 		//Begin of styling
 		function resetInput() {
 			$('#gameTime').val('');
+			$('#btnMerge').val('');
 			$('.form-decimal').val('0.00')
 			
 			$('#gameTime').datetimepicker({
