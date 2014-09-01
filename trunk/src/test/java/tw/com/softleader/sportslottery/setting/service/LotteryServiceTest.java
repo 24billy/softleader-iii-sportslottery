@@ -17,11 +17,13 @@ public class LotteryServiceTest extends BaseTest {
 	
 	@Test
 	public void test() {
+		/*
 		UserEntity user = userService.getById(1L);
 		log.debug("user = {}", user);
 		LotteryEntity lottery = new LotteryEntity();
 		lottery.setUserId(user);
 		lotteryService.insert(lottery);
+		*/
 	}
 
 }

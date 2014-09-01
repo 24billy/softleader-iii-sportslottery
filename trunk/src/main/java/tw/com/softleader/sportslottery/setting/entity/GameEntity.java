@@ -15,14 +15,12 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
-/**
- * 
- * @author nick
- *  modified by Billy 
- */
+
 @Entity
 @Table(name="GAME")
 public class GameEntity extends GenericEntity {
+	
+	private static final long serialVersionUID = 2014L;
 
 	@Column(name="GAME_TIME", nullable = false)
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -63,17 +61,6 @@ public class GameEntity extends GenericEntity {
 
 	public void setOdds(Set<OddsEntity> odds) {
 		this.odds = odds;
-	}
-
-
-	@Override
-	public String toString() {
-		return "GameEntity [gameTime=" + gameTime + ", gameNum=" + gameNum
-				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
-				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
-				+ gameScoreAway + ", leagueName=" + leagueName + ", ballType="
-				+ ballType + ", isEnd=" + isEnd + ", odds=" + odds + ", id="
-				+ id + "]";
 	}
 
 	public Boolean getIsEnd() {
@@ -146,6 +133,16 @@ public class GameEntity extends GenericEntity {
 
 	public void setBallType(String ballType) {
 		this.ballType = ballType;
+	}
+
+	@Override
+	public String toString() {
+		return "GameEntity [gameTime=" + gameTime + ", gameNum=" + gameNum
+				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
+				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
+				+ gameScoreAway + ", leagueName=" + leagueName + ", ballType="
+				+ ballType + ", isEnd=" + isEnd + ", odds=" + odds + ", id="
+				+ id + "]";
 	}
 
 }

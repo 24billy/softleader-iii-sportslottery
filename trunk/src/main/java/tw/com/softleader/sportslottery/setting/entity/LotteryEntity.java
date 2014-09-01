@@ -1,6 +1,5 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,12 +13,12 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
-/**
-@Author:Billy 
- */
+
 @Entity
 @Table(name="LOTTERY")
 public class LotteryEntity extends GenericEntity {
+	private static final long serialVersionUID = 2014L;
+	
 	@Column(name="USER_ID", nullable = false)
 	private Long userId;
 	
@@ -35,7 +34,7 @@ public class LotteryEntity extends GenericEntity {
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "lotteryId", cascade = {CascadeType.ALL})
 	private Set<LotteryOddsEntity> lotteryOdds;
-	
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -68,5 +67,19 @@ public class LotteryEntity extends GenericEntity {
 		this.confirmTime = confirmTime;
 	}
 
-	
+	public Set<LotteryOddsEntity> getLotteryOdds() {
+		return lotteryOdds;
+	}
+
+	public void setLotteryOdds(Set<LotteryOddsEntity> lotteryOdds) {
+		this.lotteryOdds = lotteryOdds;
+	}
+
+	@Override
+	public String toString() {
+		return "LotteryEntity [userId=" + userId + ", win=" + win
+				+ ", capital=" + capital + ", confirmTime=" + confirmTime
+				+ ", lotteryOdds=" + lotteryOdds + ", id=" + id + "]";
+	}
+
 }

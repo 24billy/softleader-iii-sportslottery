@@ -15,15 +15,11 @@ import org.joda.time.LocalDateTime;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
-/**
- * 
- * @author Khalil
- *
- */
-
 @Entity
 @Table(name="USERN")
 public class UserEntity extends GenericEntity {
+	
+	private static final long serialVersionUID = 2014L;
 	
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	
@@ -164,7 +160,16 @@ public class UserEntity extends GenericEntity {
 	public void setModifier(String modifier) {
 		this.modifier = modifier;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "UserEntity [userAccount=" + userAccount + ", userPassword="
+				+ userPassword + ", userName=" + userName + ", userBirthday="
+				+ userBirthday + ", userGender=" + userGender + ", userPhone="
+				+ userPhone + ", userEmail=" + userEmail + ", coins=" + coins
+				+ ", createTime=" + createTime + ", creator=" + creator
+				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
+				+ ", lotterys=" + lotterys + ", id=" + id + "]";
+	}
 	
 }
