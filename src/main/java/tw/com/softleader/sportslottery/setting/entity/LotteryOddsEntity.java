@@ -21,6 +21,22 @@ public class LotteryOddsEntity extends GenericEntity {
 	@JoinColumn(name = "ODDS_ID")
 	private OddsEntity oddsId;
 
+	public Long getLotteryId() {
+		return lotteryId;
+	}
+
+	public void setLotteryId(Long lotteryId) {
+		this.lotteryId = lotteryId;
+	}
+
+	public OddsEntity getOddsId() {
+		return oddsId;
+	}
+
+	public void setOddsId(OddsEntity oddsId) {
+		this.oddsId = oddsId;
+	}
+
 	@Override
 	public String toString() {
 		return "LotteryOddsEntity [lotteryId=" + lotteryId + ", oddsId="

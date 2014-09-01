@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
+import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
+import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
@@ -34,6 +38,11 @@ public class GameAction extends ActionSupport {
 	private TeamService teamService;
 	@Autowired
 	private OddsService oddsService;
+	@Autowired
+	private LotteryOddsService lotteryOddsService;
+	@Autowired
+	private LotteryService lotteryService;
+	
 	private GameEntity model;
 	private List<GameEntity> models;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
@@ -233,8 +242,21 @@ public class GameAction extends ActionSupport {
 		try {
 			service.update(entity);
 			oddsService.setIsPass(gameId, su, ats, sc, eo);
+			List<OddsEntity> odds = entity.getOdds();
+			if (odds != null) {
+				for (OddsEntity odd : odds) {
+					List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odd.getId());
+					odd.setCount(new Long(los.size()));
+					oddsService.update(odd);
+					for (LotteryOddsEntity lo : los) {
+						lotteryService.checkWin(lo.getLotteryId());
+					}
+				}
+			}
+			
 			result = "success";
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = "failed";
 		}
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
