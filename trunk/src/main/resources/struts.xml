@@ -106,8 +106,9 @@
 		<result name="success">/index.jsp</result>
 	</action>
 	<!-- 使用者點數修改 -->
-	<action name="userUpdate" class="userAction" method="coinsUpdate">
+	<action name="coinsUpdate" class="userAction" method="coinsUpdate">
 		<result name="success">/index.jsp</result>
+		<result name="error">/MustBeUser/deposit.jsp</result>
 	</action>
 	
 	<!-- 回首頁action -->

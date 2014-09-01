@@ -20,6 +20,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDate;
@@ -159,16 +160,25 @@ public class UserAction extends ActionSupport {
 	public String coinsUpdate() {
 		
 		Map session = ActionContext.getContext().getSession();
-		UserEntity user = (UserEntity)session.get("uesr");
-		
+		UserEntity user = (UserEntity)session.get("user");
+		//log.debug(""+user);
 		//儲值
 		DepositCardEntity card = cardService.findByCardAccount(cardAccount,cardPassword);
 		if(card!=null) {
 			try {
 				user.setCoins(user.getCoins() + card.getPoint());
-				service.update(user);
-				log.debug("儲值成功");
-				return SUCCESS;
+				
+				if (card.isState()) {
+					service.update(user);
+					log.debug("儲值成功");
+					card.setState(false);
+					cardService.update(card);
+					return SUCCESS;
+				} else {
+					log.debug("此卡已使用");
+					this.addFieldError("cardError", this.getText("alreadyuse.card"));
+					return ERROR;
+				}
 			} catch (Exception e) {
 				log.debug("coins修改異常");
 				this.addFieldError("cardError", this.getText("fieldvalue.card"));
@@ -177,12 +187,13 @@ public class UserAction extends ActionSupport {
 		} else {
 			log.debug("查無此點數卡");
 			this.addFieldError("cardError", this.getText("fieldvalue.card"));
+			return ERROR;
 		}
 		
 		
 		//別的更改coins方式
 		
-		return INPUT;
+		return ERROR;
 	}
 	
 	//忘記密碼 寄送新密碼到使用者email
@@ -272,6 +283,7 @@ public class UserAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
+		//log.debug(""+userEntity);
 		try {
 			if (model!=null) {
 				userEntity.setUserName(model.getUserName());
@@ -322,7 +334,7 @@ public class UserAction extends ActionSupport {
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
 			UserEntity e = session.get("user");
-			log.debug(e.getUserAccount());
+			//log.debug(""+e);
 			return SUCCESS;
 		} else {
 			log.debug("帳號不存在");
