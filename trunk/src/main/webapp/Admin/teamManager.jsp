@@ -27,7 +27,7 @@
 						<div class="form-group">
 							<select class="form-control input-sm" id="countryList" name="country">
 								<option value="">所有國家</option>
-								<option value="台灣">台灣</option>
+								<option value="中華民國">中華民國</option>
 								<option value="日本">日本</option>
 								<option value="美國">美國</option>
 								<option value="韓國">韓國</option>
@@ -79,7 +79,7 @@
 							<div class="col-sm-6">
 								<label for="country">國家</label>
 								<select class="form-control input-sm" id="country" name="model.country">
-									<option value="台灣">台灣</option>
+									<option value="中華民國">中華民國</option>
 									<option value="日本">日本</option>
 									<option value="美國">美國</option>
 									<option value="韓國">韓國</option>
