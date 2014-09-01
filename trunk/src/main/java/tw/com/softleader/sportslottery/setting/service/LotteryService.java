@@ -50,26 +50,14 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		return dao.findComplex(userId, timeBegin, timeEnd);
 	}
 	
-	public void checkWin(Long id) {
+	public void addWin(Long id, BigDecimal oddValue) {
 		LotteryEntity lottery = dao.findById(id);
 		Set<LotteryOddsEntity> lotteryOdds = lottery.getLotteryOdds();
 		int size = lotteryOdds.size();
 		BigDecimal bonus = new BigDecimal(lottery.getCapital() / size);
-		int count = 0;
-		for (LotteryOddsEntity entity : lotteryOdds) {
-			Long gameId = entity.getOddsId().getGameId();
-			if (gameDao.findById(gameId).getIsEnd()) {
-				count ++;
-			}
-		}
-		if (size == count) {
-			Long win = 0L;
-			List<LotteryOddsEntity> los = lotteryOddsDao.findPassedOddsByLotteryId(id);
-			for (LotteryOddsEntity lo : los) {
-				win = win + lo.getOddsId().getOddValue().multiply(bonus).longValue();
-			}
-			lottery.setWin(win);
-			dao.update(lottery);
-		}
+		bonus = bonus.multiply(oddValue);
+		Long win = lottery.getWin() + bonus.longValue();
+		lottery.setWin(win);
+		dao.update(lottery);
 	}
 }

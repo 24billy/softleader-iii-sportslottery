@@ -248,8 +248,11 @@ public class GameAction extends ActionSupport {
 					List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odd.getId());
 					odd.setCount(new Long(los.size()));
 					oddsService.update(odd);
-					for (LotteryOddsEntity lo : los) {
-						lotteryService.checkWin(lo.getLotteryId());
+					
+					if (odd.getIsPass()) {
+						for (LotteryOddsEntity lo : los) {
+							lotteryService.addWin(lo.getLotteryId(), lo.getOddsId().getOddValue());
+						}
 					}
 				}
 			}
