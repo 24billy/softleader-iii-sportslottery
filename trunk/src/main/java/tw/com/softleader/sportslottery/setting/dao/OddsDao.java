@@ -73,7 +73,19 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 		
 		return count;
+	}
 	
+	
+	public Long countByOddTypeAndIsPass(String oddType){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select SUM(odds.count) from OddsEntity odds where odds.oddType = :oddType and odds.isPass = 't'");
+		query.setString("oddType",oddType);
+		Long count = (Long)query.uniqueResult();
+		
+		
+		return count;
+		
+		
 	}
 	
 	
