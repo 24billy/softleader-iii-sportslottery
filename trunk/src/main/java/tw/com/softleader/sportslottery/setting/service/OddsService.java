@@ -2,9 +2,9 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
@@ -66,22 +66,22 @@ public class OddsService extends GenericService<OddsEntity> {
 	public boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
 		try {
-			if (StringUtils.isNotEmpty(su)) {
+			if (!StringUtils.isEmpty(su)) {
 				entity = dao.findByGameIdWithOddType(gameId, su).get(0);
 				entity.setIsPass(true);
 				dao.update(entity);
 			}
-			if (StringUtils.isNotEmpty(ats)) {
+			if (!StringUtils.isEmpty(ats)) {
 				entity = dao.findByGameIdWithOddType(gameId, ats).get(0);
 				entity.setIsPass(true);
 				dao.update(entity);
 			}
-			if (StringUtils.isNotEmpty(sc)) {
+			if (!StringUtils.isEmpty(sc)) {
 				entity = dao.findByGameIdWithOddType(gameId, sc).get(0);
 				entity.setIsPass(true);
 				dao.update(entity);
 			}
-			if (StringUtils.isNotEmpty(eo)) {
+			if (!StringUtils.isEmpty(eo)) {
 				entity = dao.findByGameIdWithOddType(gameId, eo).get(0);
 				entity.setIsPass(true);
 				dao.update(entity);
