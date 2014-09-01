@@ -192,7 +192,7 @@
 									<div style="display: inline-block" id="singleBet"></div>
 									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
 									<div style="display: inline-block">
-										<input style="width: 40px" type="text" id="betValue" value="1">
+										<input style="width: 40px" type="text" class="betValue" value="1">
 									</div>
 								</div>
 
@@ -204,8 +204,8 @@
 									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
 									<div id="singleTopPrice" style=" display: inline-block"										></div>
 								</div>
-								<div >
-									<input type="text" id="sCapital" name="model.capital" value="">
+								<div class="lotteryOdds" hidden="true">
+									<input type="text" class="capital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -232,7 +232,7 @@
 									<div style="display: inline-block" id="passBet"></div>
 									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
 									<div style="display: inline-block">
-										<input style="width: 40px" type="text" id="betValue" value="1">
+										<input style="width: 40px" type="text" class="betValue" value="1">
 									</div>
 								</div>
 
@@ -244,8 +244,8 @@
 									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
 									<div id="passTopPrice" style=" display: inline-block"										></div>
 								</div>
-								<div id="lotteryOdds" >
-									<input type="text" id ="pCapital" name="model.capital" value="">
+								<div class="lotteryOdds" hidden="true">
+									<input type="text" class="capital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -263,7 +263,42 @@
 						  <!-- End of Bet Panel -->
 						</div>
 						<div class="tab-pane" id="passCom">
-						
+						  <!-- Begin of Combination Bet Panel -->
+						  <div class="panel-body">
+							<form class="form-inline" action="<c:url value="/lottery"/>">
+								<div class="form-group ">
+									<div style="display: inline-block" id="comBet"></div>
+									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
+									<div style="display: inline-block">
+										<input style="width: 40px" type="text" class="betValue" value="1">
+									</div>
+								</div>
+
+								<div>
+									<div style="width: 50%; display: inline-block" >總價</div>
+									<div id="comCapital" style=" display: inline-block" ></div>
+								</div>
+								<div>
+									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
+									<div id="comTopPrice" style=" display: inline-block"></div>
+								</div>
+								<div class="lotteryOdds" hidden="true">
+									<input type="text" class="capital" name="model.capital" value="">
+									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
+									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
+									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
+									<input type="text" class="oddId4" name="oddsIdList.oddId4" value="">
+									<input type="text" class="oddId5" name="oddsIdList.oddId5" value="">
+									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
+									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
+									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
+								</div>
+								<div>
+									<button class="btn btn-danger btn-xs" type="submit">投注</button>
+								</div>
+							</form>
+						  </div>
+						  <!-- End of Bet Panel -->						
 						</div>
 					  </div>
 						
@@ -614,19 +649,24 @@
 				});
 				//更新過關組合類型與計算金額
 				console.log("combination:"+combination);
+				//過關總投注金、最高中獎金額
 				$('#passBet').html(1);
-				$('#passCapital').html($('#betValue').attr("value")*capitalValue+"元");
+				$('#passCapital').html($('.betValue').attr("value")*capitalValue+"元");
 				$('#passTopPrice').html(Math.floor(passPrice*100)+"元");
-				$('#pCapital').val($('#betValue').attr("value")*capitalValue);
 				
+				
+				//單場總投注金、最高中獎金額
 				$('#singleBet').html(userOddIds.length);
-				$('#singleCapital').html((userOddIds.length)*$('#betValue').attr("value")*capitalValue+"元");
+				$('#singleCapital').html((userOddIds.length)*$('.betValue').attr("value")*capitalValue+"元");
 				$('#singleTopPrice').html(Math.floor(singlePrice*100)+"元");
-				$('#sCapital').val((userOddIds.length)*$('#betValue').attr("value")*capitalValue);
+				
+				//每一注投注金計算
+				$('.capital').val((userOddIds.length)*$('.betValue').attr("value")*capitalValue);
 				if((userOddIds.length>=2)&&combination){
 					//過關
 					$('#myTab li:eq(1) a').tab('show');
 					$('#myTab li:eq(1) a').off('click');
+					$('#myTab li:eq(2) a').off('click');
 				}
 				else{
 					//單場
@@ -635,9 +675,12 @@
 					$('#myTab li:eq(1) a').on('click',function(){
 						return false;
 					});
+					$('#myTab li:eq(2) a').on('click',function(){
+						return false;
+					});
 				}
 				
-				//隱藏未投注的投注區
+				//隱藏未投注的投注區，未投注的值設定為空值
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);
 					$('.oddId'+lotteryId).val("");
