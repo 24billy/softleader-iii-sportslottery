@@ -26,8 +26,8 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_ACCOUNT", length=50, nullable=false,unique = true)
 	private String userAccount;
 	
-	@Column(name="USER_PASSWORD", length=50, nullable=false)
-	private String userPassword;
+	@Column(name="USER_PASSWORD", nullable=false)
+	private byte[] userPassword;
 	
 	@Column(name="USER_NAME", length=50, nullable=false)
 	private String userName;
@@ -73,11 +73,11 @@ public class UserEntity extends GenericEntity {
 		this.userAccount = userAccount;
 	}
 
-	public String getUserPassword() {
+	public byte[] getUserPassword() {
 		return userPassword;
 	}
 
-	public void setUserPassword(String userPassword) {
+	public void setUserPassword(byte[] userPassword) {
 		this.userPassword = userPassword;
 	}
 

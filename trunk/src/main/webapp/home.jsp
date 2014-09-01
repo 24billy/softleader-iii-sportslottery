@@ -45,7 +45,7 @@
 		<form id="form1" class="form-inline" action="<c:url value="checkLogin"/>" >
 			<div>
 				<input value="jackychen" type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
-				<input value="a123456" type="password" class="info" name="model.userPassword" placeholder="請輸入密碼" required>
+				<input value="a123456" type="password" class="info" name="userPassword" placeholder="請輸入密碼" required>
 				<s:submit cssClass="btn btn-success" value="登入" method="login"/>
 			</div>
 			<div>
