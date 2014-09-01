@@ -8,19 +8,13 @@ import javax.persistence.Table;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
-/**
- * 
- * @author ebikyatto
- *
- */
-
 @Entity
 @Table(name = "ODDS")
 public class OddsEntity extends GenericEntity {
 	
-// 	@ManyToOne
-// 	@JoinColumn(name = "GAME_ID", nullable = false)
-	@Column(name = "GAME_ID") 
+	private static final long serialVersionUID = 2014L;
+
+	@Column(name = "GAME_ID", nullable = false) 
 	private Long gameId;
 	
 	@Column(name = "ODD_TYPE", length = 10, nullable = false)
@@ -37,14 +31,6 @@ public class OddsEntity extends GenericEntity {
 	
 	@Column(name = "IS_PASS", columnDefinition = "BOOLEAN default FALSE")
 	private Boolean isPass;
-
-	@Override
-	public String toString() {
-		return "OddsEntity [oddType=" + oddType
-				+ ", oddCombination=" + oddCombination + ", oddValue="
-				+ oddValue + ", count=" + count + ", isPass=" + isPass
-				+ ", id=" + id + "]";
-	}
 
 	public Long getCount() {
 		return count;
@@ -92,6 +78,14 @@ public class OddsEntity extends GenericEntity {
 
 	public void setOddValue(BigDecimal oddValue) {
 		this.oddValue = oddValue;
+	}
+
+	@Override
+	public String toString() {
+		return "OddsEntity [gameId=" + gameId + ", oddType=" + oddType
+				+ ", oddCombination=" + oddCombination + ", oddValue="
+				+ oddValue + ", count=" + count + ", isPass=" + isPass
+				+ ", id=" + id + "]";
 	}
 	
 }

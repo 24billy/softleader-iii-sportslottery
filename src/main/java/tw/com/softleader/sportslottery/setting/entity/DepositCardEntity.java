@@ -12,6 +12,9 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 @Entity
 @Table(name="depositCard")
 public class DepositCardEntity extends GenericEntity{
+	
+	private static final long serialVersionUID = 2014L;
+	
 	@Column(name="CARD_ACCOUNT", length=50, nullable = false)
 	private String cardaccount;
 	
@@ -28,13 +31,6 @@ public class DepositCardEntity extends GenericEntity{
 	@Column(name="STATE")
 	private boolean state;
 	
-	@Override
-	public String toString() {
-		return "DepositCardEntity [cardaccount=" + cardaccount
-				+ ", cardPassword=" + cardPassword + ", point=" + point
-				+ ", gameTime=" + gameTime + ", state=" + state + "]";
-	}
-
 	public String getCardaccount() {
 		return cardaccount;
 	}
@@ -74,6 +70,13 @@ public class DepositCardEntity extends GenericEntity{
 	public void setState(boolean state) {
 		this.state = state;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "DepositCardEntity [cardaccount=" + cardaccount
+				+ ", cardPassword=" + cardPassword + ", point=" + point
+				+ ", gameTime=" + gameTime + ", state=" + state + ", id=" + id
+				+ "]";
+	}
+	
 }

@@ -6,18 +6,15 @@ import javax.persistence.Table;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
-/**
- * @Author:Rhys
- */
-
 @Entity
 @Table(name = "TEAM")
 public class TeamEntity extends GenericEntity {
-	//隊伍名稱唯一
-	@Column(name = "TEAM_NAME", length = 50, nullable=false, unique = true)
+	private static final long serialVersionUID = 2014L;
+	
+	@Column(name = "TEAM_NAME", length = 50, nullable = false, unique = true)
 	private String teamName;
 	
-	@Column(name = "COUNTRY", length = 50, nullable=false)
+	@Column(name = "COUNTRY", length = 50, nullable = false)
 	private String country;
 
 	public String getCountry() {
@@ -42,12 +39,4 @@ public class TeamEntity extends GenericEntity {
 				+ ", id=" + id + "]";
 	}
 
-	
-
-	
-
-
-
-	
-	
 }
