@@ -18,7 +18,6 @@
 	<script src="<c:url value='/Security/js/button.js'/>"></script> 
 	<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 	
-	
 <body>
 	<div class="createaccount-body">
 		<div class="sing-up">
