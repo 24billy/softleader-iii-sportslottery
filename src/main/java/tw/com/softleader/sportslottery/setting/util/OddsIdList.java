@@ -1,6 +1,12 @@
 package tw.com.softleader.sportslottery.setting.util;
 
-public class OddsIdList {
+import java.io.Serializable;
+
+public class OddsIdList implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7882326965011266633L;
 	private Long oddId1;
 	private Long oddId2;
 	private Long oddId3;
@@ -85,5 +91,6 @@ public class OddsIdList {
 				+ oddId5 + ", oddId6=" + oddId6 + ", oddId7=" + oddId7
 				+ ", oddId8=" + oddId8 + "]";
 	}
+	
 	
 }
