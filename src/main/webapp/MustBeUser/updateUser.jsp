@@ -28,7 +28,7 @@
 			<input class="non-user-input" type="text" name="model.userAccount" value="${user.userAccount}">
 			<label>
 				<strong>修改密碼</strong><br>
-				<input class="input-xlarge" id="password" name="model.userPassword" type="password" value="${user.userPassword}">
+				<input class="input-xlarge" id="password" name="userPassword" type="password" value="${user.userPassword}">
 			</label><br>
 			
 			<label>
@@ -99,7 +99,7 @@
 						checkAccount: true
 					},
 				  
-					'model.userPassword': {
+					userPassword: {
 						required: true,
 						minlength: 6,
 						checkPsw1 : true,

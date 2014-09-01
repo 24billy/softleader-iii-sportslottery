@@ -41,13 +41,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 2014L;
-
+	
 	@Autowired
 	private UserService service;
 	@Autowired
 	private DepositCardService cardService;
-	
+
 	private UserEntity model;
+	private String userPassword;
 	private List<UserEntity> models;
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
 	private String json;
@@ -60,6 +61,15 @@ public class UserAction extends ActionSupport {
 	private String cardAccount;
 	private Long coins;		//把值送進coins讓使用者coins更新
 	
+	
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
 	public Long getCoins() {
 		return coins;
 	}
@@ -130,6 +140,10 @@ public class UserAction extends ActionSupport {
 	@Override
 	public void validate() {
 		log.debug("here is userAction validate");
+		if(userPassword!=null && userPassword.length()>0) {
+			model.setUserPassword(userPassword.getBytes());
+		}
+		
 		
 //		if(model!=null) {
 //			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
@@ -192,14 +206,14 @@ public class UserAction extends ActionSupport {
 		
 		
 		//別的更改coins方式
-		
+		log.debug("coins修改非常異常");
 		return ERROR;
 	}
 	
 	//忘記密碼 寄送新密碼到使用者email
 	static Properties properties = new Properties();
 	static {
-		System.out.println("初始化Eamilproperites");
+		System.out.println("初始化Eamil-Properites");
 		properties.put("mail.smtp.host", "smtp.gmail.com");
 		properties.put("mail.smtp.socketFactory.port", "465");
 		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -257,14 +271,14 @@ public class UserAction extends ActionSupport {
 			model.setModifier("Guest"); //變數
 			model.setCreateTime(LocalDateTime.now());
 			model.setModifiedTime(LocalDateTime.now());
-			
+			//model.setUserPassword(userPassword.getBytes());
 			log.debug("Model = {}", model);
 			
 			try {
 				service.insert(model);
 			} catch (Exception e) {
 				log.debug("!!新增錯誤!!");
-				this.addFieldError("email", this.getText("invalid.fieldvalue.other"));
+				this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
 				e.printStackTrace();
 				return INPUT;
 			}
@@ -290,7 +304,7 @@ public class UserAction extends ActionSupport {
 				userEntity.setUserBirthday(model.getUserBirthday());
 				userEntity.setUserEmail(model.getUserEmail());
 				userEntity.setUserPhone(model.getUserPhone());
-				userEntity.setUserPassword(model.getUserPassword());
+				//userEntity.setUserPassword(model.getUserPassword());
 				userEntity.setUserGender(model.getUserGender());
 				
 				service.update(userEntity);
@@ -328,12 +342,13 @@ public class UserAction extends ActionSupport {
 	//登入
 	public String login() throws Exception {
 		log.debug("login...");
-		UserEntity entity = service.checkLogin(model.getUserAccount(), model.getUserPassword());
+		
+		//測試用階段
+		UserEntity entity = service.getByUserAccount(model.getUserAccount());
 		if(entity!=null) {
 			log.debug("可登入");
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
-			UserEntity e = session.get("user");
 			//log.debug(""+e);
 			return SUCCESS;
 		} else {
@@ -341,6 +356,22 @@ public class UserAction extends ActionSupport {
 			addFieldError("LoginFail","帳號或密碼不正確");
 			return INPUT;
 		}
+		
+		//正式程式碼
+//		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
+//		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
+//		if(entity!=null) {
+//			log.debug("可登入");
+//			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
+//			session.put("user", entity);
+//			UserEntity e = session.get("user");
+//			//log.debug(""+e);
+//			return SUCCESS;
+//		} else {
+//			log.debug("帳號不存在");
+//			addFieldError("LoginFail","帳號或密碼不正確");
+//			return INPUT;
+//		}
 	}
 	
 	//依照帳號找會員

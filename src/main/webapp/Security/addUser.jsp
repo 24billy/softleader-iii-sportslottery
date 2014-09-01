@@ -30,7 +30,7 @@
 				
 				<label>
 					<strong>密碼</strong><br>
-					<input class="input-xlarge" name="model.userPassword" id="password" type="password">
+					<input class="input-xlarge" name="userPassword" id="password" type="password">
 				</label>
 				<span class="error"><s:property value="fieldErrors.password"/></span>
 				
@@ -79,11 +79,10 @@
 	
 	<script>
 		(function($){
-			//帳號重複驗證
+			//帳號重複與驗證
 			jQuery.validator.addMethod("alnum", function(value, element) {
   				return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
   	 		}, "只能包括英文字母和数字");
-			
 			jQuery.validator.addMethod("checkAccount", function() {
 		    	$.ajax({
 		    		url:"<c:url value='/checkAccount'/>",
@@ -144,7 +143,7 @@
 						alnum: true
 					},
 				  
-					'model.userPassword': {
+					userPassword: {
 						required: true,
 						minlength: 6,
 						checkPsw1 : true,
