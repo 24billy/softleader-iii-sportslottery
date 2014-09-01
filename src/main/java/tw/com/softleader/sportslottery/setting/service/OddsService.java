@@ -96,4 +96,8 @@ public class OddsService extends GenericService<OddsEntity> {
 	public List<OddsEntity> getByGameIdWithOddType(Long gameId, String oddType) {
 		return dao.findByGameIdWithOddType(gameId, oddType);
 	}
+	
+	public Long countByOddType(String oddType){
+		return dao.countByOddType(oddType);
+	}
 }
