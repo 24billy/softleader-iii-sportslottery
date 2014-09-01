@@ -10,7 +10,7 @@ import org.joda.time.LocalDateTime;
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 
 @Entity
-@Table(name="GAME")
+@Table(name="depositCard")
 public class DepositCardEntity extends GenericEntity{
 	@Column(name="CARD_ACCOUNT", length=50, nullable = false)
 	private String cardaccount;
