@@ -1,6 +1,6 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,7 @@ public class GameEntity extends GenericEntity {
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	private LocalDateTime gameTime;
 	
-	@Column(name="GAME_NUM")
+	@Column(name="GAME_NUM", unique = true)
 	private Long gameNum;
 	
 	@ManyToOne
@@ -55,13 +55,13 @@ public class GameEntity extends GenericEntity {
 	private Boolean isEnd;
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId", cascade = {CascadeType.ALL})
-	private List<OddsEntity> odds;
+	private Set<OddsEntity> odds;
 
-	public List<OddsEntity> getOdds() {
+	public Set<OddsEntity> getOdds() {
 		return odds;
 	}
 
-	public void setOdds(List<OddsEntity> odds) {
+	public void setOdds(Set<OddsEntity> odds) {
 		this.odds = odds;
 	}
 

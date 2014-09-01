@@ -100,6 +100,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 
 	public String lottery() throws Exception {
+		/*
 		System.out.println("oddsIdList="+oddsIdList);
 		
 		OddsEntity oddsEntity = new OddsEntity();
@@ -140,6 +141,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 			log.debug("!!LotteryAction insertFail!!");
 			e.printStackTrace();
 		}
+		*/
 		return Action.SUCCESS;
 	}
 	

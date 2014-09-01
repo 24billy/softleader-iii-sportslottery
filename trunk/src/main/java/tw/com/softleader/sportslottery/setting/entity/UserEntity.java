@@ -1,7 +1,12 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -33,7 +38,7 @@ public class UserEntity extends GenericEntity {
 	
 	@Column(name="USER_BIRTHDAY")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-	protected LocalDate userBirthday;	
+	private LocalDate userBirthday;	
 	
 	@Column(name="USER_GENDER", length=10)
 	private String userGender;
@@ -49,29 +54,21 @@ public class UserEntity extends GenericEntity {
 	
 	@Column(name="CREATE_TIME")//data inserted time
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	protected LocalDateTime createTime;
+	private LocalDateTime createTime;
 	
 	@Column(name="CREATOR") //who input the data 
-	protected String creator;
+	private String creator;
 	
 	@Column(name="MODIFIED_TIME")//data updated time
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	protected LocalDateTime modifiedTime;
+	private LocalDateTime modifiedTime;
 	
 	@Column(name="MODIFIER")//who modifies the data
-	protected String modifier;
+	private String modifier;
 
-	@Override
-	public String toString() {
-		return "UserEntity [userAccount=" + userAccount + ", userPassword="
-				+ userPassword + ", userName=" + userName + ", userBirthday="
-				+ userBirthday + ", userGender=" + userGender + ", userPhone="
-				+ userPhone + ", userEmail=" + userEmail + ", coins=" + coins
-				+ ", createTime=" + createTime + ", creator=" + creator
-				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
-				+ ", id=" + id + "]";
-	}
-
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "userId", cascade = {CascadeType.ALL})
+	private List<LotteryEntity> lotterys;
+	
 	public String getUserAccount() {
 		return userAccount;
 	}
