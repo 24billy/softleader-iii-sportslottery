@@ -85,8 +85,6 @@ function castOddType(oddType) {
 			alert('轉換失敗');
 	}	
 }
-
-
 //將game.odds賦予KEY值
 function sortGameOdds(gameOdds) {
 	var sortedOdds = [];
@@ -123,4 +121,31 @@ function sortGameOdds(gameOdds) {
 	});
 	
 	return sortedOdds;
+}
+//計算最高中獎金額
+function getCapitalByOdd(lotteryOddValue,combinations){
+		var temparray = [];	
+		var begin=0;
+		var index=0;
+		var totalCapital =0;
+		getCombination(lotteryOddValue, combinations, begin, temparray, index);
+		return totalCapital;
+	function getCombination(lotteryOddValue, combinations, begin, temparray, index) {  
+        var oddcapital = 1;
+//如果n足夠，輸出  temparray
+        if(combinations == 0){
+        	var str = "";
+            for(var i = 0; i < index; i++){  
+            	str += temparray[i]+" ";
+            	oddcapital=oddcapital*temparray[i];
+            }
+            totalCapital+=oddcapital;
+            return;  
+        }          
+        for(var i = begin; i < lotteryOddValue.length; i++){  
+        	temparray[index] = lotteryOddValue[i];  
+            getCombination(lotteryOddValue, combinations-1, i+1, temparray, index+1);  
+        }  
+         
+    }
 }

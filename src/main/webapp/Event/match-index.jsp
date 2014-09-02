@@ -188,22 +188,28 @@
 					      <!-- Begin of Single Bet Panel -->
 						  <div class="panel-body">
 							<form class="form-inline" action="<c:url value="/lottery"/>">
-								<div class="form-group ">
-									<div style="display: inline-block" id="singleBet"></div>
-									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
-									<div style="display: inline-block">
-										<input style="width: 40px" type="text" class="betValue" value="1">
-									</div>
-								</div>
-
-								<div>
-									<div style="width: 50%; display: inline-block" >總價</div>
-									<div id="singleCapital" style=" display: inline-block"										 ></div>
-								</div>
-								<div>
-									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
-									<div id="singleTopPrice" style=" display: inline-block"										></div>
-								</div>
+								<table class="table table-striped  table-hover">
+									<thead>
+										<tr><td>總計</td></tr>
+										<tr>
+											<td>組合數</td>
+											<td>最高中獎金額</td>
+											<td>投注金</td>
+										</tr>
+									</thead>
+									<tbody>
+	 								    <tr>
+											<td id="singleBet">組合數</td>
+											<td id="singleTopPrice">最高中獎金額</td>
+											<td id="singleCapital">總價</td>
+										</tr>								
+										<tr>
+											<td colspan="2">每組合投注金額100元 X</td>
+											<td><input style="width: 40px" type="text" id="singleBetValue" value="1"></td>
+										</tr>
+									</tbody>
+								</table>
+								
 								<div class="lotteryOdds" hidden="true">
 									<input type="text" class="capital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
@@ -228,22 +234,27 @@
 						  <!-- Begin of Pass Bet Panel -->
 						  <div class="panel-body">
 							<form class="form-inline" action="<c:url value="/lottery"/>">
-								<div class="form-group ">
-									<div style="display: inline-block" id="passBet"></div>
-									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
-									<div style="display: inline-block">
-										<input style="width: 40px" type="text" class="betValue" value="1">
-									</div>
-								</div>
-
-								<div>
-									<div style="width: 50%; display: inline-block" >總價</div>
-									<div id="passCapital" style=" display: inline-block"										 ></div>
-								</div>
-								<div>
-									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
-									<div id="passTopPrice" style=" display: inline-block"										></div>
-								</div>
+								<table class="table table-striped  table-hover">
+									<thead>
+										<tr><td>總計</td></tr>
+										<tr>
+											<td>組合數</td>
+											<td>最高中獎金額</td>
+											<td>投注金</td>
+										</tr>
+									</thead>
+									<tbody>
+	 								    <tr>
+											<td id="passBet">組合數</td>
+											<td id="passTopPrice">最高中獎金額</td>
+											<td id="passCapital">總價</td>
+										</tr>								
+										<tr>
+											<td colspan="2">每組合投注金額100元 X</td>
+											<td><input style="width: 40px" type="text" id="passBetValue" value="1"></td>
+										</tr>
+									</tbody>
+								</table>								
 								<div class="lotteryOdds" hidden="true">
 									<input type="text" class="capital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
@@ -267,70 +278,129 @@
 						  <div class="panel-body">
 							<form class="form-inline" action="<c:url value="/lottery"/>">
 								
-								  <table class="table-striped  table-hover">
-									<thead><td>
+								<table class="table table-striped  table-hover" id="comTable">
+									<tr>
+									  <td>
 									      過關組合
-									</td></thead>
+									  </td>
+									  <td>
+									      組合數
+									  </td>
+									  <td>
+									      可能中獎金額
+									  </td>
+									</tr>
+										<tr>
+										  <td>
+										    <label name="comLabel"  class="checkbox " >
+										      <input type="checkbox" name="combination.com1" value="">單場
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr>
+										  <td>
+										    <label name="comLabel"  class="checkbox" >
+										      <input type="checkbox" checked="true" name="combination.com2" value="">過兩關
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel" class="checkbox" >
+										      <input type="checkbox" name="combination.com3" value="">過三關
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel"  class="checkbox">
+										      <input type="checkbox" name="combination.com4" value="">過四關
+										    </label>
+									      </td>
+									      <td>
+									      </td>
+									      <td>
+										  </td>
+									    </tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel"  class="checkbox">
+										      <input type="checkbox" name="combination.com5" value="">過五關斬六將									  
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel"  class="checkbox">
+										      <input type="checkbox" name="combination.com6" value="">過六關
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel"  class="checkbox">
+										      <input type="checkbox" name="combination.com7" value="">過七關
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+										<tr hidden="true">
+										  <td>
+										    <label name="comLabel"  class="checkbox">
+										      <input type="checkbox" name="combination.com8" value="">過八關
+										    </label>
+										  </td>
+										  <td>
+										  </td>
+										  <td>
+										  </td>
+										</tr>
+								</table>
+								<table class="table table-striped  table-hover">
+									<thead>
+										<tr><td>總計</td></tr>
+										<tr>
+											<td>組合數</td>
+											<td>最高中獎金額</td>
+											<td>投注金</td>
+										</tr>
+									</thead>
 									<tbody>
-										<tr><td>
-										  <label class="checkbox ">
-										  <input type="checkbox" name="com1" value="123">單場
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com2" value="234">過兩關
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com3" value="123">過三關
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com4" value="123">過四關
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com5" value="123">過五關斬六將									  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com6" value="123">過六關
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com7" value="123">過七關
-										  </label>
-										</td></tr>
-										<tr><td>
-										  <label class="checkbox">
-										  <input type="checkbox" name="com8" value="123">過八關
-										  </label>
-										</td></tr>
+	 								    <tr>
+											<td id="comBetsTotal">組合數</td>
+											<td id="comTopPrice">最高中獎金額</td>
+											<td id="comTopCapital">投注金</td>
+										</tr>								
+										<tr>
+											<td colspan="2">每組合投注金額100元 X</td>
+											<td><input style="width: 40px" type="text" id="comBetValue" value="1"></td>
+										</tr>
 									</tbody>
-								  </table>
-								
-															
-								<div >
-									<div style="display: inline-block" id="comBet"></div>
-									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
-									<div style="display: inline-block">
-										<input style="width: 40px" type="text" class="betValue" value="1">
-									</div>
-								</div>
-
-								<div>
-									<div style="width: 50%; display: inline-block" >總價</div>
-									<div id="comCapital" style=" display: inline-block" ></div>
-								</div>
-								<div>
-									<div style="width: 50%; display: inline-block" >最高中獎金額</div>
-									<div id="comTopPrice" style=" display: inline-block"></div>
-								</div>
+								</table>
+																					
 								<div class="lotteryOdds" hidden="true">
 									<input type="text" class="capital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
@@ -649,6 +719,8 @@
 				});
 			});
 			odds_refresh();
+			
+			
 			//-----------------------------------------------------
 			//投注區更新
 			function odds_refresh(){
@@ -668,8 +740,18 @@
 				var capitalValue=100;
 				var singlePrice=0;
 				var passPrice=1;
+				var bets=userOddIds.length;
+				var numerator=bets+0;
+				var denominator=1;
+				//紀錄投注賠率的陣列，用於計算最高中獎金額
+				var lotteryOddValue=[];
+				
+				
+
 				
 				$.each(userOddIds, function(index, userOddId){
+					
+					lotteryOddValue[lotteryId-1]=odds[userOddId].oddValue;
 					//判斷是否有重覆選取同一賽事			
 					var oddGameNum=odds[userOddId].gameNum;
 					if(gameIsSelect[oddGameNum]!=-1 && gameIsSelect[oddGameNum]!=oddGameNum){
@@ -686,33 +768,95 @@
 					singlePrice=singlePrice+oddValue;
 					passPrice=passPrice*oddValue;
 					var bet = games[odds[userOddId].gameNum];
-						$('#lottery'+lotteryId).attr("hidden",false);
+						$('#lottery'+lotteryId).prop("hidden",false);
 						$('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);				
 						$('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 						$('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
 						$('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+						//加入過關組合checkbox
+						$('#comTable  tr:eq('+lotteryId+')').prop("hidden",false);
+						//顯示過關組合數
+						denominator=denominator*lotteryId;
 						
+						$('#comTable  tr:eq('+lotteryId+') td:eq(1)').html(numerator/denominator);
+      					bets=bets-1;
+						numerator=numerator*bets;
+					
 					//加入odd至投注form中
 					    $('.oddId'+lotteryId).val(userOddId);
 					lotteryId++;
 				});
-				//更新過關組合類型與計算金額
-				console.log("combination:"+combination);
+
+
+				//var xxx = $('#comTable  tr:eq(1) td:eq(1)').html();
+				console.log("lotteryOddValue="+lotteryOddValue);
+				
+				console.log("result:"+getCapitalByOdd(lotteryOddValue,7));
+				
+
+
+
+				
 				//過關總投注金、最高中獎金額
 				$('#passBet').html(1);
-				$('#passCapital').html($('.betValue').attr("value")*capitalValue+"元");
-				$('#passTopPrice').html(Math.floor(passPrice*100)+"元");
+				$('#passCapital').html($('#passBetValue').val()*capitalValue);
+				$('#passTopPrice').html(Math.floor(passPrice*100));
 				
 				
 				//單場總投注金、最高中獎金額
 				$('#singleBet').html(userOddIds.length);
-				$('#singleCapital').html((userOddIds.length)*$('.betValue').attr("value")*capitalValue+"元");
-				$('#singleTopPrice').html(Math.floor(singlePrice*100)+"元");
+				$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+				$('#singleTopPrice').html(Math.floor(singlePrice*100));
+				//更新過關組合類型與計算金額
+				//計算每個組合的最高可能獎金
+				for(var i=1;i<=8;i++){
+					if(i<=userOddIds.length){
+						$('#comTable  tr:eq('+i+') td:eq(2)').html(Math.floor(getCapitalByOdd(lotteryOddValue,i)*capitalValue*$('#comBetValue').val()));	
+					}
+				}
+				
+				//計算過關組合投注金、最高中獎金額
+					refreshBetTable();
+				$('[name=comLabel]').click(function(){
+					refreshBetTable();
+				});
+				//更新總計
+				function refreshBetTable(){
+					var bet=0;
+					var topPrice=0;
+					var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
+					$.each(checkedlabel, function(index, checkedItem){
+						console.log(checkedItem);
+						
+						$('input',checkedItem).val(1);
+						bet+=parseInt($('td:eq(1)', checkedItem).text());
+						topPrice+=parseInt($('td:eq(2)', checkedItem).text());
+					});
+					$('#comBetsTotal').html(bet);
+					$('#comTopPrice').html(topPrice);
+					$('#comTopCapital').html(bet*capitalValue*$('#comBetValue').val());
+					
+				}
+				
+				$('#singleBetValue').on('keyup', function(){			
+					$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+				});
+				$('#passBetValue').on('keyup', function(){			
+					$('#passCapital').html($('#passBetValue').val()*capitalValue);				
+				});
+				$('#comBetValue').on('keyup', function(){							
+					refreshBetTable();
+				});
+				
+				
 				
 				//每一注投注金計算
-				$('.capital').val((userOddIds.length)*$('.betValue').attr("value")*capitalValue);
+				$('.capital').val($('#singleBetValue').val()*capitalValue);
+				$('.capital').val($('#passBetValue').val()*capitalValue);
+				$('.capital').val($('#comBetValue').val()*capitalValue);
 				if((userOddIds.length>=2)&&combination){
 					//過關
+									
 					$('#myTab li:eq(1) a').tab('show');
 					$('#myTab li:eq(1) a').off('click');
 					$('#myTab li:eq(2) a').off('click');
@@ -732,6 +876,7 @@
 				//隱藏未投注的投注區，未投注的值設定為空值
 				while(lotteryId<=8){
 					$('#lottery'+lotteryId).attr("hidden",true);
+					$('#comTable  tr:eq('+lotteryId+')').prop("hidden",true);
 					$('.oddId'+lotteryId).val("");
 					lotteryId++;
 					
@@ -764,7 +909,6 @@
 			}
 
 		});
-		
 		
 	})(jQuery);
 </script>
