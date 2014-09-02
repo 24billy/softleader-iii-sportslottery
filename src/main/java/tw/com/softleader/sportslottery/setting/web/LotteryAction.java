@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private String json;
 	private HttpSession session;
 	private OddsIdList oddsIdList;
+	private LocalDate timeFrom, timeTo;
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
@@ -84,6 +86,27 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public List<LotteryEntity> getModels() {
 		return models;
 	}
+	
+	
+	public LocalDate getTimeFrom() {
+		return timeFrom;
+	}
+
+
+	public void setTimeFrom(LocalDate timeFrom) {
+		this.timeFrom = timeFrom;
+	}
+
+
+	public LocalDate getTimeTo() {
+		return timeTo;
+	}
+
+
+	public void setTimeTo(LocalDate timeTo) {
+		this.timeTo = timeTo;
+	}
+
 
 	@Override
 	public void validate() {
@@ -207,7 +230,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 			
 			Long id = entity.getId();
 			log.debug("id..." + id);
-			json = new Gson().toJson(service.getByUserId(id));
+			json = new Gson().toJson(service.getComplex(id, timeFrom, timeTo));
 		} catch (Exception e) {
 			log.debug("!!LotteryAction selectByUser Failed!!");
 			addFieldError("QueryFail","selectByUser Fail");

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,7 +54,7 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		}
 	}
 	
-	public List<LotteryEntity> findComplex(Long userId, LocalDateTime timeBegin, LocalDateTime timeEnd){
+	public List<LotteryEntity> findComplex(Long userId, LocalDate timeBegin, LocalDate timeEnd){
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "from LotteryEntity where 1=1";//1=1純粹只是為了節省判斷AND是否需要而存在的
