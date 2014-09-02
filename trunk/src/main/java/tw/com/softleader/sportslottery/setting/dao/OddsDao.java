@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -85,6 +86,52 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 		return count;
 		
+		
+	}
+	
+	public Long countByOddType_Time(String oddType, LocalDate timeFrom, LocalDate timeTo){
+		Session session = sessionFactory.getCurrentSession();
+		
+		//設定sql字串
+		//HQL的帶入變數為 timeFrom, timeTo, teamName
+		//String sql = "select SUM(games.odds.count)from GameEntity games where games.odds.oddType= :oddType";//查詢投注類別
+		String sql = "select games.odds from GameEntity games where 1=1";//查詢投注類別
+		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
+		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
+		//判斷是否有timeFrom 如有則加入sql1的敘述
+		boolean hasTimeFrom = false;
+		if(timeFrom != null){
+			sql += sql1;
+			hasTimeFrom = true;
+		}
+		
+		//判斷是否有timeTo 如有則加入sql2的敘述
+		boolean hasTimeTo = false;
+		if (timeTo != null) {
+			sql += sql2;
+			hasTimeTo = true;
+		}
+		
+		Query query = session.createQuery(sql);
+		if (hasTimeFrom) {
+			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
+		}
+		if (hasTimeTo) {
+			query.setDate("timeTo", timeTo.toDate());
+		}
+		
+		//Long count = (Long)query.uniqueResult();
+		List<OddsEntity> odds = (List<OddsEntity>)query.list();
+		System.out.println(odds);
+		
+		Long count = 0L;//初始化
+		for (OddsEntity oddsEntity : odds) {
+			if(oddsEntity.getOddType().equals(oddType)){
+				count += oddsEntity.getCount();
+			}
+		}
+		
+		return count;
 		
 	}
 	
