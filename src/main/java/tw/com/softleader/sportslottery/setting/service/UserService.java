@@ -3,7 +3,9 @@ package tw.com.softleader.sportslottery.setting.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -15,7 +17,6 @@ import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.UserDao;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
-import tw.com.softleader.sportslottery.setting.web.GameAction;
 
 @Service
 public class UserService extends GenericService<UserEntity> {
@@ -37,9 +38,36 @@ public class UserService extends GenericService<UserEntity> {
 		return entity;
 	}
 	
+	//亂數取得新密碼
+	public byte[] getNewPassword() {
+		StringBuffer bs = new StringBuffer();
+		int word = 0;
+		int select = 0;
+		byte[] newPassword;
+		for(int i=0;i<((int) (Math.random()*5)+6);i++) {
+			select = (int)(Math.random()*3);
+			switch (select) {
+				case 0 : word = (int) (Math.random()*10) + 48;break;
+				case 1 : word = (int) (Math.random()*26) + 65;break;
+				case 2 : word = (int) (Math.random()*26) + 97;break;
+				default: log.debug("取得新密碼發生錯誤(UserService)");break;
+			}
+			bs.append((char) word);
+		}
+		
+		log.debug("成功取得新密碼(UserService)" + bs.toString());
+		return  bs.toString().getBytes();
+	}
+	
 	@Override
 	public UserEntity insert(UserEntity entity) {
 		dao.insert(this.encoding(entity));
+		return entity;
+	}
+	@Override
+	public UserEntity update(UserEntity entity) {
+		UserEntity enEntity = this.encoding(entity);
+		dao.update(enEntity);
 		return entity;
 	}
 

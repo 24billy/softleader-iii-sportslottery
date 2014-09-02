@@ -20,7 +20,6 @@
    <input type="text" name="to"/><br/>
    <div>${fieldErrors.emailCheck}</div>
    <input type="submit" value="發信" />
-   <s:submit value="Send Email" method="execute"/>
    </s:form>
 </body>
 </html>
