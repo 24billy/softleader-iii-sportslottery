@@ -127,10 +127,10 @@
                             	<label class="sr-only" for="country">隊名:</label>
                                 <select class="form-control form-country" id="country" name="country"  >
                                 	<option >不選擇區域 </option>
-                                  	<option value="ROC">中華職棒</option>
-                                  	<option value="USA">美國職棒</option>
-                                  	<option value="JAPAN">日本職棒</option>
-                                  	<option value="KOREA">韓國職棒</option>
+                                  	<option value="中華民國">中華職棒</option>
+                                  	<option value="美國">美國職棒</option>
+                                  	<option value="日本">日本職棒</option>
+                                  	<option value="韓國">韓國職棒</option>
                                 </select>
 
                             </div>
@@ -296,6 +296,7 @@
 				},
 				success:function(data) {
 					$('.form-team').empty(); 
+				/* 	$('.form-team').append('<option value="">不選擇隊伍 </option>');  */
 					$.each(data, function(key, value) {
 						var str = '<option value=' + value.teamName + '>' + value.teamName + '</option>';
 						$('.form-team').append(str);
