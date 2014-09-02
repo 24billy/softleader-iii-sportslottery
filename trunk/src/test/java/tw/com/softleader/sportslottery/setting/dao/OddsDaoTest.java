@@ -112,6 +112,34 @@ public class OddsDaoTest extends BaseTest {
 		
 //-----------------------------------------------------------------------------------------------------		
 		
+		
+		//--------------------------------Test findByOddType---------------------------------------------------		
+				Long count9=oddsDao.countByOddTypeAndIsPass("SU_H");
+				log.debug("count of SU_H= {} ", count9);
+				
+				Long count12=oddsDao.countByOddTypeAndIsPass("SU_A");
+				log.debug("count of SU_A= {} ", count12);
+				
+				Long count13=oddsDao.countByOddTypeAndIsPass("ATS_A");
+				log.debug("count of ATS_A= {} ", count13);
+				
+				Long count14=oddsDao.countByOddTypeAndIsPass("ATS_H");
+				log.debug("count of ATS_H= {} ", count14);
+				
+				Long count15=oddsDao.countByOddTypeAndIsPass("SC_H");
+				log.debug("count of SC_H= {} ", count15);
+				
+				Long count16=oddsDao.countByOddTypeAndIsPass("SC_L");
+				log.debug("count of SC_L= {} ", count16);
+				
+				Long count17=oddsDao.countByOddTypeAndIsPass("ODD");
+				log.debug("count of ODD= {} ", count17);
+				
+				Long count18=oddsDao.countByOddTypeAndIsPass("EVEN");
+				log.debug("count of EVEN= {} ", count18);
+				
+		//-----------------------------------------------------------------------------------------------------		
+			
 	}
 
 }
