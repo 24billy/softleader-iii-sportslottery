@@ -81,7 +81,7 @@
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>searchHistoryComplexData</allowed-methods>
+		<allowed-methods>countOfOddsBytype</allowed-methods>
 	</action>
 	
 	<action name="odds" class="oddsAction" method="execute"> 
