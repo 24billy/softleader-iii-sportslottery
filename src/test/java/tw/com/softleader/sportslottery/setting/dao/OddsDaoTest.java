@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -86,6 +87,7 @@ public class OddsDaoTest extends BaseTest {
 		System.out.println("size of the searching result: "+models.size());
 		*/
 //--------------------------------Test findByOddType---------------------------------------------------		
+/*
 		Long count=oddsDao.countByOddType("SU_H");
 		log.debug("count of SU_H= {} ", count);
 		
@@ -109,37 +111,73 @@ public class OddsDaoTest extends BaseTest {
 		
 		Long count8=oddsDao.countByOddType("EVEN");
 		log.debug("count of EVEN= {} ", count8);
-		
+*/		
 //-----------------------------------------------------------------------------------------------------		
 		
 		
-		//--------------------------------Test findByOddType---------------------------------------------------		
-				Long count9=oddsDao.countByOddTypeAndIsPass("SU_H");
-				log.debug("count of SU_H= {} ", count9);
-				
-				Long count12=oddsDao.countByOddTypeAndIsPass("SU_A");
-				log.debug("count of SU_A= {} ", count12);
-				
-				Long count13=oddsDao.countByOddTypeAndIsPass("ATS_A");
-				log.debug("count of ATS_A= {} ", count13);
-				
-				Long count14=oddsDao.countByOddTypeAndIsPass("ATS_H");
-				log.debug("count of ATS_H= {} ", count14);
-				
-				Long count15=oddsDao.countByOddTypeAndIsPass("SC_H");
-				log.debug("count of SC_H= {} ", count15);
-				
-				Long count16=oddsDao.countByOddTypeAndIsPass("SC_L");
-				log.debug("count of SC_L= {} ", count16);
-				
-				Long count17=oddsDao.countByOddTypeAndIsPass("ODD");
-				log.debug("count of ODD= {} ", count17);
-				
-				Long count18=oddsDao.countByOddTypeAndIsPass("EVEN");
-				log.debug("count of EVEN= {} ", count18);
-				
-		//-----------------------------------------------------------------------------------------------------		
-			
+/*//--------------------------------Test findByOddType---------------------------------------------------		
+		Long count9=oddsDao.countByOddTypeAndIsPass("SU_H");
+		log.debug("count of SU_H= {} ", count9);
+		
+		Long count12=oddsDao.countByOddTypeAndIsPass("SU_A");
+		log.debug("count of SU_A= {} ", count12);
+		
+		Long count13=oddsDao.countByOddTypeAndIsPass("ATS_A");
+		log.debug("count of ATS_A= {} ", count13);
+		
+		Long count14=oddsDao.countByOddTypeAndIsPass("ATS_H");
+		log.debug("count of ATS_H= {} ", count14);
+		
+		Long count15=oddsDao.countByOddTypeAndIsPass("SC_H");
+		log.debug("count of SC_H= {} ", count15);
+		
+		Long count16=oddsDao.countByOddTypeAndIsPass("SC_L");
+		log.debug("count of SC_L= {} ", count16);
+		
+		Long count17=oddsDao.countByOddTypeAndIsPass("ODD");
+		log.debug("count of ODD= {} ", count17);
+		
+		Long count18=oddsDao.countByOddTypeAndIsPass("EVEN");
+		log.debug("count of EVEN= {} ", count18);
+		
+//-----------------------------------------------------------------------------------------------------		
+*/
+
+//--------------------------------Test countByOddType_Time---------------------------------------------------		
+		
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+		//log.debug("date1= {} ", date1);
+		LocalDate date2 = new LocalDate();
+		date2 = LocalDate.parse("2014-08-21");
+		Long count29=oddsDao.countByOddType_Time("SU_H", date1, date2);
+		log.debug("count of SU_H= {} ", count29);
+		
+//		Long count22=oddsDao.countByOddType_Time("SU_A", null, null);
+//		log.debug("count of SU_A= {} ", count22);
+//		
+//		Long count23=oddsDao.countByOddType_Time("ATS_A", null, null);
+//				
+//		log.debug("count of ATS_A= {} ", count23);
+//		
+//		Long count24=oddsDao.countByOddType_Time("ATS_H", null, null);
+//		log.debug("count of ATS_H= {} ", count24);
+//		
+//		Long count25=oddsDao.countByOddType_Time("SC_H", null, null);
+//		log.debug("count of SC_H= {} ", count25);
+//		
+//		Long count26=oddsDao.countByOddType_Time("SC_L", null, null);
+//		log.debug("count of SC_L= {} ", count26);
+//		
+//		Long count27=oddsDao.countByOddType_Time("ODD", null, null);
+//		log.debug("count of ODD= {} ", count27);
+//		
+//		Long count28=oddsDao.countByOddType_Time("EVEN", null, null);
+//		log.debug("count of EVEN= {} ", count28);
+		
+//-----------------------------------------------------------------------------------------------------		
+
+	
 	}
 
 }
