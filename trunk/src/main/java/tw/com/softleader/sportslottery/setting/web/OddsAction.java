@@ -142,5 +142,9 @@ public class OddsAction extends ActionSupport {
 			return Action.SUCCESS;
 		}
 	}
+	public String oddsStatisticByTime() {
+		log.debug("oddsStatisticByTime...");
+		return SUCCESS;
+	}
     
 }
