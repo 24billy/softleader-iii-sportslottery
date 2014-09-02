@@ -21,7 +21,7 @@ public class LotteryServiceTest extends BaseTest {
 		UserEntity user = userService.getById(1L);
 		log.debug("user = {}", user);
 		LotteryEntity lottery = new LotteryEntity();
-		lottery.setUserId(user);
+		//lottery.setUserId(user);
 		lotteryService.insert(lottery);
 		*/
 	}

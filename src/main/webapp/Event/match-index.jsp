@@ -786,16 +786,6 @@
 					    $('.oddId'+lotteryId).val(userOddId);
 					lotteryId++;
 				});
-
-
-				//var xxx = $('#comTable  tr:eq(1) td:eq(1)').html();
-				console.log("lotteryOddValue="+lotteryOddValue);
-				
-				console.log("result:"+getCapitalByOdd(lotteryOddValue,7));
-				
-
-
-
 				
 				//過關總投注金、最高中獎金額
 				$('#passBet').html(1);
@@ -826,7 +816,6 @@
 					var topPrice=0;
 					var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
 					$.each(checkedlabel, function(index, checkedItem){
-						console.log(checkedItem);
 						
 						$('input',checkedItem).val(1);
 						bet+=parseInt($('td:eq(1)', checkedItem).text());
@@ -854,10 +843,26 @@
 				$('.capital').val($('#singleBetValue').val()*capitalValue);
 				$('.capital').val($('#passBetValue').val()*capitalValue);
 				$('.capital').val($('#comBetValue').val()*capitalValue);
+				
 				if((userOddIds.length>=2)&&combination){
 					//過關
-									
-					$('#myTab li:eq(1) a').tab('show');
+					//console.log("before:"+sessionStorage.activeTab);
+						if($('#myTab li:eq(1)').hasClass("active")){
+							sessionStorage.activeTab="1";
+							$('#myTab li:eq(1) a').tab('show');
+						}
+						else if($('#myTab li:eq(2)').hasClass("active")){
+							sessionStorage.activeTab="2";
+							$('#myTab li:eq(2) a').tab('show');
+						}
+						else if( $('#myTab li:eq(0)').hasClass("active")){
+							sessionStorage.activeTab="0";
+							$('#myTab li:eq(0) a').tab('show');
+						}
+
+					//console.log("after:"+sessionStorage.activeTab);
+					
+			
 					$('#myTab li:eq(1) a').off('click');
 					$('#myTab li:eq(2) a').off('click');
 				}
