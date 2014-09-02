@@ -493,7 +493,6 @@
 				    	'model.oddValue':$(this).val(),
 				    	'model.oddCombination':oddCombination,
 				    	'model.count':0,
-				    	'model.isPass':false
 					}).done(function(data) {
 						return true;
 					});

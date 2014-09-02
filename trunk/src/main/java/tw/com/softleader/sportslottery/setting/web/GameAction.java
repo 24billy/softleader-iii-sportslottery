@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
@@ -207,6 +208,9 @@ public class GameAction extends ActionSupport {
 		entity.setIsEnd(model.getIsEnd());
 		entity.setGameScoreAway(gameScoreAway);
 		entity.setGameScoreHome(gameScoreHome);
+		for (OddsEntity odds : entity.getOdds()) {
+			odds.setIsPass(false);
+		}
 		
 		String su = null;
 		String ats = null;
