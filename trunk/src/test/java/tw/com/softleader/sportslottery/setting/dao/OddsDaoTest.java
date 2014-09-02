@@ -145,13 +145,14 @@ public class OddsDaoTest extends BaseTest {
 
 //--------------------------------Test countByOddType_Time---------------------------------------------------		
 		
-		LocalDate date1 = new LocalDate();
-		date1 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
-		//log.debug("date1= {} ", date1);
-		LocalDate date2 = new LocalDate();
-		date2 = LocalDate.parse("2014-08-21");
-		Long count29=oddsDao.countByOddType_Time("SU_H", date1, date2);
-		log.debug("count of SU_H= {} ", count29);
+//		LocalDate date1 = new LocalDate();
+//		date1 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+//		//log.debug("date1= {} ", date1);
+//		LocalDate date2 = new LocalDate();
+//		date2 = LocalDate.parse("2014-08-21");
+//		Long count29=oddsDao.countByOddType_Time("SU_H", date1, date2);
+//		log.debug("count of SU_H= {} ", count29);
+//-------------------------------------------------------------------------------------------------
 		
 //		Long count22=oddsDao.countByOddType_Time("SU_A", null, null);
 //		log.debug("count of SU_A= {} ", count22);
@@ -177,7 +178,35 @@ public class OddsDaoTest extends BaseTest {
 		
 //-----------------------------------------------------------------------------------------------------		
 
-	
+//--------------------------------Test countByOddType_Time_isPass---------------------------------------------------		
+
+//		LocalDate date3 = new LocalDate();
+//		date3 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+//		//log.debug("date1= {} ", date1);
+//		LocalDate date4 = new LocalDate();
+//		date4 = LocalDate.parse("2014-08-21");
+//		Long count39=oddsDao.countByOddType_Time("SU_H", date3, date4);
+//		log.debug("count of SU_H= {} ", count39);
+		
+//------------------------------------------------------------------------------------
+//		LocalDate date5 = new LocalDate();
+//		date5 = LocalDate.parse("2014-09-01");//將時間自串轉成 LocalDateTime
+//		//log.debug("date1= {} ", date1);
+//		LocalDate date6 = new LocalDate();
+//		date6 = LocalDate.parse("2014-9-02");
+//		Long count49=oddsDao.countByOddType_Time("SU_H", date5, date6);
+//		log.debug("count of SU_H= {} ", count49);
+
+
+//------------------------------------------------------------------------------------
+		LocalDate date7 = new LocalDate();
+		date7 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
+		//log.debug("date1= {} ", date1);
+		LocalDate date8 = new LocalDate();
+		date8 = LocalDate.parse("2014-08-20");
+		Long count59=oddsDao.countByOddType_Time("SU_H", date7, date8);
+		log.debug("count of SU_H= {} ", count59);
+
 	}
 
 }
