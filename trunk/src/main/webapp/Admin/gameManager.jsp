@@ -416,7 +416,7 @@
 							$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
 						});
 					} else {
-						$('.form-decimal').val('0.00');
+						$('.form-decimal').val('1.00');
 					}
 					
 				});
@@ -526,7 +526,7 @@
 		function resetInput() {
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
-			$('.form-decimal').val('0.00')
+			$('.form-decimal').val('1.00')
 			
 			$('#gameTime').datetimepicker({
 				defaultDate:new Date(),
@@ -537,7 +537,7 @@
 			});
 			
 			$('.form-decimal').TouchSpin({
-				min: 0,
+				min: 1,
 				initval: 0,
 				step: 0.05,
 				decimals: 2,
