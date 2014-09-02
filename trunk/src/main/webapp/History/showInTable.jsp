@@ -55,15 +55,15 @@
 						<a href="<c:url value="/index.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 					</li>
 					<li class="active">
-						<a href="javascript:;" data-toggle="collapse" data-target="#history-manager"><i class="fa fa-fw fa-list"></i> 成績歷史資訊<i class="fa fa-fw fa-caret-down"></i></a>
+						<a href="javascript:;" data-toggle="collapse" data-target="#history-manager"><i class="fa fa-fw fa-list"></i> 歷史資訊<i class="fa fa-fw fa-caret-down"></i></a>
 <!--						 可隱藏下拉選單 -->
 						<ul id="history-manager" class="collapse">
 							<li class="open">
- 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
+ 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> 賽事成績</a>
  
 							</li>
                             <li class="open">
- 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> Statistics</a>
+ 								<a href="<c:url value="/oddsStatisticByTime"/>"><i class="fa fa-fw fa-table"></i> 以時間查詢投注統計</a>
  
 							</li>
                             <li class="open">
@@ -93,11 +93,11 @@
 								<a href="<c:url value="/History/historyIndex.jsp"/>"><i class="fa fa-fw fa-home"></i> 首頁</a>
 							</li>
 							<li>
-								<i class="fa fa-fw fa-list"></i> 成績
+								<i class="fa fa-fw fa-list"></i> 歷史資訊
 							</li>
 							<li class="active">
 								<!-- <i class="fa fa-fw fa-pencil-square-o"></i> 新增 -->
-								<i class="fa fa-fw fa-table"></i> 查詢
+								<i class="fa fa-fw fa-table"></i> 賽事成績
 							</li>
 
 						</ol>
