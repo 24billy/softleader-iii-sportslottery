@@ -266,7 +266,56 @@
 						  <!-- Begin of Combination Bet Panel -->
 						  <div class="panel-body">
 							<form class="form-inline" action="<c:url value="/lottery"/>">
-								<div class="form-group ">
+								
+								  <table class="table-striped  table-hover">
+									<thead><td>
+									      過關組合
+									</td></thead>
+									<tbody>
+										<tr><td>
+										  <label class="checkbox ">
+										  <input type="checkbox" name="com1" value="123">單場
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com2" value="234">過兩關
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com3" value="123">過三關
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com4" value="123">過四關
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com5" value="123">過五關斬六將									  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com6" value="123">過六關
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com7" value="123">過七關
+										  </label>
+										</td></tr>
+										<tr><td>
+										  <label class="checkbox">
+										  <input type="checkbox" name="com8" value="123">過八關
+										  </label>
+										</td></tr>
+									</tbody>
+								  </table>
+								
+															
+								<div >
 									<div style="display: inline-block" id="comBet"></div>
 									<div style="display: inline-block">個組合 每組合投注金額100元 X</div>
 									<div style="display: inline-block">
