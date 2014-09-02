@@ -85,3 +85,42 @@ function castOddType(oddType) {
 			alert('轉換失敗');
 	}	
 }
+
+
+//將game.odds賦予KEY值
+function sortGameOdds(gameOdds) {
+	var sortedOdds = [];
+	
+	$.each(gameOdds, function(index, odd){
+		switch(odd.oddType) {
+	    case 'SU_A':
+	    	sortedOdds['SU_A'] = odd;
+	    	break;
+	    case 'SU_H':
+	    	sortedOdds['SU_H'] = odd;
+			break;
+	    case 'ATS_A':
+	    	sortedOdds['ATS_A'] = odd;
+	    	break;
+	    case 'ATS_H':
+	    	sortedOdds['ATS_H'] = odd;
+	    	break;
+	    case 'SC_H':
+	    	sortedOdds['SC_H'] = odd;
+	    	break;
+	    case 'SC_L':
+	    	sortedOdds['SC_L'] = odd;
+	    	break;
+	    case 'ODD':
+	    	sortedOdds['ODD'] = odd;
+	    	break;
+	    case 'EVEN':
+	    	sortedOdds['EVEN'] = odd;
+	    	break;
+	    default:
+	    	break;
+		}
+	});
+	
+	return sortedOdds;
+}

@@ -33,14 +33,14 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" id="ballType">
+							<select class="form-control form-ball-type" id="ballType" >
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" value="" >
-                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" value="" >
+                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" >
+                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" >
                         <input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
                         <div id="isEndGroup" class="btn-group" data-toggle="buttons">
 							<label class="btn btn-default active" id="isEndLabelDefault">
@@ -111,11 +111,11 @@
 <script>
 	(function($) {
 		$('#timeBegin').datetimepicker({
-			format: 'Y-m-d',
+			format:'Y-m-d',
 			onShow:function( ct ){
-				//this.setOptions({
-				//	maxDate:$('#timeEnd').val()?$('#timeEnd').val():false
-				//});
+				this.setOptions({
+					maxDate:$('#timeEnd').val()?$('#timeEnd').val().replace(/-/g,'/'):false
+				});
 			},
 			onSelectDate:function(){
 				renewData();
@@ -123,11 +123,11 @@
 			timepicker: false //取消掉顯示時間
 		});
 		$('#timeEnd').datetimepicker({
-			format: 'Y-m-d',
+			format:'Y-m-d',
 			onShow:function( ct ){
-				//this.setOptions({
-				//	minDate:$('#timeBegin').val()?$('#timeBegin').val():false
-				//});
+				this.setOptions({
+					minDate:$('#timeBegin').val()?$('#timeBegin').val().replace(/-/g,'/'):false
+				});
 			},
 			onSelectDate:function(){
 				renewData();
@@ -198,7 +198,22 @@
 				        		}},
 				        		{"data": "teamAway.teamName" },
 				        		{"data": "teamHome.teamName" },
-				        		{"data": null},
+				        		{"data": function(row, type, val, meta){
+									var sortedOdds = sortGameOdds(row.odds);
+									if(sortedOdds['SU_A']&&sortedOdds['SU_H']){
+										
+										var rateSU_A = parseInt((sortedOdds['SU_A'].count/(sortedOdds['SU_H'].count+sortedOdds['SU_A'].count))*100);
+										var rateSU_H = 100 - rateSU_A;
+										
+										return '<div class="progress">' +
+										  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSU_A + '%"></div>' +
+										  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSU_H + '%"></div>' +
+										'</div>';
+									} else {
+										return "undefined";
+									}
+
+				        		}},
 				        		{"data": "isEnd"}
 				        ],
 				        
@@ -220,16 +235,61 @@
 			});
 			$(window).unbind('formatDataRow');
 			function formatDataRow (dataRow) {
-			    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+				var sortedOdds = sortGameOdds(dataRow.odds);
+				if(!sortedOdds['SU_A']){
+					return "undefined";
+				} else {
+					var rateSU_A = parseInt((sortedOdds['SU_A'].count/(sortedOdds['SU_H'].count+sortedOdds['SU_A'].count))*100);
+					var rateSU_H = 100 - rateSU_A;
+					
+					var rateATS_A = parseInt((sortedOdds['ATS_A'].count/(sortedOdds['ATS_H'].count+sortedOdds['ATS_A'].count))*100);
+					var rateATS_H = 100 - rateATS_A;
+					
+					var rateSC_H = parseInt((sortedOdds['SC_L'].count/(sortedOdds['SC_H'].count+sortedOdds['SC_L'].count))*100);
+					var rateSC_L = 100 - rateSC_H;
+					
+					var rateODD = parseInt((sortedOdds['ODD'].count/(sortedOdds['EVEN'].count+sortedOdds['ODD'].count))*100);
+					var rateEVEN = 100 - rateODD;
+					
+				    return '<table class="table" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 			        '<tr>'+
-			            '<td>gameNum:</td>'+
-			            '<td>' + dataRow.gameNum + '</td>'+
+			            '<td width="5%">不讓分:</td>'+
+						'<td>'+
+				            '<div class="progress">'+
+							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSU_A + '%">' + dataRow.teamAway.teamName + ' ' + rateSU_A + '%</div>'+
+							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSU_H + '%">' + dataRow.teamHome.teamName + ' ' + rateSU_H + '%</div>'+
+							'</div>'+
+						'</td>'+
 			        '</tr>'+
 			        '<tr>'+
-			            '<td>Extra info:</td>'+
-			            '<td>And any further details here (images etc)...</td>'+
+			            '<td>　讓分:</td>'+
+						'<td>'+
+				            '<div class="progress">'+
+							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateATS_A + '%">' + dataRow.teamAway.teamName + ' ' + rateATS_A + '%</div>'+
+							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateATS_H + '%">' + dataRow.teamAway.teamName + ' ' + rateATS_H + '%</div>'+
+							'</div>'+
+						'</td>'+
+			        '</tr>'+
+			        '<tr>'+
+			            '<td>　總分:</td>'+
+						'<td>'+
+				            '<div class="progress">'+
+							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSC_H + '%">大 ' + rateSC_H + '%</div>'+
+							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSC_L + '%">小 ' + rateSC_L + '%</div>'+
+							'</div>'+
+						'</td>'+
+			        '</tr>'+
+				        '<tr>'+
+			            '<td>單雙數:</td>'+
+						'<td>'+
+				            '<div class="progress">'+
+							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateODD + '%">單 ' + rateODD + '%</div>'+
+							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateEVEN + '%">雙 ' + rateEVEN + '%</div>'+
+							'</div>'+
+						'</td>'+
 			        '</tr>'+
 			    '</table>';
+				}
 			}
 		}
 		
