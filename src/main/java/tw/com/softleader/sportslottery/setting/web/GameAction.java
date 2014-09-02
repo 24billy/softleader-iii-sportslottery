@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
@@ -200,50 +201,62 @@ public class GameAction extends ActionSupport {
 	
 	public String update() {
 		log.debug("update...");
-		
-		Long gameId = model.getId();
-		Long gameScoreAway = model.getGameScoreAway();
-		Long gameScoreHome = model.getGameScoreHome();
-		GameEntity entity = service.getById(gameId);
-		entity.setIsEnd(model.getIsEnd());
-		entity.setGameScoreAway(gameScoreAway);
-		entity.setGameScoreHome(gameScoreHome);
-		for (OddsEntity odds : entity.getOdds()) {
-			odds.setIsPass(false);
-		}
-		
-		String su = null;
-		String ats = null;
-		String sc = null;
-		String eo = null;
-		
-		if (gameScoreAway > gameScoreHome) {
-			su = "SU_A";
-		} else if (gameScoreAway < gameScoreHome) {
-			su = "SU_H";
-		}
-		
-		if (gameScoreAway > gameScoreHome + 1.5) {
-			ats = "ATS_A";
-		} else if (gameScoreAway < gameScoreHome + 1.5) {
-			ats = "ATS_H";
-		}
-		
-		if ((gameScoreAway + gameScoreHome) > 7.5) {
-			sc = "SC_H";
-		} else {
-			sc = "SC_L";
-		}
-		
-		if ((gameScoreAway + gameScoreHome) % 2 == 0) {
-			eo = "EVEN";
-		} else {
-			eo = "ODD";
-		}
 		String result = null;
 		try {
-			service.update(entity);
+		
+			Long gameId = model.getId();
+			Long gameScoreAway = model.getGameScoreAway();
+			Long gameScoreHome = model.getGameScoreHome();
+			
+			String su = null;
+			String ats = null;
+			String sc = null;
+			String eo = null;
+			
+			if (gameScoreAway > gameScoreHome) {
+				su = "SU_A";
+			} else if (gameScoreAway < gameScoreHome) {
+				su = "SU_H";
+			}
+			
+			if (gameScoreAway > gameScoreHome + 1.5) {
+				ats = "ATS_A";
+			} else if (gameScoreAway < gameScoreHome + 1.5) {
+				ats = "ATS_H";
+			}
+			
+			if ((gameScoreAway + gameScoreHome) > 7.5) {
+				sc = "SC_H";
+			} else {
+				sc = "SC_L";
+			}
+			
+			if ((gameScoreAway + gameScoreHome) % 2 == 0) {
+				eo = "EVEN";
+			} else {
+				eo = "ODD";
+			}
+			
 			oddsService.setIsPass(gameId, su, ats, sc, eo);
+			
+			GameEntity entity = service.getById(gameId);
+			entity.setIsEnd(model.getIsEnd());
+			entity.setGameScoreAway(gameScoreAway);
+			entity.setGameScoreHome(gameScoreHome);
+			
+			service.update(entity);
+			for (OddsEntity odds : entity.getOdds()) {
+				if (odds.getIsPass() == null) {
+					odds.setIsPass(false);
+				}
+				List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odds.getId());
+				lotteryOddsService.checkStatus(los);
+				int count = los.size();
+				odds.setCount(new Long(count));
+				oddsService.update(odds);
+			}
+			
+			
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();

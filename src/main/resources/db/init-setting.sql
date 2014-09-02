@@ -239,19 +239,19 @@ insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS)
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,100,1000,'2014-08-08T10:50:20');
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,200,1000,'2014-08-09T10:50:20');
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,1000,500,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,0,300,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,0,400,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,0,300,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,null,300,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,null,400,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,null,300,'2014-08-10T10:50:20');
 
-insert into lottery_odds (lottery_id, odds_id) values (4, 89);
-insert into lottery_odds (lottery_id, odds_id) values (4, 91);
-insert into lottery_odds (lottery_id, odds_id) values (4, 93);
-insert into lottery_odds (lottery_id, odds_id) values (5, 88);
-insert into lottery_odds (lottery_id, odds_id) values (5, 91);
-insert into lottery_odds (lottery_id, odds_id) values (5, 94);
-insert into lottery_odds (lottery_id, odds_id) values (5, 96);
-insert into lottery_odds (lottery_id, odds_id) values (6, 88);
-insert into lottery_odds (lottery_id, odds_id) values (6, 93);
-insert into lottery_odds (lottery_id, odds_id) values (6, 95);
+insert into lottery_odds (lottery_id, odds_id) values (4, 113);
+insert into lottery_odds (lottery_id, odds_id) values (4, 115);
+insert into lottery_odds (lottery_id, odds_id) values (4, 117);
+insert into lottery_odds (lottery_id, odds_id) values (5, 112);
+insert into lottery_odds (lottery_id, odds_id) values (5, 115);
+insert into lottery_odds (lottery_id, odds_id) values (5, 118);
+insert into lottery_odds (lottery_id, odds_id) values (5, 120);
+insert into lottery_odds (lottery_id, odds_id) values (6, 112);
+insert into lottery_odds (lottery_id, odds_id) values (6, 117);
+insert into lottery_odds (lottery_id, odds_id) values (6, 119);
 
 insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('aaa', 'bbb', 1000, null, true);
