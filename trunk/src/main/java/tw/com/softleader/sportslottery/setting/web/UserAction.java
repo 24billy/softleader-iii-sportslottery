@@ -49,6 +49,9 @@ public class UserAction extends ActionSupport {
 
 	private UserEntity model;
 	private String userPassword;
+	private String confirm_password;
+	
+
 	private List<UserEntity> models;
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
 	private String json;
@@ -61,6 +64,13 @@ public class UserAction extends ActionSupport {
 	private String cardAccount;
 	private Long coins;		//把值送進coins讓使用者coins更新
 	
+	public String getConfirm_password() {
+		return confirm_password;
+	}
+
+	public void setConfirm_password(String confirm_password) {
+		this.confirm_password = confirm_password;
+	}
 	
 	public String getUserPassword() {
 		return userPassword;
@@ -226,7 +236,11 @@ public class UserAction extends ActionSupport {
 		UserEntity userEntity = service.getByUserAccount(account);
 		if(userEntity!=null) {
 			if(userEntity.getUserEmail().equals(to)) {
-				body = "您的密碼暫為:" + userEntity.getUserPassword(); 
+				byte[] newPassword = service.getNewPassword();
+				
+				userEntity.setUserPassword(newPassword);
+				service.update(userEntity);
+				body = "您的密碼暫為:" + new String(new String(newPassword)); 
 			}else {
 				log.debug("Email不正確");
 				this.addFieldError("emailCheck", this.getText("invalid.fieldvalue.forget.email"));
@@ -245,10 +259,12 @@ public class UserAction extends ActionSupport {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject("您的密碼來了,請盡快更改"); message.setText(body); Transport.send(message);
+			message.setSubject("您的密碼來了,請盡快更改");
+			message.setText(body);
+			Transport.send(message);
 		} catch(Exception e) { 
 			ret = ERROR; 
-			e.printStackTrace(); 
+			//e.printStackTrace(); 
 		} 
 		return ret; 
 	}
@@ -292,19 +308,21 @@ public class UserAction extends ActionSupport {
 	public String update() throws Exception {
 		log.debug("修改會員資料");
 		log.debug("Model = {}", model);
-		//model.setModifier("Guest");
-		//model.setModifiedTime(LocalDateTime.now());
+		model.setModifier("Guest");
+		model.setModifiedTime(LocalDateTime.now());
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
 		//log.debug(""+userEntity);
 		try {
 			if (model!=null) {
+				log.debug("密碼:" + userPassword);
 				userEntity.setUserName(model.getUserName());
 				userEntity.setUserBirthday(model.getUserBirthday());
 				userEntity.setUserEmail(model.getUserEmail());
 				userEntity.setUserPhone(model.getUserPhone());
-				//userEntity.setUserPassword(model.getUserPassword());
+				model.setUserPassword(userPassword.getBytes());
+				userEntity.setUserPassword(model.getUserPassword());
 				userEntity.setUserGender(model.getUserGender());
 				
 				service.update(userEntity);
@@ -342,13 +360,21 @@ public class UserAction extends ActionSupport {
 	//登入
 	public String login() throws Exception {
 		log.debug("login...");
+
+		//測試期間用 無法改密碼
+		UserEntity entity2 = service.getById(2l);
+		log.debug(entity2.toString());
+		entity2.setUserPassword("a123456".getBytes());
+		service.update(entity2);
 		
-		//測試用階段
-		UserEntity entity = service.getByUserAccount(model.getUserAccount());
+		//正式程式碼
+		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
+		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
 		if(entity!=null) {
 			log.debug("可登入");
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
+			UserEntity e = session.get("user");
 			//log.debug(""+e);
 			return SUCCESS;
 		} else {
@@ -356,22 +382,6 @@ public class UserAction extends ActionSupport {
 			addFieldError("LoginFail","帳號或密碼不正確");
 			return INPUT;
 		}
-		
-		//正式程式碼
-//		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
-//		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
-//		if(entity!=null) {
-//			log.debug("可登入");
-//			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
-//			session.put("user", entity);
-//			UserEntity e = session.get("user");
-//			//log.debug(""+e);
-//			return SUCCESS;
-//		} else {
-//			log.debug("帳號不存在");
-//			addFieldError("LoginFail","帳號或密碼不正確");
-//			return INPUT;
-//		}
 	}
 	
 	//依照帳號找會員
