@@ -59,15 +59,15 @@
 <!--						 可隱藏下拉選單 -->
 						<ul id="history-manager" class="collapse">
 							<li class="open">
- 								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
+ 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> 查詢</a>
  
 							</li>
-                                                        <li class="open">
- 								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> Statistics</a>
+                            <li class="open">
+ 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> Statistics</a>
  
 							</li>
-                                                        <li class="open">
- 								<a href="<c:url value="/History/showInTable.jsp"/>"><i class="fa fa-fw fa-table"></i> Comparisions on Map</a>
+                            <li class="open">
+ 								<a href="<c:url value="/searchHistory"/>"><i class="fa fa-fw fa-table"></i> Comparisions on Map</a>
  
 							</li>
                                                         
