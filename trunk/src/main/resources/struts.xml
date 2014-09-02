@@ -75,6 +75,15 @@
 		<allowed-methods>searchHistoryComplexData</allowed-methods>
 	</action>
 	
+	<action name="oddsStatisticByTime" class="oddsAction" method="oddsStatisticByTime">
+		<result name="success" >/History/TimeStatistics.jsp</result>
+		<result name="SuccessOfCountOfOddsBytype" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>searchHistoryComplexData</allowed-methods>
+	</action>
+	
 	<action name="odds" class="oddsAction" method="execute"> 
 		<result name="insert" type="stream">
 			<param name="contentType">appliction/json</param>
