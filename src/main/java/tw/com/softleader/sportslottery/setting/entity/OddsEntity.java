@@ -29,7 +29,7 @@ public class OddsEntity extends GenericEntity {
 	@Column(name = "COUNT", columnDefinition = "BIGINT default 0")
 	private Long count; 
 	
-	@Column(name = "IS_PASS", columnDefinition = "BOOLEAN default FALSE")
+	@Column(name = "IS_PASS")
 	private Boolean isPass;
 
 	public Long getCount() {
