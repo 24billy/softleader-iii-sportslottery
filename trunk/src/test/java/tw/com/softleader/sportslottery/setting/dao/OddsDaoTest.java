@@ -28,7 +28,7 @@ public class OddsDaoTest extends BaseTest {
 	@Test
 	public void crud() {
 		
-		List<OddsEntity> models = null;
+/*		List<OddsEntity> models = null;
 		
 		int originSize = 0;
 		int currentSize = 0;
@@ -37,23 +37,23 @@ public class OddsDaoTest extends BaseTest {
 		
 		if(models != null) {
 			originSize = models.size();
-		}
-//		
-		OddsEntity entity = new OddsEntity();
+		}*/
+	
+/*		OddsEntity entity = new OddsEntity();
 		entity.setGameId(1L);
 		entity.setOddType("EVEN");
 		BigDecimal value = new BigDecimal("1");
 		entity.setOddValue(value);
 		
 		oddsDao.insert(entity);
-//		
+		
 		models = oddsDao.findAll();
-//		
+	
 		if(models != null) {
 			currentSize = models.size();
 		}
-//		
-		assertEquals(originSize + 1, currentSize);
+		
+		assertEquals(originSize + 1, currentSize);*/
 //		
 //		entity = oddsDao.findById(entity.getId());
 //		log.debug("entity = {}", entity);
@@ -85,7 +85,32 @@ public class OddsDaoTest extends BaseTest {
 		log.debug("findForHistory = {}", models);
 		System.out.println("size of the searching result: "+models.size());
 		*/
+//--------------------------------Test findByOddType---------------------------------------------------		
+		Long count=oddsDao.countByOddType("SU_H");
+		log.debug("count of SU_H= {} ", count);
 		
+		Long count2=oddsDao.countByOddType("SU_A");
+		log.debug("count of SU_A= {} ", count2);
+		
+		Long count3=oddsDao.countByOddType("ATS_A");
+		log.debug("count of ATS_A= {} ", count3);
+		
+		Long count4=oddsDao.countByOddType("ATS_H");
+		log.debug("count of ATS_H= {} ", count4);
+		
+		Long count5=oddsDao.countByOddType("SC_H");
+		log.debug("count of SC_H= {} ", count5);
+		
+		Long count6=oddsDao.countByOddType("SC_L");
+		log.debug("count of SC_L= {} ", count6);
+		
+		Long count7=oddsDao.countByOddType("ODD");
+		log.debug("count of ODD= {} ", count7);
+		
+		Long count8=oddsDao.countByOddType("EVEN");
+		log.debug("count of EVEN= {} ", count8);
+		
+//-----------------------------------------------------------------------------------------------------		
 		
 	}
 
