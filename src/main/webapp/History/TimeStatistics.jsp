@@ -109,7 +109,7 @@
 				
 				<div class="row">
 					<div class="col-lg-12">
-						<form class="form-inline" role="form" action="<c:url value="/game.action"/>">
+						<form class="form-inline" role="form" action="<c:url value="/oddsStatisticByTime"/>">
 
 							<div class="form-group">
 								
@@ -123,28 +123,14 @@
                             	<input class="form-control form-game-time"  id = "to" placeholder="To" type="text" name="timeTo">
                             </div>
                             
-                            <div class="form-group">
-                            	<label class="sr-only" for="country">隊名:</label>
-                                <select class="form-control form-country" id="country" name="country"  >
-                                	<option >不選擇區域 </option>
-                                  	<option value="ROC">中華職棒</option>
-                                  	<option value="USA">美國職棒</option>
-                                  	<option value="JAPAN">日本職棒</option>
-                                  	<option value="KOREA">韓國職棒</option>
-                                </select>
+                           
 
-                            </div>
-
-                            <div class="form-group">
-                                    <label class="sr-only" for="teamName">隊名:</label>
-                                    <select class="form-control form-team" id="teamName" name="teamName" ></select>
-
-                            </div>
+                           
 
 
                     
                             <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
-                            <h5>可直接按submit列出所有資訊</h5>
+                            
                             <button class="btn btn-default" type="reset" id="reset" >Reset Button</button>
                             
                             
@@ -199,7 +185,7 @@
 	(function($) {
 		listTeam();
 		$( ".form-country" ).change(function() { 
-
+			
 			getTeamsByCountry();
 
 		});
