@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
@@ -188,33 +188,8 @@
 					}
 					console.log("-----datas-----");
 					console.log(datas);
-					//塞第一層資料
-					table = $('#oddTable').dataTable({
-						'data': datas,
-						
-				        'columns': [
-				        		{
-				        		'class':'details-control',
-				        		'orderable':false,
-				        		'data':null,
-				        		'defaultContent': ''
-				        		},
-				        		{"data": "id"},
-				        		{"data": function(row, type, val, meta){
-				        			timeString = "";
-									timeString += millisecondToDate(row.confirmTime.iLocalMillis);
-									timeString += " ";
-									timeString += millisecondToTime(row.confirmTime.iLocalMillis);
-									return timeString;
-				        		}},
-				        		{"data": "capital" },
-				        		{"data": "win" },
-				        		{"data": null },
-				        ],
-				        
-				        "order": [[2, 'asc']]
-					});
-					//第一層用
+					
+					
 					var lotterys = [];
 					var odds1 = [];
 					//每張彩券
@@ -232,8 +207,7 @@
 						lottery.odds = data.lotteryOdds;
 						//每注資料以oddsId排列
 						$.each(data.lotteryOdds, function(index,odd) {
-							
-							odds1.push(odd.oddsId);
+							odds1.push(odd);
 						});
 						lotterys.push(lottery);
 					});
@@ -270,82 +244,43 @@
 								
 								$.each(game.odds, function(index, odd){
 									odd.gameNum = game.gameNum;
-									/*
-									switch(odd.oddType) {
-								    case 'SU_A':
-								    	game.suA = odd.oddValue;
-								    	game.suACom = odd.oddCombination;
-								    	odd.labelText = game.teamAway.teamName;
-								    	break;
-								    case 'SU_H':
-								    	game.suH = odd.oddValue;
-								    	game.suHCom = odd.oddCombination;
-								    	odd.labelText = game.teamHome.teamName;
-										break;
-								    case 'ATS_A':
-								    	game.atsA = odd.oddValue;
-								    	game.atsACom = odd.oddCombination;
-								    	odd.labelText = game.teamAway.teamName;
-								    	break;
-								    case 'ATS_H':
-								    	game.atsH = odd.oddValue;
-								    	game.atsHCom = odd.oddCombination;
-								    	odd.labelText = game.teamHome.teamName;
-								    	break;
-								    case 'SC_H':
-								    	game.scH = odd.oddValue;
-								    	game.scCom = odd.oddCombination;
-								    	odd.labelText = "總分合大於";
-								    	break;
-								    case 'SC_L':
-								    	game.scL = odd.oddValue;
-								    	game.scCom = odd.oddCombination;
-								    	odd.labelText = "總分合小於";
-								    	break;
-								    case 'ODD':
-								    	game.oeOdd = odd.oddValue;
-								    	game.oeCom = odd.oddCombination;
-								    	odd.labelText = "總分合為單數";
-								    	break;
-								    case 'EVEN':
-								    	game.oeEven = odd.oddValue;
-								    	game.oeCom = odd.oddCombination;
-								    	odd.labelText = "總分合為偶數";
-								    	break;
-								    default:
-								    	break;
-									}	
-									*/
-									//game.detialHome = "不讓分:" + game.suHCom  + " 賠率:" + game.suH + "/讓分:" + game.atsHCom + " 賠率:" + game.atsH;
-									//game.detialAway = "不讓分:" + game.suACom  + " 賠率:" + game.suA + "/讓分:" + game.atsACom + " 賠率:" + game.atsA;
 								});
 							}
 						});
+						
 						//抓game裡的資料塞入odds2(第二層用)
-						for(var i =0;i<odds1.length;i++) {
+						for(var i = 0; i<odds1.length; i++) {
 							var odd = new Object();
-							odd.lotteryId = datas.
-							odd.ballType = games[odds[odds1[i].gameId].gameNum].ballType;
-							odd.gameTime = games[odds[odds1[i].gameId].gameNum].date;
-							odd.teamHome = games[odds[odds1[i].gameId].gameNum].teamHome.teamName;
-							odd.teamAway = games[odds[odds1[i].gameId].gameNum].teamAway.teamName;
-							odd.scoreHome = games[odds[odds1[i].gameId].gameNum].gameScoreHome;
-							odd.scoreAway = games[odds[odds1[i].gameId].gameNum].gameScoreAway;
-							odd.count = odds1[i].count;
-							odd.value = odds1[i].oddValue;
-							odd.isPass = odds1[i].isPass;
-							switch(odds1[i].oddType) {
+							
+							odd.lotteryId = odds1[i].lotteryId;
+							for(var j = 0; j<lotterys.length; j++){
+								if(odd.lotteryId == lotterys[j].id) {
+									odd.win =  lotterys[j].win;
+									odd.capital = lotterys[j].capital;
+									odd.lotteryTime = lotterys[j].iMillis;
+								}
+							}
+							odd.ballType = games[odds[odds1[i].oddsId.gameId].gameNum].ballType;
+							odd.gameTime = games[odds[odds1[i].oddsId.gameId].gameNum].date;
+							odd.teamHome = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
+							odd.teamAway = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
+							odd.scoreHome = games[odds[odds1[i].oddsId.gameId].gameNum].gameScoreHome;
+							odd.scoreAway = games[odds[odds1[i].oddsId.gameId].gameNum].gameScoreAway;
+							odd.count = odds1[i].oddsId.count;
+							odd.value = odds1[i].oddsId.oddValue;
+							odd.isPass = odds1[i].oddsId.isPass;
+							switch(odds1[i].oddsId.oddType) {
 						    case 'SU_A':
-						    	odd.labelText = games[odds[odds1[i].gameId].gameNum].teamAway.teamName;
+						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
 						    	break;
 						    case 'SU_H':
-						    	odd.labelText = games[odds[odds1[i].gameId].gameNum].teamHome.teamName;
+						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
 								break;
 						    case 'ATS_A':
-						    	odd.labelText = games[odds[odds1[i].gameId].gameNum].teamAway.teamName;
+						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
 						    	break;
 						    case 'ATS_H':
-						    	odd.labelText = games[odds[odds1[i].gameId].gameNum].teamHome.teamName;
+						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
 						    	break;
 						    case 'SC_H':
 						    	odd.labelText = "總分合大於";
@@ -364,6 +299,13 @@
 							}
 							odds2.push(odd);
 						}
+						/*
+						for(var k = 0; k<datas.length; k++){
+							if(odds2[1].lotteryId == datas[k].id){
+								datas.push(odds2);
+							}
+						}
+						*/
 						console.log('-----Odds2(第二層)-----');
 						console.log(odds2);
 						
@@ -371,6 +313,32 @@
 						//$('.details-control').click(function() {
 						//	$('#dialog').modal();
 						//});
+						//塞第一層資料
+					table = $('#oddTable').dataTable({
+						'data': odds2,
+						
+				        'columns': [
+				        		{
+				        		'class':'details-control',
+				        		'orderable':false,
+				        		'data':null,
+				        		'defaultContent': ''
+				        		},
+				        		{"data": "lotteryId"},
+				        		{"data":  function(row, type, val, meta){
+				        			timeString = "";
+									timeString += millisecondToDate(row.lotteryTime);
+									timeString += " ";
+									timeString += millisecondToTime(row.lotteryTime);
+									return timeString;
+				        		}},
+				        		{"data": "capital" },
+				        		{"data": "win" },
+				        		{"data": null },
+				        ],
+				        
+				        "order": [[2, 'asc']]
+					});
 						$('#oddList').on('click', 'td.details-control', function () {
 					    	var tr = $(this).closest('tr');
 					    	var row = $('#oddTable').DataTable().row(tr);
@@ -393,7 +361,7 @@
 				return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 		        '<tr>'+
 		            '<td>gameNum:</td>'+
-		            '<td>' + dataRow.lotteryOdds[1].lotteryId+ '</td>'+
+		            '<td>' + dataRow.ballType+ '</td>'+
 		        '</tr>'+
 		        '<tr>'+
 		            '<td>Extra info:</td>'+
