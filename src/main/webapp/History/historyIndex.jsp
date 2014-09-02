@@ -13,6 +13,8 @@
 <ul>
 	<li><a class="navbar-brand" href="<c:url value="/searchHistory"/>">賽事成績查詢</a></li>
 	<li><a class="navbar-brand" href="<c:url value="/searchHistoryComplex"/>">複合查詢</a></li>
+	<li><a class="navbar-brand" href="<c:url value="/oddsStatisticByTime"/>">以時間查詢</a></li>
+	
 
 
 
