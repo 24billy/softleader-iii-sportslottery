@@ -58,27 +58,27 @@ public class GameDao extends GenericDao<GameEntity>{
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, teamName
-		String sql = "from GameEntity games where games.isEnd = 't'";//察遜比菜是否已經結束, 要找已經結束
+		String sql = "from GameEntity games where games.isEnd = 't'";//查詢比賽是否已經結束, 要找已經結束
 		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
 		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
 		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";//搜訊teamName符合部分字串
 		String sql4 = " order by games.gameTime";
 		
-		//判斷是否有timeFrom 如有責加入sql1的敘述
+		//判斷是否有timeFrom 如有則加入sql1的敘述
 		boolean hasTimeFrom = false;
 		if(timeFrom != null){
 			sql += sql1;
 			hasTimeFrom = true;
 		}
 		
-		//判斷是否有timeTo 如有責加入sql2的敘述
+		//判斷是否有timeTo 如有則加入sql2的敘述
 		boolean hasTimeTo = false;
 		if (timeTo != null) {
 			sql += sql2;
 			hasTimeTo = true;
 		}
 		
-		//判斷是否有teamName 如有責加入sql3的敘述
+		//判斷是否有teamName 如有則加入sql3的敘述
 		boolean hasTeamName = false;
 		if (teamName != null) {
 			sql += sql3;
