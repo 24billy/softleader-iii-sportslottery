@@ -179,6 +179,24 @@
 					}
 					
 					table = $('#gameTable').dataTable({
+						oLanguage: {
+							'sProcessing':'處理中...',
+							'sLengthMenu':'顯示 _MENU_ 項結果',
+							'sZeroRecords':'沒有匹配結果',
+							'sInfo':'顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+							'sInfoEmpty':'顯示第 0 至 0 項結果，共 0 項',
+							'sInfoFiltered':'(從 _MAX_ 項結果過濾)',
+							'sInfoPostFix':'',
+							'sSearch':'搜索:',
+							'sUrl':'',
+							'oPaginate': {
+								'sFirst':'首頁',
+								'sPrevious':'上頁',
+								'sNext':'下頁',
+								'sLast':'尾頁'
+							}
+						},
+						
 						'data': datas,
 						
 				        'columns': [
@@ -214,7 +232,13 @@
 									}
 
 				        		}},
-				        		{"data": "isEnd"}
+				        		{"data": function(row, type, val, meta){
+				        			if(row.isEnd){
+				        				return '<td><button type="button" class="btn btn-success btn-xs disabled">已完賽</button></td>';
+				        			} else {
+				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未完賽</button></td>'	
+				        			}
+				        		}}
 				        ],
 				        
 				        "order": [[2, 'asc']]
@@ -251,7 +275,7 @@
 					var rateODD = parseInt((sortedOdds['ODD'].count/(sortedOdds['EVEN'].count+sortedOdds['ODD'].count))*100);
 					var rateEVEN = 100 - rateODD;
 					
-				    return '<table class="table" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+				    return '<table class="table" cellspacing="0" border="0">'+
 			        '<tr>'+
 			            '<td width="5%">不讓分:</td>'+
 						'<td>'+
