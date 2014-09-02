@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
-import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
-import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
@@ -242,21 +240,6 @@ public class GameAction extends ActionSupport {
 		try {
 			service.update(entity);
 			oddsService.setIsPass(gameId, su, ats, sc, eo);
-			List<OddsEntity> odds = entity.getOdds();
-			if (odds != null) {
-				for (OddsEntity odd : odds) {
-					List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odd.getId());
-					odd.setCount(new Long(los.size()));
-					oddsService.update(odd);
-					
-					if (odd.getIsPass()) {
-						for (LotteryOddsEntity lo : los) {
-							lotteryService.addWin(lo.getLotteryId(), lo.getOddsId().getOddValue());
-						}
-					}
-				}
-			}
-			
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();
