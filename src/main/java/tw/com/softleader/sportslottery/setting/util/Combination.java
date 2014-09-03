@@ -7,6 +7,7 @@ public class Combination implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6792593759319950502L;
+	private Long com0;
 	private Long com1;
 	private Long com2;
 	private Long com3;
@@ -15,6 +16,14 @@ public class Combination implements Serializable{
 	private Long com6;
 	private Long com7;
 	private Long com8;
+	
+	
+	public Long getCom0() {
+		return com0;
+	}
+	public void setCom0(Long com0) {
+		this.com0 = com0;
+	}
 	public Long getCom1() {
 		return com1;
 	}
@@ -65,10 +74,11 @@ public class Combination implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Combination [com1=" + com1 + ", com2=" + com2 + ", com3="
-				+ com3 + ", com4=" + com4 + ", com5=" + com5 + ", com6=" + com6
-				+ ", com7=" + com7 + ", com8=" + com8 + "]";
+		return "Combination [com0=" + com0 + ", com1=" + com1 + ", com2="
+				+ com2 + ", com3=" + com3 + ", com4=" + com4 + ", com5=" + com5
+				+ ", com6=" + com6 + ", com7=" + com7 + ", com8=" + com8 + "]";
 	}
+
 	
 }
 
