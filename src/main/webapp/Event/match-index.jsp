@@ -79,28 +79,28 @@
 							<h1>近期賽事</h1>
 							<div id="searchScopeGroup" class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default active" id="isEndLabelDefault">
-									<input type="radio" name=searchScope id="searchScopeDefault" value="none" checked >未來三日
+									<input type="radio" name=searchScope id="searchScopeDefault" value="near" checked >未來三日
 								</label>
 								<label class="btn btn-success">
-									<input type="radio" name="searchScope" id="option2" value="true" >可下注
+									<input type="radio" name="searchScope" id="option2" value="notEnd" >可下注
 								</label>
 								<label class="btn btn-warning">
-									<input type="radio" name="searchScope" id="option3" value="false">全部
+									<input type="radio" name="searchScope" id="option3" value="All">全部
 								</label>
 							</div>
 						</div>
 						<div name="event_list" id="sample" date="">
-						<h3>2014年4月20日</h3>
-						<table class="table table-hover">
-							<tr class="info">
-								<th width="100px">賽事編號</th>
-								<th width="100px">比賽時間</th>
-								<th width="200px">客場對伍</th>
-								<th width="50px"></th>
-								<th width="200px">主場隊伍</th>
-								<th width="50px"></th>
-							</tr>
-						</table>
+							<h3>2014年4月20日</h3>
+							<table class="table table-hover">
+								<tr class="info">
+									<th width="100px">賽事編號</th>
+									<th width="100px">比賽時間</th>
+									<th width="200px">客場對伍</th>
+									<th width="50px"></th>
+									<th width="200px">主場隊伍</th>
+									<th width="50px"></th>
+								</tr>
+							</table>
 						</div>
 					</div>
 
@@ -528,21 +528,41 @@
 	(function($) {
 		$('#match-manager').collapse();
 		
+		var eventListSimple = $('div[name = "event_list"]').clone();
+		
 		var userOddsCount = 0;
+		
+		$('#searchScopeGroup>label>input').on('change', function(){
+			$('div[name = "event_list"]').remove();
+			$('#event_board').append(eventListSimple);
+			superRefresh();
+		});
 		
 		//以AJAX讀數資料
 		function superRefresh(){
+			var searchScopeStr = $('#searchScopeGroup input:checked').val();
+			console.log(searchScopeStr);
+			var queryScopeURI = "";
+			switch(searchScopeStr) {
+		    case 'near':
+		    	queryScopeURI = '<c:url value="/game?method:selectNearDays" />';
+		    	break;
+		    case 'notEnd':
+		    	queryScopeURI = '<c:url value="/game?method:selectNotEnd" />';
+				break;
+		    case 'All':
+		    	queryScopeURI = '<c:url value="/game?method:select" />';
+		    	break;
+		    default:
+		    	break;
+			}
+			console.log(queryScopeURI);
+			
+			userOddsCount = 0;
 			$.ajax({
-				url:'<c:url value="/searchHistoryComplex?method:searchHistoryComplexData" />',
+				url: queryScopeURI,
 				type:'post',
 				dataType:'json',
-				data:{
-					'complexTimeBegin':$('#timeBegin').val(),
-					'complexTimeEnd':$('#timeEnd').val(),
-					'complexBallType':$('#ballType').val(),
-					'complexTeamName':$('#teamName').val(),
-					'complexIsEnd':isEnd
-				},
 				success:function(datas){
 					var games = [];
 					var odds = [];
@@ -623,6 +643,7 @@
 						
 							//生成畫面
 							//主隊與客隊的標籤上的span是彈出式的說明字串
+							
 							if(game != null){
 								//當該日期已存在的情況下，直接加入
 								if($('div[name = "event_list"][date="' + game.date + '"]').length > 0){

@@ -45,7 +45,11 @@
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>execute,select,selectNearDays</allowed-methods>
+		<result name="selectNotEnd" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>execute,select,selectNearDays,selectNotEnd</allowed-methods>
 	</action> 
 	
 	<action name="searchHistory" class="gameAction" method="gameHistory">
