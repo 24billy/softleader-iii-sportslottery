@@ -24,14 +24,16 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">管理者登入</div>
 						<div class="panel-body">
-							<form role="form" action="" class="">
+						
+							<!-- <form role="form" action="j_security_check" class=""> -->
+							<form role="form" action="<c:url value="/Admin/testPage.jsp"/>">
 								<div class="form-group">
-									<label for="account">帳號</label>
-									<input id="account" type="text" class="form-control input-sm">
+									<label for="username">帳號</label>
+									<input name="j_username" id="username" type="text" class="form-control input-sm">
 								</div>
 								<div class="form-group">
 									<label for="account">密碼</label>
-									<input id="account" type="password" class="form-control input-sm">
+									<input name="j_password" id="account" type="password" class="form-control input-sm">
 								</div>
 								<button type="submit" class="btn btn-success pull-right">登入</button>
 							</form>

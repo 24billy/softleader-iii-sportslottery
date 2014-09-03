@@ -23,7 +23,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
+					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>" method="post">
 						<div class="form-group">
 							<label for="catagory">運動項目</label>
 							<select class="form-control input-sm" id="catagory" name="catagory">

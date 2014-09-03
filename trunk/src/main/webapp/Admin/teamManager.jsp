@@ -23,7 +23,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/teamManager"/>">
+					<form role="form" class="form-inline pull-left" action="<c:url value="/teamManager"/>" method="post">
 						<div class="form-group">
 							<select class="form-control input-sm" id="countryList" name="country">
 								<option value="">所有國家</option>
