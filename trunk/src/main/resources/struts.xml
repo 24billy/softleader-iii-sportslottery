@@ -102,12 +102,17 @@
 	<!-- 檢查帳號重複 -->
 	<action name="checkAccount" class="userAction" method="check">
 		<result name="success">/Security/Result/success.jsp</result>
-		<result name="fail">/Security/Result/fail.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
 	</action>
+	<!-- 檢查Email重複 -->
+	<action name="checkEmail" class="userAction" method="checkEmail">
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
+	</action>	
 	<!-- 註冊帳號 -->
 	<action name="addAccount" class="userAction" method="insert">
 		<result name="success">/Security/Result/addSuccess.jsp</result>
-		<result name="input">/Security/addUser.jsp</result>
+		<result name="error">/Security/addUser.jsp</result>
 	</action>
 	<!-- 登入驗證 -->
 	<action name="checkLogin" class="userAction" method="login">
@@ -117,6 +122,7 @@
 	<!-- 更新會員資料 -->
 	<action name="userUpdate" class="userAction" method="update">
 		<result name="success">/index.jsp</result>
+		<result name="error"></result>
 	</action>
 	<!-- 使用者點數修改 -->
 	<action name="coinsUpdate" class="userAction" method="coinsUpdate">

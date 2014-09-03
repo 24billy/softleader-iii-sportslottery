@@ -6,6 +6,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -23,6 +31,56 @@ public class UserService extends GenericService<UserEntity> {
 	@Autowired
 	private UserDao dao;
 	private Logger log = LoggerFactory.getLogger(UserService.class);
+	private String from = "sportslott123";
+	private String password = "forget123";
+	
+	//忘記密碼 寄送新密碼到使用者email
+		static Properties properties = new Properties();
+		static {
+			System.out.println("初始化Eamil-Properites");
+			properties.put("mail.smtp.host", "smtp.gmail.com");
+			properties.put("mail.smtp.socketFactory.port", "465");
+			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			properties.put("mail.smtp.auth", "true"); properties.put("mail.smtp.port", "465");
+		}
+		public int forgetPassword(String to, String account) {
+			log.debug(to + " : " + account);
+			String body=null;
+			UserEntity userEntity = dao.findByUserAccount(account);
+			if(userEntity!=null) {
+				if(userEntity.getUserEmail().equals(to)) {
+					byte[] newPassword = this.getNewPassword();
+					userEntity.setUserPassword(newPassword);
+					this.update(userEntity);
+					body ="親愛的" + userEntity.getUserName() + "您的密碼暫為:" + new String(new String(newPassword)); 
+				}else {
+					log.debug("Email不正確");
+					return 1;//email不正確
+				}
+			}else {
+				log.debug("帳號不正確");
+				return 2;//帳號不正確
+			}
+			
+			try { Session session = Session.getDefaultInstance(properties, 
+					new javax.mail.Authenticator() { 
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(from, password); 
+						}
+					}); 
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(from));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+				message.setSubject("您的密碼來了,請盡快更改");
+				message.setText(body);
+				Transport.send(message);
+			} catch(Exception e) { 
+				log.debug("發信失敗");
+				return 3; 
+			} 
+			return 0;
+		}
+	
 	//密碼加密
 	public UserEntity encoding(UserEntity entity) {
 		try {
@@ -78,6 +136,9 @@ public class UserService extends GenericService<UserEntity> {
 	
 	public UserEntity getByUserAccount(String USER_ACCOUNT) {
 		return dao.findByUserAccount(USER_ACCOUNT);
+	}
+	public UserEntity getByUserEmail(String USER_EMAIL) {
+		return dao.findByUserEmail(USER_EMAIL);
 	}
 	
 	public UserEntity checkLogin(String userAccount,UserEntity checkEntity) {
