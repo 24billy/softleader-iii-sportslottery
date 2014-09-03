@@ -198,14 +198,19 @@ public class OddsDaoTest extends BaseTest {
 //		log.debug("count of SU_H= {} ", count49);
 
 
-//------------------------------------------------------------------------------------
+/*//------------------------------test findByTime_orderByCount------------------------------------------------------
 		LocalDate date7 = new LocalDate();
 		date7 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
 		//log.debug("date1= {} ", date1);
 		LocalDate date8 = new LocalDate();
 		date8 = LocalDate.parse("2014-08-20");
-		Long count59=oddsDao.countByOddType_Time("SU_H", date7, date8);
-		log.debug("count of SU_H= {} ", count59);
+		List<OddsEntity> models59=oddsDao.findByTime_orderByCount(date7, date8);
+		log.debug("count of findByTime_orderByCount= {} ", models59);
+		*/
+		
+//------------
+		
+		
 
 	}
 
