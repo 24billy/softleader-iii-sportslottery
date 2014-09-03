@@ -70,32 +70,11 @@
 									<th>下注時間</th>
 									<th>下注金額</th>
 									<th>獎金</th>
-									<th>狀態</th>
 	                            </tr>
 							</thead>
 							<tbody id="oddList">
-								<tr>
-									<th></th>
-									<th>彩券編號</th>
-									<th>下注時間</th>
-									<th>下注金額</th>
-									<th>獎金</th>
-									<th>狀態</th>
-	                            </tr>
 							</tbody>
 							<tfoot>
-								<!--  <tr>
-									<th></th>
-									<th>球種</th>
-									<th>比賽日期</th>
-									<th>比賽隊伍</th>
-									<th>下注類型</th>
-									<th>賠率</th>
-									<th>主隊比分</th>
-									<th>客隊比分</th>
-									<th>投注人數</th>
-									<th>過關</th>
-	                            </tr>-->
 							</tfoot>   
 						</table>
 					<!-- </div>  -->
@@ -181,19 +160,23 @@
 					'complexBallType':$('#ballType').val(),
 				},
 				success:function(datas){
-					if(table){
-						$('#oddList').off('click');
-						$('#oddTable').DataTable().rows().remove();
-						$('#oddTable').DataTable().destroy();
-					}
-					console.log("-----datas-----");
-					console.log(datas);
-					
-					
-					var lotterys = [];
+					//if(table){
+					//	$('#oddList').off('click');
+					//	$('#oddTable').DataTable().rows().remove();
+					//	$('#oddTable').DataTable().destroy();
+					//}
+					//console.log("-----datas-----");
+					//console.log(datas);
+					var i =0;
 					var odds1 = [];
+					var detail = [];
+					var user = [];
+					var lotterys = [];
+					var lotteryInfo = [];
 					//每張彩券
 					$.each(datas,function(index,data) {
+						lotterys = [];
+						detail = [];
 						var lottery = new Object();
 						lottery.id = data.id;
 						//下注時間
@@ -203,12 +186,92 @@
 						//金額獎金
 						lottery.win = data.win;
 						lottery.capital = data.capital;
-						lottery.odds = data.lotteryOdds;
+						//lottery.odds = data.lotteryOdds;
+						
 						//每注資料以oddsId排列
 						$.each(data.lotteryOdds, function(index,odd) {
-							odds1.push(odd);
+							
+							var info = {};
+							var gameId = odd.oddsId.gameId;
+							$.getJSON('<c:url value="/game?method:select" />',{
+								'model.id':gameId
+							}).done(function(game) {
+								info['oddId'] = odd.oddsId.id;
+								info['count'] = odd.oddsId.count;
+								info['value'] = odd.oddsId.oddValue;
+								if(odd.oddsId.isPass == null) {
+									info['isPass'] = "未開獎";
+								} else {
+									if(odd.oddsId.isPass == true) {
+										info['isPass'] = "過關";
+									} else {
+										info['isPass'] = "未過關";
+									}
+								}
+								info['teamAwayName'] = game.teamAway.teamName;
+								info['teamHomeName'] = game.teamHome.teamName;
+								info['ballType'] = game.ballType;
+								timeString = "";
+								timeString += millisecondToDate(game.gameTime.iLocalMillis);
+								timeString += "";
+								timeString += millisecondToTime(game.gameTime.iLocalMillis);
+								info['gameTime'] = timeString;
+								if(game.gameScoreHome == 0 && game.gameScoreAway == 0) {
+									info['gameName'] = "未完賽";
+								} else {
+									gameName = "";
+									gameName += game.gameScoreAway;
+									gameName += ":";
+									gameName += game.gameScoreHome;
+									info['gameName'] = gameName;
+								}
+								switch(odd.oddsId.oddType) {
+							    case 'SU_A':
+							    	type = "不讓分:";
+							    	type += game.teamAway.teamName;
+							    	info.labelText = type;
+							    	break;
+							    case 'SU_H':
+							    	type = "不讓分:";
+							    	type += game.teamHome.teamName;
+							    	info.labelText = type;
+									break;
+							    case 'ATS_A':
+							    	type = "讓分:";
+							    	type += game.teamAway.teamName;
+							    	info.labelText = type;
+							    	break;
+							    case 'ATS_H':
+							    	type = "讓分:";
+							    	type += game.teamHome.teamName;
+							    	info.labelText = type;
+							    	break;
+							    case 'SC_H':
+							    	info.labelText = "總分合大於";
+							    	break;
+							    case 'SC_L':
+							    	info.labelText = "總分合小於";
+							    	break;
+							    case 'ODD':
+							    	info.labelText = "總分合為單數";
+							    	break;
+							    case 'EVEN':
+							    	info.labelText = "總分合為偶數";
+							    	break;
+							    default:
+							    	break;
+								}
+								//console.log(info);
+								//datas[] = detai
+							});
+							detail.push(info);
+							//odds1.push(odd);
 						});
-						lotterys.push(lottery);
+						lotterys.push(detail);
+						user[i] = lotterys;
+						lottery.odds = detail;
+						i++;
+						lotteryInfo.push(lottery);
 					});
 					/*
 					console.log("-----lotterys(第一層)-----");
@@ -216,107 +279,15 @@
 					console.log("-----odds1-----");
 					console.log(odds1);
 					*/
-					
-					//取得game&team 資料
-					$.getJSON('<c:url value="/game?method:select" />', {}, function(datas2){
-						var games = [];
-						var odds = [];
-						//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
-						$.each(datas2, function(index, data){
-							games[data.gameNum] = data;
-							$.each(data.odds, function(index, odd){
-								odds[odd.id] = odd;
-							});
-						});
-						/*
-						//debug用
-						console.log('-----Game-----');
-						console.log(games);
-						console.log('-----Odds-----');
-						console.log(odds);
-						*/
-						//game資料進一步處理 將odds中的資料往上提方便後續使用
-						$.each(games, function(index, game){
-							if(game != null){
-								game.iMillis = game.gameTime.iLocalMillis;
-								game.date = millisecondToDate(game.iMillis);
-								game.time = millisecondToTime(game.iMillis);
-								//根據odd的內容來建立game的屬性
-								
-								$.each(game.odds, function(index, odd){
-									odd.gameNum = game.gameNum;
-								});
-							}
-						});
-						
-						//抓game裡的資料塞入odds2(第二層用)
-						for(var i = 0; i<odds1.length; i++) {
-							var odd = new Object();
-							
-							odd.lotteryId = odds1[i].lotteryId;
-							for(var j = 0; j<lotterys.length; j++){
-								if(odd.lotteryId == lotterys[j].id) {
-									odd.win =  lotterys[j].win;
-									odd.capital = lotterys[j].capital;
-									odd.lotteryTime = lotterys[j].iMillis;
-								}
-							}
-							odd.ballType = games[odds[odds1[i].oddsId.gameId].gameNum].ballType;
-							odd.gameTime = games[odds[odds1[i].oddsId.gameId].gameNum].date;
-							odd.teamHome = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
-							odd.teamAway = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
-							odd.scoreHome = games[odds[odds1[i].oddsId.gameId].gameNum].gameScoreHome;
-							odd.scoreAway = games[odds[odds1[i].oddsId.gameId].gameNum].gameScoreAway;
-							odd.count = odds1[i].oddsId.count;
-							odd.value = odds1[i].oddsId.oddValue;
-							odd.isPass = odds1[i].oddsId.isPass;
-							switch(odds1[i].oddsId.oddType) {
-						    case 'SU_A':
-						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
-						    	break;
-						    case 'SU_H':
-						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
-								break;
-						    case 'ATS_A':
-						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamAway.teamName;
-						    	break;
-						    case 'ATS_H':
-						    	odd.labelText = games[odds[odds1[i].oddsId.gameId].gameNum].teamHome.teamName;
-						    	break;
-						    case 'SC_H':
-						    	odd.labelText = "總分合大於";
-						    	break;
-						    case 'SC_L':
-						    	odd.labelText = "總分合小於";
-						    	break;
-						    case 'ODD':
-						    	odd.labelText = "總分合為單數";
-						    	break;
-						    case 'EVEN':
-						    	odd.labelText = "總分合為偶數";
-						    	break;
-						    default:
-						    	break;
-							}
-							odds2.push(odd);
-						}
-						/*
-						for(var k = 0; k<datas.length; k++){
-							if(odds2[1].lotteryId == datas[k].id){
-								datas.push(odds2);
-							}
-						}
-						*/
-						console.log('-----Odds2(第二層)-----');
-						console.log(odds2);
-						
-						//console.log(datas);
+					$(document).ajaxStop(function() {
+						//console.log(user);
+						console.log(lotteryInfo);
 						//$('.details-control').click(function() {
 						//	$('#dialog').modal();
 						//});
 						//塞第一層資料
 						table = $('#oddTable').dataTable({
-							'data': datas,
+							'data': lotteryInfo,
 							
 					        'columns': [
 					        		{
@@ -328,14 +299,19 @@
 					        		{"data": "id"},
 					        		{"data":  function(row, type, val, meta){
 					        			timeString = "";
-										timeString += millisecondToDate(row.confirmTime.iLocalMillis);
+										timeString += millisecondToDate(row.iMillis);
 										timeString += " ";
-										timeString += millisecondToTime(row.confirmTime.iLocalMillis);
+										timeString += millisecondToTime(row.iMillis);
 										return timeString;
 					        		}},
 					        		{"data": "capital" },
-					        		{"data": "capital" },
-					        		{"data": null },
+					        		{"data": function(row, type, val, meta){
+					        			if(row.win == null) {
+					        				return "未開獎";
+					        			} else {
+					        				return row.win;
+					        			}
+					        		}},
 					        ],
 					        
 					        "order": [[2, 'asc']]
@@ -352,32 +328,50 @@
 					    	}
 					    });
 						
-					});//game
+					});//ajaxStop	
 				}//success
 			});//ajax
-			
+				
 			$(window).unbind('formatDataRow');
 			function formatDataRow (dataRow) {
 				var odds = new Object();
-				odds = dataRow.lotteryOdds;
+				odds = dataRow.odds;
 				console.log(odds);
+				var temp = '';
+				
+				temp += '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+		        '<thead>'+
+		        	'<tr>'+
+		        		'<td>球種</td>'+
+		        		'<td>比賽時間</td>'+
+		        		'<td>比賽隊伍</td>'+
+		        		'<td>下注類型</td>'+
+		        		'<td>賠率</td>'+
+		        		'<td>比分</td>'+
+		        		'<td>投注人數</td>'+
+		        		'<td>過關</td>'+
+		        	'</tr>'+	
+				'</thead>';
 				
 				$.each(odds, function(index,odd) {
 				
-				return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-		        '<tr>'+
-		            '<td>gameNum:</td>'+
-		            '<td>' + "" + '</td>'+
+				temp += '<tbody>'+
+				'<tr>'+
+		            '<td>' + odd.ballType+ '</td>'+
+		            '<td>' + odd.gameTime+ '</td>'+
+		            '<td>' + odd.teamAwayName+'VS.'+ odd.teamHomeName+'</td>'+
+		            '<td>' + odd.labelText+ '</td>'+
+		            '<td>' + odd.value+ '</td>'+
+		            '<td>' + odd.gameName+ '</td>'+
+		            '<td>' + odd.count+ '</td>'+
+		            '<td>' + odd.isPass+ '</td>'+
 		        '</tr>'+
-		        '<tr>'+
-		            '<td>Extra info:</td>'+
-		            '<td>And any further details here (images etc)...</td>'+
-		        '</tr>'+
-		    	'</table>';
-		    	
-				
+		        '</tbody>';
 				});
+				temp += '</table>';
+				return temp;
 			}
+			
 		}
 		renewData();
 	})(jQuery);
