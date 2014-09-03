@@ -21,7 +21,7 @@
 <a href="Admin/index.jsp">Game Manager</a><br>
 <a href="Event/match-index.jsp">Game info</a><br>
 <a href="<c:url value="/History/historyIndex.jsp"/>">History Index</a><br>
-
+<a href="<c:url value="/Security/userOddsSearch.jsp"/>">UserOdds</a><br>
 
 <hr>
 <a href="http://getbootstrap.com/">BootStrap</a><br>
