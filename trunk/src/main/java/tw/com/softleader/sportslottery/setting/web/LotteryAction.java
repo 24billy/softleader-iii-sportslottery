@@ -136,9 +136,49 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public String lottery() throws Exception {
 		
 		System.out.println("oddsIdList="+oddsIdList);
+		StringBuilder oddsArray=new StringBuilder(); 
+		int oddsCount=0;
+		if(oddsIdList.getOddId1()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId1());
+		}
+		if(oddsIdList.getOddId2()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId2());
+		}
+		if(oddsIdList.getOddId3()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId3());
+		}
+		if(oddsIdList.getOddId4()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId4());
+		}
+		if(oddsIdList.getOddId5()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId5());
+		}
+		if(oddsIdList.getOddId6()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId6());
+		}
+		if(oddsIdList.getOddId7()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId7());
+		}
+		if(oddsIdList.getOddId8()!=null){
+			oddsCount++;
+			oddsArray.append(","+oddsIdList.getOddId8());
+		}
+		String temp=oddsArray.toString().substring(1);
+		System.out.println("oddsCount:"+oddsCount);
+		System.out.println("oddsArray:"+temp);
 		System.out.println("combination="+combination);
 		Long capital = model.getCapital();
 		System.out.println("capital:"+capital);
+		
+		
+		
 		//OddsEntity oddsEntity = new OddsEntity();
 		
 		/*
@@ -253,7 +293,26 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "selectByUser";
 	}
-
+	
+    private void getCombination(int[] source, int number, int begin, int[] tempArray, int index) {  
+        
+        if(number == 0){//如果抓取達到目標，輸出該陣列  
+        	String str = "";
+        	for(int i = 0; i < index; i++){  
+        		str += tempArray[i]+" ";
+        		System.out.print(tempArray[i] + " ");  
+            }  
+              
+            return;  
+        }  
+              
+        for(int i = begin; i < source.length; i++){  
+              
+        	tempArray[index] = source[i];  
+            getCombination(source, number-1, i+1, tempArray, index+1);  
+        }  
+          
+    } 
 	
 	
 }

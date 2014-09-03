@@ -222,7 +222,7 @@
 								</table>
 								
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" id="singleCapitalValue" name="model.capital" value="">
+									<input type="text" class="capitalValue" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -267,7 +267,7 @@
 									</tbody>
 								</table>								
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" id="passCapital" name="model.capital" value="">
+									<input type="text" class="capitalValue" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -414,7 +414,7 @@
 								</table>
 																					
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" id="comCapital" name="model.capital" value="">
+									<input type="text" class="capitalValue" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -874,20 +874,23 @@
 						
 						$('#singleBetValue').on('keyup', function(){			
 							$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+							$('.capitalValue').val($('#singleBetValue').val()*capitalValue);
 						});
 						$('#passBetValue').on('keyup', function(){			
 							$('#passCapital').html($('#passBetValue').val()*capitalValue);				
+							$('.capitalValue').val($('#passBetValue').val()*capitalValue);
 						});
 						$('#comBetValue').on('keyup', function(){							
+							$('.capitalValue').val($('#comBetValue').val()*capitalValue);
 							refreshBetTable();
 						});
 						
 						
 						
 						//每一注投注金計算
-						$('#singleCapitalValue').val($('#singleBetValue').val()*capitalValue);
-						$('#passCapitalValue').val($('#passBetValue').val()*capitalValue);
-						$('#comCapitalValue').val($('#comBetValue').val()*capitalValue);
+						$('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+						$('.capitalValue').val($('#passBetValue').val()*capitalValue);
+						$('.capitalValue').val($('#comBetValue').val()*capitalValue);
 						
 						if((userOddIds.length>=2)&&combination){
 							//過關
