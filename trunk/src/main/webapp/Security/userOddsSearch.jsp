@@ -195,7 +195,6 @@
 					//每張彩券
 					$.each(datas,function(index,data) {
 						var lottery = new Object();
-						console.log(data);
 						lottery.id = data.id;
 						//下注時間
 						lottery.iMillis = data.confirmTime.iLocalMillis;
@@ -211,10 +210,12 @@
 						});
 						lotterys.push(lottery);
 					});
+					/*
 					console.log("-----lotterys(第一層)-----");
 					console.log(lotterys);
 					console.log("-----odds1-----");
 					console.log(odds1);
+					*/
 					
 					//取得game&team 資料
 					$.getJSON('<c:url value="/game?method:select" />', {}, function(datas2){
@@ -227,13 +228,13 @@
 								odds[odd.id] = odd;
 							});
 						});
-						
+						/*
 						//debug用
 						console.log('-----Game-----');
 						console.log(games);
 						console.log('-----Odds-----');
 						console.log(odds);
-						
+						*/
 						//game資料進一步處理 將odds中的資料往上提方便後續使用
 						$.each(games, function(index, game){
 							if(game != null){
@@ -309,36 +310,36 @@
 						console.log('-----Odds2(第二層)-----');
 						console.log(odds2);
 						
-						console.log(datas);
+						//console.log(datas);
 						//$('.details-control').click(function() {
 						//	$('#dialog').modal();
 						//});
 						//塞第一層資料
-					table = $('#oddTable').dataTable({
-						'data': odds2,
-						
-				        'columns': [
-				        		{
-				        		'class':'details-control',
-				        		'orderable':false,
-				        		'data':null,
-				        		'defaultContent': ''
-				        		},
-				        		{"data": "lotteryId"},
-				        		{"data":  function(row, type, val, meta){
-				        			timeString = "";
-									timeString += millisecondToDate(row.lotteryTime);
-									timeString += " ";
-									timeString += millisecondToTime(row.lotteryTime);
-									return timeString;
-				        		}},
-				        		{"data": "capital" },
-				        		{"data": "win" },
-				        		{"data": null },
-				        ],
-				        
-				        "order": [[2, 'asc']]
-					});
+						table = $('#oddTable').dataTable({
+							'data': datas,
+							
+					        'columns': [
+					        		{
+					        		'class':'details-control',
+					        		'orderable':false,
+					        		'data':null,
+					        		'defaultContent': ''
+					        		},
+					        		{"data": "id"},
+					        		{"data":  function(row, type, val, meta){
+					        			timeString = "";
+										timeString += millisecondToDate(row.confirmTime.iLocalMillis);
+										timeString += " ";
+										timeString += millisecondToTime(row.confirmTime.iLocalMillis);
+										return timeString;
+					        		}},
+					        		{"data": "capital" },
+					        		{"data": "capital" },
+					        		{"data": null },
+					        ],
+					        
+					        "order": [[2, 'asc']]
+						});
 						$('#oddList').on('click', 'td.details-control', function () {
 					    	var tr = $(this).closest('tr');
 					    	var row = $('#oddTable').DataTable().row(tr);
@@ -357,11 +358,16 @@
 			
 			$(window).unbind('formatDataRow');
 			function formatDataRow (dataRow) {
+				var odds = new Object();
+				odds = dataRow.lotteryOdds;
+				console.log(odds);
+				
+				$.each(odds, function(index,odd) {
 				
 				return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 		        '<tr>'+
 		            '<td>gameNum:</td>'+
-		            '<td>' + dataRow.ballType+ '</td>'+
+		            '<td>' + "" + '</td>'+
 		        '</tr>'+
 		        '<tr>'+
 		            '<td>Extra info:</td>'+
@@ -369,7 +375,8 @@
 		        '</tr>'+
 		    	'</table>';
 		    	
-				return "";
+				
+				});
 			}
 		}
 		renewData();
