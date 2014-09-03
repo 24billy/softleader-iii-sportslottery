@@ -57,8 +57,8 @@ public class LotteryOddsService extends GenericService<LotteryOddsEntity> {
 					for (LotteryOddsEntity entity : entitys) {
 						value = value.multiply(entity.getOddsId().getOddValue());
 					}
-					
-					lottery.setWin(lottery.getCapital() * value.longValue());
+					BigDecimal capital = new BigDecimal(lottery.getCapital());
+					lottery.setWin(value.multiply(capital).longValue());
 					lotteryDao.update(lottery);
 				} else {
 					lottery.setWin(0L);
