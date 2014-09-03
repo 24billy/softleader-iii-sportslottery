@@ -25,6 +25,12 @@ public class UserDao extends GenericDao<UserEntity> {
 		return  (UserEntity) query.setString("userAccount", userAccount).uniqueResult();	
 	}
 	
+	public UserEntity findByUserEmail(String userEmail) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from UserEntity where USER_EMAIL = :userEmail");
+		return  (UserEntity) query.setString("userEmail", userEmail).uniqueResult();	
+	}
+	
 	public List<UserEntity> findByCreateTime(LocalDate createTime) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from UserEntity u where CREATE_TIME >= :createTime1 and CREATE_TIME < :createTime2 order by CREATE_TIME");

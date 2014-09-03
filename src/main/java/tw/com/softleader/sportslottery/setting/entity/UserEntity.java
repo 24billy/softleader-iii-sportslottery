@@ -62,9 +62,28 @@ public class UserEntity extends GenericEntity {
 	@Column(name="MODIFIER")//who modifies the data
 	private String modifier;
 
+	@Column(name="CARD_ID", length=10)//who modifies the data
+	private String cardId;
+
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "userId", cascade = {CascadeType.ALL})
 	private List<LotteryEntity> lotterys;
 	
+	public List<LotteryEntity> getLotterys() {
+		return lotterys;
+	}
+
+	public void setLotterys(List<LotteryEntity> lotterys) {
+		this.lotterys = lotterys;
+	}
+
+	public String getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+
 	public String getUserAccount() {
 		return userAccount;
 	}

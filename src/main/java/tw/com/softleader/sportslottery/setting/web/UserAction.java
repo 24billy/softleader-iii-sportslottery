@@ -9,6 +9,7 @@ package tw.com.softleader.sportslottery.setting.web;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -48,22 +49,27 @@ public class UserAction extends ActionSupport {
 	private DepositCardService cardService;
 
 	private UserEntity model;
+	private String oldUserPassword;
 	private String userPassword;
 	private String confirm_password;
-	
-
 	private List<UserEntity> models;
 	private Logger log = LoggerFactory.getLogger(UserAction.class);
 	private String json;
 	private InputStream inputStream;
 	private LocalDate time;
-	private String from = "sportslott123";
-	private String password = "forget123";
 	private String to;
 	private String account;
 	private String cardAccount;
 	private Long coins;		//把值送進coins讓使用者coins更新
 	
+	public String getOldUserPassword() {
+		return oldUserPassword;
+	}
+
+	public void setOldUserPassword(String oldUserPassword) {
+		this.oldUserPassword = oldUserPassword;
+	}
+
 	public String getConfirm_password() {
 		return confirm_password;
 	}
@@ -153,31 +159,65 @@ public class UserAction extends ActionSupport {
 		if(userPassword!=null && userPassword.length()>0) {
 			model.setUserPassword(userPassword.getBytes());
 		}
-		
-		
-//		if(model!=null) {
-//			if(model.getUserAccount() != null && model.getUserAccount().length()>5) {
-//			} else {
-//				log.debug("帳號問題");
-//				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
-//			}
-//			if(model.getUserPassword() != null && model.getUserPassword().length()>5) {
-//			} else {
-//				log.debug("密碼問題");
-//				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
-//			}
+	}
+	
+	//更新或新增帳號驗證
+	public void iValidate(int select) {
+		if(model!=null) {
+			if(model.getUserAccount()!=null && model.getUserAccount().length()>3) {
+			} else {
+				log.debug("帳號問題");
+				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
+			}
+			if(userPassword!=null && userPassword.length()>5) {
+			} else {
+				log.debug("密碼問題");
+				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
+			}
 			
+			switch(select) {
+				case 1 : 
+					log.debug("iValidate...(驗證1中");
+					if(model.getUserEmail()!=null && 
+							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {
+						if(this.checkEmail().equals("error")){
+							log.debug("信箱已存在");
+							addFieldError("mail","此信箱已註冊");
+						} else {
+							log.debug("信箱可用");
+						}
+					} else {
+						addFieldError("mail","此信箱已註冊");
+						log.debug("Email格式不符合");
+					}
+					break;
+				case 2 : 
+					log.debug("iValidate...(驗證2中");
+					break;
+				default: 
+					break;
+			}
 			
-		
-//			if(model.getUserPassword() != null) {
-//				log.debug("信箱已存在");
-//				addFieldError("QueryFail","此信箱已註冊");
-//			} else {
-//				log.debug("密碼空白");
-//				addFieldError("QueryFail","密碼不可空白");
-//			}
-//		}
-
+		}
+	}
+	
+	//發送新密碼
+	public String forgetPassword() {
+		int ret = service.forgetPassword(to, account);
+		switch(ret) { 
+			case 0:
+				return SUCCESS;
+			case 1:
+				this.addFieldError("emailCheck", getText("invalid.fieldvalue.forget.email")); 
+				break;
+			case 2:
+				this.addFieldError("accountCheck", this.getText("invalid.fieldvalue.forget.account"));
+				break;
+			default: 
+				this.addFieldError("orther", this.getText("invalid.fieldvalue.other"));
+				break;
+		}
+		return ERROR;
 	}
 	
 	//會員儲值下注得獎coins修改
@@ -195,7 +235,9 @@ public class UserAction extends ActionSupport {
 				if (card.isState()) {
 					service.update(user);
 					log.debug("儲值成功");
+					card.setUserId(user);
 					card.setState(false);
+					card.setUseTime(LocalDateTime.now());
 					cardService.update(card);
 					return SUCCESS;
 				} else {
@@ -214,59 +256,9 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		}
 		
-		
-		//別的更改coins方式
+
 		log.debug("coins修改非常異常");
 		return ERROR;
-	}
-	
-	//忘記密碼 寄送新密碼到使用者email
-	static Properties properties = new Properties();
-	static {
-		System.out.println("初始化Eamil-Properites");
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.socketFactory.port", "465");
-		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		properties.put("mail.smtp.auth", "true"); properties.put("mail.smtp.port", "465");
-	}
-	public String forgetPassword() {
-		log.debug(to + " : " + account);
-		String ret = SUCCESS;
-		String body=null;
-		UserEntity userEntity = service.getByUserAccount(account);
-		if(userEntity!=null) {
-			if(userEntity.getUserEmail().equals(to)) {
-				byte[] newPassword = service.getNewPassword();
-				
-				userEntity.setUserPassword(newPassword);
-				service.update(userEntity);
-				body = "您的密碼暫為:" + new String(new String(newPassword)); 
-			}else {
-				log.debug("Email不正確");
-				this.addFieldError("emailCheck", this.getText("invalid.fieldvalue.forget.email"));
-			}
-		}else {
-			log.debug("帳號不正確");
-			this.addFieldError("accountCheck", this.getText("invalid.fieldvalue.forget.account"));
-		}
-		
-		try { Session session = Session.getDefaultInstance(properties, 
-				new javax.mail.Authenticator() { 
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(from, password); 
-					}
-				}); 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject("您的密碼來了,請盡快更改");
-			message.setText(body);
-			Transport.send(message);
-		} catch(Exception e) { 
-			ret = ERROR; 
-			//e.printStackTrace(); 
-		} 
-		return ret; 
 	}
 	
 	//搜尋出所有會員資料
@@ -274,14 +266,14 @@ public class UserAction extends ActionSupport {
 	public String execute() throws Exception {
 		System.out.println("UserAction execute");
 		json = new Gson().toJson(service.getAll());
-		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-		
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));	
 		return SUCCESS;
 	}
 	
 	//新增會員
 	public String insert() throws Exception {
 		log.debug("新增會員資料");
+		this.iValidate(1);//驗證資料
 		if(this.getFieldErrors().isEmpty()){
 			model.setCreator("Guest"); //變數
 			model.setModifier("Guest"); //變數
@@ -301,41 +293,85 @@ public class UserAction extends ActionSupport {
 			return SUCCESS;
 		}
 		log.debug("有誤");
-		return INPUT;
+		return ERROR;
 	}
 	
 	//更新會員資料
 	public String update() throws Exception {
-		log.debug("修改會員資料");
-		log.debug("Model = {}", model);
-		model.setModifier("Guest");
-		model.setModifiedTime(LocalDateTime.now());
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
-		//log.debug(""+userEntity);
-		try {
-			if (model!=null) {
-				log.debug("密碼:" + userPassword);
-				userEntity.setUserName(model.getUserName());
-				userEntity.setUserBirthday(model.getUserBirthday());
-				userEntity.setUserEmail(model.getUserEmail());
-				userEntity.setUserPhone(model.getUserPhone());
-				model.setUserPassword(userPassword.getBytes());
-				userEntity.setUserPassword(model.getUserPassword());
-				userEntity.setUserGender(model.getUserGender());
-				
-				service.update(userEntity);
-				log.debug("!!修改成功!!");
-				request.setAttribute("updateSuccess", "修改成功");
-			}
-		} catch (Exception e) {
-			log.debug("!!新增錯誤!!");
-			this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
-			request.setAttribute("updateFail", "修改失敗");
-			e.printStackTrace();
+		if(userEntity.getUserEmail().equals(model.getUserEmail())) {
+			this.iValidate(2);//驗證資料
+		} else {
+			this.iValidate(1);//驗證資料
 		}
-		return SUCCESS;
+		
+		if(getFieldErrors().isEmpty()) {
+			log.debug("修改會員資料");
+			log.debug("Model = {}", model);
+			model.setModifier("Guest");
+			model.setModifiedTime(LocalDateTime.now());
+			//log.debug(""+userEntity);
+			try {
+				if (model!=null) {
+					log.debug("密碼:" + userPassword);
+					if (userPassword!=null && userPassword.length()>5) {
+						model.setUserPassword(oldUserPassword.getBytes());
+						model = service.encoding(model);
+						if(userEntity!=null
+								&& Arrays.equals(userEntity.getUserPassword(), model.getUserPassword())) {
+							userEntity.setUserPassword(userPassword.getBytes());
+							log.debug("密碼驗證成功 可修改密碼");
+						} else {
+							log.debug("密碼不符合");
+							this.addFieldError("passwordError", this.getText("invalid.fieldvalue.password"));
+							return ERROR;
+						}
+					}
+					userEntity.setUserName(model.getUserName());
+					userEntity.setUserBirthday(model.getUserBirthday());
+					userEntity.setUserEmail(model.getUserEmail());
+					userEntity.setUserPhone(model.getUserPhone());
+					userEntity.setUserGender(model.getUserGender());
+					service.update(userEntity);
+					log.debug("!!修改成功!!");
+					request.setAttribute("updateSuccess", "修改成功");
+				}
+			} catch (Exception e) {
+				log.debug("!!新增錯誤!!");
+				this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
+				request.setAttribute("updateFail", "修改失敗");
+				e.printStackTrace();
+			}
+			return SUCCESS;
+		}
+		return ERROR;
+	}
+	
+	//Email重複驗證
+	public String checkEmail() {
+		String result = ERROR;
+		log.debug("檢查Email是否存在" + model.getUserEmail());
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity)session.get("user");
+		if(userEntity!=null && userEntity.getUserEmail().equals(model.getUserEmail())) {
+			return SUCCESS;//驗證資料
+		}else if (model!=null && model.getUserEmail().length()>0) {
+			UserEntity check = service.getByUserEmail(model.getUserEmail());
+			if (check == null) {
+				log.debug("Email不存在");
+				result = SUCCESS;
+			} else {
+				log.debug("Email存在");
+				addFieldError("QueryFail", "Email已存在");
+				result = ERROR;
+			}
+			return result;
+		}
+		log.debug("model為空值或email未輸入");
+		return result;
 	}
 	
 	//帳號重複驗證
@@ -343,17 +379,20 @@ public class UserAction extends ActionSupport {
 		log.debug("check...");
 		log.debug("檢查帳號是否存在" + model.getUserAccount());
 		
-		String result;
-		UserEntity check = service.getByUserAccount(model.getUserAccount());
-		if(check == null) {
-			log.debug("不存在");
-			addFieldError("QueryFail","此帳號可以使用");
-			result="success";
-		} else {
-			log.debug("存在");
-			addFieldError("QueryFail","帳號已存在");
-			result="fail";
+		String result = ERROR;
+		if (model!=null && model.getUserAccount().length()>0) {
+			UserEntity check = service.getByUserAccount(model.getUserAccount());
+			if (check == null) {
+				log.debug("不存在");
+				result = SUCCESS;
+			} else {
+				log.debug("存在");
+				addFieldError("QueryFail", "帳號已存在");
+				result = ERROR;
+			}
+			return result;
 		}
+		
 		return result;
 	}
 	

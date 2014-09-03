@@ -2,6 +2,8 @@ package tw.com.softleader.sportslottery.setting.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -16,7 +18,7 @@ public class DepositCardEntity extends GenericEntity{
 	private static final long serialVersionUID = 2014L;
 	
 	@Column(name="CARD_ACCOUNT", length=50, nullable = false)
-	private String cardaccount;
+	private String cardAccount;
 	
 	@Column(name="CARD_PASSWORD", length=50, nullable = false)
 	private String cardPassword;
@@ -26,17 +28,21 @@ public class DepositCardEntity extends GenericEntity{
 	
 	@Column(name="USE_TIME")
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	private LocalDateTime gameTime;
+	private LocalDateTime useTime;
 	
 	@Column(name="STATE")
 	private boolean state;
 	
-	public String getCardaccount() {
-		return cardaccount;
+	@ManyToOne
+	@JoinColumn(name = "USER_ID")
+	private UserEntity userId;
+	
+	public String getCardAccount() {
+		return cardAccount;
 	}
 
-	public void setCardaccount(String cardaccount) {
-		this.cardaccount = cardaccount;
+	public void setCardAccount(String cardaccount) {
+		this.cardAccount = cardaccount;
 	}
 
 	public String getCardPassword() {
@@ -53,14 +59,14 @@ public class DepositCardEntity extends GenericEntity{
 
 	public void setPoint(Long point) {
 		this.point = point;
+	}	
+
+	public LocalDateTime getUseTime() {
+		return useTime;
 	}
 
-	public LocalDateTime getGameTime() {
-		return gameTime;
-	}
-
-	public void setGameTime(LocalDateTime gameTime) {
-		this.gameTime = gameTime;
+	public void setUseTime(LocalDateTime useTime) {
+		this.useTime = useTime;
 	}
 
 	public boolean isState() {
@@ -73,10 +79,18 @@ public class DepositCardEntity extends GenericEntity{
 
 	@Override
 	public String toString() {
-		return "DepositCardEntity [cardaccount=" + cardaccount
+		return "DepositCardEntity [cardaccount=" + cardAccount
 				+ ", cardPassword=" + cardPassword + ", point=" + point
-				+ ", gameTime=" + gameTime + ", state=" + state + ", id=" + id
+				+ ", gameTime=" + useTime + ", state=" + state + ", id=" + id
 				+ "]";
+	}
+
+	public UserEntity getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UserEntity userId) {
+		this.userId = userId;
 	}
 	
 }

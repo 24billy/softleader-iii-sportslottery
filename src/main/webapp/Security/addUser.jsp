@@ -46,7 +46,7 @@
 				
 				<label id="label-account">
 					<strong>E-mail</strong><br>
-					<input class="input-xlarge" name="model.userEmail" type="text">
+					<input class="input-xlarge" name="model.userEmail" id="email" type="text">
 				</label>
 				<span class="error"><s:property value="fieldErrors.email"/></span>
 				
@@ -91,30 +91,39 @@
 						'model.userAccount': $('#username').val()
 					},
 					success: function(data) {
-						console.log(data);
-						if(data=="fail") {
-							checeAccount = false;	
-						}else {
+						if(data=="success") {
 							checeAccount = true;	
+						}else {
+							checeAccount = false;	
 						}
 					}
 				});
 		        return checeAccount;
-			}, "Repeat Account");
+			}, "帳號重複!");
+			
+			//驗證Email
+			jQuery.validator.addMethod("checkEmail", function() {
+		    	$.ajax({
+		    		url:"<c:url value='/checkEmail'/>",
+					type:"get",
+					data:{
+						'model.userEmail': $('#email').val()
+					},
+					success: function(data) {
+						if(data=="success") {
+							checeEmail = true;	
+						}else {
+							checeEmail = false;	
+						}
+					}
+				});
+		        return checeEmail;
+			}, "Email已使用過");
 			
 			//密碼規則驗證
 			jQuery.validator.addMethod("alnumpwd", function(value, element) {
   				return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
   	 		}, "只能包括英文字母和数字");
-			jQuery.validator.addMethod("checkPswA", function() {
-				var re = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])\S{6,}$/g;
-		        if (re.test($('#password').val())) {
-		            checkPsw = true;
-		        }else {
-		        	checkPsw = false;
-		        }
-		        return checkPsw;
-			}, "Non-compliance");
 			jQuery.validator.addMethod("checkPsw1", function() {
 				var re1 = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])\S{6,}$/g;
 		        if (re1.test($('#password').val())) {
@@ -159,11 +168,16 @@
 				  
 					'model.userEmail': {
 						required: true,
-						email: true
+						email: true,
+						checkEmail: true
 					},
 				  
 					'model.userBirthday': {
 						dateISO:true
+					},
+					
+					'model.userName': {
+						required: true
 					}
 			    },
 				highlight: function(element) {
