@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blank Page</title>
+<title>登入頁面</title>
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
@@ -19,7 +19,28 @@
 	<div id="page-wrapper">
 		
 		<div class="container top20">
-			
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">管理者登入</div>
+						<div class="panel-body">
+							<form role="form" action="" class="">
+								<div class="form-group">
+									<label for="account">帳號</label>
+									<input id="account" type="text" class="form-control input-sm">
+								</div>
+								<div class="form-group">
+									<label for="account">密碼</label>
+									<input id="account" type="password" class="form-control input-sm">
+								</div>
+								<button type="submit" class="btn btn-success pull-right">登入</button>
+							</form>
+								
+								
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- .container-fluid -->
 	</div>
