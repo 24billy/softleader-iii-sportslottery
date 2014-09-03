@@ -23,6 +23,7 @@ import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.UserService;
+import tw.com.softleader.sportslottery.setting.util.Combination;
 import tw.com.softleader.sportslottery.setting.util.OddsIdList;
 
 import com.google.gson.Gson;
@@ -49,7 +50,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private HttpSession session;
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
-
+	private Combination combination;
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		log.debug("get Session...");
@@ -57,6 +58,16 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 	
 	
+	public Combination getCombination() {
+		return combination;
+	}
+
+
+	public void setCombination(Combination combination) {
+		this.combination = combination;
+	}
+
+
 	public OddsIdList getOddsIdList() {
 		return oddsIdList;
 	}
@@ -123,11 +134,14 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 
 	public String lottery() throws Exception {
-		/*
+		
 		System.out.println("oddsIdList="+oddsIdList);
+		System.out.println("combination="+combination);
+		Long capital = model.getCapital();
+		System.out.println("capital:"+capital);
+		//OddsEntity oddsEntity = new OddsEntity();
 		
-		OddsEntity oddsEntity = new OddsEntity();
-		
+		/*
 		model.setOddsId1(oddsService.getById(oddsIdList.getOddId1()));
 		if(oddsIdList.getOddId2()!=null){
 			model.setOddsId2(oddsService.getById(oddsIdList.getOddId2()));
