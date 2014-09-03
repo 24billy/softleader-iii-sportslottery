@@ -33,13 +33,6 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/userSearchOdds?method:selectByUser"/>">
-						<!--<div class="form-group">
-							<select class="form-control form-ball-type" id="ballType">
-								<option value="Baseball">棒球</option>
-								<option value="Basketball">籃球</option>
-								<option value="Basketball">足球</option>
-							</select>
-						</div>  -->
                         <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
                         <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
                         <div id="isEndGroup" class="btn-group" data-toggle="buttons">
@@ -110,9 +103,9 @@
 		$('#timeBegin').datetimepicker({
 			format: 'Y-m-d',
 			onShow:function( ct ){
-				//this.setOptions({
-				//	maxDate:$('#timeEnd').val()?$('#timeEnd').val():false
-				//});
+				this.setOptions({
+					maxDate:$('#timeEnd').val()?$('#timeEnd').val():false
+				});
 			},
 			onSelectDate:function(){
 				renewData();
@@ -122,9 +115,9 @@
 		$('#timeEnd').datetimepicker({
 			format: 'Y-m-d',
 			onShow:function( ct ){
-				//this.setOptions({
-				//	minDate:$('#timeBegin').val()?$('#timeBegin').val():false
-				//});
+				this.setOptions({
+					minDate:$('#timeBegin').val()?$('#timeBegin').val():false
+				});
 			},
 			onSelectDate:function(){
 				renewData();
@@ -138,16 +131,14 @@
 		$('#cleanQuery').on('click',function() {
 			$('#timeBegin').val('');
 			$('#timeEnd').val('');
-			$('#isEndGroup>label').removeClass('active');
-			$('#isEndGroup>label>input').prop('checked', false);
-			$('#isEndLabelDefault').addClass('active');
-			$('#isEndInputDefault').prop('checked', true);
+			//$('#isEndGroup>label').removeClass('active');
+			//$('#isEndGroup>label>input').prop('checked', false);
+			//$('#isEndLabelDefault').addClass('active');
+			//$('#isEndInputDefault').prop('checked', true);
 			renewData();
 			
 		});
-		var odds2 = [];
 		var table;
-		var table2;
 		function renewData(){
 		
 			$.ajax({
@@ -157,27 +148,24 @@
 				data:{
 					'timeFrom':$('#timeBegin').val(),
 					'timeTo':$('#timeEnd').val(),
-					'complexBallType':$('#ballType').val(),
 				},
 				success:function(datas){
-					//if(table){
-					//	$('#oddList').off('click');
-					//	$('#oddTable').DataTable().rows().remove();
-					//	$('#oddTable').DataTable().destroy();
-					//}
+					if(table){
+						$('#oddList').off('click');
+						$('#oddTable').DataTable().rows().remove();
+						$('#oddTable').DataTable().destroy();
+					}
 					//console.log("-----datas-----");
 					//console.log(datas);
-					var i =0;
-					var odds1 = [];
+					
 					var detail = [];
-					var user = [];
 					var lotterys = [];
 					var lotteryInfo = [];
 					//每張彩券
 					$.each(datas,function(index,data) {
 						lotterys = [];
 						detail = [];
-						var lottery = new Object();
+						var lottery = {};
 						lottery.id = data.id;
 						//下注時間
 						lottery.iMillis = data.confirmTime.iLocalMillis;
@@ -213,7 +201,7 @@
 								info['ballType'] = game.ballType;
 								timeString = "";
 								timeString += millisecondToDate(game.gameTime.iLocalMillis);
-								timeString += "";
+								timeString += " ";
 								timeString += millisecondToTime(game.gameTime.iLocalMillis);
 								info['gameTime'] = timeString;
 								if(game.gameScoreHome == 0 && game.gameScoreAway == 0) {
@@ -227,23 +215,27 @@
 								}
 								switch(odd.oddsId.oddType) {
 							    case 'SU_A':
-							    	type = "不讓分:";
+							    	type = "不讓分(";
 							    	type += game.teamAway.teamName;
+							    	type += ")";
 							    	info.labelText = type;
 							    	break;
 							    case 'SU_H':
-							    	type = "不讓分:";
+							    	type = "不讓分(";
 							    	type += game.teamHome.teamName;
+							    	type += ")";
 							    	info.labelText = type;
 									break;
 							    case 'ATS_A':
-							    	type = "讓分:";
+							    	type = "讓分(";
 							    	type += game.teamAway.teamName;
+							    	type += ")";
 							    	info.labelText = type;
 							    	break;
 							    case 'ATS_H':
-							    	type = "讓分:";
+							    	type = "讓分(";
 							    	type += game.teamHome.teamName;
+							    	type += ")";
 							    	info.labelText = type;
 							    	break;
 							    case 'SC_H':
@@ -261,32 +253,39 @@
 							    default:
 							    	break;
 								}
-								//console.log(info);
-								//datas[] = detai
 							});
 							detail.push(info);
-							//odds1.push(odd);
 						});
 						lotterys.push(detail);
-						user[i] = lotterys;
 						lottery.odds = detail;
-						i++;
 						lotteryInfo.push(lottery);
 					});
-					/*
-					console.log("-----lotterys(第一層)-----");
-					console.log(lotterys);
-					console.log("-----odds1-----");
-					console.log(odds1);
-					*/
-					$(document).ajaxStop(function() {
-						//console.log(user);
+					
+					//$(document).ajaxStop(function() {
+						console.log("=====lotteryInfo=====");
 						console.log(lotteryInfo);
 						//$('.details-control').click(function() {
 						//	$('#dialog').modal();
 						//});
 						//塞第一層資料
 						table = $('#oddTable').dataTable({
+							oLanguage: {
+								'sProcessing':'處理中...',
+								'sLengthMenu':'顯示 _MENU_ 項結果',
+								'sZeroRecords':'沒有匹配結果',
+								'sInfo':'顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+								'sInfoEmpty':'顯示第 0 至 0 項結果，共 0 項',
+								'sInfoFiltered':'(從 _MAX_ 項結果過濾)',
+								'sInfoPostFix':'',
+								'sSearch':'搜索:',
+								'sUrl':'',
+								'oPaginate': {
+									'sFirst':'首頁',
+									'sPrevious':'上頁',
+									'sNext':'下頁',
+									'sLast':'尾頁'
+								}
+							},
 							'data': lotteryInfo,
 							
 					        'columns': [
@@ -297,7 +296,7 @@
 					        		'defaultContent': ''
 					        		},
 					        		{"data": "id"},
-					        		{"data":  function(row, type, val, meta){
+					        		{"data": function(row, type, val, meta){
 					        			timeString = "";
 										timeString += millisecondToDate(row.iMillis);
 										timeString += " ";
@@ -307,7 +306,7 @@
 					        		{"data": "capital" },
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == null) {
-					        				return "未開獎";
+					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
 					        			} else {
 					        				return row.win;
 					        			}
@@ -328,7 +327,7 @@
 					    	}
 					    });
 						
-					});//ajaxStop	
+					//});//ajaxStop	
 				}//success
 			});//ajax
 				
@@ -338,8 +337,7 @@
 				odds = dataRow.odds;
 				console.log(odds);
 				var temp = '';
-				
-				temp += '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+				temp += '<table class="table" cellspacing="0" border="0";">'+
 		        '<thead>'+
 		        	'<tr>'+
 		        		'<td>球種</td>'+
@@ -371,7 +369,6 @@
 				temp += '</table>';
 				return temp;
 			}
-			
 		}
 		renewData();
 	})(jQuery);
