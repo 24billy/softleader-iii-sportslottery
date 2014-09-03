@@ -211,7 +211,7 @@
 								</table>
 								
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" class="capital" name="model.capital" value="">
+									<input type="text" id="singleCapitalValue" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -227,7 +227,7 @@
 								</div>
 							</form>
 						  </div>
-						  <!-- End of Bet Panel -->
+						  <!-- End of Single Bet Panel -->
 						
 						</div>
 						<div class="tab-pane" id="pass"> 
@@ -256,7 +256,7 @@
 									</tbody>
 								</table>								
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" class="capital" name="model.capital" value="">
+									<input type="text" id="passCapital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -271,7 +271,7 @@
 								</div>
 							</form>
 						  </div>
-						  <!-- End of Bet Panel -->
+						  <!-- End of Pass Bet Panel -->
 						</div>
 						<div class="tab-pane" id="passCom">
 						  <!-- Begin of Combination Bet Panel -->
@@ -402,7 +402,7 @@
 								</table>
 																					
 								<div class="lotteryOdds" hidden="true">
-									<input type="text" class="capital" name="model.capital" value="">
+									<input type="text" id="comCapital" name="model.capital" value="">
 									<input type="text" class="oddId1" name="oddsIdList.oddId1" value="">
 									<input type="text" class="oddId2" name="oddsIdList.oddId2" value="">
 									<input type="text" class="oddId3" name="oddsIdList.oddId3" value="">
@@ -840,9 +840,9 @@
 				
 				
 				//每一注投注金計算
-				$('.capital').val($('#singleBetValue').val()*capitalValue);
-				$('.capital').val($('#passBetValue').val()*capitalValue);
-				$('.capital').val($('#comBetValue').val()*capitalValue);
+				$('#singleCapitalValue').val($('#singleBetValue').val()*capitalValue);
+				$('#passCapitalValue').val($('#passBetValue').val()*capitalValue);
+				$('#comCapitalValue').val($('#comBetValue').val()*capitalValue);
 				
 				if((userOddIds.length>=2)&&combination){
 					//過關
