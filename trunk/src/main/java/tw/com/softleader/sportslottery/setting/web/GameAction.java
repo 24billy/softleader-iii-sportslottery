@@ -199,6 +199,15 @@ public class GameAction extends ActionSupport {
 		return "selectNearDays";
 	}
 	
+	public String selectNotEnd() {
+		log.debug("selectNearDays...");
+		json = new Gson().toJson(service.getComplex(null, null, false, null, null, null));
+		
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+	
+		return "selectNotEnd";
+	}
+	
 	public String update() {
 		log.debug("update...");
 		String result = null;
