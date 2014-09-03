@@ -231,7 +231,7 @@
 									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
 									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
 									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
-									
+									<input type="text" name="combination.com1" value="1">
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
@@ -276,6 +276,7 @@
 									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
 									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
 									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
+									<input type="text" name="combination.com0" value="1">
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
