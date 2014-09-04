@@ -246,7 +246,7 @@
 									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
 									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
 									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
-									<input type="text" name="combination.com1" value="1">
+									<input type="text" name="model.com1" value="1">
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
@@ -291,7 +291,7 @@
 									<input type="text" class="oddId6" name="oddsIdList.oddId6" value="">
 									<input type="text" class="oddId7" name="oddsIdList.oddId7" value="">
 									<input type="text" class="oddId8" name="oddsIdList.oddId8" value="">
-									<input type="text" name="combination.com0" value="1">
+									<input type="text" name="model.com0" value="1">
 								</div>
 								<div>
 									<button class="btn btn-danger btn-xs" type="submit">投注</button>
@@ -320,7 +320,7 @@
 										<tr>
 										  <td>
 										    <label name="comLabel"  class="checkbox " >
-										      <input type="checkbox" name="combination.com1" value="">單場
+										      <input type="checkbox" name="model.com1" value="">單場
 										    </label>
 										  </td>
 										  <td>
@@ -331,7 +331,7 @@
 										<tr>
 										  <td>
 										    <label name="comLabel"  class="checkbox" >
-										      <input type="checkbox" checked="true" name="combination.com2" value="">過兩關
+										      <input type="checkbox" checked="true" name="model.com2" value="">過兩關
 										    </label>
 										  </td>
 										  <td>
@@ -342,7 +342,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel" class="checkbox" >
-										      <input type="checkbox" name="combination.com3" value="">過三關
+										      <input type="checkbox" name="model.com3" value="">過三關
 										    </label>
 										  </td>
 										  <td>
@@ -353,7 +353,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel"  class="checkbox">
-										      <input type="checkbox" name="combination.com4" value="">過四關
+										      <input type="checkbox" name="model.com4" value="">過四關
 										    </label>
 									      </td>
 									      <td>
@@ -364,7 +364,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel"  class="checkbox">
-										      <input type="checkbox" name="combination.com5" value="">過五關斬六將									  
+										      <input type="checkbox" name="model.com5" value="">過五關斬六將									  
 										    </label>
 										  </td>
 										  <td>
@@ -375,7 +375,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel"  class="checkbox">
-										      <input type="checkbox" name="combination.com6" value="">過六關
+										      <input type="checkbox" name="model.com6" value="">過六關
 										    </label>
 										  </td>
 										  <td>
@@ -386,7 +386,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel"  class="checkbox">
-										      <input type="checkbox" name="combination.com7" value="">過七關
+										      <input type="checkbox" name="model.com7" value="">過七關
 										    </label>
 										  </td>
 										  <td>
@@ -397,7 +397,7 @@
 										<tr hidden="true">
 										  <td>
 										    <label name="comLabel"  class="checkbox">
-										      <input type="checkbox" name="combination.com8" value="">過八關
+										      <input type="checkbox" name="model.com8" value="">過八關
 										    </label>
 										  </td>
 										  <td>
