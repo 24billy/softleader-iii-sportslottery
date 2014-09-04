@@ -47,9 +47,10 @@ public class GenericDao<T extends GenericEntity> {
 		return model;
 	}
 	
-	public void insert(T entity){
+	public T insert(T entity){
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(entity);
+		return entity;
 	}
 
 	public void update(T entity){

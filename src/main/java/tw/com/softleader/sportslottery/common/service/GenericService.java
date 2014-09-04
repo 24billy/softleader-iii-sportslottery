@@ -20,8 +20,7 @@ public abstract class GenericService<T extends GenericEntity> {
 	}
 	
 	public T insert(T entity) {
-		getDao().insert(entity);
-		return entity;
+		return getDao().insert(entity);
 	}
 	
 	public T update(T entity) {
