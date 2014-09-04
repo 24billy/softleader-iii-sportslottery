@@ -7,6 +7,6 @@
 <title>Lottery</title>
 </head>
 <body>
-	<h1>Lottery</h1>
+	<h1>你已經完成投注。</h1>
 </body>
 </html>
