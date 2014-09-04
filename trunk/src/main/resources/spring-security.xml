@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/Admin/index.jsp" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/Admin/login.jsp" access="isAnonymous()"/>
+		<security:form-login login-processing-url="/Admin/j_spring_security_check"
+         login-page="/Admin/login.jsp" default-target-url="/Admin/index.jsp"
+         authentication-failure-url="/Admin/login.jsp?error=1"/>
+        <security:logout logout-url="/Admin/j_spring_security_logout"
+        	logout-success-url="/Admin/login.jsp"/>
+	</security:http>
+	
+	<bean id="securityService" 
+		class="tw.com.softleader.sportslottery.common.security.SecurityService"/>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="securityService"/>
+	</security:authentication-manager>
+	
+</beans>
