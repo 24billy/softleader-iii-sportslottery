@@ -31,7 +31,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header"><!-- 主部分標頭 -->
-							查詢賽事成績
+							依時間查詢投注統計資料
 						</h1>
 						<ol class="breadcrumb">
 							<li>
@@ -42,7 +42,7 @@
 							</li>
 							<li class="active">
 								<!-- <i class="fa fa-fw fa-pencil-square-o"></i> 新增 -->
-								<i class="fa fa-fw fa-table"></i> 賽事成績
+								<i class="fa fa-fw fa-table"></i> 依時間查詢投注統計資料
 							</li>
 
 						</ol>
@@ -54,7 +54,7 @@
 				
 				<div class="row">
 					<div class="col-lg-12">
-						<form class="form-inline" role="form" action="<c:url value="/game.action"/>">
+						<form class="form-inline" role="form" action="<c:url value="/oddsStatisticByTime"/>">
 
 							<div class="form-group">
 								
@@ -69,7 +69,7 @@
                             </div>
                             
                             <div class="form-group">
-                            	<label class="sr-only" for="country">隊名:</label>
+                            	<label class="sr-only" for="country">國名:</label>
                                 <select class="form-control form-country" id="country" name="country"  >
                                 	<option >不選擇區域 </option>
                                   	<option value="中華民國">中華職棒</option>
@@ -80,11 +80,7 @@
 
                             </div>
 
-                            <div class="form-group">
-                                    <label class="sr-only" for="teamName">隊名:</label>
-                                    <select class="form-control form-team" id="teamName" name="teamName" ></select>
-
-                            </div>
+                           
                              <h5>可直接按submit列出所有資訊</h5>
                             <button class="btn btn-default" type="button" id="submitButton">Submit Button</button>
                             <button class="btn btn-default" type="reset" id="reset" >Reset Button</button>
@@ -204,9 +200,9 @@
 		function showResultTable(data){
 
 			$('#teamListHead').html("<tr><th>項目</th><th>地主隊不讓分</th><th>客隊不讓分</th><th>地主隊讓分</th><th>客隊讓分</th><th>比大</th><th>總分機數</th><th>總分偶數</th></tr>");
-			$('#gameList').empty();
+			/* $('#gameList').empty();
 			console.log(data);
-			/* var gameList = $.parseJSON(data); */
+			
 			 $.each(data, function(index, game) {
 				console.log(game);
 				var child = '';
@@ -222,8 +218,8 @@
 				child += '<td>' + game.gameScoreHome + '</td>';
 				child += '</tr>';
 				
-				$('#gameList').append(child);
-			});
+				$('#gameList').append(child); 
+			});*/
 			
 		
 			
