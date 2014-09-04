@@ -8,10 +8,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/admin-style.css"/>">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0-beta.2/themes/smoothness/jquery-ui.css" />
 <style>
 	#sample{
 		display:none;
@@ -32,6 +41,10 @@
 	.btn{
 		text-align: center;
 		width: 250px;
+	}
+	
+	#searchScopeGroup .btn{
+		width: 100px;
 	}
 
 </style>
@@ -71,14 +84,20 @@
 		
 		<div id="page-wrapper">
 	
-			<div class="container-fluid" >
-			
+			<div class="container top20" >
 				<div class="row">
-					<div class="col-lg-8"  id="event_board" >
+					<div class="col-sm-8" id="event_board" >
 						<div class="page-header">
 							<h1>近期賽事</h1>
-							<div id="searchScopeGroup" class="btn-group" data-toggle="buttons">
-								<label class="btn btn-default active" id="isEndLabelDefault">
+						</div>
+						<form role="form" class="form-inline pull-left" >
+							<select class="form-control form-ball-type" id="ballType" >
+								<option value="Baseball">棒球</option>
+								<option value="Basketball">籃球</option>
+								<option value="Basketball">足球</option>
+							</select>
+							<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+								<label class="btn btn-default active" >
 									<input type="radio" name=searchScope id="searchScopeDefault" value="near" checked >未來三日
 								</label>
 								<label class="btn btn-success">
@@ -88,7 +107,8 @@
 									<input type="radio" name="searchScope" id="option3" value="All">全部
 								</label>
 							</div>
-						</div>
+						</form>
+						<br/>
 						<div name="event_list" id="sample" date="">
 							<h3>2014年4月20日</h3>
 							<table class="table table-hover">
@@ -104,7 +124,7 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary  col-lg-4">
+					<div class="panel panel-primary  col-sm-4">
 					  <div class="panel-heading ">
 					  	<h6>投注區</h3>
 					  </div>
@@ -520,19 +540,30 @@
 	<!-- #wrapper -->
 	
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.0-beta.2/jquery-ui.js"></script>
+<script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+
 <script>
 	(function($) {
+		//$('.btn').button();
 		$('#match-manager').collapse();
-		
 		var eventListSimple = $('div[name = "event_list"]').clone();
-		
 		var userOddsCount = 0;
-		
+
 		$('#searchScopeGroup>label>input').on('change', function(){
+			$('div[name = "event_list"]').remove();
+			$('#event_board').append(eventListSimple);
+			superRefresh();
+		});
+		
+		$('#ballType').on('change', function(){
 			$('div[name = "event_list"]').remove();
 			$('#event_board').append(eventListSimple);
 			superRefresh();
@@ -563,6 +594,9 @@
 				url: queryScopeURI,
 				type:'post',
 				dataType:'json',
+				data:{
+					'complexBallType':$('#ballType').val()
+				},
 				success:function(datas){
 					var games = [];
 					var odds = [];
