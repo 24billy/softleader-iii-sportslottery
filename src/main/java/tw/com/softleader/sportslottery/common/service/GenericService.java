@@ -24,8 +24,7 @@ public abstract class GenericService<T extends GenericEntity> {
 	}
 	
 	public T update(T entity) {
-		getDao().update(entity);
-		return entity;
+		return getDao().update(entity);
 	}
 	
 	public void delete(T entity) {

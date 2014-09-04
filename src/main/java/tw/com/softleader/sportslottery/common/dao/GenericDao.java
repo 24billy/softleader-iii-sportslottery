@@ -53,9 +53,10 @@ public class GenericDao<T extends GenericEntity> {
 		return entity;
 	}
 
-	public void update(T entity){
+	public T update(T entity){
 		Session session = sessionFactory.getCurrentSession();
 		session.merge(entity);
+		return entity;
 	}
 	
 	public void delete(T entity){

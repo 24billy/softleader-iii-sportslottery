@@ -8,10 +8,9 @@
   <constant name="struts.devMode" value="true" />
   <constant name="struts.ui.theme" value="simple" />
   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+  <constant name="struts.action.excludePattern" value="/Admin/j_spring_security_check"/>
   
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
-  	
-
   	
   	<action name="gameManager" class="gameAction" method="manager">
   		<result name="success">/Admin/gameManager.jsp</result>

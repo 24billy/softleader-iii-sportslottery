@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>登入頁面</title>
+<title>Index Page</title>
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
@@ -18,33 +18,10 @@
 <body>
 	<div id="page-wrapper">
 		
-		<div class="container top20">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">管理者登入</div>
-						<div class="panel-body">
-							<c:if test="${param.error != null}">
-            					<h4 class="warning">帳號或密碼錯誤</h4>
-        					</c:if>
-							<!-- <form role="form" action="j_security_check" class=""> -->
-							<form role="form" action="<c:url value="/Admin/j_spring_security_check"/>">
-								<div class="form-group">
-									<label for="username">帳號</label>
-									<input name="j_username" id="username" type="text" class="form-control input-sm">
-								</div>
-								<div class="form-group">
-									<label for="account">密碼</label>
-									<input name="j_password" id="account" type="password" class="form-control input-sm">
-								</div>
-								<button type="submit" class="btn btn-success pull-right">登入</button>
-							</form>
-								
-								
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="container-fluid top20">
+			<a class="btn btn-success" type="button" href="<c:url value="/gameManager"/>">Game Table</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/teamManager"/>">Team Table</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/Admin/j_spring_security_logout"/>">Log Out</a>
 		</div>
 		<!-- .container-fluid -->
 	</div>
