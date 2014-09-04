@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
+import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.UserService;
@@ -41,6 +42,9 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private UserService userService;
 	@Autowired
 	private OddsService oddsService;
+	@Autowired
+	private LotteryOddsService lotteryOddsService;
+	
 	
 	private LotteryEntity model;	
 	private List<LotteryEntity> models;
@@ -177,9 +181,18 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		Long capital = model.getCapital();
 		System.out.println("capital:"+capital);
 		
-		
-		
-		//OddsEntity oddsEntity = new OddsEntity();
+		//start insert
+
+		model.setUserId(2L);
+		model.setConfirmTime(new LocalDateTime());
+		System.out.println("model:"+model);
+		service.insert(model);
+		try {
+			service.insert(model);
+		} catch (Exception e) {
+			log.debug("!!LotteryAction insertFail!!");
+			e.printStackTrace();
+		}
 		
 		/*
 		model.setOddsId1(oddsService.getById(oddsIdList.getOddId1()));
@@ -294,25 +307,25 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return "selectByUser";
 	}
 	
-    private void getCombination(int[] source, int number, int begin, int[] tempArray, int index) {  
-        
-        if(number == 0){//如果抓取達到目標，輸出該陣列  
-        	String str = "";
-        	for(int i = 0; i < index; i++){  
-        		str += tempArray[i]+" ";
-        		System.out.print(tempArray[i] + " ");  
-            }  
-              
-            return;  
-        }  
-              
-        for(int i = begin; i < source.length; i++){  
-              
-        	tempArray[index] = source[i];  
-            getCombination(source, number-1, i+1, tempArray, index+1);  
-        }  
-          
-    } 
+//    private void getCombination(int[] source, int number, int begin, int[] tempArray, int index) {  
+//        
+//        if(number == 0){//如果抓取達到目標，輸出該陣列  
+//        	String str = "";
+//        	for(int i = 0; i < index; i++){  
+//        		str += tempArray[i]+" ";
+//        		System.out.print(tempArray[i] + " ");  
+//            }  
+//              
+//            return;  
+//        }  
+//              
+//        for(int i = begin; i < source.length; i++){  
+//              
+//        	tempArray[index] = source[i];  
+//            getCombination(source, number-1, i+1, tempArray, index+1);  
+//        }  
+//          
+//    } 
 	
 	
 }
