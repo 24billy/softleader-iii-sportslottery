@@ -59,14 +59,11 @@
 	
 	<c:if test="${ !empty user }">
 		<form id="form2" class="form-inline" action="<c:url value="/Security/Result/logout.jsp"/>" >	
-			<div>
 				<button type="sumit" class="btn btn-info">登出</button>
-			</div>
 		</form>
-		
+		<a href="<c:url value='/goDeposit'/>">金額:${user.coins}</a>
 		<button id="update" class="btn btn-info">修改資料</button>
 		
-		<button id="deposit" class="btn btn-primary">充值</button>
 	</c:if>
 
 <div class="modal fade">
