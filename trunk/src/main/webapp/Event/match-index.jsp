@@ -72,9 +72,6 @@
 							<li class="open">
 								<a href="<c:url value="/Event/match-index.jsp"/>"><i class="fa fa-fw fa-bars"></i> 近期賽事</a>
 							</li>
-							<li>
-								<a href="<c:url value="/Event/match-events.jsp"/>"><i class="fa fa-fw fa-table"></i> 全部賽事</a>
-							</li>
 						</ul>
 					</li>
 				</ul>
