@@ -124,9 +124,9 @@
 				rules: {
 					userPassword: {
 						//required: true,
-						//minlength: 6,
-						//checkPsw1 : true,
-						//checkPsw2 : true, 
+						minlength: 6,
+						checkPsw1 : true,
+						checkPsw2 : true, 
 						alnum: true
 					},
 					
