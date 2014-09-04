@@ -136,7 +136,7 @@ margin-top: 2px;
 <script>
 
 $('#game').click(function() {
-	  window.location='<c:url value="/game"/>';
+	location.href='<c:url value="/game"/>';
 	});
 $('#history').click(function() {
 	  window.location='<c:url value="/searchHistoryComplex"/>';
