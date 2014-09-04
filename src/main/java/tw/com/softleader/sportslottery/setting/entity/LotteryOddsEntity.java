@@ -7,7 +7,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import tw.com.softleader.sportslottery.common.entity.GenericEntity;
-
+/**
+ * 
+ * 
+ * @author Ebi & Billy
+ *
+ */
 @Entity
 @Table(name = "LOTTERY_ODDS")
 public class LotteryOddsEntity extends GenericEntity {
