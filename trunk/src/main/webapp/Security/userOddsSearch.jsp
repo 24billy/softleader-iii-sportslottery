@@ -37,13 +37,13 @@
                         <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
                         <div id="isEndGroup" class="btn-group" data-toggle="buttons">
 							<label class="btn btn-default active" id="isEndLabelDefault">
-								<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
+								<input type="radio" name="win" id="isEndInputDefault" value="none" checked >全選
 							</label>
 							<label class="btn btn-success">
-								<input type="radio" name="isEnd" id="option2" value="true" >已開獎
+								<input type="radio" name="win" id="option2" value="true" >已開獎
 							</label>
 							<label class="btn btn-warning">
-								<input type="radio" name="isEnd" id="option3" value="false">未開獎
+								<input type="radio" name="win" id="option3" value="false" >未開獎
 							</label>
 						</div>
 						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
@@ -104,7 +104,7 @@
 			format: 'Y-m-d',
 			onShow:function( ct ){
 				this.setOptions({
-					maxDate:$('#timeEnd').val()?$('#timeEnd').val():false
+					maxDate:$('#timeEnd').val()?$('#timeEnd').val().replace(/-/g,'/'):false
 				});
 			},
 			onSelectDate:function(){
@@ -116,7 +116,7 @@
 			format: 'Y-m-d',
 			onShow:function( ct ){
 				this.setOptions({
-					minDate:$('#timeBegin').val()?$('#timeBegin').val():false
+					minDate:$('#timeBegin').val()?$('#timeBegin').val().replace(/-/g,'/'):false
 				});
 			},
 			onSelectDate:function(){
@@ -131,16 +131,19 @@
 		$('#cleanQuery').on('click',function() {
 			$('#timeBegin').val('');
 			$('#timeEnd').val('');
-			//$('#isEndGroup>label').removeClass('active');
-			//$('#isEndGroup>label>input').prop('checked', false);
-			//$('#isEndLabelDefault').addClass('active');
-			//$('#isEndInputDefault').prop('checked', true);
+			$('#isEndGroup>label').removeClass('active');
+			$('#isEndGroup>label>input').prop('checked', false);
+			$('#isEndLabelDefault').addClass('active');
+			$('#isEndInputDefault').prop('checked', true);
 			renewData();
 			
 		});
 		var table;
 		function renewData(){
-		
+			var win = null;
+			if($('input:checked').val()!='none'){
+				//win = $('input:checked').val();
+			}
 			$.ajax({
 				url:'<c:url value="/userSearchOdds?method:selectByUser" />',
 				type:'post',
@@ -148,6 +151,7 @@
 				data:{
 					'timeFrom':$('#timeBegin').val(),
 					'timeTo':$('#timeEnd').val(),
+					'winOpen':win,
 				},
 				success:function(datas){
 					if(table){
@@ -306,8 +310,10 @@
 					        		{"data": "capital" },
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == null) {
+					        				win = false;
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
 					        			} else {
+					        				win = true;
 					        				return row.win;
 					        			}
 					        		}},

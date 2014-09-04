@@ -44,7 +44,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		return dao.findByTime(timeBegin, timeEnd);
 	}
 	
-	public List<LotteryEntity> getComplex(Long userId, LocalDate timeBegin, LocalDate timeEnd) {
-		return dao.findComplex(userId, timeBegin, timeEnd);
+	public List<LotteryEntity> getComplex(Long userId, LocalDate timeBegin, LocalDate timeEnd, Long win) {
+		return dao.findComplex(userId, timeBegin, timeEnd, win);
 	}
 }
