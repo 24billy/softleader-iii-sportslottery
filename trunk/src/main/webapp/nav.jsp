@@ -119,9 +119,9 @@ margin-top: 2px;
 <div class="container">
 	<div class="row">
 		<div class="well text-center">
-			<button type="button" class="btn btn-hot text-uppercase ">賽事歷程</button>
-			<button type="button" class="btn btn-sunny text-uppercase ">歷史紀錄</button>
-			<button type="button" class="btn btn-sky text-uppercase ">使用者資訊</button>
+			<button type="button" class="btn btn-hot text-uppercase " id="game">賽事歷程</button>
+			<button type="button" class="btn btn-sunny text-uppercase " id="history">歷史紀錄</button>
+			<button type="button" class="btn btn-sky text-uppercase " id="user">使用者資訊</button>
 		
 		
 		</div>
@@ -132,7 +132,21 @@ margin-top: 2px;
 
 
 </div>
+<script>
 
+$('#game').click(function() {
+	  window.location='"<c:url value="/game"/>"';
+	});
+$('#history').click(function() {
+	  window.location='"<c:url value="/searchHistoryComplex"/>"';
+	});
+$('#user').click(function() {
+	  window.location='"<c:url value="/searchHistoryComplex"/>"';
+	});
+	
+	
+	
+</script>
 
 
 </body>
