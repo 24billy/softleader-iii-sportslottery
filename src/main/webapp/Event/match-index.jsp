@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/admin-style.css"/>">
 <style>
 	#sample{
 		display:none;
@@ -50,8 +49,8 @@
 </style>
 </head>
 <body>
-	<div id="wrapper">
-		
+	<div >
+		<!--
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				
 			<div class="navbar-header">
@@ -76,14 +75,13 @@
 					</li>
 				</ul>
 			</div>
-			<!-- .navbar-collapse -->
 		</nav>
-		
-		<div id="page-wrapper">
+		-->
+		<div>
 	
 			<div class="container top20" >
 				<div class="row">
-					<div class="col-sm-8" id="event_board" >
+					<div class="col-lg-8" id="event_board" >
 						<div class="page-header">
 							<h1>近期賽事</h1>
 						</div>
@@ -121,7 +119,7 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary  col-sm-4">
+					<div class="panel panel-primary  col-lg-4">
 					  <div class="panel-heading ">
 					  	<h6>投注區</h3>
 					  </div>
