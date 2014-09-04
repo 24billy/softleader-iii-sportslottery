@@ -92,14 +92,14 @@
 								<option value="Basketball">足球</option>
 							</select>
 							<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-								<label class="btn btn-default active" >
-									<input type="radio" name=searchScope id="searchScopeDefault" value="near" checked >未來三日
+								<label class="btn btn-default active">
+									<input type="radio" name="searchScope" id="option3" value="All" checked >全部
 								</label>
-								<label class="btn btn-success">
-									<input type="radio" name="searchScope" id="option2" value="notEnd" >可下注
+								<label class="btn btn-success" >
+									<input type="radio" name=searchScope id="searchScopeDefault" value="near" >未來三日
 								</label>
 								<label class="btn btn-warning">
-									<input type="radio" name="searchScope" id="option3" value="All">全部
+									<input type="radio" name="searchScope" id="option2" value="notEnd" >可下注
 								</label>
 							</div>
 						</form>
