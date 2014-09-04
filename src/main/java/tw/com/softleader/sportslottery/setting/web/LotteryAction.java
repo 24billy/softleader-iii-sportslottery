@@ -203,7 +203,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		System.out.println("lotteryId:"+lotteryId);
 		
 		lotteryOddsEntity.setLotteryId(lotteryId);
-		System.out.println("lotteryOddsEntity:"+lotteryOddsEntity);
+		//System.out.println("lotteryOddsEntity:"+lotteryOddsEntity);
 		/**
 		lotteryOddsEntity.setOddsId(oddsEntity);
 		System.out.println("lotteryOddsEntity:"+lotteryOddsEntity);
