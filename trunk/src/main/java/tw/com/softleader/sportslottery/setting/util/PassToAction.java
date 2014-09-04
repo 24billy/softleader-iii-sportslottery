@@ -8,6 +8,10 @@ public class PassToAction  extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String goDeposit() throws Exception {
+		return INPUT;
+	}
+	
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub

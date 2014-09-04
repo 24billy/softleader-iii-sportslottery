@@ -14,7 +14,11 @@
 <script src="<c:url value="/Security/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value='/Security/js/button.js'/>"></script> 
 <script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
-	
+<style>
+	.error {
+		color:red;
+	}
+</style>
 
 <body>
 	<h1>儲值</h1>
@@ -45,11 +49,6 @@
 				console.log("fail");
 				
 				$(element).closest('.control-group').removeClass('success').addClass('error');
-			},
-			success: function(element) {
-				console.log("success");
-				element
-				.closest('.control-group').removeClass('error').addClass('success');
 			}
 		});
 	})(jQuery);
