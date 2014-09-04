@@ -58,6 +58,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private HttpSession session;
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
+	private Long winOpen;
 	private Combination combination;
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
@@ -124,6 +125,16 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 
 	public void setTimeTo(LocalDate timeTo) {
 		this.timeTo = timeTo;
+	}
+	
+
+	public Long getWinOpen() {
+		return winOpen;
+	}
+
+
+	public void setWinOpen(Long winOpen) {
+		this.winOpen = winOpen;
 	}
 
 
@@ -317,7 +328,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 			
 			Long id = entity.getId();
 			log.debug("id..." + id);
-			json = new Gson().toJson(service.getComplex(id, timeFrom, timeTo));
+			json = new Gson().toJson(service.getComplex(id, timeFrom, timeTo, winOpen));
 		} catch (Exception e) {
 			log.debug("!!LotteryAction selectByUser Failed!!");
 			addFieldError("QueryFail","selectByUser Fail");

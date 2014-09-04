@@ -54,15 +54,16 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		}
 	}
 	
-	public List<LotteryEntity> findComplex(Long userId, LocalDate timeBegin, LocalDate timeEnd){
+	public List<LotteryEntity> findComplex(Long userId, LocalDate timeBegin, LocalDate timeEnd, Long win){
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "from LotteryEntity where 1=1";//1=1純粹只是為了節省判斷AND是否需要而存在的
 		String sql1 = " and USER_ID = :userId";
 		String sql2 = " and CONFIRM_TIME >= :timeBegin";
 		String sql3 = " and CONFIRM_TIME < :timeEnd";
+		String sql4 = " and WIN = :win";
 		
-		if (userId == null && timeBegin == null && timeEnd == null) {
+		if (userId == null && timeBegin == null && timeEnd == null && win == null) {
 			//全部條件都沒輸入的情況下 findAll
 			Query query = session.createQuery(sql);
 			return query.list();
@@ -86,6 +87,12 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 			hasTimeEnd = true;
 		}
 		
+		boolean hasWin = false;
+		if (win != null) {
+			sql += sql4;
+			hasWin = true;
+		}
+		
 		Query query = session.createQuery(sql);
 		if (hasUserId) {
 			query.setLong("userId", userId);
@@ -97,6 +104,10 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		
 		if (hasTimeEnd) {
 			query.setDate("timeEnd", timeEnd.toDate());
+		}
+		
+		if (hasWin) {
+			query.setLong("win", win);
 		}
 	
 		return query.list();
