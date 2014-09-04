@@ -611,8 +611,6 @@
 					console.log("odds="+odds);
 					console.log('-----------');
 					//此段作備忘用 無意義
-		
-						
 					
 					//game資料進一步處理 將odds中的資料往上提方便後續使用
 					$.each(games, function(index, game){
@@ -677,9 +675,16 @@
 							
 							if(game != null){
 								//當該日期已存在的情況下，直接加入
+								var trHtml = "";
+								if(game.isEnd){
+									trHtml = "<tr class='gameIsEnd warning' gameId=" + game.gameNum + ">";
+								} else {
+									trHtml = "<tr class='trClick' gameId=" + game.gameNum + ">";
+								}
+								
 								if($('div[name = "event_list"][date="' + game.date + '"]').length > 0){
 									$('div[name = "event_list"][date="' + game.date + '"] table').append(
-											"<tr class='trClick' gameId=" + game.gameNum + ">"+
+											trHtml+
 											"<td>" + game.gameNum + "</td>"+
 											"<td>" + game.time + "</td>"+
 											"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialAway + "'>" + game.teamAway.teamName + "</span></td>"+
@@ -698,7 +703,7 @@
 									
 									$('div[name = "event_list"][date="' + game.date + '"] h3').text(game.date);
 									$('div[name = "event_list"][date="' + game.date + '"] table').append(
-											"<tr class='trClick' gameId=" + game.gameNum + ">"+
+											trHtml+
 											"<td>" + game.gameNum + "</td>"+
 											"<td>" + game.time + "</td>"+
 											"<td><span data-toggle='popover' data-placement='top' data-content='" + game.detialAway + "'>" + game.teamAway.teamName + "</span></td>"+
