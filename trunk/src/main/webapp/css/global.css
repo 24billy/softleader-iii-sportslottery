@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.top5 {
+	margin-top:5px;
+}
+
+.top10 {
+	margin-top:10px;
+}
+
+.top15 {
+	margin-top:15px;
+}
+
+.top20 {
+	margin-top:20px;
+}
+
+.left5 {
+	margin-left:5px;
+}
+
+.left10 {
+	margin-left:10px;
+}
+
+.left15 {
+	margin-left:15px;
+}
+
+.left20 {
+	margin-left:20px;
+}
