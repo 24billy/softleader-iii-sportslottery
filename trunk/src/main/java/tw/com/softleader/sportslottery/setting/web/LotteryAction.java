@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.web;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
@@ -46,8 +48,10 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private LotteryOddsService lotteryOddsService;
 	
 	
-	private LotteryEntity model;	
+	private LotteryEntity model;
 	private List<LotteryEntity> models;
+	private OddsEntity oddsEntity;
+	private LotteryOddsEntity lotteryOddsEntity;
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 	private InputStream inputStream;
 	private String json;
@@ -138,7 +142,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 
 	public String lottery() throws Exception {
-		
+		/**
 		System.out.println("oddsIdList="+oddsIdList);
 		StringBuilder oddsArray=new StringBuilder(); 
 		int oddsCount=0;
@@ -180,20 +184,36 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		System.out.println("combination="+combination);
 		Long capital = model.getCapital();
 		System.out.println("capital:"+capital);
-		
+		*/
 		//start insert
 
 		model.setUserId(2L);
 		model.setConfirmTime(new LocalDateTime());
-		System.out.println("model:"+model);
-		service.insert(model);
+		System.out.println("before model:"+model);
+		
 		try {
-			service.insert(model);
+			model=service.insert(model);
 		} catch (Exception e) {
-			log.debug("!!LotteryAction insertFail!!");
+			log.debug("!!Lottery insertFail!!");
 			e.printStackTrace();
 		}
+		System.out.println("after model:"+model);
+		oddsEntity = oddsService.getById(oddsIdList.getOddId1());
+		Long lotteryId=model.getId();
+		System.out.println("lotteryId:"+lotteryId);
 		
+		lotteryOddsEntity.setLotteryId(lotteryId);
+		System.out.println("lotteryOddsEntity:"+lotteryOddsEntity);
+		/**
+		lotteryOddsEntity.setOddsId(oddsEntity);
+		System.out.println("lotteryOddsEntity:"+lotteryOddsEntity);
+		try {
+			lotteryOddsService.insert(lotteryOddsEntity);
+		} catch (Exception e) {
+			log.debug("!!LotteryOdds insertFail!!");
+			e.printStackTrace();
+		}
+		*/
 		/*
 		model.setOddsId1(oddsService.getById(oddsIdList.getOddId1()));
 		if(oddsIdList.getOddId2()!=null){
