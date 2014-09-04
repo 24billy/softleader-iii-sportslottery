@@ -182,7 +182,7 @@ public class GameAction extends ActionSupport {
 		if (gameId != null && gameId > 0) {
 			json = new Gson().toJson(service.getById(gameId));
 		} else {
-			json = new Gson().toJson(service.getAll());
+			json = new Gson().toJson(service.getComplex(null, null, null, null, null, complexBallType));
 		}
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
@@ -192,7 +192,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate(), new LocalDate().plusDays(3), null));
+		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate(), new LocalDate().plusDays(3), complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -201,7 +201,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNotEnd() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, null, null, null));
+		json = new Gson().toJson(service.getComplex(null, null, false, null, null, complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
