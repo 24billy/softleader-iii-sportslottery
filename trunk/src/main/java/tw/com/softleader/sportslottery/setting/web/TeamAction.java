@@ -8,7 +8,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
@@ -32,14 +31,7 @@ public class TeamAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(TeamAction.class);
 	
 	private String json;
-	private String country;
-	
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
+
 	public String getJson() {
 		return json;
 	}
@@ -138,11 +130,7 @@ public class TeamAction extends ActionSupport {
 	public String manager() {
 		log.debug("manager...");
 		
-		if (!StringUtils.isEmpty(country)) {
-			json = new Gson().toJson(service.getTeamsByCountry(country));
-		} else {
-			json = new Gson().toJson(service.getAll());
-		}
+		json = new Gson().toJson(service.getAll());
 		
 		return Action.SUCCESS;
 	}
@@ -153,7 +141,7 @@ public class TeamAction extends ActionSupport {
 	}
 	public String getTeamsByCountry(){
 		
-		json= new Gson().toJson(service.getTeamsByCountry(country));
+		json = new Gson().toJson(service.getTeamsByLeagueName(model.getLeagueName()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "getTeamsByCountry";
 	}

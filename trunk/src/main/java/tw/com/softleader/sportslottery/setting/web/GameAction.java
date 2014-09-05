@@ -283,7 +283,6 @@ public class GameAction extends ActionSupport {
 			GameEntity entity = service.getById(gameId);
 			entity.setBallType(model.getBallType());
 			entity.setGameNum(model.getGameNum());
-			entity.setLeagueName(model.getLeagueName());
 			entity.setGameTime(model.getGameTime());
 			entity.setTeamAway(teamService.getById(teamAwayId));
 			entity.setTeamHome(teamService.getById(teamHomeId));
