@@ -352,6 +352,10 @@ public class GameAction extends ActionSupport {
 		log.debug("gameHistory...");
 		return SUCCESS;
 	}
+	public String navigationPage(){
+		log.debug("navigationPage...");
+		return SUCCESS;
+	}
 	
 	public String searchHistoryMethod(){
 		log.debug("searchHistoryMethod...");
