@@ -16,20 +16,26 @@
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
+
 <div id="tsv" style="display:none">Browser Version	Total Market Share
 2014年7月 1	8.01%
 2014年7月 2	8.01%
 2014年7月 3	8.01%
 2014年7月 4	7.73%
-Lamigo桃猿 1	8.01%
-Lamigo桃猿 2	8.01%
-Lamigo桃猿 3	8.01%
-Lamigo桃猿 4	7.73%
-Lamigo桃猿 5	1.13%
-Lamigo桃猿 6	0.90%
-Lamigo桃猿 7	0.85%
-Lamigo桃猿 8	0.65%
+2014年7月 5	8.01%
+2014年7月 6	8.01%
+2014年7月 7	8.01%
+2014年7月 8	7.73%
+2014年8月 1	1.13%
+2014年8月 2	0.90%
+2014年8月 3	0.85%
+2014年8月 4	0.65%
+2014年8月 5	0.85%
+2014年8月 6	0.85%
+2014年8月 7	0.85%
+2014年8月 8	0.85%
 </div>
+
 
 
 <script>
@@ -68,11 +74,17 @@ $(function () {
             $.each(col[0], function (i, name) {
                 var brand,
                     version;
-				console.log(name);
+
+                console.log(name);
+
                 if (i > 0) {
 
                     // Remove special edition notes
+
+                   // name = name.split(' -')[0];
+
                     console.log(name);
+
                     // Split into brand and version
                     version = name.match(/( [0-9])/);
                     if (version) {
