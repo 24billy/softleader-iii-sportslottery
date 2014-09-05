@@ -86,7 +86,7 @@ $(function () {
                     name = name.split(' -')[0];
 
                     // Split into brand and version
-                    version = name.match(/([0-9]+[\.0-9x]*)/);
+                    version = name.match(/([0-9])/);
                     if (version) {
                         version = version[0];
                     }
