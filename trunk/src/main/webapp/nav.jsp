@@ -101,19 +101,41 @@
 		margin-top: 2px;
 		}
 		
+		.btn-tree {
+		color: #fff;
+		background-color: #66CDAA;
+		border-bottom:2px solid #098aa9;
+		}
+		
+		.btn-tree:hover,.btn-tree.active:focus, .btn-tree:focus, .open>.dropdown-toggle.btn-tree {
+		color: #fff;
+		background-color: #66CDAA;
+		border-bottom:2px solid #2192ad;
+		outline: none;
+		}
+		
+		.btn-tree:active, .btn-tree.active {
+		color: #fff;
+		background-color: #66CDAA;
+		border-top:2px solid #087994;
+		outline-offset: none;
+		margin-top: 2px;
+		}
+		
 		.btn:focus,
 		.btn:active:focus,
 		.btn.active:focus {
 		    outline: none;
 		    outline-offset: 0px;
 		}
-	</style>
-	
+</style>
+
 	<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">賽事投注</button>
 	<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">歷史紀錄</button>
 	<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">使用者資訊</button>
-			
-	<script>
+	<a href="" data-slidepanel="panel"><button type="button" class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
+	
+<script>
 	
 	$('#game').click(function() {
 		location.href='<c:url value="/game"/>';
@@ -125,4 +147,5 @@
 		  window.location='<c:url value="/userInfo"/>';
 	});
 
-	</script>
+
+</script>

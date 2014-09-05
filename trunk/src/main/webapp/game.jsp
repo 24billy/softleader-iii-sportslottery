@@ -221,7 +221,7 @@
 			<div class="row-fluid" >
 				<!-- content start -->
 				<div id="target">
-					<jsp:include page="/go.jsp" />				
+					<jsp:include page="/Event/match-index.jsp" />				
 				</div>
 				<!-- content end -->
 
