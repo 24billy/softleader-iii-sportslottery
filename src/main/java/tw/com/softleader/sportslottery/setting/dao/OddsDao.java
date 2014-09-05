@@ -91,14 +91,31 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 	}
 	
-	//以odd_type，時間，查投注數加總
+
+	//以gameId和odd_type得 投注數
+	public Long countByOddTypeAndGameID(String oddType, Long gameId){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select odds.count from OddsEntity odds where odds.oddType = :oddType and odds.gameId = :gameId");
+		query.setString("oddType",oddType);
+		query.setLong("gameId", gameId);
+		
+		
+		Long count = (Long)query.uniqueResult();
+		
+		
+		return count;
+		
+	}
+	
+	
+/*	//以odd_type，時間，查投注數加總
 	public Long countByOddType_Time(String oddType, LocalDate timeFrom, LocalDate timeTo){
 		Session session = sessionFactory.getCurrentSession();
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, teamName
-		//String sql = "select SUM(games.odds.count)from GameEntity games where games.odds.oddType= :oddType";//查詢投注類別
-		String sql = "select games.odds from GameEntity games where 1=1";//查詢投注類別
+		String sql = "select SUM(games.odds.count)from GameEntity games where games.odds.oddType= :oddType";//查詢投注類別
+		//String sql = "select games.odds from GameEntity games where 1=1";//查詢投注類別
 		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
 		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
 		//判斷是否有timeFrom 如有則加入sql1的敘述
@@ -144,8 +161,8 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, 
-		//String sql = "select SUM(games.odds.count)from GameEntity games where games.odds.oddType= :oddType";//查詢投注類別
-		String sql = "select games.odds from GameEntity games where 1=1";
+		String sql = "select SUM(games.odds.count)from GameEntity games where games.odds.oddType= :oddType and odds.isPass = 't'";//查詢投注類別
+		//String sql = "select games.odds from GameEntity games where 1=1";
 		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
 		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
 		//判斷是否有timeFrom 如有則加入sql1的敘述
@@ -183,7 +200,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 		return count;
 		
-	}
+	}*/
 	
 /*	//以時間範圍，得List<OddsEntity，以COUNT大小排列，從大排到小
 	public List<OddsEntity> findByTime_orderByCount(LocalDate timeFrom, LocalDate timeTo){
