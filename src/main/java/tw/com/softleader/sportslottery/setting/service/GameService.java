@@ -54,5 +54,7 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getComplex(Long gameNum, String teamName, Boolean isEnd, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
 		return dao.findComplex(gameNum, teamName, isEnd, timeBegin, timeEnd, ballType);
 	}
+	
+
 
 }
