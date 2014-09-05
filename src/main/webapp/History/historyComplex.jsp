@@ -304,6 +304,7 @@
 					}
 					
 				    return '<table class="table" cellspacing="0" border="0">'+
+				    	'<tr><th>投注比<th><tr>'+
 					    writeRateHtml('不讓分', rateSU_A, rateSU_H, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
 					    writeRateHtml('　讓分', rateATS_A, rateATS_H, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
 					    writeRateHtml('　總分', rateSC_H, rateSC_L, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
