@@ -333,7 +333,6 @@ public class UserAction extends ActionSupport {
 					userEntity.setUserBirthday(model.getUserBirthday());
 					userEntity.setUserEmail(model.getUserEmail());
 					userEntity.setUserPhone(model.getUserPhone());
-					userEntity.setUserGender(model.getUserGender());
 					service.update(userEntity);
 					log.debug("!!修改成功!!");
 					request.setAttribute("updateSuccess", "修改成功");
@@ -353,7 +352,6 @@ public class UserAction extends ActionSupport {
 	public String checkEmail() {
 		String result = ERROR;
 		log.debug("檢查Email是否存在" + model.getUserEmail());
-		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
 		if(userEntity!=null && userEntity.getUserEmail().equals(model.getUserEmail())) {

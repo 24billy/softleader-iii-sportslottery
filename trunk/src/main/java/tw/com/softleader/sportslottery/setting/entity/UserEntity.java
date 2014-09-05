@@ -1,5 +1,6 @@
 package tw.com.softleader.sportslottery.setting.entity;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,37 +21,46 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 public class UserEntity extends GenericEntity {
 	
 	private static final long serialVersionUID = 2014L;
-	
+	//user:id, 帳號, 密碼, 姓名, 身分證, 生日, 地址, 信箱, 電話, 驗證狀態, 營行帳戶, 錢.
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
-	
-	@Column(name="USER_ACCOUNT", length=50, nullable=false,unique = true)
+	//帳號
+	@Column(name="USER_ACCOUNT", length=50, nullable=false, unique = true)
 	private String userAccount;
-	
+	//密碼
 	@Column(name="USER_PASSWORD", nullable=false)
 	private byte[] userPassword;
-	
+	//姓名
 	@Column(name="USER_NAME", length=50, nullable=false)
 	private String userName;
-	
-	@Column(name="USER_BIRTHDAY")
+	//身分證
+	@Column(name="USER_CARD_ID", length=10, nullable=false)
+	private String userCardId;
+	//生日
+	@Column(name="USER_BIRTHDAY", nullable=false)
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	private LocalDate userBirthday;	
-	
-	@Column(name="USER_GENDER", length=10)
-	private String userGender;
-	
-	@Column(name="USER_PHONE", length=10)
-	private String userPhone;
-	
+	//地址
+	@Column(name="USER_ADDRESS", nullable=false)
+	private String userAddress;
+	//信箱
 	@Column(name="USER_EMAIL", length=50, nullable=false)
 	private String userEmail;
-	
+	//電話
+	@Column(name="USER_PHONE", length=10)
+	private String userPhone;
+	//驗證狀態
+	@Column(name="USER_STATE")
+	private String userState;
+	//營行帳戶
+	@Column(name="USER_BANK_ACCOUNT", length=10)
+	private String userBankAccount;
+	//錢
 	@Column(name="COINS", columnDefinition = "BIGINT default 0")
 	private Long coins;
 	
 	@Column(name="CREATE_TIME")//data inserted time
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	private LocalDateTime createTime;
+	private LocalDateTime createTime;	
 	
 	@Column(name="CREATOR") //who input the data 
 	private String creator;
@@ -62,11 +72,40 @@ public class UserEntity extends GenericEntity {
 	@Column(name="MODIFIER")//who modifies the data
 	private String modifier;
 
-	@Column(name="CARD_ID", length=10)//who modifies the data
-	private String cardId;
-
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "userId", cascade = {CascadeType.ALL})
 	private List<LotteryEntity> lotterys;
+	
+	public String getUserCardId() {
+		return userCardId;
+	}
+
+	public void setUserCardId(String userCardId) {
+		this.userCardId = userCardId;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getUserState() {
+		return userState;
+	}
+
+	public void setUserState(String userState) {
+		this.userState = userState;
+	}
+
+	public String getUserBankAccount() {
+		return userBankAccount;
+	}
+
+	public void setUserBankAccount(String userBankAccount) {
+		this.userBankAccount = userBankAccount;
+	}
 	
 	public List<LotteryEntity> getLotterys() {
 		return lotterys;
@@ -74,14 +113,6 @@ public class UserEntity extends GenericEntity {
 
 	public void setLotterys(List<LotteryEntity> lotterys) {
 		this.lotterys = lotterys;
-	}
-
-	public String getCardId() {
-		return cardId;
-	}
-
-	public void setCardId(String cardId) {
-		this.cardId = cardId;
 	}
 
 	public String getUserAccount() {
@@ -114,14 +145,6 @@ public class UserEntity extends GenericEntity {
 
 	public void setUserBirthday(LocalDate userBirthday) {
 		this.userBirthday = userBirthday;
-	}
-
-	public String getUserGender() {
-		return userGender;
-	}
-
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
 	}
 
 	public String getUserPhone() {
@@ -183,12 +206,13 @@ public class UserEntity extends GenericEntity {
 	@Override
 	public String toString() {
 		return "UserEntity [userAccount=" + userAccount + ", userPassword="
-				+ userPassword + ", userName=" + userName + ", userBirthday="
-				+ userBirthday + ", userGender=" + userGender + ", userPhone="
-				+ userPhone + ", userEmail=" + userEmail + ", coins=" + coins
-				+ ", createTime=" + createTime + ", creator=" + creator
-				+ ", modifiedTime=" + modifiedTime + ", modifier=" + modifier
-				+ ", lotterys=" + lotterys + ", id=" + id + "]";
+				+ Arrays.toString(userPassword) + ", userName=" + userName
+				+ ", userCardId=" + userCardId + ", userBirthday="
+				+ userBirthday + ", userAddress=" + userAddress
+				+ ", userEmail=" + userEmail + ", userPhone=" + userPhone
+				+ ", userState=" + userState + ", userBankAccount="
+				+ userBankAccount + ", coins=" + coins + ", lotterys="
+				+ lotterys + "]";
 	}
 	
 }
