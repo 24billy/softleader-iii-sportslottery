@@ -11,6 +11,10 @@
   
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   	
+  	<action name="nav" class="gameAction" method="navigationPage">
+  		<result name="success">/nav.jsp</result>
+  	</action>
+  	
   	<action name="gameManager" class="gameAction" method="manager">
   		<result name="success">/Admin/gameManager.jsp</result>
   		<result name="message" type="stream">
