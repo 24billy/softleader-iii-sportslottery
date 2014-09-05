@@ -34,13 +34,13 @@
 <div id="page-wrapper">
 		<!-- top start -->
 		<div>
-		 
+		  
 		</div>		
 		<!-- top end -->
 		<!-- navbar start -->
 		<div class="navbar navbar-default">
 			<div class="navbar-header">
-			
+				<jsp:include page="/nav.jsp"></jsp:include>
 			</div>
 			
 			<!-- 

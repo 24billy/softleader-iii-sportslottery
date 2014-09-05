@@ -5,18 +5,13 @@
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-
 <link href="<c:url value="/Security/css/style.css"/>" rel="stylesheet">
 <script src="<c:url value="/Security/js/jquery-1.7.1.min.js"/>"></script>
 <script src="<c:url value="/Security/js/jquery.XYTipsWindow.min.2.8.js"/>"></script>
 <script src="<c:url value="/Security/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value='/Security/js/button.js'/>"></script> 
 <script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
-
 <style>
 #form1{
 	float:right;
