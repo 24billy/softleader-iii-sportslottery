@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -123,9 +122,9 @@
 <body id='nav'>
 
 
-				<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">аи╗ф╖К╙`</button>
-				<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">╬З╔v╛Ж©Щ</button>
-				<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">╗о╔н╙л╦Й╟T</button>
+				<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">ХЁ╫Д╨▀Ф┼∙ФЁ╗</button>
+				<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">Ф╜╥Е▐╡Г╢─И▄└</button>
+				<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">Д╫©Г■╗Х─┘ХЁ┤Х╗┼</button>
 			
 				
 
