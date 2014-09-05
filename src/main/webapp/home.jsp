@@ -37,6 +37,9 @@
 <body>
 <div class="body">
 	<c:if test="${empty user}">
+		
+		
+		
 		<form id="form1" class="form-inline" action="<c:url value="checkLogin"/>" >
 			<div>
 				<input value="chen" type="text" class="info" name="model.userAccount" placeholder="請輸入帳號" required>
@@ -50,6 +53,8 @@
 				<button type="button" id="reg" class="btn btn-info">註冊</button>
 			</div>
 		</form>
+		
+		
 	</c:if>
 	
 	<c:if test="${ !empty user }">
