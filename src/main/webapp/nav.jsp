@@ -120,9 +120,9 @@ margin-top: 2px;
 <div class="container">
 	<div class="row">
 		<div class="well text-center">
-			<button type="button" class="btn btn-hot text-uppercase " id="game">賽事歷程</button>
-			<button type="button" class="btn btn-sunny text-uppercase " id="history">歷史紀錄</button>
-			<button type="button" class="btn btn-sky text-uppercase " id="user">使用者資訊</button>
+			<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">賽事投注</button>
+			<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">歷史紀錄</button>
+			<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">使用者資訊</button>
 		
 		
 		</div>
