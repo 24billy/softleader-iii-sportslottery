@@ -13,8 +13,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
-		
-		body{
+	
+		#nav{
 		    font-family: 'Oswald', sans-serif;
 		}
 		
@@ -120,24 +120,15 @@
 		}
 	</style>
 </head>
-<body>
+<body id='nav'>
 
-	<div class="container">
-		<div class="row">
-			<div class="well text-center">
+
 				<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">賽事投注</button>
 				<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">歷史紀錄</button>
 				<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">使用者資訊</button>
 			
 				
-			</div>
-		
-		
-		
-		</div>
-	
-	
-	</div>
+
 	<script>
 	
 	$('#game').click(function() {
