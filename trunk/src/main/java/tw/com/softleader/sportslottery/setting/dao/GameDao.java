@@ -53,6 +53,43 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.setString("leagueName", leagueName).list();
 	}
 	
+	public List<GameEntity> findGameByPeriod(LocalDate timeFrom, LocalDate timeTo){
+		Session session = sessionFactory.getCurrentSession();
+		//設定sql字串
+		//HQL的帶入變數為 timeFrom, timeTo, teamName
+		String sql = "from GameEntity games where 1= 1";
+		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
+		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
+		String sql4 = " order by games.gameTime";
+		//判斷是否有timeFrom 如有則加入sql1的敘述
+		boolean hasTimeFrom = false;
+		if(timeFrom != null){
+			sql += sql1;
+			hasTimeFrom = true;
+		}
+		
+		//判斷是否有timeTo 如有則加入sql2的敘述
+		boolean hasTimeTo = false;
+		if (timeTo != null) {
+			sql += sql2;
+			hasTimeTo = true;
+		}
+		
+		//帶入排序方式
+		sql += sql4;
+		
+		Query query = session.createQuery(sql);
+	    
+		//根據加入的sql敘述帶入變數
+		if (hasTimeFrom) {
+			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
+		}
+		if (hasTimeTo) {
+			query.setDate("timeTo", timeTo.toDate());
+		}
+		return query.list();
+	}
+	
 	public List<GameEntity> findForHistory(LocalDate timeFrom, LocalDate timeTo,String teamName){		
 		Session session = sessionFactory.getCurrentSession();
 		
