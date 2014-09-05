@@ -180,13 +180,13 @@ public class OddsDaoTest extends BaseTest {
 
 //--------------------------------Test countByOddType_Time_isPass---------------------------------------------------		
 
-//		LocalDate date3 = new LocalDate();
-//		date3 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
-//		//log.debug("date1= {} ", date1);
-//		LocalDate date4 = new LocalDate();
-//		date4 = LocalDate.parse("2014-08-21");
-//		Long count39=oddsDao.countByOddType_Time("SU_H", date3, date4);
-//		log.debug("count of SU_H= {} ", count39);
+		LocalDate date3 = new LocalDate();
+		date3 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+		//log.debug("date1= {} ", date1);
+		LocalDate date4 = new LocalDate();
+		date4 = LocalDate.parse("2014-08-21");
+		Long count39=oddsDao.countByOddType_Time("SU_H", date3, date4);
+		log.debug("count of SU_H= {} ", count39);
 		
 //------------------------------------------------------------------------------------
 //		LocalDate date5 = new LocalDate();
