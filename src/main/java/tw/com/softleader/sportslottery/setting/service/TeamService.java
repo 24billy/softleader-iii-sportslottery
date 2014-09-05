@@ -30,8 +30,8 @@ public class TeamService extends GenericService<TeamEntity> {
 		return dao;
 	}
 	
-	public List<TeamEntity> getTeamsByCountry(String country){
-		return dao.findByCountry(country);
+	public List<TeamEntity> getTeamsByLeagueName(String leagueName){
+		return dao.findByLeagueName(leagueName);
 	}
 
 }

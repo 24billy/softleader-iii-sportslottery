@@ -14,6 +14,7 @@ public class TeamDaoTest extends BaseTest {
 	
 	@Test
 	public void test(){
+		/*
 		List<TeamEntity> models = dao.findByCountry("ROC");
 		log.debug("find teams by country, ROC: {}", models);
 		if(models != null){
@@ -40,6 +41,6 @@ public class TeamDaoTest extends BaseTest {
 		
 		
 		
-		
+		*/
 	}
 }

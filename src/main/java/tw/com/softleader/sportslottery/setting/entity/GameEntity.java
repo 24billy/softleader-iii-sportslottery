@@ -43,9 +43,6 @@ public class GameEntity extends GenericEntity {
 	@Column(name="GAME_SCORE_AWAY", columnDefinition="BIGINT default 0")
 	private Long gameScoreAway;
 	
-	@Column(name="LEAGUE_NAME", length=50, nullable = false)
-	private String leagueName;
-	
 	@Column(name="BALL_TYPE", length=10, nullable = false)
 	private String ballType;
 	
@@ -119,14 +116,6 @@ public class GameEntity extends GenericEntity {
 		this.gameScoreAway = gameScoreAway;
 	}
 
-	public String getLeagueName() {
-		return leagueName;
-	}
-
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
-	}
-
 	public String getBallType() {
 		return ballType;
 	}
@@ -140,9 +129,8 @@ public class GameEntity extends GenericEntity {
 		return "GameEntity [gameTime=" + gameTime + ", gameNum=" + gameNum
 				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
 				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
-				+ gameScoreAway + ", leagueName=" + leagueName + ", ballType="
-				+ ballType + ", isEnd=" + isEnd + ", odds=" + odds + ", id="
-				+ id + "]";
+				+ gameScoreAway + ", ballType=" + ballType + ", isEnd=" + isEnd
+				+ ", odds=" + odds + ", id=" + id + "]";
 	}
 
 }
