@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
@@ -21,6 +21,10 @@
 	}
 	tr.shown td.details-control {
 	    background: url('<c:url value="/History/images/details_close.png"/>') no-repeat center center;
+	}
+	
+	.progress{
+		margin:0px;
 	}
 </style>
 </head>
@@ -217,18 +221,18 @@
 				        		{"data": "teamAway.teamName" },
 				        		{"data": "teamHome.teamName" },
 				        		{"data": function(row, type, val, meta){
-									var sortedOdds = sortGameOdds(row.odds);
-									if(sortedOdds['SU_A']&&sortedOdds['SU_H']){
-										
-										var rateSU_A = parseInt((sortedOdds['SU_A'].count/(sortedOdds['SU_H'].count+sortedOdds['SU_A'].count))*100);
-										var rateSU_H = 100 - rateSU_A;
+									if(row.gameScoreAway||row.gameScoreHome){
+										var rateA = parseInt(((row.gameScoreAway+1)/(row.gameScoreHome+row.gameScoreAway+2))*100);
+										var rateH = 100 - rateA;
 										
 										return '<div class="progress">' +
-										  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSU_A + '%"></div>' +
-										  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSU_H + '%"></div>' +
+										  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateA + '%">' + row.gameScoreAway + '</div>' +
+										  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateH + '%">' + row.gameScoreHome + '</div>' +
 										'</div>';
 									} else {
-										return "undefined";
+										return '<div class="progress">' + 
+											'<div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%">暫無比分</div>' +
+										'</div>';
 									}
 
 				        		}},
@@ -275,44 +279,36 @@
 					var rateODD = parseInt((sortedOdds['ODD'].count/(sortedOdds['EVEN'].count+sortedOdds['ODD'].count))*100);
 					var rateEVEN = 100 - rateODD;
 					
+					function writeRateHtml(rateName, rateA, rateH, teamA, teamH){
+						if(rateA||rateH){
+							return '<tr>'+
+						            '<td width="5%">' + rateName + ':</td>'+
+									'<td>'+
+							            '<div class="progress">'+
+										  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateA + '%">' + teamA + ' ' + rateA + '%</div>'+
+										  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateH + '%">' + teamH + ' ' + rateH + '%</div>'+
+										'</div>'+
+									'</td>'+
+						        '</tr>';
+						} else {
+							return '<tr>'+
+				            		'<td width="5%">' + rateName + ':</td>'+
+									'<td>'+
+							            '<div class="progress">'+
+										  '<div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%">暫無資料</div>'+
+										'</div>'+
+									'</td>'+
+						        '</tr>';	
+						}
+
+					}
+					
 				    return '<table class="table" cellspacing="0" border="0">'+
-			        '<tr>'+
-			            '<td width="5%">不讓分:</td>'+
-						'<td>'+
-				            '<div class="progress">'+
-							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSU_A + '%">' + dataRow.teamAway.teamName + ' ' + rateSU_A + '%</div>'+
-							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSU_H + '%">' + dataRow.teamHome.teamName + ' ' + rateSU_H + '%</div>'+
-							'</div>'+
-						'</td>'+
-			        '</tr>'+
-			        '<tr>'+
-			            '<td>　讓分:</td>'+
-						'<td>'+
-				            '<div class="progress">'+
-							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateATS_A + '%">' + dataRow.teamAway.teamName + ' ' + rateATS_A + '%</div>'+
-							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateATS_H + '%">' + dataRow.teamAway.teamName + ' ' + rateATS_H + '%</div>'+
-							'</div>'+
-						'</td>'+
-			        '</tr>'+
-			        '<tr>'+
-			            '<td>　總分:</td>'+
-						'<td>'+
-				            '<div class="progress">'+
-							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateSC_H + '%">大 ' + rateSC_H + '%</div>'+
-							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateSC_L + '%">小 ' + rateSC_L + '%</div>'+
-							'</div>'+
-						'</td>'+
-			        '</tr>'+
-				        '<tr>'+
-			            '<td>單雙數:</td>'+
-						'<td>'+
-				            '<div class="progress">'+
-							  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateODD + '%">單 ' + rateODD + '%</div>'+
-							  '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' + rateEVEN + '%">雙 ' + rateEVEN + '%</div>'+
-							'</div>'+
-						'</td>'+
-			        '</tr>'+
-			    '</table>';
+					    writeRateHtml('不讓分', rateSU_A, rateSU_H, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
+					    writeRateHtml('　讓分', rateATS_A, rateATS_H, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
+					    writeRateHtml('　總分', rateSC_H, rateSC_L, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
+					    writeRateHtml('單雙數', rateODD, rateEVEN, dataRow.teamAway.teamName, dataRow.teamHome.teamName)+
+			    	'</table>';
 				}
 			}
 		}
