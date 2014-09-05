@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
+<title>運動彩卷</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,33 +17,30 @@
 <script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<!--Include the slidepanel plugin -->
-<script type="text/javascript" src="<c:url value="/js/jquery.slidepanel.js"/>"></script>
-<!--Add the css -->
+<!--sidepanel  -->
+<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
 <link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
-
-
 <link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
-<title>運動彩卷</title>
+<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">    
 </head>
+
+
 <body>
-	<div id="page-wrapper">
+<div id="page-wrapper">
 		<!-- top start -->
 		<div>
-		  <jsp:include page="/top.jsp"></jsp:include>
+		 
 		</div>		
 		<!-- top end -->
 		<!-- navbar start -->
 		<div class="navbar navbar-default">
 			<div class="navbar-header">
-				<jsp:include page="/nav.jsp"></jsp:include>
+			
 			</div>
 			
 			<!-- 
@@ -92,7 +88,7 @@
 				<!-- content end -->
 				<div class="">
 				
-					<a href="nav.jsp" data-slidepanel="panel">SSShow Panel</a>
+					    <a href="index_go.jsp" data-slidepanel="panel">Show Panel</a>
 				</div>
 			</div>
 		</div>
@@ -103,6 +99,7 @@
 
 
 
+</body>
   <script type="text/javascript">
       $(document).ready(function(){
           $('[data-slidepanel]').slidepanel({
@@ -111,16 +108,4 @@
           });
       });
 </script>
-
-
-
-
-<script>
-	(function($) {
-
-	})(jQuery);
-</script>
-
-
-</body>
 </html>
