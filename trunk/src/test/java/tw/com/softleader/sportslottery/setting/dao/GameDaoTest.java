@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,18 @@ public class GameDaoTest extends BaseTest{
 //		log.debug("findForHistory = {}", models);
 //		System.out.println("size of the searching result: "+models.size());
 //----------------------------------------------------------------------------------
-		List<GameEntity> models = dao.findGameByLeagueName("MLB");
+/*		List<GameEntity> models = dao.findGameByLeagueName("MLB");
 		log.debug("findGameByLeagueName = {}", models);
+		System.out.println("size of the searching result: "+models.size());*/
+		
+//-------------test public List<GameEntity> findGameByPeriod(LocalDate timeFrom, LocalDate timeTo)
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+		//log.debug("date1= {} ", date1);
+		LocalDate date2 = new LocalDate();
+		date2 = LocalDate.parse("2014-08-21");
+		List<GameEntity> models = dao.findGameByPeriod(date1, date2);
+		log.debug("findGameByPeriod = {}", models);
 		System.out.println("size of the searching result: "+models.size());
 		
 	}
