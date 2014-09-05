@@ -139,10 +139,10 @@ $('#game').click(function() {
 	location.href='<c:url value="/game"/>';
 	});
 $('#history').click(function() {
-	  window.location='<c:url value="/searchHistoryComplex"/>';
+	  window.location='<c:url value="/history"/>';
 	});
 $('#user').click(function() {
-	  window.location='<c:url value="/searchHistoryComplex"/>';
+	  window.location='<c:url value="/userInfo"/>';
 	});
 	
 	
