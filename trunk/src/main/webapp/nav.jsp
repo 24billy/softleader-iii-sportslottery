@@ -1,15 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
 	
@@ -118,32 +107,21 @@
 		    outline-offset: 0px;
 		}
 	</style>
-</head>
-<body id='nav'>
-
-
-				<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">賽事投注</button>
-				<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">歷史紀錄</button>
-				<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">使用者資訊</button>
+	
+	<button type="button" class="btn btn-hot text-uppercase btn-lg" id="game">賽事投注</button>
+	<button type="button" class="btn btn-sunny text-uppercase btn-lg" id="history">歷史紀錄</button>
+	<button type="button" class="btn btn-sky text-uppercase btn-lg " id="user">使用者資訊</button>
 			
-				
-
 	<script>
 	
 	$('#game').click(function() {
 		location.href='<c:url value="/game"/>';
-		});
+	});
 	$('#history').click(function() {
 		  window.location='<c:url value="/history"/>';
-		});
+	});
 	$('#user').click(function() {
 		  window.location='<c:url value="/userInfo"/>';
-		});
-		
-		
-		
+	});
+
 	</script>
-
-
-</body>
-</html>
