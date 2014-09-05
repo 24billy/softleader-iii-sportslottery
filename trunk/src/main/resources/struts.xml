@@ -11,7 +11,7 @@
   
   <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
   	
-  	<action name="nav" class="gameAction" method="navigationPage">
+  	<action name="nav">
   		<result name="success">/nav.jsp</result>
   	</action>
   	
