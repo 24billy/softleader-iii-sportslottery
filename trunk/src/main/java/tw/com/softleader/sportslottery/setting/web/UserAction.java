@@ -288,7 +288,7 @@ public class UserAction extends ActionSupport {
 				log.debug("!!新增錯誤!!");
 				this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
 				e.printStackTrace();
-				return INPUT;
+				return ERROR;
 			}
 			return SUCCESS;
 		}

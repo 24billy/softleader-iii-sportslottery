@@ -52,7 +52,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_STATE")
 	private String userState;
 	//營行帳戶
-	@Column(name="USER_BANK_ACCOUNT", length=10)
+	@Column(name="USER_BANK_ACCOUNT", length=20)
 	private String userBankAccount;
 	//錢
 	@Column(name="COINS", columnDefinition = "BIGINT default 0")
