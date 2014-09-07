@@ -9,14 +9,10 @@
   <constant name="struts.ui.theme" value="simple" />
   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
   
-  <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
-  	
-  	<action name="nav">
-  		<result name="success">/nav.jsp</result>
-  	</action>
-  	
-  	<action name="gameManager" class="gameAction" method="manager">
-  		<result name="success">/Admin/gameManager.jsp</result>
+  <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
+  
+  	<action name="gameAdmin" class="gameAction" method="admin">
+  		<result name="success">/admin/gameAdmin.jsp</result>
   		<result name="message" type="stream">
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
@@ -28,13 +24,30 @@
 		<allowed-methods>select,insert,delete,update,payout</allowed-methods>
   	</action>
   	
-  	<action name="teamManager" class="teamAction" method="manager">
-  		<result name="success">/Admin/teamManager.jsp</result>
+  	<action name="teamAdmin" class="teamAction" method="admin">
+  		<result name="success">/admin/teamAdmin.jsp</result>
   		<result name="select" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
 		<allowed-methods>insert,select,delete</allowed-methods>
+  	</action>
+  	
+  	<action name="oddsAdmin" class="oddsAction" method="insert"> 
+		<result name="message" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action> 
+  	
+  </package>
+  
+  
+  
+  <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
+  	
+  	<action name="nav">
+  		<result name="success">/nav.jsp</result>
   	</action>
   	
     <action name="game" class="gameAction" method="execute"> 
@@ -175,5 +188,9 @@
 		<allowed-methods>select,insert,update,delete</allowed-methods>
 	</action>
 	-->
+	
+	<action name="admin">
+		<result>/Admin/index.jsp</result>
+	</action>
   </package>
 </struts>
