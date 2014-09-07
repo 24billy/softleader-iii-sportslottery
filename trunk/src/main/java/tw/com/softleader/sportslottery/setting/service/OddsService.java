@@ -73,7 +73,15 @@ public class OddsService extends GenericService<OddsEntity> {
 	
 	public boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
+		
 		try {
+			List<OddsEntity> entitys = dao.findByGameId(gameId);
+			
+			for (OddsEntity odds : entitys) {
+				odds.setIsPass(false);
+				dao.update(odds);
+			}
+			
 			if (!StringUtils.isEmpty(su)) {
 				entity = dao.findByGameIdWithOddType(gameId, su).get(0);
 				entity.setIsPass(true);

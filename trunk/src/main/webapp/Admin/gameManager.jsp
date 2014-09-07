@@ -299,6 +299,39 @@
 		<!-- .modal-dialog -->
 	</div>
 	<!-- End of statusModal -->
+	
+	<!-- Begin of payoutModal -->
+	<div class="modal fade" id="payoutModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" tabindex="-1">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+			
+				<div id="payoutModalHeader" class="modal-header">
+					<h3 id="payoutModalTitle" class="modal-title">樂透派彩</h3>
+				</div>
+				<!-- modal-header -->
+				
+				<div class="modal-body">
+				
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-center">確認派彩？</h4>
+						</div>
+					</div>
+					<!-- .row -->
+				</div>
+				<!-- .modal-body -->
+						
+	      		<div id="payoutModalFooter" class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="btnPayout">確認</button>
+	      		</div>
+	      		<!-- .modal-footer -->
+			</div>
+			<!-- .modal-content -->
+		</div>
+		<!-- .modal-dialog -->
+	</div>
+	<!-- End of payoutModal -->
 
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
@@ -337,7 +370,7 @@
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-flag"></i></button>';
-				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status btn-payout left10"><i class="fa fa-trophy"></i></button>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status btn-payout left10" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-trophy"></i></button>';
 			} else if (currentDate > gameTime) {
 				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">進行中</button></td>';
 				child += '<td>';
@@ -448,11 +481,16 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
+			$.post('<c:url value="/gameManager?method:select"/>',{
+				'model.id':$(this).val()
+			}).done(function(data) {
+				$('#gameScoreAway').val(data.gameScoreAway);
+				$('#gameScoreHome').val(data.gameScoreHome);
+			});
 			$('#btnStatus').val($(this).val());
 		});
 		
 		$('#btnStatus').click(function() {
-			
 			$.post('<c:url value="/gameManager?method:update"/>', {
 				'model.id':$(this).val(),
 				'model.isEnd':true,
@@ -518,7 +556,6 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			
 			$.post('<c:url value="/gameManager?method:delete"/>', {
 				'model.id':$(this).val()
 			});
@@ -528,6 +565,22 @@
 			});
 		});
 		//End of btnDelete
+		
+		//Begin of btnPayout
+		$('.btn-payout').click(function() {
+			$('#btnPayout').val($(this).val());
+		});
+		
+		$('#btnPayout').click(function() {
+			$.post('<c:url value="/gameManager?method:payout"/>',{
+				'model.id':$(this).val()
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnPayout
 		
 		//Begin of styling
 		function resetInput() {
