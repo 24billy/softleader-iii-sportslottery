@@ -1,0 +1,22 @@
+body {
+	background-color: #222;
+}
+
+#loginForm .input-group {
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+
+#loginForm .input-group * {
+	background-color: transparent;
+	border: none;
+}
+
+#loginForm .input-group input {
+	box-shadow: none;
+	outline: none;
+}
+
+#loginForm .input-group i {
+	color: #ccc;
+}

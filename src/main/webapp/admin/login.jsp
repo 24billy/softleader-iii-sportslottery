@@ -29,7 +29,6 @@
 							<c:if test="${param.error != null}">
             					<h4 class="warning">帳號或密碼錯誤</h4>
         					</c:if>
-							<!-- <form role="form" action="j_security_check" class=""> -->
 							<form role="form" id="loginForm" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
 								<div class="form-group">
 									<div class="input-group">
