@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
@@ -174,8 +176,8 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String select() {
-		log.debug("select...");
-		Long gameId = 0L;
+		log.debug("GameAction select()");
+		Long gameId = null;
 		if (model != null) {
 			gameId = model.getId();
 		}
@@ -208,53 +210,15 @@ public class GameAction extends ActionSupport {
 		return "selectNotEnd";
 	}
 	
-	public String update() {
-		log.debug("update...");
-		String result = null;
-		try {
+	public String payout() {
+		log.debug("GameAction payout()");
 		
-			Long gameId = model.getId();
-			Long gameScoreAway = model.getGameScoreAway();
-			Long gameScoreHome = model.getGameScoreHome();
-			
-			String su = null;
-			String ats = null;
-			String sc = null;
-			String eo = null;
-			
-			if (gameScoreAway > gameScoreHome) {
-				su = "SU_A";
-			} else if (gameScoreAway < gameScoreHome) {
-				su = "SU_H";
-			}
-			
-			if (gameScoreAway > gameScoreHome + 1.5) {
-				ats = "ATS_A";
-			} else if (gameScoreAway < gameScoreHome + 1.5) {
-				ats = "ATS_H";
-			}
-			
-			if ((gameScoreAway + gameScoreHome) > 7.5) {
-				sc = "SC_H";
-			} else {
-				sc = "SC_L";
-			}
-			
-			if ((gameScoreAway + gameScoreHome) % 2 == 0) {
-				eo = "EVEN";
-			} else {
-				eo = "ODD";
-			}
-			
-			oddsService.setIsPass(gameId, su, ats, sc, eo);
-			
-			GameEntity entity = service.getById(gameId);
-			entity.setIsEnd(model.getIsEnd());
-			entity.setGameScoreAway(gameScoreAway);
-			entity.setGameScoreHome(gameScoreHome);
-			
-			service.update(entity);
-			for (OddsEntity odds : entity.getOdds()) {
+		String result = null;
+		Long gameId = model.getId();
+		model = service.getById(gameId);
+		
+		try {
+			for (OddsEntity odds : model.getOdds()) {
 				if (odds.getIsPass() == null) {
 					odds.setIsPass(false);
 				}
@@ -265,45 +229,110 @@ public class GameAction extends ActionSupport {
 				oddsService.update(odds);
 			}
 			
+			result = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "failed";
+		}
+		
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
+	}
+	
+	public String update() {
+		log.debug("GameAction update()");
+		
+		String result = null;
+		String su = null;
+		String ats = null;
+		String sc = null;
+		String eo = null;
+		Long gameId = model.getId();
+		Long gameScoreAway = model.getGameScoreAway();
+		Long gameScoreHome = model.getGameScoreHome();
+		Boolean isEnd = model.getIsEnd(); 
+		
+		if (gameScoreAway > gameScoreHome) {
+			su = "SU_A";
+		} else if (gameScoreAway < gameScoreHome) {
+			su = "SU_H";
+		}
+		
+		if (gameScoreAway > gameScoreHome + 1.5) {
+			ats = "ATS_A";
+		} else if (gameScoreAway < gameScoreHome + 1.5) {
+			ats = "ATS_H";
+		}
+		
+		if ((gameScoreAway + gameScoreHome) > 7.5) {
+			sc = "SC_H";
+		} else {
+			sc = "SC_L";
+		}
+		
+		if ((gameScoreAway + gameScoreHome) % 2 == 0) {
+			eo = "EVEN";
+		} else {
+			eo = "ODD";
+		}
+		
+		try {
+			oddsService.setIsPass(gameId, su, ats, sc, eo);
+			
+			model = service.getById(gameId);
+			model.setIsEnd(isEnd);
+			model.setGameScoreAway(gameScoreAway);
+			model.setGameScoreHome(gameScoreHome);
+			
+			service.update(model);
 			
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "failed";
 		}
+		
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
 		return "message";
 	}
 	
 	public String insert() {
-		log.debug("insert...");
+		log.debug("GameAction insert()");
+		
 		String result = null;
 		Long gameId = model.getId();
+		String ballType = model.getBallType();
+		Long gameNum = model.getGameNum();
+		LocalDateTime gameTime = model.getGameTime();
+		TeamEntity teamAway = teamService.getById(teamAwayId);
+		TeamEntity teamHome = teamService.getById(teamHomeId);
+		
 		if (gameId != null && gameId > 0) {
-			GameEntity entity = service.getById(gameId);
-			entity.setBallType(model.getBallType());
-			entity.setGameNum(model.getGameNum());
-			entity.setGameTime(model.getGameTime());
-			entity.setTeamAway(teamService.getById(teamAwayId));
-			entity.setTeamHome(teamService.getById(teamHomeId));
+			model = service.getById(gameId);
+			model.setBallType(ballType);
+			model.setGameNum(gameNum);
+			model.setGameTime(gameTime);
+			model.setTeamAway(teamAway);
+			model.setTeamHome(teamHome);
 			
 			try {
-				service.update(entity);
+				service.update(model);
 				result = gameId.toString();
 			} catch (Exception e) {
+				e.printStackTrace();
 				result = "failed";
 			}
 			
 		} else {
-			model.setTeamHome(teamService.getById(teamHomeId));
-			model.setTeamAway(teamService.getById(teamAwayId));
+			model.setTeamHome(teamAway);
+			model.setTeamAway(teamHome);
 			model.setIsEnd(false);
 			
 			try {
-				service.update(model);
-				model = service.getByGameNum(model.getGameNum());
+				model = service.update(model);
 				result = model.getId().toString();
 			} catch (Exception e) {
+				e.printStackTrace();
 				result = "failed";
 			}
 		}
@@ -314,14 +343,15 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String delete() {
-		log.debug("delete...");
+		log.debug("GameAction delete()");
+		
 		String result = null;
 		try {
 			model = service.getById(model.getId());
 			service.delete(model);
-			result = "deleted";
+			result = "success";
 		} catch (Exception e) {
-			log.debug("ERRORRRRRRRRRR");
+			e.printStackTrace();
 			result = "failed";
 		}
 		
@@ -330,7 +360,8 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String manager() {
-		log.debug("manager");
+		log.debug("GameAction manager()");
+		
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));
 		} else {
