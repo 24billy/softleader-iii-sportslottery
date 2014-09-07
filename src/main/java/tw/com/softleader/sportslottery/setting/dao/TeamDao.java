@@ -23,7 +23,7 @@ public class TeamDao  extends GenericDao<TeamEntity> {
 	public List<TeamEntity> findByLeagueName(String leagueName){
 		Session session = sessionFactory.getCurrentSession();
 		Query query= session.createQuery("from TeamEntity where league_name = :leagueName");
-		return query.setString("leaguName", leagueName).list();
+		return query.setString("leagueName", leagueName).list();
 		
 	}
 }

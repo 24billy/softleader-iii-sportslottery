@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
@@ -61,8 +62,13 @@ public class TeamAction extends ActionSupport {
 	public String select() {
 		log.debug("select...");
 		Long teamId = model.getId();
+		String leagueName = model.getLeagueName();
 		if (teamId != null && teamId > 0) {
 			json = new Gson().toJson(service.getById(teamId));
+		} else if (!StringUtils.isEmpty(leagueName)) {
+			log.debug(leagueName);
+			log.debug("result = {}",service.getTeamsByLeagueName(leagueName));
+			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
 		} else {
 			json = new Gson().toJson(service.getAll());
 		}
@@ -135,11 +141,7 @@ public class TeamAction extends ActionSupport {
 		return Action.SUCCESS;
 	}
 	
-	public String teamsByCountry() {
-		log.debug("TeamsByCountry...");
-		return SUCCESS;
-	}
-	public String getTeamsByCountry(){
+	public String getTeamsByLeagueName(){
 		
 		json = new Gson().toJson(service.getTeamsByLeagueName(model.getLeagueName()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
