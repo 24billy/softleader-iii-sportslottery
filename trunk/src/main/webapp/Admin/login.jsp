@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/adminStyle.css"/>">
 </head>
 <body>
 	<div id="page-wrapper">
@@ -29,14 +30,18 @@
             					<h4 class="warning">帳號或密碼錯誤</h4>
         					</c:if>
 							<!-- <form role="form" action="j_security_check" class=""> -->
-							<form role="form" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
+							<form role="form" id="loginForm" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
 								<div class="form-group">
-									<label for="username">帳號</label>
-									<input name="j_username" id="username" type="text" class="form-control input-sm">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input name="j_username" id="username" type="text" class="form-control" placeholder="帳號">
+									</div>
 								</div>
 								<div class="form-group">
-									<label for="account">密碼</label>
-									<input name="j_password" id="account" type="password" class="form-control input-sm">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-key"></i></span>
+										<input name="j_password" id="account" type="password" class="form-control" placeholder="密碼">
+									</div>
 								</div>
 								<button type="submit" class="btn btn-success pull-right">登入</button>
 							</form>
@@ -47,7 +52,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- .container-fluid -->
+		<!-- .container -->
 	</div>
 	<!-- #page-wrapper -->
 
