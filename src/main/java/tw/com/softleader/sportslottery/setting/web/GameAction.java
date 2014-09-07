@@ -356,8 +356,8 @@ public class GameAction extends ActionSupport {
 		return "message";
 	}
 	
-	public String manager() {
-		log.debug("GameAction manager()");
+	public String admin() {
+		log.debug("GameAction admin()");
 		
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));

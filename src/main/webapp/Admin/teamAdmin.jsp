@@ -24,7 +24,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/teamManager"/>" method="post">
+					<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
 						<div class="form-group">
 							<select class="form-control input-sm" id="leagueNameList" name="leagueName">
 								<option value="美國職棒" selected>美國職棒</option>
@@ -188,7 +188,7 @@
 		});
 		$('.btn-edit').click(function() {
 			$('#teamModalTitle').text('編輯隊伍');
-			$.post('<c:url value="/teamManager?method:select"/>', {
+			$.post('<c:url value="/admin/teamAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
 				$('#leagueName').val(data.leagueName);
@@ -201,7 +201,7 @@
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
 			var teamId = $(this).val();
-			$.post('<c:url value="/teamManager?method:insert"/>',{
+			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
 				'model.id':teamId,
 				'model.leagueName':$('#leagueName').val(),
 				'model.teamName':$('#teamName').val()
@@ -220,7 +220,7 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/teamManager?method:delete"/>', {
+			$.post('<c:url value="/admin/teamAdmin?method:delete"/>', {
 				'model.id':$(this).val()
 			});
 			

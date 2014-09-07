@@ -139,8 +139,8 @@ public class TeamAction extends ActionSupport {
 		return Action.SUCCESS;
 	}
 	
-	public String manager() {
-		log.debug("TeamAction manager()");
+	public String admin() {
+		log.debug("TeamAction admin()");
 		
 		if (!StringUtils.isEmpty(leagueName)) {
 			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));

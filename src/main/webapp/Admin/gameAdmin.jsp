@@ -24,7 +24,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>" method="post">
+					<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
 						<div class="form-group">
 							<label for="catagory">運動項目</label>
 							<select class="form-control input-sm" id="catagory" name="catagory">
@@ -411,7 +411,7 @@
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
-			$.post('<c:url value="/teamManager?method:select"/>',{
+			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
 				'model.leagueName':$('#leagueName').val()
 			}, function(data) {	
 				$.each(data, function(key, value) {
@@ -433,7 +433,7 @@
 			}
 			
 			if (gameId != null) {
-				var url = '<c:url value="/gameManager?method:select"/>';
+				var url = '<c:url value="/admin/gameAdmin?method:select"/>';
 				$.post(url, {
 					'model.id':gameId
 				}, function(data) {
@@ -482,7 +482,7 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
-			$.post('<c:url value="/gameManager?method:select"/>',{
+			$.post('<c:url value="/admin/gameAdmin?method:select"/>',{
 				'model.id':$(this).val()
 			}, function(data) {
 				$('#gameScoreAway').val(data.gameScoreAway);
@@ -492,7 +492,7 @@
 		});
 		
 		$('#btnStatus').click(function() {
-			$.post('<c:url value="/gameManager?method:update"/>', {
+			$.post('<c:url value="/admin/gameAdmin?method:update"/>', {
 				'model.id':$(this).val(),
 				'model.isEnd':true,
 				'model.gameScoreAway':$('#gameScoreAway').val(),
@@ -508,7 +508,7 @@
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
 			var gameId = $(this).val();
-			$.post('<c:url value="/gameManager?method:insert"/>', {
+			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
 				'model.id':gameId,
 				'model.ballType':$('[name="catagory"]').val(),
 				'model.leagueName':$('[name="model.leagueName"]').val(),
@@ -533,7 +533,7 @@
 					} else if (oddType.indexOf('SC_') != -1) {
 						oddCombination = 7.5;
 					}
-					$.post('<c:url value="/odds?method:insert"/>', {
+					$.post('<c:url value="/admin/oddsAdmin"/>', {
 						'model.gameId':data,
 				    	'model.oddType':oddType,
 				    	'model.oddValue':$(this).val(),
@@ -557,7 +557,7 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/gameManager?method:delete"/>', {
+			$.post('<c:url value="/admin/gameAdmin?method:delete"/>', {
 				'model.id':$(this).val()
 			});
 			
@@ -573,7 +573,7 @@
 		});
 		
 		$('#btnPayout').click(function() {
-			$.post('<c:url value="/gameManager?method:payout"/>',{
+			$.post('<c:url value="/admin/gameAdmin?method:payout"/>',{
 				'model.id':$(this).val()
 			});
 			
