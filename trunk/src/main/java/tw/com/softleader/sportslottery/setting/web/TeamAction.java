@@ -33,6 +33,14 @@ public class TeamAction extends ActionSupport {
 	
 	private String json;
 
+	private String leagueName;
+	
+	public String getLeagueName() {
+		return leagueName;
+	}
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
 	public String getJson() {
 		return json;
 	}
@@ -66,8 +74,6 @@ public class TeamAction extends ActionSupport {
 		if (teamId != null && teamId > 0) {
 			json = new Gson().toJson(service.getById(teamId));
 		} else if (!StringUtils.isEmpty(leagueName)) {
-			log.debug(leagueName);
-			log.debug("result = {}",service.getTeamsByLeagueName(leagueName));
 			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
 		} else {
 			json = new Gson().toJson(service.getAll());
@@ -136,7 +142,11 @@ public class TeamAction extends ActionSupport {
 	public String manager() {
 		log.debug("TeamAction manager()");
 		
-		json = new Gson().toJson(service.getAll());
+		if (!StringUtils.isEmpty(leagueName)) {
+			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+		} else {
+			json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
+		}
 		
 		return Action.SUCCESS;
 	}

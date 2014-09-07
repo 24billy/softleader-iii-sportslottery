@@ -30,7 +30,7 @@
 							<select class="form-control input-sm" id="catagory" name="catagory">
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
-								<option value="Basketball">足球</option>
+								<option value="soccer">足球</option>
 							</select>
 						</div>
 						<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
@@ -411,9 +411,9 @@
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
-			$.getJSON('<c:url value="/teamManager?method:select"/>',{
+			$.post('<c:url value="/teamManager?method:select"/>',{
 				'model.leagueName':$('#leagueName').val()
-			}).done(function(data) {	
+			}, function(data) {	
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
@@ -423,7 +423,7 @@
 				$('#teamAwayList').change();
 				$('#teamHomeList')[0].selectedIndex = 1;
 				$('#teamHomeList').change();
-			});
+			}, 'json');
 			
 			function addZero(str) {
 				if (str < 10) {
@@ -434,7 +434,9 @@
 			
 			if (gameId != null) {
 				var url = '<c:url value="/gameManager?method:select"/>';
-				$.getJSON(url, {'model.id':gameId}).done(function(data) {
+				$.post(url, {
+					'model.id':gameId
+				}, function(data) {
 					var dateTime = new Date(data.gameTime.iLocalMillis);
 					var year = dateTime.getUTCFullYear();
 					var month = addZero(dateTime.getUTCMonth() + 1);
@@ -458,8 +460,7 @@
 					} else {
 						$('.form-decimal').val('1.00');
 					}
-					
-				});
+				}, 'json');
 				
 			}
 		}
@@ -483,7 +484,7 @@
 		$('.btn-status').click(function() {
 			$.post('<c:url value="/gameManager?method:select"/>',{
 				'model.id':$(this).val()
-			}).done(function(data) {
+			}, function(data) {
 				$('#gameScoreAway').val(data.gameScoreAway);
 				$('#gameScoreHome').val(data.gameScoreHome);
 			});
@@ -517,7 +518,7 @@
 				'teamHomeId':$('[name="teamHomeId"]').val(),
 				'model.gameScoreAway':0,
 				'model.gameScoreHome':0
-			}).done(function(data) {
+			}, function(data) {
 				
 				$('.form-decimal').each(function() {
 					var oddCombination = 0;
@@ -538,7 +539,7 @@
 				    	'model.oddValue':$(this).val(),
 				    	'model.oddCombination':oddCombination,
 				    	'model.count':0,
-					}).done(function(data) {
+					}, function(data) {
 						return true;
 					});
 				});
