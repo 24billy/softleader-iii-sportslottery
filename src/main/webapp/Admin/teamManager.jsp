@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>隊伍管理</title>
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
+<!-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> -->
+<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 </head>
 <body>
 	<!-- Begin of teamTable -->
@@ -25,15 +26,15 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/teamManager"/>" method="post">
 						<div class="form-group">
-							<select class="form-control input-sm" id="countryList" name="country">
-								<option value="">所有國家</option>
-								<option value="中華民國">中華民國</option>
-								<option value="日本">日本</option>
-								<option value="美國">美國</option>
-								<option value="韓國">韓國</option>
+							<select class="form-control input-sm" id="leagueNameList" name="leagueName">
+								<option value="美國職棒" selected>美國職棒</option>
+								<option value="中華職棒">中華職棒</option>
+								<option value="中央聯盟">中央聯盟</option>
+								<option value="太平洋聯盟">太平洋聯盟</option>
+								<option value="韓國職棒">韓國職棒</option>
 							</select>
 						</div>
-						<button class="btn btn-primary btn-sm" type="submit">送出</button>
+						<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
 					</form>
 					<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal">新增隊伍</button>
 				</div>
@@ -45,7 +46,7 @@
 					<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
 						<thead>
 							<tr>
-								<th>國家</th>
+								<th>聯盟</th>
 								<th>隊伍名稱</th>
 								<th>功能</th>
 							</tr>
@@ -77,12 +78,13 @@
 					
 						<div class="row">
 							<div class="col-sm-6">
-								<label for="country">國家</label>
-								<select class="form-control input-sm" id="country" name="model.country">
-									<option value="中華民國">中華民國</option>
-									<option value="日本">日本</option>
-									<option value="美國">美國</option>
-									<option value="韓國">韓國</option>
+								<label for="leagueName">聯盟</label>
+								<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+									<option value="美國職棒" selected>美國職棒</option>
+									<option value="中華職棒">中華職棒</option>
+									<option value="中央聯盟">中央聯盟</option>
+									<option value="太平洋聯盟">太平洋聯盟</option>
+									<option value="韓國職棒">韓國職棒</option>
 								</select>
 							</div>
 							<div class="col-sm-6">
@@ -144,22 +146,22 @@
 	</div>
 	<!-- End of deleteModal -->
 
-<script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
+<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script>
 	(function($) {
 		
-		//Begin of country
-		var country = '${country}';
-		if (country == null || country == "") {
-			$('#countryList')[0].selectedIndex = 0;
+		//Begin of leagueName
+		var leagueName = '${leagueName}';
+		if (leagueName == null || leagueName == "") {
+			$('#leagueNameList')[0].selectedIndex = 0;
 		} else {
-			$('#countryList').val(country);
+			$('#leagueNameList').val(leagueName);
 		}
 		//End of catagory
 		
@@ -168,11 +170,11 @@
 		$.each(teamList, function(index, team) {
 			var child = '';
 			child += '<tr>';
-			child += '<td>' + team.country + '</td>';
+			child += '<td>' + team.leagueName + '</td>';
 			child += '<td>' + team.teamName + '</td>';
 			child += '<td>';
-			child += '<button type="button" value="' + team.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#teamModal">編輯</button>';
-			child += '<button type="button" value="' + team.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
+			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#teamModal"><i class="fa fa-pencil-square-o"></i></button>';
+			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>';
 			child += '</td>';
 			child += '</tr>';
 			$('#teamList').append(child);
@@ -186,13 +188,13 @@
 		});
 		$('.btn-edit').click(function() {
 			$('#teamModalTitle').text('編輯隊伍');
-			$.getJSON('<c:url value="/teamManager?method:select"/>', {
+			$.post('<c:url value="/teamManager?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
-				$('#country').val(data.country);
+				$('#leagueName').val(data.leagueName);
 				$('#teamName').val(data.teamName);
 				$('#btnMerge').val(data.id);
-			});
+			}, 'json');
 		});
 		//End of listTeam
 		
@@ -201,7 +203,7 @@
 			var teamId = $(this).val();
 			$.post('<c:url value="/teamManager?method:insert"/>',{
 				'model.id':teamId,
-				'model.country':$('#country').val(),
+				'model.leagueName':$('#leagueName').val(),
 				'model.teamName':$('#teamName').val()
 			});
 			
@@ -230,7 +232,7 @@
 		
 		//Begin of styling		
 		function resetInput() {
-			$('#country')[0].selectedIndex = 0;
+			$('#leagueName')[0].selectedIndex = 0;
 			$('#teamName').val('');
 			$('#btnMerge').val('');
 		}
