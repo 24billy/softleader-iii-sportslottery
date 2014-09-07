@@ -29,7 +29,7 @@
             					<h4 class="warning">帳號或密碼錯誤</h4>
         					</c:if>
 							<!-- <form role="form" action="j_security_check" class=""> -->
-							<form role="form" action="<c:url value="/Admin/j_spring_security_check"/>" method="post">
+							<form role="form" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
 								<div class="form-group">
 									<label for="username">帳號</label>
 									<input name="j_username" id="username" type="text" class="form-control input-sm">
