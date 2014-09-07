@@ -60,7 +60,7 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String select() {
-		log.debug("select...");
+		log.debug("TeamAction select()");
 		Long teamId = model.getId();
 		String leagueName = model.getLeagueName();
 		if (teamId != null && teamId > 0) {
@@ -85,7 +85,7 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String delete(){
-		log.debug("TeamAction delete");
+		log.debug("TeamAction delete()");
 		log.debug("Model = {}", model);
 		
 		try {
@@ -102,7 +102,7 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String update() {
-		log.debug("TeamAction update");
+		log.debug("TeamAction update()");
 //		model.setModifier("guest");
 //		model.setModifiedTime(LocalDateTime.now());
 		log.debug("Model = {}", model);
@@ -119,7 +119,7 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String insert() {
-		log.debug("TeamAction insert");
+		log.debug("TeamAction insert()");
 		log.debug("Model = {}", model);
 		try {
 			service.update(model);
@@ -134,7 +134,7 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String manager() {
-		log.debug("manager...");
+		log.debug("TeamAction manager()");
 		
 		json = new Gson().toJson(service.getAll());
 		
