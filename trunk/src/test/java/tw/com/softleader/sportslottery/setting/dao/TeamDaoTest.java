@@ -14,33 +14,8 @@ public class TeamDaoTest extends BaseTest {
 	
 	@Test
 	public void test(){
-		/*
-		List<TeamEntity> models = dao.findByCountry("ROC");
-		log.debug("find teams by country, ROC: {}", models);
-		if(models != null){
-			System.out.println("result size, ROC: "+models.size());
-		}
+		List<TeamEntity> models = dao.findByLeagueName("美國職棒");
+		log.debug("models = {}", models);
 		
-		models=dao.findByCountry("USA");
-		log.debug("find teams by country, USA: {}", models);
-		if(models != null){
-			System.out.println("result size, USA: "+models.size());
-		}
-		
-		models=dao.findByCountry("JAPAN");
-		log.debug("find teams by country, JAPAN: {}", models);
-		if(models != null){
-			System.out.println("result size, JAPAN: "+models.size());
-		}
-		
-		models=dao.findByCountry("KOREA");
-		log.debug("find teams by country, KOREA: {}", models);
-		if(models != null){
-			System.out.println("result size, KOREA: "+models.size());
-		}
-		
-		
-		
-		*/
 	}
 }

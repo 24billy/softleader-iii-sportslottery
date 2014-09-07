@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>賽事管理</title>
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>"> -->
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/dataTables.responsive.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
+<!-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> -->
+<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 </head>
 <body>
 	<!-- Begin of gameTable -->
@@ -32,7 +33,7 @@
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-						<button class="btn btn-primary btn-sm" type="submit">送出</button>
+						<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
 					</form>
 					<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal">新增賽事</button>
 				</div>
@@ -87,9 +88,10 @@
 											<label for="leagueName">聯盟名稱</label>
 											<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 												<option value="美國職棒" selected>美國職棒</option>
-												<option value="中華職棒" selected>中華職棒</option>
-												<option value="中央聯盟" selected>中央聯盟</option>
-												<option value="韓國職棒" selected>韓國職棒</option>
+												<option value="中華職棒">中華職棒</option>
+												<option value="中央聯盟">中央聯盟</option>
+												<option value="太平洋聯盟">太平洋聯盟</option>
+												<option value="韓國職棒">韓國職棒</option>
 											</select>
 										</div>
 									</div>
@@ -298,13 +300,13 @@
 	</div>
 	<!-- End of statusModal -->
 
-<script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
+<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script>
 	(function($) {
 		
@@ -324,7 +326,7 @@
 			var child = '';
 			child += '<tr>';
 			child += '<td>' + game.gameNum + '</td>';
-			child += '<td>' + game.leagueName + '</td>';
+			child += '<td>' + game.teamHome.leagueName + '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			
@@ -334,18 +336,17 @@
 			if (game.isEnd) {
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 				child += '<td>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-flag"></i></button>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status btn-payout left10"><i class="fa fa-trophy"></i></button>';
 			} else if (currentDate > gameTime) {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">進行中</button></td>';
+				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">進行中</button></td>';
 				child += '<td>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit disabled" data-toggle="modal" data-target="#gameModal">編輯</button>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10 disabled" data-toggle="modal" data-target="#deleteModal">刪除</button>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-flag"></i></button>';
 			} else {
-				child += '<td><button type="button" value="' + game.id + '" class="btn btn-xs btn-status disabled" data-toggle="modal" data-target="#statusModal">尚未開始</button></td>';
+				child += '<td><button type="button" class="btn btn-info btn-xs btn-status disabled">尚未開始</button></td>';
 				child += '<td>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-info btn-xs btn-edit" data-toggle="modal" data-target="#gameModal">編輯</button>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-danger btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal">刪除</button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-pencil-square-o"></i></button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></button>';
 			}
 			child += '</td>';
 			child += '</tr>';
@@ -373,7 +374,9 @@
 			
 			$('#teamAwayList,#teamHomeList').empty();
 			
-			$.getJSON('<c:url value="/team"/>').done(function(data) {	
+			$.getJSON('<c:url value="/teamManager?method:select"/>',{
+				'model.leagueName':$('#leagueName').val()
+			}).done(function(data) {	
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
@@ -402,7 +405,7 @@
 					var hours = addZero(dateTime.getUTCHours());
 					var minutes = addZero(dateTime.getUTCMinutes());
 					$('[name="model.leagueName"] option').filter(function() {
-						return $(this).text() == data.leaguName;
+						return $(this).text() == data.teamHome.leaguName;
 					}).prop('selected', true);
 					$('[name="model.gameNum"]').val(data.gameNum);
 					$('#teamAwayList').val(data.teamAway.id);
