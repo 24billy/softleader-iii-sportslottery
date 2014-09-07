@@ -25,7 +25,7 @@
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>select,insert,delete,update</allowed-methods>
+		<allowed-methods>select,insert,delete,update,payout</allowed-methods>
   	</action>
   	
   	<action name="teamManager" class="teamAction" method="manager">
@@ -91,7 +91,7 @@
 	</action>
 	
 	<action name="odds" class="oddsAction" method="execute"> 
-		<result name="insert" type="stream">
+		<result name="message" type="stream">
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>

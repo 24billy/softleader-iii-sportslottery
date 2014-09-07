@@ -87,31 +87,33 @@ public class OddsAction extends ActionSupport {
     }
     
     public String insert() {
-    	log.debug("insert...");
+    	log.debug("OddsAction insert()");
+    	
     	String result = null;
     	Long gameId = model.getGameId();
     	String oddType = model.getOddType();
     	BigDecimal oddCombination = model.getOddCombination();
     	BigDecimal oddValue = model.getOddValue();
-    	log.debug("model = {}", model);
+    	
     	try {
 	    	List<OddsEntity> list = service.getByGameIdWithOddType(gameId, oddType);
+	    	
 	    	if (list != null && list.size() > 0) {
-	    		OddsEntity entity = list.get(0);
-	    		entity.setOddCombination(oddCombination);
-	    		entity.setOddValue(oddValue);
-	    		service.update(entity);
-	    	} else {
+	    		model = list.get(0);
+	    		model.setOddCombination(oddCombination);
+	    		model.setOddValue(oddValue);
 	    		service.update(model);
-	    	}
-    	
+	    	} 
+	    	
+	    	service.update(model);
+	    	
     		result = "success";
     	} catch (Exception e) {
     		result = "failed";
     	}
     	
     	inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
-    	return "insert";
+    	return "message";
     }
     
     public String update() throws Exception {
