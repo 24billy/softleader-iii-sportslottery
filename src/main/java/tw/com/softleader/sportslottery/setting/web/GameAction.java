@@ -219,9 +219,6 @@ public class GameAction extends ActionSupport {
 		
 		try {
 			for (OddsEntity odds : model.getOdds()) {
-				if (odds.getIsPass() == null) {
-					odds.setIsPass(false);
-				}
 				List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odds.getId());
 				lotteryOddsService.checkStatus(los);
 				int count = los.size();
