@@ -367,6 +367,10 @@
 			listTeam($(this).val());
 		});
 		
+		$('#leagueName').change(function() {
+			listTeam();
+		});
+		
 		function listTeam(gameId) {
 			resetInput();
 			var maxGameNum = Math.max.apply(Math, gameNumArray);
