@@ -40,6 +40,14 @@
 		</result>
 	</action> 
   	
+  	<action name="login">
+  		<result>/admin/login.jsp</result>
+  	</action>
+  	
+  	<action name="">
+		<result>/admin/index.jsp</result>
+	</action>
+	
   </package>
   
   
@@ -189,8 +197,5 @@
 	</action>
 	-->
 	
-	<action name="admin">
-		<result>/Admin/index.jsp</result>
-	</action>
   </package>
 </struts>

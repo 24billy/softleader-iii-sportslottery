@@ -8,20 +8,24 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 	
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/Admin/index.jsp" access="hasRole('ROLE_USER')"/>
-		<security:intercept-url pattern="/Admin/login.jsp" access="isAnonymous()"/>
-		<security:form-login login-processing-url="/Admin/j_spring_security_check"
-         login-page="/Admin/login.jsp" default-target-url="/Admin/index.jsp"
-         authentication-failure-url="/Admin/login.jsp?error=1"/>
-        <security:logout logout-url="/Admin/j_spring_security_logout"
-        	logout-success-url="/Admin/login.jsp"/>
+		<security:intercept-url pattern="/admin/login*" access="isAnonymous()"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:form-login 
+			login-processing-url="/admin/j_spring_security_check"
+         	login-page="/admin/login" default-target-url="/admin"
+         	always-use-default-target="true"
+         	authentication-failure-url="/admin/login?error=1"/>
+        <security:logout 
+        	logout-url="/admin/j_spring_security_logout"
+        	logout-success-url="/admin/login"/>
 	</security:http>
 	
-	<bean id="securityService" 
-		class="tw.com.softleader.sportslottery.common.security.SecurityService"/>
-	
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="securityService"/>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
 	</security:authentication-manager>
 	
 </beans>

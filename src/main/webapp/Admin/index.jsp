@@ -20,9 +20,9 @@
 	<div id="page-wrapper">
 		
 		<div class="container-fluid top20">
-			<a class="btn btn-success" type="button" href="<c:url value="/gameManager"/>">Game Table</a>
-			<a class="btn btn-success" type="button" href="<c:url value="/teamManager"/>">Team Table</a>
-			<a class="btn btn-success" type="button" href="<c:url value="/Admin/j_spring_security_logout"/>">Log Out</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/admin/gameAdmin"/>">Game Table</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/admin/teamAdmin"/>">Team Table</a>
+			<a class="btn btn-success" type="button" href="<c:url value="/admin/j_spring_security_logout"/>">Log Out</a>
 		</div>
 		<!-- .container-fluid -->
 	</div>
