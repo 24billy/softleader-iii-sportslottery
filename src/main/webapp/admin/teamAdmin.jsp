@@ -31,7 +31,7 @@
 						</div>
 						<ol class="breadcrumb">
 							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-list-alt"></i> 隊伍管理</li>
+  							<li class="active"><i class="fa fa-fw fa-users"></i> 隊伍管理</li>
 						</ol>
 					</div>
 				</div>
