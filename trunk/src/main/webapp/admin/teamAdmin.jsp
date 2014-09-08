@@ -156,7 +156,7 @@
 			<!-- .modal-dialog -->
 		</div>
 		<!-- End of deleteModal -->
-		
+		<jsp:include page="footer.jsp"/>
 	</div>
 	<!-- #wrapper -->
 
