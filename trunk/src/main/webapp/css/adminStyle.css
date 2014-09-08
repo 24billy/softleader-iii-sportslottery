@@ -1,5 +1,6 @@
 body {
 	margin-top: 100px;
+	background-image: url('../images/bg02.jpg');
 	background-color: #222;
 }
 
@@ -7,6 +8,10 @@ body {
     body {
         margin-top: 50px;
     }
+}
+
+#loginTitle {
+	color: #fff;
 }
 
 #loginForm .input-group {
