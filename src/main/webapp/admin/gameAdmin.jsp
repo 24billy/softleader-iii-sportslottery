@@ -60,7 +60,7 @@
 			</div>
 			<!-- .row -->
 		</div>
-		<!-- .container-fluid -->
+		<!-- .container -->
 	</div>
 	<!-- #page-wrapper -->
 	<!-- End of gameTable -->
