@@ -31,6 +31,7 @@
 			<!-- .container -->
 		</div>
 		<!-- #page-wrapper -->
+		<jsp:include page="footer.jsp"/>
 	</div>
 	<!-- #wrapper -->
 	

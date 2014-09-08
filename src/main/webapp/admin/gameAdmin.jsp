@@ -351,6 +351,7 @@
 			<!-- .modal-dialog -->
 		</div>
 		<!-- End of payoutModal -->
+		<jsp:include page="footer.jsp"/>
 	</div>
 	<!-- #wrapper -->
 	
