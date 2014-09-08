@@ -22,8 +22,9 @@
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
+			<security:password-encoder hash="sha"/>
 			<security:user-service>
-				<security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+				<security:user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/>
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
