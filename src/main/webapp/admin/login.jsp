@@ -22,7 +22,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="text-center"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</h1>
+					<h1 id="loginTitle" class="text-center"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</h1>
 				</div>
 			</div>
 			<div class="row">
