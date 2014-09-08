@@ -23,7 +23,17 @@
 		<jsp:include page="navigation.jsp"/>
 		<div id="page-wrapper">
 			<div class="container">
-			
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="page-header">
+							<h1>賽事管理</h1>
+						</div>
+						<ol class="breadcrumb">
+							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+  							<li class="active"><i class="fa fa-fw fa-table"></i> 賽事管理</li>
+						</ol>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
@@ -661,6 +671,10 @@
 				}
 			}
 		});
+		
+		var currentUrl = document.location.pathname;
+		var currentPath = currentUrl.substr(currentUrl.lastIndexOf('/') + 1);
+		$('nav a[href*="' + currentPath + '"]').parent().addClass('active');
 		//End of styling
 		
 	})(jQuery);

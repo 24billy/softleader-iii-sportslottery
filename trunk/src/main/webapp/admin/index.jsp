@@ -22,11 +22,22 @@
 	<div id="wrapper">
 		<jsp:include page="navigation.jsp"/>
 		<div id="page-wrapper">
-			
 			<div class="container">
-				<a class="btn btn-success" type="button" href="<c:url value="/admin/gameAdmin"/>">Game Table</a>
-				<a class="btn btn-success" type="button" href="<c:url value="/admin/teamAdmin"/>">Team Table</a>
-				<a class="btn btn-success" type="button" href="<c:url value="/admin/j_spring_security_logout"/>">Log Out</a>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="page-header">
+							<h1>首頁</h1>
+						</div>
+						<ol class="breadcrumb">
+  							<li class="active"><i class="fa fa-fw fa-home"></i> 首頁</li>
+						</ol>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+					</div>
+				</div>
+				<!-- .row -->
 			</div>
 			<!-- .container -->
 		</div>
@@ -45,6 +56,7 @@
 <script>
 	(function($) {
 		
+		$('nav a[href$="admin"]').parent().addClass('active');
 	})(jQuery);
 </script>
 </body>
