@@ -10,7 +10,7 @@ body {
     }
 }
 
-#loginTitle {
+footer *, #loginTitle {
 	color: #fff;
 }
 
