@@ -4,12 +4,6 @@ body {
 	background-color: #222;
 }
 
-@media(min-width:768px) {
-    body {
-        margin-top: 50px;
-    }
-}
-
 footer *, #loginTitle {
 	color: #fff;
 }
@@ -41,7 +35,17 @@ footer *, #loginTitle {
 }
 
 @media(min-width:768px) {
-	#page-wrapper .container {
+	
+    body {
+        margin-top: 50px;
+    }
+    
+    #page-wrapper .container {
     	padding: 20px;
 	}
+	
+	nav .dropdown:hover .dropdown-menu {
+		display: block;
+	}
+	
 }
