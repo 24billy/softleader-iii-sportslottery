@@ -39,9 +39,9 @@
 		
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/admin"/>">首頁</a></li>
-				<li><a href="<c:url value="/admin/gameAdmin"/>">賽事管理</a></li>
-				<li><a href="<c:url value="/admin/teamAdmin"/>">隊伍管理</a></li>
+				<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+				<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i> 賽事管理</a></li>
+				<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i> 隊伍管理</a></li>
 			</ul>
 		</div>
 		<!-- .navbar-collapse -->
