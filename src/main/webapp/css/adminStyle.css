@@ -1,5 +1,12 @@
 body {
+	margin-top: 100px;
 	background-color: #222;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
 }
 
 #loginForm .input-group {
@@ -19,4 +26,9 @@ body {
 
 #loginForm .input-group i {
 	color: #ccc;
+}
+
+#page-wrapper .container {
+    background-color: #fff;
+    padding: 50px;
 }
