@@ -39,14 +39,13 @@
 					<div class="col-sm-12">
 						<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
 							<div class="form-group">
-								<label for="catagory">運動項目</label>
 								<select class="form-control input-sm" id="catagory" name="catagory">
 									<option value="Baseball">棒球</option>
 									<option value="Basketball">籃球</option>
 									<option value="soccer">足球</option>
 								</select>
 							</div>
-							<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 						</form>
 						<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal">新增賽事</button>
 					</div>

@@ -47,7 +47,7 @@
 									<option value="韓國職棒">韓國職棒</option>
 								</select>
 							</div>
-							<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 						</form>
 						<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal">新增隊伍</button>
 					</div>
