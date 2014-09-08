@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/adminStyle.css"/>">
 </head>
@@ -22,7 +23,7 @@
 	<div id="wrapper">
 		<jsp:include page="navigation.jsp"/>
 		<div id="page-wrapper">
-			<div class="container">
+			<div class="container animated fadeIn">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="page-header">

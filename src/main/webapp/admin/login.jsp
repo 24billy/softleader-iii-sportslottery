@@ -14,12 +14,13 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/adminStyle.css"/>">
 </head>
 <body>
 	<div id="wrapper">
-		<div class="container">
+		<div class="container animated fadeIn">
 			<div class="row">
 				<div class="col-sm-12">
 					<h1 id="loginTitle" class="text-center"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</h1>
@@ -27,34 +28,27 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">管理者登入</div>
-						<!-- .panel-heading -->
-						<div class="panel-body">
-							<c:if test="${param.error != null}">
-            					<h4 class="warning">帳號或密碼錯誤</h4>
-        					</c:if>
-							<form role="form" id="loginForm" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
-								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-										<input name="j_username" id="username" type="text" class="form-control" placeholder="帳號">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-										<input name="j_password" id="account" type="password" class="form-control" placeholder="密碼">
-									</div>
-								</div>
-								<button type="submit" class="btn btn-success pull-right">登入</button>
-							</form>
+					<c:if test="${param.error != null}">
+            			<div class="alert alert-danger" role="alert">帳號或密碼錯誤</div>
+        			</c:if>
+					<form role="form" id="loginForm" action="<c:url value="/admin/j_spring_security_check"/>" method="post">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+								<input name="j_username" id="username" type="text" class="form-control" placeholder="帳號">
+							</div>
 						</div>
-						<!-- .panel-body -->
-					</div>
-					<!-- .panel -->
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
+								<input name="j_password" id="account" type="password" class="form-control" placeholder="密碼">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success pull-right">登入</button>
+					</form>
 				</div>
 			</div>
+			<!-- .row -->
 		</div>
 		<!-- .container -->
 	</div>

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/adminStyle.css"/>">
 </head>
