@@ -6,14 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/font-awesome.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/bootstrap-dialog.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/jquery.dataTables_themeroller.css"/>">
-<link rel="stylesheet" href="<c:url value="/Admin/css/global.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap-dialog.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables_themeroller.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 </head>
 <body>
 <div id="page-wrapper">
@@ -67,13 +67,13 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-<script src="<c:url value="/Admin/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery-ui.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/Admin/js/bootstrap-dialog.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/Admin/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
+<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/bootstrap-dialog.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
