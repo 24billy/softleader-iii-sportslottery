@@ -12,7 +12,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value="/admin"/>">Sports Lottery Admin</a>
+			<a class="navbar-brand" href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</a>
 		</div>
 		
 		<ul class="nav navbar-nav navbar-right">
