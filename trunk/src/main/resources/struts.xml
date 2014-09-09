@@ -139,8 +139,8 @@
 	</action>
 	<!-- 登入驗證 -->
 	<action name="checkLogin" class="userAction" method="login">
-		<result name="success">/index.jsp</result>
-		<result name="input">/index.jsp</result>
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="input">/Security/Result/fail.jsp</result>
 	</action>
 	<!-- 更新會員資料 -->
 	<action name="userUpdate" class="userAction" method="update">
