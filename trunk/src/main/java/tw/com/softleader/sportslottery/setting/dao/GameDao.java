@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 /**
  * 
@@ -224,5 +225,11 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 	}
 	
+	public List<OddsEntity> getOddsByTime(LocalDate gameTime){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select odds from GameEntity where GAME_TIME = :gameTime order by GAME_TIME");
+		return query.setDate("gameTime", gameTime.toDate()).list();
+		
+	}
 
 }
