@@ -225,10 +225,12 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 	}
 	
-	public List<OddsEntity> getOddsByTime(LocalDate gameTime){
+	public List<OddsEntity> getOddsByTime(LocalDate gameTime, String teamName){
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select odds from GameEntity where GAME_TIME = :gameTime order by GAME_TIME");
-		return query.setDate("gameTime", gameTime.toDate()).list();
+		Query query = session.createQuery("select game.odds from GameEntity as game where game.gameTime = :gameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName) ");
+		query.setDate("gameTime", gameTime.toDate());
+		query.setString("teamName", teamName);
+		return query.list();
 		
 	}
 
