@@ -61,7 +61,14 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		String sql1 = " and USER_ID = :userId";
 		String sql2 = " and CONFIRM_TIME >= :timeBegin";
 		String sql3 = " and CONFIRM_TIME < :timeEnd";
-		String sql4 = " and WIN = :win";
+		String sql4 = "";
+		if(win != null){
+			if(win >= 0){
+				sql4 = " and WIN >= :win";
+			} else {
+				sql4 = " and WIN < 0";
+			}
+		}
 		
 		if (userId == null && timeBegin == null && timeEnd == null && win == null) {
 			//全部條件都沒輸入的情況下 findAll
@@ -107,7 +114,9 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		}
 		
 		if (hasWin) {
-			query.setLong("win", win);
+			if(win >= 0){
+				query.setLong("win", win);
+			}
 		}
 	
 		return query.list();

@@ -170,7 +170,7 @@
 		<allowed-methods></allowed-methods>
 	</action>
 	
-	<action name="userSearchOdds" class="lotteryAction" method="userOddsComplex">
+	<action name="userOdds" class="lotteryAction" method="userOddsComplex">
 		<result name="success" >/Security/userOddsSearch.jsp</result>
 		<result name="selectByUser" type="stream">
 			<param name="contentType">appliction/json</param>

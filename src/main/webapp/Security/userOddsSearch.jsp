@@ -32,7 +32,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/userSearchOdds?method:selectByUser"/>">
+					<form role="form" class="form-inline pull-left" action="<c:url value="/userOdds?method:selectByUser"/>">
                         <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
                         <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
                         <div id="isEndGroup" class="btn-group" data-toggle="buttons">
@@ -75,16 +75,6 @@
 				</div>
 			</div>
 			<!-- .row -->
-			<div id = "dialog" class="modal fade bs-example-modal-lg" tabindex="-1"
-				role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div id="gameModalHeader" class="modal-header">
-							<h3 id="gameModalTitle" class="modal-title">投注資訊</h3>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- .container-fluid -->
 	</div>
@@ -125,7 +115,7 @@
 			timepicker: false //取消掉顯示時間
 		});
 		$('.btn').button();
-		$('#isEndGroup>lable>input').on('change',function() {
+		$('input[name="win"]').on('change',function() {
 			renewData();
 		});
 		$('#cleanQuery').on('click',function() {
@@ -136,22 +126,28 @@
 			$('#isEndLabelDefault').addClass('active');
 			$('#isEndInputDefault').prop('checked', true);
 			renewData();
-			
 		});
+		
 		var table;
 		function renewData(){
-			var win = null;
-			if($('input:checked').val()!='none'){
-				//win = $('input:checked').val();
+			var win = "";
+			var winQuery;
+			win = $('input[name="win"]:checked').val();
+			if(win == 'none'){
+			} else if(win == 'true') {
+				winQuery = 0;
+			} else if(win == 'false') {
+				winQuery = -1;
 			}
+			//console.log(winQuery);
 			$.ajax({
-				url:'<c:url value="/userSearchOdds?method:selectByUser" />',
+				url:'<c:url value="/userOdds?method:selectByUser" />',
 				type:'post',
 				dataType:'json',
 				data:{
 					'timeFrom':$('#timeBegin').val(),
 					'timeTo':$('#timeEnd').val(),
-					'winOpen':win,
+					'winOpen':winQuery,
 				},
 				success:function(datas){
 					if(table){
@@ -309,11 +305,9 @@
 					        		}},
 					        		{"data": "capital" },
 					        		{"data": function(row, type, val, meta){
-					        			if(row.win == null) {
-					        				win = false;
+					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
 					        			} else {
-					        				win = true;
 					        				return row.win;
 					        			}
 					        		}},

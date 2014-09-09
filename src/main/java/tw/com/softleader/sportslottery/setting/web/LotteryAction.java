@@ -539,6 +539,11 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return "selectByUser";
 	}
 	
+	public String userOddsComplex() {
+		log.debug("userOdds...");
+		
+		return SUCCESS;
+	}
 //    private void getCombination(int[] source, int number, int begin, int[] tempArray, int index) {  
 //        
 //        if(number == 0){//如果抓取達到目標，輸出該陣列  
