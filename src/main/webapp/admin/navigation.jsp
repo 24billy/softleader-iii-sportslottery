@@ -23,7 +23,7 @@
 						<a href="#"><i class="fa fa-fw fa-user"></i> 個人資訊</a>
                     </li>
                 	<li>
-                		<a href="#"><i class="fa fa-fw fa-envelope"></i> 信箱</a>
+                		<a href="#"><i class="fa fa-fw fa-envelope"></i> 收件箱</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-gear"></i> 設定</a>
