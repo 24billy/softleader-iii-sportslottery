@@ -164,6 +164,7 @@
 
 <body>
 <br><br>
+
 <div id="page-wrapper">
 		<!-- top start -->
 		<div>
@@ -182,7 +183,7 @@
 				<a href="" data-slidepanel="panel"><button type="button"
 						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
 			</div>
-
+							
 			<!-- 
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
