@@ -1,6 +1,8 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,4 +120,47 @@ public class OddsService extends GenericService<OddsEntity> {
 		return dao.countByOddType(oddType);
 	}
 	
+	//將OddsList 變成 Map
+	public Map<String,OddsEntity> from_OddsEntityList_To_OddsEntityMap(List<OddsEntity> OddsList){
+		Map<String,OddsEntity> map=new HashMap<String,OddsEntity>();
+		
+		for(OddsEntity odd: OddsList ){
+			
+			if(odd.getOddType().equals("SU_H")){
+				map.put("SU_H", odd);
+				System.out.println("SU_H");
+				
+			}else if(odd.getOddType().equals("SU_A")){
+				map.put("SU_A", odd);
+				System.out.println("SU_A");
+				
+			}else if(odd.getOddType().equals("ATS_A")){
+				map.put("ATS_A", odd);
+				System.out.println("ATS_A");
+				
+			}else if(odd.getOddType().equals("ATS_H")){
+				map.put("ATS_H", odd);
+				System.out.println("ATS_H");
+				
+			}else if(odd.getOddType().equals("SC_H")){
+				map.put("SC_H", odd);
+				System.out.println("SC_H");
+				
+			}else if(odd.getOddType().equals("SC_L")){
+				map.put("SC_L", odd);
+				System.out.println("SC_L");
+				
+			}else if(odd.getOddType().equals("ODD")){
+				map.put("ODD", odd);
+				System.out.println("ODD");
+				
+			}else if(odd.getOddType().equals("EVEN")){
+				map.put("EVEN", odd);
+				System.out.println("EVEN");
+				
+			}
+		}
+		
+		return map;
+	}
 }
