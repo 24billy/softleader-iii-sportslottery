@@ -233,5 +233,17 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 		
 	}
+	public List<GameEntity> getGameByTimeAndName(LocalDate gameTime, String teamName){
+		Session session = sessionFactory.getCurrentSession();
+		LocalDate newGameTime= gameTime.plusDays(1);//add one day to the gameTime
+		
+//		Query query = session.createQuery("from GameEntity as game where game.gameTime = :gameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName) ");
+//		Query query = session.createQuery("from GameEntity as game where game.gameTime = :gameTime and game.teamHome.teamName = :teamName ");
+		Query query = session.createQuery("from GameEntity as game where game.gameTime >= :gameTime and game.gameTime < :newGameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName)");
+		query.setDate("gameTime", gameTime.toDate());
+		query.setDate("newGameTime", newGameTime.toDate());
+		query.setString("teamName", teamName);
+		return query.list();
+	}
 
 }
