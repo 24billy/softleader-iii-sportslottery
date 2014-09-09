@@ -163,6 +163,7 @@
 
 
 <body>
+<br><br>
 <div id="page-wrapper">
 		<!-- top start -->
 		<div>
@@ -251,4 +252,9 @@
 		window.location='<c:url value="/userInfo"/>';
 	});
 </script>
+<body>
+<div>
+	<jsp:include page="topPage.jsp"/>
+</div>
+</body>
 </html>
