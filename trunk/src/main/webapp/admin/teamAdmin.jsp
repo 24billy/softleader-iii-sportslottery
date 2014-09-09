@@ -264,6 +264,16 @@
 		
 		resetInput();
 		
+		$('.btn-edit').tooltip({
+			placement: 'top',
+			title: '編輯隊伍'
+		});
+		
+		$('.btn-del').tooltip({
+			placement: 'top',
+			title: '刪除隊伍'
+		});
+		
 		$('#teamTable').dataTable({
 			responsive: true,
 			autoWidth: false,

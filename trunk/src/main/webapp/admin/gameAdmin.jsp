@@ -649,6 +649,26 @@
 		
 		resetInput();
 		
+		$('.btn-edit').tooltip({
+			placement: 'top',
+			title: '編輯賽事'
+		});
+		
+		$('.btn-del').tooltip({
+			placement: 'top',
+			title: '刪除賽事'
+		});
+		
+		$('.btn-status').tooltip({
+			placement: 'top',
+			title: '設定比分'
+		});
+		
+		$('.btn-payout').tooltip({
+			placement: 'top',
+			title: '派彩'
+		});
+		
 		$('#gameTable').dataTable({
 			responsive: true,
 			autoWidth: false,
