@@ -1,36 +1,24 @@
 package tw.com.softleader.sportslottery.setting.web;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.lang.reflect.*;
+import java.nio.charset.*;
+import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.struts2.*;
+import org.apache.struts2.interceptor.*;
+import org.joda.time.*;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
 
-import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
-import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
-import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
-import tw.com.softleader.sportslottery.setting.entity.UserEntity;
-import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
-import tw.com.softleader.sportslottery.setting.service.LotteryService;
-import tw.com.softleader.sportslottery.setting.service.OddsService;
-import tw.com.softleader.sportslottery.setting.service.UserService;
-import tw.com.softleader.sportslottery.setting.util.Combination;
-import tw.com.softleader.sportslottery.setting.util.OddsIdList;
+import tw.com.softleader.sportslottery.setting.entity.*;
+import tw.com.softleader.sportslottery.setting.service.*;
+import tw.com.softleader.sportslottery.setting.util.*;
 
-import com.google.gson.Gson;
-import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionSupport;
+import com.google.gson.*;
+import com.opensymphony.xwork2.*;
 /**
 @Author:Billy 
  */
@@ -157,311 +145,88 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		//測試用：設定UserId為2
 		model.setUserId(2L);
 		model.setConfirmTime(new LocalDateTime());
-		System.out.println("com:"+combination.getCom0());
-		//如果是過關投注
-		if(combination.getCom0()!=null){
-			try {
-				model=service.insert(model);
-			} catch (Exception e) {
-				log.debug("!!Lottery insertFail!!");
-				e.printStackTrace();
-			}
-			
-			StringBuilder oddsArray=new StringBuilder(); 
-			int oddsCount=0;
-			if(oddsIdList.getOddId1()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId1());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId1());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId2()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId2());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId2());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId3()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId3());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId3());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId4()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId4());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId4());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId5()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId5());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId5());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId6()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId6());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId6());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId7()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId7());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId7());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId8()!=null){
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId8());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId8());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			String temp=oddsArray.toString().substring(1);
-			System.out.println("oddsCount:"+oddsCount);
-			System.out.println("oddsArray:"+temp);
-			System.out.println("combination="+combination);
-			Long capital = model.getCapital();
-			System.out.println("capital:"+capital);
-		}
-		else{
-			//單場投注
+		
+        Long capital = model.getCapital();
+        System.out.println("capital:"+capital);
+        model=service.insert(model);
+        
+        Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
+        LotteryOddsEntity lotteryOdd = new LotteryOddsEntity();
+        
+        //紀錄投注
+        int oddsCount1=0;
+        StringBuilder oddsArray1=new StringBuilder(); 
+        Method[] methods = oddsIdList.getClass().getMethods();
+        for (Method method : methods){
+            String methodStr = method.toString();
+            if (methodStr.indexOf("getOddId") >= 0){
+                if(method.invoke(oddsIdList, null)!=null){
+                    oddsArray1.append(","+method.invoke(oddsIdList, null));
+                    Long oddId= (Long)method.invoke(oddsIdList, null);
+                    OddsEntity odd=new OddsEntity();
+                    odd=oddsService.getById(oddId);
+                    lotteryOdd = new LotteryOddsEntity();
+                    lotteryOdd.setLotteryId(model.getId());
+                    lotteryOdd.setOddsId(odd);
+                    lotteryOdds.add(lotteryOdd);
+                    oddsCount1++;
+                }            
+            }      
+        }
+        System.out.println("lotteryOdds:"+lotteryOdds);
+        
+        String temp1=oddsArray1.toString().substring(1);
+        System.out.println("oddsCount:"+oddsCount1);
+        System.out.println("oddsArray1:"+temp1);
+        model.setLotteryOdds(lotteryOdds);
+        service.update(model);
+        
+		//紀錄投注
+		/*
+        StringBuilder oddsArray=new StringBuilder(); 
+        int oddsCount=0;
+        
+        if(oddsIdList.getOddId1()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId1());
+        }
+        if(oddsIdList.getOddId2()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId2());          
+        }
+        if(oddsIdList.getOddId3()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId3());
+        }
+        if(oddsIdList.getOddId4()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId4());
+        }
+        if(oddsIdList.getOddId5()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId5());
+        }
+        if(oddsIdList.getOddId6()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId6());
+        }
+        if(oddsIdList.getOddId7()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId7());
+        }
+        if(oddsIdList.getOddId8()!=null){
+            oddsCount++;
+            oddsArray.append(","+oddsIdList.getOddId8());
+        }
 
-			
-			StringBuilder oddsArray=new StringBuilder(); 
-			int oddsCount=0;
-			if(oddsIdList.getOddId1()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId1());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId1());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId2()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId2());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId2());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId3()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId3());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId3());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId4()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId4());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId4());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId5()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId5());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId5());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId6()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId6());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId6());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId7()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId7());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId7());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			if(oddsIdList.getOddId8()!=null){
-				try {
-					model=service.insert(model);
-				} catch (Exception e) {
-					log.debug("!!Lottery insertFail!!");
-					e.printStackTrace();
-				}
-				oddsCount++;
-				oddsArray.append(","+oddsIdList.getOddId8());
-				oddsEntity = oddsService.getById(oddsIdList.getOddId8());
-				LotteryOddsEntity lotteryOddsEntity = new LotteryOddsEntity();
-				lotteryOddsEntity.setLotteryId(model.getId());
-				lotteryOddsEntity.setOddsId(oddsEntity);
-				try {
-					lotteryOddsService.insert(lotteryOddsEntity);
-				} catch (Exception e) {
-					log.debug("!!LotteryOdds insertFail!!");
-					e.printStackTrace();
-				}
-			}
-			String temp=oddsArray.toString().substring(1);
-			System.out.println("oddsCount:"+oddsCount);
-			System.out.println("oddsArray:"+temp);
-			System.out.println("combination="+combination);
-			Long capital = model.getCapital();
-			System.out.println("capital:"+capital);
-			
-		}
+        String temp=oddsArray.toString().substring(1);
+        System.out.println("oddsCount:"+oddsCount);
+        System.out.println("oddsArray:"+temp);
+        */
+
+		
+		
+		
 
 		
 		return Action.SUCCESS;
