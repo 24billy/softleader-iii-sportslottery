@@ -402,7 +402,7 @@
 				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-fw fa-flag"></i></button>';
-				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status btn-payout left10" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-fw fa-trophy"></i></button>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-payout left10" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-fw fa-trophy"></i></button>';
 			} else if (currentDate > gameTime) {
 				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">進行中</button></td>';
 				child += '<td>';
