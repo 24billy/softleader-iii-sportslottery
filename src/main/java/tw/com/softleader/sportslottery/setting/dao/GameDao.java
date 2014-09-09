@@ -225,6 +225,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 	}
 	
+	//從比賽時間和隊名瞿德投注物件list
 	public List<OddsEntity> getOddsByTimeAndTeamName(LocalDate gameTime, String teamName){
 		Session session = sessionFactory.getCurrentSession();
 		LocalDate newGameTime= gameTime.plusDays(1);//add one day to the gameTime
