@@ -4,15 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
+import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
+
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 import com.google.gson.Gson;
@@ -121,46 +124,78 @@ public class OddsService extends GenericService<OddsEntity> {
 	}
 	
 	//將OddsList 變成 Map
-	public Map<String,OddsEntity> from_OddsEntityList_To_OddsEntityMap(List<OddsEntity> OddsList){
-		Map<String,OddsEntity> map=new HashMap<String,OddsEntity>();
+	public Map<String, OddCountBean> from_OddsEntityList_To_OddsEntityMap(String teamName , LocalDate gameTime){
+		Map<String,OddCountBean> map=new HashMap<String,OddCountBean>();
+
+//		Long totalCount=getTotalCountOftheDay(OddsList);
 		
-		for(OddsEntity odd: OddsList ){
+		
+//		for(OddsEntity odd: OddsList ){
+//			OddCountBean bean= new OddCountBean();
+//			bean.setCount(odd.getCount());
+//			bean.setTotalCountOftheDay(totalCount);
+//			bean.setCountPercentage(bean.getCount(), totalCount);
+//			bean.setGameTime(gameTime);
+//			bean.setIsPass(odd.getIsPass());
+			//bean.setTeamName();
+		
 			
-			if(odd.getOddType().equals("SU_H")){
-				map.put("SU_H", odd);
-				System.out.println("SU_H");
-				
-			}else if(odd.getOddType().equals("SU_A")){
-				map.put("SU_A", odd);
-				System.out.println("SU_A");
-				
-			}else if(odd.getOddType().equals("ATS_A")){
-				map.put("ATS_A", odd);
-				System.out.println("ATS_A");
-				
-			}else if(odd.getOddType().equals("ATS_H")){
-				map.put("ATS_H", odd);
-				System.out.println("ATS_H");
-				
-			}else if(odd.getOddType().equals("SC_H")){
-				map.put("SC_H", odd);
-				System.out.println("SC_H");
-				
-			}else if(odd.getOddType().equals("SC_L")){
-				map.put("SC_L", odd);
-				System.out.println("SC_L");
-				
-			}else if(odd.getOddType().equals("ODD")){
-				map.put("ODD", odd);
-				System.out.println("ODD");
-				
-			}else if(odd.getOddType().equals("EVEN")){
-				map.put("EVEN", odd);
-				System.out.println("EVEN");
-				
-			}
-		}
+//			
+//			if(odd.getOddType().equals("SU_H")){
+//				bean.setOddType("SU_H");
+//				map.put("SU_H", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("SU_A")){
+//				bean.setOddType("SU_A");
+//				map.put("SU_A", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("ATS_A")){
+//				bean.setOddType("ATS_A");
+//				map.put("ATS_A", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("ATS_H")){
+//				bean.setOddType("ATS_H");
+//				map.put("ATS_H", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("SC_H")){
+//				bean.setOddType("SC_H");
+//				map.put("SC_H", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("SC_L")){
+//				bean.setOddType("SC_L");
+//				map.put("SC_L", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("ODD")){
+//				bean.setOddType("ODD");
+//				map.put("ODD", bean);
+//				
+//				
+//			}else if(odd.getOddType().equals("EVEN")){
+//				bean.setOddType("EVEN");
+//				map.put("EVEN", bean);
+//			
+//				
+//			}
+//		}
 		
 		return map;
 	}
+
+	private Long getTotalCountOftheDay(List<OddsEntity> oddsList) {
+		
+		return null;
+	}
+	
+	
+
+	
+	
+	
 }
+
