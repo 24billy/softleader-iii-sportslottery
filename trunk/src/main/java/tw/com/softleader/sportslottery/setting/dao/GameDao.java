@@ -244,6 +244,17 @@ public class GameDao extends GenericDao<GameEntity>{
 		query.setDate("newGameTime", newGameTime.toDate());
 		query.setString("teamName", teamName);
 		return query.list();
+		/*
+		Criteria criteria = session.createCriteria(GameEntity.class);
+		criteria.createAlias("teamAway", "away");
+		criteria.createAlias("teamHome", "home");
+		
+		Criterion date = Restrictions.between("gameTime", gameTime, gameTime.plusDays(1));
+		Criterion away = Restrictions.like("away.teamName", teamName);
+		Criterion home = Restrictions.like("home.teamName", teamName);
+		Criterion team = Restrictions.or(away, home);
+		return criteria.add(date).add(team).list();
+		*/
 	}
 
 }
