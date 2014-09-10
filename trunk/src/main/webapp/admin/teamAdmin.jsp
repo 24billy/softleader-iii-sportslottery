@@ -95,7 +95,7 @@
 						<div class="modal-body">
 						
 							<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-12">
 									<label for="leagueName">聯盟</label>
 									<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 										<option value="美國職棒" selected>美國職棒</option>
@@ -105,7 +105,11 @@
 										<option value="韓國職棒">韓國職棒</option>
 									</select>
 								</div>
-								<div class="col-sm-6">
+							</div>
+							<!-- .row -->
+							
+							<div class="row">
+								<div class="col-sm-12">
 									<div class="form-group">
 										<label for="teamName">隊伍名稱</label>
 										<input class="form-control input-sm" id="teamName" name="model.teamName" placeholder="隊伍名稱">
