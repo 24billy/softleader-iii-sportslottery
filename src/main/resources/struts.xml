@@ -40,13 +40,17 @@
 		</result>
 	</action> 
   	
-  	<action name="adminLogAdmin" class="adminLogAction" method="admin">
-  		<result name="success">/admin/adminLogAdmin.jsp</result>
+  	<action name="adminLog" class="adminLogAction" method="admin">
+  		<result name="success">/admin/adminLog.jsp</result>
   		<result name="message" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>insert,delete</allowed-methods>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert,delete</allowed-methods>
   	</action>
   	
   	<action name="announceAdmin" class="announceAction" method="admin">
@@ -55,7 +59,11 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>insert,delete</allowed-methods>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert,delete</allowed-methods>
   	</action>
   	
   	<action name="login">

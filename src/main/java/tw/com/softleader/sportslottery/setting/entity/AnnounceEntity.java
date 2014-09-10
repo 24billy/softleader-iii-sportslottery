@@ -24,12 +24,17 @@ public class AnnounceEntity extends GenericEntity {
 	@Column(name = "ANNOUNCE_TIME")
 	@Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	private LocalDateTime announceTime;
+	
+	@Column(name = "MODIFIED_TIME")
+	@Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	private LocalDateTime modifiedTime;
 
 	@Override
 	public String toString() {
 		return "AnnounceEntity [announceTitle=" + announceTitle
 				+ ", announceContent=" + announceContent + ", announceTime="
-				+ announceTime + ", id=" + id + "]";
+				+ announceTime + ", modifiedTime=" + modifiedTime + ", id="
+				+ id + "]";
 	}
 
 	public String getAnnounceTitle() {
@@ -55,5 +60,13 @@ public class AnnounceEntity extends GenericEntity {
 	public void setAnnounceTime(LocalDateTime announceTime) {
 		this.announceTime = announceTime;
 	}
-	
+
+	public LocalDateTime getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(LocalDateTime modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
+
 }

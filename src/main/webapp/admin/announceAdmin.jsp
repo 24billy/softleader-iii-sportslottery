@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>隊伍管理</title>
+<title>公告管理</title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
@@ -27,88 +27,77 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="page-header">
-							<h1>隊伍管理</h1>
+							<h1>公告管理</h1>
 						</div>
 						<ol class="breadcrumb">
 							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-users"></i> 隊伍管理</li>
+  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</li>
 						</ol>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
-							<div class="form-group">
-								<select class="form-control input-sm" id="leagueNameList" name="leagueName">
-									<option value="美國職棒" selected>美國職棒</option>
-									<option value="中華職棒">中華職棒</option>
-									<option value="中央聯盟">中央聯盟</option>
-									<option value="太平洋聯盟">太平洋聯盟</option>
-									<option value="韓國職棒">韓國職棒</option>
-								</select>
-							</div>
-							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
-						</form>
-						<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal">新增隊伍</button>
+						<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal">新增公告</button>
 					</div>
 				</div>
 				<!-- .row -->
 				
-	            <!-- Begin of teamTable -->    
+	            <!-- Begin of announceTable -->    
 				<div class="row top20">
 					<div class="col-sm-12">
-						<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
+						<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
 							<thead>
 								<tr>
-									<th>聯盟</th>
-									<th>隊伍名稱</th>
+									<th>公告標題</th>
+									<th>公告日期</th>
+									<th>修改日期</th>
 									<th>功能</th>
 								</tr>
 							</thead>
-							<tbody id="teamList">
+							<tbody id="announceList">
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<!-- .row -->
-				<!-- End of teamTable -->
+				<!-- End of announceTable -->
 			</div>
 			<!-- .container -->
 		</div>
 		<!-- #page-wrapper -->
 		
-		<!-- Begin of teamModal -->
-		<div class="modal fade" id="teamModal" role="dialog" aria-labelledby="teamModalTitle" aria-hidden="true" tabindex="-1">
+		<!-- Begin of announceModal -->
+		<div class="modal fade" id="announceModal" role="dialog" aria-labelledby="announceModalTitle" aria-hidden="true" tabindex="-1">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 				
-					<div id="teamModalHeader" class="modal-header">
+					<div id="announceModalHeader" class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="teamModalTitle" class="modal-title">新增隊伍</h3>
+						<h3 id="announceModalTitle" class="modal-title">新增公告</h3>
 					</div>
 					<!-- modal-header -->
 					
-					<form role="form" id="teamForm">
+					<form role="form" id="announceForm">
 						<div class="modal-body">
 						
 							<div class="row">
-								<div class="col-sm-6">
-									<label for="leagueName">聯盟</label>
-									<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-										<option value="美國職棒" selected>美國職棒</option>
-										<option value="中華職棒">中華職棒</option>
-										<option value="中央聯盟">中央聯盟</option>
-										<option value="太平洋聯盟">太平洋聯盟</option>
-										<option value="韓國職棒">韓國職棒</option>
-									</select>
-								</div>
-								<div class="col-sm-6">
+								<div class="col-sm-12">
 									<div class="form-group">
-										<label for="teamName">隊伍名稱</label>
-										<input class="form-control input-sm" id="teamName" name="model.teamName" placeholder="隊伍名稱">
+										<label for="announceTitle">公告標題</label>
+										<input class="form-control" type="text" name="model.announceTitle" id="announceTitle">
+									</div>
+								</div>
+							</div>
+							<!-- .row -->
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="announceTitle">公告內容</label>
+										<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
 									</div>
 								</div>
 							</div>
@@ -117,8 +106,8 @@
 						</div>
 						<!-- .modal-body -->
 					</form>
-					<!-- #teamform -->
-			      	<div id="teamModalFooter" class="modal-footer">
+					<!-- #announceform -->
+			      	<div id="announceModalFooter" class="modal-footer">
 						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
 			      	</div>
@@ -129,7 +118,7 @@
 			</div>
 			<!-- .modal-dialog -->
 		</div>
-		<!-- End of teamModal -->
+		<!-- End of announceModal -->
 		
 		<!-- Begin of deleteModal -->
 		<div class="modal fade" id="deleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" tabindex="-1">
@@ -141,7 +130,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="deleteModalTitle" class="modal-title">刪除隊伍</h3>
+						<h3 id="deleteModalTitle" class="modal-title">刪除公告</h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -149,7 +138,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認刪除隊伍？</h4>
+								<h4 class="text-center">確認刪除公告？</h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -178,58 +167,57 @@
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
 		
-		//Begin of leagueName
-		var leagueName = '${leagueName}';
-		if (leagueName == null || leagueName == "") {
-			$('#leagueNameList')[0].selectedIndex = 0;
-		} else {
-			$('#leagueNameList').val(leagueName);
-		}
-		//End of leagueName
-		
-		//Begin of teamTable
-		var teamList = $.parseJSON('${json}');
-		$.each(teamList, function(index, team) {
+		//Begin of announceTable
+		var announceList = $.parseJSON('${json}');
+		$.each(announceList, function(index, announce) {
 			var child = '';
 			child += '<tr>';
-			child += '<td>' + team.leagueName + '</td>';
-			child += '<td>' + team.teamName + '</td>';
+			child += '<td>' + announce.announceTitle + '</td>';
+			child += '<td>'; 
+			var announceTime = announce.announceTime.iLocalMillis;
+			child += millisecondToDate(announceTime) + ' ' + millisecondToTime(announceTime);
+			child += '</td>'; 
+			child += '<td>'; 
+			var modifiedTime = announce.modifiedTime.iLocalMillis;
+			child += millisecondToDate(modifiedTime) + ' ' + millisecondToTime(modifiedTime);
+			child += '</td>'; 
 			child += '<td>';
-			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
-			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
+			child += '<button type="button" value="' + announce.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
+			child += '<button type="button" value="' + announce.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
 			child += '</td>';
 			child += '</tr>';
-			$('#teamList').append(child);
+			$('#announceList').append(child);
 		});
-		//End of teamTable
+		//End of announceTable
 		
-		//Begin of listTeam
-		$('#btnAddTeam').click(function() {
-			$('#teamModalTitle').text('新增隊伍');
+		//Begin of listannounce
+		$('#btnAddAnnounce').click(function() {
+			$('#announceModalTitle').text('新增公告');
 			resetInput();
 		});
 		$('.btn-edit').click(function() {
-			$('#teamModalTitle').text('編輯隊伍');
-			$.post('<c:url value="/admin/teamAdmin?method:select"/>', {
+			$('#announceModalTitle').text('編輯公告');
+			$.post('<c:url value="/admin/announceAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
-				$('#leagueName').val(data.leagueName);
-				$('#teamName').val(data.teamName);
+				$('#announceTitle').val(data.announceTitle);
+				$('#announceContent').val(data.announceContent);
 				$('#btnMerge').val(data.id);
 			}, 'json');
 		});
-		//End of listTeam
+		//End of listannounce
 		
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
-			var teamId = $(this).val();
-			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
-				'model.id':teamId,
-				'model.leagueName':$('#leagueName').val(),
-				'model.teamName':$('#teamName').val()
+			var announceId = $(this).val();
+			$.post('<c:url value="/admin/announceAdmin?method:insert"/>',{
+				'model.id':announceId,
+				'model.announceTitle':$('#announceTitle').val(),
+				'model.announceContent':$('#announceContent').val()
 			});
 			
 			$(document).ajaxStop(function() {
@@ -245,7 +233,7 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/admin/teamAdmin?method:delete"/>', {
+			$.post('<c:url value="/admin/announceAdmin?method:delete"/>', {
 				'model.id':$(this).val()
 			});
 			
@@ -257,8 +245,8 @@
 		
 		//Begin of styling		
 		function resetInput() {
-			$('#leagueName')[0].selectedIndex = 0;
-			$('#teamName').val('');
+			$('#announceTitle').val('');
+			$('#announceContent').val('');
 			$('#btnMerge').val('');
 		}
 		
@@ -266,18 +254,18 @@
 		
 		$('.btn-edit').tooltip({
 			placement: 'top',
-			title: '編輯隊伍'
+			title: '編輯公告'
 		});
 		
 		$('.btn-del').tooltip({
 			placement: 'top',
-			title: '刪除隊伍'
+			title: '刪除公告'
 		});
 		
-		$('#teamTable').dataTable({
+		$('#announceTable').dataTable({
 			responsive: true,
 			autoWidth: false,
-			order: [[ 0, "asc" ]],
+			order: [[ 3, "asc" ]],
 			oLanguage: {
 				'sProcessing': '處理中...',
 				'sLengthMenu': '顯示 _MENU_ 項結果',
