@@ -49,15 +49,15 @@ public class OddsServiceTest extends BaseTest {
 //----------------------------test Map<String,OddsEntity> from_OddsEntityList_To_OddsEntityMap(List<OddsEntity> OddsList)	
 
 	
-	LocalDate date1 = new LocalDate();
-	date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
-	//log.debug("date1= {} ", date1);
-	String teamName= "辛辛那堤紅人";
-	List<OddsEntity> oddList = gamedao.getOddsByTimeAndTeamName(date1, teamName);
-//	log.debug("oddList = {}", oddList );
-	
-	Map<String,OddsEntity> map = oddsService.from_OddsEntityList_To_OddsEntityMap(oddList);
-	log.debug("getOddsByTimeAndTeamName map = {}", map);
+//	LocalDate date1 = new LocalDate();
+//	date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
+//	//log.debug("date1= {} ", date1);
+//	String teamName= "辛辛那堤紅人";
+//	List<OddsEntity> oddList = gamedao.getOddsByTimeAndTeamName(date1, teamName);
+////	log.debug("oddList = {}", oddList );
+//	
+//	Map<String,OddsEntity> map = oddsService.from_OddsEntityList_To_OddsEntityMap(oddList);
+//	log.debug("getOddsByTimeAndTeamName map = {}", map);
 	
 	
 	
