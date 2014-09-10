@@ -15,6 +15,7 @@ public class AnnounceServiceTest extends BaseTest {
 	@Test
 	public void test() {
 		AnnounceEntity entity = new AnnounceEntity();
+		entity.setAnnounceTitle("TEST");
 		entity.setAnnounceContent("測試公告");
 		entity.setAnnounceTime(LocalDateTime.now());
 		log.debug("entity = {}", entity);

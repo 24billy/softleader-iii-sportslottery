@@ -15,6 +15,9 @@ public class AnnounceEntity extends GenericEntity {
 
 	private static final long serialVersionUID = 2014L;
 	
+	@Column(name = "ANNOUNCE_TITLE")
+	private String announceTitle;
+	
 	@Column(name = "ANNOUNCE_CONTENT")
 	private String announceContent;
 	
@@ -24,8 +27,17 @@ public class AnnounceEntity extends GenericEntity {
 
 	@Override
 	public String toString() {
-		return "AnnounceEntity [announceContent=" + announceContent
-				+ ", announceTime=" + announceTime + ", id=" + id + "]";
+		return "AnnounceEntity [announceTitle=" + announceTitle
+				+ ", announceContent=" + announceContent + ", announceTime="
+				+ announceTime + ", id=" + id + "]";
+	}
+
+	public String getAnnounceTitle() {
+		return announceTitle;
+	}
+
+	public void setAnnounceTitle(String announceTitle) {
+		this.announceTitle = announceTitle;
 	}
 
 	public String getAnnounceContent() {
