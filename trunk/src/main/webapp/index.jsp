@@ -17,10 +17,15 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 
 
-<!--sidepanel  -->
+<!--sidepanel  -->  
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
+<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+
 
 <link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
+
+
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 
 <!-- <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>"> -->
@@ -29,141 +34,21 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">    
-
-	<style>
+<link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
+<style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
 	
-		#nav{
-		    font-family: 'Oswald', sans-serif;
-		}
 		
-		.btn{
-		    margin: 4px;
-		    box-shadow: 1px 1px 5px #888888;
-		}
-		
-		.btn-xs{
-		    font-weight: 300;
-		}
-		   
-		.btn-hot {
-		color: #fff;
-		background-color: #db5566;
-		border-bottom:2px solid #af4451;
-		}
-		
-		.btn-hot:hover, .btn-sky.active:focus, .btn-hot:focus, .open>.dropdown-toggle.btn-hot {
-		color: #fff;
-		background-color: #df6a78;
-		border-bottom:2px solid #b25560;
-		outline: none;}
-		
-		
-		.btn-hot:active, .btn-hot.active {
-		color: #fff;
-		background-color: #c04b59;
-		border-top:2px solid #9a3c47;
-		margin-top: 2px;
-		}
-		
-		.btn-sunny {
-		color: #fff;
-		background-color: #f4ad49;
-		border-bottom:2px solid #c38a3a;
-		}
-		
-		.btn-sunny:hover, .btn-sky.active:focus, .btn-sunny:focus, .open>.dropdown-toggle.btn-sunny {
-		color: #fff;
-		background-color: #f5b75f;
-		border-bottom:2px solid #c4924c;
-		outline: none;
-		}
-		
-		
-		.btn-sunny:active, .btn-sunny.active {
-		color: #fff;
-		background-color: #d69840;
-		border-top:2px solid #ab7a33;
-		margin-top: 2px;
-		}
-		
-		.btn-fresh {
-		color: #fff;
-		background-color: #51bf87;
-		border-bottom:2px solid #41996c;
-		}
-		
-		.btn-fresh:hover, .btn-sky.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
-		color: #fff;
-		background-color: #66c796;
-		border-bottom:2px solid #529f78;
-		outline: none;
-		}
-		
-		
-		.btn-fresh:active, .btn-fresh.active {
-		color: #fff;
-		background-color: #47a877;
-		border-top:2px solid #39865f;
-		outline: none;
-		outline-offset: none;
-		margin-top: 2px;
-		}
-		
-		.btn-sky {
-		color: #fff;
-		background-color: #0bacd3;
-		border-bottom:2px solid #098aa9;
-		}
-		
-		.btn-sky:hover,.btn-sky.active:focus, .btn-sky:focus, .open>.dropdown-toggle.btn-sky {
-		color: #fff;
-		background-color: #29b6d8;
-		border-bottom:2px solid #2192ad;
-		outline: none;
-		}
-		
-		.btn-sky:active, .btn-sky.active {
-		color: #fff;
-		background-color: #0a97b9;
-		border-top:2px solid #087994;
-		outline-offset: none;
-		margin-top: 2px;
-		}
-		
-		.btn-tree {
-		color: #fff;
-		background-color: #66CDAA;
-		border-bottom:2px solid #098aa9;
-		}
-		
-		.btn-tree:hover,.btn-tree.active:focus, .btn-tree:focus, .open>.dropdown-toggle.btn-tree {
-		color: #fff;
-		background-color: #66CDAA;
-		border-bottom:2px solid #2192ad;
-		outline: none;
-		}
-		
-		.btn-tree:active, .btn-tree.active {
-		color: #fff;
-		background-color: #66CDAA;
-		border-top:2px solid #087994;
-		outline-offset: none;
-		margin-top: 2px;
-		}
-		
-		.btn:focus,
-		.btn:active:focus,
-		.btn.active:focus {
-		    outline: none;
-		    outline-offset: 0px;
-		}
 </style>
 </head>
 
 
 <body>
 <br><br>
+
+ 
+
+ 
 
 <div id="page-wrapper">
 		<!-- top start -->
@@ -180,8 +65,10 @@
 					id="history">歷史紀錄</button>
 				<button type="button" class="btn btn-sky text-uppercase btn-lg "
 					id="user">使用者資訊</button>
-				<a href="" data-slidepanel="panel"><button type="button"
+				<a id="simple-menu" href="#sidr"><button type="button"
 						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
+                        
+                        
 			</div>
 							
 			<!-- 
@@ -223,7 +110,7 @@
 			<div class="row-fluid" >
 				<!-- content start -->
 				<div id="target">
-					<jsp:include page="/go.jsp" />				
+					<jsp:include page="/Event/test-events.jsp" />				
 				</div>
 				<!-- content end -->
 
@@ -236,26 +123,39 @@
 </body>
   <script type="text/javascript">
       $(document).ready(function(){
-          $('[data-slidepanel]').slidepanel({
-              orientation: 'right',
-              mode: 'overlay',
-              static: true
-          });
+    	  $('#simple-menu').sidr();
       });
       
-  	$('#game').click(function() {		
-  		window.location='<c:url value="/game"/>';
+  	$('#game').click(function() {		  		
+  		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
  	});
 	$('#history').click(function() {
-		window.location='<c:url value="/history"/>';
+		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
 	$('#user').click(function() {
-		window.location='<c:url value="/userInfo"/>';
+		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
 	});
 </script>
 <body>
 <div>
 	<jsp:include page="topPage.jsp"/>
 </div>
+<div id="sidr">
+  <!-- lottery content -->
+  <ul>
+    <li><a href="#">List 1</a></li>
+    <li class="active"><a href="#">List 2</a></li>
+    <li><a href="#">List 3</a></li>
+  </ul>
+</div>
+<!--sidepanel  -->  
+<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
+<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#simple-menu').sidr();
+});
+</script>
+
 </body>
 </html>
