@@ -25,54 +25,66 @@
 		<div id="page-wrapper">
 			<div class="container animated fadeIn">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="page-header">
-							<h1>賽事管理</h1>
-						</div>
-						<ol class="breadcrumb">
-							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-table"></i> 賽事管理</li>
-						</ol>
+					<div class="col-sm-2 container-left">
+						<jsp:include page="slider.jsp"/>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
-							<div class="form-group">
-								<select class="form-control input-sm" id="catagory" name="catagory">
-									<option value="Baseball">棒球</option>
-									<option value="Basketball">籃球</option>
-									<option value="soccer">足球</option>
-								</select>
+					<!-- col-sm-2 -->
+					<div class="col-sm-10 container-right">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<h1>賽事管理</h1>
+								</div>
+								<ol class="breadcrumb">
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+		  							<li class="active"><i class="fa fa-fw fa-table"></i> 賽事管理</li>
+								</ol>
 							</div>
-							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
-						</form>
-						<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal">新增賽事</button>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-sm-12">
+								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
+									<div class="form-group">
+										<select class="form-control input-sm" id="catagory" name="catagory">
+											<option value="Baseball">棒球</option>
+											<option value="Basketball">籃球</option>
+											<option value="soccer">足球</option>
+										</select>
+									</div>
+									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+								</form>
+								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i> 新增賽事</button>
+							</div>
+						</div>
+						<!-- .row -->
+			            
+			            <!-- Begin of gameTable -->    
+						<div class="row top20">
+							<div class="col-sm-12">
+								<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
+									<thead>
+										<tr>
+											<th>賽事編號</th>
+											<th>聯盟</th>
+											<th>客隊隊伍</th>
+											<th>主隊隊伍</th>
+											<th>狀態</th>
+											<th>功能</th>
+										</tr>
+									</thead>
+									<tbody id="gameList">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- .row -->
+						<!-- End of gameTable -->
 					</div>
+					<!-- .col-sm-10 -->
 				</div>
 				<!-- .row -->
-	            
-	            <!-- Begin of gameTable -->    
-				<div class="row top20">
-					<div class="col-sm-12">
-						<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
-							<thead>
-								<tr>
-									<th>賽事編號</th>
-									<th>聯盟</th>
-									<th>客隊隊伍</th>
-									<th>主隊隊伍</th>
-									<th>狀態</th>
-									<th>功能</th>
-								</tr>
-							</thead>
-							<tbody id="gameList">
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- .row -->
-				<!-- End of gameTable -->
 			</div>
 			<!-- .container -->
 		</div>

@@ -1,5 +1,5 @@
 body {
-	margin-top: 100px;
+	margin-top: 50px;
 	background-image: url('../images/bg02.jpg');
 	background-color: #222;
 }
@@ -35,7 +35,7 @@ textarea {
 	color: #ccc;
 }
 
-#page-wrapper .container {
+#page-wrapper .container-right {
     background-color: #fff;
     padding: 10px;
     border-bottom-left-radius: 10px;
@@ -44,16 +44,36 @@ textarea {
 
 @media(min-width:768px) {
 	
-    body {
-        margin-top: 50px;
-    }
-    
-    #page-wrapper .container {
-    	padding: 20px;
+    #page-wrapper .container-right {
+    	padding-left: 20px;
+    	padding-right: 20px;
 	}
 	
 	nav .dropdown:hover .dropdown-menu {
 		display: block;
 	}
 	
+	.navbar-slider {
+    	padding: 0;
+    	max-height: none;
+    	border-bottom-left-radius: 10px;
+    	border-bottom-right-radius: 10px;
+  	}
+  	
+  	.navbar-slider ul {
+    	float: none;
+  	}
+  	
+  	.navbar-slider ul:not {
+    	display: block;
+  	}
+  	.navbar-slider li {
+    	float: none;
+    	display: block;
+  	}
+  	.navbar-slider li a {
+    	padding-top: 12px;
+    	padding-bottom: 12px;
+    	color: #fff;
+  	}
 }

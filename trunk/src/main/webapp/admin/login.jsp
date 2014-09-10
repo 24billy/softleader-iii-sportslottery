@@ -48,7 +48,7 @@
 								<input name="j_password" id="account" type="password" class="form-control" placeholder="密碼">
 							</div>
 						</div>
-						<button type="submit" class="btn btn-success pull-right">登入</button>
+						<button type="submit" class="btn btn-success pull-right"><i class="fa fa-fw fa-sign-in"></i> 登入</button>
 					</form>
 				</div>
 			</div>
