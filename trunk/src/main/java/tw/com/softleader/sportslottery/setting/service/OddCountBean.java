@@ -17,8 +17,8 @@ public class OddCountBean {
 	private String oddType;
 	private Long countPercentage;// count/totalCountOftheDay 
 	private Boolean isPass;
-	@Autowired
-	private GameDao gameDao;
+//	@Autowired
+//	private GameDao gameDao;
 	
 	public OddCountBean(){
 		
@@ -58,17 +58,24 @@ public class OddCountBean {
 		return totalCountOftheDay;
 	}
 	public void setTotalCountOftheDay(LocalDate gameTime, String teamName) {
-		//從比賽時間和隊名瞿德投注物件list
-//		GameDao gameDao= new GameDao();
-		List<OddsEntity> OddsList= gameDao.getOddsByTimeAndTeamName(gameTime, teamName);
-		System.out.println(OddsList);
-		Long totalCountOftheDay = 0L;
-		for(OddsEntity odd: OddsList){
-			totalCountOftheDay += odd.getCount();
+		//從比賽時間和隊名取得投注物件list
+		GameDao gameDao= new GameDao();
+		Long totalCountOftheDay;
+		try {
+			List<OddsEntity> OddsList= gameDao.getOddsByTimeAndTeamName(gameTime, teamName);
+			totalCountOftheDay = 0L;
 			
+			for(OddsEntity odd: OddsList){
+				totalCountOftheDay += odd.getCount();
+				
+			}
+			this.totalCountOftheDay = totalCountOftheDay;
+
+		} catch (Exception e) {
+			System.out.println("oddList is null");
+			e.printStackTrace();
 		}
 		
-		this.totalCountOftheDay = totalCountOftheDay;
 	}
 	public String getOddType() {
 		return oddType;
