@@ -25,53 +25,65 @@
 		<div id="page-wrapper">
 			<div class="container animated fadeIn">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="page-header">
-							<h1>隊伍管理</h1>
-						</div>
-						<ol class="breadcrumb">
-							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-users"></i> 隊伍管理</li>
-						</ol>
+					<div class="col-sm-2 container-left">
+						<jsp:include page="slider.jsp"/>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
-							<div class="form-group">
-								<select class="form-control input-sm" id="leagueNameList" name="leagueName">
-									<option value="美國職棒" selected>美國職棒</option>
-									<option value="中華職棒">中華職棒</option>
-									<option value="中央聯盟">中央聯盟</option>
-									<option value="太平洋聯盟">太平洋聯盟</option>
-									<option value="韓國職棒">韓國職棒</option>
-								</select>
+					<!-- .col-sm-2 -->
+					<div class="col-sm-10 container-right">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<h1>隊伍管理</h1>
+								</div>
+								<ol class="breadcrumb">
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+			  						<li class="active"><i class="fa fa-fw fa-users"></i> 隊伍管理</li>
+								</ol>
 							</div>
-							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
-						</form>
-						<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal">新增隊伍</button>
+						</div>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-sm-12">
+								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
+									<div class="form-group">
+										<select class="form-control input-sm" id="leagueNameList" name="leagueName">
+											<option value="美國職棒" selected>美國職棒</option>
+											<option value="中華職棒">中華職棒</option>
+											<option value="中央聯盟">中央聯盟</option>
+											<option value="太平洋聯盟">太平洋聯盟</option>
+											<option value="韓國職棒">韓國職棒</option>
+										</select>
+									</div>
+									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+								</form>
+								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i> 新增隊伍</button>
+							</div>
+						</div>
+						<!-- .row -->
+						
+						<!-- Begin of teamTable -->    
+						<div class="row top20">
+							<div class="col-sm-12">
+								<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
+									<thead>
+										<tr>
+											<th>聯盟</th>
+											<th>隊伍名稱</th>
+											<th>功能</th>
+										</tr>
+									</thead>
+									<tbody id="teamList">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- .row -->
+						<!-- End of teamTable -->
 					</div>
+					<!-- .col-sm-10 -->
 				</div>
 				<!-- .row -->
-				
-	            <!-- Begin of teamTable -->    
-				<div class="row top20">
-					<div class="col-sm-12">
-						<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
-							<thead>
-								<tr>
-									<th>聯盟</th>
-									<th>隊伍名稱</th>
-									<th>功能</th>
-								</tr>
-							</thead>
-							<tbody id="teamList">
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- .row -->
-				<!-- End of teamTable -->
 			</div>
 			<!-- .container -->
 		</div>

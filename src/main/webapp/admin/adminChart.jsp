@@ -25,19 +25,31 @@
 		<div id="page-wrapper">
 			<div class="container animated fadeIn">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="page-header">
-							<h1>報表</h1>
+					<div class="col-sm-2 container-left">
+						<jsp:include page="slider.jsp"/>
+					</div>
+					<!-- .col-sm-2 -->
+					<div class="col-sm-10 container-right">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<h1>報表</h1>
+								</div>
+								<ol class="breadcrumb">
+		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
+								</ol>
+							</div>
 						</div>
-						<ol class="breadcrumb">
-  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
-						</ol>
+						<!-- .row -->
+						
+						<div class="row">
+							<div class="col-sm-12">
+							</div>
+						</div>
+						<!-- .row -->
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-					</div>
+					<!-- .col-sm-10 -->
 				</div>
 				<!-- .row -->
 			</div>

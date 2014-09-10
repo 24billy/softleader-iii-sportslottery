@@ -25,42 +25,53 @@
 		<div id="page-wrapper">
 			<div class="container animated fadeIn">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="page-header">
-							<h1>公告管理</h1>
+					<div class="col-sm-2 container-left">
+						<jsp:include page="slider.jsp"/>
+					</div>
+					<!-- .col-sm-2 -->
+					<div class="col-sm-10 container-right">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<h1>公告管理</h1>
+								</div>
+								<ol class="breadcrumb">
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+		  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</li>
+								</ol>
+							</div>
 						</div>
-						<ol class="breadcrumb">
-							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</li>
-						</ol>
+						<!-- row -->
+						<div class="row">
+							<div class="col-sm-12">
+								<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-plus"></i> 新增公告</button>
+							</div>
+						</div>
+						<!-- .row -->
+						
+			            <!-- Begin of announceTable -->    
+						<div class="row top20">
+							<div class="col-sm-12">
+								<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
+									<thead>
+										<tr>
+											<th>公告標題</th>
+											<th>公告日期</th>
+											<th>修改日期</th>
+											<th>功能</th>
+										</tr>
+									</thead>
+									<tbody id="announceList">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- .row -->
+						<!-- End of announceTable -->
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal">新增公告</button>
-					</div>
+					<!-- col-sm-10 -->
 				</div>
 				<!-- .row -->
-				
-	            <!-- Begin of announceTable -->    
-				<div class="row top20">
-					<div class="col-sm-12">
-						<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
-							<thead>
-								<tr>
-									<th>公告標題</th>
-									<th>公告日期</th>
-									<th>修改日期</th>
-									<th>功能</th>
-								</tr>
-							</thead>
-							<tbody id="announceList">
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- .row -->
-				<!-- End of announceTable -->
 			</div>
 			<!-- .container -->
 		</div>
