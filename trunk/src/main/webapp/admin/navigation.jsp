@@ -19,16 +19,6 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> <sec:authentication property="principal.username"/><span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li>
-						<a href="#"><i class="fa fa-fw fa-user"></i> 個人資訊</a>
-                    </li>
-                	<li>
-                		<a href="#"><i class="fa fa-fw fa-envelope"></i> 收件箱</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> 設定</a>
-                    </li>
-                    <li class="divider"></li>
                     <li>
                         <a href="<c:url value="/admin/j_spring_security_logout"/>"><i class="fa fa-fw fa-power-off"></i> 登出</a>
                     </li>
