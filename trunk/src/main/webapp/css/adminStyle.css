@@ -4,7 +4,15 @@ body {
 	background-color: #222;
 }
 
-footer *, #loginTitle {
+footer * {
+	color: #fff;
+}
+
+textarea {
+	resize: none;
+}
+
+#loginTitle {
 	color: #fff;
 }
 
@@ -32,10 +40,6 @@ footer *, #loginTitle {
     padding: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-}
-
-textarea {
-	resize: none;
 }
 
 @media(min-width:768px) {

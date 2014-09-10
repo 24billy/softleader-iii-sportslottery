@@ -40,8 +40,8 @@
 		</result>
 	</action> 
   	
-  	<action name="adminLog" class="adminLogAction" method="admin">
-  		<result name="success">/admin/adminLog.jsp</result>
+  	<action name="adminChart" class="adminLogAction" method="admin">
+  		<result name="success">/admin/adminChart.jsp</result>
   		<result name="message" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
