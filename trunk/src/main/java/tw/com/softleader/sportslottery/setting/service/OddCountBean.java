@@ -17,8 +17,8 @@ public class OddCountBean {
 	private String oddType;
 	private Long countPercentage;// count/totalCountOftheDay 
 	private Boolean isPass;
-//	@Autowired
-//	private GameDao gameDao;
+	@Autowired
+	private GameDao gameDao;
 	
 	public OddCountBean(){
 		
@@ -59,7 +59,7 @@ public class OddCountBean {
 	}
 	public void setTotalCountOftheDay(LocalDate gameTime, String teamName) {
 		//從比賽時間和隊名取得投注物件list
-		GameDao gameDao= new GameDao();
+//		GameDao gameDao= new GameDao();
 		Long totalCountOftheDay;
 		try {
 			List<OddsEntity> OddsList= gameDao.getOddsByTimeAndTeamName(gameTime, teamName);
