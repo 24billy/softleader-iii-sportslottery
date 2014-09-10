@@ -35,6 +35,10 @@ public class AdminLogAction extends ActionSupport {
 		return models;
 	}
 	
+	public AdminLogEntity getModel() {
+		return model;
+	}
+
 	public void setModel(AdminLogEntity model) {
 		this.model = model;
 	}
@@ -43,6 +47,20 @@ public class AdminLogAction extends ActionSupport {
 		return inputStream;
 	}
 
+	public String select() {
+		log.debug("AdminLogAction select()");
+		Long adminLogId = null;
+		if (model != null) {
+			adminLogId = model.getId();
+		}
+		if (adminLogId != null && adminLogId > 0) {
+			json = new Gson().toJson(service.getById(adminLogId));
+		}
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+	
+		return "select";
+	}
+	
 	public String insert() {
 		log.debug("AdminLogAction insert()");
 		String result = null;

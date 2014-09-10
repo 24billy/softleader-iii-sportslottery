@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,47 @@ public class AnnounceAction extends ActionSupport {
 		this.model = model;
 	}
 	
+	public AnnounceEntity getModel() {
+		return model;
+	}
+
 	public InputStream getInputStream() {
 		return inputStream;
 	}
-
+	
+	public String select() {
+		log.debug("AnnounceAction select()");
+		Long announceId = null;
+		if (model != null) {
+			announceId = model.getId();
+		}
+		if (announceId != null && announceId > 0) {
+			json = new Gson().toJson(service.getById(announceId));
+		}
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+	
+		return "select";
+	}
+	
 	public String insert() {
 		log.debug("AnnounceAction insert()");
+		log.debug("model = {}", model);
 		String result = null;
+		Long announceId = model.getId();
+		String announceTitle = model.getAnnounceTitle();
+		String announceContent = model.getAnnounceContent();
+		LocalDateTime announceTime = LocalDateTime.now();
+		LocalDateTime modifiedTime = LocalDateTime.now();
 		try {
+			if (announceId != null && announceId > 0) {
+				model = service.getById(announceId);
+				model.setAnnounceTitle(announceTitle);
+				model.setAnnounceContent(announceContent);
+				model.setModifiedTime(modifiedTime);
+			} else {
+				model.setAnnounceTime(announceTime);
+				model.setModifiedTime(modifiedTime);
+			}
 			service.update(model);
 			result = "success";
 		} catch (Exception e) {

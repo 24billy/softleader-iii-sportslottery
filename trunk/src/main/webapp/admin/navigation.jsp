@@ -42,6 +42,7 @@
 				<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
 				<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i> 賽事管理</a></li>
 				<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i> 隊伍管理</a></li>
+				<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</a></li>
 			</ul>
 		</div>
 		<!-- .navbar-collapse -->
