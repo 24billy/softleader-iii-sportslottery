@@ -19,7 +19,7 @@ public class AdminLogEntity extends GenericEntity {
 	private Long profit;
 	
 	@Column(name = "ENTERED_TIME")
-	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	@Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	private LocalDateTime enteredTime;
 
 	public Long getProfit() {
