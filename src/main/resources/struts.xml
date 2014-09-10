@@ -14,11 +14,11 @@
   	<action name="gameAdmin" class="gameAction" method="admin">
   		<result name="success">/admin/gameAdmin.jsp</result>
   		<result name="message" type="stream">
-			<param name="contentType">appliction/json</param>
+			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
 		<result name="select" type="stream">
-			<param name="contentType">appliction/json</param>
+			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
 		<allowed-methods>select,insert,delete,update,payout</allowed-methods>
@@ -35,10 +35,28 @@
   	
   	<action name="oddsAdmin" class="oddsAction" method="insert"> 
 		<result name="message" type="stream">
-			<param name="contentType">appliction/json</param>
+			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
 	</action> 
+  	
+  	<action name="adminLogAdmin" class="adminLogAction" method="admin">
+  		<result name="success">/admin/adminLogAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert,delete</allowed-methods>
+  	</action>
+  	
+  	<action name="announceAdmin" class="announceAction" method="admin">
+  		<result name="success">/admin/announceAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert,delete</allowed-methods>
+  	</action>
   	
   	<action name="login">
   		<result>/admin/login.jsp</result>
