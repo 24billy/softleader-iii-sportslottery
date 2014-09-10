@@ -747,7 +747,6 @@
 							thislabel.attr('id', '');
 							
 							if(userOdds.indexOf(odd.id+"") != -1){
-								console.log('found!');
 								thislabel.addClass('active');
 							}
 							
