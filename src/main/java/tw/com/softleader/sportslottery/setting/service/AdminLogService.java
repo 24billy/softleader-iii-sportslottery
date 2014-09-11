@@ -36,4 +36,8 @@ public class AdminLogService extends GenericService<AdminLogEntity> {
 	public List<AdminLogEntity> getInLastYear() {
 		return dao.findInLastYear();
 	}
+	
+	public Long getSpecificMonthByCurrentDate(int arg0) {
+		return dao.findSpecificMonthByCurrentDate(arg0);
+	}
 }

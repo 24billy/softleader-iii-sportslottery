@@ -45,6 +45,8 @@
 						
 						<div class="row">
 							<div class="col-sm-12">
+								<div id="profitChart">
+								</div>
 							</div>
 						</div>
 						<!-- .row -->
@@ -67,8 +69,33 @@
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/highcharts.js"/>"></script>
+<script src="<c:url value="/js/exporting.js"/>"></script>
 <script>
 	(function($) {
+		$('#profitChart').highcharts({
+			title: {
+				text: '每月獲利',
+				x: -20
+			},
+			xAxis: {
+				categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+			},
+			tooltip: {
+				valueSuffix: '台幣'
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+			series: [{
+				name: '獲利',
+				color: '#582',
+				data: [12345, -100, 42654, 75611, 45351, 48613, -13151, 84351, 98460, 12315, -1235, 45643]
+			}]
+		});
 		
 		//Begin of styling
 		var currentUrl = document.location.pathname;
