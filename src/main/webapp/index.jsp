@@ -329,9 +329,7 @@
                         <form class="form-inline"
                             action="<c:url value="/lottery"/>">
 
-                            <table
-                                class="table table-striped  table-hover"
-                                id="comTable">
+                            <table class="table table-striped  table-hover" id="comTable">
                                 <tr>
                                     <td>過關組合</td>
                                     <td>組合數</td>
@@ -516,10 +514,7 @@ function odds_refresh(){
             var numerator=bets+0;
             var denominator=1;
             //紀錄投注賠率的陣列，用於計算最高中獎金額
-            var lotteryOddValue=[];
-            
-            
-
+            var lotteryOddValue=[];                    
             
             $.each(userOddIds, function(index, userOddId){
                 
@@ -562,8 +557,7 @@ function odds_refresh(){
             //過關總投注金、最高中獎金額
             $('#passBet').html(1);
             $('#passCapital').html($('#passBetValue').val()*capitalValue);
-            $('#passTopPrice').html(Math.floor(passPrice*100));
-            
+            $('#passTopPrice').html(Math.floor(passPrice*100));            
             
             //單場總投注金、最高中獎金額
             $('#singleBet').html(userOddIds.length);
@@ -610,9 +604,7 @@ function odds_refresh(){
             $('#comBetValue').on('keyup', function(){                           
                 $('.capitalValue').val($('#comBetValue').val()*capitalValue);
                 refreshBetTable();
-            });
-            
-            
+            });               
             
             //每一注投注金計算
             $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
@@ -666,7 +658,9 @@ function odds_refresh(){
                 userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
                 sessionStorage.userOdds = userOddIds;
                 $(this).parent().parent().parent().attr("hidden",true); 
+                superRefresh();
                 odds_refresh();
+                
             });
 
             if (userOddIds!=""){
@@ -684,11 +678,10 @@ function odds_refresh(){
             //清除投注區
             $('#clearbtn').click(function(){
                 sessionStorage.userOdds="";
+                superRefresh();
                 odds_refresh();
+                
             });
-        
-
-		
 		
 	})(jQuery);
 }
