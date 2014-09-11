@@ -584,4 +584,4 @@ insert into admin_log (profit, entered_time) values (-2111, '2014-6-11T23:36:30'
 insert into admin_log (profit, entered_time) values (-2903, '2014-4-8T2:55:16');
 insert into admin_log (profit, entered_time) values (-2699, '2014-5-12T19:5:27');
 insert into admin_log (profit, entered_time) values (477, '2014-7-17T23:12:23');
-insert into admin_log (profit, entered_time) values (-2837, '2014-2-28T3:29:25');>>>>>>> .r625
+insert into admin_log (profit, entered_time) values (-2837, '2014-2-28T3:29:25');

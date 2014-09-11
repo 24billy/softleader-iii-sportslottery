@@ -55,7 +55,7 @@
 		visibility: hidden;
 	}
 	.detial.active{
-		height: 324px;
+		height: 358px;
 		opacity: 1;
 		visibility: visible;
 	}
@@ -90,9 +90,6 @@
 						</label>
 						<label class="btn btn-success" >
 							<input type="radio" name=searchScope id="searchScopeDefault" value="near" >未來三日
-						</label>
-						<label class="btn btn-warning">
-							<input type="radio" name="searchScope" id="option2" value="notEnd" >可下注
 						</label>
 					</div>
 				</form>
