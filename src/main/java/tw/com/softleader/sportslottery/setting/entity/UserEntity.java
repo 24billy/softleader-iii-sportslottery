@@ -40,7 +40,7 @@ public class UserEntity extends GenericEntity {
 	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	private LocalDate userBirthday;	
 	//地址
-	@Column(name="USER_ADDRESS", nullable=false)
+	@Column(name="USER_ADDRESS")
 	private String userAddress;
 	//信箱
 	@Column(name="USER_EMAIL", length=50, nullable=false)
@@ -49,10 +49,10 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_PHONE", length=10)
 	private String userPhone;
 	//驗證狀態
-	@Column(name="USER_STATE")
-	private String userState;
+	@Column(name="USER_STATE", columnDefinition = "BIGINT default 0")
+	private Long userState;
 	//營行帳戶
-	@Column(name="USER_BANK_ACCOUNT", length=20)
+	@Column(name="USER_BANK_ACCOUNT", length=20, nullable=false)
 	private String userBankAccount;
 	//錢
 	@Column(name="COINS", columnDefinition = "BIGINT default 0")
@@ -91,11 +91,11 @@ public class UserEntity extends GenericEntity {
 		this.userAddress = userAddress;
 	}
 
-	public String getUserState() {
+	public Long getUserState() {
 		return userState;
 	}
 
-	public void setUserState(String userState) {
+	public void setUserState(Long userState) {
 		this.userState = userState;
 	}
 

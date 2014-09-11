@@ -160,8 +160,8 @@
 	</action>	
 	<!-- 註冊帳號 -->
 	<action name="addAccount" class="userAction" method="insert">
-		<result name="success">/Security/Result/addSuccess.jsp</result>
-		<result name="error">/Security/addUser.jsp</result>
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
 	</action>
 	<!-- 登入驗證 -->
 	<action name="checkLogin" class="userAction" method="login">

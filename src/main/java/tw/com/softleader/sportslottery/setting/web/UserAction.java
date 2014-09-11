@@ -279,6 +279,7 @@ public class UserAction extends ActionSupport {
 			model.setModifier("Guest"); //變數
 			model.setCreateTime(LocalDateTime.now());
 			model.setModifiedTime(LocalDateTime.now());
+			model.setCoins(0l);
 			//model.setUserPassword(userPassword.getBytes());
 			log.debug("Model = {}", model);
 			
