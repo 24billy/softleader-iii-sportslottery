@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,13 @@ public class AdminLogDao extends GenericDao<AdminLogEntity> {
 		return session.createCriteria(AdminLogEntity.class)
 				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusYears(-1)))
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
+	}
+	
+	public Long findSpecificMonthByCurrentDate(int arg0) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Long) session.createCriteria(AdminLogEntity.class)
+				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(arg0)))
+				.add(Restrictions.le("enteredTime", LocalDateTime.now()))
+				.setProjection(Projections.sum("profit")).uniqueResult();
 	}
 }
