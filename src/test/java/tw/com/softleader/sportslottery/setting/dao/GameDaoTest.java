@@ -84,7 +84,7 @@ public class GameDaoTest extends BaseTest{
 		date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
 		//log.debug("date1= {} ", date1);
 		String teamName= "辛辛那堤紅人";
-		List<OddsEntity> models = dao.getOddsByTimeAndTeamName(date1, teamName);
+		List<OddsEntity> models = dao.findOddsByTimeAndTeamName(date1, teamName);
 		log.debug("getOddsByTime = {}", models);
 		System.out.println("size of the searching result: "+models.size());
 		

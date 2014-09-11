@@ -226,7 +226,7 @@ public class GameDao extends GenericDao<GameEntity>{
 	}
 	
 	//從比賽時間和隊名瞿德投注物件list
-	public List<OddsEntity> getOddsByTimeAndTeamName(LocalDate gameTime, String teamName){
+	public List<OddsEntity> findOddsByTimeAndTeamName(LocalDate gameTime, String teamName){
 		Session session = sessionFactory.getCurrentSession();
 		LocalDate newGameTime= gameTime.plusDays(1);//add one day to the gameTime
 		Query query = session.createQuery("select game.odds from GameEntity as game where game.gameTime >= :gameTime and game.gameTime < :newGameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName) ");
@@ -236,7 +236,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return query.list();
 		
 	}
-	public List<GameEntity> getGameByTimeAndName(LocalDate gameTime, String teamName){
+	public List<GameEntity> findGameByTimeAndName(LocalDate gameTime, String teamName){
 		Session session = sessionFactory.getCurrentSession();
 		LocalDate newGameTime= gameTime.plusDays(1);//add one day to the gameTime
 		Query query = session.createQuery("from GameEntity as game where game.gameTime >= :gameTime and game.gameTime < :newGameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName)");
