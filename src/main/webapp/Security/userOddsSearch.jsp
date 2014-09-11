@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!--  
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
@@ -15,6 +16,7 @@
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables_themeroller.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
+-->
 <style>
 	td.details-control {
 	    background: url('<c:url value="/Security/images/icon.gif"/>') no-repeat center center;
@@ -80,6 +82,7 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
+<!--  
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
@@ -89,6 +92,7 @@
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+-->
 <script>
 	(function($) {
 		$('#timeBegin').datetimepicker({
