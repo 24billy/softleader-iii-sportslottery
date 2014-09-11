@@ -265,7 +265,7 @@
 							$('[name="gameTitle"]', thisGame).text(game.gameNum + ' ' + game.teamHome.leagueName);
 							$('[name="teamAway"]', thisGame).text(game.teamAway.teamName);
 							$('[name="teamHome"]', thisGame).text(game.teamHome.teamName);
-							$('[name="gameTime"]', thisGame).text(game.time);
+							$('[name="gameTime"]', thisGame).text(game.date + ' ' + game.time);
 							
 							//生成動態磚內的投注選項
 							if(sessionStorage.userOdds){
@@ -315,10 +315,12 @@
 						enableCrossDrop: false,
 					});
 					
+					//動態磚被按下時的情形
 					$('#game_list .clickfield.clickable').on('click',function(){
 						toggleHidden($(this).parent());
 					});
 					
+					//投注按鈕被案下的情形
 					$('#game_list .detial label').on('click',function(){
 						if(sessionStorage.userOdds){
 							userOdds = sessionStorage.userOdds.split(',');
@@ -340,6 +342,7 @@
 							userOddsCount--;
 						}
 						sessionStorage.userOdds = userOdds;
+						globalTemp(games,odds);
 						//odds_refresh();
 						var thisTag = $(this).parent().parent().parent();
 						//依據投注狀況更換動態磚顏色

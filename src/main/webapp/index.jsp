@@ -35,6 +35,16 @@
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
 </style>
+
+<script>
+var globalGames;
+var globalOdds;
+function globalTemp(games,odds){
+	console.log('Global Insert');
+	globalGames = games;
+	globalOdds = odds;
+}
+</script>
 </head>
 <body>
 <br><br>
