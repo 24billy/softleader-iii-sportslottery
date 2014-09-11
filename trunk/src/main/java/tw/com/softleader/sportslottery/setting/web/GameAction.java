@@ -194,11 +194,20 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate(), new LocalDate().plusDays(3), complexBallType));
+		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
 		return "selectNearDays";
+	}
+	
+	public String selectNearNotEnd() {
+		log.debug("selectNearDays...");
+		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate().minusDays(1), null, complexBallType));
+		
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+	
+		return "selectNearNotEnd";
 	}
 	
 	public String selectNotEnd() {
