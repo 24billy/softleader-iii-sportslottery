@@ -77,6 +77,26 @@
 <body>
 	<div id="page-wrapper">
 		<div class="container top20">
+			<div class="row" id="game_form">
+				<form role="form" class="form-inline pull-left" >
+					<select class="form-control form-ball-type" id="ballType" >
+						<option value="Baseball">棒球</option>
+						<option value="Basketball">籃球</option>
+						<option value="Basketball">足球</option>
+					</select>
+					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+						<label class="btn btn-default active">
+							<input type="radio" name="searchScope" id="option3" value="All" checked >全部
+						</label>
+						<label class="btn btn-success" >
+							<input type="radio" name=searchScope id="searchScopeDefault" value="near" >未來三日
+						</label>
+						<label class="btn btn-warning">
+							<input type="radio" name="searchScope" id="option2" value="notEnd" >可下注
+						</label>
+					</div>
+				</form>
+			</div>
 			<div class="row" id="game_list">
 				<div id="gametagSample" class="well gametag sample">
 					<div class="clickfield">
@@ -294,13 +314,23 @@ function tagColorfn(target){
 	}
 }
 
+$('#searchScopeGroup input[name="searchScope"]').off('click');
+$('#searchScopeGroup>label>input').on('change', function(){
+	superRefresh();
+});
+
+$('#ballType').off('change');
+$('#ballType').on('change', function(){
+	superRefresh();
+});
+
 function superRefresh(){
 	
 	var searchScopeStr = $('#searchScopeGroup input:checked').val();
 	var queryScopeURI = "";
 	switch(searchScopeStr) {
     case 'near':
-    	queryScopeURI = '<c:url value="/game?method:selectNearDays" />';
+    	queryScopeURI = '<c:url value="/game?method:selectNearNotEnd" />';
     	break;
     case 'notEnd':
     	queryScopeURI = '<c:url value="/game?method:selectNotEnd" />';
@@ -314,7 +344,7 @@ function superRefresh(){
 	
 	userOddsCount = 0;
 	$.ajax({
-		url: '<c:url value="/game?method:select" />',
+		url: queryScopeURI,
 		type:'post',
 		dataType:'json',
 		data:{
