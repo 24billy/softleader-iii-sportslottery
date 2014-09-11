@@ -16,18 +16,11 @@
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 
-
 <!--sidepanel  -->  
-<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
-
-
-<link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
 
-
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-
 <!-- <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
@@ -37,23 +30,13 @@
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
-	
-		
 </style>
 </head>
-
-
 <body>
 <br><br>
-
- 
-
- 
-
 <div id="page-wrapper">
 		<!-- top start -->
-		<div>
-		   
+		<div>		   
 		</div>		
 		<!-- top end -->
 		<!-- navbar start -->
@@ -67,40 +50,7 @@
 					id="user">使用者資訊</button>
 				<a id="simple-menu" href="#sidr"><button type="button"
 						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
-                        
-                        
-			</div>
-							
-			<!-- 
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">運動彩券</a>
-			</div>
-			<div class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Active</a></li>
-					<li><a href="#">Link</a></li>
-
-				</ul>
-
-				
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul></li>
-				</ul>
-				 -->
+ 			</div>
 		</div>
 		<!-- navbar end -->
 	</div>
