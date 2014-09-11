@@ -152,13 +152,17 @@
 
 
 <script>
+(function($){
+	superRefresh();
+})(jQuery);
+
+function superRefresh(){
 	(function($){
 		
 		gameTagTemp = $('#gametagSample').clone();
 		gameTagTemp.removeAttr('id');
 		gameTagTemp.removeClass('sample');
-		
-		function superRefresh(){
+
 			var searchScopeStr = $('#searchScopeGroup input:checked').val();
 			var queryScopeURI = "";
 			switch(searchScopeStr) {
@@ -366,10 +370,6 @@
 					
 				}//Ajax function
 			});//Ajax
-		}//superRefresh
-		
-		superRefresh();
-
 		//切換detial的顯示狀態 target為detial所在的父元素
 		function toggleHidden(target){
 			if($('.detial', target).hasClass('active')){
@@ -399,7 +399,7 @@
 		}
 		
 	}(jQuery));
-
+}//superRefresh
 </script>
 </body>
 </html>
