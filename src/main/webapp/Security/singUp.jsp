@@ -215,7 +215,17 @@ font-size: 24px;
 								</legend>
 								<legend>
 									<p>
+										<span class="infot">生日 :</span> 2000/01/01
+									</p>
+								</legend>
+								<legend>
+									<p>
 										<span class="infot">E mail :</span> <a href="mailto:#">user@example.com</a>
+									</p>
+								</legend>
+								<legend>
+									<p>
+										<span class="infot">卡號 :</span> 1234-5678-2234-5678
 									</p>
 								</legend>
 
