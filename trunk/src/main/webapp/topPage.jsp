@@ -238,13 +238,20 @@
 				count++;
 
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='<c:url value='/userOdds'/>' class='text-center'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center' id='all1'>View All</a></li>");
 		}
 		
 	});//ajax
+	$(document).ajaxStop(function() {
+		$('#all1').click(function() {
+			console.log('all check');
+			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+		});
+	});
 	$('#toLogin').click(function() {
 			$('#loginError').html('');
 	});
+	
 	$('#login').click(function() {
 		$.ajax({
 			url : "<c:url value='/checkLogin'/>",
