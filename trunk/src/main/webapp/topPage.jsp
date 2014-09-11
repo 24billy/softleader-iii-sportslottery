@@ -66,8 +66,7 @@
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li>
 		            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd" id="coins">0</span>
-								<span class="glyphicon glyphicon-usd" id="coins2">0</span> 
+								<span class="glyphicon glyphicon-usd" id="coins">0</span> 
 							</a>
 		            	</li>
 						<li class="dropdown">
