@@ -30,6 +30,9 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 
+<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
+
+
 <link rel="stylesheet" href="<c:url value="/css/jquery.sidr.light.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">

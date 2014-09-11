@@ -106,7 +106,7 @@
 		                                   		<p class="text-left"><strong>${user.userName}</strong></p>    
 		                                   	</div>          
 		                                   	<div class="col-sm-8">
-		                                   		<a href="#" class="btn-primary btn-xs">個人資料</a>
+		                                   		<a id="goUser" href="#" class="btn-primary btn-xs" data-dismiss="modal">個人資料</a>
 		                                   	</div>                                                           
 		                            	</div>
 		                            	
@@ -193,6 +193,10 @@
 		$('#loginError').html('');
 	});
 			
+	$('#goUser').click(function() {
+		$("#target").load('<c:url value="/MustBeUser/memberInfo.jsp"/>');
+	});
+	
 	$('#regist').click(function() {
 		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
 	});
