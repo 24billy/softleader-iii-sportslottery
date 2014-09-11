@@ -287,6 +287,7 @@ function tagColorfn(target){
 	if($('.detial label.active', target)[0]){
 		target.removeClass('success');
 		target.addClass('primary');
+		toggleHidden(target);
 	} else {
 		target.removeClass('primary');
 		target.addClass('success');
