@@ -15,8 +15,8 @@ import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
-
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
 import com.google.gson.Gson;
 
@@ -37,6 +37,9 @@ public class OddsService extends GenericService<OddsEntity> {
 	
 	@Autowired
 	private LotteryDao lotteryDao;
+	
+
+	
 	
 	@Override
 	protected GenericDao<OddsEntity> getDao() {
@@ -122,6 +125,11 @@ public class OddsService extends GenericService<OddsEntity> {
 	public Long countByOddType(String oddType){
 		return dao.countByOddType(oddType);
 	}
+
+	
+	
+	
+	
 	
 	//將OddsList 變成 Map
 	public Map<String, OddCountBean> from_OddsEntityList_To_OddsEntityMap(String teamName , LocalDate gameTime){
@@ -187,10 +195,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		return map;
 	}
 
-	private Long getTotalCountOftheDay(List<OddsEntity> oddsList) {
-		
-		return null;
-	}
+
 	
 	
 
