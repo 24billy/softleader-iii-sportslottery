@@ -221,7 +221,7 @@
                 <div class="tab-pane active" id="single">
                     <!-- Begin of Single Bet Panel -->
                     <div class="panel-body">
-                        <form class="form-inline"
+                        <form class="form"
                             action="<c:url value="/lottery"/>">
                             <table
                                 class="table table-striped  table-hover">
@@ -287,10 +287,8 @@
                 <div class="tab-pane" id="pass">
                     <!-- Begin of Pass Bet Panel -->
                     <div class="panel-body">
-                        <form class="form-inline"
-                            action="<c:url value="/lottery"/>">
-                            <table
-                                class="table table-striped  table-hover">
+                        <form class="form" action="<c:url value="/lottery"/>">
+                            <table class="table table-striped  table-hover">
                                 <thead>
                                     <tr>
                                         <td>總計</td>
@@ -350,7 +348,7 @@
                 <div class="tab-pane" id="passCom">
                     <!-- Begin of Combination Bet Panel -->
                     <div class="panel-body">
-                        <form class="form-inline"
+                        <form class="form"
                             action="<c:url value="/lottery"/>">
 
                             <table class="table table-striped  table-hover" id="comTable">
@@ -560,7 +558,7 @@ function odds_refresh(){
 	        $('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);             
 	        $('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
 	        $('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
-	        $('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+	        $('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+userOddId+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
 	        //加入過關組合checkbox
 	        $('#comTable  tr:eq('+lotteryId+')').prop("hidden",false);
 	        //顯示過關組合數
@@ -696,7 +694,8 @@ function odds_refresh(){
 	//刪除指定投注
 	$('td[name="oddList"] .close').off('click');
 	$('td[name="oddList"] .close').on('click', function(){
-	    userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
+	    userOddIds.splice(userOddIds.indexOf($(this).attr('oddId')),1);
+	    console.log("userOddIds:"+userOddIds);
 	    sessionStorage.userOdds = userOddIds;
 	    $(this).parent().parent().parent().attr("hidden",true); 
 	    gameRefresh(galbalGames, galbalOdds);
