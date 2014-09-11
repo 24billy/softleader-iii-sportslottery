@@ -149,7 +149,17 @@
 		</div>
 	</div>
 	
-
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
+<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/bootstrap-dialog.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
+<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
 
 <script>
 (function($){
