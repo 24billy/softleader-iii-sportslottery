@@ -8,18 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/bootstrap-dialog.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables_themeroller.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 
 <style>
 	#game_list{
@@ -32,6 +20,7 @@
 		color: #ffffff;
 		float:left;
 		position: absolute;
+		width:220px;
 	}
 	.gametag *{
 		transition: all 220ms ease;
@@ -75,6 +64,8 @@
 	}
 	.detial .btn-group-vertical .btn{
 		width:100%;
+		margin: auto;
+		box-shadow: 0;
 	}
 	
 	.sample{
@@ -87,7 +78,7 @@
 	<div id="page-wrapper">
 		<div class="container top20">
 			<div class="row" id="game_list">
-				<div id="gametagSample" class="col-sm-2 well gametag sample">
+				<div id="gametagSample" class="well gametag sample">
 					<div class="clickfield">
 						<h4><strong name="gameTitle">No.101 亞洲職棒</strong></h4>
 						<p class="text-left" name="teamAway">亞歷桑那響尾蛇</p>
@@ -158,16 +149,7 @@
 		</div>
 	</div>
 	
-<script src="<c:url value="/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/js/bootstrap-dialog.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
-<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
-<script src="<c:url value="/js/misc.js"/>"></script>
+
 
 <script>
 	(function($){
@@ -333,11 +315,11 @@
 						enableCrossDrop: false,
 					});
 					
-					$('.clickfield.clickable').on('click',function(){
+					$('#game_list .clickfield.clickable').on('click',function(){
 						toggleHidden($(this).parent());
 					});
 					
-					$('.detial label').click(function(){
+					$('#game_list .detial label').on('click',function(){
 						if(sessionStorage.userOdds){
 							userOdds = sessionStorage.userOdds.split(',');
 							userOddsCount = userOdds.length;
