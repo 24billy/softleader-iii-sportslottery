@@ -20,7 +20,7 @@
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 
-<link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
+<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
@@ -472,8 +472,7 @@
         <!-- End of Bet panel -->
     </div>
 <!--sidepanel  -->  
-<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
-<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+
 <script>
 $(document).ready(function(){
     $('#simple-menu').sidr();
