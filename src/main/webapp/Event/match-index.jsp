@@ -118,7 +118,7 @@
 							</table>
 						</div>
 					</div>
-
+                    <!--start lottery panel  -->
 					<div class="panel panel-primary  col-lg-4">
 					  <div class="panel-heading ">
 					  	<h6>投注區</h3>
@@ -207,6 +207,7 @@
 						</table>
 					</div>
 					<!-- End of Lottery Panel   -->
+                    <!-- start of BetBoard -->
 					<div id="betBoard" hidden="true" class="panel panel-primary col-lg-4">
 					  <!-- Tab panes -->
 					  <div class="tab-content">
@@ -444,12 +445,12 @@
 								</div>
 							</form>
 						  </div>
-						  <!-- End of Bet Panel -->						
+						  <!-- End of Combination Bet Panel -->						
 						</div>
 					  </div>
 						
 					</div>
-					
+					<!-- End of Bet panel -->
 				</div>
 				
 			</div>
@@ -993,6 +994,8 @@
 							odds_refresh();
 						});
 					}
+					//-----------------------------------------------------
+                    //投注區更新結束
 				}
 			});
 		}
