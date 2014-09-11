@@ -1,14 +1,18 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class OddCountBeanTest {
-	OddCountBean bean=new OddCountBean() ;
+import tw.com.softleader.sportslottery.common.test.BaseTest;
+
+public class OddCountBeanTest extends BaseTest {
+	@Autowired
+	OddCountBean bean;
 	Long totalCountOftheDay;
 	Long expectedResult;
 	@Before
