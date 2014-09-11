@@ -44,13 +44,6 @@ public class OddCountBeanTest extends BaseTest {
 
 	}
 
-
-	@After
-	public void tearDown() throws Exception {
-		bean=null;
-
-	}
-
 	@Test
 	public void test() {
 		log.debug("bean = {}", bean);
