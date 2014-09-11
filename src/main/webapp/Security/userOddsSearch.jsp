@@ -63,6 +63,7 @@
 									<th>下注時間</th>
 									<th>下注金額</th>
 									<th>獎金</th>
+									<th>玩法</th>
 	                            </tr>
 							</thead>
 							<tbody id="oddList">
@@ -163,6 +164,7 @@
 					var lotteryInfo = [];
 					//每張彩券
 					$.each(datas,function(index,data) {
+						//console.log(data);
 						lotterys = [];
 						detail = [];
 						var lottery = {};
@@ -175,6 +177,33 @@
 						lottery.win = data.win;
 						lottery.capital = data.capital;
 						//lottery.odds = data.lotteryOdds;
+						//判斷玩法
+						lottery.unique = data.com1;
+						lottery.com2 = data.com2;
+						lottery.com3 = data.com3;
+						lottery.com4 = data.com4;
+						lottery.com5 = data.com5;
+						lottery.com6 = data.com6;
+						lottery.com7 = data.com7;
+						lottery.com8 = data.com8;
+						lottery.com = data.com0;
+						if(lottery.unique!=null && lottery.com2==null && lottery.com3==null && 
+						   lottery.com4==null && lottery.com5==null && lottery.com6==null && 
+						   lottery.com7==null && lottery.com8==null && lottery.com==null) {
+						
+						   lottery.play = "單場";
+						   
+						} else if(lottery.unique==null && lottery.com2==null && lottery.com3==null && 
+								  lottery.com4==null && lottery.com5==null && lottery.com6==null && 
+								  lottery.com7==null && lottery.com8==null && lottery.com!=null) {
+								  
+								  lottery.play = "過關";
+								  
+						} else if(lottery.com2!=null || lottery.com3!=null || lottery.com4!=null || lottery.com5!=null ||
+								  lottery.com6!=null || lottery.com7!=null || lottery.com8!=null) {
+								  
+								  lottery.play = "過關組合";
+						}
 						
 						//每注資料以oddsId排列
 						$.each(data.lotteryOdds, function(index,odd) {
@@ -311,9 +340,10 @@
 					        				return row.win;
 					        			}
 					        		}},
+					        		{"data": "play" },
 					        ],
 					        
-					        "order": [[2, 'asc']]
+					        "order": [[1, 'desc']]
 						});
 						$('#oddList').on('click', 'td.details-control', function () {
 					    	var tr = $(this).closest('tr');

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,9 +27,29 @@
 {
 	height: 20px;
 }
+
+.label,.glyphicon 
+{
+	 margin-right:5px; 
+}
+.label-info
+{
+	display:inline-block;
+	width:120px;
+}
+.label-danger,.label-success
+{
+	display:inline-block;
+	width:100px;
+}
+
 .login-error
 {
 	color: red;
+}
+#coins
+{
+	size:100;
 }
 </style>
 
@@ -44,7 +64,20 @@
 	            <!-- 登入後 -->
 	            <c:if test="${ !empty user }">
 		            <ul class="nav navbar-nav navbar-right">
-		            	<li class="dropdown">
+		            	<li>
+		            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-usd" id="coins">0</span>
+								<span class="glyphicon glyphicon-usd" id="coins2">0</span> 
+							</a>
+		            	</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-comment">最新投注</span>  
+							</a>
+							<ul class="dropdown-menu" id="newOdds">
+							</ul>
+						</li>
+						<li class="dropdown">
 			            	<a href="#"class="dropdown-toggle" data-toggle="dropdown">
 			                	<span class="badge pull-right">42</span>
 		   				 		<span class="glyphicon glyphicon-envelope"></span>
@@ -151,32 +184,68 @@
 			</div>
 		</div>
 	</div>
+<script>
+(function($){
+	var str = "";
 	
-	<script>
-		(function($) {
-			$('#toLogin').click(function() {
-				$('#loginError').html('');
-			})
-			$('#login').click(function() {
-				$.ajax({
-		    		url:"<c:url value='/checkLogin'/>",
-					type:"get",
-					data:{
-						'model.userAccount': $('#account').val(),
-						userPassword: $('#password').val()
-					},
-					success: function(data) {
-						
-						if(data=="success") {
-							document.location.href="<c:url value='/index.jsp'/>";	
-						}else {
-							$('#loginError').html('帳號或密碼有誤');
-						}
-					}
-				});
+	$.ajax({
+		url:'<c:url value="/userOdds?method:selectByUser" />',
+		type:'post',
+		dataType:'json',
+		success:function(datas){
+			var count = 0;
+			$.each(datas, function(index,data) {
+				console.log(data);
+				var lottery = {};
+				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
+				if(data.win>=0 && count<3) {
+					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
+				} else if(count<3){
+					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
+				}
+				count++;
 			});
-			
-		})(jQuery);
-	</script>
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='<c:url value='/userOdds'/>' class='text-center'>View All</a></li>");
+		}
+		
+	});//ajax
+	$('#toLogin').click(function() {
+			$('#loginError').html('');
+	});
+	$('#login').click(function() {
+		$.ajax({
+			url : "<c:url value='/checkLogin'/>",
+			type : "get",
+			data : {
+				'model.userAccount' : $('#account').val(),
+				userPassword : $('#password').val()
+			},
+			success : function(data) {
+
+				if (data == "success") {
+					document.location.href = "<c:url value='/index.jsp'/>";
+				} else {
+					$('#loginError').html('帳號或密碼有誤');
+				}
+			}
+		});
+	});
+	function fadeOut() {
+	    $('#coins').fadeOut(500, fadeIn);
+	    
+	    
+	};
+	function fadeIn() {
+	    $('#coins').delay(500).fadeIn(500, fadeOut);
+	    
+	};
+	fadeOut();
+
+
+	
+})(jQuery);
+</script>
 </body>
 </html>

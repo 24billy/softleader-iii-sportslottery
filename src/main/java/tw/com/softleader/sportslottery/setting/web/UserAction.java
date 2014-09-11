@@ -404,6 +404,11 @@ public class UserAction extends ActionSupport {
 		entity2.setUserPassword("a123456".getBytes());
 		service.update(entity2);
 		
+		UserEntity entity3 = service.getById(3l);
+		log.debug(entity3.toString());
+		entity3.setUserPassword("a123456".getBytes());
+		service.update(entity3);
+		
 		//正式程式碼
 		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
