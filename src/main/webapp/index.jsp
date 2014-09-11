@@ -112,8 +112,17 @@ $(document).ready(function(){
 
 });
 
-function odds_refresh(games, odds){
+var galbalGames;
+var galbalOdds;
+function golbalInsert(games, odds){
+	galbalGames = games;
+	galbalOdds = odds;
+}
+
+function odds_refresh(){
 	(function($){
+		var games = galbalGames;
+		var odds = galbalOdds;
 		console.log('odds_refresh call');
 	})(jQuery);
 }

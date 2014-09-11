@@ -260,6 +260,9 @@
 								game.detialAway = "不讓分:" + game.suACom  + " 賠率:" + game.suA + "/讓分:" + game.atsACom + " 賠率:" + game.atsA;
 							});
 							
+							//將games 與odds 輸出到index
+							golbalInsert(games, odds);
+							
 							//生成動態磚
 							var thisGame = gameTagTemp.clone();
 							$('[name="gameTitle"]', thisGame).text(game.gameNum + ' ' + game.teamHome.leagueName);
@@ -342,8 +345,7 @@
 							userOddsCount--;
 						}
 						sessionStorage.userOdds = userOdds;
-						odds_refresh(games, odds);
-						//odds_refresh();
+						odds_refresh();
 						var thisTag = $(this).parent().parent().parent();
 						//依據投注狀況更換動態磚顏色
 						var tagColor = function(){
