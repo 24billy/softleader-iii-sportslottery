@@ -342,7 +342,7 @@
 							userOddsCount--;
 						}
 						sessionStorage.userOdds = userOdds;
-						globalTemp(games,odds);
+						odds_refresh(games, odds);
 						//odds_refresh();
 						var thisTag = $(this).parent().parent().parent();
 						//依據投注狀況更換動態磚顏色

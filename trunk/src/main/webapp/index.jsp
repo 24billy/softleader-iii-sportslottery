@@ -37,13 +37,7 @@
 </style>
 
 <script>
-var globalGames;
-var globalOdds;
-function globalTemp(games,odds){
-	console.log('Global Insert');
-	globalGames = games;
-	globalOdds = odds;
-}
+
 </script>
 </head>
 <body>
@@ -115,7 +109,15 @@ function globalTemp(games,odds){
 <script>
 $(document).ready(function(){
     $('#simple-menu').sidr();
+
 });
+
+function odds_refresh(games, odds){
+	(function($){
+		console.log('odds_refresh call');
+	})(jQuery);
+}
+
 </script>
 </body>
 </html>
