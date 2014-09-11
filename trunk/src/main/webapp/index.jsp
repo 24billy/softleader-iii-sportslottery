@@ -12,22 +12,26 @@
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/bootstrap-dialog.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
 
-<!--sidepanel  -->  
-<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
-
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>"> -->
+<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap-dialog.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">    
+<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
+
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
 </style>
@@ -72,9 +76,6 @@
 
 </body>
   <script type="text/javascript">
-      $(document).ready(function(){
-    	  $('#simple-menu').sidr();
-      });
       
   	$('#game').click(function() {		  		
   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
@@ -106,6 +107,5 @@ $(document).ready(function(){
     $('#simple-menu').sidr();
 });
 </script>
-
 </body>
 </html>
