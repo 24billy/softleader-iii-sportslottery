@@ -8,8 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
@@ -22,8 +20,6 @@
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 
-<<<<<<< .mine
-
 <!--sidepanel  -->  
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
@@ -33,10 +29,8 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
- 
-=======
-<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
->>>>>>> .r626
+
+<link rel="stylesheet" href="<c:url value="/css/jquery.sidr.light.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
@@ -50,6 +44,7 @@
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
+
 </style>
 
 <script>
@@ -57,13 +52,17 @@
 </script>
 </head>
 <body>
-<br><br>
-<div id="page-wrapper">
-		<!-- top start -->
-		<div>		   
-		</div>		
-		<!-- top end -->
-		<!-- navbar start -->
+
+<!-- page start -->
+<div>
+    <div>
+        <!-- TopPage start -->
+        <div>
+            <jsp:include page="topPage.jsp" />
+        </div>
+        <br><br>
+        <!-- TopPage end -->
+        <!-- navbar start -->
 		<div class="navbar navbar-default">
 			<div class="navbar-header">
 				<button type="button" class="btn btn-hot text-uppercase btn-lg"
@@ -76,25 +75,17 @@
 						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
  			</div>
 		</div>
-		<!-- navbar end -->
-	</div>
+		<!-- navbar end -->    
+        <!-- content start -->
+	    <div  id="target" >				
+		  <jsp:include page="/Event/test-events.jsp" />
+	    </div>
+        <!-- content end -->
+    </div>
+</div>
+<!-- page end -->
 
-	<div >		
-		<div class="container-fluid" >
-			<div class="row-fluid" >
-				<!-- content start -->
-				<div id="target">
-					<jsp:include page="/Event/test-events.jsp" />				
-				</div>
-				<!-- content end -->
 
-			</div>
-		</div>
-		<!-- .container-fluid -->
-	</div>
-	<!-- #page-wrapper -->
-
-</body>
   <script type="text/javascript">
 
     $(document).ready(function(){
@@ -114,11 +105,9 @@
 		odds_refresh();
 	});
 </script>
-<body>
-<script src="<c:url value="/js/misc.js"/>"></script>
-<div>
-	<jsp:include page="topPage.jsp"/>
-</div>
+
+
+
 <div id="sidr">
   <!-- lottery content -->
 <!--start lottery panel  -->
@@ -220,14 +209,14 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="single">
                     <!-- Begin of Single Bet Panel -->
-                    <div class="panel-body">
+                    <div  >
                         <form class="form"
                             action="<c:url value="/lottery"/>">
                             <table
                                 class="table table-striped  table-hover">
                                 <thead>
                                     <tr>
-                                        <td>總計</td>
+                                        <td colspan="3">單場</td>
                                     </tr>
                                     <tr>
                                         <td>組合數</td>
@@ -276,7 +265,7 @@
                                     value="1">
                             </div>
                             <div>
-                                <button class="btn btn-danger btn-xs"
+                                <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
                             </div>
                         </form>
@@ -286,12 +275,12 @@
                 </div>
                 <div class="tab-pane" id="pass">
                     <!-- Begin of Pass Bet Panel -->
-                    <div class="panel-body">
+                    <div  >
                         <form class="form" action="<c:url value="/lottery"/>">
                             <table class="table table-striped  table-hover">
                                 <thead>
                                     <tr>
-                                        <td>總計</td>
+                                        <td colspan="3">過關</td>
                                     </tr>
                                     <tr>
                                         <td>組合數</td>
@@ -338,7 +327,7 @@
                                     value="1">
                             </div>
                             <div>
-                                <button class="btn btn-danger btn-xs"
+                                <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
                             </div>
                         </form>
@@ -347,7 +336,7 @@
                 </div>
                 <div class="tab-pane" id="passCom">
                     <!-- Begin of Combination Bet Panel -->
-                    <div class="panel-body">
+                    <div class=" ">
                         <form class="form"
                             action="<c:url value="/lottery"/>">
 
@@ -481,7 +470,7 @@
                                     name="oddsIdList.oddId8" value="">
                             </div>
                             <div>
-                                <button class="btn btn-danger btn-xs"
+                                <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
                             </div>
                         </form>
@@ -498,7 +487,9 @@
 <script>
 $(document).ready(function(){
     $('#simple-menu').sidr();
-
+    $('.lottery.btn').click(function(){
+    	sessionStorage.userOdds="";
+    });
 });
 
 var galbalGames;

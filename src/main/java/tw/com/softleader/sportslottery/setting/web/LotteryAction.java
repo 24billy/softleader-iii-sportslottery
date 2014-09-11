@@ -37,7 +37,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	
 	private LotteryEntity model;
 	private List<LotteryEntity> models;
-	private OddsEntity oddsEntity;
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 	private InputStream inputStream;
 	private String json;
@@ -45,38 +44,23 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
 	private Long winOpen;
-	private Combination combination;
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		log.debug("get Session...");
 		session = request.getSession();
 	}
-	
-	
-	public Combination getCombination() {
-		return combination;
-	}
-
-
-	public void setCombination(Combination combination) {
-		this.combination = combination;
-	}
-
+		
 
 	public OddsIdList getOddsIdList() {
 		return oddsIdList;
 	}
-
-
 	public void setOddsIdList(OddsIdList oddsIdList) {
 		this.oddsIdList = oddsIdList;
 	}
 
-
 	public InputStream getInputStream() {
 		return inputStream;
 	}
-
 	public String getJson() {
 		return json;
 	}
@@ -223,12 +207,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
         System.out.println("oddsCount:"+oddsCount);
         System.out.println("oddsArray:"+temp);
         */
-
-		
-		
-		
-
-		
+	
 		return Action.SUCCESS;
 	}
 	
