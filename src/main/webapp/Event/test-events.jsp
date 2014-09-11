@@ -345,7 +345,9 @@
 							userOddsCount--;
 						}
 						sessionStorage.userOdds = userOdds;
+
 						odds_refresh();
+
 						var thisTag = $(this).parent().parent().parent();
 						//依據投注狀況更換動態磚顏色
 						var tagColor = function(){
