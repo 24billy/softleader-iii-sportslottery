@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.service.GameService;
 
 //這個bean 主要用於儲存遊時間和隊伍名稱相關的odd資訊和以及購買數 和 odd在當天購賣的百分比
-@Service
+//@Service
 public class OddCountBean {
 	private LocalDate gameTime;
 	private String teamName;
@@ -23,8 +24,9 @@ public class OddCountBean {
 	private BigDecimal countPercentage;// count除以totalCountOftheDay 百分比字串
 	private BigDecimal oddValue;
 	private Boolean isPass;
-	@Autowired
-	private GameDao gameDao;
+	
+	//@Autowired
+	private GameDao gameDao = new GameDao();
 	public OddCountBean(){
 		
 	}
@@ -36,9 +38,14 @@ public class OddCountBean {
 		try {
 			this.gameTime = gameTime;
 			this.teamName = teamName;
-			List<OddsEntity> oddsList= gameDao.getOddsByTimeAndTeamName(gameTime, teamName);
-			OddsEntity odd=this.getOddsEntityByType(oddType, oddsList);
+			System.out.println("gameDao="+gameDao);
+			List<OddsEntity> oddsList = gameDao.findOddsByTimeAndTeamName(gameTime, teamName);
+			System.out.println("gameTime="+ gameTime);
+			System.out.println("teamName="+ teamName);
+			System.out.println("oddsList="+ oddsList);
 			
+			OddsEntity odd=this.getOddsEntityByType(oddType, oddsList);
+
 			this.count = odd.getCount();
 			this.oddType = oddType;
 			this.setTotalCountOftheDay(gameTime,teamName);
@@ -97,7 +104,7 @@ public class OddCountBean {
 //		GameDao gameDao= new GameDao();
 		Long totalCountOftheDay;
 		try {
-			List<OddsEntity> OddsList= gameDao.getOddsByTimeAndTeamName(gameTime, teamName);
+			List<OddsEntity> OddsList= gameDao.findOddsByTimeAndTeamName(gameTime, teamName);
 			totalCountOftheDay = 0L;
 			
 			for(OddsEntity odd: OddsList){
