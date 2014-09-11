@@ -55,7 +55,7 @@
 				<button type="button" class="btn btn-sunny text-uppercase btn-lg"
 					id="history">歷史紀錄</button>
 				<button type="button" class="btn btn-sky text-uppercase btn-lg "
-					id="user">使用者資訊</button>
+					id="user">使用者投注資訊</button>
 				<a id="simple-menu" href="#sidr"><button type="button"
 						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
  			</div>
@@ -88,13 +88,14 @@
 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
 	$('#user').click(function() {
-		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
+		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 	});
 	$('#lotteryBoard').click(function() {
 		 odds_refresh();
 	});
 </script>
 <body>
+<script src="<c:url value="/js/misc.js"/>"></script>
 <div>
 	<jsp:include page="topPage.jsp"/>
 </div>
