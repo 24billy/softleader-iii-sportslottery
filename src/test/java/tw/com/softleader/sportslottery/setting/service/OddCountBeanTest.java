@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
+import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
 public class OddCountBeanTest extends BaseTest {
 	@Autowired

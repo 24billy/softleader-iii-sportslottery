@@ -1,4 +1,4 @@
-package tw.com.softleader.sportslottery.setting.service;
+package tw.com.softleader.sportslottery.setting.util;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
+//這個bean 主要用於儲存遊時間和隊伍名稱相關的odd資訊和以及購買數 和 odd在當天購賣的百分比
 @Service
 public class OddCountBean {
 	private LocalDate gameTime;
