@@ -111,7 +111,7 @@
 		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 	});
 	$('#lotteryBoard').click(function() {
-		 odds_refresh();
+		odds_refresh();
 	});
 </script>
 <body>
@@ -509,202 +509,207 @@ function golbalInsert(games, odds){
 //-----------------------------------------------------
 //投注區更新
 function odds_refresh(){
-	(function($){
-		var games = galbalGames;
-		var odds = galbalOdds;
-		console.log('odds_refresh call');
 
-                   
-            //取出投注
-            var userOddIds = [];
-            if(sessionStorage.userOdds){
-                userOddIds  = sessionStorage.userOdds.split(',');
-            }
-            console.log("userOddIds:"+userOddIds);
+	var games = galbalGames;
+	var odds = galbalOdds;
+      
+	//取出投注
+	var userOddIds = [];
+	if(sessionStorage.userOdds){
+	    userOddIds  = sessionStorage.userOdds.split(',');
+	}
+	//console.log("userOddIds:"+userOddIds);
+	
+	//顯示投注區
+	var lotteryId=1;
+	var gameIsSelect=[];
+	var combination=true;
+	//投注的本金計錄；最高中獎金額紀錄
+	var capitalValue=100;
+	var singlePrice=0;
+	var passPrice=1;
+	var bets=userOddIds.length;
+	var numerator=bets+0;
+	var denominator=1;
+	//紀錄投注賠率的陣列，用於計算最高中獎金額
+	var lotteryOddValue=[];                    
+	
+	$.each(userOddIds, function(index, userOddId){
+	    
+	    lotteryOddValue[lotteryId-1]=odds[userOddId].oddValue;
+	    //判斷是否有重覆選取同一賽事         
+	    var oddGameNum=odds[userOddId].gameNum;
+	    if(gameIsSelect[oddGameNum]!=-1 && gameIsSelect[oddGameNum]!=oddGameNum){
+	        gameIsSelect[oddGameNum]=oddGameNum;
+	    
+	    }else{
+	        gameIsSelect[oddGameNum]=-1;
+	        combination=false;
+	    }
+	    
+	    var oddType=odds[userOddId].labelText;
+	    var oddValue=odds[userOddId].oddValue;
+	    //調整最高中獎金額
+	    singlePrice=singlePrice+oddValue;
+	    passPrice=passPrice*oddValue;
+	    var bet = games[odds[userOddId].gameNum];
+	        $('#lottery'+lotteryId).prop("hidden",false);
+	        $('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);             
+	        $('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
+	        $('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
+	        $('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
+	        //加入過關組合checkbox
+	        $('#comTable  tr:eq('+lotteryId+')').prop("hidden",false);
+	        //顯示過關組合數
+	        denominator=denominator*lotteryId;
+	        
+	        $('#comTable  tr:eq('+lotteryId+') td:eq(1)').html(numerator/denominator);
+	        bets=bets-1;
+	        numerator=numerator*bets;
+	    
+	    //加入odd至投注form中
+	        $('.oddId'+lotteryId).val(userOddId);
+	    lotteryId++;
+	});
+	
+	//過關總投注金、最高中獎金額
+	$('#passBet').html(1);
+	$('#passCapital').html($('#passBetValue').val()*capitalValue);
+	$('#passTopPrice').html(Math.floor(passPrice*100));            
+	
+	//單場總投注金、最高中獎金額
+	$('#singleBet').html(userOddIds.length);
+	$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+	$('#singleTopPrice').html(Math.floor(singlePrice*100));
+	//更新過關組合類型與計算金額
+	//計算每個組合的最高可能獎金
+	for(var i=1;i<=8;i++){
+	    if(i<=userOddIds.length){
+	        $('#comTable  tr:eq('+i+') td:eq(2)').html(Math.floor(getCapitalByOdd(lotteryOddValue,i)*capitalValue*$('#comBetValue').val()));    
+	    }
+	}
+	
+	//計算過關組合投注金、最高中獎金額
+	    refreshBetTable();
+	$('[name=comLabel]').click(function(){
+	    refreshBetTable();
+	});
+	//更新總計
+	function refreshBetTable(){
+	    var bet=0;
+	    var topPrice=0;
+	    var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
+	    $.each(checkedlabel, function(index, checkedItem){
+	        
+	        $('input',checkedItem).val(1);
+	        bet+=parseInt($('td:eq(1)', checkedItem).text());
+	        topPrice+=parseInt($('td:eq(2)', checkedItem).text());
+	    });
+	    $('#comBetsTotal').html(bet);
+	    $('#comTopPrice').html(topPrice);
+	    $('#comTopCapital').html(bet*capitalValue*$('#comBetValue').val());
+	    
+	}
+	
+	$('#singleBetValue').off('keyup');
+	$('#singleBetValue').on('keyup', function(){            
+	    $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+	    $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+	});
+	
+	$('#passBetValue').off('keyup');
+	$('#passBetValue').on('keyup', function(){          
+	    $('#passCapital').html($('#passBetValue').val()*capitalValue);              
+	    $('.capitalValue').val($('#passBetValue').val()*capitalValue);
+	});
+	
+	$('#comBetValue').off('keyup');
+	$('#comBetValue').on('keyup', function(){                           
+	    $('.capitalValue').val($('#comBetValue').val()*capitalValue);
+	    refreshBetTable();
+	});               
+	
+	//每一注投注金計算
+	$('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+	$('.capitalValue').val($('#passBetValue').val()*capitalValue);
+	$('.capitalValue').val($('#comBetValue').val()*capitalValue);
+	
+	if((userOddIds.length>=2)&&combination){
+	    //過關
+	    //console.log("before:"+sessionStorage.activeTab);
+	        if($('#myTab li:eq(1)').hasClass("active")){
+	            sessionStorage.activeTab="1";
+	            $('#myTab li:eq(1) a').tab('show');
+	        }
+	        else if($('#myTab li:eq(2)').hasClass("active")){
+	            sessionStorage.activeTab="2";
+	            $('#myTab li:eq(2) a').tab('show');
+	        }
+	        else if( $('#myTab li:eq(0)').hasClass("active")){
+	            sessionStorage.activeTab="0";
+	            $('#myTab li:eq(0) a').tab('show');
+	        }
+	
+	    //console.log("after:"+sessionStorage.activeTab);
+	    
+	
+	    $('#myTab li:eq(1) a').off('click');
+	    $('#myTab li:eq(2) a').off('click');
+	}
+	else{
+	    //單場
+	    $('#myTab li:eq(0) a').tab('show');
+	    //若同一場賽事過關或過關組合僅能選擇一種遊戲玩法，凍結過關與過關組合
+	    $('#myTab li:eq(1) a').off('click');
+	    $('#myTab li:eq(1) a').on('click',function(){
+	        return false;
+	    });
+	    $('#myTab li:eq(2) a').off('click');
+	    $('#myTab li:eq(2) a').on('click',function(){
+	        return false;
+	    });
+	}
+	
+	//隱藏未投注的投注區，未投注的值設定為空值
+	while(lotteryId<=8){
+	    $('#lottery'+lotteryId).attr("hidden",true);
+	    $('#comTable  tr:eq('+lotteryId+')').prop("hidden",true);
+	    $('.oddId'+lotteryId).val("");
+	    lotteryId++;
+	}
+	
+	if (userOddIds!=""){
+	    //有投注時才顯示投注區
+	    $('#betBoard').attr("hidden",false);
+	    $('#clearLottery').attr("hidden",false);
+	
+	}
+	else{
+	    //沒有投注時才隱藏投注區
+	    $('#betBoard').attr("hidden",true);
+	    $('#clearLottery').attr("hidden",true);
+	}
+	
+	//刪除指定投注
+	$('td[name="oddList"] .close').off('click');
+	$('td[name="oddList"] .close').on('click', function(){
+	    userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
+	    sessionStorage.userOdds = userOddIds;
+	    $(this).parent().parent().parent().attr("hidden",true); 
+	    gameRefresh(galbalGames, galbalOdds);
+	    odds_refresh();    
+	});
+	
+	//清除投注區
+	$('#clearbtn').off('click');
+	$('#clearbtn').on('click', function(){
+	    sessionStorage.userOdds="";
+	    gameRefresh(galbalGames, galbalOdds);
+	    odds_refresh();
+	});
 
-            //顯示投注區
-            var lotteryId=1;
-            var gameIsSelect=[];
-            var combination=true;
-            //投注的本金計錄；最高中獎金額紀錄
-            var capitalValue=100;
-            var singlePrice=0;
-            var passPrice=1;
-            var bets=userOddIds.length;
-            var numerator=bets+0;
-            var denominator=1;
-            //紀錄投注賠率的陣列，用於計算最高中獎金額
-            var lotteryOddValue=[];                    
-            
-            $.each(userOddIds, function(index, userOddId){
-                
-                lotteryOddValue[lotteryId-1]=odds[userOddId].oddValue;
-                //判斷是否有重覆選取同一賽事         
-                var oddGameNum=odds[userOddId].gameNum;
-                if(gameIsSelect[oddGameNum]!=-1 && gameIsSelect[oddGameNum]!=oddGameNum){
-                    gameIsSelect[oddGameNum]=oddGameNum;
-                
-                }else{
-                    gameIsSelect[oddGameNum]=-1;
-                    combination=false;
-                }
-                
-                var oddType=odds[userOddId].labelText;
-                var oddValue=odds[userOddId].oddValue;
-                //調整最高中獎金額
-                singlePrice=singlePrice+oddValue;
-                passPrice=passPrice*oddValue;
-                var bet = games[odds[userOddId].gameNum];
-                    $('#lottery'+lotteryId).prop("hidden",false);
-                    $('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);             
-                    $('#lottery'+lotteryId+'> div:eq(1)').html("時間:"+millisecondToDate(bet.gameTime.iLocalMillis)+millisecondToTime(bet.gameTime.iLocalMillis));
-                    $('#lottery'+lotteryId+'> div:eq(2)').html("隊伍:"+bet.teamAway.teamName+"vs"+bet.teamHome.teamName);
-                    $('#lottery'+lotteryId+'> div:eq(3)').html(oddType+'<span">'+oddValue+'</span>'+'<button oddId="'+(lotteryId-1)+'" type="button" class="close" lotteryId="'+lotteryId+'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>');
-                    //加入過關組合checkbox
-                    $('#comTable  tr:eq('+lotteryId+')').prop("hidden",false);
-                    //顯示過關組合數
-                    denominator=denominator*lotteryId;
-                    
-                    $('#comTable  tr:eq('+lotteryId+') td:eq(1)').html(numerator/denominator);
-                    bets=bets-1;
-                    numerator=numerator*bets;
-                
-                //加入odd至投注form中
-                    $('.oddId'+lotteryId).val(userOddId);
-                lotteryId++;
-            });
-            
-            //過關總投注金、最高中獎金額
-            $('#passBet').html(1);
-            $('#passCapital').html($('#passBetValue').val()*capitalValue);
-            $('#passTopPrice').html(Math.floor(passPrice*100));            
-            
-            //單場總投注金、最高中獎金額
-            $('#singleBet').html(userOddIds.length);
-            $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
-            $('#singleTopPrice').html(Math.floor(singlePrice*100));
-            //更新過關組合類型與計算金額
-            //計算每個組合的最高可能獎金
-            for(var i=1;i<=8;i++){
-                if(i<=userOddIds.length){
-                    $('#comTable  tr:eq('+i+') td:eq(2)').html(Math.floor(getCapitalByOdd(lotteryOddValue,i)*capitalValue*$('#comBetValue').val()));    
-                }
-            }
-            
-            //計算過關組合投注金、最高中獎金額
-                refreshBetTable();
-            $('[name=comLabel]').click(function(){
-                refreshBetTable();
-            });
-            //更新總計
-            function refreshBetTable(){
-                var bet=0;
-                var topPrice=0;
-                var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
-                $.each(checkedlabel, function(index, checkedItem){
-                    
-                    $('input',checkedItem).val(1);
-                    bet+=parseInt($('td:eq(1)', checkedItem).text());
-                    topPrice+=parseInt($('td:eq(2)', checkedItem).text());
-                });
-                $('#comBetsTotal').html(bet);
-                $('#comTopPrice').html(topPrice);
-                $('#comTopCapital').html(bet*capitalValue*$('#comBetValue').val());
-                
-            }
-            
-            $('#singleBetValue').on('keyup', function(){            
-                $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
-                $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
-            });
-            $('#passBetValue').on('keyup', function(){          
-                $('#passCapital').html($('#passBetValue').val()*capitalValue);              
-                $('.capitalValue').val($('#passBetValue').val()*capitalValue);
-            });
-            $('#comBetValue').on('keyup', function(){                           
-                $('.capitalValue').val($('#comBetValue').val()*capitalValue);
-                refreshBetTable();
-            });               
-            
-            //每一注投注金計算
-            $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
-            $('.capitalValue').val($('#passBetValue').val()*capitalValue);
-            $('.capitalValue').val($('#comBetValue').val()*capitalValue);
-            
-            if((userOddIds.length>=2)&&combination){
-                //過關
-                //console.log("before:"+sessionStorage.activeTab);
-                    if($('#myTab li:eq(1)').hasClass("active")){
-                        sessionStorage.activeTab="1";
-                        $('#myTab li:eq(1) a').tab('show');
-                    }
-                    else if($('#myTab li:eq(2)').hasClass("active")){
-                        sessionStorage.activeTab="2";
-                        $('#myTab li:eq(2) a').tab('show');
-                    }
-                    else if( $('#myTab li:eq(0)').hasClass("active")){
-                        sessionStorage.activeTab="0";
-                        $('#myTab li:eq(0) a').tab('show');
-                    }
-
-                //console.log("after:"+sessionStorage.activeTab);
-                
-        
-                $('#myTab li:eq(1) a').off('click');
-                $('#myTab li:eq(2) a').off('click');
-            }
-            else{
-                //單場
-                $('#myTab li:eq(0) a').tab('show');
-                //若同一場賽事過關或過關組合僅能選擇一種遊戲玩法，凍結過關與過關組合
-                $('#myTab li:eq(1) a').on('click',function(){
-                    return false;
-                });
-                $('#myTab li:eq(2) a').on('click',function(){
-                    return false;
-                });
-            }
-            
-            //隱藏未投注的投注區，未投注的值設定為空值
-            while(lotteryId<=8){
-                $('#lottery'+lotteryId).attr("hidden",true);
-                $('#comTable  tr:eq('+lotteryId+')').prop("hidden",true);
-                $('.oddId'+lotteryId).val("");
-                lotteryId++;
-                
-            }
-            //刪除指定投注
-            $('td[name="oddList"] .close').click(function(){
-                userOddIds.splice(userOddIds.indexOf($(this).attr('lotteryId')),1);
-                sessionStorage.userOdds = userOddIds;
-                $(this).parent().parent().parent().attr("hidden",true); 
-                superRefresh();
-                odds_refresh();
-                
-            });
-
-            if (userOddIds!=""){
-                //有投注時才顯示投注區
-                $('#betBoard').attr("hidden",false);
-                $('#clearLottery').attr("hidden",false);
-
-            }
-            else{
-                //沒有投注時才隱藏投注區
-                $('#betBoard').attr("hidden",true);
-                $('#clearLottery').attr("hidden",true);
-            }
-            
-            //清除投注區
-            $('#clearbtn').click(function(){
-                sessionStorage.userOdds="";
-                superRefresh();
-                odds_refresh();
-                
-            });
-		
-	})(jQuery);
 }
+
 //-----------------------------------------------------
 //投注區更新結束
 </script>
