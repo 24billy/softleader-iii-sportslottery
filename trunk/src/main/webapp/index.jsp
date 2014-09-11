@@ -214,6 +214,9 @@
         <!-- start of BetBoard -->
         <div id="betBoard" hidden="true" class="panel panel-primary ">
             <!-- Tab panes -->
+            <div class="panel-heading">
+                <h3>投注板</h3>
+            </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="single">
                     <!-- Begin of Single Bet Panel -->
@@ -490,7 +493,7 @@
             </div>
 
         </div>
-        <!-- End of Bet panel -->
+        <!-- End of BetBoard -->
     </div>
 <!--sidepanel  -->  
 
@@ -709,6 +712,12 @@ function odds_refresh(){
 	});
 
 }
+
+
+       
+		
+
+
 
 //-----------------------------------------------------
 //投注區更新結束
