@@ -1,14 +1,15 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
+@Service
 public class OddCountBean {
 	private LocalDate gameTime;
 	private String teamName;
