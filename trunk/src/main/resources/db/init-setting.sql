@@ -104,6 +104,7 @@ insert into game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,TEAM_HOME
 
 INSERT INTO USERN(USER_ACCOUNT,USER_PASSWORD,USER_NAME,USER_CARD_ID,USER_BIRTHDAY,USER_ADDRESS,USER_EMAIL,USER_BANK_ACCOUNT) VALUES('JACKYCHEN','a123123','王小蠻','A323456789','1988-11-11','Taipei','wang1@gmail.com','1234-5678-1111');
 INSERT INTO USERN(USER_ACCOUNT,USER_PASSWORD,USER_NAME,USER_CARD_ID,USER_BIRTHDAY,USER_ADDRESS,USER_EMAIL,USER_BANK_ACCOUNT,USER_PHONE) VALUES('CHEN','a123456','王大蠻','A223456789','1988-11-11','Taipei','wang2@gmail.com','1234-5678-2222','0912345678');
+INSERT INTO USERN(USER_ACCOUNT,USER_PASSWORD,USER_NAME,USER_CARD_ID,USER_BIRTHDAY,USER_ADDRESS,USER_EMAIL,USER_BANK_ACCOUNT) VALUES('WANG','a123456','王','A223456788','1988-11-11','Taipei','wang3@gmail.com','1234-5678-2222');
 
 
 
@@ -524,9 +525,16 @@ insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS)
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,100,1000,'2014-08-08T10:50:20');
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,200,1000,'2014-08-09T10:50:20');
 insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (1,1000,500,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,-1,300,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,-1,400,'2014-08-10T10:50:20');
-insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,-1,300,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,NULL,300,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,NULL,400,'2014-08-10T10:50:20');
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME) values (2,NULL,300,'2014-08-10T10:50:20');
+
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME, COMBINATION_COM1, COMBINATION_COM2, COMBINATION_COM3, COMBINATION_COM4, COMBINATION_COM5, COMBINATION_COM6, COMBINATION_COM7, COMBINATION_COM8, COMBINATION_COM0) values (3,-1,800,'2014-08-10T10:30:20',1,null,null,null,null,null,null,null,null);
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME, COMBINATION_COM1, COMBINATION_COM2, COMBINATION_COM3, COMBINATION_COM4, COMBINATION_COM5, COMBINATION_COM6, COMBINATION_COM7, COMBINATION_COM8, COMBINATION_COM0) values (3,-1,700,'2014-08-10T10:40:20',1,1,null,null,null,null,null,null,null);
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME, COMBINATION_COM1, COMBINATION_COM2, COMBINATION_COM3, COMBINATION_COM4, COMBINATION_COM5, COMBINATION_COM6, COMBINATION_COM7, COMBINATION_COM8, COMBINATION_COM0) values (3,-1,600,'2014-09-05T10:30:20',null,null,null,null,null,null,null,null,1);
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME, COMBINATION_COM1, COMBINATION_COM2, COMBINATION_COM3, COMBINATION_COM4, COMBINATION_COM5, COMBINATION_COM6, COMBINATION_COM7, COMBINATION_COM8, COMBINATION_COM0) values (3,-1,500,'2014-09-05T10:50:20',null,null,null,1,null,null,null,null,null);
+insert into lottery (USER_ID, WIN, CAPITAL, CONFIRM_TIME, COMBINATION_COM1, COMBINATION_COM2, COMBINATION_COM3, COMBINATION_COM4, COMBINATION_COM5, COMBINATION_COM6, COMBINATION_COM7, COMBINATION_COM8, COMBINATION_COM0) values (3,100,400,'2014-09-10T10:50:20',1,null,null,null,null,null,null,1,null);
+
 
 insert into lottery_odds (lottery_id, odds_id) values (4, 361);
 insert into lottery_odds (lottery_id, odds_id) values (4, 363);
@@ -537,7 +545,21 @@ insert into lottery_odds (lottery_id, odds_id) values (5, 366);
 insert into lottery_odds (lottery_id, odds_id) values (5, 368);
 insert into lottery_odds (lottery_id, odds_id) values (6, 362);
 
+
+insert into lottery_odds (lottery_id, odds_id) values (7, 313);
+insert into lottery_odds (lottery_id, odds_id) values (7, 316);
+insert into lottery_odds (lottery_id, odds_id) values (8, 314);
+insert into lottery_odds (lottery_id, odds_id) values (8, 316);
+insert into lottery_odds (lottery_id, odds_id) values (9, 318);
+insert into lottery_odds (lottery_id, odds_id) values (9, 320);
+insert into lottery_odds (lottery_id, odds_id) values (10, 314);
+insert into lottery_odds (lottery_id, odds_id) values (10, 317);
+insert into lottery_odds (lottery_id, odds_id) values (10, 320);
+insert into lottery_odds (lottery_id, odds_id) values (11, 316);
+insert into lottery_odds (lottery_id, odds_id) values (11, 319);
+
 insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('aaa', 'bbb', 1000, null, true);
+
 
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告1', '測試公告內容1', '2014-08-10T10:50:20', '2014-08-12T7:20:50');
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告2', '測試公告內容2', '2014-08-13T8:20:10', '2014-08-13T8:21:45');
@@ -562,4 +584,4 @@ insert into admin_log (profit, entered_time) values (-2111, '2014-6-11T23:36:30'
 insert into admin_log (profit, entered_time) values (-2903, '2014-4-8T2:55:16');
 insert into admin_log (profit, entered_time) values (-2699, '2014-5-12T19:5:27');
 insert into admin_log (profit, entered_time) values (477, '2014-7-17T23:12:23');
-insert into admin_log (profit, entered_time) values (-2837, '2014-2-28T3:29:25');
+insert into admin_log (profit, entered_time) values (-2837, '2014-2-28T3:29:25');>>>>>>> .r625
