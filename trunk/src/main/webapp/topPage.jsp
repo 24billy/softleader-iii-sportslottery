@@ -178,15 +178,42 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					還沒有成為會員? <a href="#" class="btn btn-primary">註冊</a>
+					還沒有成為會員? <a href="#" id="regist" class="btn btn-primary" data-dismiss="modal">註冊</a>
 				</div>
 			</div>
 		</div>
 	</div>
+
 <script>
-(function($){
+
+(function($) {
 	var str = "";
-	
+		
+	$('#toLogin').click(function() {
+		$('#loginError').html('');
+	});
+			
+	$('#regist').click(function() {
+		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+	});
+			
+	$('#login').click(function() {
+		$.ajax({
+	   		url:"<c:url value='/checkLogin'/>",
+			type:"get",
+			data:{
+				'model.userAccount': $('#account').val(),
+				userPassword: $('#password').val()
+			},
+			success: function(data) {
+				if(data=="success") {
+					document.location.href="<c:url value='/index.jsp'/>";	
+				}else {
+					$('#loginError').html('帳號或密碼有誤');
+				}
+			}
+		})
+	});
 	$.ajax({
 		url:'<c:url value="/userOdds?method:selectByUser" />',
 		type:'post',
@@ -205,6 +232,7 @@
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
+
 			});
 			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='<c:url value='/userOdds'/>' class='text-center'>View All</a></li>");
 		}
@@ -233,18 +261,15 @@
 	});
 	function fadeOut() {
 	    $('#coins').fadeOut(500, fadeIn);
-	    
-	    
 	};
 	function fadeIn() {
 	    $('#coins').delay(500).fadeIn(500, fadeOut);
-	    
 	};
 	fadeOut();
 
 
 	
-})(jQuery);
+})(jQuery); 
 </script>
 </body>
 </html>

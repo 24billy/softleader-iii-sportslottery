@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
@@ -20,7 +22,21 @@
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 
+<<<<<<< .mine
+
+<!--sidepanel  -->  
+<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
+<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+
+<link rel="stylesheet" href="<c:url value='/css/font-awesome/css/font-awesome.min.css'/>">	
+<link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+ 
+=======
 <link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
+>>>>>>> .r626
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
@@ -80,7 +96,11 @@
 
 </body>
   <script type="text/javascript">
-      
+
+    $(document).ready(function(){
+    	  $('#simple-menu').sidr();
+    });
+
   	$('#game').click(function() {		  		
   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
  	});
