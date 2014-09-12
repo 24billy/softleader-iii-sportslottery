@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
+-->
 <title>Insert title here</title>
 <style>
 body
@@ -13,7 +15,7 @@ body
 	margin-top:20px;
 	padding-top:20px
 }
-.coin
+.coin,.pay
 {
 	text-align:center;
 	font-weight:900;
@@ -136,6 +138,11 @@ body
   padding: 8px 25px;
   font-size: 18px;
 }
+#numberCoins
+{
+	color:red;
+	font-size:0.5cm
+}
 </style>
 </head>
 <body>
@@ -208,7 +215,7 @@ body
     </div>
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
-            <div class="col-md-10 well">
+            <div class="col-md-12 well">
             	<span><h1 class="p2"><strong class="coinType"></strong>元虛幣</h1>
         		<span class="p2-1"><h1>合計
                 <strong class="coinType"></strong>元</h1></span>
@@ -222,9 +229,8 @@ body
 							<h2>超商繳款</h2>
 						</div>
 						<ul>
-							
 							<li class="plan-feature">
-							<button id="activate-step-3" class="btn btn-primary btn-lg">Select</button>
+							<button id="activate-step-3" class="btn btn-primary btn-lg" >Select</button>
 							</li>
 						</ul>
 					</div>
@@ -233,9 +239,8 @@ body
 							<h2>Card點數</h2>
 						</div>
 						<ul>
-							
 							<li class="plan-feature">
-							<button id="activate-step-4" class="btn btn-primary btn-lg">Select</button>
+							<button id="activate-step-4" class="btn btn-primary btn-lg" >Select</button>
 							</li>
 						</ul>
 					</div>
@@ -244,9 +249,8 @@ body
 							<h2>ATM轉帳</h2>
 						</div>
 						<ul>
-							
 							<li class="plan-feature">
-							<button id="activate-step-5" class="btn btn-primary btn-lg">Select</button>
+							<button id="activate-step-5" class="btn btn-primary btn-lg" >Select</button>
 							</li>
 						</ul>
 					</div>
@@ -257,15 +261,34 @@ body
     <div class="row setup-content" id="step-3">
         <div class="col-xs-12">
             <div class="col-md-12 well text-center">
-                <h1 class="text-center"> STEP 3</h1>
+                <table class="table table-hover">
+                	<thead>
+                		<tr>
+                			<th class="pay">付款方式</th>
+                			<th class="pay">付款金額</th>
+                			<th class="pay">儲值虛幣</th>
+                			<th class="pay">繳款編號</th>
+                		</tr>
+                	</thead>
+                	<tbody>
+                		<tr class="success money">
+                			<td class="payType"></td>
+                			<td class="payMoney"></td>
+                			<td><span class="payMoney"></span>元虛幣</td>
+                			<td id="numberCoins">123456789</td>
+                		</tr>
+                	</tbody>
+                </table>
                 <button id="activate-step-6" class="btn btn-primary btn-lg">Finish</button>
             </div>
         </div>
     </div>
 </div>
+<!--
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+-->
 <script>
 (function($){
 	var navListItems = $('ul.setup-panel li a'),
@@ -286,33 +309,43 @@ body
 	});
 
 	$('ul.setup-panel li.active a').trigger('click');
-
+	
 	// DEMO ONLY //
 	$('.btn').on('click', function(e) {
     	$('ul.setup-panel li:eq(1)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-2"]').trigger('click');
     	$('.coinType').text($(this).val());
+    	//sessionStorge
     	sessionStorage.coinBuy = $(this).val();
     	console.log(sessionStorage.coinBuy*1+100);
 
+    	$('#activate-step-3').val($(this).val());
+    	$('#activate-step-4').val($(this).val());
+    	$('#activate-step-5').val($(this).val());
+    	
 	});
 	
 	$('#activate-step-3').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    	$('.payType').text("超商繳款");
+    	$('.payMoney').text($(this).val());
     	
 	});
 	
 	$('#activate-step-4').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    	$('.payType').text("Card點數");
+    	$('.payMoney').text($(this).val());
     	
 	});
 	
 	$('#activate-step-5').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
-    	
+    	$('.payType').text("ATM轉帳");
+    	$('.payMoney').text($(this).val());
 	});
 
 })(jQuery);
