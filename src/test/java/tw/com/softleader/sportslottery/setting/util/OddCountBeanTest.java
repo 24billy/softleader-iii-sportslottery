@@ -43,12 +43,12 @@ public class OddCountBeanTest extends BaseTest {
 		String teamName= "辛辛那堤紅人";
 		String type="SU_H";
 		
-		bean.setBeanByGameTimeAndTeamName(gameTime,teamName,type);
+//		bean.setBeanByGameTimeAndTeamName(gameTime,teamName,type);
 		
-		
-		log.debug("bean = {}", bean.getCount());
-
-		//assertEquals(new Long(100), bean.getCount());
+//		
+//		log.debug("bean = {}", bean.getCount());
+//
+//		assertEquals(new Long(100), bean.getCount());
 //		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
 //		assertEquals(new BigDecimal("100").divide(new BigDecimal("3300"),mc), bean.getCountPercentage());
 //		assertEquals(LocalDate.parse("2014-08-19"), bean.getGameTime());

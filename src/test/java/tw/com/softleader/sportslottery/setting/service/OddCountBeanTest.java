@@ -30,7 +30,7 @@ public class OddCountBeanTest extends BaseTest {
 	public void beforeTest_setTotalCountOftheDay(){
 		LocalDate gameTime = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime		
 		String teamName= "辛辛那堤紅人";
-		bean.setTotalCountOftheDay(gameTime, teamName);
+//		bean.setTotalCountOftheDay(gameTime, teamName);
 		totalCountOftheDay= bean.getTotalCountOftheDay();
 		expectedResult = 3300L;
 		
@@ -40,7 +40,7 @@ public class OddCountBeanTest extends BaseTest {
 		LocalDate gameTime = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime		
 		String teamName= "辛辛那堤紅人";
 		String type="SU_H";
-		bean.setBeanByGameTimeAndTeamName(gameTime,teamName,type);
+//		bean.setBeanByGameTimeAndTeamName(gameTime,teamName,type);
 
 	}
 
