@@ -58,12 +58,11 @@
 
 <!-- page start -->
 <div>
-    <div>
+    <div class="page-wraper">
         <!-- TopPage start -->
-        <div>
+        <div style="margin:120px">
             <jsp:include page="topPage.jsp" />
-        </div>
-        <br><br><br><br>
+        </div>        
         <!-- TopPage end --> 
         <!-- content start -->
 	    <div  id="target" >	
@@ -220,7 +219,7 @@
                                         <td id="singleCapital">總價</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">每組合投注金額100元
+                                        <td colspan="2">每組合投注  100元
                                             X</td>
                                         <td><input
                                             style="width: 40px"
@@ -284,7 +283,7 @@
                                         <td id="passCapital">總價</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">每組合投注金額100元
+                                        <td colspan="2">每組合投注  100元
                                             X</td>
                                         <td><input
                                             style="width: 40px"
@@ -428,7 +427,7 @@
                                         <td id="comTopCapital">投注金</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">每組合投注金額100元
+                                        <td colspan="2">每組合投注  100元
                                             X</td>
                                         <td><input
                                             style="width: 40px"
