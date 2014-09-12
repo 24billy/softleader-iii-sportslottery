@@ -58,6 +58,7 @@ public class loginFilter implements Filter {
 					session.setAttribute("timeOut", "使用逾時，請重新登入");
 				}
 				System.out.println(contextPath);
+				resp.getOutputStream().println("<script>callMyModal();</script>");
 				resp.sendRedirect(contextPath + "/goIndex");
 				//chain.doFilter(request, response);
 				return;
