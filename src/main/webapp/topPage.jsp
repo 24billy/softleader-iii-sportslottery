@@ -59,25 +59,25 @@
 	    <div class="container">
 	        <div class="collapse navbar-collapse">
 	            <ul class="nav navbar-nav">            
-	                <li><a href='<c:url value="/index.jsp"/>'>Sport Lottery</a></li>
+	                <li><a href="/index.jsp">Sport Lottery</a></li>
 	            </ul>
                 <!-- 登入後 -->
 	            <c:if test="${ !empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li>
-		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd" id="coins">購買虛幣</span>
+		            		<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-usd" id="coins">0</span> 
 							</a>
 		            	</li>
 						<li class="dropdown">
-							<a href='<c:url value="/index.jsp"/>' class="dropdown-toggle" data-toggle="dropdown">
+							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-comment">最新投注</span>  
 							</a>
 							<ul class="dropdown-menu" id="newOdds">
 							</ul>
 						</li>
 						<li class="dropdown">
-			            	<a href='<c:url value="/index.jsp"/>' class="dropdown-toggle" data-toggle="dropdown">
+			            	<a href="/index.jsp"class="dropdown-toggle" data-toggle="dropdown">
 			                	<span class="badge pull-right">42</span>
 		   				 		<span class="glyphicon glyphicon-envelope"></span>
 			                </a>
@@ -93,7 +93,7 @@
 		                </li> 
 		            
 		                <li class="dropdown">
-		                    <a href='<c:url value="/index.jsp"/>' class="dropdown-toggle" data-toggle="dropdown">
+		                    <a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 		                        <span class="glyphicon glyphicon-user"></span>
 		                        <strong>${user.userAccount}</strong>
 		                        <span class="glyphicon glyphicon-chevron-down"></span>
@@ -142,18 +142,18 @@
 	            <c:if test="${ empty user }">
 		            <ul class="nav navbar-nav navbar-right" >
 		            	<li>
-		            		<a href='<c:url value="/index.jsp"/>' id="toLogin" data-toggle="modal" data-target="#myModal">
+		            		<a href="#" id="toLogin" data-toggle="modal" data-target="#myModal">
 		                        <span class="glyphicon glyphicon-user"></span>
 		                        <strong>登入</strong>
 		                    </a>
 		            	</li>
 		            </ul>
 	            </c:if>
-	        </div>	    
+	        </div>
+	    
         <!-- 登入區結束 -->
-        <!-- 導覽列開始 -->
             <div class="row">
-                <div class="navbar-header col-sm-9 col-sm-offset-3">
+                <div class="navbar-header col-sm-8 col-sm-offset-3">
                     <button type="button"
                         class="btn btn-hot text-uppercase btn-lg"
                         id="game">賽事投注</button>
@@ -169,7 +169,6 @@
                             id="lotteryBoard">投注區</button></a>
                 </div>
             </div>
-         <!-- 導覽列結束 -->   
         </div>
 	</div>
 	<!--登入頁面 -->
@@ -193,13 +192,13 @@
 						</p>
 						<p>
 							<button type="button" id="login" class="btn btn-primary">登入</button>
-							<a href='<c:url value="/index.jsp"/>'>忘記密碼</a>
+							<a href="#">忘記密碼</a>
 							<div id="loginError" class="login-error"></div>
 						</p>
 					</form>
 				</div>
 				<div class="modal-footer">
-					還沒有成為會員? <a href='<c:url value="/index.jsp"/>' id="regist" class="btn btn-primary" data-dismiss="modal">註冊</a>
+					還沒有成為會員? <a href="#" id="regist" class="btn btn-primary" data-dismiss="modal">註冊</a>
 				</div>
 			</div>
 		</div>
@@ -255,21 +254,21 @@
 				var lottery = {};
 				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
 				if(data.win>=0 && count<3) {
-					str+= "<li><a href='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
 				} else if(count<3){
-					str+= "<li><a href='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
 
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center' id='all1'>View All</a></li>");
 		}
 		
 	});//ajax
 	$(document).ajaxStop(function() {
-		$('.allOdds').click(function() {
+		$('#all1').click(function() {
 			console.log('all check');
 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		});
@@ -296,7 +295,6 @@
 			}
 		});
 	});
-	/*
 	function fadeOut() {
 	    $('#coins').fadeOut(500, fadeIn);
 	};
@@ -304,12 +302,6 @@
 	    $('#coins').delay(500).fadeIn(500, fadeOut);
 	};
 	fadeOut();
-	*/
-	
-	$('.coins').click(function() {
-		console.log('coins...');
-		$("#target").load('<c:url value="/Security/coins.jsp"/>');
-	});
 
 
 	
