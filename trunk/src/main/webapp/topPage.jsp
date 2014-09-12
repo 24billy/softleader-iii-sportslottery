@@ -188,7 +188,8 @@
 
 (function($) {
 	var str = "";
-		
+
+	<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
 	function callMyModal(){
     	$('#myModal').modal('show');
     }

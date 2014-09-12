@@ -1,11 +1,14 @@
 package tw.com.softleader.sportslottery.filter;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -58,8 +61,10 @@ public class loginFilter implements Filter {
 					session.setAttribute("timeOut", "使用逾時，請重新登入");
 				}
 				System.out.println(contextPath);
-				resp.getOutputStream().println("<script>callMyModal();</script>");
-				resp.sendRedirect(contextPath + "/goIndex");
+				//resp.getOutputStream().println("<script>callMyModal();</script>");
+				req.setAttribute("mustBeLogin", "true");
+				req.getRequestDispatcher("/index.jsp").forward(req, resp);
+				//resp.sendRedirect(contextPath + "/goIndex");
 				//chain.doFilter(request, response);
 				return;
 			}
