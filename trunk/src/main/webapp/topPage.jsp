@@ -161,6 +161,7 @@
 					<h3>全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
+					<c:if test="${not empty errorMsg}"><p class="bg-danger text-danger">${errorMsg}</p></c:if>
 					<form method="post" action="" name="login_form">
 						<p>
 							<input type="text" class="span3" name="model.userAccount" id="account"
