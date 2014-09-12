@@ -563,7 +563,6 @@
 				'model.gameScoreAway':0,
 				'model.gameScoreHome':0
 			}, function(data) {
-				alert(data);
 				$('.form-decimal').each(function() {
 					var oddCombination = 0;
 					
