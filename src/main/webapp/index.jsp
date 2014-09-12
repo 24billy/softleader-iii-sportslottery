@@ -63,22 +63,8 @@
         <div>
             <jsp:include page="topPage.jsp" />
         </div>
-        <br><br>
-        <!-- TopPage end -->
-        <!-- navbar start -->
-		<div class="navbar navbar-default">
-			<div class="navbar-header">
-				<button type="button" class="btn btn-hot text-uppercase btn-lg"
-					id="game">賽事投注</button>
-				<button type="button" class="btn btn-sunny text-uppercase btn-lg"
-					id="history">歷史紀錄</button>
-				<button type="button" class="btn btn-sky text-uppercase btn-lg "
-					id="user">使用者投注資訊</button>
-				<a id="simple-menu" href="#sidr"><button type="button"
-						class="btn btn-tree text-uppercase btn-lg " id="lotteryBoard">投注區</button></a>
- 			</div>
-		</div>
-		<!-- navbar end -->    
+        <br><br><br><br>
+        <!-- TopPage end --> 
         <!-- content start -->
 	    <div  id="target" >	
 		  <jsp:include page="/Event/test-events.jsp" />

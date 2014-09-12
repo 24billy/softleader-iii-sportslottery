@@ -59,25 +59,25 @@
 	    <div class="container">
 	        <div class="collapse navbar-collapse">
 	            <ul class="nav navbar-nav">            
-	                <li><a href="#">Sport Lottery</a></li>
+	                <li><a href="/index.jsp">Sport Lottery</a></li>
 	            </ul>
-	            <!-- 登入後 -->
+                <!-- 登入後 -->
 	            <c:if test="${ !empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li>
-		            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		            		<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-usd" id="coins">0</span> 
 							</a>
 		            	</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-comment">最新投注</span>  
 							</a>
 							<ul class="dropdown-menu" id="newOdds">
 							</ul>
 						</li>
 						<li class="dropdown">
-			            	<a href="#"class="dropdown-toggle" data-toggle="dropdown">
+			            	<a href="/index.jsp"class="dropdown-toggle" data-toggle="dropdown">
 			                	<span class="badge pull-right">42</span>
 		   				 		<span class="glyphicon glyphicon-envelope"></span>
 			                </a>
@@ -93,7 +93,7 @@
 		                </li> 
 		            
 		                <li class="dropdown">
-		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		                    <a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 		                        <span class="glyphicon glyphicon-user"></span>
 		                        <strong>${user.userAccount}</strong>
 		                        <span class="glyphicon glyphicon-chevron-down"></span>
@@ -150,7 +150,26 @@
 		            </ul>
 	            </c:if>
 	        </div>
-	    </div>
+	    
+        <!-- 登入區結束 -->
+            <div class="row">
+                <div class="navbar-header col-sm-8 col-sm-offset-3">
+                    <button type="button"
+                        class="btn btn-hot text-uppercase btn-lg"
+                        id="game">賽事投注</button>
+                    <button type="button"
+                        class="btn btn-sunny text-uppercase btn-lg"
+                        id="history">歷史紀錄</button>
+                    <button type="button"
+                        class="btn btn-sky text-uppercase btn-lg "
+                        id="user">使用者投注資訊</button>
+                    <a id="simple-menu" href="#sidr"><button
+                            type="button"
+                            class="btn btn-tree text-uppercase btn-lg "
+                            id="lotteryBoard">投注區</button></a>
+                </div>
+            </div>
+        </div>
 	</div>
 	<!--登入頁面 -->
 	<div class="modal fade" id="myModal">
