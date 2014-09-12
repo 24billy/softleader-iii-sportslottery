@@ -52,8 +52,11 @@ public class AdminLogServiceTest extends BaseTest {
 		models = service.getInLastYear();
 		log.debug("last year month models = {}", models);
 		
-		Long sum = service.getSpecificMonthByCurrentDate(-12);
+		Long sum = service.getSumFromTodayToSpecificMonth(-12);
 		log.debug("sum = {}", sum);
+		
+		List<Long> sums = service.getSumOfLastYear();
+		log.debug("sums = {}", sums);
 	}
 
 }
