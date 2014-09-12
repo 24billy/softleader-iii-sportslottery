@@ -26,7 +26,7 @@
 		transition: all 220ms ease;
 	}
 	.gametag:HOVER{
-		box-shadow: inset 0px 0px 10px 0px #FFFFFF;
+		box-shadow: inset 0px 0px 10px 0px #000000;
 	}
 	.gametag.primary{
 		background: #428bca url(<c:url value="/images/bg-blueprint.png"/>);
