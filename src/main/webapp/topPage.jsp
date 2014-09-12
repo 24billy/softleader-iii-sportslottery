@@ -304,7 +304,7 @@
 	fadeOut();
 	*/
 	
-	$('.coins').click(function() {
+	$('#coins').click(function() {
 		console.log('coins...');
 		$("#target").load('<c:url value="/Security/coins.jsp"/>');
 	});
