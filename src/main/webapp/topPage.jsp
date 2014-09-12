@@ -189,6 +189,10 @@
 (function($) {
 	var str = "";
 		
+	function callMyModal(){
+    	$('#myModal').modal('show');
+    }
+	
 	$('#toLogin').click(function() {
 		$('#loginError').html('');
 	});

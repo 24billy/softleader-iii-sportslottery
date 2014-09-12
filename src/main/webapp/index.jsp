@@ -80,7 +80,7 @@
 		</div>
 		<!-- navbar end -->    
         <!-- content start -->
-	    <div  id="target" >				
+	    <div  id="target" >	
 		  <jsp:include page="/Event/test-events.jsp" />
 	    </div>
         <!-- content end -->
@@ -705,12 +705,6 @@ function odds_refresh(){
 	});
 
 }
-
-
-       
-		
-
-
 
 //-----------------------------------------------------
 //投注區更新結束
