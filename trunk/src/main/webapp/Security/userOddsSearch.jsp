@@ -155,11 +155,9 @@
 					'winOpen':winQuery,
 				},
 				success:function(datas){
-					if(table){
-						$('#oddList').off('click');
-						$('#oddTable').DataTable().rows().remove();
-						$('#oddTable').DataTable().destroy();
-					}
+					$('#oddList').off('click');
+					$('#oddTable').DataTable().rows().remove();
+					$('#oddTable').DataTable().destroy();
 					//console.log("-----datas-----");
 					//console.log(datas);
 					

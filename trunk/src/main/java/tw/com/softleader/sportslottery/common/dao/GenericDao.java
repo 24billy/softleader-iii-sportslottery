@@ -60,8 +60,11 @@ public class GenericDao<T extends GenericEntity> {
 	}
 	
 	public void delete(T entity){
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(entity);
+		
+		getSession().delete(entity);
 	}
 	
+	protected Session getSession(){
+		return sessionFactory.getCurrentSession();
+	}
 }

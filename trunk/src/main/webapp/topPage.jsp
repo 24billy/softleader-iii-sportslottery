@@ -261,11 +261,9 @@
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
-
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center' id='all1'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds' id='all1'>View All</a></li>");
 		}
-		
 	});//ajax
 	$(document).ajaxStop(function() {
 		$('.allOdds').click(function() {
