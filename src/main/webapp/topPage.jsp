@@ -65,8 +65,8 @@
 	            <c:if test="${ !empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li>
-		            		<a href='<c:url value="/index.jsp"/>' class="dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd" id="coins">0</span> 
+		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-usd" id="coins">購買虛幣</span>
 							</a>
 		            	</li>
 						<li class="dropdown">
@@ -255,21 +255,21 @@
 				var lottery = {};
 				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
 				if(data.win>=0 && count<3) {
-					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
 				} else if(count<3){
-					str+= "<li><a href='<c:url value='/userOdds'/>'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
 
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center' id='all1'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>View All</a></li>");
 		}
 		
 	});//ajax
 	$(document).ajaxStop(function() {
-		$('#all1').click(function() {
+		$('.allOdds').click(function() {
 			console.log('all check');
 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		});
@@ -296,6 +296,7 @@
 			}
 		});
 	});
+	/*
 	function fadeOut() {
 	    $('#coins').fadeOut(500, fadeIn);
 	};
@@ -303,6 +304,12 @@
 	    $('#coins').delay(500).fadeIn(500, fadeOut);
 	};
 	fadeOut();
+	*/
+	
+	$('.coins').click(function() {
+		console.log('coins...');
+		$("#target").load('<c:url value="/Security/coins.jsp"/>');
+	});
 
 
 	
