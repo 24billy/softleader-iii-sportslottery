@@ -62,7 +62,7 @@
 	                <li><a href="/index.jsp">Sport Lottery</a></li>
 	            </ul>
                 <!-- 登入後 -->
-	            <c:if test="${ !empty user }">
+	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li>
 		            		<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
@@ -254,10 +254,10 @@
 				var lottery = {};
 				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
 				if(data.win>=0 && count<3) {
-					str+= "<li><a href='<c:url value='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
 				} else if(count<3){
-					str+= "<li><a href='<c:url value='#' class='allOdds'><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
@@ -279,7 +279,7 @@
 	
 	$('#login').click(function() {
 		$.ajax({
-			url : "<c:url value='/checkLogin'/>",
+			url : '<c:url value="/checkLogin"/>',
 			type : "get",
 			data : {
 				'model.userAccount' : $('#account').val(),
@@ -288,7 +288,7 @@
 			success : function(data) {
 
 				if (data == "success") {
-					document.location.href = "<c:url value='/index.jsp'/>";
+					document.location.href = '<c:url value="/index.jsp"/>';
 				} else {
 					$('#loginError').html('帳號或密碼有誤');
 				}
