@@ -166,12 +166,12 @@ public class UserAction extends ActionSupport {
 		if(model!=null) {
 			if(model.getUserAccount()!=null && model.getUserAccount().length()>3) {
 			} else {
-				log.debug("帳號問題");
+				log.debug("帳號問題" + model.getUserAccount());
 				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
 			}
 			if(userPassword!=null && userPassword.length()>5) {
 			} else {
-				log.debug("密碼問題");
+				log.debug("密碼問題" + userPassword);
 				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
 			}
 			
