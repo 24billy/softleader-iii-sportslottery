@@ -18,11 +18,10 @@ import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 
 @Repository
 public class TeamDao  extends GenericDao<TeamEntity> {
-	@Autowired
-	private SessionFactory sessionFactory;
+	//@Autowired
+	//private SessionFactory sessionFactory;
 	public List<TeamEntity> findByLeagueName(String leagueName){
-		Session session = sessionFactory.getCurrentSession();
-		Query query= session.createQuery("from TeamEntity where league_name = :leagueName");
+		Query query= getSession().createQuery("from TeamEntity where league_name = :leagueName");
 		return query.setString("leagueName", leagueName).list();
 		
 	}
