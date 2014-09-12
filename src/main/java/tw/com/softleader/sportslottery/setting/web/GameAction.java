@@ -335,8 +335,7 @@ public class GameAction extends ActionSupport {
 			model.setIsEnd(false);
 			
 			try {
-				service.update(model);
-				model = service.getByGameNum(model.getGameNum());
+				model = service.insert(model);
 				result = model.getId().toString();
 			} catch (Exception e) {
 				e.printStackTrace();
