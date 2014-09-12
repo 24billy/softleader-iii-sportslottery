@@ -93,8 +93,8 @@ public class AdminLogAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("AdminLogAction admin()");
-		models = service.getAll();
-		json = new Gson().toJson(models);
+		List<Long> sums = service.getSumOfLastYear();
+		json = new Gson().toJson(sums);
 		
 		return Action.SUCCESS;
 	}

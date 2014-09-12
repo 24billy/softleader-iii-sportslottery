@@ -47,7 +47,7 @@ public class AdminLogDao extends GenericDao<AdminLogEntity> {
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
 	}
 	
-	public Long findSpecificMonthByCurrentDate(int arg0) {
+	public Long findSumFromTodayToSpecificMonth(int arg0) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Long) session.createCriteria(AdminLogEntity.class)
 				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(arg0)))

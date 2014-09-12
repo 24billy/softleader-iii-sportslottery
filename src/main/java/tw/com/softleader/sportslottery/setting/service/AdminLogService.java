@@ -1,5 +1,6 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,15 @@ public class AdminLogService extends GenericService<AdminLogEntity> {
 		return dao.findInLastYear();
 	}
 	
-	public Long getSpecificMonthByCurrentDate(int arg0) {
-		return dao.findSpecificMonthByCurrentDate(arg0);
+	public Long getSumFromTodayToSpecificMonth(int arg0) {
+		return dao.findSumFromTodayToSpecificMonth(arg0);
+	}
+	
+	public List<Long> getSumOfLastYear() {
+		List<Long> sums = new ArrayList<Long>();
+		for (int arg = -1; arg >= -12; arg--) {
+			sums.add(dao.findSumFromTodayToSpecificMonth(arg));
+		}
+		return sums;
 	}
 }

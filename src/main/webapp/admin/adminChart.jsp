@@ -73,9 +73,10 @@
 <script src="<c:url value="/js/exporting.js"/>"></script>
 <script>
 	(function($) {
+		
 		$('#profitChart').highcharts({
 			title: {
-				text: '每月獲利',
+				text: '月報表',
 				x: -20
 			},
 			xAxis: {
@@ -91,9 +92,9 @@
 				borderWidth: 0
 			},
 			series: [{
-				name: '獲利',
+				name: '總獲利',
 				color: '#582',
-				data: [12345, -100, 42654, 75611, 45351, 48613, -13151, 84351, 98460, 12315, -1235, 45643]
+				data: $.parseJSON('${json}')
 			}]
 		});
 		
