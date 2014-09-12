@@ -102,7 +102,7 @@ font-size: 24px;
 
 <body>
 
-
+	<br><br>
 
 
 	<div id="sigUp-body">
@@ -132,13 +132,13 @@ font-size: 24px;
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="account">帳號</label> <input type="text"
-												class="form-control" id="account" name="model.userAccount"
+											<label for="accountf">帳號</label> <input type="text"
+												class="form-control" id="accountf" name="model.userAccount"
 												placeholder="輸入帳號" required="required" />
 										</div>
 										<div class="form-group">
-											<label for="password">密碼</label> <input type="text"
-												class="form-control" id="password" name="userPassword"
+											<label for="passwordf">密碼</label> <input type="text"
+												class="form-control" id="passwordf" name="userPassword"
 												placeholder="輸入密碼" />
 										</div>
 										<div class="form-group">
@@ -285,12 +285,15 @@ font-size: 24px;
 
 	(function($) {
 		$('#addUserButton').on('click',function() {
+			console.log('lalala');
+			console.log($('#account').val());
+			console.log($('#password').val());
 			$.ajax({
 				url:"<c:url value='/addAccount'/>",
 				type:"get",
 				data:{
-					'model.userAccount': $('#account').val(),
-					userPassword: $('#password').val(),
+					'model.userAccount': $('#accountf').val(),
+					userPassword: $('#passwordf').val(),
 					'model.userBirthday': $('#userBirth').val(),
 					'model.userEmail': $('#email').val(),
 					'model.userName': $('#name').val(),

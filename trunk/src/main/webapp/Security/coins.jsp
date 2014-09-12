@@ -276,7 +276,7 @@ body
     	e.preventDefault();
     	var $target = $($(this).attr('href')),
        		$item = $(this).closest('li');
-    
+
     	if (!$item.hasClass('disabled')) {
         	navListItems.closest('li').removeClass('active');
         	$item.addClass('active');
@@ -294,7 +294,7 @@ body
     	$('.coinType').text($(this).val());
     	sessionStorage.coinBuy = $(this).val();
     	console.log(sessionStorage.coinBuy*1+100);
-    	
+
 	});
 	
 	$('#activate-step-3').on('click', function(e) {
