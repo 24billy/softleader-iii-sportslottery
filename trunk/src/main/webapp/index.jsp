@@ -488,12 +488,7 @@
 <!--sidepanel  -->  
 
 <script>
-$(document).ready(function(){
-    $('#simple-menu').sidr();
-    $('.lottery.btn').click(function(){
-    	sessionStorage.userOdds="";
-    });
-});
+
 
 var galbalGames;
 var galbalOdds;

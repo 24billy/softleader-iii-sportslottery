@@ -11,7 +11,7 @@
 	<h1>你已經完成投注，三秒後回到賽事表頁面。</h1>
     
 <script>
-
+sessionStorage.userOdds="";
 setTimeout(function(){
 	document.location.href='<c:url value="/index.jsp"/>';
 },3000);
