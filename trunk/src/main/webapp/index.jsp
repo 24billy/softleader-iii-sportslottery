@@ -214,7 +214,7 @@
                     <!-- Begin of Single Bet Panel -->
                     <div  >
                         <form class="form"
-                            action="<c:url value="/lottery"/>">
+                            action="<c:url value="/lottery"/>" method="post">
                             <table
                                 class="table table-striped  table-hover">
                                 <thead>

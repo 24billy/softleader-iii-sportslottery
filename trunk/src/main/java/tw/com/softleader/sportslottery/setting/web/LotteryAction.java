@@ -5,6 +5,7 @@ import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.util.*;
 
+import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.apache.struts2.*;
@@ -128,9 +129,20 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		//start insert
 		//測試用：設定UserId為2
 		model.setUserId(2L);
+		
+	      Map session = ActionContext.getContext().getSession();
+	        UserEntity user = (UserEntity)session.get("user");
+	    //HttpServletRequest req = (HttpServletRequest) request;
+	    //   HttpSession session = req.getSession();
+	    //    UserEntity loginToken = (UserEntity) session.getAttribute("user");
+	    //    System.out.println("loginToken:"+loginToken);
+	    model.setUserId(user.getId());
+	    
+	    
 		model.setConfirmTime(new LocalDateTime());
 		
         Long capital = model.getCapital();
+        model.setWin(-1L);
         System.out.println("capital:"+capital);
         model=service.insert(model);
         
