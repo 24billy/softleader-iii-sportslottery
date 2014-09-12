@@ -196,7 +196,19 @@ function gameRefresh(games, odds){
 			$('[name="gameTime"]', thisGame).text(game.date + ' ' + game.time);
 			
 			var count = 0;			
-			$.each(game.odds, function(index, odd){					
+			$.each(game.odds, function(index, odd){	
+				switch(odd.oddType) {
+			    case 'SU_A': count = 0; break;
+			    case 'SU_H': count = 1; break;
+			    case 'ATS_A': count = 2; break;
+			    case 'ATS_H': count = 3; break;
+			    case 'SC_H': count = 4; break;
+			    case 'SC_L': count = 5; break;
+			    case 'ODD': count = 6; break;
+			    case 'EVEN': count = 7; break;
+			    default: break;
+				}
+				
 				var thisCheckbox = $('input:eq(' + count + ')', thisGame);
 				var thislabel = $('label:eq(' + count + ')', thisGame);
 				thisCheckbox.attr('id', 'cb' + odd.id);
@@ -215,8 +227,7 @@ function gameRefresh(games, odds){
 				labelText += '(' + odd.oddCombination + ')';
 				$('samp:eq(0)', thislabel).text(labelText);
 				$('samp:eq(1)', thislabel).text(odd.oddValue);
-				
-				count++;
+
 			});
 			
 			if(game.isEnd){
