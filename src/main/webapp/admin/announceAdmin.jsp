@@ -25,11 +25,11 @@
 		<div id="page-wrapper">
 			<div class="container animated fadeIn">
 				<div class="row">
-					<div class="col-sm-2 container-left">
+					<div class="col-sm-3 container-left">
 						<jsp:include page="slider.jsp"/>
 					</div>
-					<!-- .col-sm-2 -->
-					<div class="col-sm-10 container-right">
+					<!-- .container-left -->
+					<div class="col-sm-9 container-right">
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="page-header">
@@ -69,7 +69,7 @@
 						<!-- .row -->
 						<!-- End of announceTable -->
 					</div>
-					<!-- col-sm-10 -->
+					<!-- .container-right -->
 				</div>
 				<!-- .row -->
 			</div>
