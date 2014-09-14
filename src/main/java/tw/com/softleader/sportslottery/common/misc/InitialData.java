@@ -117,11 +117,10 @@ public class InitialData implements ServletContextListener {
 			OddsEntity odds = new OddsEntity();
 			BigDecimal stdValue = new BigDecimal("1.5");
 			BigDecimal diffValue = new BigDecimal("0.05");
-			BigDecimal range = new BigDecimal(rand.nextInt(26));
+			BigDecimal range = new BigDecimal(rand.nextInt(21));
 			BigDecimal oddValue = diffValue.multiply(range).add(stdValue);
 			odds.setGameId(gameId);
 			odds.setCount(0L);
-			odds.setGameId(gameId);
 			odds.setOddType(oddType[i]);
 			odds.setOddValue(oddValue);
 			
