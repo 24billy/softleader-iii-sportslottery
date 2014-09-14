@@ -47,12 +47,13 @@ public class InitialData implements ServletContextListener {
 			int leagueIndex = rand.nextInt(leagueNames.size() - 1);
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
-			LocalDateTime gameTime = LocalDateTime.now().plusMonths(rand.nextInt(8) - 6)
-														.plusDays(rand.nextInt(30) - 15)
-														.plusHours(rand.nextInt(24) - 12)
-														.plusMinutes(rand.nextInt(60) - 30)
-														.withSecondOfMinute(0)
-														.withMillisOfSecond(0);
+			LocalDateTime gameTime = LocalDateTime.now()
+										.plusMonths(rand.nextInt(8) - 6)
+										.plusDays(rand.nextInt(30) - 15)
+										.plusHours(rand.nextInt(24) - 12)
+										.plusMinutes(rand.nextInt(60) - 30)
+										.withSecondOfMinute(0)
+										.withMillisOfSecond(0);
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
 			Long gameNum = gameService.maxGameNum();
