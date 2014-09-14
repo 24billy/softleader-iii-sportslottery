@@ -70,12 +70,20 @@ public class InitialData implements ServletContextListener {
 			Boolean isEnd = null;
 			Long gameScoreAway = 0L;
 			Long gameScoreHome = 0L;
+			Long gameStatus = 0L;
 			if (gameTime.isAfter(LocalDateTime.now().plusHours(-3))) {
 				isEnd = false;
 			} else {
 				isEnd = true;
 				gameScoreAway = Long.valueOf(rand.nextInt(10));
 				gameScoreHome = Long.valueOf(rand.nextInt(10));
+			}
+			if (gameTime.isBefore(LocalDateTime.now().plusDays(-1))) {
+				gameStatus = 3L;
+			} else if (gameTime.isBefore(LocalDateTime.now().plusHours(-3))) {
+				gameStatus = 2L;
+			} else if (gameTime.isBefore(LocalDateTime.now().plusDays(2))) {
+				gameStatus = 1L;
 			}
 			
 			GameEntity game = new GameEntity();
@@ -87,6 +95,7 @@ public class InitialData implements ServletContextListener {
 			game.setBallType(ballType);
 			game.setGameTime(gameTime);
 			game.setIsEnd(isEnd);
+			game.setGameStatus(gameStatus);
 			game = gameService.insert(game);
 			createOdds(game, getPassedTypes(game));
 		}

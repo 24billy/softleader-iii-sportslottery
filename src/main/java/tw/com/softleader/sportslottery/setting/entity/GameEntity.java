@@ -49,7 +49,7 @@ public class GameEntity extends GenericEntity {
 	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
 	private Boolean isEnd;
 	
-	@Column(name="GAME_STATUS", columnDefinition="BIGINT default 1")
+	@Column(name="GAME_STATUS", columnDefinition="BIGINT default 0")
 	private Long gameStatus;
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId", cascade = {CascadeType.ALL})

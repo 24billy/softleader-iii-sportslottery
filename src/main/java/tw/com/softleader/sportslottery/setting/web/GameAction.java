@@ -302,6 +302,25 @@ public class GameAction extends ActionSupport {
 		return "message";
 	}
 	
+	public String open() {
+		log.debug("GameAction start()");
+		
+		String result = null;
+		try {
+			model = service.getById(model.getId());
+			model.setGameStatus(1L);
+			service.update(model);
+			
+			result = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "failed";
+		}
+		
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
+	}
+	
 	public String insert() {
 		log.debug("GameAction insert()");
 		
@@ -312,6 +331,7 @@ public class GameAction extends ActionSupport {
 		LocalDateTime gameTime = model.getGameTime();
 		TeamEntity teamAway = teamService.getById(teamAwayId);
 		TeamEntity teamHome = teamService.getById(teamHomeId);
+		Long gameStatus = 0L;
 		
 		if (gameId != null && gameId > 0) {
 			model = service.getById(gameId);
@@ -320,6 +340,7 @@ public class GameAction extends ActionSupport {
 			model.setGameTime(gameTime);
 			model.setTeamAway(teamAway);
 			model.setTeamHome(teamHome);
+			model.setGameStatus(gameStatus);
 			
 			try {
 				service.update(model);
@@ -333,6 +354,7 @@ public class GameAction extends ActionSupport {
 			model.setTeamHome(teamAway);
 			model.setTeamAway(teamHome);
 			model.setIsEnd(false);
+			model.setGameStatus(gameStatus);
 			
 			try {
 				model = service.insert(model);
