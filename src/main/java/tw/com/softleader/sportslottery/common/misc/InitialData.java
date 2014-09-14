@@ -32,7 +32,7 @@ public class InitialData implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent arg0)  {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-		createGames(1000);
+		createGames(250);
     }
 	
     public void contextDestroyed(ServletContextEvent arg0)  { 
@@ -46,12 +46,18 @@ public class InitialData implements ServletContextListener {
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
 			LocalDateTime gameTime = LocalDateTime.now()
-										.plusMonths(rand.nextInt(8) - 6)
-										.plusDays(rand.nextInt(30) - 15)
-										.plusHours(rand.nextInt(24) - 12)
 										.plusMinutes(rand.nextInt(60) - 30)
 										.withSecondOfMinute(0)
 										.withMillisOfSecond(0);
+			if (i == num - 1) {
+				gameTime = gameTime.plusHours(-1);
+			} else {
+				gameTime = gameTime
+							.plusMonths(rand.nextInt(8) - 6)
+							.plusDays(rand.nextInt(30) - 15)
+							.plusHours(rand.nextInt(24) - 12);
+			}
+			
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
 			Long gameNum = gameService.maxGameNum();
