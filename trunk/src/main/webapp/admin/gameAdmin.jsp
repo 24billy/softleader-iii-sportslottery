@@ -337,8 +337,45 @@
 		</div>
 		<!-- End of statusModal -->
 		
+		<!-- Begin of openModal -->
+		<div class="modal fade" id="openModal" role="dialog" aria-labelledby="openModalTitle" aria-hidden="true" tabindex="-1">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				
+					<div id="openModalHeader" class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<h3 id="openModalTitle" class="modal-title">開放投注</h3>
+					</div>
+					<!-- modal-header -->
+					
+					<div class="modal-body">
+					
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="text-center">確認開放投注？</h4>
+							</div>
+						</div>
+						<!-- .row -->
+					</div>
+					<!-- .modal-body -->
+							
+		      		<div id="openModalFooter" class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnOpen">確認</button>
+		      		</div>
+		      		<!-- .modal-footer -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- End of openModal -->
+		
 		<!-- Begin of payoutModal -->
-		<div class="modal fade" id="payoutModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" tabindex="-1">
+		<div class="modal fade" id="payoutModal" role="dialog" aria-labelledby="payoutModalTitle" aria-hidden="true" tabindex="-1">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 				
@@ -410,20 +447,28 @@
 			var currentDate = new Date().getTime();
 			var gameTime = new Date(game.gameTime.iLocalMillis - 8 * 60 * 60 * 1000).getTime();
 			
-			if (game.isEnd) {
-				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已結束</button></td>';
+			if (game.gameStatus == 3) {
+				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已派彩</button></td>';
+				child += '<td>';
+			} else if (game.gameStatus == 2)  {
+				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">已結束</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-fw fa-flag"></i></button>';
-				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-payout left10" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-fw fa-trophy"></i></button>';
-			} else if (currentDate > gameTime) {
-				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">進行中</button></td>';
+				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-payout left5" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-fw fa-trophy"></i></button>';
+			} else if (currentDate >= gameTime) {
+				child += '<td><button type="button" class="btn btn-primary btn-xs disabled">進行中</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-fw fa-flag"></i></button>';
-			} else {
-				child += '<td><button type="button" class="btn btn-info btn-xs btn-status disabled">尚未開始</button></td>';
+			} else if (game.gameStatus == 1) {
+				child += '<td><button type="button" class="btn btn-info btn-xs btn-status disabled">可投注</button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
-				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
+			} else {
+				child += '<td><button type="button" class="btn btn-xs btn-status disabled">未開放</button></td>';
+				child += '<td>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-del left5" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
+				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-open left5" data-toggle="modal" data-target="#openModal"><i class="fa fa-fw fa-check-square-o"></i></button>';
 			}
 			child += '</td>';
 			child += '</tr>';
@@ -436,38 +481,39 @@
 		//Begin of listTeam
 		$('#btnAddGame').click(function() {
 			$('#gameModalTitle').text("新增賽事");
-			listTeam(null);
+			resetInput();
+			var maxGameNum = Math.max.apply(Math, gameNumArray);
+			$('[name="model.gameNum"]').val(maxGameNum + 1);
+			listTeam(null, null);
 		});
 		
 		$('.btn-edit').click(function() {
 			$('#gameModalTitle').text("編輯賽事");
-			listTeam($(this).val());
-		});
-		
-		$('#leagueName').change(function() {
-			listTeam();
-		});
-		
-		function listTeam(gameId) {
-			resetInput();
-			var maxGameNum = Math.max.apply(Math, gameNumArray);
-			$('[name="model.gameNum"]').val(maxGameNum + 1);
-			
-			$('#teamAwayList,#teamHomeList').empty();
-			
-			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
-				'model.leagueName':$('#leagueName').val()
-			}, function(data) {	
-				$.each(data, function(key, value) {
-					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
-					$('#teamAwayList,#teamHomeList').append(str);
-				});
-				
-				$('#teamAwayList')[0].selectedIndex = 0;
-				$('#teamAwayList').change();
-				$('#teamHomeList')[0].selectedIndex = 1;
-				$('#teamHomeList').change();
-			}, 'json');
+			var url = '<c:url value="/admin/gameAdmin?method:select"/>';
+			$.getJSON(url, {
+				'model.id':$(this).val()
+			}, function(data) {
+				var dateTime = new Date(data.gameTime.iLocalMillis);
+				var year = dateTime.getUTCFullYear();
+				var month = addZero(dateTime.getUTCMonth() + 1);
+				var date = addZero(dateTime.getUTCDate());
+				var hours = addZero(dateTime.getUTCHours());
+				var minutes = addZero(dateTime.getUTCMinutes());
+				$('[name="model.leagueName"] option').filter(function() {
+					return $(this).text() == data.teamHome.leagueName;
+				}).prop('selected', true);
+				listTeam(data.teamAway.id, data.teamHome.id);
+				$('[name="model.gameNum"]').val(data.gameNum);
+				$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
+				$('#btnMerge').val(data.id);
+				if (data.odds.length != 0) {
+					$.each(data.odds, function(index, odd) {
+						$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
+					});
+				} else {
+					$('.form-decimal').val('2.00');
+				}
+			});
 			
 			function addZero(str) {
 				if (str < 10) {
@@ -476,37 +522,38 @@
 				return str;
 			}
 			
-			if (gameId != null) {
-				var url = '<c:url value="/admin/gameAdmin?method:select"/>';
-				$.post(url, {
-					'model.id':gameId
-				}, function(data) {
-					var dateTime = new Date(data.gameTime.iLocalMillis);
-					var year = dateTime.getUTCFullYear();
-					var month = addZero(dateTime.getUTCMonth() + 1);
-					var date = addZero(dateTime.getUTCDate());
-					var hours = addZero(dateTime.getUTCHours());
-					var minutes = addZero(dateTime.getUTCMinutes());
-					$('[name="model.leagueName"] option').filter(function() {
-						return $(this).text() == data.teamHome.leaguName;
-					}).prop('selected', true);
-					$('[name="model.gameNum"]').val(data.gameNum);
-					$('#teamAwayList').val(data.teamAway.id);
-					$('#teamAwayList').change();
-					$('#teamHomeList').val(data.teamHome.id);
-					$('#teamHomeList').change();
-					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
-					$('#btnMerge').val(data.id);
-					if (data.odds.length != 0) {
-						$.each(data.odds, function(index, odd) {
-							$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
-						});
-					} else {
-						$('.form-decimal').val('2.00');
-					}
-				}, 'json');
-				
+		});
+		
+		$('#leagueName').change(function() {
+			listTeam(null, null);
+		});
+		
+		function listTeam(teamAwayId, teamHomeId) {
+			$('#teamAwayList,#teamHomeList').empty();
+			if (teamAwayId == null && teamHomeId == null) {
+				$('[name="model.leagueName"]')[0].selectedIndex = 0;
 			}
+			
+			$.getJSON('<c:url value="/admin/teamAdmin?method:select"/>',{
+				'model.leagueName':$('#leagueName').val()
+			}, function(data) {	
+				$.each(data, function(key, value) {
+					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					$('#teamAwayList,#teamHomeList').append(str);
+				});
+				
+				if (teamAwayId != null && teamHomeId != null) {
+					$('#teamAwayList').val(teamAwayId);
+					$('#teamAwayList').change();
+					$('#teamHomeList').val(teamHomeId);
+					$('#teamHomeList').change();
+				} else {
+					$('#teamAwayList')[0].selectedIndex = 0;
+					$('#teamAwayList').change();
+					$('#teamHomeList')[0].selectedIndex = 1;
+					$('#teamHomeList').change();
+				}
+			});
 		}
 		//End of listTeam
 		
@@ -526,12 +573,12 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:select"/>',{
+			$.getJSON('<c:url value="/admin/gameAdmin?method:select"/>',{
 				'model.id':$(this).val()
 			}, function(data) {
 				$('#gameScoreAway').val(data.gameScoreAway);
 				$('#gameScoreHome').val(data.gameScoreHome);
-			}, 'json');
+			});
 			$('#btnStatus').val($(this).val());
 		});
 		
@@ -626,6 +673,22 @@
 		});
 		//End of btnPayout
 		
+		//Begin of btnOpen
+		$('.btn-open').click(function() {
+			$('#btnOpen').val($(this).val());
+		});
+		
+		$('#btnOpen').click(function() {
+			$.post('<c:url value="/admin/gameAdmin?method:open"/>',{
+				'model.id':$(this).val()
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnPayout
+		
 		//Begin of styling
 		function resetInput() {
 			$('#gameTime').val('');
@@ -679,9 +742,14 @@
 			title: '派彩'
 		});
 		
+		$('.btn-open').tooltip({
+			placement: 'top',
+			title: '開放投注'
+		});
+		
 		$('#gameTable').dataTable({
 			responsive: true,
-			autoWidth: false,
+			autoWidth: true,
 			order: [[ 0, "desc" ]],
 			oLanguage: {
 				'sProcessing': '處理中...',
