@@ -36,31 +36,24 @@ public class GenericDao<T extends GenericEntity> {
 	//spring-database.xml 和 spring-service.xml
 	//最後Spring 會幫我們 close the connection, statement and resultset.
 	public List<T> findAll(){
-		Session session = sessionFactory.getCurrentSession();
-		List<T> models = session.createCriteria(entityClass).list();
-		return models;
+		return getSession().createCriteria(entityClass).list();
 	}
 	
 	public T findById(Long id){
-		Session session = sessionFactory.getCurrentSession();
-		T model = (T)session.get(entityClass, id);
-		return model;
+		return (T)getSession().get(entityClass, id);
 	}
 	
 	public T insert(T entity){
-		Session session = sessionFactory.getCurrentSession();
-		session.persist(entity);
+		getSession().persist(entity);
 		return entity;
 	}
 
 	public T update(T entity){
-		Session session = sessionFactory.getCurrentSession();
-		session.merge(entity);
+		getSession().merge(entity);
 		return entity;
 	}
 	
 	public void delete(T entity){
-		
 		getSession().delete(entity);
 	}
 	

@@ -2,27 +2,23 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 
-
-/**
- * @Author:Rhys
- */
-
 @Repository
 public class TeamDao  extends GenericDao<TeamEntity> {
-	//@Autowired
-	//private SessionFactory sessionFactory;
+	
 	public List<TeamEntity> findByLeagueName(String leagueName){
-		Query query= getSession().createQuery("from TeamEntity where league_name = :leagueName");
-		return query.setString("leagueName", leagueName).list();
-		
+		return getSession().createCriteria(TeamEntity.class)
+				.add(Restrictions.eq("leagueName", leagueName)).list();
+	}
+	
+	public List<String> leagueNames() {
+		return getSession().createCriteria(TeamEntity.class)
+				.setProjection(Projections.distinct(Projections.property("leagueName"))).list();
 	}
 }
