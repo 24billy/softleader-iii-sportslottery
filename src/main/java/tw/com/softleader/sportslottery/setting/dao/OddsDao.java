@@ -1,14 +1,9 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
@@ -22,18 +17,14 @@ import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 @Repository
 public class OddsDao extends GenericDao<OddsEntity> {
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	@Override
 	public List<OddsEntity> findAll() {
-		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("from OddsEntity odds").list();
+		return getSession().createQuery("from OddsEntity odds").list();
 	}
 	
 	public List<OddsEntity> findByOddType(String oddType) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity odds where ODD_TYPE like :oddType");
+		Query query = getSession().createQuery("from OddsEntity odds where ODD_TYPE like :oddType");
 		             //from OddsEntity odds where odds.gameId.gameTime < {inputtime} and odds.gameId.isEnd == 'true'
 		
 		StringBuffer sb = new StringBuffer();
@@ -47,14 +38,12 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	}
 	
 	public List<OddsEntity> findByGameId(Long gameId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity odds where GAME_ID = :gameId");
+		Query query = getSession().createQuery("from OddsEntity odds where GAME_ID = :gameId");
 		return query.setLong("gameId", gameId).list();
 	}
 	
 	public List<OddsEntity> findByGameIdWithOddType(Long gameId, String oddType) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from OddsEntity odds where odds.gameId = :gameId and odds.oddType like :oddType");
+		Query query = getSession().createQuery("from OddsEntity odds where odds.gameId = :gameId and odds.oddType like :oddType");
 		             //from OddsEntity odds where odds.gameId.gameTime < {inputtime} and odds.gameId.isEnd == 'true'
 		
 		StringBuffer sb = new StringBuffer();
@@ -69,8 +58,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 	//以odd_type查投注數加總
 	public Long countByOddType(String oddType){
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select SUM(odds.count) from OddsEntity odds where odds.oddType = :oddType ");
+		Query query = getSession().createQuery("select SUM(odds.count) from OddsEntity odds where odds.oddType = :oddType ");
 		query.setString("oddType",oddType);
 		Long count = (Long)query.uniqueResult();
 		
@@ -80,8 +68,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 	//以odd_type，有過關，查投注數加總
 	public Long countByOddTypeAndIsPass(String oddType){
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select SUM(odds.count) from OddsEntity odds where odds.oddType = :oddType and odds.isPass = 't'");
+		Query query = getSession().createQuery("select SUM(odds.count) from OddsEntity odds where odds.oddType = :oddType and odds.isPass = 't'");
 		query.setString("oddType",oddType);
 		Long count = (Long)query.uniqueResult();
 		
@@ -94,8 +81,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 
 	//以gameId和odd_type得 投注數
 	public Long countByOddTypeAndGameID(String oddType, Long gameId){
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select odds.count from OddsEntity odds where odds.oddType = :oddType and odds.gameId = :gameId");
+		Query query = getSession().createQuery("select odds.count from OddsEntity odds where odds.oddType = :oddType and odds.gameId = :gameId");
 		query.setString("oddType",oddType);
 		query.setLong("gameId", gameId);
 		
@@ -110,7 +96,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 /*	//以odd_type，時間，查投注數加總
 	public Long countByOddType_Time(String oddType, LocalDate timeFrom, LocalDate timeTo){
-		Session session = sessionFactory.getCurrentSession();
+		getSession() getSession() = getSession()Factory.getCurrentgetSession()();
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, teamName
@@ -132,7 +118,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 			hasTimeTo = true;
 		}
 		
-		Query query = session.createQuery(sql);
+		Query query = getSession().createQuery(sql);
 		if (hasTimeFrom) {
 			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
 		}
@@ -157,7 +143,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 
 	//以odd_type，時間，有過關，查投注數加總
 	public Long countByOddType_Time_isPass(String oddType, LocalDate timeFrom, LocalDate timeTo){
-		Session session = sessionFactory.getCurrentSession();
+		getSession() getSession() = getSession()Factory.getCurrentgetSession()();
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, 
@@ -179,7 +165,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 			hasTimeTo = true;
 		}
 		
-		Query query = session.createQuery(sql);
+		Query query = getSession().createQuery(sql);
 		if (hasTimeFrom) {
 			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
 		}
@@ -204,7 +190,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 	
 /*	//以時間範圍，得List<OddsEntity，以COUNT大小排列，從大排到小
 	public List<OddsEntity> findByTime_orderByCount(LocalDate timeFrom, LocalDate timeTo){
-		Session session = sessionFactory.getCurrentSession();
+		getSession() getSession() = getSession()Factory.getCurrentgetSession()();
 		
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, 
@@ -230,7 +216,7 @@ public class OddsDao extends GenericDao<OddsEntity> {
 			hasTimeTo = true;
 		}
 				
-		Query query = session.createQuery(sql);
+		Query query = getSession().createQuery(sql);
 		
 		if (hasTimeFrom) {
 			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
