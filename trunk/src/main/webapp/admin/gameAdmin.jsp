@@ -630,7 +630,7 @@
 		function resetInput() {
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
-			$('.form-decimal').val('1.00')
+			$('.form-decimal').val('2.00');
 			
 			$('#gameTime').datetimepicker({
 				defaultDate:new Date(),
@@ -642,7 +642,6 @@
 			
 			$('.form-decimal').TouchSpin({
 				min: 1,
-				initval: 0,
 				step: 0.05,
 				decimals: 2,
 				buttondown_class: 'btn btn-info',

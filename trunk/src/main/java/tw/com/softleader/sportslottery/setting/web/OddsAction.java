@@ -103,9 +103,9 @@ public class OddsAction extends ActionSupport {
 	    		model.setOddCombination(oddCombination);
 	    		model.setOddValue(oddValue);
 	    		service.update(model);
-	    	} 
-	    	
-	    	service.update(model);
+	    	} else {
+	    		service.insert(model);
+	    	}
 	    	
     		result = "success";
     	} catch (Exception e) {
