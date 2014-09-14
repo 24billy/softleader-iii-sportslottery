@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.criterion.Projections;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 
 @Repository
 public class GameDao extends GenericDao<GameEntity>{
@@ -236,4 +238,8 @@ public class GameDao extends GenericDao<GameEntity>{
 		*/
 	}
 
+	public Long maxGameNum() {
+		return (Long) getSession().createCriteria(GameEntity.class)
+			.setProjection(Projections.max("gameNum")).uniqueResult();
+	}
 }
