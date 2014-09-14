@@ -234,7 +234,8 @@ public class GameAction extends ActionSupport {
 				odds.setCount(new Long(count));
 				oddsService.update(odds);
 			}
-			
+			model.setGameStatus(3L);
+			service.update(model);
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -256,7 +257,7 @@ public class GameAction extends ActionSupport {
 		Long gameId = model.getId();
 		Long gameScoreAway = model.getGameScoreAway();
 		Long gameScoreHome = model.getGameScoreHome();
-		Boolean isEnd = model.getIsEnd(); 
+		Boolean isEnd = model.getIsEnd();
 		
 		if (gameScoreAway > gameScoreHome) {
 			su = "SU_A";
@@ -289,7 +290,7 @@ public class GameAction extends ActionSupport {
 			model.setIsEnd(isEnd);
 			model.setGameScoreAway(gameScoreAway);
 			model.setGameScoreHome(gameScoreHome);
-			
+			model.setGameStatus(2L);
 			service.update(model);
 			
 			result = "success";
@@ -331,7 +332,6 @@ public class GameAction extends ActionSupport {
 		LocalDateTime gameTime = model.getGameTime();
 		TeamEntity teamAway = teamService.getById(teamAwayId);
 		TeamEntity teamHome = teamService.getById(teamHomeId);
-		Long gameStatus = 0L;
 		
 		if (gameId != null && gameId > 0) {
 			model = service.getById(gameId);
@@ -340,7 +340,6 @@ public class GameAction extends ActionSupport {
 			model.setGameTime(gameTime);
 			model.setTeamAway(teamAway);
 			model.setTeamHome(teamHome);
-			model.setGameStatus(gameStatus);
 			
 			try {
 				service.update(model);
@@ -354,7 +353,7 @@ public class GameAction extends ActionSupport {
 			model.setTeamHome(teamAway);
 			model.setTeamAway(teamHome);
 			model.setIsEnd(false);
-			model.setGameStatus(gameStatus);
+			model.setGameStatus(0L);
 			
 			try {
 				model = service.insert(model);
