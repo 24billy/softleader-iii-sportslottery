@@ -10,7 +10,6 @@ import javax.servlet.ServletContextListener;
 
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
@@ -20,7 +19,6 @@ import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
 
-@Component
 public class InitialData implements ServletContextListener {
 	
 	@Autowired
