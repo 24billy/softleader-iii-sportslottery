@@ -49,24 +49,11 @@ public class GameEntity extends GenericEntity {
 	@Column(name="IS_END", columnDefinition="BOOLEAN default FALSE")
 	private Boolean isEnd;
 	
+	@Column(name="GAME_STATUS", columnDefinition="BIGINT default 1")
+	private Long gameStatus;
+	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId", cascade = {CascadeType.ALL})
 	private List<OddsEntity> odds;
-
-	public List<OddsEntity> getOdds() {
-		return odds;
-	}
-
-	public void setOdds(List<OddsEntity> odds) {
-		this.odds = odds;
-	}
-
-	public Boolean getIsEnd() {
-		return isEnd;
-	}
-
-	public void setIsEnd(Boolean isEnd) {
-		this.isEnd = isEnd;
-	}
 
 	public LocalDateTime getGameTime() {
 		return gameTime;
@@ -124,13 +111,38 @@ public class GameEntity extends GenericEntity {
 		this.ballType = ballType;
 	}
 
+	public Boolean getIsEnd() {
+		return isEnd;
+	}
+
+	public void setIsEnd(Boolean isEnd) {
+		this.isEnd = isEnd;
+	}
+
+	public Long getGameStatus() {
+		return gameStatus;
+	}
+
+	public void setGameStatus(Long gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+
+	public List<OddsEntity> getOdds() {
+		return odds;
+	}
+
+	public void setOdds(List<OddsEntity> odds) {
+		this.odds = odds;
+	}
+
 	@Override
 	public String toString() {
 		return "GameEntity [gameTime=" + gameTime + ", gameNum=" + gameNum
 				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
 				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
 				+ gameScoreAway + ", ballType=" + ballType + ", isEnd=" + isEnd
-				+ ", odds=" + odds + ", id=" + id + "]";
+				+ ", gameStatus=" + gameStatus + ", odds=" + odds + ", id="
+				+ id + "]";
 	}
 
 }
