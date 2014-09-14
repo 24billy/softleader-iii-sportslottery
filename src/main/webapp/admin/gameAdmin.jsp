@@ -502,7 +502,7 @@
 							$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
 						});
 					} else {
-						$('.form-decimal').val('1.00');
+						$('.form-decimal').val('2.00');
 					}
 				}, 'json');
 				
@@ -531,7 +531,7 @@
 			}, function(data) {
 				$('#gameScoreAway').val(data.gameScoreAway);
 				$('#gameScoreHome').val(data.gameScoreHome);
-			});
+			}, 'json');
 			$('#btnStatus').val($(this).val());
 		});
 		
@@ -630,7 +630,7 @@
 		function resetInput() {
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
-			$('.form-decimal').val('2.00');
+			$('.form-decimal').val('2.00')
 			
 			$('#gameTime').datetimepicker({
 				defaultDate:new Date(),
