@@ -22,7 +22,6 @@ public class TeamService extends GenericService<TeamEntity> {
 	
 	@Override
 	protected GenericDao<TeamEntity> getDao() {
-		// TODO Auto-generated method stub
 		return dao;
 	}
 	
@@ -32,6 +31,10 @@ public class TeamService extends GenericService<TeamEntity> {
 	
 	public List<TeamEntity> getTeamsByLeagueName(String leagueName){
 		return dao.findByLeagueName(leagueName);
+	}
+	
+	public List<String> leagueNames() {
+		return dao.leagueNames();
 	}
 
 }
