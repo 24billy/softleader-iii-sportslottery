@@ -21,4 +21,5 @@ public class TeamDao  extends GenericDao<TeamEntity> {
 		return getSession().createCriteria(TeamEntity.class)
 				.setProjection(Projections.distinct(Projections.property("leagueName"))).list();
 	}
+	
 }

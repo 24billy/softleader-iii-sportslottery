@@ -36,5 +36,5 @@ public class TeamService extends GenericService<TeamEntity> {
 	public List<String> leagueNames() {
 		return dao.leagueNames();
 	}
-
+	
 }
