@@ -1,6 +1,9 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
+import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 /**
  * 
@@ -21,6 +26,10 @@ import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 public class GameService extends GenericService<GameEntity> {
 	@Autowired
 	private GameDao dao;
+	@Autowired
+	private OddCountService oddCountService;
+	@Autowired
+	private OddsDao oddDao;
 
 	@Override
 	protected GenericDao<GameEntity> getDao() {
@@ -79,6 +88,28 @@ public class GameService extends GenericService<GameEntity> {
 		
 		//如果比賽ID不存在則回傳負值
 		return -100000000000000000L;
+	}
+	//透過gameId和投注類型取得CountBean，也就是用來統計單一比賽過關比的物件
+	public CountBean getBountBean(Long gameId, String oddType){
+		CountBean bean = new CountBean();
+
+		return null;
+	}
+	
+	public Long getCount(Long gameId, String oddType){
+		List<OddsEntity> oddsList= oddDao.findByGameId(gameId);//用GAMEID取得投注集合
+		Long count = oddCountService.getOddsEntityByType(oddType, oddsList).getCount();//根據投注集合和投注類型，取得該OddsEntity，接著再取得投注數。
+		return count;
+	}
+	
+	//計算過關比率
+	public BigDecimal isPassPercentage(String oddType){
+		return null;
+	}
+	
+	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
+	public Map<String, CountBean> GraphBarByGameId(Long gameId){
+		return null;
 	}
 
 }
