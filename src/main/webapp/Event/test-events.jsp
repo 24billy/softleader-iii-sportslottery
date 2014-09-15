@@ -43,6 +43,9 @@
 	.gametag.danger{
 		background: #d9534f url(<c:url value="/images/bg-blueprint.png"/>);
 	}
+	.gametag.unable{
+		background: #777777 url(<c:url value="/images/bg-blueprint.png"/>);
+	}
 	
 	.clickfield.clickable{
 		cursor: pointer;
@@ -240,8 +243,11 @@ function gameRefresh(games, odds){
 				$('samp:eq(1)', thislabel).text(odd.oddValue);
 
 			});
-			
-			if(game.gameStatus != 1){
+
+			//根據是否可投注賦予顏色
+			if(game.gameStatus == 0){
+				thisGame.addClass('unable');
+			} else if(game.gameStatus != 1) {
 				thisGame.addClass('warning');
 			} else {
 				thisGame.addClass('success');
@@ -284,7 +290,6 @@ function gameRefresh(games, odds){
 			}
 		} else {
 			userOdds.splice(userOdds.indexOf($(this).attr('oddId')),1);
-			userGameInfo[userOddInfo[$(this).attr('oddId')].gameNum] = null;
 			userOddInfo[$(this).attr('oddId')] = null;
 			userOddsCount--;
 		}
@@ -296,7 +301,7 @@ function gameRefresh(games, odds){
 				var thisOdd = odds[userOddID];
 				var thisGame = games[thisOdd.gameNum];
 				userOddInfo[userOddID] = thisOdd;
-				userGameInfo[thisGame.gameNum] = thisGame;
+				userGameInfo[thisOdd.gameNum] = thisGame;
 			}
 		});
 		sessionStorage.userOddInfo = JSON.stringify(userOddInfo);
@@ -306,7 +311,6 @@ function gameRefresh(games, odds){
 		odds_refresh();
 		
 		var thisTag = $(this).parent().parent().parent();
-		//依據投注狀況更換動態磚顏色
 		var tagColor = function(){
 			if($('.detial label.active', thisTag)[0]){
 				thisTag.removeClass('success');
