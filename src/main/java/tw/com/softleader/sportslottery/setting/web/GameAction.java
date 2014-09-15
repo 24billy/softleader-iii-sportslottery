@@ -50,6 +50,7 @@ public class GameAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	private Long teamAwayId;
 	private Long teamHomeId;
+	private Long gameId;
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
@@ -421,6 +422,12 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "searchHistoryMethod";
+	}
+	
+	public String countInfoGraph(){
+		json = new Gson().toJson(service.getCountInfoHistory(teamName, gameId));
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "countInfoGraph";
 	}
 	
 	public String gameHistoryComplex() {
