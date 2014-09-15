@@ -171,7 +171,7 @@ public class GameService extends GenericService<GameEntity> {
 	
 	//輸入 GameId和隊伍名稱，取得之前所有人購買的投注資訊 
 	//一個MAP是一場比賽的投注資訊，投注資訊包含投注數，和過關數比值
-	//一個LIST的MAP是之前所有比賽的投注資訊
+	//這個LIST是之前所有比賽的投注資訊
 	public List<Map<String, CountBean>> getCountInfoHistory (String teamName, Long gameId){
 		try {
 			List<GameEntity> games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
