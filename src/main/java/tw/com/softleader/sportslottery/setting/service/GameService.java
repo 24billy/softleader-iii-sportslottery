@@ -61,8 +61,8 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.findByGameNum(gameNum);
 	}
 	
-	public List<GameEntity> getComplex(Long gameNum, String teamName, Boolean isEnd, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
-		return dao.findComplex(gameNum, teamName, isEnd, timeBegin, timeEnd, ballType);
+	public List<GameEntity> getComplex(Long gameNum, String teamName, Long gameStatus, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
+		return dao.findComplex(gameNum, teamName, gameStatus, timeBegin, timeEnd, ballType);
 	}
 	
 	public Long maxGameNum() {

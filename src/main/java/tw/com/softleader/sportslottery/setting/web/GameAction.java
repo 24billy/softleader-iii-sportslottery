@@ -194,7 +194,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType));
+		json = new Gson().toJson(service.getComplex(null, null, null, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -203,7 +203,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearNotEnd() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, complexTimeBegin.minusDays(1), complexTimeEnd.plusDays(1), complexBallType));
+		json = new Gson().toJson(service.getComplex(null, null, null, complexTimeBegin.minusDays(1), complexTimeEnd.plusDays(1), complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -212,7 +212,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNotEnd() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, false, null, null, complexBallType));
+		json = new Gson().toJson(service.getComplex(null, null, null, null, null, complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -440,7 +440,7 @@ public class GameAction extends ActionSupport {
 				"complexBallType:" + complexBallType
 				);
 		
-		json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, complexIsEnd, complexTimeBegin, complexTimeEnd, complexBallType));
+		json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, null, complexTimeBegin, complexTimeEnd, complexBallType));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 
