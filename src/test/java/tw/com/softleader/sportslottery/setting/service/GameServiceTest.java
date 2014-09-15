@@ -2,6 +2,9 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -57,11 +60,11 @@ public class GameServiceTest extends BaseTest  {
 //	}
 	
 //	@Test
-//	public void testTotalCount(){
-//		Long totalCount=gameService.totalCount(2L);
+//	public void testGetTotalCount(){
+//		Long totalCount=gameService.getTotalCount(2L);
 //		log.debug("total count= {}", totalCount);
 //		
-//		Long totalCount2=gameService.totalCount(210200L);
+//		Long totalCount2=gameService.getTotalCount(210200L);
 //		log.debug("total count2= {}", totalCount2);
 //	}
 	
@@ -74,12 +77,30 @@ public class GameServiceTest extends BaseTest  {
 //		assertEquals(expectedCount, count);
 //	}
 
+//	@Test
+//	public void testGetIsPass(){
+//		Long gameId=2L;
+//		String oddType= "SU_H";
+//		boolean isPass= gameService.getIsPass(gameId, oddType);
+//		boolean expectedBoolean= true;
+//		assertEquals(expectedBoolean, isPass);
+//	}
+	
 	@Test
-	public void testGetIsPass(){
+	public void testIsPassPercentage(){
 		Long gameId=2L;
 		String oddType= "SU_H";
-		boolean isPass= gameService.getIsPass(gameId, oddType);
-		boolean expectedBoolean= true;
-		assertEquals(expectedBoolean, isPass);
+		String oddType2="SU_A";
+		BigDecimal percent= gameService.getIsPassPercentage(gameId, oddType);
+		BigDecimal percent2= gameService.getIsPassPercentage(gameId, oddType2);
+		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);//預防無限小數
+		BigDecimal expPercent = new BigDecimal("100").divide(new BigDecimal("3300"),mc);
+		BigDecimal expPercent2 = new BigDecimal(0);
+
+		assertEquals(expPercent2, percent2);
+		
+		
+	
+		
 	}
 }
