@@ -9,12 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>登入頁面</title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> -->
-<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/adminStyle.css"/>">
@@ -61,10 +62,13 @@
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
+<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
+<script src="<c:url value="/js/highcharts.js"/>"></script>
+<script src="<c:url value="/js/exporting.js"/>"></script>
+<script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
 		
