@@ -170,8 +170,6 @@
 
 <script>
 
-var userOdds = [];
-
 //生成動態磚
 function gameRefresh(games, odds){
 	//初始化gameList
@@ -179,11 +177,13 @@ function gameRefresh(games, odds){
 	$('#game_list').html('');
 	$('#game_list').prepend(gameTagSample);
 	
-	userOdds = [];
+	var userOdds = [];
 	if(sessionStorage.userOdds){
 		userOdds = sessionStorage.userOdds.split(',');
 		userOddsCount = userOdds.length;
 	}
+	var userOddInfo = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
+	var userGameInfo = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
 	
 	$.each(games, function(index, game){
 		if(game){
@@ -273,9 +273,25 @@ function gameRefresh(games, odds){
 			}
 		} else {
 			userOdds.splice(userOdds.indexOf($(this).attr('oddId')),1);
+			userGameInfo[userOddInfo[$(this).attr('oddId')].gameNum] = null;
+			userOddInfo[$(this).attr('oddId')] = null;
 			userOddsCount--;
 		}
+		
+		//將資訊以JSON格式紀錄在sessionStorage
+		//注意!!此處將不會進行資料的更新以及刪除，資料一旦被記錄，除非使用者操作刪除的動作，否則將會一直保留。
+		$.each(userOdds, function(index, userOddID){
+			if(!userOddInfo[userOddID]){
+				var thisOdd = odds[userOddID];
+				var thisGame = games[thisOdd.gameNum];
+				userOddInfo[userOddID] = thisOdd;
+				userGameInfo[thisGame.gameNum] = thisGame;
+			}
+		});
+		sessionStorage.userOddInfo = JSON.stringify(userOddInfo);
+		sessionStorage.userGameInfo = JSON.stringify(userGameInfo);
 		sessionStorage.userOdds = userOdds;
+		
 		odds_refresh();
 		
 		var thisTag = $(this).parent().parent().parent();
