@@ -544,7 +544,7 @@ function odds_refresh(){
 	        bets=bets-1;
 	        numerator=numerator*bets;
 	    
-	    //加入odd至投注form中
+	    	//加入odd至投注form中
 	        $('.oddId'+lotteryId).val(userOddId);
 	    lotteryId++;
 	});
@@ -673,10 +673,9 @@ function odds_refresh(){
 	    userOddIds.splice(userOddIds.indexOf($(this).attr('oddId')),1);
 	    console.log("userOddIds:"+userOddIds);
 	    sessionStorage.userOdds = userOddIds;
-	    games[odds[$(this).attr('oddId')].gameNum] = null;
+	    
 	    odds[$(this).attr('oddId')] = null;
 	    sessionStorage.userOddInfo = JSON.stringify(odds);
-		sessionStorage.userGameInfo = JSON.stringify(games);
 	    
 	    $(this).parent().parent().parent().attr("hidden",true); 
 	    gameRefresh(galbalGames, galbalOdds);
