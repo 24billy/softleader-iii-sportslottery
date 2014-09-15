@@ -55,4 +55,5 @@ public class AdminLogService extends GenericService<AdminLogEntity> {
 		}
 		return sums;
 	}
+	
 }
