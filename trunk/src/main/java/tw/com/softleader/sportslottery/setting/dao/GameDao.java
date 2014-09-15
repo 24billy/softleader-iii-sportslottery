@@ -3,8 +3,11 @@ package tw.com.softleader.sportslottery.setting.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Repository;
 
@@ -78,12 +81,26 @@ public class GameDao extends GenericDao<GameEntity>{
 	}
 	
 	public List<GameEntity> findForHistory(LocalDate timeFrom, LocalDate timeTo,String teamName){		
+////newer method user crirteria
+//		
+//		Criteria criteria = getSession().createCriteria(GameEntity.class);
+//		criteria.createAlias("teamAway", "away");
+//		criteria.createAlias("teamHome", "home");
+//		
+//		Criterion date = Restrictions.between("gameTime", timeFrom, timeTo.plusDays(1));
+//		Criterion away = Restrictions.like("away.teamName", teamName);
+//		Criterion home = Restrictions.like("home.teamName", teamName);
+//		Criterion team = Restrictions.or(away, home);
+//		return criteria.add(date).add(team).list();
+//		
 		
+//.......older method using HQL	..............................................	
 		//設定sql字串
 		//HQL的帶入變數為 timeFrom, timeTo, teamName
-		String sql = "from GameEntity games where games.isEnd = 't'";//查詢比賽是否已經結束, 要找已經結束
-		String sql1 = " and games.gameTime >= :timeFrom";//搜尋大於 timeFrom的時間
-		String sql2 = " and games.gameTime < :timeTo";//搜尋小於 timeTo的時間
+//		String sql = "from GameEntity games where games.isEnd = 't'";//查詢比賽是否已經結束, 要找已經結束
+		String sql = "from GameEntity games where 1=1";
+		String sql1 = " and games.gameTime > :timeFrom";//搜尋大於 timeFrom的時間
+		String sql2 = " and games.gameTime <= :timeTo";//搜尋小於 timeTo的時間
 		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";//搜訊teamName符合部分字串
 		String sql4 = " order by games.gameTime";
 		
@@ -118,7 +135,8 @@ public class GameDao extends GenericDao<GameEntity>{
 			query.setDate("timeFrom", timeFrom.toDate());//sql沒有支援LocalDateTime, 但有支援Date, 所以轉成Date
 		}
 		if (hasTimeTo) {
-			query.setDate("timeTo", timeTo.toDate());
+//			query.setDate("timeTo", timeTo.toDate());
+			query.setDate("timeTo", timeTo.plusDays(1).toDate());
 		}
 		if (hasTeamName) {
 			query.setString("teamName", teamName + "%");//因為使用 LIKE讓我們依據一個模式 (pattern) 來找出我們要的資料, 所以要搭配%這樣的萬用字元
