@@ -10,6 +10,7 @@ import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 /**
  * 
@@ -57,6 +58,27 @@ public class GameService extends GenericService<GameEntity> {
 	
 	public Long maxGameNum() {
 		return dao.maxGameNum();
+	}
+	
+	//by gameid to get the total count of the odds
+	public Long totalCount(Long gameId){
+		try {
+			List<OddsEntity> OddsList= dao.findById(gameId).getOdds();
+			Long totalCountOftheDay = 0L;
+			
+			for(OddsEntity odd: OddsList){
+				totalCountOftheDay += odd.getCount();
+				
+			}
+			System.out.println("totalCountOftheDay: "+totalCountOftheDay);
+			return totalCountOftheDay;
+		} catch (Exception e) {
+			System.out.println("List<OddsEntity> is null in totalCount(Long gameId)");
+			e.printStackTrace();
+		}
+		
+		//如果比賽ID不存在則回傳負值
+		return -100000000000000000L;
 	}
 
 }
