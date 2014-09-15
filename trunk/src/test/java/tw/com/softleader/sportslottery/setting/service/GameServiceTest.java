@@ -56,13 +56,22 @@ public class GameServiceTest extends BaseTest  {
 //		
 //	}
 	
+//	@Test
+//	public void testTotalCount(){
+//		Long totalCount=gameService.totalCount(2L);
+//		log.debug("total count= {}", totalCount);
+//		
+//		Long totalCount2=gameService.totalCount(210200L);
+//		log.debug("total count2= {}", totalCount2);
+//	}
+	
 	@Test
-	public void testTotalCount(){
-		Long totalCount=gameService.totalCount(2L);
-		log.debug("total count= {}", totalCount);
-		
-		Long totalCount2=gameService.totalCount(210200L);
-		log.debug("total count2= {}", totalCount2);
+	public void testGetCount(){
+		Long gameId=2L;
+		String oddType= "SU_H";
+		Long count = gameService.getCount(gameId, oddType);
+		Long expectedCount = 100L;
+		assertEquals(expectedCount, count);
 	}
 
 }
