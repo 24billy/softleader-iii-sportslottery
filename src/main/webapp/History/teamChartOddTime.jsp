@@ -95,8 +95,9 @@ function test2(){
 		
 	 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
 			$.each(data, function(key, value) {
-				var str = '';
-				$('#tsv').append(str);
+/* 				var child = '';
+				$('#tsv').append(child); */
+				console.log(data);
 			});
 		});
 	
