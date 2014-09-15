@@ -12,40 +12,102 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 </head>
 <body>
+	<div id="selectInput">
+		<input type="text" class="inputData" id="gameId" placeholder="game Id" >
+		<input type="text" class="inputData" id="teamName" placeholder="隊伍名稱" >
+		<button type="button" id="submitButton">Submit Button</button>
+	</div> 
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
 
-<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
+	<div id="tsv" style="display:none"></div>
 
-<div id="tsv" style="display:none">Browser Version	Total Market Share
-2014年7月 1	8.01%
-2014年7月 2	8.01%
-2014年7月 3	8.01%
-2014年7月 4	7.73%
-2014年7月 5	8.01%
-2014年7月 6	8.01%
-2014年7月 7	8.01%
-2014年7月 8	7.73%
-2014年8月 1	1.13%
-2014年8月 2	0.90%
-2014年8月 3	0.85%
-2014年8月 4	0.65%
-2014年8月 5	0.85%
-2014年8月 6	0.85%
-2014年8月 7	0.85%
-2014年8月 8	0.85%
-</div>
 
 
 
 <script>
 $(function () {
+	appendToDiv();  
+	mainFunction();
+	
+});
 
+/* function appendToDiv(){
+ 	var child='';
+	child += '過關比歷史紀錄\n';
+
+ 	child += '2014年7月 1	11.01%\n';
+ 	child += '\t';
+	child += '11.01%';
+	child += '\n';  
+ 	child += '2014年7月 2';
+	child += '\t';
+	child += '25.02%';
+	child += '\n'; 
+ 	child += '過關比歷史紀錄\n';
+	child += '2014年7月 3	9.01%\n';
+	child += '2014年7月 4	11.08%\n'; 
+ 	
+	 2014年7月 4	7.73%
+	2014年7月 5	8.01%
+	2014年7月 6	8.01%
+	2014年7月 7	8.01%
+	2014年7月 8	7.73%
+	2014年8月 1	1.13%
+	2014年8月 2	0.90%
+	2014年8月 3	0.85%
+	2014年8月 4	0.65%
+	2014年8月 5	0.85%
+	2014年8月 6	0.85%
+	2014年8月 7	0.85%
+	2014年8月 8	0.85%  
+	
+	$('#tsv').append(child); 
+
+}  */
+
+function appendToDiv(){
+	/* test1(); */
+	test2();
+	
+	
+}
+
+function test1(){
+ 	var child='';
+	child += '過關	歷史\n'; 
+
+	child += '2014-08-19 1';
+	child +='\t';
+	child +='24.21%';
+	child +='\n';
+	child += '2014-08-19 1	8.05%\n';
+	
+	$('#tsv').append(child); 
+	
+
+}
+
+function test2(){
+	var url = '<c:url value="/countInfoGraph"/>';
+	 
+		
+	 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
+			$.each(data, function(key, value) {
+				var str = '';
+				$('#tsv').append(str);
+			});
+		});
+	
+}
+
+function mainFunction(){
 	var col = [];
 	col[0] = [];
 	col[1] = [];
-	$.each($('#tsv').text().split('\n'), function(index, row){
-		console.log(row);
+	$.each($('#tsv').text().split('\n'), function(index, row){//取出#tsv下的text資料，並以\n取成row陣列
+		/* console.log(row); */
 		coldata = row.split('\t');
 		if(coldata[0]){
 			col[0].push(coldata[0]);
@@ -148,10 +210,10 @@ $(function () {
                     type: 'column'
                 },
                 title: {
-                    text: '過關比例統計, 2014'
+                    text: '過關比歷史統計, 2014'
                 },
                 subtitle: {
-                    text: '點擊長柱見投注細節<br>計算方式:每種投注方式的過關數除以總投注數除以出賽場次'
+                    text: '點擊長柱見投注細節'
                 },
                 xAxis: {
                     type: 'category'
@@ -190,7 +252,8 @@ $(function () {
             });
         }
     });
-});
+	
+}
 </script>
 
 
