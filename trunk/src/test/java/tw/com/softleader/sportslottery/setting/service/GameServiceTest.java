@@ -114,7 +114,7 @@ public class GameServiceTest extends BaseTest  {
 	@Test
 	public void testGetGraphBarByGameId(){
 		Long gameId=2L;
-		Map<String, CountBean> map = gameService.getGraphBarByGameId(gameId);
+		Map<String, CountBean> map = gameService.getCountInfoByGameId(gameId);
 		log.debug("graphBar = {}", map.toString());
 		//result:graphBar = {
 		//ATS_H= CountBean [count=500, oddType=ATS_H, percentage=0, gameId=2, isPass=false], 
