@@ -84,13 +84,23 @@
 						<option value="Basketball">籃球</option>
 						<option value="Basketball">足球</option>
 					</select>
+					<a href="#" role="button" class="btn btn-default" id="today" >回到今日</a>
 					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-						<label class="btn btn-default active">
-							<input type="radio" name="searchScope" id="option3" value="All" checked >全部
-						</label>
-						<label class="btn btn-success" >
-							<input type="radio" name=searchScope id="searchScopeDefault" value="near" >未來三日
-						</label>
+						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+							<span class="glyphicon glyphicon-backward"></span>
+						</a>
+						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+							<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a href="#" role="button" class="btn btn-default active" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+							<span id="searchDefault" >當日</span>
+						</a>
+						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+							<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+							<span class="glyphicon glyphicon-forward"></span>
+						</a>
 					</div>
 				</form>
 			</div>
@@ -167,6 +177,7 @@
 	</div>
 
 <script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
 
 <script>
 
@@ -338,41 +349,86 @@ function tagColorfn(target){
 	}
 }
 
-$('#searchScopeGroup input[name="searchScope"]').off('click');
-$('#searchScopeGroup>label>input').on('change', function(){
-	superRefresh();
-});
+//取得今天日期
+var d = new Date();
+var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
 
+
+//更換頁面按鈕上顯示的時間，以及顯示模式
+function changeDate(){
+	$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
+	d = new Date(Date.parse(searchDay));
+	$('#searchDefault').text($.format.date(d.getTime(), 'yyyy-MM-dd'));
+	d = new Date(Date.parse(searchDay));
+	$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
+	d = new Date(Date.parse(searchDay));
+	
+	$('#searchScopeGroup label:eq(2)').button('toggle');
+}
+changeDate();
+
+//頁面上按鈕的觸發事件
 $('#ballType').off('change');
 $('#ballType').on('change', function(){
 	superRefresh();
 });
 
+//往前一日
+$('#searchScopeGroup a:eq(1)').off('click');
+$('#searchScopeGroup a:eq(1)').on('click', function(){
+	d = new Date(Date.parse(searchDay));
+	searchDay = $.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd');
+	changeDate();
+	superRefresh();
+});
+
+//往後一日
+$('#searchScopeGroup a:eq(3)').off('click');
+$('#searchScopeGroup a:eq(3)').on('click', function(){
+	d = new Date(Date.parse(searchDay));
+	searchDay = $.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd');
+	changeDate();
+	superRefresh();
+});
+
+//往前三日
+$('#searchScopeGroup a:eq(0)').off('click');
+$('#searchScopeGroup a:eq(0)').on('click', function(){
+	d = new Date(Date.parse(searchDay));
+	searchDay = $.format.date(d.setDate(d.getDate()-3), 'yyyy-MM-dd');
+	changeDate();
+	superRefresh();
+});
+
+//往後三日
+$('#searchScopeGroup a:eq(4)').off('click');
+$('#searchScopeGroup a:eq(4)').on('click', function(){
+	d = new Date(Date.parse(searchDay));
+	searchDay = $.format.date(d.setDate(d.getDate()+3), 'yyyy-MM-dd');
+	changeDate();
+	superRefresh();
+});
+
+//回到今日
+$('#today').off('click');
+$('#today').on('click', function(){
+	searchDay = $.format.date(new Date, 'yyyy-MM-dd');
+	changeDate();
+	superRefresh();
+});
+
+console.log(searchDay);
 function superRefresh(){
-	
-	var searchScopeStr = $('#searchScopeGroup input:checked').val();
-	var queryScopeURI = "";
-	switch(searchScopeStr) {
-    case 'near':
-    	queryScopeURI = '<c:url value="/game?method:selectNearNotEnd" />';
-    	break;
-    case 'notEnd':
-    	queryScopeURI = '<c:url value="/game?method:selectNotEnd" />';
-		break;
-    case 'All':
-    	queryScopeURI = '<c:url value="/game?method:select" />';
-    	break;
-    default:
-    	break;
-	}
 	
 	userOddsCount = 0;
 	$.ajax({
-		url: queryScopeURI,
+		url: '<c:url value="/game?method:selectNearNotEnd" />',
 		type:'post',
 		dataType:'json',
 		data:{
-			'complexBallType':$('#ballType').val()
+			'complexBallType':$('#ballType').val(),
+			'complexTimeBegin':searchDay,
+			'complexTimeEnd':searchDay,
 		},
 		success:function(datas){
 			var games = [];
