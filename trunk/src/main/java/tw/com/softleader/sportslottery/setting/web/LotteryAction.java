@@ -150,14 +150,14 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
         LotteryOddsEntity lotteryOdd = new LotteryOddsEntity();
         
         //紀錄投注
-        int oddsCount1=0;
-        StringBuilder oddsArray1=new StringBuilder(); 
+        int oddsCount=0;
+        StringBuilder oddsArray=new StringBuilder(); 
         Method[] methods = oddsIdList.getClass().getMethods();
         for (Method method : methods){
             String methodStr = method.toString();
             if (methodStr.indexOf("getOddId") >= 0){
                 if(method.invoke(oddsIdList, null)!=null){
-                    oddsArray1.append(","+method.invoke(oddsIdList, null));
+                    oddsArray.append(","+method.invoke(oddsIdList, null));
                     Long oddId= (Long)method.invoke(oddsIdList, null);
                     OddsEntity odd=new OddsEntity();
                     odd=oddsService.getById(oddId);
@@ -165,15 +165,15 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
                     lotteryOdd.setLotteryId(model.getId());
                     lotteryOdd.setOddsId(odd);
                     lotteryOdds.add(lotteryOdd);
-                    oddsCount1++;
+                    oddsCount++;
                 }            
             }      
         }
         System.out.println("lotteryOdds:"+lotteryOdds);
         
-        String temp1=oddsArray1.toString().substring(1);
-        System.out.println("oddsCount:"+oddsCount1);
-        System.out.println("oddsArray1:"+temp1);
+        String temp=oddsArray.toString().substring(1);
+        System.out.println("oddsCount:"+oddsCount);
+        System.out.println("oddsArray1:"+temp);
         model.setLotteryOdds(lotteryOdds);
         service.update(model);
         

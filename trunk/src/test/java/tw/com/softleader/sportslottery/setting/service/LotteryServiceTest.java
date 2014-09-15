@@ -22,7 +22,7 @@ public class LotteryServiceTest extends BaseTest {
 	
 	@Test
 	public void test() {
-		
+	    /*
 		//UserEntity user = userService.getById(1L);
 		//log.debug("user = {}", user);
 		LotteryEntity lottery = new LotteryEntity();
@@ -62,8 +62,13 @@ public class LotteryServiceTest extends BaseTest {
 		lottery.setLotteryOdds(lotteryOdds);
 		
 		lotteryService.update(lottery);
-		/*
+		
 		*/
+	    System.out.println("Begin CalculatePrize");
+	    LotteryEntity lottery = new LotteryEntity();
+	    lottery=lotteryService.getById(10L);
+	    Long Result = lotteryService.calculatePrize(lottery);
+	    log.debug("Result = {}",Result);
 	}
 
 }

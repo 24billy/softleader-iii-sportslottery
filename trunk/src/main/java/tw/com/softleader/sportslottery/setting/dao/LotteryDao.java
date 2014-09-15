@@ -114,4 +114,5 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		
 	}
 
+
 }
