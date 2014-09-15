@@ -44,8 +44,14 @@ public class AdminLogService extends GenericService<AdminLogEntity> {
 	
 	public List<Long> getSumOfLastYear() {
 		List<Long> sums = new ArrayList<Long>();
-		for (int arg = -1; arg >= -12; arg--) {
-			sums.add(dao.findSumFromTodayToSpecificMonth(arg));
+		Long sum = 0L;
+		for (int arg = -12; arg <= -1; arg++) {
+			Long temp = dao.findSumFromTodayToSpecificMonth(arg);
+			if (temp == null) {
+				temp = 0L;
+			}
+			sum += temp;
+			sums.add(sum);
 		}
 		return sums;
 	}
