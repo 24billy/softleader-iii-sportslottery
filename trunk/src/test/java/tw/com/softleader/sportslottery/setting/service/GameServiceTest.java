@@ -75,7 +75,7 @@ public class GameServiceTest extends BaseTest  {
 //	}
 
 	@Test
-	public void testIsPass(){
+	public void testGetIsPass(){
 		Long gameId=2L;
 		String oddType= "SU_H";
 		boolean isPass= gameService.getIsPass(gameId, oddType);
