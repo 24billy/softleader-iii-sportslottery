@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -111,21 +112,29 @@ public class GameServiceTest extends BaseTest  {
 //
 //	}
 	
+//	@Test
+//	public void testGetGraphBarByGameId(){
+//		Long gameId=2L;
+//		Map<String, CountBean> map = gameService.getCountInfoByGameId(gameId);
+//		log.debug("graphBar = {}", map.toString());
+//		//result:graphBar = {
+//		//ATS_H= CountBean [count=500, oddType=ATS_H, percentage=0, gameId=2, isPass=false], 
+//		//SU_A =  CountBean [count=300, oddType=SU_A, percentage=0, gameId=2, isPass=false], 
+//		//ATS_A= CountBean [count=400, oddType=ATS_A, percentage=0.12, gameId=2, isPass=true], 
+//		//EVEN =  CountBean [count=400, oddType=EVEN, percentage=0, gameId=2, isPass=false], 
+//		//SC_L =  CountBean [count=800, oddType=SC_L, percentage=0, gameId=2, isPass=false], 
+//		//SU_H =  CountBean [count=100, oddType=SU_H, percentage=0.030, gameId=2, isPass=true], 
+//		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
+//		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
+//		//}
 	@Test
-	public void testGetGraphBarByGameId(){
-		Long gameId=2L;
-		Map<String, CountBean> map = gameService.getCountInfoByGameId(gameId);
-		log.debug("graphBar = {}", map.toString());
-		//result:graphBar = {
-		//ATS_H= CountBean [count=500, oddType=ATS_H, percentage=0, gameId=2, isPass=false], 
-		//SU_A =  CountBean [count=300, oddType=SU_A, percentage=0, gameId=2, isPass=false], 
-		//ATS_A= CountBean [count=400, oddType=ATS_A, percentage=0.12, gameId=2, isPass=true], 
-		//EVEN =  CountBean [count=400, oddType=EVEN, percentage=0, gameId=2, isPass=false], 
-		//SC_L =  CountBean [count=800, oddType=SC_L, percentage=0, gameId=2, isPass=false], 
-		//SU_H =  CountBean [count=100, oddType=SU_H, percentage=0.030, gameId=2, isPass=true], 
-		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
-		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
-		//}
+	public void testGetCountInfoHistory(){
+		Long gameId=29L;
+		String teamName= "辛辛那堤紅人";
+		List<Map<String, CountBean>> listMap = gameService.getCountInfoHistory(teamName, gameId);
+		log.debug("listMap = {}",listMap.toString() );
 
 	}
+	
+
 }
