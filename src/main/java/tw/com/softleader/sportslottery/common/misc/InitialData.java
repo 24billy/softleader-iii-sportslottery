@@ -21,6 +21,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
+	private static int GAME_ROWS_NUM = 500;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -32,7 +33,7 @@ public class InitialData implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent arg0)  {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-		createGames(250);
+		createGames(GAME_ROWS_NUM);
     }
 	
     public void contextDestroyed(ServletContextEvent arg0)  { 
