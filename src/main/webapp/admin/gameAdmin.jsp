@@ -489,8 +489,7 @@
 		
 		$('.btn-edit').click(function() {
 			$('#gameModalTitle').text("編輯賽事");
-			var url = '<c:url value="/admin/gameAdmin?method:select"/>';
-			$.getJSON(url, {
+			$.post('<c:url value="/admin/gameAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
 				var dateTime = new Date(data.gameTime.iLocalMillis);
@@ -513,7 +512,7 @@
 				} else {
 					$('.form-decimal').val('2.00');
 				}
-			});
+			}, 'json');
 			
 			function addZero(str) {
 				if (str < 10) {
@@ -530,13 +529,10 @@
 		
 		function listTeam(teamAwayId, teamHomeId) {
 			$('#teamAwayList,#teamHomeList').empty();
-			if (teamAwayId == null && teamHomeId == null) {
-				$('[name="model.leagueName"]')[0].selectedIndex = 0;
-			}
-			
-			$.getJSON('<c:url value="/admin/teamAdmin?method:select"/>',{
+
+			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
 				'model.leagueName':$('#leagueName').val()
-			}, function(data) {	
+			}, function(data) {
 				$.each(data, function(key, value) {
 					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
@@ -553,7 +549,7 @@
 					$('#teamHomeList')[0].selectedIndex = 1;
 					$('#teamHomeList').change();
 				}
-			});
+			}, 'json');
 		}
 		//End of listTeam
 		
@@ -573,12 +569,12 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
-			$.getJSON('<c:url value="/admin/gameAdmin?method:select"/>',{
+			$.post('<c:url value="/admin/gameAdmin?method:select"/>',{
 				'model.id':$(this).val()
 			}, function(data) {
 				$('#gameScoreAway').val(data.gameScoreAway);
 				$('#gameScoreHome').val(data.gameScoreHome);
-			});
+			}, 'json');
 			$('#btnStatus').val($(this).val());
 		});
 		
