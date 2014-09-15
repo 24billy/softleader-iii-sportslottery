@@ -73,6 +73,15 @@
 <script src="<c:url value="/js/exporting.js"/>"></script>
 <script>
 	(function($) {
+		var months = [];
+		var currentMonth = new Date().getMonth() + 2;
+		for (var i = 12; i >= 1; i--) {
+			var month = currentMonth - i;
+			if (month <= 0) {
+				month = 12 + month;
+			}
+			months.push(month + '月');				
+		}
 		
 		//Begin of profitChart
 		$('#profitChart').highcharts({
@@ -84,7 +93,7 @@
 				x: -20
 			},
 			xAxis: {
-				categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+				categories: months
 			},
 			yAxis: {
 				title: {
