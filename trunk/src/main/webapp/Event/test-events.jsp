@@ -46,6 +46,9 @@
 	.gametag.unable{
 		background: #777777 url(<c:url value="/images/bg-blueprint.png"/>);
 	}
+	.gametag.resulted{
+		background: rgba(217,83,79,0.7) url(<c:url value="/images/bg-blueprint.png"/>);
+	}
 	
 	.clickfield.clickable{
 		cursor: pointer;
@@ -74,12 +77,135 @@
 	.sample{
 		display:none;
 	}
+	
+	#loader{
+		position:absolute;
+		height: 300px;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		top: 50%;
+		margin-top: -32px;
+		left: 50%;
+		margin-left: -32px;
+		display: none;
+	}
+</style>
+
+<style>
+.spinner {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
 </style>
 
 </head>
 <body>
 	<div id="page-wrapper">
 		<div class="container top20">
+			<div class="row" id="loader">
+				<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+				   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+				</svg>
+			</div>
 			<div class="row" id="game_form">
 				<form role="form" class="form-inline pull-left" >
 					<select class="form-control form-ball-type" id="ballType" >
@@ -110,7 +236,9 @@
 			<div class="row" id="game_list">
 				<div id="gametagSample" class="well gametag sample">
 					<div class="clickfield">
-						<h4><strong name="gameTitle">No.101 亞洲職棒</strong></h4>
+						<h4 style="display:inline-block;"><strong name="gameTitle">No.101 亞洲職棒</strong>
+							<h6 style="display:inline-block;" id="gameMark" class="glyphicon pull-right"></h6>
+						</h4>
 						<p class="text-left" name="teamAway">亞歷桑那響尾蛇</p>
 						<p class="text-right" name="teamHome">科羅拉多落磯山</p>
 					</div>
@@ -247,11 +375,21 @@ function gameRefresh(games, odds){
 			//根據是否可投注賦予顏色
 			if(game.gameStatus == 0){
 				thisGame.addClass('unable');
+				$('#gameMark', thisGame).addClass('glyphicon-remove-circle');
+				$('#gameMark', thisGame).text('未開局');
+			} else if(game.gameStatus == 3) {
+				thisGame.addClass('resulted');
+				$('#gameMark', thisGame).addClass('glyphicon-usd');
+				$('#gameMark', thisGame).text('已派彩');
 			} else if(game.gameStatus != 1) {
 				thisGame.addClass('warning');
+				$('#gameMark', thisGame).addClass('glyphicon-exclamation-sign');
+				$('#gameMark', thisGame).text('已開賽');
 			} else {
 				thisGame.addClass('success');
 				$('.clickfield', thisGame).addClass('clickable');
+				$('#gameMark', thisGame).addClass('glyphicon-ok-circle');
+				$('#gameMark', thisGame).text('可投注');
 			}
 			tagColorfn(thisGame);
 			$('#game_list').prepend(thisGame);
@@ -315,9 +453,15 @@ function gameRefresh(games, odds){
 			if($('.detial label.active', thisTag)[0]){
 				thisTag.removeClass('success');
 				thisTag.addClass('primary');
+				$('#gameMark', thisTag).removeClass('glyphicon-ok-circle');
+				$('#gameMark', thisTag).addClass('glyphicon-thumbs-up');
+				$('#gameMark', thisTag).text('已下注');
 			} else {
 				thisTag.removeClass('primary');
 				thisTag.addClass('success');
+				$('#gameMark', thisTag).removeClass('glyphicon-thumbs-up');
+				$('#gameMark', thisTag).addClass('glyphicon-ok-circle');
+				$('#gameMark', thisTag).text('可投注');
 			}
 		}
 		setTimeout(tagColor);
@@ -346,10 +490,15 @@ function tagColorfn(target){
 	if($('.detial label.active', target)[0]){
 		target.removeClass('success');
 		target.addClass('primary');
-		toggleHidden(target);
+		$('#gameMark', target).removeClass('glyphicon-ok-circle');
+		$('#gameMark', target).addClass('glyphicon-thumbs-up');
+		$('#gameMark', target).text('已下注');
 	} else {
 		target.removeClass('primary');
 		target.addClass('success');
+		$('#gameMark', target).removeClass('glyphicon-thumbs-up');
+		$('#gameMark', target).addClass('glyphicon-ok-circle');
+		$('#gameMark', target).text('可投注');
 	}
 }
 
@@ -423,7 +572,7 @@ $('#today').on('click', function(){
 
 console.log(searchDay);
 function superRefresh(){
-	
+	$('#loader').css('display','flex');
 	userOddsCount = 0;
 	$.ajax({
 		url: '<c:url value="/game?method:selectNearNotEnd" />',
@@ -433,7 +582,9 @@ function superRefresh(){
 			'complexBallType':$('#ballType').val(),
 			'complexTimeBegin':searchDay,
 			'complexTimeEnd':searchDay,
-		},
+		},complete:function(){
+			$('#loader').css('display','none');
+        },
 		success:function(datas){
 			var games = [];
 			var odds = [];
