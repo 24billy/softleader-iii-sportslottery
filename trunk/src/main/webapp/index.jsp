@@ -68,7 +68,7 @@
 	    <div  id="target" >	
 		  <jsp:include page="/Event/test-events.jsp" />
 	    </div>
-        <!-- content end -->
+        <!-- content end --> 
     </div>
 </div>
 <!-- page end -->
