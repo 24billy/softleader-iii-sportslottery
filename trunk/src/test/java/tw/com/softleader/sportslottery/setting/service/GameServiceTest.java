@@ -1,18 +1,17 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.List;
+import java.util.Map;
 
-import org.hibernate.Session;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
-import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 public class GameServiceTest extends BaseTest  {
 	@Autowired
@@ -86,21 +85,47 @@ public class GameServiceTest extends BaseTest  {
 //		assertEquals(expectedBoolean, isPass);
 //	}
 	
-	@Test
-	public void testIsPassPercentage(){
-		Long gameId=2L;
-		String oddType= "SU_H";
-		String oddType2="SU_A";
-		BigDecimal percent= gameService.getIsPassPercentage(gameId, oddType);
-		BigDecimal percent2= gameService.getIsPassPercentage(gameId, oddType2);
-		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);//預防無限小數
-		BigDecimal expPercent = new BigDecimal("100").divide(new BigDecimal("3300"),mc);
-		BigDecimal expPercent2 = new BigDecimal(0);
-
-		assertEquals(expPercent2, percent2);
-		
-		
+//	@Test
+//	public void testIsPassPercentage(){
+//		Long gameId=2L;
+//		String oddType= "SU_H";
+//		String oddType2="SU_A";
+//		BigDecimal percent= gameService.getIsPassPercentage(gameId, oddType);
+//		BigDecimal percent2= gameService.getIsPassPercentage(gameId, oddType2);
+//		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);//預防無限小數
+//		BigDecimal expPercent = new BigDecimal("100").divide(new BigDecimal("3300"),mc);
+//		BigDecimal expPercent2 = new BigDecimal(0);
+//		assertEquals(expPercent, percent);
+//		assertEquals(expPercent2, percent2);
+//	}
 	
-		
+//	@Test
+//	public void testGetCountBean(){
+//		Long gameId=2L;
+//		String oddType= "SU_H";
+//		String oddType2="SU_A";
+//		CountBean beanSUH= gameService.getCountBean(gameId, oddType);
+//		CountBean beanSUA= gameService.getCountBean(gameId, oddType2);
+//		log.debug("beanSUH = {}", beanSUH.toString());
+//		log.debug("beanSUA = {}", beanSUA.toString());
+//
+//	}
+	
+	@Test
+	public void testGetGraphBarByGameId(){
+		Long gameId=2L;
+		Map<String, CountBean> map = gameService.getGraphBarByGameId(gameId);
+		log.debug("graphBar = {}", map.toString());
+		//result:graphBar = {
+		//ATS_H= CountBean [count=500, oddType=ATS_H, percentage=0, gameId=2, isPass=false], 
+		//SU_A =  CountBean [count=300, oddType=SU_A, percentage=0, gameId=2, isPass=false], 
+		//ATS_A= CountBean [count=400, oddType=ATS_A, percentage=0.12, gameId=2, isPass=true], 
+		//EVEN =  CountBean [count=400, oddType=EVEN, percentage=0, gameId=2, isPass=false], 
+		//SC_L =  CountBean [count=800, oddType=SC_L, percentage=0, gameId=2, isPass=false], 
+		//SU_H =  CountBean [count=100, oddType=SU_H, percentage=0.030, gameId=2, isPass=true], 
+		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
+		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
+		//}
+
 	}
 }
