@@ -130,7 +130,7 @@ public class GameService extends GenericService<GameEntity> {
 	
 	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
 	//一個MAP 是一場比賽的資訊
-	public Map<String, CountBean> getGraphBarByGameId(Long gameId){
+	public Map<String, CountBean> getCountInfoByGameId(Long gameId){
 		Map<String, CountBean> map= new HashMap<String, CountBean>();
 		//用投注類型取得Bean
 		String oddType="SU_H";
@@ -166,6 +166,10 @@ public class GameService extends GenericService<GameEntity> {
 		map.put(oddType, bean);
 		
 		return map;
+	}
+	
+	public List<Map<String, CountBean>> getTotalGraph (){
+		return null;
 	}
 
 }
