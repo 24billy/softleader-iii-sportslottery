@@ -292,7 +292,7 @@
 		
 		$('#teamTable').dataTable({
 			responsive: true,
-			autoWidth: false,
+			autoWidth: true,
 			order: [[ 0, "asc" ]],
 			oLanguage: {
 				'sProcessing': '處理中...',
