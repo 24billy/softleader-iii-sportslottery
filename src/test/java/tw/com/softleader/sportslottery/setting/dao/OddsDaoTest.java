@@ -29,7 +29,7 @@ public class OddsDaoTest extends BaseTest {
 	@Test
 	public void crud() {
 		
-/*		List<OddsEntity> models = null;
+		List<OddsEntity> models = null;
 		
 		int originSize = 0;
 		int currentSize = 0;
@@ -38,7 +38,7 @@ public class OddsDaoTest extends BaseTest {
 		
 		if(models != null) {
 			originSize = models.size();
-		}*/
+		}
 	
 /*		OddsEntity entity = new OddsEntity();
 		entity.setGameId(1L);
@@ -67,9 +67,9 @@ public class OddsDaoTest extends BaseTest {
 //		models = oddsDao.findByOddType("ODD");
 //		log.debug("findByOddType models = {}", models);
 //		
-//		models = oddsDao.findByGameId(1L);
-//		log.debug("findByGameId models = {}", models);
-//		
+		models = oddsDao.findByGameId(2L);
+		log.debug("findByGameId models = {}", models);
+		
 //		oddsDao.delete(entity);
 //		
 //		models = oddsDao.findAll();
