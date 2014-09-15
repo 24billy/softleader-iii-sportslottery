@@ -425,7 +425,8 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String countInfoGraph(){
-		json = new Gson().toJson(service.getCountInfoHistory(teamName, gameId));
+//		json = new Gson().toJson(service.getCountInfoHistory(teamName, gameId));
+		json = new Gson().toJson(service.trialGetCountInfoHistor());
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "countInfoGraph";
 	}
