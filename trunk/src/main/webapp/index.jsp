@@ -24,7 +24,6 @@
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 
-<link rel="stylesheet" href="<c:url value='/css/font-awesome/css/font-awesome.min.css'/>">	
 <link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
 
@@ -485,9 +484,12 @@ function golbalInsert(games, odds){
 //投注區更新
 function odds_refresh(){
 
-	var games = galbalGames;
-	var odds = galbalOdds;
-      
+	//var games = galbalGames;
+	//var odds = galbalOdds;
+     
+	var games = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
+	var odds = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
+	
 	//取出投注
 	var userOddIds = [];
 	if(sessionStorage.userOdds){
@@ -671,6 +673,11 @@ function odds_refresh(){
 	    userOddIds.splice(userOddIds.indexOf($(this).attr('oddId')),1);
 	    console.log("userOddIds:"+userOddIds);
 	    sessionStorage.userOdds = userOddIds;
+	    games[odds[$(this).attr('oddId')].gameNum] = null;
+	    odds[$(this).attr('oddId')] = null;
+	    sessionStorage.userOddInfo = JSON.stringify(odds);
+		sessionStorage.userGameInfo = JSON.stringify(games);
+	    
 	    $(this).parent().parent().parent().attr("hidden",true); 
 	    gameRefresh(galbalGames, galbalOdds);
 	    odds_refresh();    
@@ -679,7 +686,9 @@ function odds_refresh(){
 	//清除投注區
 	$('#clearbtn').off('click');
 	$('#clearbtn').on('click', function(){
-	    sessionStorage.userOdds="";
+	    sessionStorage.userOdds = "";
+	    sessionStorage.userOddInfo = [];
+	    sessionStorage.userGameInfo = [];
 	    gameRefresh(galbalGames, galbalOdds);
 	    odds_refresh();
 	});
