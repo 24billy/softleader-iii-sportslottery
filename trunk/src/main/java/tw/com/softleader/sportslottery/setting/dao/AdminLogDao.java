@@ -43,4 +43,5 @@ public class AdminLogDao extends GenericDao<AdminLogEntity> {
 				.add(Restrictions.le("enteredTime", LocalDateTime.now().plusMonths(arg0 + 1)))
 				.setProjection(Projections.sum("profit")).uniqueResult();
 	}
+	
 }
