@@ -40,7 +40,7 @@ public class AdminLogDao extends GenericDao<AdminLogEntity> {
 	public Long findSumFromTodayToSpecificMonth(int arg0) {
 		return (Long) getSession().createCriteria(AdminLogEntity.class)
 				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(arg0)))
-				.add(Restrictions.le("enteredTime", LocalDateTime.now()))
+				.add(Restrictions.le("enteredTime", LocalDateTime.now().plusMonths(arg0 + 1)))
 				.setProjection(Projections.sum("profit")).uniqueResult();
 	}
 }
