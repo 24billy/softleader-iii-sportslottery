@@ -1,7 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -90,14 +90,13 @@ public class GameService extends GenericService<GameEntity> {
 		return -100000000000000000L;
 	}
 	//透過gameId和投注類型取得CountBean，也就是用來統計單一比賽過關比的物件
-	public CountBean getBountBean(Long gameId, String oddType){
+	public CountBean getCountBean(Long gameId, String oddType){
 		CountBean bean = new CountBean();
 		bean.setCount(this.getCount(gameId, oddType));
 		bean.setGameId(gameId);
 		bean.setOddType(oddType);
 		bean.setPass(this.getIsPass(gameId, oddType));
 		bean.setPercentage(this.getIsPassPercentage(gameId,oddType));
-
 		return bean;
 	}
 	
@@ -115,23 +114,58 @@ public class GameService extends GenericService<GameEntity> {
 		return isPass;
 	}
 	
-	//透過gameId和投注類型取得過關比率
+	//透過gameId和投注類型取得購買的過關比數
 	public BigDecimal getIsPassPercentage(Long gameId,String oddType){
 		BigDecimal percent=new BigDecimal(0);
-		boolean isPass = this.getIsPass(gameId, oddType);
-		Long count = this.getCount(gameId, oddType);
-		Long totalCountOftheDay=this.getTotalCount(gameId);
+		boolean isPass = this.getIsPass(gameId, oddType);//根據gameId和oddtype取得此投注是否過關的資訊
+		Long count = this.getCount(gameId, oddType);//取得此投注的購賣數
+		Long totalCountOftheGamae=this.getTotalCount(gameId);//取得此場比賽投注的總購買數
 		
-		if(isPass){
-			percent=oddCountService.getCountPercentage(count, totalCountOftheDay);
+		if(isPass){//如果此種投注有過關，算出購買的過關比數，投注數除以總購買數，如果沒有過關則購買過關的比數是零
+			percent=oddCountService.getCountPercentage(count, totalCountOftheGamae);
 		}
 		
 		return percent;
 	}
 	
 	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
-	public Map<String, CountBean> GraphBarByGameId(Long gameId){
-		return null;
+	//一個MAP 是一場比賽的資訊
+	public Map<String, CountBean> getGraphBarByGameId(Long gameId){
+		Map<String, CountBean> map= new HashMap<String, CountBean>();
+		//用投注類型取得Bean
+		String oddType="SU_H";
+		CountBean bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="SU_A";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="ATS_A";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="ATS_H";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="SC_H";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="SC_L";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="ODD";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		oddType="EVEN";
+		bean = this.getCountBean(gameId, oddType);
+		map.put(oddType, bean);
+		
+		return map;
 	}
 
 }
