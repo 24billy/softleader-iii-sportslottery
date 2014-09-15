@@ -56,11 +56,19 @@
 
 <body>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	    <div class="container">
-	        <div class="collapse navbar-collapse">
-	            <ul class="nav navbar-nav">            
-	                <li><a href="/index.jsp">Sport Lottery</a></li>
-	            </ul>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index.jsp">Sport Lottery</a>
+        </div>
+        
+        <div class="container-fluid">
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">                
                 <!-- 登入後 -->
 	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
@@ -150,10 +158,11 @@
 		            </ul>
 	            </c:if>
 	        </div>
-	    
+
         <!-- 登入區結束 -->
+        <div class="navbar navbar-default">
             <div class="row">
-                <div class="navbar-header col-sm-8 col-sm-offset-3">
+                <div class="navbar-header col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset-3">
                     <button type="button"
                         class="btn btn-hot text-uppercase btn-lg"
                         id="game">賽事投注</button>
@@ -165,10 +174,11 @@
                         id="user">使用者投注資訊</button>
                     <a id="simple-menu" href="#sidr"><button
                             type="button"
-                            class="btn btn-tree text-uppercase btn-lg "
+                            class="btn btn-right btn-tree text-uppercase btn-lg "
                             id="lotteryBoard">投注區</button></a>
                 </div>
             </div>
+        </div>
         </div>
 	</div>
 	<!--登入頁面 -->
