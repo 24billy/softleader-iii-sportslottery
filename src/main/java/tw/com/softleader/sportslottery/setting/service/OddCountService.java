@@ -88,8 +88,8 @@ public class OddCountService {
 	
 	
 	public BigDecimal getCountPercentage(Long count, Long totalCountOftheDay) {
-		System.out.println("count = " + count);
-		System.out.println("totalCountOftheDay = " + totalCountOftheDay);
+//		System.out.println("count = " + count);
+//		System.out.println("totalCountOftheDay = " + totalCountOftheDay);
 		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
 
 		return new BigDecimal(count).divide(new BigDecimal(totalCountOftheDay), mc);
