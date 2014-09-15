@@ -241,7 +241,7 @@ function gameRefresh(games, odds){
 
 			});
 			
-			if(game.isEnd){
+			if(game.gameStatus != 1){
 				thisGame.addClass('warning');
 			} else {
 				thisGame.addClass('success');
