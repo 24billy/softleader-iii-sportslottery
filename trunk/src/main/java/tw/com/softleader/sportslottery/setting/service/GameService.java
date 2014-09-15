@@ -70,7 +70,7 @@ public class GameService extends GenericService<GameEntity> {
 	}
 	
 	//by gameid to get the total count of the odds
-	public Long totalCount(Long gameId){
+	public Long getTotalCount(Long gameId){
 		try {
 			List<OddsEntity> OddsList= dao.findById(gameId).getOdds();
 			Long totalCountOftheDay = 0L;
@@ -92,19 +92,41 @@ public class GameService extends GenericService<GameEntity> {
 	//透過gameId和投注類型取得CountBean，也就是用來統計單一比賽過關比的物件
 	public CountBean getBountBean(Long gameId, String oddType){
 		CountBean bean = new CountBean();
+		bean.setCount(this.getCount(gameId, oddType));
+		bean.setGameId(gameId);
+		bean.setOddType(oddType);
+		bean.setPass(this.getIsPass(gameId, oddType));
+		bean.setPercentage(this.getIsPassPercentage(gameId,oddType));
 
-		return null;
+		return bean;
 	}
 	
+	//透過gameId 和投注類型取得投注數
 	public Long getCount(Long gameId, String oddType){
 		List<OddsEntity> oddsList= oddDao.findByGameId(gameId);//用GAMEID取得投注集合
 		Long count = oddCountService.getOddsEntityByType(oddType, oddsList).getCount();//根據投注集合和投注類型，取得該OddsEntity，接著再取得投注數。
 		return count;
 	}
 	
-	//計算過關比率
-	public BigDecimal isPassPercentage(String oddType){
-		return null;
+	//透過gameId和投注類型取得是否過關的資訊
+	public boolean getIsPass(Long gameId, String oddType){
+		List<OddsEntity> oddsList= oddDao.findByGameId(gameId);//用GAMEID取得投注集合
+		boolean isPass = oddCountService.getOddsEntityByType(oddType, oddsList).getIsPass();//根據投注集合和投注類型，取得該OddsEntity，接著再取得投注數。
+		return isPass;
+	}
+	
+	//透過gameId和投注類型取得過關比率
+	public BigDecimal getIsPassPercentage(Long gameId,String oddType){
+		BigDecimal percent=new BigDecimal(0);
+		boolean isPass = this.getIsPass(gameId, oddType);
+		Long count = this.getCount(gameId, oddType);
+		Long totalCountOftheDay=this.getTotalCount(gameId);
+		
+		if(isPass){
+			percent=oddCountService.getCountPercentage(count, totalCountOftheDay);
+		}
+		
+		return percent;
 	}
 	
 	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
