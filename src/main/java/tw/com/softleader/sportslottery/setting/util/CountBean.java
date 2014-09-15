@@ -3,6 +3,12 @@ package tw.com.softleader.sportslottery.setting.util;
 import java.math.BigDecimal;
 
 public class CountBean {
+	@Override
+	public String toString() {
+		return "CountBean [count=" + count + ", oddType=" + oddType
+				+ ", percentage=" + percentage + ", gameId=" + gameId
+				+ ", isPass=" + isPass + "]";
+	}
 	private Long count;
 	private String oddType;
 	private BigDecimal percentage;
