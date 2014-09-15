@@ -160,7 +160,7 @@
 	        </div>
 
         <!-- 登入區結束 -->
-        <div class="navbar navbar-default">
+        <div class="navbar">
             <div class="row">
                 <div class="navbar-header col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset-3">
                     <button type="button"
