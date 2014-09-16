@@ -221,21 +221,20 @@
 						<option value="Basketball">籃球</option>
 						<option value="Basketball">足球</option>
 					</select>
-					<a href="#" role="button" class="btn btn-default" id="today" >回到今日</a>
 					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+						<a href="#" role="button" class="btn btn-success" id="back3" name="searchScope" data-toggle="button">
 							<span class="glyphicon glyphicon-backward"></span>
 						</a>
-						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+						<a href="#" role="button" class="btn btn-success" id="back1" name="searchScope" data-toggle="button">
 							<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
 						</a>
-						<a href="#" role="button" class="btn btn-default active" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+						<a href="#" role="button" class="btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
 							<span id="searchDefault" >當日</span>
 						</a>
-						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+						<a href="#" role="button" class="btn btn-success" id="next1" name="searchScope" data-toggle="button">
 							<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
 						</a>
-						<a href="#" role="button" class="btn btn-success" name="searchScope" data-toggle="button">
+						<a href="#" role="button" class="btn btn-success" id="next3" name="searchScope" data-toggle="button">
 							<span class="glyphicon glyphicon-forward"></span>
 						</a>
 					</div>
@@ -516,7 +515,6 @@ function tagColorfn(target){
 var d = new Date();
 var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
 
-
 //更換頁面按鈕上顯示的時間，以及顯示模式
 function changeDate(){
 	$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
@@ -526,7 +524,31 @@ function changeDate(){
 	$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
 	d = new Date(Date.parse(searchDay));
 	
-	$('#searchScopeGroup label:eq(2)').button('toggle');
+	$('#back3').tooltip({
+		placement:'top',
+		title:'往前三天',
+		container: 'body'
+	});
+	$('#back1').tooltip({
+		placement:'top',
+		title:'往前一天',
+		container: 'body'
+	});
+	$('#searchScopeDefault').tooltip({
+		placement:'top',
+		title:'返回今天日期',
+		container: 'body'
+	});
+	$('#next1').tooltip({
+		placement:'top',
+		title:'往後一天',
+		container: 'body'
+	});
+	$('#next3').tooltip({
+		placement:'top',
+		title:'往後三天',
+		container: 'body'
+	});
 }
 changeDate();
 
@@ -573,8 +595,8 @@ $('#searchScopeGroup a:eq(4)').on('click', function(){
 });
 
 //回到今日
-$('#today').off('click');
-$('#today').on('click', function(){
+$('#searchScopeDefault').off('click');
+$('#searchScopeDefault').on('click', function(){
 	searchDay = $.format.date(new Date, 'yyyy-MM-dd');
 	changeDate();
 	superRefresh();
