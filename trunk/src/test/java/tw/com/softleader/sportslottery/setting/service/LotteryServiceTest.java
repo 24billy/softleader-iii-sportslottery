@@ -68,9 +68,13 @@ public class LotteryServiceTest extends BaseTest {
 	    //test CalculatePrize
 	    System.out.println("Begin CalculatePrize");
 	    LotteryEntity lottery = new LotteryEntity();
+	    lottery=lotteryService.getById(7L);
+	    Long Result1 = lotteryService.calculatePrize(lottery);
+	    log.debug("Result1 = {}",Result1);
+	    
 	    lottery=lotteryService.getById(10L);
-	    Long Result = lotteryService.calculatePrize(lottery);
-	    log.debug("Result = {}",Result);
+	    Long Result2 = lotteryService.calculatePrize(lottery);
+	    log.debug("Result2 = {}",Result2);
 	}
 
 }
