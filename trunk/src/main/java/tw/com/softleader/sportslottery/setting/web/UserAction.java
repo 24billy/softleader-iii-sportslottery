@@ -362,6 +362,18 @@ public class UserAction extends ActionSupport {
 		return ERROR;
 	}
 	
+	//身分證重複驗證
+	public String checkUserCardId() {
+		String result = ERROR;
+		String userCardId = model.getUserCardId().toUpperCase();
+		log.debug("檢查身分證是否重複" + userCardId);
+		if(service.getByuserCardId(userCardId)==null) {
+			log.debug("身分證可使用");
+			result = SUCCESS;
+		}
+		return result;
+	}
+	
 	//Email重複驗證
 	public String checkEmail() {
 		String result = ERROR;
@@ -373,7 +385,7 @@ public class UserAction extends ActionSupport {
 		}else if (model!=null && model.getUserEmail().length()>0) {
 			UserEntity check = service.getByUserEmail(model.getUserEmail());
 			if (check == null) {
-				log.debug("Email不存在");
+				log.debug("Email可使用");
 				result = SUCCESS;
 			} else {
 				log.debug("Email存在");
