@@ -175,8 +175,8 @@ public class LotteryService extends GenericService<LotteryEntity> {
             
             System.out.println("---->>lottery:"+lottery);
             System.out.println("---->>lotteryOdds:"+lotteryOdds);
-            
-            
+            lottery.setWin(win);
+            dao.update(lottery);
             return win;    
         }
         else{

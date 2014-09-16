@@ -8,7 +8,7 @@
 <title>Lottery</title>
 </head>
 <body>
-	<h1>你已經完成投注，三秒後回到賽事表頁面。</h1>
+	<h1>${user.userAccount}你已經完成投注，三秒後回到賽事表頁面。</h1>
     
 <script>
 sessionStorage.userOdds = "";
