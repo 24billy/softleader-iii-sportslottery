@@ -20,6 +20,9 @@ public class LotteryServiceTest extends BaseTest {
 	@Autowired
 	OddsService oddsService;
 	
+	@Autowired
+	GameService gameService;
+	
 	@Test
 	public void test() {
 	    /*
@@ -75,6 +78,16 @@ public class LotteryServiceTest extends BaseTest {
 	    lottery=lotteryService.getById(10L);
 	    Long Result2 = lotteryService.calculatePrize(lottery);
 	    log.debug("Result2 = {}",Result2);
+	}
+	
+	@Test
+	public void testGetLotterysByGame() {
+		GameEntity game = gameService.getById(40L);
+		log.debug("GameEntity = {}", game);
+		List<LotteryEntity> lotterys = lotteryService.getLotterysByGame(game);
+		for (LotteryEntity lo : lotterys) {
+			System.out.println(lo.getId());
+		}
 	}
 
 }
