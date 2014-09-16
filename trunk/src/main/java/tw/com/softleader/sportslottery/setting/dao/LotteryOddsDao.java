@@ -35,9 +35,10 @@ public class LotteryOddsDao extends GenericDao<LotteryOddsEntity> {
 	}
 	
 	public List<Long> findLotteryIdByOddsId(OddsEntity odds) {
-		return getSession().createCriteria(LotteryOddsEntity.class)
-								.add(Restrictions.eq("oddsId", odds))
-								.setProjection(Projections.property("lotteryId"))
-								.list();
+		return getSession()
+				.createCriteria(LotteryOddsEntity.class)
+				.add(Restrictions.eq("oddsId", odds))
+				.setProjection(Projections.property("lotteryId"))
+				.list();
 	}
 }
