@@ -24,7 +24,7 @@ import tw.com.softleader.sportslottery.setting.entity.*;
 
 @Service
 public class LotteryService extends GenericService<LotteryEntity> {
-    BigDecimal result=new BigDecimal(0);
+    private BigDecimal result;
 	@Autowired
 	private LotteryDao dao;
 	
@@ -53,6 +53,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
 	}
 	   //計算獎金
     public Long calculatePrize(LotteryEntity lottery){
+    	result = new BigDecimal(0);
         Long com0 = lottery.getCom0();
         Long com1 = lottery.getCom1();
         Long com2 = lottery.getCom2();
