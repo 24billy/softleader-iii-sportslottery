@@ -214,8 +214,9 @@
 				   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
 				</svg>
 			</div>
-			<div class="row" id="game_form">
-				<form role="form" class="form-inline pull-left" >
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2" >
+				<form role="form" class="form-inline" id="game_form">
 					<select class="form-control form-ball-type" id="ballType" >
 						<option value="Baseball">棒球</option>
 						<option value="Basketball">籃球</option>
@@ -238,7 +239,16 @@
 							<span class="glyphicon glyphicon-forward"></span>
 						</a>
 					</div>
+					<div id="sortGroup" class="btn-group" data-toggle="buttons">
+						<label id="sortByTime" class="btn btn-primary active"> 
+							<input type="radio" name="sortRadio" value="time" checked>依時間
+						</label> 
+						<label id="sortByStatus" class="btn btn-primary"> 
+							<input type="radio" name="sortRadio" value="type" id="option2">依狀態
+						</label> 
+					</div>
 				</form>
+				</div>
 			</div>
 			<div class="alert alert-warning" id="noGameResult" role="alert"><span class="glyphicon glyphicon-remove-sign"><strong>尚無賽事資料</strong></span></div>
 			<div class="row" id="game_list">
@@ -307,7 +317,7 @@
 							</label>
 						</div>
 					</div>
-					<div class="clickfield">
+					<div class="clickfield time">
 						<h4 name="gameTime">10:20</h4>
 					</div>
 				</div>
@@ -317,8 +327,11 @@
 
 <script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 
 <script>
+//先行隱藏警告
+$('#noGameResult').hide();
 
 //生成動態磚
 function gameRefresh(games, odds){
@@ -408,6 +421,8 @@ function gameRefresh(games, odds){
 	
 	//顯示
 	$('#game_list').fadeIn(110);
+	//排序
+	sortGameTag();
 	
 	//套用動態磚效果
 	try {
@@ -605,6 +620,27 @@ $('#searchScopeDefault').on('click', function(){
 	changeDate();
 	superRefresh();
 });
+
+//排序按鈕
+$('input[name="sortRadio"]').on('change', sortGameTag);
+
+function sortGameTag(){
+	if($('input:checked').val() == 'time'){
+		$('#game_list').jSort({
+			item: 'div.gametag',
+			sort_by: 'div.time',
+		});
+	} else if($('input:checked').val() == 'type') {
+		$('#game_list').jSort({
+			item: 'div.gametag',
+			sort_by: 'h6#gameMark',
+		});
+	}
+	$('#game_list').shapeshift({
+		enableDrag:false,
+		enableCrossDrop: false,
+	});
+}
 
 console.log(searchDay);
 function superRefresh(){
