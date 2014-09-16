@@ -62,76 +62,114 @@ public class LotteryService extends GenericService<LotteryEntity> {
         Long capital=lottery.getCapital();
         List<LotteryOddsEntity> lotteryOdds= lotteryOddsDao.findByLotteryId(lottery.getId());
         
-        
-
-        //得到陣列大小       
-        System.out.println("size="+lotteryOdds.size());
-        
-
-        long[] tempAnsArray=null,ansArray=null;//暫存中獎ID
+              
+        long[] tempPrize=null,prize=null;//暫存中獎ID
         BigDecimal[] tempOddsValue=null,oddsValue=null;
         BigDecimal[] tempArray=null;
         if(lotteryOdds.size()>0){
-            tempAnsArray = new long[lotteryOdds.size()];
+            
+            
+            tempPrize = new long[lotteryOdds.size()];
             tempOddsValue = new BigDecimal[lotteryOdds.size()];
          }
-         //最大過關數
+        //計算哪些投注有中獎，截取暫存陣列存放中獎oddId and oddValue
         int passCount=0;
         for (LotteryOddsEntity odds : lotteryOdds)
         {
             if(odds.getOddsId().getIsPass()!=null){
-                tempAnsArray[passCount]=odds.getOddsId().getId();
+                tempPrize[passCount]=odds.getOddsId().getId();
                 tempOddsValue[passCount]=odds.getOddsId().getOddValue();
-                System.out.println("teampAnsArray[passCount]="+tempAnsArray[passCount]);
+                System.out.println("tempPrize[passCount]="+tempPrize[passCount]);
                 passCount++;
             }
         }
         if(passCount>0){
-            ansArray = new long[passCount];
+            //將過關轉成對應的組合數
+            if(com0!=null&&com0.equals(1L)){
+                int combinations =lotteryOdds.size();
+                    switch(combinations) { 
+                        case 8:
+                            com8=1L;
+                            System.out.println("得8"); 
+                            break; 
+                        case 7: 
+                            com7=1L;
+                            System.out.println("得7"); 
+                            break; 
+                        case 6: 
+                            com6=1L;
+                            System.out.println("得6"); 
+                            break;
+                        case 5:
+                            com5=1L;
+                            System.out.println("得5"); 
+                            break; 
+                        case 4: 
+                            com4=1L;
+                            System.out.println("得4"); 
+                            break; 
+                        case 3: 
+                            com3=1L;
+                            System.out.println("得3"); 
+                            break;
+                        case 2:
+                            com2=1L;
+                            System.out.println("得2"); 
+                            break; 
+                        case 1: 
+                            com1=1L;
+                            System.out.println("得1"); 
+                            break;    
+                        default: 
+                            System.out.println("得-1"); 
+                    }
+            }
+            
+            prize = new long[passCount];
             oddsValue = new BigDecimal[passCount];
             for (int i=0;i<passCount;i++){
-                ansArray[i]=tempAnsArray[i];
+                prize[i]=tempPrize[i];
                 oddsValue[i]=tempOddsValue[i];
             }        
-            tempArray = new BigDecimal[ansArray.length];
+            tempArray = new BigDecimal[prize.length];
             
             //getCombination(oddsValue,2,0,tempArray,0);
             System.out.println("result 0 :"+result);
             System.out.println("passCount:"+passCount);
 
-            if(com1!=null && com1<=passCount){
+            if(com1!=null && 1<=passCount){
                 getCombination(oddsValue,1,0,tempArray,0);
                 System.out.println("result 1:"+result);
             }
-            if(com2!=null && com2<=passCount){
+            if(com2!=null && 2<=passCount){
                 getCombination(oddsValue,2,0,tempArray,0);
                 System.out.println("result 2:"+result);
             }
-            if(com3!=null && com3<=passCount){
+            if(com3!=null && 3<=passCount){
                 getCombination(oddsValue,3,0,tempArray,0);
                 System.out.println("result 3:"+result);
             }
-            if(com4!=null && com4<=passCount){
+            if(com4!=null && 4<=passCount){
                 getCombination(oddsValue,4,0,tempArray,0);
                 System.out.println("result 4:"+result);
             }
-            if(com5!=null && com5<=passCount){
+            if(com5!=null && 5<=passCount){
                 getCombination(oddsValue,5,0,tempArray,0);
                 System.out.println("result 5:"+result);
             }
-            if(com6!=null && com6<=passCount){
+            if(com6!=null && 6<=passCount){
                 getCombination(oddsValue,6,0,tempArray,0);
                 System.out.println("result 6:"+result);
             }
-            if(com7!=null && com7<=passCount){
+            if(com7!=null && 7<=passCount){
                 getCombination(oddsValue,7,0,tempArray,0);
                 System.out.println("result 7:"+result);
             }
-            if(com8!=null && com8<=passCount){
+            if(com8!=null && 8<=passCount){
                 getCombination(oddsValue,8,0,tempArray,0);
                 System.out.println("result 8:"+result);
             }
-            Long win=result.multiply(new BigDecimal(capital)).longValue();
+            Long win=result.multiply(new BigDecimal(capital)).setScale(3, BigDecimal.ROUND_HALF_UP).longValue();
             /*
             */
             
@@ -142,7 +180,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
             return win;    
         }
         else{
-            return 0L;
+            return -1L;
         }
     }
     private void getCombination(BigDecimal[] a, int n, int begin, BigDecimal[] b, int index) {  
