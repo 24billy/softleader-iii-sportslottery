@@ -337,6 +337,7 @@ function gameRefresh(games, odds){
 			var thisGame = $('#gametagSample').clone();
 			thisGame.removeAttr('id');
 			thisGame.removeClass('sample');
+			thisGame.attr('gameStatus', game.gameStatus);
 			$('[name="gameTitle"]', thisGame).text(game.gameNum + ' ' + game.teamHome.leagueName);
 			$('[name="teamAway"]', thisGame).text(game.teamAway.teamName);
 			$('[name="teamHome"]', thisGame).text(game.teamHome.teamName);
@@ -461,19 +462,7 @@ function gameRefresh(games, odds){
 		
 		var thisTag = $(this).parent().parent().parent();
 		var tagColor = function(){
-			if($('.detial label.active', thisTag)[0]){
-				thisTag.removeClass('success');
-				thisTag.addClass('primary');
-				$('#gameMark', thisTag).removeClass('glyphicon-ok-circle');
-				$('#gameMark', thisTag).addClass('glyphicon-thumbs-up');
-				$('#gameMark', thisTag).text('已下注');
-			} else {
-				thisTag.removeClass('primary');
-				thisTag.addClass('success');
-				$('#gameMark', thisTag).removeClass('glyphicon-thumbs-up');
-				$('#gameMark', thisTag).addClass('glyphicon-ok-circle');
-				$('#gameMark', thisTag).text('可投注');
-			}
+			tagColorfn(thisTag);
 		}
 		setTimeout(tagColor);
 	});
@@ -498,18 +487,20 @@ function toggleHidden(target){
 
 //依據投注狀況更換動態磚顏色
 function tagColorfn(target){
-	if($('.detial label.active', target)[0]){
-		target.removeClass('success');
-		target.addClass('primary');
-		$('#gameMark', target).removeClass('glyphicon-ok-circle');
-		$('#gameMark', target).addClass('glyphicon-thumbs-up');
-		$('#gameMark', target).text('已下注');
-	} else {
-		target.removeClass('primary');
-		target.addClass('success');
-		$('#gameMark', target).removeClass('glyphicon-thumbs-up');
-		$('#gameMark', target).addClass('glyphicon-ok-circle');
-		$('#gameMark', target).text('可投注');
+	if(target.attr('gameStatus') == 1){
+		if($('.detial label.active', target)[0]){
+			target.removeClass('success');
+			target.addClass('primary');
+			$('#gameMark', target).removeClass('glyphicon-ok-circle');
+			$('#gameMark', target).addClass('glyphicon-thumbs-up');
+			$('#gameMark', target).text('已下注');
+		} else {
+			target.removeClass('primary');
+			target.addClass('success');
+			$('#gameMark', target).removeClass('glyphicon-thumbs-up');
+			$('#gameMark', target).addClass('glyphicon-ok-circle');
+			$('#gameMark', target).text('可投注');
+		}
 	}
 }
 
