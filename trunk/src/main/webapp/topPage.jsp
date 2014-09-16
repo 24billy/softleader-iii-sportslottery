@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -73,9 +74,9 @@
                 <!-- 登入後 -->
 	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
-		            	<li>
-		            		<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd" id="coins">0</span> 
+		            	<li class="dropdown">
+		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-usd">${user.coins} </span> 
 							</a>
 		            	</li>
 						<li class="dropdown">
@@ -126,7 +127,7 @@
 		                                    <div class="col-sm-8">
 		                                        <p class="text-left small">${user.userEmail}</p>
 		                                    	<p class="text-left small">${user.userPhone}</p>
-		                                    	<p class="text-left small">${user.coins}$$</p>
+		                                    	<p class="text-left small glyphicon glyphicon-usd">${user.coins}</p>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -273,7 +274,7 @@
 				}
 				count++;
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds' id='all1'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>View All</a></li>");
 		}
 	});//ajax
 	$(document).ajaxStop(function() {
@@ -301,7 +302,7 @@
 				} else {
 					$('#loginError').html('帳號或密碼有誤');
 				}
-			}
+			},
 		});
 	});
 	/*	function fadeOut() {
@@ -313,7 +314,7 @@
 	fadeOut();
 	*/
 	
-	$('#coins').click(function() {
+	$('.coins').click(function() {
 		console.log('coins...');
 		$("#target").load('<c:url value="/Security/coins.jsp"/>');
 	});
