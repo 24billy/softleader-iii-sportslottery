@@ -15,11 +15,11 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="<c:url value="/admin"/>"><i class="fa fa-1x fa-home"></i> <span>首頁</span></a></li>
-			<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i> <span>賽事管理</span></a></li>
-			<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i> <span>隊伍管理</span></a></li>
-			<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</a></li>
-			<li><a href="<c:url value="/admin/adminChart"/>"><i class="fa fa-fw fa-line-chart"></i> 報表</a></li>
+			<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left10">首頁</span></a></li>
+			<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i><span class="left10">賽事管理</span></a></li>
+			<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i><span class="left10">隊伍管理</span></a></li>
+			<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i><span class="left10">公告管理</span></a></li>
+			<li><a href="<c:url value="/admin/adminChart"/>"><i class="fa fa-fw fa-line-chart"></i><span class="left10">報表</span></a></li>
 		</ul>
 	</div>
 	<!-- .navbar-slider -->

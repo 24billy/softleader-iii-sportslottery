@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>報表</title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> -->
-<link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
+<!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
@@ -33,9 +33,6 @@
 					<div class="col-sm-9 container-right">
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="page-header">
-									<h1>報表</h1>
-								</div>
 								<ol class="breadcrumb">
 		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
 		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
@@ -44,7 +41,7 @@
 						</div>
 						<!-- .row -->
 						
-						<div class="row">
+						<div class="row container-table">
 							<div class="col-sm-12">
 								<div id="profitChart">
 								</div>
