@@ -225,40 +225,53 @@ public class UserAction extends ActionSupport {
 		
 		Map session = ActionContext.getContext().getSession();
 		UserEntity user = (UserEntity)session.get("user");
-		//log.debug(""+user);
-		//儲值
-		DepositCardEntity card = cardService.findByCardAccount(cardAccount,cardPassword);
-		if(card!=null) {
-			try {
-				user.setCoins(user.getCoins() + card.getPoint());
-				
-				if (card.isState()) {
-					service.update(user);
-					log.debug("儲值成功");
-					card.setUserId(user);
-					card.setState(false);
-					card.setUseTime(LocalDateTime.now());
-					cardService.update(card);
-					return SUCCESS;
-				} else {
-					log.debug("此卡已使用");
-					this.addFieldError("cardError", this.getText("alreadyuse.card"));
-					return ERROR;
+		if (coins == null) {
+			//log.debug(""+user);
+			//儲值
+			DepositCardEntity card = cardService.findByCardAccount(cardAccount,
+					cardPassword);
+			if (card != null) {
+				try {
+					user.setCoins(user.getCoins() + card.getPoint());
+
+					if (card.isState()) {
+						service.update(user);
+						log.debug("儲值成功");
+						card.setUserId(user);
+						card.setState(false);
+						card.setUseTime(LocalDateTime.now());
+						cardService.update(card);
+						return SUCCESS;
+					} else {
+						log.debug("此卡已使用");
+						this.addFieldError("cardError",
+								this.getText("alreadyuse.card"));
+						return ERROR;
+					}
+				} catch (Exception e) {
+					log.debug("coins修改異常");
+					this.addFieldError("cardError",
+							this.getText("fieldvalue.card"));
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				log.debug("coins修改異常");
+			} else {
+				log.debug("查無此點數卡");
 				this.addFieldError("cardError", this.getText("fieldvalue.card"));
+				return ERROR;
+			}
+			log.debug("coins修改非常異常");
+			return ERROR;
+		}else {
+			try {
+				System.out.println(coins);
+				user.setCoins(user.getCoins() + coins);
+				service.update(user);
+				return SUCCESS;
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else {
-			log.debug("查無此點數卡");
-			this.addFieldError("cardError", this.getText("fieldvalue.card"));
 			return ERROR;
 		}
-		
-
-		log.debug("coins修改非常異常");
-		return ERROR;
 	}
 	
 	//搜尋出所有會員資料

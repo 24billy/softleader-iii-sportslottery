@@ -180,7 +180,7 @@
 	<!-- 使用者點數修改 -->
 	<action name="coinsUpdate" class="userAction" method="coinsUpdate">
 		<result name="success">/index.jsp</result>
-		<result name="error">/MustBeUser/deposit.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
 	</action>
 	
 	<!-- 回首頁action -->

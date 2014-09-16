@@ -210,17 +210,31 @@ body
 {
 	display:inline-block;
 	width:200px;
+	opacity:0.5;
 }
 #fourWay-main
 {
-	width: 800px;
+	width: 650px;
 	float: right;
+	position:static;
 }
 .fourWay
 {
 	float: left;
-	width: 250px;
+	width: 230px;
 	position: relative;
+}
+.payWay2-1
+{
+	overflow:auto;
+}
+.active
+{
+	opacity:1;
+}
+.finish
+{
+	display:none;
 }
 </style>
 </head>
@@ -373,25 +387,29 @@ body
                			<li>選擇"其他服務"→選擇"跨行轉帳"→輸入銀行代號→輸入轉帳帳號(共16位)→輸入繳款金額→確認</li>
                		</ul>
                		<a href="/softleader-iii-sportslottery/index.jsp">
-                		<button id="activate-step-6" class="btn btn-success btn-lg">Finish</button>
+                		<button class="btn btn-success btn-lg">Finish</button>
                	 	</a>
                 </div>
                 <div id="payWay2">
                		<div class="topWay">超商繳款操作步驟</div>
-                    	<div>
+                    	<div class="payWay2-1">
                         	<div class="fourWay">
-                            	<a href="#" rel="p1" class="btn btn-info btn-lg marketbut">7-11 ibon</a><br>
+                            	<a href="#" rel="p1" class="btn btn-info btn-lg marketbut active">7-11 ibon</a><br>
                                 <a href="#" rel="p2" class="btn btn-info btn-lg marketbut">全家Famiport</a><br>
                                 <a href="#" rel="p3" class="btn btn-info btn-lg marketbut">萊爾富Life-ET</a><br>
                                 <a href="#" rel="p4" class="btn btn-info btn-lg marketbut">OK超商OK-GO</a>
                             </div>
                             <div id="fourWay-main" style="background-color:white">
-                                <div class="p1 active p market"><img src="images/ibonPayway.jpg" alt="7-11 ibon操作方式"/></div>
+                                <div class="p1 p market"><img src="images/ibonPayway.jpg" alt="7-11 ibon操作方式"/></div>
                                 <div class="p2 p market"><img src="images/famiportpayl.jpg" alt="全家Famiport操作方式"/></div>
                                 <div class="p3 p market"><img src="images/LifeET_pay_L.jpg" alt="萊爾富Life-ET"/></div>
                                 <div class="p4 p market"><img src="images/ok-go_flow.jpg" alt="OK超商OK-GO"/></div>
                             </div>
                        </div>
+                	<form action="<c:url value="/coinsUpdate" />" method="post">
+                		<input class="finish" type="text" name="coins">
+                		<button class="btn btn-success btn-lg">Finish</button>
+               	 	</form>
                 </div>
                 <div class="way" id="payWay3">
 					<h1>儲值</h1>
@@ -476,13 +494,14 @@ body
     	$('.p1').show();
     	$('.account').html("繳款編號");
     	$('.numberCoins').html('AB05 1017 3456 7890');
+    	$('.finish').val($(this).val());
 	});
 	
 	$('#activate-step-5').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
     	$('.payType').text("Card點數");
-    	$('.payMoney').text($(this).val());
+    	$('.payMoney').text($(this).val()*1);
     	$('#payWay1').hide();
     	$('#payWay2').hide();
     	$('#payWay3').show();
@@ -490,9 +509,10 @@ body
 	});
 	
 	$('.fourWay a').click(function() {
-		$('#fourWay-main div').removeClass('active');
+		$('.fourWay a').removeClass('active');
+		$(this).addClass('active');
 		$('.p').hide();
-        $('#fourWay-main div.' + $(this).attr('rel')).addClass('active').show();
+        $('#fourWay-main div.' + $(this).attr('rel')).show();
 	});
 	
 	
