@@ -85,10 +85,6 @@
 	#loader{
 		position:absolute;
 		height: 300px;
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
 		top: 50%;
 		margin-top: -32px;
 		left: 50%;
@@ -421,11 +417,11 @@ function gameRefresh(games, odds){
 	
 	//顯示
 	$('#game_list').fadeIn(110);
-	//排序
-	sortGameTag();
 	
 	//套用動態磚效果
 	try {
+		//排序
+		sortGameTag();
 		$('#game_list').shapeshift({
 			enableDrag:false,
 			enableCrossDrop: false,
