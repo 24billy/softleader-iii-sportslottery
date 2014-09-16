@@ -451,40 +451,24 @@ insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS)
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (38, 'EVEN', 0, 2.05, 700, 'false');
 
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SU_A', 0, 2.15, 800, null);
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SU_H', 0, 1.45, 300, 'false');
-<<<<<<< .mine
+insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SU_H', 0, 1.45, 300, 'true');
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ATS_A', 1.5, 1.60, 200, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ATS_H', -1.5, 1.90, 500, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SC_H', 8.5, 1.70, 300, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SC_L', 8.5, 1.80, 700, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ODD', 0, 1.50, 600, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'EVEN', 0, 2.05, 400, null);
-=======
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ATS_A', 1.5, 1.60, 200, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ATS_H', -1.5, 1.90, 500, 'false');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SC_H', 8.5, 1.70, 300, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'SC_L', 8.5, 1.80, 700, 'false');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'ODD', 0, 1.50, 600, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (39, 'EVEN', 0, 2.05, 400, 'false');
->>>>>>> .r760
+
 
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SU_H', 0, 1.70, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SU_A', 0, 1.25, 0, null);
-<<<<<<< .mine
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ATS_A', 1.5, 1.60, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ATS_H', -1.5, 1.90, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SC_H', 8.5, 1.70, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SC_L', 8.5, 1.80, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ODD', 0, 1.50, 0, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'EVEN', 0, 2.05, 0, null);
-=======
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ATS_A', 1.5, 1.60, 0, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ATS_H', -1.5, 1.90, 0, 'false');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SC_H', 8.5, 1.70, 0, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'SC_L', 8.5, 1.80, 0, 'false');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'ODD', 0, 1.50, 0, 'TRUE');
-insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (40, 'EVEN', 0, 2.05, 0, 'false');
->>>>>>> .r760
+
 
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (41, 'SU_A', 0, 2.85, 500, null);
 insert into ODDS (GAME_ID, ODD_TYPE, ODD_COMBINATION, ODD_VALUE, COUNT, IS_PASS) values (41, 'SU_H', 0, 1.25, 500, null);
