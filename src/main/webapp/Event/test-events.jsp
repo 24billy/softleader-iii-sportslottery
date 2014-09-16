@@ -254,12 +254,12 @@
 					<div class="detial">
 						<div>不讓分:</div>
 						<div class="btn-group-vertical btn-group-sm" data-toggle="buttons">
-							<label id="labelSample1" class="btn btn-default">
+							<label id="labelSample1" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample1">
 								<samp></samp>
 								<samp style="float:right"></samp>
 							</label>
-							<label id="labelSample2" class="btn btn-default">
+							<label id="labelSample2" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample2">
 								<samp></samp>
 								<samp style="float:right"></samp>
@@ -268,12 +268,12 @@
 						<br/>
 						<div>讓分:</div>
 						<div class="btn-group-vertical btn-group-sm" data-toggle="buttons">
-							<label id="labelSample3" class="btn btn-default">
+							<label id="labelSample3" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample3">
 								<samp></samp>
 								<samp style="float:right"></samp>
 							</label>
-							<label id="labelSample4" class="btn btn-default">
+							<label id="labelSample4" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample4">
 								<samp></samp>
 								<samp style="float:right"></samp>
@@ -282,12 +282,12 @@
 						<br/>
 						<div>總分:</div>
 						<div class="btn-group-vertical btn-group-sm" data-toggle="buttons">
-							<label id="labelSample5" class="btn btn-default">
+							<label id="labelSample5" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample5">
 								<samp></samp>
 								<samp style="float:right"></samp>
 							</label>
-							<label id="labelSample6" class="btn btn-default">
+							<label id="labelSample6" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample6">
 								<samp></samp>
 								<samp style="float:right"></samp>
@@ -296,12 +296,12 @@
 						<br/>
 						<div>單雙:</div>
 						<div class="btn-group-vertical btn-group-sm" data-toggle="buttons">
-							<label id="labelSample7" class="btn btn-default">
+							<label id="labelSample7" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample7">
 								<samp></samp>
 								<samp style="float:right"></samp>
 							</label>
-							<label id="labelSample8" class="btn btn-default">
+							<label id="labelSample8" class="btn btn-default" style="text-align: left;">
 								<input type="checkbox" id="checkSample8">
 								<samp></samp>
 								<samp style="float:right"></samp>
@@ -401,6 +401,7 @@ function gameRefresh(games, odds){
 				$('#gameMark', thisGame).addClass('glyphicon-ok-circle');
 				$('#gameMark', thisGame).text('可投注');
 			}
+			//根據投注情形判斷展開與否
 			tagColorfn(thisGame);
 			$('#game_list').prepend(thisGame);
 		}
@@ -497,6 +498,9 @@ function tagColorfn(target){
 			target.addClass('primary');
 			$('#gameMark', target).removeClass('glyphicon-ok-circle');
 			$('#gameMark', target).addClass('glyphicon-thumbs-up');
+			if(!$('.detial', target).hasClass('active')){
+				$('.detial', target).addClass('active');
+			}
 			$('#gameMark', target).text('已下注');
 		} else {
 			target.removeClass('primary');
