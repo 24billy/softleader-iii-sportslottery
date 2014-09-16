@@ -93,12 +93,15 @@ public class GameService extends GenericService<GameEntity> {
 	//透過gameId和投注類型取得CountBean，也就是用來統計單一比賽過關比的物件
 	public CountBean getCountBean(Long gameId, String oddType){
 		CountBean bean = new CountBean();
+		GameEntity game = dao.findById(gameId);
 		bean.setCount(this.getCount(gameId, oddType));
 		bean.setGameId(gameId);
 		bean.setOddType(oddType);
 		bean.setPass(this.getIsPass(gameId, oddType));
 		bean.setPercentage(this.getIsPassPercentage(gameId,oddType));
-		bean.setGameTime(dao.findById(gameId).getGameTime());
+		bean.setGameTime(game.getGameTime());
+		bean.setTeamNameAway(game.getTeamAway().getTeamName());
+		bean.setTeamNameHome(game.getTeamHome().getTeamName());
 		return bean;
 	}
 	
