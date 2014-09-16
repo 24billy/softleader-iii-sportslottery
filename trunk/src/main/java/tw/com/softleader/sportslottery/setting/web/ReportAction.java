@@ -53,6 +53,11 @@ public class ReportAction extends ActionSupport {
 		return Action.SUCCESS;
 	}
 	
+	public String admin() {
+		log.debug("ReportAction admin()");
+		return Action.SUCCESS;
+	}
+	
 	public String execute() {
 		log.debug("ReportAction execute()");
 		return Action.SUCCESS;
