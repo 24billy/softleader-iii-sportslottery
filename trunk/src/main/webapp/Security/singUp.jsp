@@ -353,7 +353,8 @@
 		
 		//身分證驗證
 		jQuery.validator.addMethod("idCard",
-			function(citizenid, element) {
+			function(element) {
+				var citizenid = $('userId').val();
 				var local_table = [10,11,12,13,14,15,16,17,34,18,19,20,21,
 			                       22,35,23,24,25,26,27,28,29,32,30,31,33];
 			    var local_digit = local_table[citizenid.charCodeAt(0)-'A'.charCodeAt(0)];
@@ -370,11 +371,15 @@
 			}, "無此身分證"
 		);
 		jQuery.validator.addMethod("idCardLayout",
-			function(citizenid, element) {
+			function(element) {
+				var citizenid = $('userId').val();
 				citizenid = citizenid.replace(/\s+/g, "");
 				return (this.optional(element) || /^[A-Z]{1}[1-2]{1}[0-9]{8}$/.test(citizenid));
 			}, "格式不正確"
 		);
+		jQuery.validator.addMethod("checkIdCard", function() {
+			
+		});
 		
 		$('#registration-form').validate({
 			debug: true,
@@ -413,6 +418,7 @@
 					required: true,
 					idCardLayout: true,
 					idCard: true,
+					checkIdCard: true
 				}
 				
 			},
