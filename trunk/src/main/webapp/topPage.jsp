@@ -56,6 +56,8 @@
 
 <body>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		
+		<!-- 摺疊書籤 -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                 data-target=".navbar-responsive-collapse">
@@ -67,7 +69,6 @@
         </div>
         
         <div class="container-fluid">
-
             <div class="navbar-collapse collapse navbar-responsive-collapse">                
                 <!-- 登入後 -->
 	            <c:if test="${ not empty user }">
