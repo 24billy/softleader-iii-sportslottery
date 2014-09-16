@@ -76,19 +76,19 @@
   <script type="text/javascript">
 
     $(document).ready(function(){
-    	  $('#simple-menu').sidr();
+    	  $('.simple-menu').sidr();
     });
 
-  	$('#game').click(function() {		  		
+  	$('.game').click(function() {		  		
   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
  	});
-	$('#history').click(function() {
+	$('.history').click(function() {
 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
-	$('#user').click(function() {
+	$('.user').click(function() {
 		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 	});
-	$('#lotteryBoard').click(function() {
+	$('.lotteryBoard').click(function() {
 		odds_refresh();
 	});
 </script>
