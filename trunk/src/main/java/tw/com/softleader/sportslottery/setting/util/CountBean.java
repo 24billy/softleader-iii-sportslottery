@@ -14,15 +14,15 @@ public class CountBean {
 		return "CountBean [count=" + count + ", oddType=" + oddType
 				+ ", percentage=" + percentage + ", gameId=" + gameId
 				+ ", isPass=" + isPass + ", gameTime=" + gameTime
-				+ ", awayTeamName=" + awayTeamName + ", HomeTeamName="
-				+ HomeTeamName + "]";
+				+ ", teamNameAway=" + teamNameAway + ", teamNameHome="
+				+ teamNameHome + "]";
 	}
 	private BigDecimal percentage;
 	private Long gameId;
 	boolean isPass;
 	private LocalDateTime gameTime;
-	private String awayTeamName;
-	private String HomeTeamName;
+	private String teamNameAway;
+	private String teamNameHome;
 
 	public Long getCount() {
 		return count;
@@ -60,17 +60,18 @@ public class CountBean {
 	public void setGameTime(LocalDateTime gameTime) {
 		this.gameTime = gameTime;
 	}
-	public String getAwayTeamName() {
-		return awayTeamName;
+	public String getTeamNameAway() {
+		return teamNameAway;
 	}
-	public void setAwayTeamName(String awayTeamName) {
-		this.awayTeamName = awayTeamName;
+	public void setTeamNameAway(String teamNameAway) {
+		this.teamNameAway = teamNameAway;
 	}
-	public String getHomeTeamName() {
-		return HomeTeamName;
+	public String getTeamNameHome() {
+		return teamNameHome;
 	}
-	public void setHomeTeamName(String homeTeamName) {
-		HomeTeamName = homeTeamName;
+	public void setTeamNameHome(String teamNameHome) {
+		this.teamNameHome = teamNameHome;
 	}
+
 
 }
