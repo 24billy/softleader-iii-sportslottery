@@ -1,7 +1,9 @@
 body {
 	margin-top: 50px;
-	background-image: url('../images/bg01.jpg');
+	/*background-image: url('../images/bg01.jpg');*/
 	background-color: #222;
+	/*default color #2e8bcc*/
+	/*inverse color #222*/
 }
 
 footer * {
@@ -38,6 +40,10 @@ textarea {
 #page-wrapper .container-right {
     background-color: #fff;
     padding: 10px;
+}
+
+.thumbnail {
+  	border: none;
 }
 
 @media(min-width:768px) {
