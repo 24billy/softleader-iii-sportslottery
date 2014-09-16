@@ -59,12 +59,12 @@
 <div>
     <div class="page-wraper">
         <!-- TopPage start -->
-        <div style="margin:120px">
+        <div >
             <jsp:include page="topPage.jsp" />
         </div>        
         <!-- TopPage end --> 
         <!-- content start -->
-	    <div  id="target" >	
+	    <div  id="target" style="padding-top:120px;">	
 		  <jsp:include page="/Event/test-events.jsp" />
 	    </div>
         <!-- content end --> 
