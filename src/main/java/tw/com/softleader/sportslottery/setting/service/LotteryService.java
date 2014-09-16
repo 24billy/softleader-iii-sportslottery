@@ -76,7 +76,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
         int passCount=0;
         for (LotteryOddsEntity odds : lotteryOdds)
         {
-            if(odds.getOddsId().getIsPass()!=null){
+            if(odds.getOddsId().getIsPass()!=null && odds.getOddsId().getIsPass()){
                 tempPrize[passCount]=odds.getOddsId().getId();
                 tempOddsValue[passCount]=odds.getOddsId().getOddValue();
                 System.out.println("tempPrize[passCount]="+tempPrize[passCount]);
@@ -134,8 +134,9 @@ public class LotteryService extends GenericService<LotteryEntity> {
             tempArray = new BigDecimal[prize.length];
             
             //getCombination(oddsValue,2,0,tempArray,0);
-            System.out.println("result 0 :"+result);
-            System.out.println("passCount:"+passCount);
+            System.out.println("---->>result 0 :"+result+"passCount:"+passCount);
+            System.out.println("---->>lottery:"+lottery);
+            System.out.println("---->>lotteryOdds:"+lotteryOdds);           
 
             if(com1!=null && 1<=passCount){
                 getCombination(oddsValue,1,0,tempArray,0);
@@ -170,12 +171,8 @@ public class LotteryService extends GenericService<LotteryEntity> {
                 System.out.println("result 8:"+result);
             }
             Long win=result.multiply(new BigDecimal(capital)).setScale(3, BigDecimal.ROUND_HALF_UP).longValue();
-            /*
-            */
-            
-            System.out.println("---->>lottery:"+lottery);
-            System.out.println("---->>lotteryOdds:"+lotteryOdds);
             lottery.setWin(win);
+            System.out.println("final lottery:"+lottery);            
             dao.update(lottery);
             return win;    
         }
@@ -191,6 +188,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
                 System.out.print(b[i] + " ");
                 temp=temp.multiply(b[i]);
             }
+            System.out.println();
             System.out.println("temp:"+temp); 
             this.result=this.result.add(temp);
             return;
