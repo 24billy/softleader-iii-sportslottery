@@ -2,18 +2,22 @@ package tw.com.softleader.sportslottery.setting.util;
 
 import java.math.BigDecimal;
 
+import org.joda.time.LocalDateTime;
+
 public class CountBean {
+
+	private Long count;
+	private String oddType;
 	@Override
 	public String toString() {
 		return "CountBean [count=" + count + ", oddType=" + oddType
 				+ ", percentage=" + percentage + ", gameId=" + gameId
-				+ ", isPass=" + isPass + "]";
+				+ ", isPass=" + isPass + ", gameTime=" + gameTime + "]";
 	}
-	private Long count;
-	private String oddType;
 	private BigDecimal percentage;
 	private Long gameId;
 	boolean isPass;
+	private LocalDateTime gameTime;
 
 	public Long getCount() {
 		return count;
@@ -44,6 +48,12 @@ public class CountBean {
 	}
 	public void setPass(boolean isPass) {
 		this.isPass = isPass;
+	}
+	public LocalDateTime getGameTime() {
+		return gameTime;
+	}
+	public void setGameTime(LocalDateTime gameTime) {
+		this.gameTime = gameTime;
 	}
 
 }

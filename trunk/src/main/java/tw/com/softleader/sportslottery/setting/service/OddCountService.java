@@ -75,7 +75,7 @@ public class OddCountService {
 				totalCountOftheDay += odd.getCount();
 				
 			}
-			System.out.println("totalCountOftheDay: "+totalCountOftheDay);
+			System.out.println("totalCountOftheDay: "+totalCountOftheDay+" on"+gameTime);
 			return totalCountOftheDay;
 		} catch (Exception e) {
 			System.out.println("somethig wrong in getTotalCountOftheDay");

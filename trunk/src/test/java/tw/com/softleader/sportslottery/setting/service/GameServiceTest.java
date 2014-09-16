@@ -100,17 +100,17 @@ public class GameServiceTest extends BaseTest  {
 //		assertEquals(expPercent2, percent2);
 //	}
 	
-//	@Test
-//	public void testGetCountBean(){
-//		Long gameId=2L;
-//		String oddType= "SU_H";
-//		String oddType2="SU_A";
-//		CountBean beanSUH= gameService.getCountBean(gameId, oddType);
-//		CountBean beanSUA= gameService.getCountBean(gameId, oddType2);
-//		log.debug("beanSUH = {}", beanSUH.toString());
-//		log.debug("beanSUA = {}", beanSUA.toString());
-//
-//	}
+	@Test
+	public void testGetCountBean(){
+		Long gameId=2L;
+		String oddType= "SU_H";
+		String oddType2="SU_A";
+		CountBean beanSUH= gameService.getCountBean(gameId, oddType);
+		CountBean beanSUA= gameService.getCountBean(gameId, oddType2);
+		log.debug("beanSUH = {}", beanSUH.toString());
+		log.debug("beanSUA = {}", beanSUA.toString());
+
+	}
 	
 //	@Test
 //	public void testGetGraphBarByGameId(){
@@ -127,14 +127,14 @@ public class GameServiceTest extends BaseTest  {
 //		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
 //		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
 //		//}
-	@Test
-	public void testGetCountInfoHistory(){
-		Long gameId=29L;
-		String teamName= "辛辛那堤紅人";
-		List<Map<String, CountBean>> listMap = gameService.getCountInfoHistory(teamName, gameId);
-		log.debug("listMap = {}",listMap.toString() );
-
-	}
+//	@Test
+//	public void testGetCountInfoHistory(){
+//		Long gameId=29L;
+//		String teamName= "辛辛那堤紅人";
+//		List<Map<String, CountBean>> listMap = gameService.getCountInfoHistory(teamName, gameId);
+//		log.debug("listMap = {}",listMap.toString() );
+//
+//	}
 	
 
 }
