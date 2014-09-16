@@ -78,6 +78,10 @@
 		display:none;
 	}
 	
+	#noGameResult{
+		margin: 20px 5px;
+	}
+	
 	#loader{
 		position:absolute;
 		height: 300px;
@@ -233,6 +237,7 @@
 					</div>
 				</form>
 			</div>
+			<div class="alert alert-warning" id="noGameResult" role="alert"><span class="glyphicon glyphicon-remove-sign"><strong>尚無賽事資料</strong></span></div>
 			<div class="row" id="game_list">
 				<div id="gametagSample" class="well gametag sample">
 					<div class="clickfield">
@@ -397,11 +402,17 @@ function gameRefresh(games, odds){
 	});
 	
 	//套用動態磚效果
-	$('#game_list').shapeshift({
-		enableDrag:false,
-		enableCrossDrop: false,
-	});
-
+	try {
+		$('#game_list').shapeshift({
+			enableDrag:false,
+			enableCrossDrop: false,
+		});
+		$('#noGameResult').hide();
+	}
+	catch(err) {
+	    $('#noGameResult').show();
+	}
+	
 	//動態磚被按下時的情形
 	$('#game_list .clickfield.clickable').off('click');
 	$('#game_list .clickfield.clickable').on('click',function(){
@@ -582,10 +593,9 @@ function superRefresh(){
 			'complexBallType':$('#ballType').val(),
 			'complexTimeBegin':searchDay,
 			'complexTimeEnd':searchDay,
-		},complete:function(){
-			$('#loader').css('display','none');
-        },
+		},
 		success:function(datas){
+			$('#loader').css('display','none');
 			var games = [];
 			var odds = [];
 			//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
