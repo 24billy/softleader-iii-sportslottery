@@ -1,13 +1,13 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import java.util.*;
+import java.util.List;
 
-import org.joda.time.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
-import tw.com.softleader.sportslottery.setting.entity.*;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 
 public class LotteryServiceTest extends BaseTest {
 	
