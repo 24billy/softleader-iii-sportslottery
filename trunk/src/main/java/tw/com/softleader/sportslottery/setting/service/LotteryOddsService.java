@@ -1,6 +1,5 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
-import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
@@ -20,7 +18,7 @@ public class LotteryOddsService extends GenericService<LotteryOddsEntity> {
 	private LotteryOddsDao dao;
 	
 	@Autowired
-	private LotteryDao lotteryDao;
+	private LotteryService lotteryService;
 	
 	public GenericDao<LotteryOddsEntity> getDao() {
 		return dao;
@@ -45,8 +43,9 @@ public class LotteryOddsService extends GenericService<LotteryOddsEntity> {
 	public boolean checkStatus(List<LotteryOddsEntity> los) {
 		for (LotteryOddsEntity lo : los) {
 			
-			LotteryEntity lottery = lotteryDao.findById(lo.getLotteryId());
-			
+			LotteryEntity lottery = lotteryService.getById(lo.getLotteryId());
+			lotteryService.calculatePrize(lottery);
+			/*
 			if (lottery.getWin() == null) {
 				List<LotteryOddsEntity> entitys = dao.findByLotteryId(lottery.getId());
 				List<LotteryOddsEntity> passed = dao.findPassedOddsByLotteryId(lottery.getId());
@@ -65,6 +64,7 @@ public class LotteryOddsService extends GenericService<LotteryOddsEntity> {
 					lotteryDao.update(lottery);
 				}
 			}
+			*/
 		}
 		return true;
 	}

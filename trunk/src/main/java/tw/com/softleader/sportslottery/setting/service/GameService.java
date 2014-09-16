@@ -196,7 +196,7 @@ public class GameService extends GenericService<GameEntity> {
 	
 	//測試getCountInfoHistor，前端用的預設值
 	public List<Map<String, CountBean>> trialGetCountInfoHistor(){
-		Long gameId=29L;
+		Long gameId=100L;
 		String teamName= "辛辛那堤紅人";
 		List<Map<String, CountBean>> listMap = this.getCountInfoHistory(teamName, gameId);
 		return listMap;
