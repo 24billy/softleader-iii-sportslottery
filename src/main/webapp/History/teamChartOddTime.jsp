@@ -22,20 +22,25 @@
 
 	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
 
-	<div id="tsv" style="display:none"></div>
-
+	<!-- <div id="tsv" style="display:none"></div>  -->
+	 <div id="tsv"></div>
 
 
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
-	appendToDiv();  
-	mainFunction();
+	appendToDiv(); 
+	$(document).ajaxStop(function() {//確認appendToDiv()先執行完，才執行 mainFunction()
+		mainFunction();
+	});
+	
 	
 	function appendToDiv(){
-		/* test1(); */
-		test2();
-		
+		/* test1();  */
+		/* test2();  */ 
+		/* test3();  */
+		/*  test4();  */
+		 test5(); 
 		
 	}
 
@@ -72,6 +77,51 @@ $(function () {
 					console.log('\n');
 				});
 			});
+	}
+	function test3(){
+		var url = '<c:url value="/countInfoGraph"/>';
+		var child='';	
+ 		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
+				$.each(data, function(key, value) { 
+					console.log('inside');
+/* 					var type=value['ATS_A'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); */
+					/* console.log(time); */
+					child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
+					child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
+					/* console.log(type.percentage*100+'%'); */
+					
+ 				 });  
+				$('#tsv').append(child);
+			  });  
+		 /* console.log(child); */
+		  
+	}
+	function test4(){
+	 	var child='';
+		child += '過關	歷史\n'; 
+		child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
+		child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
+		$('#tsv').append(child); 
+	}
+	function test5(){
+		var url = '<c:url value="/countInfoGraph"/>';
+		var child='';	
+		
+		var i=1;
+		child += '過關	歷史\n'; 
+  		 $.post(url, function(data) { //透過countInfoGraph取回的Json型式的值
+  			
+				// $.each(data, function(key, value) {  
+					console.log('inside'+i); 
+					child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
+					child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
+  				 	i++;
+				//});  
+				
+				console.log(child);
+	  			$('#tsv').append(child);
+		}, 'json');
 	}
 
 
