@@ -406,6 +406,9 @@ function gameRefresh(games, odds){
 		}
 	});
 	
+	//顯示
+	$('#game_list').fadeIn(110);
+	
 	//套用動態磚效果
 	try {
 		$('#game_list').shapeshift({
@@ -470,6 +473,7 @@ function gameRefresh(games, odds){
 		}
 		setTimeout(tagColor);
 	});
+	
 }
 
 //切換detial的顯示狀態 target為detial所在的父元素
@@ -604,112 +608,121 @@ $('#searchScopeDefault').on('click', function(){
 
 console.log(searchDay);
 function superRefresh(){
-	$('#loader').css('display','flex');
-	userOddsCount = 0;
-	$.ajax({
-		url: '<c:url value="/game?method:selectNearNotEnd" />',
-		type:'post',
-		dataType:'json',
-		data:{
-			'complexBallType':$('#ballType').val(),
-			'complexTimeBegin':searchDay,
-			'complexTimeEnd':searchDay,
-		},
-		success:function(datas){
-			$('#loader').css('display','none');
-			var games = [];
-			var odds = [];
-			//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
-			$.each(datas, function(index, data){
-				games[data.gameNum] = data;
-				$.each(data.odds, function(index, odd){
-					odds[odd.id] = odd;
-				});
-			});
-			
-			//debug用
-			//console.log(games);
-			//console.log('-----------');
-			//console.log(odds);
-			//console.log('-----------');
+	//初始化gameList
+	var gameTagSample = $('#gametagSample').clone();
+	$('#game_list').fadeOut(110, function(){
+		$('#game_list *').remove();
+		$('#game_list').prepend(gameTagSample);
 
-			//初始化gameList
-			var gameTagSample = $('#gametagSample').clone();
-			$('#game_list').html('');
-			$('#game_list').prepend(gameTagSample);
-			
-			userOdds = [];
-			if(sessionStorage.userOdds){
-				userOdds = sessionStorage.userOdds.split(',');
-				userOddsCount = userOdds.length;
-			}
-			
-			//game資料進一步處理 將odds中的資料往上提方便後續使用
-			$.each(games, function(index, game){
-				if(game != null){
-					game.iMillis = game.gameTime.iLocalMillis;
-					game.date = millisecondToDate(game.iMillis);
-					game.time = millisecondToTime(game.iMillis);
-					//根據odd的內容來建立game的屬性
-
-					$.each(game.odds, function(index, odd){
-						odd.gameNum = game.gameNum;
-						switch(odd.oddType) {
-					    case 'SU_A':
-					    	game.suA = odd.oddValue;
-					    	game.suACom = odd.oddCombination;
-					    	odd.labelText = game.teamAway.teamName;
-					    	break;
-					    case 'SU_H':
-					    	game.suH = odd.oddValue;
-					    	game.suHCom = odd.oddCombination;
-					    	odd.labelText = game.teamHome.teamName;
-							break;
-					    case 'ATS_A':
-					    	game.atsA = odd.oddValue;
-					    	game.atsACom = odd.oddCombination;
-					    	odd.labelText = game.teamAway.teamName;
-					    	break;
-					    case 'ATS_H':
-					    	game.atsH = odd.oddValue;
-					    	game.atsHCom = odd.oddCombination;
-					    	odd.labelText = game.teamHome.teamName;
-					    	break;
-					    case 'SC_H':
-					    	game.scH = odd.oddValue;
-					    	game.scCom = odd.oddCombination;
-					    	odd.labelText = "總分合大於";
-					    	break;
-					    case 'SC_L':
-					    	game.scL = odd.oddValue;
-					    	game.scCom = odd.oddCombination;
-					    	odd.labelText = "總分合小於";
-					    	break;
-					    case 'ODD':
-					    	game.oeOdd = odd.oddValue;
-					    	game.oeCom = odd.oddCombination;
-					    	odd.labelText = "總分合為單數";
-					    	break;
-					    case 'EVEN':
-					    	game.oeEven = odd.oddValue;
-					    	game.oeCom = odd.oddCombination;
-					    	odd.labelText = "總分合為偶數";
-					    	break;
-					    default:
-					    	break;
-						}	
-						game.detialHome = "不讓分:" + game.suHCom  + " 賠率:" + game.suH + "/讓分:" + game.atsHCom + " 賠率:" + game.atsH;
-						game.detialAway = "不讓分:" + game.suACom  + " 賠率:" + game.suA + "/讓分:" + game.atsACom + " 賠率:" + game.atsA;
+		$('#loader').css('display','flex');
+		userOddsCount = 0;
+		$.ajax({
+			url: '<c:url value="/game?method:selectNearNotEnd" />',
+			type:'post',
+			dataType:'json',
+			data:{
+				'complexBallType':$('#ballType').val(),
+				'complexTimeBegin':searchDay,
+				'complexTimeEnd':searchDay,
+			},
+			success:function(datas){
+				$('#loader').css('display','none');
+				var games = [];
+				var odds = [];
+				//根據gameId與oddId分配出game陣列與odd陣列方便後續使用
+				$.each(datas, function(index, data){
+					games[data.gameNum] = data;
+					$.each(data.odds, function(index, odd){
+						odds[odd.id] = odd;
 					});
+				});
+				
+				//debug用
+				//console.log(games);
+				//console.log('-----------');
+				//console.log(odds);
+				//console.log('-----------');
+
+				//初始化gameList
+				var gameTagSample = $('#gametagSample').clone();
+				$('#game_list').html('');
+				$('#game_list').prepend(gameTagSample);
+				
+				userOdds = [];
+				if(sessionStorage.userOdds){
+					userOdds = sessionStorage.userOdds.split(',');
+					userOddsCount = userOdds.length;
 				}
-			});
-			
-			//將games 與odds 輸出到index
-			golbalInsert(games, odds);
-			gameRefresh(games, odds);
-			
-		}//Ajax function
-	});//Ajax
+				
+				//game資料進一步處理 將odds中的資料往上提方便後續使用
+				$.each(games, function(index, game){
+					if(game != null){
+						game.iMillis = game.gameTime.iLocalMillis;
+						game.date = millisecondToDate(game.iMillis);
+						game.time = millisecondToTime(game.iMillis);
+						//根據odd的內容來建立game的屬性
+
+						$.each(game.odds, function(index, odd){
+							odd.gameNum = game.gameNum;
+							switch(odd.oddType) {
+						    case 'SU_A':
+						    	game.suA = odd.oddValue;
+						    	game.suACom = odd.oddCombination;
+						    	odd.labelText = game.teamAway.teamName;
+						    	break;
+						    case 'SU_H':
+						    	game.suH = odd.oddValue;
+						    	game.suHCom = odd.oddCombination;
+						    	odd.labelText = game.teamHome.teamName;
+								break;
+						    case 'ATS_A':
+						    	game.atsA = odd.oddValue;
+						    	game.atsACom = odd.oddCombination;
+						    	odd.labelText = game.teamAway.teamName;
+						    	break;
+						    case 'ATS_H':
+						    	game.atsH = odd.oddValue;
+						    	game.atsHCom = odd.oddCombination;
+						    	odd.labelText = game.teamHome.teamName;
+						    	break;
+						    case 'SC_H':
+						    	game.scH = odd.oddValue;
+						    	game.scCom = odd.oddCombination;
+						    	odd.labelText = "總分合大於";
+						    	break;
+						    case 'SC_L':
+						    	game.scL = odd.oddValue;
+						    	game.scCom = odd.oddCombination;
+						    	odd.labelText = "總分合小於";
+						    	break;
+						    case 'ODD':
+						    	game.oeOdd = odd.oddValue;
+						    	game.oeCom = odd.oddCombination;
+						    	odd.labelText = "總分合為單數";
+						    	break;
+						    case 'EVEN':
+						    	game.oeEven = odd.oddValue;
+						    	game.oeCom = odd.oddCombination;
+						    	odd.labelText = "總分合為偶數";
+						    	break;
+						    default:
+						    	break;
+							}	
+							game.detialHome = "不讓分:" + game.suHCom  + " 賠率:" + game.suH + "/讓分:" + game.atsHCom + " 賠率:" + game.atsH;
+							game.detialAway = "不讓分:" + game.suACom  + " 賠率:" + game.suA + "/讓分:" + game.atsACom + " 賠率:" + game.atsA;
+						});
+					}
+				});
+				
+				//將games 與odds 輸出到index
+				golbalInsert(games, odds);
+				gameRefresh(games, odds);
+				
+			}//Ajax function
+		});//Ajax
+		
+	});//hide
+	
 }//superRefresh
 
 superRefresh();
