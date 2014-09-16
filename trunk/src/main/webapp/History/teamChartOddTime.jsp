@@ -301,7 +301,7 @@ $(function () {
 	                },
 
 	                series: [{
-	                    name: '隊名',
+	                    name: '前頁',
 	                    colorByPoint: true,
 	                    data: brandsData
 	                }],
