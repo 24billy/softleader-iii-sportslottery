@@ -60,22 +60,8 @@
 		
 		<!-- 摺疊書籤 -->
         <div class="navbar-header">
-            <span class="navbar-toggle" data-toggle="collapse">
-                <span class="game">
-                                                   賽事投注
-                </span>
-                <span class="history">
-                                                    歷史紀錄
-                </span>
-                <span class="user">
-                                                    使用者投注資訊
-                </span >
-                <a class="simple-menu" href="#sidr">
-                    <span class="lotteryBoard">投注區
-                   
-                    </span>
-                </a>
-            </span>           
+            <a class="navbar-brand" href="/index.jsp">Sport Lottery</a>
+                       
         
         
             <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse"
@@ -84,7 +70,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index.jsp">Sport Lottery</a>
+            <span class="navbar navbar-toggle" data-toggle="collapse" >
+                <button class="game">賽事</button>
+                <button class="history">歷史</button>
+                <button class="user">使用者</button>
+                <button class="lotteryBoard simple-menu">投注</button>
+            </span>
+            
+            
         </div>
         
         <div class="container-fluid">
@@ -194,10 +187,10 @@
                     <button type="button"
                         class="btn btn-sky text-uppercase btn-lg user"
                         >使用者投注資訊</button>
-                    <a id="simple-menu" href="#sidr"><button
+                    <button
                             type="button"
-                            class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard"
-                            >投注區</button></a>
+                            class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu"
+                            >投注區</button>
                 </div>
             </div>
         </div>        
