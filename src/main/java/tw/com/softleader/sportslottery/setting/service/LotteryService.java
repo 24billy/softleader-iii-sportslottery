@@ -82,6 +82,9 @@ public class LotteryService extends GenericService<LotteryEntity> {
                 System.out.println("tempPrize[passCount]="+tempPrize[passCount]);
                 passCount++;
             }
+            if(odds.getOddsId().getIsPass()==null){
+                return -1L;
+            }
         }
         if(passCount>0){
             //將過關轉成對應的組合數
