@@ -11,14 +11,6 @@
   
   <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
   
-  	<action name="countInfoGraph" class="gameAction" method="countInfoGraph">
-  		<result name="success">/History/teamChartOddTime.jsp</result>
-  		<result name="countInfoGraph" type="stream">
-  			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-  		</result>
-  	</action>
-  
   	<action name="gameAdmin" class="gameAction" method="admin">
   		<result name="success">/admin/gameAdmin.jsp</result>
   		<result name="message" type="stream">
@@ -234,6 +226,12 @@
 		<allowed-methods>select,insert,update,delete</allowed-methods>
 	</action>
 	-->
-	
+	<action name="countInfoGraph" class="gameAction" method="countInfoGraph">
+  		<result name="success">/History/teamChartOddTime.jsp</result>
+  		<result name="countInfoGraph" type="stream">
+  			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+  		</result>
+  	</action>
   </package>
 </struts>
