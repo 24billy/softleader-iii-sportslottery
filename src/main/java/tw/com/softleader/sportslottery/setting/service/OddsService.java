@@ -204,7 +204,7 @@ public class OddsService extends GenericService<OddsEntity> {
 	
 }
 
-class CountBean {
+/*class CountBean {
 	private LocalDate gameTime;
 	private String teamName;
 	private Long count;
@@ -297,5 +297,5 @@ class CountBean {
 
 	
 
-}
+}*/
 

@@ -80,7 +80,7 @@ public class GameService extends GenericService<GameEntity> {
 				totalCountOftheDay += odd.getCount();
 				
 			}
-			System.out.println("totalCountOftheDay: "+totalCountOftheDay);
+//			System.out.println("totalCountOftheDay: "+totalCountOftheDay+" "+dao.findById(gameId).getGameTime());
 			return totalCountOftheDay;
 		} catch (Exception e) {
 			System.out.println("List<OddsEntity> is null in totalCount(Long gameId)");
@@ -98,6 +98,7 @@ public class GameService extends GenericService<GameEntity> {
 		bean.setOddType(oddType);
 		bean.setPass(this.getIsPass(gameId, oddType));
 		bean.setPercentage(this.getIsPassPercentage(gameId,oddType));
+		bean.setGameTime(dao.findById(gameId).getGameTime());
 		return bean;
 	}
 	

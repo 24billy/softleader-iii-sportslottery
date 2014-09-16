@@ -26,7 +26,7 @@
 
 
 
-
+<script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
 	appendToDiv();  
@@ -60,7 +60,8 @@ $(function () {
 			 /* console.log(data); */
 				$.each(data, function(key, value) {
 					console.log(value['ATS_A']);
-					console.log(value['ATS_A'].count);
+					var time=value['ATS_A'].gameTime.iLocalMillis;
+					console.log(millisecondToDate(time)+millisecondToTime(time));
 					console.log(value['ATS_H'].count);
 					console.log(value['SU_A'].count);
 					console.log(value['SU_H'].count);
