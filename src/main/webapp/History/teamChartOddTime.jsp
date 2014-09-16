@@ -269,10 +269,10 @@ $(function () {
 	                    type: 'column'
 	                },
 	                title: {
-	                    text: '過關比歷史統計, 2014'
+	                    text: '有賺到錢的投注統計, 2014'
 	                },
 	                subtitle: {
-	                    text: '點擊長柱見投注細節'
+	                    text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
 	                },
 	                xAxis: {
 	                    type: 'category'
