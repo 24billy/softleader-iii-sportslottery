@@ -22,8 +22,8 @@
 
 	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
 
-	<!-- <div id="tsv" style="display:none"></div>  -->
-	 <div id="tsv"></div>
+	 <div id="tsv" style="display:none"></div>  
+	 <!-- <div id="tsv"></div> -->
 
 
 <script src="<c:url value="/js/misc.js"/>"></script>
@@ -37,10 +37,10 @@ $(function () {
 	
 	function appendToDiv(){
 		/* test1();  */
-		/* test2();  */ 
-		/* test3();  */
+		 test2();  
+		 test3();  
 		/*  test4();  */
-		 test5(); 
+		// test5(); 
 		
 	}
 
@@ -64,16 +64,16 @@ $(function () {
 		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
 			 /* console.log(data); */
 				$.each(data, function(key, value) {
-					console.log(value['ATS_A']);
+					//console.log(value['ATS_A']);
 					var time=value['ATS_A'].gameTime.iLocalMillis;
 					console.log(millisecondToDate(time)+millisecondToTime(time));
-					console.log(value['ATS_H'].count);
-					console.log(value['SU_A'].count);
-					console.log(value['SU_H'].count);
-					console.log(value['SC_H'].count);
-					console.log(value['SC_L'].count);
-					console.log(value['ODD'].count);
-					console.log(value['EVEN'].count);
+					console.log(value['ATS_H'].percentage);
+					console.log(value['SU_A'].percentage);
+					console.log(value['SU_H'].percentage);
+					console.log(value['SC_H'].percentage);
+					console.log(value['SC_L'].percentage);
+					console.log(value['ODD'].percentage);
+					console.log(value['EVEN'].percentage);
 					console.log('\n');
 				});
 			});
@@ -81,15 +81,50 @@ $(function () {
 	function test3(){
 		var url = '<c:url value="/countInfoGraph"/>';
 		var child='';	
+		child += '過關	歷史\n'; 
  		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
 				$.each(data, function(key, value) { 
-					console.log('inside');
-/* 					var type=value['ATS_A'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); */
-					/* console.log(time); */
-					child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
-					child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
-					/* console.log(type.percentage*100+'%'); */
+
+ 					var type=value['ATS_A'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
+	
+ 					var type=value['ATS_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+					
+ 					var type=value['SU_A'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SU_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SC_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SC_L'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['ODD'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['EVEN'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+					
 					
  				 });  
 				$('#tsv').append(child);
@@ -205,7 +240,7 @@ $(function () {
 	                        }else if(version == 7){
 	                        	versions[brand].push(['總分奇數', columns[1][i]]);
 	                        }else if(version == 8){
-	                        	versions[brand].push(['低於總和', columns[1][i]]);
+	                        	versions[brand].push(['總分偶數', columns[1][i]]);
 	                        }
 	                       
 	                    }
