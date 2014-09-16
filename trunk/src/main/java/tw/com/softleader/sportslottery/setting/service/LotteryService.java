@@ -81,11 +81,13 @@ public class LotteryService extends GenericService<LotteryEntity> {
         {
             if(odds.getOddsId().getIsPass()!=null && odds.getOddsId().getIsPass()){
                 tempPrize[passCount]=odds.getOddsId().getId();
+                System.out.println();
                 tempOddsValue[passCount]=odds.getOddsId().getOddValue();
-                System.out.println("tempPrize[passCount]="+tempPrize[passCount]);
+                System.out.println("過關的odd="+tempPrize[passCount]);
                 passCount++;
             }
             if(odds.getOddsId().getIsPass()==null){
+                System.out.println("有odds未結算:lotteryId="+lottery.getId());
                 return -1L;
             }
         }
@@ -140,45 +142,45 @@ public class LotteryService extends GenericService<LotteryEntity> {
             tempArray = new BigDecimal[prize.length];
             
             //getCombination(oddsValue,2,0,tempArray,0);
-            System.out.println("---->>result 0 :"+result+"passCount:"+passCount);
+            System.out.println("計算前獎金為0 :"+result+"過關注數為:"+passCount);
             System.out.println("---->>lottery:"+lottery);
             System.out.println("---->>lotteryOdds:"+lotteryOdds);           
 
             if(com1!=null && 1<=passCount){
                 getCombination(oddsValue,1,0,tempArray,0);
-                System.out.println("result 1:"+result);
+                System.out.println("過一關的累積獎金:"+result);
             }
             if(com2!=null && 2<=passCount){
                 getCombination(oddsValue,2,0,tempArray,0);
-                System.out.println("result 2:"+result);
+                System.out.println("過二關的累積獎金:"+result);
             }
             if(com3!=null && 3<=passCount){
                 getCombination(oddsValue,3,0,tempArray,0);
-                System.out.println("result 3:"+result);
+                System.out.println("過三關的累積獎金:"+result);
             }
             if(com4!=null && 4<=passCount){
                 getCombination(oddsValue,4,0,tempArray,0);
-                System.out.println("result 4:"+result);
+                System.out.println("過四關的累積獎金:"+result);
             }
             if(com5!=null && 5<=passCount){
                 getCombination(oddsValue,5,0,tempArray,0);
-                System.out.println("result 5:"+result);
+                System.out.println("過五關的累積獎金:"+result);
             }
             if(com6!=null && 6<=passCount){
                 getCombination(oddsValue,6,0,tempArray,0);
-                System.out.println("result 6:"+result);
+                System.out.println("過六關的累積獎金:"+result);
             }
             if(com7!=null && 7<=passCount){
                 getCombination(oddsValue,7,0,tempArray,0);
-                System.out.println("result 7:"+result);
+                System.out.println("過七關的累積獎金:"+result);
             }
             if(com8!=null && 8<=passCount){
                 getCombination(oddsValue,8,0,tempArray,0);
-                System.out.println("result 8:"+result);
+                System.out.println("過八關的累積獎金:"+result);
             }
             Long win=result.multiply(new BigDecimal(capital)).setScale(3, BigDecimal.ROUND_HALF_UP).longValue();
             lottery.setWin(win);
-            System.out.println("final lottery:"+lottery);            
+            System.out.println("結算後總獎金:"+win+";結算後lottery:"+lottery);            
             dao.update(lottery);
             return win;    
         }
@@ -197,6 +199,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
             System.out.println();
             System.out.println("temp:"+temp); 
             this.result=this.result.add(temp);
+            
             return;
         }  
               
