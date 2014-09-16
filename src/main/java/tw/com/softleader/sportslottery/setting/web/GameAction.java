@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
@@ -226,11 +227,14 @@ public class GameAction extends ActionSupport {
 		String result = null;
 		Long gameId = model.getId();
 		model = service.getById(gameId);
+		List<LotteryEntity> lotterys = lotteryService.getLotterysByGame(model);
+		for (LotteryEntity lottery : lotterys) {
+			lotteryService.calculatePrize(lottery);
+		}
 		
 		try {
 			for (OddsEntity odds : model.getOdds()) {
 				List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odds.getId());
-				lotteryOddsService.checkStatus(los);
 				int count = los.size();
 				odds.setCount(new Long(count));
 				oddsService.update(odds);

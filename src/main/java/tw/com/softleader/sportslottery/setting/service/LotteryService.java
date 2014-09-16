@@ -1,7 +1,10 @@
 package tw.com.softleader.sportslottery.setting.service;
 
 import java.math.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -204,5 +207,18 @@ public class LotteryService extends GenericService<LotteryEntity> {
         }
    
             
-    } 	
+    }
+    
+    public List<LotteryEntity> getLotterysByGame(GameEntity game) {
+		List<LotteryEntity> lotterys = new ArrayList<LotteryEntity>();
+		Set<Long> lotteryIds = new HashSet<Long>();
+		List<OddsEntity> odds = game.getOdds();
+		for (OddsEntity odd : odds) {
+			lotteryIds.addAll(lotteryOddsDao.findLotteryIdByOddsId(odd));
+		}
+		for (Long id : lotteryIds) {
+			lotterys.add(dao.findById(id));
+		}
+		return lotterys;
+	}
 }

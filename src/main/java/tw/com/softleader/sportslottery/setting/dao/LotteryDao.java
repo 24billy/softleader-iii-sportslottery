@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
@@ -12,6 +13,9 @@ import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 
 @Repository
 public class LotteryDao extends GenericDao<LotteryEntity>{
+	
+	@Autowired
+	private LotteryOddsDao lotteryOddsDao;
 	
 	public List<LotteryEntity> findByUserId(Long userId){
 		Query query = getSession().createQuery("from LotteryEntity where USER_ID = :userId");
@@ -113,6 +117,5 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		return query.list();
 		
 	}
-
-
+	
 }
