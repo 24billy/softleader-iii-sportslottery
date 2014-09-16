@@ -157,6 +157,11 @@
 		<result name="success">/Security/Result/success.jsp</result>
 		<result name="error">/Security/Result/fail.jsp</result>
 	</action>
+	<!-- 身分證重複 -->
+	<action name="checkUserCardId" class="userAction" method="checkUserCardId">
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
+	</action>
 	<!-- 檢查Email重複 -->
 	<action name="checkEmail" class="userAction" method="checkEmail">
 		<result name="success">/Security/Result/success.jsp</result>

@@ -17,21 +17,16 @@ public class UserServiceTest extends BaseTest{
 	private UserDao dao;
 	List<UserEntity> models=null;
 	UserEntity model=null;
+	
 	@Test
 	public void testGetByUserAccount() {
-		model=userService.getByUserAccount("jackychen");
+		model=userService.getByUserAccount("CHEN");
 		log.debug("GetByUserAccount:{}",model);
-
 	}
-
+	
 	@Test
-	public void testCheckLogin() {
-		//UserEntity user=dao.findByUserAccount("jackychen");
-		UserEntity checkEntity =dao.findByUserAccount("jackychen");
-		checkEntity = userService.encoding(checkEntity);
-		
-		model=userService.checkLogin("jackychen", checkEntity);
-		log.debug("CheckLogin:{}",model);
+	public void testGetByUserEmail() {
+		model=userService.getByUserEmail("wANg@gMail.Com");
+		log.debug("GetByUserEmail:{}",model);
 	}
-
 }

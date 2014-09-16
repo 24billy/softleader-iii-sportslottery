@@ -19,10 +19,8 @@ public class UserDaoTest extends BaseTest {
 	@Test
 	public void test() throws ParseException {
 		
-		
 		LocalDate date1 = new LocalDate();
-		date1 = LocalDate.parse("2014-08-26");//將時間自串轉成 LocalDate
-		
+		date1 = LocalDate.parse("2014-08-26");//將時間自串轉成 LocalDate		
 		
 		System.out.println("--------Test:findByUserAccount--------");
 		System.out.println("findByUserAccount :" + dao.findByUserAccount("jackychen"));
@@ -32,6 +30,9 @@ public class UserDaoTest extends BaseTest {
 		System.out.println("findByCreateTime :" + dao.findByCreateTime(date1));
 		System.out.println("findByCreateTime :" + dao.findByCreateTime(date1).size());
 		
+		System.out.println("--------Test:findByUserCardId--------");
+		log.debug(dao.findByUserCardId("A223456788").toString());
+	
 	}
 
 }

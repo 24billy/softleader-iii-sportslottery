@@ -24,7 +24,7 @@ public class UserEntity extends GenericEntity {
 	//user:id, 帳號, 密碼, 姓名, 身分證, 生日, 地址, 信箱, 電話, 驗證狀態, 營行帳戶, 錢.
     //http://docs.oracle.com/javaee/7/api/javax/persistence/Column.html#nullable()
 	//帳號
-	@Column(name="USER_ACCOUNT", length=50, nullable=false, unique = true)
+	@Column(name="USER_ACCOUNT", length=50, nullable=false, unique=true)
 	private String userAccount;
 	//密碼
 	@Column(name="USER_PASSWORD", nullable=false)
@@ -33,7 +33,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_NAME", length=50, nullable=false)
 	private String userName;
 	//身分證
-	@Column(name="USER_CARD_ID", length=10, nullable=false)
+	@Column(name="USER_CARD_ID", length=10, nullable=false, unique=true)
 	private String userCardId;
 	//生日
 	@Column(name="USER_BIRTHDAY", nullable=false)
@@ -43,7 +43,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_ADDRESS")
 	private String userAddress;
 	//信箱
-	@Column(name="USER_EMAIL", length=50, nullable=false)
+	@Column(name="USER_EMAIL", length=50, nullable=false, unique=true)
 	private String userEmail;
 	//電話
 	@Column(name="USER_PHONE", length=10)

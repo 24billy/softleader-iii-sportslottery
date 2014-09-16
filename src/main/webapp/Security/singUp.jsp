@@ -61,14 +61,15 @@
     border-bottom: 3px solid #5CB85C !important;
     vertical-align: central;
 }
-
 .step .fa {
     padding-top: 15px;
     font-size: 40px;
 }
 .infot {
 	color: #c0c0c0;
-	float:left;
+	float: left;
+	font-family: fantasy;
+	font-size: 0.4cm;
 }
 #page2 {
 	display: none;
@@ -78,6 +79,13 @@
 }
 #sigUp-body {
 	text-align:center;
+}
+.user-column {
+	margin-bottom: 0px;
+	font-size: 0.6cm;
+}
+hr {
+	margin-top: 0px;
 }
 
 </style>
@@ -188,35 +196,45 @@
 						<form>
 							<legend>
 								<span class="glyphicon glyphicon-user"></span>  
-								<abbr id="info-account" title="預覽資料"></abbr> <span id="info-name"></span><br>
+								<abbr id="info-account" title="預覽資料"></abbr> 
+								<span id="info-name"></span><br>
 							</legend>
 							<address>
-								
-								<legend>
+								<div>
 									<p>
-										<span id="info-idcard" class="infot">身分證:</span> 
+										<span class="infot">身分證:</span>
+										<span class="user-column" id="info-idcard">&nbsp;</span> 
 									</p>
-								</legend>
-								<legend>
+								</div>
+								<HR>
+								<div>
 									<p>
-										<span id="info-birth" class="infot">生日 :</span> 
+										<span class="infot">生日 :</span> 
+										<span class="user-column" id="info-birth">&nbsp;</span> 
 									</p>
-								</legend>
-								<legend>
+								</div>
+								<HR>
+								<div>
 									<p>
-										<span class="infot">E mail :</span> <a id="info-mail" href="mailto:#"></a>
+										<span class="infot">E mail :</span> 
+										<a class="user-column" id="info-mail" href="mailto:#">&nbsp;</a>
 									</p>
-								</legend>
-								<legend>
+								</div>
+								<HR>
+								<div>
 									<p>
-										<span id="info-phone" class="infot">電話 :</span> 
+										<span class="infot">電話 :</span> 
+										<span class="user-column" id="info-phone">&nbsp;</span> 
 									</p>
-								</legend>
-								<legend>
+								</div>
+								<HR>
+								<div>
 									<p>
-										<span id="info-card" class="infot">卡號 :</span> 
+										<span class="infot">卡號 :</span> 
+										<span class="user-column" id="info-card">&nbsp;</span> 
 									</p>
-								</legend>
+								</div>
+								<HR>
 
 							</address>
 						</form>
@@ -232,7 +250,7 @@
 		</div>
 	</div>
 
-	<div id="sigUp-footer" class="row container footer" style="margin-top: 100px; margin-bottom: 100px;">
+	<div id="sigUp-footer" class="row container">
     <div class="footer-body">
 	    <div class="row">
 	        <div class="progress" id="progress1">
@@ -344,17 +362,15 @@
 		
 		//姓名
 		jQuery.validator.addMethod("input", function() {
-			console.log($('#name').val());
 			$('#info-name').empty();
 			$('#info-name').append("(" + $('#name').val());
-			
 			return true;
 		});
 		
 		//身分證驗證
 		jQuery.validator.addMethod("idCard",
-			function(element) {
-				var citizenid = $('userId').val();
+			function() {
+				var citizenid = $('#userId').val().toUpperCase();
 				var local_table = [10,11,12,13,14,15,16,17,34,18,19,20,21,
 			                       22,35,23,24,25,26,27,28,29,32,30,31,33];
 			    var local_digit = local_table[citizenid.charCodeAt(0)-'A'.charCodeAt(0)];
@@ -364,23 +380,78 @@
 			    for (var i=1, p=8; i <= 8; i++, p--) {
 			    	checksum += parseInt(citizenid.charAt(i)) * p;
 			    }
-			    checksum += parseInt(citizenid.charAt(9)); 
-			    return (boolean)(
-			        this.optional(element) || !(checksum % 10)
-				);
+			    checksum += parseInt(citizenid.charAt(9));
+			    return !(checksum % 10);
 			}, "無此身分證"
 		);
 		jQuery.validator.addMethod("idCardLayout",
-			function(element) {
-				var citizenid = $('userId').val();
+			function() {
+				var citizenid = $('#userId').val().toUpperCase();
+				console.log(citizenid);
 				citizenid = citizenid.replace(/\s+/g, "");
-				return (this.optional(element) || /^[A-Z]{1}[1-2]{1}[0-9]{8}$/.test(citizenid));
+				return /^[A-Z]{1}[1-2]{1}[0-9]{8}$/.test(citizenid);
 			}, "格式不正確"
 		);
 		jQuery.validator.addMethod("checkIdCard", function() {
-			
-		});
+			$('#info-idcard').empty();
+			$('#info-idcard').append($('#userId').val());
+			var check = false;
+			$.ajax({
+				url: "<c:url value='checkUserCardId' />",
+				type: 'get',
+				async:false,
+				data: {
+					'model.userCardId':$('#userId').val()
+				},
+				success: function(data) {
+					console.log(data);
+					if(data=="success") {
+						check = true;
+					}
+				}
+			});
+			return check;
+		},"身分證重複");
 		
+		//年齡驗證
+		jQuery.validator.addMethod('checkBirth', function() {
+			$('#info-birth').empty();
+			$('#info-birth').append($('#userBirth').val());
+			var check = true;
+			var userBirth = $("#userBirth").val();
+			var year = new Date().getFullYear();
+			var month = new Date().getMonth() +1;
+			//var day = new Date().getDate();
+			var res;
+			if(userBirth.substring(4,5)=='/') {
+				res = userBirth.split("/");
+			} else {
+				res = userBirth.split("-");
+			}
+			if((year - res[0])<18) {
+				console.log('');
+				check = false;
+			}else if((year - res[0])==18 && (res[1]-month)>0) {
+				check = false;
+			}
+			return check;
+		},function() {
+			var res;
+			var month = new Date().getMonth() +1;
+			var userBirth = $("#userBirth").val();
+			var year = new Date().getFullYear();
+			if(userBirth.substring(4,5)=='/') {
+				res = userBirth.split("/");
+			} else {
+				res = userBirth.split("-");
+			}
+			year = 18-(year-res[0]);
+			if(year==0) {
+				return "快了快了,剩" + (res[1]-month) + "個月就能來了";
+			}
+			return "別急別急,再等"+ year + "年再來";
+		});
+
 		$('#registration-form').validate({
 			debug: true,
 			rules: {
@@ -419,6 +490,11 @@
 					idCardLayout: true,
 					idCard: true,
 					checkIdCard: true
+				},
+				'model.userBirthday': {
+					required: true,
+					dateISO: true,
+					checkBirth: true
 				}
 				
 			},
@@ -466,7 +542,14 @@
 			});
 		});
 		
-		//$( "#userBirth").datepicker();
+		//日期選擇器
+		$('#userBirth').datepicker({
+			format: "yyyy/mm/dd",
+		    startView: 2,
+		    endDate: "now",
+		    language: "zh-TW",
+		    keyboardNavigation: false
+		});
 		
 		$('#agree').on('click',function() {
 	        $('#step1').removeClass("activestep");

@@ -19,6 +19,9 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
+<script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
+
 
 <!--sidepanel  -->  
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
@@ -43,6 +46,7 @@
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">    
 <link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
+<link rel="stylesheet" href="<c:url value="/css/datepicker.css"/>"> 
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);

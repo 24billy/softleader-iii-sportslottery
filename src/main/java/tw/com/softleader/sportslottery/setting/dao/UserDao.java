@@ -30,4 +30,10 @@ public class UserDao extends GenericDao<UserEntity> {
 		return query.list();
 	}
 	
+	public UserEntity findByUserCardId(String userCardId) {
+		Query query = getSession().createQuery("from UserEntity u where USER_CARD_ID = :userCardId");
+		return (UserEntity) query.setString("userCardId", userCardId).uniqueResult();
+	}
+
+	
 }
