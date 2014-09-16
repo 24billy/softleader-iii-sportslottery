@@ -13,22 +13,32 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 </head>
 <body>
-	<div id="selectInput">
-		<input type="text" class="inputData" id="gameId" placeholder="game Id" >
-		<input type="text" class="inputData" id="teamName" placeholder="隊伍名稱" >
-		<button type="button" id="submitButton">Submit Button</button>
-	</div> 
+
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
+	
 	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
-
+	
 	 <div id="tsv" style="display:none"></div>  
 	 <!-- <div id="tsv"></div> -->
-
+	<br><br>
+	<div >
+		<label>購買推薦: <span id="suggestion">t</span> </label>
+		<p>(推薦方式以歷史中最高的過關比為主)</p>
+	</div>
+	<br><br>
+<!-- 	<div id="selectInput" >
+		<button type="button" class="button" id="oddType" >以投注類型來看</button>
+		<button type="button" class="button" id="Count" >以購買數來看</button>
+		<button type="button" class="button" id="Count" >以過關比率來看</button>
+		<button type="button" class="button" id="money">以金額來看</button>
+		<button type="button" class="button" id="money">比分統計</button>
+	</div>  -->
 
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
+	var teamNameHome=[], teamNameAway=[];
+	
 	appendToDiv(); 
 	$(document).ajaxStop(function() {//確認appendToDiv()先執行完，才執行 mainFunction()
 		mainFunction();
@@ -37,7 +47,7 @@ $(function () {
 	
 	function appendToDiv(){
 		/* test1();  */
-		 test2();  
+		// test2();  
 		 test3();  
 		/*  test4();  */
 		// test5(); 
@@ -80,12 +90,20 @@ $(function () {
 	}
 	function test3(){
 		var url = '<c:url value="/countInfoGraph"/>';
+		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
  		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
+ 			 
+ 			
+ 			 console.log(data);
 				$.each(data, function(key, value) { 
-
+					
  					var type=value['ATS_A'];
+ 					teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
+		 			teamNameHome[i] = type.teamNameHome;
+ 					console.log(i+' AAAway : '+teamNameAway[i]);
+ 					//console.log(i+' Home : '+teamNameHome[i]);
 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
 					var percent=type.percentage;
 					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
@@ -125,7 +143,7 @@ $(function () {
 					var percent=type.percentage;
 					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
 					
-					
+					i +=8;
  				 });  
 				$('#tsv').append(child);
 			  });  
@@ -191,20 +209,26 @@ $(function () {
 	                }
 	                return value;
 	            });
-
+				
+	            var j=0; //用來取teamNameAway, teamNameHome
+	            var awayName, homeName;
 	            $.each(col[0], function (i, name) {
 	                var brand,
 	                    version;
-
-	                console.log(name);
-
+	                if(j%8==0){
+	                	awayName= teamNameAway[j];
+		                homeName= teamNameHome[j];
+	                	
+	                }
+	                
+					console.log(name);
 	                if (i > 0) {
 
 	                    // Remove special edition notes
 
 	                   // name = name.split(' -')[0];
 
-	                    console.log(name);
+	                    //console.log(name);
 
 	                    // Split into brand and version
 	                    version = name.match(/( [0-9])/);
@@ -219,20 +243,24 @@ $(function () {
 	                    } else {
 	                        brands[brand] += columns[1][i];
 	                    }
-
+	                    console.log(j+": "+homeName);
+	                    console.log(j+": "+awayName);
+		
 	                    // Create the version data
 	                    if (version !== null) {
 	                        if (!versions[brand]) {
 	                            versions[brand] = [];
 	                        }
 	                        if(version == 1){
-	                        	versions[brand].push(['主隊不讓分', columns[1][i]]);
+	                        	versions[brand].push(['主隊不讓分<br>('+homeName+')', columns[1][i]]);
 	                        }else if(version == 2){
-	                        	versions[brand].push(['客隊不讓分', columns[1][i]]);
+	                        	versions[brand].push(['客隊不讓分<br>('+awayName+')', columns[1][i]]);
+	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 3){
-	                        	versions[brand].push(['主隊讓分', columns[1][i]]);
+	                        	versions[brand].push(['主隊讓分<br>('+homeName+')', columns[1][i]]);
 	                        }else if(version == 4){
-	                        	versions[brand].push(['客隊讓分', columns[1][i]]);
+	                        	versions[brand].push(['客隊讓分<br>('+awayName+')', columns[1][i]]);
+	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 5){
 	                        	versions[brand].push(['高於總和', columns[1][i]]);
 	                        }else if(version == 6){
@@ -244,6 +272,7 @@ $(function () {
 	                        }
 	                       
 	                    }
+	                    j++;
 	                }
 
 	            });
@@ -301,7 +330,7 @@ $(function () {
 	                },
 
 	                series: [{
-	                    name: '前頁',
+	                    name: 'Date',
 	                    colorByPoint: true,
 	                    data: brandsData
 	                }],
