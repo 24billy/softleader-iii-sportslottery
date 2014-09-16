@@ -254,8 +254,10 @@
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
+                                <button class="btn btn-warning btn-xs">虛擬投注</button>
                             </div>
                         </form>
+   
                     </div>
                     <!-- End of Single Bet Panel -->
 

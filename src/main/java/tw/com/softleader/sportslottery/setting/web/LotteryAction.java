@@ -128,19 +128,14 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		//System.out.println("oddsIdList="+oddsIdList);
 		//start insert
 		//測試用：設定UserId為2
-		model.setUserId(2L);
-		
-	      Map session = ActionContext.getContext().getSession();
+		//model.setUserId(2L);		
+	    //從session中取出userId
+	    Map session = ActionContext.getContext().getSession();
 	        UserEntity user = (UserEntity)session.get("user");
-	    //HttpServletRequest req = (HttpServletRequest) request;
-	    //   HttpSession session = req.getSession();
-	    //    UserEntity loginToken = (UserEntity) session.getAttribute("user");
-	    //    System.out.println("loginToken:"+loginToken);
-	    model.setUserId(user.getId());
-	    
-	    
-		model.setConfirmTime(new LocalDateTime());
+	    model.setUserId(user.getId());  
+	    model.setConfirmTime(new LocalDateTime());  
 		
+	    //將form的資料提取
         Long capital = model.getCapital();
         model.setWin(-1L);
         System.out.println("capital:"+capital);
@@ -222,7 +217,47 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	
 		return Action.SUCCESS;
 	}
-	
+	public String vitualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        //從session中取出userId
+        Map session = ActionContext.getContext().getSession();
+            UserEntity user = (UserEntity)session.get("user");
+        model.setUserId(user.getId());  
+        model.setConfirmTime(new LocalDateTime());  
+        
+        //將form的資料提取
+        Long capital = model.getCapital();
+        model.setWin(-1L);
+        System.out.println("capital:"+capital);
+        model=service.insert(model);
+        
+        Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
+        LotteryOddsEntity lotteryOdd = new LotteryOddsEntity();
+        
+        //紀錄投注
+        int oddsCount=0;
+        StringBuilder oddsArray=new StringBuilder(); 
+        Method[] methods = oddsIdList.getClass().getMethods();
+        for (Method method : methods){
+            String methodStr = method.toString();
+            if (methodStr.indexOf("getOddId") >= 0){
+                if(method.invoke(oddsIdList, null)!=null){
+                    oddsArray.append(","+method.invoke(oddsIdList, null));
+                    Long oddId= (Long)method.invoke(oddsIdList, null);
+                    OddsEntity odd=new OddsEntity();
+                    odd=oddsService.getById(oddId);
+                    lotteryOdd = new LotteryOddsEntity();
+                    lotteryOdd.setLotteryId(model.getId());
+                    lotteryOdd.setOddsId(odd);
+                    lotteryOdds.add(lotteryOdd);
+                    oddsCount++;
+                }            
+            }      
+        }	    
+        model.setLotteryOdds(lotteryOdds);
+        service.update(model);
+        
+	    return Action.SUCCESS;
+	}
 
 	public String delete(){
 		log.debug("LotteryAction delete");
