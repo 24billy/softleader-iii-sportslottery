@@ -86,42 +86,42 @@ $(function () {
 				$.each(data, function(key, value) { 
 
  					var type=value['ATS_A'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
 					var percent=type.percentage;
 					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
 	
  					var type=value['ATS_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+ 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
 					
  					var type=value['SU_A'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+ 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
 					var percent=type.percentage;
 					child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
 					
 					var type=value['SU_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
 					
 					var type=value['SC_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
 					
 					var type=value['SC_L'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
 					
 					var type=value['ODD'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
 					
 					var type=value['EVEN'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis); 
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
 					var percent=type.percentage;
 					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
 					
