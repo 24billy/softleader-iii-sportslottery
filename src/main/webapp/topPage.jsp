@@ -60,8 +60,26 @@
 		
 		<!-- 摺疊書籤 -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                data-target=".navbar-responsive-collapse">
+            <span class="navbar-toggle" data-toggle="collapse">
+                <span class="game">
+                                                   賽事投注
+                </span>
+                <span class="history">
+                                                    歷史紀錄
+                </span>
+                <span class="user">
+                                                    使用者投注資訊
+                </span >
+                <a class="simple-menu" href="#sidr">
+                    <span class="lotteryBoard">投注區
+                   
+                    </span>
+                </a>
+            </span>           
+        
+        
+            <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse"
+                data-target=".navbar-responsive-collapse.userinfo">
                 <span class="icon-bar"></span> 
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -70,7 +88,7 @@
         </div>
         
         <div class="container-fluid">
-            <div class="navbar-collapse collapse navbar-responsive-collapse">                
+            <div class="navbar-collapse collapse navbar-responsive-collapse userinfo">                
                 <!-- 登入後 -->
 	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
@@ -161,27 +179,28 @@
 	            </c:if>
 	        </div>
 
+
+        </div>
         <!-- 登入區結束 -->
-        <div class="navbar">
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
             <div class="row">
-                <div class="navbar-header col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset-3">
+                <div class="navbar-header col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-3">
                     <button type="button"
-                        class="btn btn-hot text-uppercase btn-lg"
-                        id="game">賽事投注</button>
+                        class="btn btn-hot text-uppercase btn-lg game"
+                        >賽事投注</button>
                     <button type="button"
-                        class="btn btn-sunny text-uppercase btn-lg"
-                        id="history">歷史紀錄</button>
+                        class="btn btn-sunny text-uppercase btn-lg history"
+                        >歷史紀錄</button>
                     <button type="button"
-                        class="btn btn-sky text-uppercase btn-lg "
-                        id="user">使用者投注資訊</button>
+                        class="btn btn-sky text-uppercase btn-lg user"
+                        >使用者投注資訊</button>
                     <a id="simple-menu" href="#sidr"><button
                             type="button"
-                            class="btn btn-right btn-tree text-uppercase btn-lg "
-                            id="lotteryBoard">投注區</button></a>
+                            class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard"
+                            >投注區</button></a>
                 </div>
             </div>
-        </div>
-        </div>
+        </div>        
 	</div>
 	<!--登入頁面 -->
 	<div class="modal fade" id="myModal">
