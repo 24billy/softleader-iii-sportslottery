@@ -2,6 +2,8 @@ package tw.com.softleader.sportslottery.setting.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -14,6 +16,10 @@ import tw.com.softleader.sportslottery.common.entity.GenericEntity;
 public class ReportEntity extends GenericEntity {
 
 	private static final long serialVersionUID = 2014L;
+	
+	@ManyToOne
+	@JoinColumn(name = "USER_ID")
+	private UserEntity user;
 	
 	@Column(name = "TITLE")
 	private String title;
@@ -31,6 +37,17 @@ public class ReportEntity extends GenericEntity {
 	@Column(name = "ANSWER_TIME")
 	@Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
 	private LocalDateTime answerTime;
+	
+	@Column(name = "IS_REPLAYED", columnDefinition = "boolean default false")
+	private Boolean isReplayed;
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
 
 	public String getTitle() {
 		return title;
@@ -72,11 +89,21 @@ public class ReportEntity extends GenericEntity {
 		this.answerTime = answerTime;
 	}
 
+	public Boolean getIsReplayed() {
+		return isReplayed;
+	}
+
+	public void setIsReplayed(Boolean isReplayed) {
+		this.isReplayed = isReplayed;
+	}
+
 	@Override
 	public String toString() {
-		return "ReportEntity [title=" + title + ", question=" + question
-				+ ", answer=" + answer + ", questionTime=" + questionTime
-				+ ", answerTime=" + answerTime + ", id=" + id + "]";
+		return "ReportEntity [user=" + user + ", title=" + title
+				+ ", question=" + question + ", answer=" + answer
+				+ ", questionTime=" + questionTime + ", answerTime="
+				+ answerTime + ", isReplayed=" + isReplayed + ", id=" + id
+				+ "]";
 	}
-	
+
 }
