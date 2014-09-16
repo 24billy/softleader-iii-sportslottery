@@ -86,19 +86,19 @@ public class GameServiceTest extends BaseTest  {
 //		assertEquals(expectedBoolean, isPass);
 //	}
 	
-//	@Test
-//	public void testIsPassPercentage(){
-//		Long gameId=2L;
-//		String oddType= "SU_H";
-//		String oddType2="SU_A";
-//		BigDecimal percent= gameService.getIsPassPercentage(gameId, oddType);
-//		BigDecimal percent2= gameService.getIsPassPercentage(gameId, oddType2);
-//		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);//預防無限小數
-//		BigDecimal expPercent = new BigDecimal("100").divide(new BigDecimal("3300"),mc);
-//		BigDecimal expPercent2 = new BigDecimal(0);
-//		assertEquals(expPercent, percent);
-//		assertEquals(expPercent2, percent2);
-//	}
+	@Test
+	public void testIsPassPercentage(){
+		Long gameId=2L;
+		String oddType= "SU_H";
+		String oddType2="SU_A";
+		BigDecimal percent= gameService.getIsPassPercentage(gameId, oddType);
+		BigDecimal percent2= gameService.getIsPassPercentage(gameId, oddType2);
+		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);//預防無限小數
+		BigDecimal expPercent = new BigDecimal("100").divide(new BigDecimal("3300"),mc);
+		BigDecimal expPercent2 = new BigDecimal(0);
+		assertEquals(expPercent, percent);
+		assertEquals(expPercent2, percent2);
+	}
 	
 	@Test
 	public void testGetCountBean(){
