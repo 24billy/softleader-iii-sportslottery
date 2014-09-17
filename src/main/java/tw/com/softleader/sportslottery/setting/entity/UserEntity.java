@@ -49,8 +49,8 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_PHONE", length=10)
 	private String userPhone;
 	//驗證狀態
-	@Column(name="USER_STATE", columnDefinition = "BIGINT default 0")
-	private Long userState;
+	@Column(name="USER_STATE", length=10)
+	private String userState;
 	//營行帳戶
 	@Column(name="USER_BANK_ACCOUNT", length=20, nullable=false)
 	private String userBankAccount;
@@ -91,11 +91,11 @@ public class UserEntity extends GenericEntity {
 		this.userAddress = userAddress;
 	}
 
-	public Long getUserState() {
+	public String getUserState() {
 		return userState;
 	}
 
-	public void setUserState(Long userState) {
+	public void setUserState(String userState) {
 		this.userState = userState;
 	}
 

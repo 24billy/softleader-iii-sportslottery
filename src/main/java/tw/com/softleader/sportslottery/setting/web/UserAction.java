@@ -297,6 +297,9 @@ public class UserAction extends ActionSupport {
 			model.setCreateTime(LocalDateTime.now());
 			model.setModifiedTime(LocalDateTime.now());
 			model.setCoins(0l);
+			model.setUserState(new String(service.getNewPassword()));
+			String cardId = model.getUserCardId().toUpperCase();
+			model.setUserCardId(cardId);
 			//model.setUserPassword(userPassword.getBytes());
 			log.debug("Model = {}", model);
 			

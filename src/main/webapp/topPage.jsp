@@ -127,7 +127,7 @@
 		                                   		<p class="text-left"><strong>${user.userName}</strong></p>    
 		                                   	</div>          
 		                                   	<div class="col-sm-8">
-		                                   		<a id="goUser" href="#" class="btn-primary btn-xs" data-dismiss="modal">個人資料</a>
+		                                   		<button id="goUser" class="btn-primary btn-xs" data-dismiss="modal">個人資料</button>
 		                                   	</div>                                                           
 		                            	</div>
 		                            	
@@ -260,12 +260,12 @@
 			},
 			success: function(data) {
 				if(data=="success") {
-					document.location.href="<c:url value='/index.jsp'/>";	
+					document.location.href="<c:url value='/goIndex'/>";	
 				}else {
 					$('#loginError').html('帳號或密碼有誤');
 				}
 			}
-		})
+		});
 	});
 	$.ajax({
 		url:'<c:url value="/userOdds?method:selectByUser" />',
@@ -295,28 +295,7 @@
 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		});
 	});
-	$('#toLogin').click(function() {
-			$('#loginError').html('');
-	});
 	
-	$('#login').click(function() {
-		$.ajax({
-			url : '<c:url value="/checkLogin"/>',
-			type : "get",
-			data : {
-				'model.userAccount' : $('#account').val(),
-				userPassword : $('#password').val()
-			},
-			success : function(data) {
-
-				if (data == "success") {
-					document.location.href = '<c:url value="/index.jsp"/>';
-				} else {
-					$('#loginError').html('帳號或密碼有誤');
-				}
-			},
-		});
-	});
 	/*	function fadeOut() {
 	    $('#coins').fadeOut(500, fadeIn);
 	};
@@ -332,9 +311,7 @@
 	});
 
 	$('#myModal').keyup(function() {
-		console.log($('#account').val()+"11111");
 		if($('#account').val()=='' || $('#password').val()=='') {
-			
 		} else if(event.keyCode == 13) {
 			$("#login").click();
 		}

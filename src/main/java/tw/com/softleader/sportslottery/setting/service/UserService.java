@@ -59,7 +59,7 @@ public class UserService extends GenericService<UserEntity> {
 				userEntity.setUserPassword(newPassword);
 				this.update(userEntity);
 				body = "親愛的" + userEntity.getUserName() + "您的密碼暫為:"
-						+ new String(new String(newPassword));
+						+ new String(newPassword);
 			} else {
 				log.debug("Email不正確");
 				return 1;
