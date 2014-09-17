@@ -15,6 +15,11 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script>
+$(document).ready(function(){
+	$('body').hide().fadeIn(3000);
+});
+</script>
 </head>
 <body>
 
