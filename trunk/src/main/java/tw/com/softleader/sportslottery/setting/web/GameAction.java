@@ -65,6 +65,9 @@ public class GameAction extends ActionSupport {
 	private LocalDate complexTimeEnd;
 	private String complexBallType;
 	private String complexLeagueName;
+	private Long linkGameNum;
+	private String linkTeamSearch;
+	
 	
 	public String getComplexLeagueName() {
 		return complexLeagueName;
@@ -437,10 +440,18 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String countInfoGraph(){
-//		json = new Gson().toJson(service.getCountInfoHistory(teamName, gameId));
-		json = new Gson().toJson(service.trialGetCountInfoHistor());
+		gameId= service.getGameIdByGameNum(linkGameNum);
+		//System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
+		json = new Gson().toJson(service.getCountInfoHistory(linkTeamSearch, gameId));//輸入gamiId 和teamName取得COUT資訊
+		//System.out.println("HEHEHEHEHEHEHEHE"+json);
+		//json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
 		return "countInfoGraph";
+	}
+	
+	public String teamChartOddTime() {
+		return Action.SUCCESS;
 	}
 	
 	public String gameHistoryComplex() {
@@ -465,5 +476,21 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 
 		return "searchHistoryComplexData";
+	}
+
+	public Long getLinkGameNum() {
+		return linkGameNum;
+	}
+
+	public void setLinkGameNum(Long linkGameNum) {
+		this.linkGameNum = linkGameNum;
+	}
+
+	public String getLinkTeamSearch() {
+		return linkTeamSearch;
+	}
+
+	public void setLinkTeamSearch(String linkTeamSearch) {
+		this.linkTeamSearch = linkTeamSearch;
 	}
 }
