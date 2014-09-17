@@ -51,7 +51,6 @@ public class GameAction extends ActionSupport {
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
 	private Long teamAwayId;
 	private Long teamHomeId;
-	private Long gameId;
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
@@ -236,14 +235,15 @@ public class GameAction extends ActionSupport {
 		log.debug("GameAction payout()");
 		
 		String result = null;
-		Long gameId = model.getId();
-		model = service.getById(gameId);
-		List<LotteryEntity> lotterys = lotteryService.getLotterysByGame(model);
-		for (LotteryEntity lottery : lotterys) {
-			lotteryService.calculatePrize(lottery);
-		}
 		
 		try {
+			Long gameId = model.getId();
+			model = service.getById(gameId);
+			List<LotteryEntity> lotterys = lotteryService.getLotterysByGame(model);
+			for (LotteryEntity lottery : lotterys) {
+				lotteryService.calculatePrize(lottery);
+			}
+			
 			for (OddsEntity odds : model.getOdds()) {
 				List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odds.getId());
 				int count = los.size();
@@ -256,6 +256,38 @@ public class GameAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "failed";
+		}
+		
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
+	}
+	
+	public String payoutToday() {
+		log.debug("GameAction payoutToday()");
+		
+		String result = null;
+		
+		try {
+			models = service.getFinishedGameToday();
+			for (GameEntity model : models) {
+				List<LotteryEntity> lotterys = lotteryService.getLotterysByGame(model);
+				for (LotteryEntity lottery : lotterys) {
+					lotteryService.calculatePrize(lottery);
+				}
+				
+				for (OddsEntity odds : model.getOdds()) {
+					List<LotteryOddsEntity> los = lotteryOddsService.getByOddsId(odds.getId());
+					int count = los.size();
+					odds.setCount(new Long(count));
+					oddsService.update(odds);
+				}
+				model.setGameStatus(3L);
+				service.update(model);
+			}
+			result = "success";
+		} catch (Exception e) {
+			result = "failed";
+			e.printStackTrace();
 		}
 		
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
@@ -440,7 +472,7 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String countInfoGraph(){
-		gameId= service.getGameIdByGameNum(linkGameNum);
+		Long gameId= service.getGameIdByGameNum(linkGameNum);
 		System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
 		json = new Gson().toJson(service.getCountInfoHistory(linkTeamSearch, gameId));//輸入gamiId 和teamName取得COUT資訊
 		//System.out.println("HEHEHEHEHEHEHEHE"+json);
