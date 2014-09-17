@@ -94,6 +94,14 @@
 	.width80{
 		width:80%;
 	}
+	
+	#game_form{
+		text-align: center;
+	}
+	
+	#game_form .input-sm{
+		padding:5px 10px;
+	}
 </style>
 
 <style>
@@ -212,12 +220,12 @@
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2" >
 				<form role="form" class="form-inline" id="game_form">
-					<select class="form-control form-ball-type" id="ballType" >
+					<select class="form-ele form-control form-ball-type" id="ballType" >
 						<option value="Baseball">棒球</option>
 						<option value="Basketball">籃球</option>
 						<option value="Basketball">足球</option>
 					</select>
-					<select class="form-control" id="leagueName_form">
+					<select class="form-ele form-control" id="leagueName_form">
 						<option value="" selected>全部聯盟</option>
 						<option value="美國職棒">美國職棒</option>
 						<option value="中華職棒">中華職棒</option>
@@ -225,30 +233,30 @@
 						<option value="太平洋聯盟">太平洋聯盟</option>
 						<option value="韓國職棒">韓國職棒</option>
 					</select>
-					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-						<a href="#" role="button" class="btn btn-success" id="back3" name="searchScope" data-toggle="button">
-							<span class="glyphicon glyphicon-backward"></span>
-						</a>
-						<a href="#" role="button" class="btn btn-success" id="back1" name="searchScope" data-toggle="button">
-							<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
-						</a>
-						<a href="#" role="button" class="btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
-							<span id="searchDefault" >當日</span>
-						</a>
-						<a href="#" role="button" class="btn btn-success" id="next1" name="searchScope" data-toggle="button">
-							<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
-						</a>
-						<a href="#" role="button" class="btn btn-success" id="next3" name="searchScope" data-toggle="button">
-							<span class="glyphicon glyphicon-forward"></span>
-						</a>
-					</div>
 					<div id="sortGroup" class="btn-group" data-toggle="buttons">
-						<label id="sortByTime" class="btn btn-primary active"> 
+						<label id="sortByTime" class="form-ele btn btn-primary active"> 
 							<input type="radio" name="sortRadio" value="time" checked>依時間
 						</label> 
-						<label id="sortByStatus" class="btn btn-primary"> 
+						<label id="sortByStatus" class="form-ele btn btn-primary"> 
 							<input type="radio" name="sortRadio" value="type" id="option2">依狀態
 						</label> 
+					</div>
+					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+						<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
+							<span class="glyphicon glyphicon-backward"></span>
+						</a>
+						<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
+							<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+							<span id="searchDefault"></span>
+						</a>
+						<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
+							<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+						<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
+							<span class="glyphicon glyphicon-forward"></span>
+						</a>
 					</div>
 				</form>
 				</div>
@@ -537,14 +545,43 @@ function tagColorfn(target){
 var d = new Date();
 var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
 
+//響應頁面大小
+function responseSize(){
+	if ($(window).width() < 1543){
+		$('#sortGroup').css('float', 'none');
+	} else {
+		$('#sortGroup').css('float', 'right');
+	}
+	if ($(window).width() < 895) {
+		if(!$('form .form-ele').hasClass('input-sm')){
+			$('form .form-ele').addClass('input-sm');
+		}
+		$('#searchPreview').text('');
+		d = new Date(Date.parse(searchDay));
+		$('#searchDefault').html('<span class="glyphicon glyphicon-repeat"></span>');
+		d = new Date(Date.parse(searchDay));
+		$('#searchNextview').text('');
+		d = new Date(Date.parse(searchDay));
+	} else {
+		if($('form .form-ele').hasClass('input-sm')){
+			$('form .form-ele').removeClass('input-sm');
+		}
+		$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
+		d = new Date(Date.parse(searchDay));
+		$('#searchDefault').text($.format.date(d.getTime(), 'yyyy-MM-dd'));
+		d = new Date(Date.parse(searchDay));
+		$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
+		d = new Date(Date.parse(searchDay));
+	}
+}
+
+$(window).resize(function() {
+	responseSize();
+});
+
 //更換頁面按鈕上顯示的時間，以及顯示模式
 function changeDate(){
-	$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
-	d = new Date(Date.parse(searchDay));
-	$('#searchDefault').text($.format.date(d.getTime(), 'yyyy-MM-dd'));
-	d = new Date(Date.parse(searchDay));
-	$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
-	d = new Date(Date.parse(searchDay));
+	responseSize();
 	
 	$('#back3').tooltip({
 		placement:'top',
