@@ -6,11 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="http://code.highcharts.com/highcharts.js"></script>
-
+<!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
+<script src="<c:url value="/js/highcharts.js"/>"></script>
 <script src="http://code.highcharts.com/modules/data.js"></script>
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
+
+<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
 
@@ -33,7 +37,22 @@
 		<button type="button" class="button" id="money">以金額來看</button>
 		<button type="button" class="button" id="money">比分統計</button>
 	</div>  -->
-
+	<div id="modalBox" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  		<div class="modal-dialog modal-sm">
+    		<div class="modal-content">
+    			
+    			<div class="modal-body">
+    				<div id="searchMessage">
+    				</div>
+    			</div>
+    		
+    			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+      			
+    		</div>
+ 		</div>
+	</div>
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
@@ -93,7 +112,9 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+		$('#searchMessage').text('正在搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+		$('#modalBox').modal('show');
+		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		 $.post(url, {
  			'linkGameNum':'${linkGameNum}',
  			'linkTeamSearch':'${linkTeamSearch}'
@@ -219,7 +240,7 @@ $(function () {
 	            $.each(col[0], function (i, name) {
 	                var brand,
 	                    version;
-	                if(j%8==0){
+	                if(j%8==0){//確認能取到TEAM的值 每八個數字一數
 	                	awayName= teamNameAway[j];
 		                homeName= teamNameHome[j];
 	                	
@@ -296,101 +317,77 @@ $(function () {
 	                });
 	            });
 
-	            // Create the chart
-	            $('#container').highcharts({
-	                chart: {
-	                    type: 'column'
-	                },
-	                title: {
-	                    text: '有賺到錢的投注統計, 2014'
-	                },
-	                subtitle: {
-	                    text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
-	                },
-	                xAxis: {
-	                    type: 'category'
-	                },
-	                yAxis: {
-	                    title: {
-	                        text: '過關數比例'
-	                    }
-	                },
-	                legend: {
-	                    enabled: false
-	                },
-	                plotOptions: {
-	                    series: {
-	                        borderWidth: 0,
-	                        dataLabels: {
-	                            enabled: true,
-	                            format: '{point.y:.1f}%'
-	                        }
-	                    }
-	                },
+	            	// Create the chart
+	            	$('#container').highcharts({
+	                	chart: {
+	                    	type: 'column'
+	                	},
+	                	title: {
+	                    	text: '有賺到錢的投注統計, 2014'
+	                	},
+	                	subtitle: {
+	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
+	                	},
+	                	xAxis: {
+	                    	type: 'category'
+	                	},
+	                	yAxis: {
+	                    	title: {
+	                        	text: '過關數比例'
+	                    	}
+	                	},
+	                	legend: {
+	                    	enabled: false
+	                	},
+	                	plotOptions: {
+	                    	series: {
+	                        	borderWidth: 0,
+	                        	dataLabels: {
+	                            	enabled: true,
+	                            	format: '{point.y:.1f}%'
+	                        	}
+	                    	}
+	                	},
 
-	                tooltip: {
-	                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-	                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-	                },
+	                	tooltip: {
+	                    	headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+	                    	pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+	                	},
 
-	                series: [{
-	                    name: 'Date',
-	                    colorByPoint: true,
-	                    data: brandsData
-	                }],
-	                drilldown: {
+	                	series: [{
+	                    	name: '總和',
+	                    	colorByPoint: true,
+	                    	data: brandsData
+	                	}],
+	                	drilldown: {
 	                    series: drilldownSeries
-	                }
-	            });
-	        }
-	    });
+	                	}
+	            	});//$('#container').highcharts
+	        	}
+	    	});//Highcharts.data
 		
-	}
-	
-	
-	
-});
+		}//function mainFunction()
 
-/* function appendToDiv(){
- 	var child='';
-	child += '過關比歷史紀錄\n';
-
- 	child += '2014年7月 1	11.01%\n';
- 	child += '\t';
-	child += '11.01%';
-	child += '\n';  
- 	child += '2014年7月 2';
-	child += '\t';
-	child += '25.02%';
-	child += '\n'; 
- 	child += '過關比歷史紀錄\n';
-	child += '2014年7月 3	9.01%\n';
-	child += '2014年7月 4	11.08%\n'; 
- 	
-	 2014年7月 4	7.73%
-	2014年7月 5	8.01%
-	2014年7月 6	8.01%
-	2014年7月 7	8.01%
-	2014年7月 8	7.73%
-	2014年8月 1	1.13%
-	2014年8月 2	0.90%
-	2014年8月 3	0.85%
-	2014年8月 4	0.65%
-	2014年8月 5	0.85%
-	2014年8月 6	0.85%
-	2014年8月 7	0.85%
-	2014年8月 8	0.85%  
-	
-	$('#tsv').append(child); 
-
-}  */
-
+	});
 
 </script>
 
+	
+	
+	<div class="alert alert-danger" role="alert">最熱門的過關投注是..........</div>
 
+	
+	
 
+	<button type="button" class="btn btn-default btn-lg" onclick="goBack()" >
+  		<span class="glyphicon glyphicon-backward"></span> Back
+	</button>
 
+	<script>
+		 function goBack() {
+		     window.history.back()
+		 }
+	</script>
 
 </body>
 </html>
