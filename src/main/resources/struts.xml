@@ -240,6 +240,7 @@
 		<allowed-methods>select,insert,update,delete</allowed-methods>
 	</action>
 	-->
+	<!-- 用GAMENUM和隊伍名取得此場GAME和之前的COUNT資訊 -->
 	<action name="countInfoGraph" class="gameAction" method="countInfoGraph">
   		<result name="countInfoGraph" type="stream">
   			<param name="contentType">text/plain</param>
@@ -249,5 +250,16 @@
   	<action name="teamChartOddTime" class="gameAction" method="teamChartOddTime">
   		<result name="success">/History/teamChartOddTime.jsp</result>
   	</action>
+  	
+  	<!-- 用隊伍名取得所有COUNT歷史資訊 -->
+	<action name="countAllHistoryByTeam" class="gameAction" method="countAllHistoryByTeam">
+  		<result name="countAllHistoryByTeam" type="stream">
+  			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+  		</result>
+  	</action>
+  
+  	
+  	
   </package>
 </struts>
