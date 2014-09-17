@@ -232,9 +232,9 @@ public class UserAction extends ActionSupport {
 					cardPassword);
 			if (card != null) {
 				try {
-					user.setCoins(user.getCoins() + card.getPoint());
-
+					
 					if (card.isState()) {
+						user.setCoins(user.getCoins() + card.getPoint());
 						service.update(user);
 						log.debug("儲值成功");
 						card.setUserId(user);
@@ -244,25 +244,29 @@ public class UserAction extends ActionSupport {
 						return SUCCESS;
 					} else {
 						log.debug("此卡已使用");
-						this.addFieldError("cardError",
-								this.getText("alreadyuse.card"));
+//						this.addFieldError("cardError",
+//								this.getText("alreadyuse.card"));
+						inputStream = new ByteArrayInputStream(this.getText("alreadyuse.card").getBytes(StandardCharsets.UTF_8));
 						return ERROR;
 					}
 				} catch (Exception e) {
 					log.debug("coins修改異常");
-					this.addFieldError("cardError",
-							this.getText("fieldvalue.card"));
+//					this.addFieldError("cardError",
+//							this.getText("fieldvalue.card"));
+					inputStream = new ByteArrayInputStream(this.getText("fieldvalue.card").getBytes(StandardCharsets.UTF_8));
 					e.printStackTrace();
 				}
 			} else {
 				log.debug("查無此點數卡");
 				this.addFieldError("cardError", this.getText("fieldvalue.card"));
+				inputStream = new ByteArrayInputStream(this.getText("fieldvalue.card").getBytes(StandardCharsets.UTF_8));
 				return ERROR;
 			}
 			log.debug("coins修改非常異常");
 			return ERROR;
 		}else {
 			try {
+				log.debug("12132131131");
 				System.out.println(coins);
 				user.setCoins(user.getCoins() + coins);
 				service.update(user);

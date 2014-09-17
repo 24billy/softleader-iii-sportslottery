@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!-- 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-
+ -->
 <title>Insert title here</title>
 <style>
 body
@@ -16,7 +16,7 @@ body
 	margin-top:20px;
 	padding-top:20px
 }
-.coin,.pay
+.coin,.pay,.card
 {
 	text-align:center;
 	font-weight:900;
@@ -236,6 +236,39 @@ body
 {
 	display:none;
 }
+.bg-danger
+{
+	margin-bottom:20px;
+	border-radius:10px 10px 10px 10px;
+	overflow:auto;
+}
+.container
+{
+	overflow:hidden;
+}
+#dialog-coins
+{
+	position:absolute;
+  	top:80px;
+}
+.modal-content 
+{
+	background-color: #FFFFF0;
+}
+#deposit-form
+{
+	width:150%
+}
+#coins-error,.error
+{
+	color:red;
+}
+.way
+{
+	position:relative;
+	left:300px;
+  	
+}
 </style>
 </head>
 <body>
@@ -276,28 +309,28 @@ body
                 		</tr>
                 	</thead>
                 	<tbody>
-                		<tr class="success money">
+                		<tr class="bg-success money">
                 			<td>100元</td>
                 			<td>100虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="100">購買</button></td>
                 		</tr>
-                		<tr class="money">
+                		<tr class="bg-info money">
                 			<td>500元</td>
                 			<td>500虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="500">購買</button></td>
                 		</tr>
-                		<tr class="success money">
+                		<tr class="bg-success money">
                 			<td>1000元</td>
                 			<td>1000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="1000">購買</button></td>
                 		</tr>
-                		<tr class="money">
-                			<td>2000元</td>
+                		<tr class="bg-info money">
+                			<td>2000元(適用Card點數)</td>
                 			<td>2000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="2000">購買</button></td>
                 		</tr>
-                		<tr class="success money">
-                			<td>5000元</td>
+                		<tr class="bg-success money">
+                			<td>5000元(適用Card點數)</td>
                 			<td>5000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="5000">購買</button></td>
                 		</tr>
@@ -308,7 +341,7 @@ body
     </div>
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
-            <div class="col-md-12 well">
+            <div class="col-md-12 bg-danger">
             	<span><h1 class="p2-0"><strong class="coinType"></strong>元虛幣</h1>
         		<span class="p2-1"><h1>合計
                 <strong class="coinType"></strong>元</h1></span>
@@ -364,7 +397,7 @@ body
                 		</tr>
                 	</thead>
                 	<tbody>
-                		<tr class="success money">
+                		<tr class="bg-danger money">
                 			<td class="payType"></td>
                 			<td><span class="payMoney"></span>元</td>
                 			<td><span class="payMoney"></span>元虛幣</td>
@@ -386,9 +419,7 @@ body
                		<ul class="ul-li-a">
                			<li>選擇"其他服務"→選擇"跨行轉帳"→輸入銀行代號→輸入轉帳帳號(共16位)→輸入繳款金額→確認</li>
                		</ul>
-               		<a href="/softleader-iii-sportslottery/index.jsp">
-                		<button class="btn btn-success btn-lg">Finish</button>
-               	 	</a>
+               		<button class="btn btn-success btn-lg">Finish</button>
                 </div>
                 <div id="payWay2">
                		<div class="topWay">超商繳款操作步驟</div>
@@ -412,28 +443,39 @@ body
                	 	</form>
                 </div>
                 <div class="way" id="payWay3">
-					<h1>儲值</h1>
-					
-						<label for="cardAccount">卡號</label> 
-						<input type="text" id="cardAccount" name="cardAccount"><br> 
-						<label for="cardPassword">密碼</label>
-						<input type="password" id="cardPassword" name="cardPassword"><br>
-						<button class="btn btn-success addMoney">加值</button>
-						<button type="reset" class="btn btn-info">清除</button>
-						<div class="error">
-							<s:property value="fieldErrors.cardError" />
+                <form id="deposit-form">
+                	<div class="col-xs-3">
+						<label for="cardAccount" class="card">卡號</label> 
+						<input class="form-control" type="text" id="cardAccount" name="cardAccount" placeholder="請輸入卡號">
+						<br>
+						<label for="cardPassword" class="card">密碼</label>
+						<input class="form-control" type="password" id="cardPassword" name="cardPassword" placeholder="請輸入密碼"><br>
+						<button class="btn btn-success addMoney">確認送出</button>
+						<span class="coins-error"></span>
+					</div>
+				</form>
+				</div>
+				<!-- dialog -->
+				<div id = "dialog-coins" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" 
+						aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-body">
+								<img src="images/success.png">
+       							<h4>加值成功 3秒後自動跳轉</h4>
+      						</div>
 						</div>
+					</div>
 				</div>
             </div>
         </div>
     </div>
 </div>
-
+<!--  
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-
-<script src="<c:url value="/js/jquery.jcarousel.js"/>"></script>
+-->
 <script>
 (function($){
 	var navListItems = $('ul.setup-panel li a'),
@@ -451,6 +493,7 @@ body
         	allWells.hide();
         	$target.show();
     	}
+    	
 	});
 
 	$('ul.setup-panel li.active a').trigger('click');
@@ -462,11 +505,18 @@ body
     	$('.coinType').text($(this).val());
     	//sessionStorge
     	sessionStorage.coinBuy = $(this).val();
-    	console.log(sessionStorage.coinBuy*1+100);
+    	console.log(sessionStorage.coinBuy*1);
 
     	$('#activate-step-3').val($(this).val());
     	$('#activate-step-4').val($(this).val());
     	$('#activate-step-5').val($(this).val());
+    	
+    	if($('#activate-step-5').val() == 100 || $('#activate-step-5').val() == 500 || 
+    	   $('#activate-step-5').val() == 1000) {
+    		$('#activate-step-5').addClass('disabled');
+    	} else if ($('#activate-step-5').hasClass('disabled')) {
+    		$('#activate-step-5').removeClass('disabled');
+    	}
     	
 	});
 	
@@ -505,6 +555,8 @@ body
     	$('#payWay1').hide();
     	$('#payWay2').hide();
     	$('#payWay3').show();
+    	$('.account').html("繳款方式");
+    	$('.numberCoins').html('請輸入卡號密碼');
     	
 	});
 	
@@ -519,7 +571,7 @@ body
 	
 	$('.addMoney').click(function() {
 		$.ajax({
-			url:'<c:url value="/coinsUpdate" />',
+			url:"<c:url value='/coinsUpdate'/>",
 			type:'post',
 			data:{
 				'cardAccount' :$('#cardAccount').val(),
@@ -527,9 +579,43 @@ body
 			},
 			success:function(data) {
 				console.log($('#cardAccount').val() + ":" + $('#cardPassword').val());
+				console.log(data);
+				if(data == 'success') {
+					$('#dialog-coins').modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
+					
+				} else {
+					if($('#cardAccount').val()=='' && $('#cardAccount').val()=='') {
+						$('.coins-error').empty();
+					} else {	
+ 						$('.coins-error').empty();
+	  					$('.coins-error').append('<span id="coins-error">'+ data +'</span>');
+					}
+				}
 			}
 		});
 	});
+	
+	$('#deposit-form').validate({
+		debug: true,
+		rules: {
+			cardAccount: {
+				required: true,
+			},
+			cardPassword: {
+				required: true,
+			}
+		},
+		highlight: function(element) {
+			console.log("fail");
+			
+			$(element).closest('.control-group').removeClass('success').addClass('error');
+		}
+	});
+	
 })(jQuery);
 </script>
 </body>
