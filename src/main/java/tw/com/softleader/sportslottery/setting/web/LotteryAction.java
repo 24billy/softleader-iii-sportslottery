@@ -317,10 +317,11 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 			UserEntity entity = (UserEntity) session2.get("user");
 			
 //			UserEntity entity = (UserEntity)session.getAttribute("user");
-			
-			Long id = entity.getId();
-			log.debug("id..." + id);
-			json = new Gson().toJson(service.getComplex(id, timeFrom, timeTo, winOpen));
+			if(entity!=null){
+				Long id = entity.getId();
+				log.debug("id..." + id);
+				json = new Gson().toJson(service.getComplex(id, timeFrom, timeTo, winOpen));
+			}
 		} catch (Exception e) {
 			log.debug("!!LotteryAction selectByUser Failed!!");
 			addFieldError("QueryFail","selectByUser Fail");

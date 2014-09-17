@@ -331,7 +331,14 @@
 		$("#target").load('<c:url value="/Security/coins.jsp"/>');
 	});
 
-	
+	$('#myModal').keyup(function() {
+		console.log($('#account').val()+"11111");
+		if($('#account').val()=='' || $('#password').val()=='') {
+			
+		} else if(event.keyCode == 13) {
+			$("#login").click();
+		}
+	});
 })(jQuery); 
 </script>
 </body>

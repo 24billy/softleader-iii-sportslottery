@@ -19,8 +19,11 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+<script src="<c:url value='/js/jquery.validate.min.js'/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
+
+
 
 
 <!--sidepanel  -->  
