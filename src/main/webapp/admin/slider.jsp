@@ -11,7 +11,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="visible-xs navbar-brand" href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</a>
+		<a class="visible-xs navbar-brand" href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left5">Sports Lottery Admin</span></a>
 	</div>
 	<div class="collapse navbar-collapse" id="navbar-collapse">
 		<ul class="nav navbar-nav">

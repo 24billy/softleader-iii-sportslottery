@@ -34,8 +34,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-		  							<li class="active"><i class="fa fa-fw fa-table"></i> 賽事管理</li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
+		  							<li class="active"><i class="fa fa-fw fa-table"></i><span class="left5">賽事管理</span></li>
 								</ol>
 							</div>
 						</div>
@@ -44,16 +44,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
-									<div class="form-group">
-										<select class="form-control input-sm" id="catagory" name="catagory">
-											<option value="Baseball">棒球</option>
-											<option value="Basketball">籃球</option>
-											<option value="soccer">足球</option>
-										</select>
-									</div>
+									<select class="input-sm" id="catagory" name="catagory">
+										<option value="Baseball">棒球</option>
+										<option value="Basketball">籃球</option>
+										<option value="soccer">足球</option>
+									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
-								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i> 新增賽事</button>
+								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增賽事</span></button>
 							</div>
 						</div>
 						<!-- .row -->

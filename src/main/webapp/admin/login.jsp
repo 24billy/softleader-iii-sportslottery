@@ -28,7 +28,7 @@
 		<div class="container animated fadeIn">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 id="loginTitle" class="text-center"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</h1>
+					<h1 id="loginTitle" class="text-center"><i class="fa fa-fw fa-futbol-o"></i><span class="left5">Sports Lottery Admin</span></h1>
 				</div>
 			</div>
 			<div class="row">
@@ -49,7 +49,7 @@
 								<input name="j_password" id="account" type="password" class="form-control" placeholder="密碼">
 							</div>
 						</div>
-						<button type="submit" class="btn btn-success pull-right"><i class="fa fa-fw fa-sign-in"></i> 登入</button>
+						<button type="submit" class="btn btn-success pull-right"><i class="fa fa-fw fa-sign-in"></i><span class="left5">登入</span></button>
 					</form>
 				</div>
 			</div>

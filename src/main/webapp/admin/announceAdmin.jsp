@@ -34,15 +34,15 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-		  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i> 公告管理</li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
+		  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i><span class="left5">公告管理</span></li>
 								</ol>
 							</div>
 						</div>
 						<!-- row -->
 						<div class="row">
 							<div class="col-sm-12">
-								<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-plus"></i> 新增公告</button>
+								<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增公告</span></button>
 							</div>
 						</div>
 						<!-- .row -->

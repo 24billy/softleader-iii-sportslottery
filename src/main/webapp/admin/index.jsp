@@ -34,7 +34,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-		  							<li class="active"><i class="fa fa-fw fa-home"></i> 首頁</li>
+		  							<li class="active"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></li>
 								</ol>
 							</div>
 						</div>
