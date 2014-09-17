@@ -18,7 +18,7 @@
 	<div class="row">
     	<nav class="col-sm-3"><!--nav-->
         <div class="row">
-	        <ul class="nav nav-pills nav-stacked">
+	        <ul class="nav nav-pills nav-stacked nav-ul">
 	        <br><br>
 		    	<li><a id="goUserInfo" class="active disabled" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;個人資料</a></li>
 		        <li><a id="goFixPassword" class="disabled" href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;修改密碼</a></li>        
@@ -65,9 +65,8 @@
 														<td>信箱</td>
 														<td><input type="text" value="user@email.com" disabled></td>
 													</tr>
-													<td>Phone Number</td>
-													<td><input type="text" value="0912345678" disabled></td>
-
+														<td>電話</td>
+														<td><input type="text" value="0912345678" disabled></td>
 													</tr>
 
 												</tbody>
@@ -101,12 +100,12 @@
 
 <script>
 	(function($) {
-		var navListItems = $('ul li a'),
+		var navListItems = $('.nav-ul li a'),
 			allWells = $('.content');
 		allWells.hide();
 		
 		
-		$('ul li a').click(function(e) {
+		$('.nav-ul li a').click(function(e) {
 	    	e.preventDefault();
 	    	var $target = $($(this).attr('href')),
 	       		$item = $(this).closest('li');
@@ -119,7 +118,7 @@
 	    	}
 		});
 		
-		$('ul').trigger('click');
+		$('.nav-ul').trigger('click');
 		
 		$('#edit').on('click', function(e) {
 			$('tr input').removeAttr("disabled");
