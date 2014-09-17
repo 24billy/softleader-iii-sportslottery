@@ -21,10 +21,10 @@
 	 <div id="tsv" style="display:none"></div>  
 	 <!-- <div id="tsv"></div> -->
 	<br><br>
-	<div >
+<!-- 	<div >
 		<label>購買推薦: <span id="suggestion">t</span> </label>
 		<p>(推薦方式以歷史中最高的過關比為主)</p>
-	</div>
+	</div> -->
 	<br><br>
 <!-- 	<div id="selectInput" >
 		<button type="button" class="button" id="oddType" >以投注類型來看</button>
@@ -93,7 +93,10 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
- 		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
+ 		 $.post(url, {
+ 			'linkGameNum':'${linkGameNum}',
+ 			'linkTeamSearch':'${linkTeamSearch}'
+ 		 },function(data) { //用POST透過countInfoGraph取回的Json型式的值
  			 
  			
  			 console.log(data);
@@ -146,7 +149,7 @@ $(function () {
 					i +=8;
  				 });  
 				$('#tsv').append(child);
-			  });  
+			  },'json');  
 		 /* console.log(child); */
 		  
 	}
