@@ -27,7 +27,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 container-left">
-						<jsp:include page="slider.jsp"/>
+						<jsp:include page="sider.jsp"/>
 					</div>
 					<!-- .container-left -->
 					<div class="col-sm-9 container-right animated fadeIn">
