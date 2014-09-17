@@ -374,7 +374,7 @@ $(function () {
 
 	
 	
-	<div class="alert alert-danger" role="alert">最熱門的過關投注是..........</div>
+	<div class="alert alert-danger" role="alert">最熱門的單場投注是..........</div>
 
 	
 	
