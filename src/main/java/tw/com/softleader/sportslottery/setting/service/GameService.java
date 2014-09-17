@@ -178,8 +178,8 @@ public class GameService extends GenericService<GameEntity> {
 	//這個LIST是之前所有比賽的投注資訊
 	public List<Map<String, CountBean>> getCountInfoHistory (String teamName, Long gameId){
 		try {
-//			List<GameEntity> games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
-			List<GameEntity> games = dao.findForHistory(null, null, teamName);//取出跟隊伍有關的所有資訊
+			List<GameEntity> games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
+//			List<GameEntity> games = dao.findForHistory(null, null, teamName);//取出跟隊伍有關的所有資訊
 			//結束時間則以輸入gameId來尋找
 			System.out.println(games.toString());
 			List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
