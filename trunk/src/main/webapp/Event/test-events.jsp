@@ -218,6 +218,14 @@
 						<option value="Basketball">籃球</option>
 						<option value="Basketball">足球</option>
 					</select>
+					<select class="form-control" id="leagueName_form">
+						<option value="" selected>全部聯盟</option>
+						<option value="美國職棒">美國職棒</option>
+						<option value="中華職棒">中華職棒</option>
+						<option value="中央聯盟">中央聯盟</option>
+						<option value="太平洋聯盟">太平洋聯盟</option>
+						<option value="韓國職棒">韓國職棒</option>
+					</select>
 					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
 						<a href="#" role="button" class="btn btn-success" id="back3" name="searchScope" data-toggle="button">
 							<span class="glyphicon glyphicon-backward"></span>
@@ -568,8 +576,15 @@ function changeDate(){
 changeDate();
 
 //頁面上按鈕的觸發事件
+//球種
 $('#ballType').off('change');
 $('#ballType').on('change', function(){
+	superRefresh();
+});
+
+//聯盟
+$('#leagueName_form').off('change');
+$('#leagueName_form').on('change', function(){
 	superRefresh();
 });
 
@@ -656,6 +671,7 @@ function superRefresh(){
 				'complexBallType':$('#ballType').val(),
 				'complexTimeBegin':searchDay,
 				'complexTimeEnd':searchDay,
+				'complexLeagueName':$('#leagueName_form').val(),
 			},
 			success:function(datas){
 				$('#loader').css('display','none');
