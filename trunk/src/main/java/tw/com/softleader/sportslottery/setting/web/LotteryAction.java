@@ -33,6 +33,8 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	@Autowired
 	private OddsService oddsService;
 	@Autowired
+    private GameService gameService;
+	@Autowired
 	private LotteryOddsService lotteryOddsService;
 	
 	
@@ -41,6 +43,8 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private Logger log = LoggerFactory.getLogger(LotteryAction.class);
 	private InputStream inputStream;
 	private String json;
+	private String jsonLottery;
+	private String jsonGame;
 	private HttpSession session;
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
@@ -66,7 +70,37 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return json;
 	}
 	
-	public LotteryEntity getModel() {
+	public void setJson(String json)
+    {
+        this.json = json;
+    }
+
+
+    public String getJsonLottery()
+    {
+        return jsonLottery;
+    }
+
+
+    public void setJsonLottery(String jsonLottery)
+    {
+        this.jsonLottery = jsonLottery;
+    }
+    
+
+    public String getJsonGame()
+    {
+        return jsonGame;
+    }
+
+
+    public void setJsonGame(String jsonGame)
+    {
+        this.jsonGame = jsonGame;
+    }
+
+
+    public LotteryEntity getModel() {
 		return model;
 	}
 
@@ -217,8 +251,9 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	
 		return Action.SUCCESS;
 	}
-	public String vitualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-        //從session中取出userId
+	public String virtualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        System.out.println("去吧，虛擬投注!!");
+	    //從session中取出userId
         Map session = ActionContext.getContext().getSession();
             UserEntity user = (UserEntity)session.get("user");
         model.setUserId(user.getId());  
@@ -228,13 +263,15 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
         Long capital = model.getCapital();
         model.setWin(-1L);
         System.out.println("capital:"+capital);
-        model=service.insert(model);
+        //model=service.insert(model);
         
-        Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
-        LotteryOddsEntity lotteryOdd = new LotteryOddsEntity();
+        //Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
+        //LotteryOddsEntity lotteryOdd = null;
         
         //紀錄投注
         int oddsCount=0;
+        List<OddsEntity> odds=new ArrayList<OddsEntity>();
+        List<GameEntity> games=new ArrayList<GameEntity>();
         StringBuilder oddsArray=new StringBuilder(); 
         Method[] methods = oddsIdList.getClass().getMethods();
         for (Method method : methods){
@@ -243,20 +280,32 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
                 if(method.invoke(oddsIdList, null)!=null){
                     oddsArray.append(","+method.invoke(oddsIdList, null));
                     Long oddId= (Long)method.invoke(oddsIdList, null);
-                    OddsEntity odd=new OddsEntity();
+                    OddsEntity odd=new OddsEntity();                    
                     odd=oddsService.getById(oddId);
-                    lotteryOdd = new LotteryOddsEntity();
-                    lotteryOdd.setLotteryId(model.getId());
-                    lotteryOdd.setOddsId(odd);
-                    lotteryOdds.add(lotteryOdd);
+                    odds.add(odd);
+                    GameEntity game=new GameEntity();                    
+                    game=gameService.getById(odd.getGameId());
+                    games.add(game);
+                    
+                    //lotteryOdd = new LotteryOddsEntity();
+                    //lotteryOdd.setLotteryId(model.getId());
+                    //lotteryOdd.setOddsId(odd);
+                    //lotteryOdds.add(lotteryOdd);
                     oddsCount++;
                 }            
             }      
-        }	    
-        model.setLotteryOdds(lotteryOdds);
-        service.update(model);
+        }
+        System.out.println("odds="+odds);
+        if(odds!=null && odds.size()!=0){
+            json = new Gson().toJson(odds);
+            jsonLottery = new Gson().toJson(model);
+            jsonGame = new Gson().toJson(games);
+        }
         
-	    return Action.SUCCESS;
+        //model.setLotteryOdds(lotteryOdds);
+        //service.update(model);
+        
+	    return "successtoo";
 	}
 
 	public String delete(){
