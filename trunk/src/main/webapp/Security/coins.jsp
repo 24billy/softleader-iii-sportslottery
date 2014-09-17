@@ -11,148 +11,6 @@
  -->
 <title>Insert title here</title>
 <style>
-body
-{ 
-	margin-top:20px;
-	padding-top:20px
-}
-.coin,.pay,.card
-{
-	text-align:center;
-	font-weight:900;
-	font-family:新細明體;
-	font-size:0.5cm;
-}
-.money
-{
-	font-size:0.5cm;
-	font-weight:900;
-}
-.p2-0
-{
-	float:left;
-}
-.p2-1
-{
-	float:right;
-}
-.pricing-table .plan {
-  margin-left:0px;
-  border-radius: 5px;
-  text-align: center;
-  background-color: #f3f3f3;
-  -moz-box-shadow: 0 0 6px 2px #b0b2ab;
-  -webkit-box-shadow: 0 0 6px 2px #b0b2ab;
-  box-shadow: 0 0 6px 2px #b0b2ab;
-}
- 
- .plan:hover {
-  background-color: #fff;
-  -moz-box-shadow: 0 0 12px 3px #b0b2ab;
-  -webkit-box-shadow: 0 0 12px 3px #b0b2ab;
-  box-shadow: 0 0 12px 3px #b0b2ab;
-}
- 
- .plan {
-  padding: 20px;
-  margin-left:0px;
-  color: #ff;
-  background-color: #5e5f59;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
-}
-  
-.plan-name-bronze {
-  padding: 20px;
-  color: #fff;
-  background-color: #665D1E;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
- }
-  
-.plan-name-silver {
-  padding: 20px;
-  color: #fff;
-  background-color: #C0C0C0;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
- }
-  
-.plan-name-gold {
-  padding: 20px;
-  color: #fff;
-  background-color: #FFD700;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
-  } 
-  
-.pricing-table-bronze  {
-  padding: 20px;
-  color: #fff;
-  background-color: #f89406;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
-}
-  
-.pricing-table .plan .plan-name span {
-  font-size: 20px;
-}
- 
-.pricing-table .plan ul {
-  list-style: none;
-  margin: 0;
-  -moz-border-radius: 0 0 5px 5px;
-  -webkit-border-radius: 0 0 5px 5px;
-  border-radius: 0 0 5px 5px;
-}
- 
-.pricing-table .plan ul li.plan-feature {
-  padding: 15px 10px;
-  border-top: 1px solid #c5c8c0;
-  margin-right: 35px;
-}
- 
-.pricing-three-column {
-  margin: 0 auto;
-  width: 80%;
-}
- 
-.pricing-variable-height .plan {
-  float: none;
-  margin-left: 2%;
-  vertical-align: bottom;
-  display: inline-block;
-  zoom:1;
-  *display:inline;
-}
- 
-.plan-mouseover .plan-name {
-  background-color: #4e9a06 !important;
-}
- 
-.btn-plan-select {
-  padding: 8px 25px;
-  font-size: 18px;
-}
-
-.numberCoins
-{
-	color:red;
-	font-size:0.5cm
-}
-.topWay
-{
-	color:#505050;
-	font-size:0.6cm;
-	font-weight:bolder;
-	margin-bottom:15px;
-	font-family: "微軟正黑體", "Microsoft JhengHei", "新細明體", "PMingLiU", "Arial", "Helvetica", "sans-serif";
-}
 .ul-li-q
 {
 	list-style-type:none;
@@ -171,103 +29,6 @@ body
 	color:#585858;
 	font-weight:bolder;
 	
-}
-
-.word
-{
-	 display: inline-block;
-	 margin-bottom:10px;
-}
-
-.p1,.p2,.p3,.p4
-{
-	display:none;
-}
-
-.myButton 
-{
-	background-color:#009933;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:arial;
-	font-size:17px;
-	padding:10px 70px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #2f6627;
-	
-}
-.myButton:hover 
-{
-	background-color:#5cbf2a;
-}
-.myButton:active 
-{
-	position:relative;
-	top:1px;
-}
-.marketbut
-{
-	display:inline-block;
-	width:200px;
-	opacity:0.5;
-}
-#fourWay-main
-{
-	width: 650px;
-	float: right;
-	position:static;
-}
-.fourWay
-{
-	float: left;
-	width: 230px;
-	position: relative;
-}
-.payWay2-1
-{
-	overflow:auto;
-}
-.active
-{
-	opacity:1;
-}
-.finish
-{
-	display:none;
-}
-.bg-danger
-{
-	margin-bottom:20px;
-	border-radius:10px 10px 10px 10px;
-	overflow:auto;
-}
-.container
-{
-	overflow:hidden;
-}
-#dialog-coins
-{
-	position:absolute;
-  	top:80px;
-}
-.modal-content 
-{
-	background-color: #FFFFF0;
-}
-#deposit-form
-{
-	width:150%
-}
-#coins-error,.error
-{
-	color:red;
-}
-.way
-{
-	position:relative;
-	left:300px;
-  	
 }
 </style>
 </head>
@@ -310,29 +71,34 @@ body
                 	</thead>
                 	<tbody>
                 		<tr class="bg-success money">
-                			<td>100元</td>
-                			<td>100虛幣</td>
+                			<td style='vertical-align:middle'>100元</td>
+                			<td style='vertical-align:middle'>100虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="100">購買</button></td>
                 		</tr>
-                		<tr class="bg-info money">
-                			<td>500元</td>
-                			<td>500虛幣</td>
+                		<tr class="bg-success money">
+                			<td style='vertical-align:middle'>500元</td>
+                			<td style='vertical-align:middle'>500虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="500">購買</button></td>
                 		</tr>
                 		<tr class="bg-success money">
-                			<td>1000元</td>
-                			<td>1000虛幣</td>
+                			<td style='vertical-align:middle'>1000元</td>
+                			<td style='vertical-align:middle'>1000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="1000">購買</button></td>
                 		</tr>
-                		<tr class="bg-info money">
-                			<td>2000元(適用Card點數)</td>
-                			<td>2000虛幣</td>
+                		<tr class="bg-success money">
+                			<td style='vertical-align:middle'>2000元</td>
+                			<td style='vertical-align:middle'>2000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="2000">購買</button></td>
                 		</tr>
                 		<tr class="bg-success money">
-                			<td>5000元(適用Card點數)</td>
-                			<td>5000虛幣</td>
+                			<td style='vertical-align:middle'>5000元</td>
+                			<td style='vertical-align:middle'>5000虛幣</td>
                 			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="5000">購買</button></td>
+                		</tr>
+                		<tr class="bg-danger money">
+                			<td style='vertical-align:middle'>Card點數</td>
+                			<td style='vertical-align:middle'>Card點數</td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn3" value="5000">加值</button></td>
                 		</tr>
                 	</tbody>
                 </table>
@@ -350,7 +116,7 @@ body
             
 			<div class="container">
 				<div class="pricing-table pricing-three-column row">
-					<div class="plan col-sm-4 col-lg-4">
+					<div class="plan col-sm-6 col-lg-6">
 						<div class="plan-name-bronze">
 							<h2>ATM轉帳</h2>
 						</div>
@@ -360,7 +126,7 @@ body
 							</li>
 						</ul>
 					</div>
-					<div style="z-index: 55;" class="plan col-sm-4 col-lg-4">
+					<div style="z-index: 55;" class="plan col-sm-6 col-lg-6">
 						<div class="plan-name-silver">
 							<h2>超商繳款</h2>
 						</div>
@@ -370,6 +136,7 @@ body
 							</li>
 						</ul>
 					</div>
+					<!--  
 					<div class="plan col-sm-4 col-lg-4">
 						<div class="plan-name-gold">
 							<h2>Card點數</h2>
@@ -380,6 +147,7 @@ body
 							</li>
 						</ul>
 					</div>
+					-->
 				</div>
 			</div>
         </div>
@@ -387,7 +155,7 @@ body
     <div class="row setup-content" id="step-3" >
         <div class="col-xs-12">
             <div class="col-md-12 well">
-                <table class="table text-center">
+                <table class="table text-center table1">
                 	<thead>
                 		<tr>
                 			<th class="pay">付款方式</th>
@@ -401,6 +169,20 @@ body
                 			<td class="payType"></td>
                 			<td><span class="payMoney"></span>元</td>
                 			<td><span class="payMoney"></span>元虛幣</td>
+                			<td class="numberCoins"></td>
+                		</tr>
+                	</tbody>
+               	 </table>
+               	 <table class="table text-center table2">
+                	<thead>
+                		<tr class="bg-danger money">
+                			<th class="pay">付款方式</th>
+                			<th class="pay">付款說明</th>
+                		</tr>
+                	</thead>
+                	<tbody>
+                		<tr class="bg-success money">
+                			<td class="payType"></td>
                 			<td class="numberCoins"></td>
                 		</tr>
                 	</tbody>
@@ -419,7 +201,10 @@ body
                		<ul class="ul-li-a">
                			<li>選擇"其他服務"→選擇"跨行轉帳"→輸入銀行代號→輸入轉帳帳號(共16位)→輸入繳款金額→確認</li>
                		</ul>
-               		<button class="btn btn-success btn-lg">Finish</button>
+               		<form action="" method="post">
+                		<input class="finish" type="text" name="coins">
+                		<button class="btn btn-success btn-lg">Finish</button>
+               	 	</form>
                 </div>
                 <div id="payWay2">
                		<div class="topWay">超商繳款操作步驟</div>
@@ -437,7 +222,7 @@ body
                                 <div class="p4 p market"><img src="images/ok-go_flow.jpg" alt="OK超商OK-GO"/></div>
                             </div>
                        </div>
-                	<form action="<c:url value="/coinsUpdate" />" method="post">
+                	<form action="" method="post">
                 		<input class="finish" type="text" name="coins">
                 		<button class="btn btn-success btn-lg">Finish</button>
                	 	</form>
@@ -462,7 +247,7 @@ body
 						<div class="modal-content">
 							<div class="modal-body">
 								<img src="images/success.png">
-       							<h4>加值成功 3秒後自動跳轉</h4>
+       							<h4>加值成功  3秒後自動跳轉</h4>
       						</div>
 						</div>
 					</div>
@@ -503,10 +288,10 @@ body
     	$('ul.setup-panel li:eq(1)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-2"]').trigger('click');
     	$('.coinType').text($(this).val());
-    	//sessionStorge
+    	/* //sessionStorge
     	sessionStorage.coinBuy = $(this).val();
     	console.log(sessionStorage.coinBuy*1);
-
+		*/
     	$('#activate-step-3').val($(this).val());
     	$('#activate-step-4').val($(this).val());
     	$('#activate-step-5').val($(this).val());
@@ -520,9 +305,26 @@ body
     	
 	});
 	
+	$('.btn3').on('click', function() {
+		$('ul.setup-panel li:eq(2)').removeClass('disabled');
+    	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    	
+    	$('.payType').text("Card點數");
+    	$('.payMoney').text($(this).val()*1);
+    	$('.table1').hide();
+    	$('.table2').show();
+    	$('#payWay1').hide();
+    	$('#payWay2').hide();
+    	$('#payWay3').show();
+    	$('.account').html("繳款方式");
+    	$('.numberCoins').html('請輸入卡片上帳號密碼，並注意大小寫');
+	});
+	
 	$('#activate-step-3').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    	$('.table1').show();
+    	$('.table2').hide();
     	$('.payType').text("ATM轉帳");
     	$('.payMoney').text($(this).val());
     	$('#payWay1').show();
@@ -536,6 +338,8 @@ body
 	$('#activate-step-4').on('click', function(e) {
     	$('ul.setup-panel li:eq(2)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    	$('.table1').show();
+    	$('.table2').hide();
     	$('.payType').text("超商繳款");
     	$('.payMoney').text($(this).val());
     	$('#payWay1').hide();
@@ -544,20 +348,7 @@ body
     	$('.p1').show();
     	$('.account').html("繳款編號");
     	$('.numberCoins').html('AB05 1017 3456 7890');
-    	$('.finish').val($(this).val());
-	});
-	
-	$('#activate-step-5').on('click', function(e) {
-    	$('ul.setup-panel li:eq(2)').removeClass('disabled');
-    	$('ul.setup-panel li a[href="#step-3"]').trigger('click');
-    	$('.payType').text("Card點數");
-    	$('.payMoney').text($(this).val()*1);
-    	$('#payWay1').hide();
-    	$('#payWay2').hide();
-    	$('#payWay3').show();
-    	$('.account').html("繳款方式");
-    	$('.numberCoins').html('請輸入卡號密碼');
-    	
+    	//$('.finish').val($(this).val());
 	});
 	
 	$('.fourWay a').click(function() {
@@ -585,10 +376,11 @@ body
 						backdrop: 'static',
 						keyboard: false
 					});
+					
 					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
 					
 				} else {
-					if($('#cardAccount').val()=='' && $('#cardAccount').val()=='') {
+					if($('#cardAccount').val()=='' || $('#cardAccount').val()=='') {
 						$('.coins-error').empty();
 					} else {	
  						$('.coins-error').empty();
@@ -611,10 +403,14 @@ body
 		},
 		highlight: function(element) {
 			console.log("fail");
-			
+			$('.coins-error').empty();
 			$(element).closest('.control-group').removeClass('success').addClass('error');
 		}
 	});
+	
+	function myrefresh(){
+		window.location.reload();
+	}
 	
 })(jQuery);
 </script>

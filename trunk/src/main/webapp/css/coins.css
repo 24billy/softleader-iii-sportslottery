@@ -1,0 +1,240 @@
+@charset "UTF-8";
+body
+{ 
+	margin-top:20px;
+	padding-top:20px
+}
+.coin,.pay,.card
+{
+	text-align:center;
+	font-weight:900;
+	font-family:新細明體;
+	font-size:0.5cm;
+}
+.money
+{
+	font-size:0.5cm;
+	font-weight:900;
+}
+.p2-0
+{
+	float:left;
+}
+.p2-1
+{
+	float:right;
+}
+.pricing-table .plan {
+  margin-left:0px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #f3f3f3;
+  -moz-box-shadow: 0 0 6px 2px #b0b2ab;
+  -webkit-box-shadow: 0 0 6px 2px #b0b2ab;
+  box-shadow: 0 0 6px 2px #b0b2ab;
+}
+ 
+ .plan:hover {
+  background-color: #fff;
+  -moz-box-shadow: 0 0 12px 3px #b0b2ab;
+  -webkit-box-shadow: 0 0 12px 3px #b0b2ab;
+  box-shadow: 0 0 12px 3px #b0b2ab;
+}
+ 
+ .plan {
+  padding: 20px;
+  margin-left:0px;
+  color: #ff;
+  background-color: #5e5f59;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+  
+.plan-name-bronze {
+  padding: 20px;
+  color: #fff;
+  background-color: #665D1E;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+ }
+  
+.plan-name-silver {
+  padding: 20px;
+  color: #fff;
+  background-color: #C0C0C0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+ }
+  
+.plan-name-gold {
+  padding: 20px;
+  color: #fff;
+  background-color: #FFD700;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  } 
+  
+.pricing-table-bronze  {
+  padding: 20px;
+  color: #fff;
+  background-color: #f89406;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+  
+.pricing-table .plan .plan-name span {
+  font-size: 20px;
+}
+ 
+.pricing-table .plan ul {
+  list-style: none;
+  margin: 0;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+ 
+.pricing-table .plan ul li.plan-feature {
+  padding: 15px 10px;
+  border-top: 1px solid #c5c8c0;
+  margin-right: 35px;
+}
+ 
+.pricing-three-column {
+  margin: 0 auto;
+  width: 80%;
+}
+ 
+.pricing-variable-height .plan {
+  float: none;
+  margin-left: 2%;
+  vertical-align: bottom;
+  display: inline-block;
+  zoom:1;
+  *display:inline;
+}
+ 
+.plan-mouseover .plan-name {
+  background-color: #4e9a06 !important;
+}
+ 
+.btn-plan-select {
+  padding: 8px 25px;
+  font-size: 18px;
+}
+
+.numberCoins
+{
+	color:red;
+	font-size:0.5cm
+}
+.topWay
+{
+	color:#505050;
+	font-size:0.6cm;
+	font-weight:bolder;
+	margin-bottom:15px;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "新細明體", "PMingLiU", "Arial", "Helvetica", "sans-serif";
+}
+
+
+.word
+{
+	 display: inline-block;
+	 margin-bottom:10px;
+}
+
+.p1,.p2,.p3,.p4
+{
+	display:none;
+}
+
+.myButton 
+{
+	background-color:#009933;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:17px;
+	padding:10px 70px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #2f6627;
+	
+}
+.myButton:hover 
+{
+	background-color:#5cbf2a;
+}
+.myButton:active 
+{
+	position:relative;
+	top:1px;
+}
+.marketbut
+{
+	display:inline-block;
+	width:200px;
+	opacity:0.5;
+}
+#fourWay-main
+{
+	width: 650px;
+	float: right;
+	position:static;
+}
+.fourWay
+{
+	float: left;
+	width: 230px;
+	position: relative;
+}
+.payWay2-1
+{
+	overflow:auto;
+}
+.active
+{
+	opacity:1;
+}
+.finish
+{
+	display:none;
+}
+.bg-danger
+{
+	margin-bottom:20px;
+	border-radius:10px 10px 10px 10px;
+	overflow:auto;
+}
+.container
+{
+	overflow:hidden;
+}
+#dialog-coins
+{
+	position:absolute;
+  	top:80px;
+}
+.modal-content 
+{
+	background-color: #FFFFF0;
+}
+#deposit-form
+{
+	width:150%
+}
+#coins-error,.error
+{
+	color:red;
+}
+
+.table1,.table2
+{
+	display:none
+}
