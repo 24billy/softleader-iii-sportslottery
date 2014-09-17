@@ -232,11 +232,13 @@
 	</action>
 	-->
 	<action name="countInfoGraph" class="gameAction" method="countInfoGraph">
-  		<result name="success">/History/teamChartOddTime.jsp</result>
   		<result name="countInfoGraph" type="stream">
   			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
   		</result>
+  	</action>
+  	<action name="teamChartOddTime" class="gameAction" method="teamChartOddTime">
+  		<result name="success">/History/teamChartOddTime.jsp</result>
   	</action>
   </package>
 </struts>
