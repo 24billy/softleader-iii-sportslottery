@@ -52,6 +52,7 @@
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
 								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增賽事</span></button>
+								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="<i class="fa fa-fw fa-trophy"></i>"></i><span class="left5">今日派彩</span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -406,6 +407,43 @@
 			<!-- .modal-dialog -->
 		</div>
 		<!-- End of payoutModal -->
+		
+		<!-- Begin of payoutTodayModal -->
+		<div class="modal fade" id="payoutTodayModal" role="dialog" aria-labelledby="payoutTodayModalTitle" aria-hidden="true" tabindex="-1">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				
+					<div id="payoutTodayModalHeader" class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<h3 id="payoutTodayModalTitle" class="modal-title">今日樂透派彩</h3>
+					</div>
+					<!-- modal-header -->
+					
+					<div class="modal-body">
+					
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="text-center">確認派彩？</h4>
+							</div>
+						</div>
+						<!-- .row -->
+					</div>
+					<!-- .modal-body -->
+							
+		      		<div id="payoutTodayModalFooter" class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnPayoutToday">確認</button>
+		      		</div>
+		      		<!-- .modal-footer -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- End of payoutTodayModal -->
 		<jsp:include page="footer.jsp"/>
 	</div>
 	<!-- #wrapper -->
@@ -667,6 +705,16 @@
 			});
 		});
 		//End of btnPayout
+		
+		//Begin of btnPayoutToday
+		$('#btnPayoutToday').click(function() {
+			$.post('<c:url value="/admin/gameAdmin?method:payoutToday"/>');
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnPayoutToday
 		
 		//Begin of btnOpen
 		$('.btn-open').click(function() {

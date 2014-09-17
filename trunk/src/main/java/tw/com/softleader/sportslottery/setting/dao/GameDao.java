@@ -9,12 +9,13 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
-import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 
 @Repository
 public class GameDao extends GenericDao<GameEntity>{
@@ -268,5 +269,16 @@ public class GameDao extends GenericDao<GameEntity>{
 	public Long maxGameNum() {
 		return (Long) getSession().createCriteria(GameEntity.class)
 			.setProjection(Projections.max("gameNum")).uniqueResult();
+	}
+	
+	public List<GameEntity> findFinishedGameToday() {
+		LocalDateTime today = LocalDate.now().toLocalDateTime(new LocalTime(0, 0));
+		Criterion isEnd = Restrictions.eq("isEnd", true);
+		Criterion gameStatus = Restrictions.eq("gameStatus", 2L);
+		return getSession().createCriteria(GameEntity.class)
+							.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+							.add(Restrictions.between("gameTime", today, today.plusDays(1)))
+							.add(Restrictions.or(isEnd, gameStatus))
+							.list();
 	}
 }
