@@ -47,7 +47,7 @@
     			</div>
     		
     			<div class="modal-footer">
-        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
       			</div>
       			
     		</div>
@@ -67,7 +67,8 @@ $(function () {
 	function appendToDiv(){
 		/* test1();  */
 		// test2();  
-		 test3();  
+		 final1();  
+		 //final2(); 
 		/*  test4();  */
 		// test5(); 
 		
@@ -107,7 +108,7 @@ $(function () {
 				});
 			});
 	}
-	function test3(){
+	function final1(){
 		var url = '<c:url value="/countInfoGraph"/>';
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
@@ -175,6 +176,75 @@ $(function () {
 		 /* console.log(child); */
 		  
 	}
+	
+	function final2(){
+		var url = '<c:url value="/countAllHistoryByTeam"/>';
+		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
+		var child='';	
+		child += '過關	歷史\n'; 
+		$('#searchMessage').text('正在搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+		$('#modalBox').modal('show');
+		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+ 		 $.post(url, {
+ 			'linkTeamSearch':'${linkTeamSearch}'
+ 		 },function(data) { //用POST透過countInfoGraph取回的Json型式的值
+ 			 
+ 			
+ 			 console.log(data);
+				$.each(data, function(key, value) { 
+					
+ 					var type=value['ATS_A'];
+ 					teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
+		 			teamNameHome[i] = type.teamNameHome;
+ 					console.log(i+' AAAway : '+teamNameAway[i]);
+ 					//console.log(i+' Home : '+teamNameHome[i]);
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
+	
+ 					var type=value['ATS_H'];
+ 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+					
+ 					var type=value['SU_A'];
+ 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+					var percent=type.percentage;
+					child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SU_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SC_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['SC_L'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['ODD'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+					
+					var type=value['EVEN'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+					var percent=type.percentage;
+					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+					
+					i +=8;
+ 				 });  
+				$('#tsv').append(child);
+			  },'json');  
+		 /* console.log(child); */
+		  
+	}
+	
 	function test4(){
 	 	var child='';
 		child += '過關	歷史\n'; 
@@ -374,20 +444,20 @@ $(function () {
 
 	
 	
-	<div class="alert alert-danger" role="alert">最熱門的單場投注是..........</div>
+<div class="alert alert-danger" role="alert">最熱門的單場投注是..........</div>
 
-	
-	
 
-	<button type="button" class="btn btn-default btn-lg" onclick="goBack()" >
-  		<span class="glyphicon glyphicon-backward"></span> Back
-	</button>
 
-	<script>
-		 function goBack() {
-		     window.history.back()
-		 }
-	</script>
+
+<button type="button" class="btn btn-default btn-lg" onclick="goBack()" >
+ 		<span class="glyphicon glyphicon-backward"></span> Back
+</button>
+
+<script>
+	 function goBack() {
+	     window.history.back()
+	 }
+</script>
 
 </body>
 </html>
