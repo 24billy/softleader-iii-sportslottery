@@ -202,10 +202,12 @@ public class GameService extends GenericService<GameEntity> {
 		return listMap;
 	}
 	
-
 	//從gameNum取得gameId
 	public Long getGameIdByGameNum(Long gameNum){
 		return this.getByGameNum(gameNum).getId();
 	}
-
+	
+	public List<GameEntity> getFinishedGameToday() {
+		return dao.findFinishedGameToday();
+	}
 }
