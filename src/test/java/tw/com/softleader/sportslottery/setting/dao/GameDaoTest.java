@@ -53,6 +53,51 @@ public class GameDaoTest extends BaseTest{
 ////		LocalDateTime date3 = new LocalDateTime();
 ////		date3 = LocalDateTime.parse("2014-08-20T10:15:30");
 //		
+
+//		models = dao.findByBallType("Baseball");
+//		log.debug("findByBallType models = {}", models);
+		
+//		LocalDate date1 = new LocalDate();
+//		date1 = LocalDate.parse("2014-08-31");//將時間自串轉成 LocalDateTime
+//		LocalDateTime date2 = new LocalDateTime();
+//		date2 = LocalDateTime.parse("2014-12-31T07:04:00");
+//		LocalDateTime date3 = new LocalDateTime();
+//		date3 = LocalDateTime.parse("2014-08-20T10:15:30");
+		
+//		models = dao.findForHistory(null, date1, "辛辛那堤紅人");//結果數據不對, 得空值
+//		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
+//		models = dao.findForHistory(null, date3, null);//結果數據正確
+//		models = dao.findForHistory(null, date2, null);//結果數據正確
+//		LocalDate date1=dao.findById(29L).getGameTime().toLocalDate();
+//		String teamName= dao.findById(29L).getTeamHome().getTeamName() ;
+//		models = dao.findForHistory(null, date1,teamName);
+//		List<GameEntity> models = dao.findForHistory(null, null,teamName);
+//		log.debug("game = {}", dao.findById(2L));
+//		log.debug("Gametime= {}",dao.findById(2L).getGameTime().toLocalDate() );
+//		log.debug("findForHistory = {}", models);
+//		System.out.println("size of the searching result: "+models.size());
+//----------------------------------------------------------------------------------
+/*		List<GameEntity> models = dao.findGameByLeagueName("MLB");
+		log.debug("findGameByLeagueName = {}", models);
+		System.out.println("size of the searching result: "+models.size());*/
+		
+//-------------test public List<GameEntity> findGameByPeriod(LocalDate timeFrom, LocalDate timeTo)
+/*		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-08-20");//將時間自串轉成 LocalDateTime
+		//log.debug("date1= {} ", date1);
+		LocalDate date2 = new LocalDate();
+		date2 = LocalDate.parse("2014-08-21");
+		List<GameEntity> models = dao.findGameByPeriod(date1, date2);
+		log.debug("findGameByPeriod = {}", models);
+		System.out.println("size of the searching result: "+models.size());*/
+//---------------------List<OddsEntity> getOddsByTimeAndTeamName(date1, teamName);----------------------
+//		LocalDate date1 = new LocalDate();
+//		date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
+//		//log.debug("date1= {} ", date1);
+//		String teamName= "辛辛那堤紅人";
+//		List<OddsEntity> models = dao.findOddsByTimeAndTeamName(date1, teamName);
+//		log.debug("getOddsByTime = {}", models);
+
 ////		models = dao.findForHistory(null, date1, "辛辛那堤紅人");//結果數據不對, 得空值
 ////		models = dao.findForHistory(date3, null, null);//結果數據不對， 得空值
 ////		models = dao.findForHistory(null, date3, null);//結果數據正確
@@ -63,6 +108,7 @@ public class GameDaoTest extends BaseTest{
 ////		log.debug("game = {}", dao.findById(2L));
 ////		log.debug("Gametime= {}",dao.findById(2L).getGameTime().toLocalDate() );
 //		log.debug("findForHistory = {}", models);
+
 //		System.out.println("size of the searching result: "+models.size());
 ////----------------------------------------------------------------------------------
 ///*		List<GameEntity> models = dao.findGameByLeagueName("MLB");
