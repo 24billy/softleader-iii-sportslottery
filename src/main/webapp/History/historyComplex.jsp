@@ -203,8 +203,16 @@
 									timeString += millisecondToTime(row.gameTime.iLocalMillis);
 									return timeString;
 				        		}},
-				        		{"data": "teamAway.teamName" },
-				        		{"data": "teamHome.teamName" },
+				        		{
+				        		"data": "teamAway.teamName",
+				        		"class":"teamAwayDetail",
+				        		'defaultContent': ''
+				        		},
+				        		{
+				        		"data": "teamHome.teamName",
+				        		"class":"teamHomeDetail",
+				        		'defaultContent': ''
+				        		},
 				        		{"data": function(row, type, val, meta){
 									if(row.gameScoreAway||row.gameScoreHome){
 										var rateA = parseInt(((row.gameScoreAway+1)/(row.gameScoreHome+row.gameScoreAway+2))*100);
@@ -243,42 +251,53 @@
 				    		row.child(formatDataRow(row.data())).show();
 				    		tr.addClass('shown info');
 				    	}
-				    	
-				    	
 				    });
-					sendDataToGraph();
-					//點選隊伍，將對伍名稱和比賽號碼送出
-					function sendDataToGraph(){
-						$(document).ajaxStop(function() {
-							$('#gameList tr').each(function() {//tr迴圈
-								$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
-								
-								
-									var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-									var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-									$('#linkGameNum').val(linkGameNum);
-									$('#linkTeamSearch').val(linkTeamSearch);
-									$('#countForm').submit();
+					
+					$('#gameList').on('click', '.teamAwayDetail', function() {
+						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+						var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+						$('#linkGameNum').val(linkGameNum);
+						$('#linkTeamSearch').val(linkTeamSearch);
+						$('#countForm').submit();
+					});
+					
+					$('#gameList').on('click', '.teamHomeDetail', function() {
+						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+						var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+						$('#linkGameNum').val(linkGameNum);
+						$('#linkTeamSearch').val(linkTeamSearch);
+						$('#countForm').submit();
+					});
+					
+// 					sendDataToGraph();
+	
+// 					//點選隊伍，將對伍名稱和比賽號碼送出
+// 					function sendDataToGraph(){
+// 						$('#gameList tr').each(function() {//tr迴圈
+// 							$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
+							
+							
+// 								var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+// 								var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+// 								$('#linkGameNum').val(linkGameNum);
+// 								$('#linkTeamSearch').val(linkTeamSearch);
+// 								$('#countForm').submit();
 
-								});
-							});//end $('#gameList tr').each(function()
-									
-							$('#gameList tr').each(function() {//tr迴圈
-								$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
+// 							});
+// 						});//end $('#gameList tr').each(function()
 								
-								
-									var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-									var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
-									$('#linkGameNum').val(linkGameNum);
-									$('#linkTeamSearch').val(linkTeamSearch);
-									$('#countForm').submit();
-								});
-							});//end $('#gameList tr').each(function()
-						});
-						
-						
-						
-					}//end sendDataToGraph()
+// 						$('#gameList tr').each(function() {//tr迴圈
+// 							$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
+							
+							
+// 								var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+// 								var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+// 								$('#linkGameNum').val(linkGameNum);
+// 								$('#linkTeamSearch').val(linkTeamSearch);
+// 								$('#countForm').submit();
+// 							});
+// 						});//end $('#gameList tr').each(function()
+// 					}//end sendDataToGraph()
 					
 
 /* 					$('#gameList tr>td:eq(4)').on('click', function(){
