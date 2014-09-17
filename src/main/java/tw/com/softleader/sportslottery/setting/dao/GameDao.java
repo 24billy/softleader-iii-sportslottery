@@ -157,7 +157,7 @@ public class GameDao extends GenericDao<GameEntity>{
 		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
 	}
 	
-	public List<GameEntity> findComplex(Long gameNum, String teamName, Long gameStatus, LocalDate timeBegin, LocalDate timeEnd, String ballType) {
+	public List<GameEntity> findComplex(Long gameNum, String teamName, Long gameStatus, LocalDate timeBegin, LocalDate timeEnd, String ballType, String leagueName) {
 		
 		String sql = "from GameEntity games where 1=1";
 		String sql1 = " and games.gameNum = :gameNum";
@@ -166,7 +166,8 @@ public class GameDao extends GenericDao<GameEntity>{
 		String sql4 = " and games.gameTime >= :timeBegin";
 		String sql5 = " and games.gameTime < :timeEnd";
 		String sql6 = " and games.ballType like :ballType";
-		String sql7 = " order by games.gameTime";
+		String sql7 = " and (games.teamAway.leagueName like :leagueName or games.teamHome.leagueName like :leagueName)";
+		String sql99 = " order by games.gameTime";
 		
 		boolean hasGameNum = false;
 		if (gameNum != null) {
@@ -198,7 +199,12 @@ public class GameDao extends GenericDao<GameEntity>{
 			sql += sql6;
 			hasBallType = true;
 		}
-		sql += sql7;
+		boolean hasLeagueName = false;
+		if (leagueName != null) {
+			sql += sql7;
+			hasLeagueName = true;
+		}
+		sql += sql99;
 		
 		System.out.println(sql);
 		
@@ -221,6 +227,9 @@ public class GameDao extends GenericDao<GameEntity>{
 		}
 		if (hasBallType) {
 			query.setString("ballType", "%" + ballType + "%");
+		}
+		if (hasLeagueName) {
+			query.setString("leagueName", "%" + leagueName + "%");
 		}
 		
 		return query.list();
