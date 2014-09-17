@@ -240,6 +240,37 @@
 				    		tr.addClass('shown info');
 				    	}
 				    });
+					
+					$('#gameList tr').each(function() {//tr迴圈
+						$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
+						
+						
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+							window.location.assign('<c:url value="/countInfoGraph?linkGameNum=' + linkGameNum + '&linkTeamSearch=' + linkTeamSearch + '"/>');
+
+						});
+					});//end $('#gameList tr').each(function()
+							
+					$('#gameList tr').each(function() {//tr迴圈
+						$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
+						
+						
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+							window.location.assign('<c:url value="/countInfoGraph?linkGameNum=' + linkGameNum + '&linkTeamSearch=' + linkTeamSearch + '"/>');
+
+						});
+					});//end $('#gameList tr').each(function()
+
+/* 					$('#gameList tr>td:eq(4)').on('click', function(){
+						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+						var linkTeamAway = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+						var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamHome
+						console.log('linkGameNum'+linkGameNum);
+						console.log('linkTeamAway'+linkTeamAway);
+						console.log('linkTeamSearch'+linkTeamSearch);
+					}); */
 				}
 			});
 			$(window).unbind('formatDataRow');
