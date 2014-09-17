@@ -84,8 +84,7 @@
 	
 	#loader{
 		position:absolute;
-		height: 300px;
-		top: 50%;
+		top: 300px;
 		margin-top: -32px;
 		left: 50%;
 		margin-left: -32px;
@@ -653,7 +652,6 @@ function sortGameTag(){
 	});
 }
 
-console.log(searchDay);
 function superRefresh(){
 	//初始化gameList
 	var gameTagSample = $('#gametagSample').clone();
