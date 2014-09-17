@@ -441,10 +441,10 @@ public class GameAction extends ActionSupport {
 	
 	public String countInfoGraph(){
 		gameId= service.getGameIdByGameNum(linkGameNum);
-		//System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
+		System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
 		json = new Gson().toJson(service.getCountInfoHistory(linkTeamSearch, gameId));//輸入gamiId 和teamName取得COUT資訊
 		//System.out.println("HEHEHEHEHEHEHEHE"+json);
-		//json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
+//		json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "countInfoGraph";
