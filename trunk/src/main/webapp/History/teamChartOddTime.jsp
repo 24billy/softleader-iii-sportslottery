@@ -93,6 +93,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
+		alert('${linkTeamSearch}');
  		 $.post(url, {
  			'linkGameNum':'${linkGameNum}',
  			'linkTeamSearch':'${linkTeamSearch}'
