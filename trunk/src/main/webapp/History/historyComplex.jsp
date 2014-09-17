@@ -253,21 +253,49 @@
 				    	}
 				    });
 					
-					$('#gameList').on('click', '.teamAwayDetail', function() {
-						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-						var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-						$('#linkGameNum').val(linkGameNum);
-						$('#linkTeamSearch').val(linkTeamSearch);
-						$('#countForm').submit();
-					});
+					sendDataToGraph1();//以隊伍搜尋此場賽事(含)之前所有的COUNT資訊
+					//sendDataToGraph2();//以隊伍搜尋所有COUNT資訊
+					function sendDataToGraph1(){
+						
+						
+						$('#gameList').on('click', '.teamAwayDetail', function() {
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+							$('#linkGameNum').val(linkGameNum);
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
+						});
+						
+						$('#gameList').on('click', '.teamHomeDetail', function() {
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+							$('#linkGameNum').val(linkGameNum);
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
+						});
+						
+					}
 					
-					$('#gameList').on('click', '.teamHomeDetail', function() {
-						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-						var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
-						$('#linkGameNum').val(linkGameNum);
-						$('#linkTeamSearch').val(linkTeamSearch);
-						$('#countForm').submit();
-					});
+					function sendDataToGraph2(){
+		
+						
+						$('#gameList').on('click', '.teamAwayDetail', function() {
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+							
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
+						});
+						
+						$('#gameList').on('click', '.teamHomeDetail', function() {
+							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+							var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+							
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
+						});
+						
+					}
 					
 // 					sendDataToGraph();
 	
