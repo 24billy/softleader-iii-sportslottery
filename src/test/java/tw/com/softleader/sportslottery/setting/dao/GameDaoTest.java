@@ -152,9 +152,10 @@ public class GameDaoTest extends BaseTest{
 	
 	@Test
 	public void TestFindFinishedGameToday() {
-		List<GameEntity> games = dao.findFinishedGameToday();
+		
+	    List<GameEntity> games = dao.findFinishedGameToday();
 		for (GameEntity game : games) {
-			System.out.println(game);
+			System.out.println("game:"+game);
 		}
 	}
 
