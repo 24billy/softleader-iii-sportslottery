@@ -52,7 +52,7 @@
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
 								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增賽事</span></button>
-								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="<i class="fa fa-fw fa-trophy"></i>"></i><span class="left5">今日派彩</span></button>
+								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="fa fa-fw fa-trophy"></i><span class="left5">今日派彩</span></button>
 							</div>
 						</div>
 						<!-- .row -->
