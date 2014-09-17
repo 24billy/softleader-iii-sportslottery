@@ -8,7 +8,7 @@
 			<div class="col-sm-12">
 				<p class="lead">
 					<i class="fa fa-fw fa-copyright"></i> CECJ05. All Rights Reserved
-					<span class="pull-right">
+					<span class="pull-right hidden-xs">
 						<a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</a>
 					</span>
 				</p>

@@ -34,7 +34,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
+		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
 		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
 								</ol>
 							</div>

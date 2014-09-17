@@ -34,8 +34,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i> 首頁</a></li>
-			  						<li class="active"><i class="fa fa-fw fa-users"></i> 隊伍管理</li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
+			  						<li class="active"><i class="fa fa-fw fa-users"></i><span class="left5">隊伍管理</span></li>
 								</ol>
 							</div>
 						</div>
@@ -44,18 +44,16 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
-									<div class="form-group">
-										<select class="form-control input-sm" id="leagueNameList" name="leagueName">
-											<option value="美國職棒" selected>美國職棒</option>
-											<option value="中華職棒">中華職棒</option>
-											<option value="中央聯盟">中央聯盟</option>
-											<option value="太平洋聯盟">太平洋聯盟</option>
-											<option value="韓國職棒">韓國職棒</option>
-										</select>
-									</div>
+									<select class="input-sm" id="leagueNameList" name="leagueName">
+										<option value="美國職棒" selected>美國職棒</option>
+										<option value="中華職棒">中華職棒</option>
+										<option value="中央聯盟">中央聯盟</option>
+										<option value="太平洋聯盟">太平洋聯盟</option>
+										<option value="韓國職棒">韓國職棒</option>
+									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
-								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i> 新增隊伍</button>
+								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增隊伍</span></button>
 							</div>
 						</div>
 						<!-- .row -->
