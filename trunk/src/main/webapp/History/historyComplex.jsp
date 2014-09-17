@@ -160,11 +160,12 @@
 					'complexIsEnd':isEnd
 				},
 				success:function(datas){
+					
 					if(table){
 						$('#gameList').off('click');
 						$('#gameTable').DataTable().rows().remove();
 						$('#gameTable').DataTable().destroy();
-					}
+					}//end if
 					
 					table = $('#gameTable').dataTable({
 						oLanguage: {
@@ -183,7 +184,7 @@
 								'sNext':'下頁',
 								'sLast':'尾頁'
 							}
-						},
+						},//end oLanguage
 						
 						'data': datas,
 						
@@ -219,18 +220,18 @@
 										'</div>';
 									}
 
-				        		}},
+				        		}},//end dataL function(row, type, val, meta)
 				        		{"data": function(row, type, val, meta){
 				        			if(row.isEnd){
 				        				return '<td><button type="button" class="btn btn-success btn-xs disabled">已完賽</button></td>';
 				        			} else {
 				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未完賽</button></td>'	
 				        			}
-				        		}}
+				        		}}//"data": function(row, type, val, meta)
 				        ],
 				        
 				        "order": [[2, 'asc']]
-					});
+					});//table = $('#gameTable').dataTable
 					
 					$('#gameList').on('click', 'td.details-control', function () {
 				    	var tr = $(this).closest('tr');
@@ -242,32 +243,43 @@
 				    		row.child(formatDataRow(row.data())).show();
 				    		tr.addClass('shown info');
 				    	}
+				    	
+				    	
 				    });
-					
-					$('#gameList tr').each(function() {//tr迴圈
-						$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
-						
-						
-							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-							$('#linkGameNum').val(linkGameNum);
-							$('#linkTeamSearch').val(linkTeamSearch);
-							$('#countForm').submit();
+					sendDataToGraph();
+					//點選隊伍，將對伍名稱和比賽號碼送出
+					function sendDataToGraph(){
+						$(document).ajaxStop(function() {
+							$('#gameList tr').each(function() {//tr迴圈
+								$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
+								
+								
+									var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+									var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
+									$('#linkGameNum').val(linkGameNum);
+									$('#linkTeamSearch').val(linkTeamSearch);
+									$('#countForm').submit();
 
+								});
+							});//end $('#gameList tr').each(function()
+									
+							$('#gameList tr').each(function() {//tr迴圈
+								$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
+								
+								
+									var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
+									var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
+									$('#linkGameNum').val(linkGameNum);
+									$('#linkTeamSearch').val(linkTeamSearch);
+									$('#countForm').submit();
+								});
+							});//end $('#gameList tr').each(function()
 						});
-					});//end $('#gameList tr').each(function()
-							
-					$('#gameList tr').each(function() {//tr迴圈
-						$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
 						
 						
-							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-							var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
-							$('#linkGameNum').val(linkGameNum);
-							$('#linkTeamSearch').val(linkTeamSearch);
-							$('#countForm').submit();
-						});
-					});//end $('#gameList tr').each(function()
+						
+					}//end sendDataToGraph()
+					
 
 /* 					$('#gameList tr>td:eq(4)').on('click', function(){
 						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
