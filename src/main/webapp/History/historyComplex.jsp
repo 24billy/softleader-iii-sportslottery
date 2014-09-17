@@ -92,7 +92,10 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-
+	<form style="display:none;" id="countForm" method="post" action="<c:url value="/teamChartOddTime"/>">
+		<input id="linkGameNum" name="linkGameNum">
+		<input id="linkTeamSearch" name="linkTeamSearch">
+	</form>
 <script>
 	(function($) {
 		$('#timeBegin').datetimepicker({
@@ -247,7 +250,9 @@
 						
 							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
 							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-							window.location.assign('<c:url value="/countInfoGraph?linkGameNum=' + linkGameNum + '&linkTeamSearch=' + linkTeamSearch + '"/>');
+							$('#linkGameNum').val(linkGameNum);
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
 
 						});
 					});//end $('#gameList tr').each(function()
@@ -258,8 +263,9 @@
 						
 							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
 							var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
-							window.location.assign('<c:url value="/countInfoGraph?linkGameNum=' + linkGameNum + '&linkTeamSearch=' + linkTeamSearch + '"/>');
-
+							$('#linkGameNum').val(linkGameNum);
+							$('#linkTeamSearch').val(linkTeamSearch);
+							$('#countForm').submit();
 						});
 					});//end $('#gameList tr').each(function()
 
