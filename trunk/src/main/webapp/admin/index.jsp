@@ -311,6 +311,35 @@
 		}, 'json');
 		/* End of gameTable */
 		
+		/* Begin of announceTable */
+		$.post('<c:url value="/admin/announceAdmin?method:selectLatestFiveRecord"/>', function(data) {
+			$.each(data, function(index, announce) {
+				var child = '';
+				child += '<tr>';
+				child += '<td>' + announce.announceTitle + '</td>';
+				child += '<td>';
+				var announceTime = announce.announceTime.iLocalMillis;
+				child += millisecondToDate(announceTime) + ' ' + millisecondToTime(announceTime);
+				child += '</td>';
+				child += '<td>'; 
+				var modifiedTime = announce.modifiedTime.iLocalMillis;
+				child += millisecondToDate(modifiedTime) + ' ' + millisecondToTime(modifiedTime);
+				child += '</td>';
+				child += '</tr>';
+				$('#announceList').append(child);
+			});
+			$('#announceTable').dataTable({
+				'responsive': true,
+				'autoWidth': false,
+				'sDom': '',
+				'order': [[ 0, 'desc' ]],
+				'columns': [{'width': '30%'},
+			            	{'width': '35%'},
+			            	{'width': '35%'}]
+			});
+		}, 'json');
+		/* End of announceTable */
+		
 		/* Begin of styling */
 		function resetInput() {
 			$('#gameTime').val('');

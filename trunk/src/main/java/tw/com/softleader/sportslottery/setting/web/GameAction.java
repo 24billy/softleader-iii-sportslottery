@@ -320,9 +320,9 @@ public class GameAction extends ActionSupport {
 			su = "SU_H";
 		}
 		
-		if (gameScoreAway > gameScoreHome + 1.5) {
+		if (gameScoreAway + 1.5 > gameScoreHome) {
 			ats = "ATS_A";
-		} else if (gameScoreAway < gameScoreHome + 1.5) {
+		} else if (gameScoreAway + 1.5 < gameScoreHome) {
 			ats = "ATS_H";
 		}
 		

@@ -135,8 +135,8 @@ public class InitialData implements ServletContextListener {
 			odds.setOddValue(oddValue);
 			
 			switch(oddType[i]) {
-				case "ATS_A": odds.setOddCombination(new BigDecimal("-1.5")); break;
-				case "ATS_H": odds.setOddCombination(new BigDecimal("1.5")); break;
+				case "ATS_A": odds.setOddCombination(new BigDecimal("1.5")); break;
+				case "ATS_H": odds.setOddCombination(new BigDecimal("-1.5")); break;
 				case "SC_L": odds.setOddCombination(new BigDecimal("7.5")); break;
 				case "SC_H": odds.setOddCombination(new BigDecimal("7.5")); break;
 				default: odds.setOddCombination(new BigDecimal("0"));
