@@ -494,7 +494,7 @@ public class GameAction extends ActionSupport {
 		System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
 		json = new Gson().toJson(service.getAllCountHistoryByTeam(linkTeamSearch));//輸入teamName取得COUNT資訊
 		//System.out.println("HEHEHEHEHEHEHEHE"+json);
-//		json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
+//		json = new Gson().toJson(service.trialGetCountInfoHistory());//使用預設值
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "countAllHistoryByTeam";
