@@ -129,7 +129,8 @@ function getCapitalByOdd(lotteryOddValue,combinations){
 		var index=0;
 		var totalCapital =0;
 		getCombination(lotteryOddValue, combinations, begin, temparray, index);
-		return totalCapital;
+		return totalCapital;  //回傳所有中獎下注的總合係數
+		
 	function getCombination(lotteryOddValue, combinations, begin, temparray, index) {  
         var oddcapital = 1;
 //如果n足夠，輸出  temparray
