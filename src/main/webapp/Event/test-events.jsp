@@ -78,7 +78,7 @@
 		display:none;
 	}
 	
-	#noGameResult{
+	.alert{
 		margin: 20px 5px;
 	}
 	
@@ -261,7 +261,9 @@
 				</form>
 				</div>
 			</div>
-			<div class="alert alert-warning" id="noGameResult" role="alert"><span class="glyphicon glyphicon-remove-sign"><strong>尚無賽事資料</strong></span></div>
+			<div class="alert alert-warning" id="noGameResult" role="alert"><span class="glyphicon glyphicon-info-sign"></span><strong>尚無賽事資料:</strong>建議搜索其他日期區間</div>
+			<div class="alert alert-danger" id="requestFail" role="alert"><span class="glyphicon glyphicon-remove-sign"></span><strong>搜索發生錯誤:</strong>請檢查網路連線、或稍後再進行搜尋</div>
+			
 			<div class="row" id="game_list">
 				<div id="gametagSample" class="well gametag sample">
 					<div class="clickfield">
@@ -342,7 +344,7 @@
 
 <script>
 //先行隱藏警告
-$('#noGameResult').hide();
+$('.alert').hide();
 
 //生成動態磚
 function gameRefresh(games, odds){
@@ -441,7 +443,7 @@ function gameRefresh(games, odds){
 			enableDrag:false,
 			enableCrossDrop: false,
 		});
-		$('#noGameResult').hide();
+		$('.alert').hide();
 	}
 	catch(err) {
 	    $('#noGameResult').show();
@@ -802,7 +804,10 @@ function superRefresh(){
 				gameRefresh(games, odds);
 				
 			}//Ajax function
-		});//Ajax
+		}).fail(function(jqXHR, textStatus) {
+			$('#loader').css('display','none');
+			$('#requestFail').show();
+		});;//Ajax
 		
 	});//hide
 	

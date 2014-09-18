@@ -196,7 +196,7 @@ public class GameAction extends ActionSupport {
 		if (gameId != null && gameId > 0) {
 			json = new Gson().toJson(service.getById(gameId));
 		} else {
-			json = new Gson().toJson(service.getComplex(null, null, null, null, null, complexBallType, null));
+			json = new Gson().toJson(service.getComplex(null, null, null, null, null, null, complexBallType, null));
 		}
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
@@ -213,7 +213,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, null, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType, null));
+		json = new Gson().toJson(service.getComplex(null, null, null, null, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType, null));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -222,7 +222,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNearNotEnd() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, null, complexTimeBegin.minusDays(1), complexTimeEnd.plusDays(2), complexBallType, complexLeagueName));
+		json = new Gson().toJson(service.getComplex(null, null, null, null, complexTimeBegin.minusDays(1), complexTimeEnd.plusDays(2), complexBallType, complexLeagueName));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -231,7 +231,7 @@ public class GameAction extends ActionSupport {
 	
 	public String selectNotEnd() {
 		log.debug("selectNearDays...");
-		json = new Gson().toJson(service.getComplex(null, null, null, null, null, complexBallType, null));
+		json = new Gson().toJson(service.getComplex(null, null, null, null, null, null, complexBallType, null));
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 	
@@ -521,7 +521,14 @@ public class GameAction extends ActionSupport {
 				"complexBallType:" + complexBallType
 				);
 		
-		json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, null, complexTimeBegin, complexTimeEnd, complexBallType, complexLeagueName));
+		
+		if(complexIsEnd != null && complexIsEnd.equals(true)){
+			json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, 3L, 3L, complexTimeBegin, complexTimeEnd, complexBallType, complexLeagueName));
+		} else if(complexIsEnd != null && complexIsEnd.equals(false)){
+			json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, 0L, 2L, complexTimeBegin, complexTimeEnd, complexBallType, complexLeagueName));
+		} else {
+			json = new Gson().toJson(service.getComplex(complexGameNum, complexTeamName, null, null, complexTimeBegin, complexTimeEnd, complexBallType, complexLeagueName));
+		}
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 
