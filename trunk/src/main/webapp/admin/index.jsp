@@ -47,47 +47,60 @@
 										<div class="row">
 										
 											<div class="col-sm-12">
-												<div class="panel panel-default">
-													<div class="panel-heading">最新公告</div>
-													<div class="panel-body">
-														<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
-															<thead>
-																<tr>
-																	<th>公告標題</th>
-																	<th>公告日期</th>
-																	<th>修改日期</th>
-																</tr>
-															</thead>
-															<tbody id="announceList">
-															</tbody>
-														</table>
+												<div class="panel-group" id="listPanel">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">最新公告
+																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#announcePanel"><i class="fa fa-fw fa-bars"></i></a>
+															</h4>
+														</div>
+														<div id="announcePanel" class="panel-collapse collapse in">
+															<div class="panel-body">
+																<table id="announceTable" class="table table-hover table-condensed">
+																	<thead>
+																		<tr>
+																			<th>公告標題</th>
+																			<th>公告內容</th>
+																		</tr>
+																	</thead>
+																	<tbody id="announceList">
+																	</tbody>
+																</table>
+															</div>
+															<!-- .panel-body -->
+														</div>
+														<!-- #announcePanel -->
 													</div>
-													<!-- .panel-body -->
-												</div>
-												<!-- .panel -->
-											</div>
-											
-											<div class="col-sm-12">
-												<div class="panel panel-default">
-													<div class="panel-heading">最新賽事</div>
-													<div class="panel-body">
-														<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
-															<thead>
-																<tr>
-																	<th>賽事編號</th>
-																	<th>主隊</th>
-																	<th>客隊</th>
-																</tr>
-															</thead>
-															<tbody id="gameList">
-															</tbody>
-														</table>
+													<!-- .panel -->
+													
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">最新賽事
+																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#gamePanel"><i class="fa fa-fw fa-bars"></i></a>
+															</h4>
+														</div>
+														<div id="gamePanel" class="panel-collapse collapse">
+															<div class="panel-body">
+																<table id="gameTable" class="table table-hover table-condensed">
+																	<thead>
+																		<tr>
+																			<th>賽事編號</th>
+																			<th>主隊</th>
+																			<th>客隊</th>
+																		</tr>
+																	</thead>
+																	<tbody id="gameList">
+																	</tbody>
+																</table>
+															</div>
+															<!-- .panel-body -->
+														</div>
+														<!-- #gamePanel -->
 													</div>
-													<!-- .panel-body -->
+													<!-- .panel -->
 												</div>
-												<!-- .panel -->
+												<!-- .panel-group -->
 											</div>
-											
 										</div>
 										<!-- .row -->
 									</div>
@@ -285,11 +298,13 @@
 <script src="<c:url value="/js/highcharts.js"/>"></script>
 <script src="<c:url value="/js/exporting.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+<script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
 		
 		/* Begin of gameTable */
 		$.post('<c:url value="/admin/gameAdmin?method:selectLatestFiveRecord"/>', function(data) {
+			
 			$.each(data, function(index, game) {
 				var child = '';
 				child += '<tr>';
@@ -299,43 +314,20 @@
 				child += '</tr>';
 				$('#gameList').append(child);
 			});
-			$('#gameTable').dataTable({
-				'responsive': true,
-				'autoWidth': false,
-				'sDom': '',
-				'order': [[ 0, 'desc' ]],
-				'columns': [{'width': '30%'},
-			            	{'width': '35%'},
-			            	{'width': '35%'}]
-			});
 		}, 'json');
 		/* End of gameTable */
 		
 		/* Begin of announceTable */
 		$.post('<c:url value="/admin/announceAdmin?method:selectLatestFiveRecord"/>', function(data) {
 			$.each(data, function(index, announce) {
+				
 				var child = '';
 				child += '<tr>';
 				child += '<td>' + announce.announceTitle + '</td>';
-				child += '<td>';
-				var announceTime = announce.announceTime.iLocalMillis;
-				child += millisecondToDate(announceTime) + ' ' + millisecondToTime(announceTime);
-				child += '</td>';
-				child += '<td>'; 
-				var modifiedTime = announce.modifiedTime.iLocalMillis;
-				child += millisecondToDate(modifiedTime) + ' ' + millisecondToTime(modifiedTime);
-				child += '</td>';
+				child += '<td>' + announce.announceContent + '</td>';
 				child += '</tr>';
 				$('#announceList').append(child);
-			});
-			$('#announceTable').dataTable({
-				'responsive': true,
-				'autoWidth': false,
-				'sDom': '',
-				'order': [[ 0, 'desc' ]],
-				'columns': [{'width': '30%'},
-			            	{'width': '35%'},
-			            	{'width': '35%'}]
+				
 			});
 		}, 'json');
 		/* End of announceTable */
