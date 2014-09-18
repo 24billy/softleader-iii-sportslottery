@@ -221,7 +221,7 @@
                                 <tbody>
                                     <tr>
                                         <td id="singleBet">組合數</td>
-                                        <td id="singleTopPrice">最高中獎金額</td>
+                                        <td id="singleTopPrize">最高中獎金額</td>
                                         <td id="singleCapital">總價</td>
                                     </tr>
                                     <tr>
@@ -287,7 +287,7 @@
                                 <tbody>
                                     <tr>
                                         <td id="passBet">組合數</td>
-                                        <td id="passTopPrice">最高中獎金額</td>
+                                        <td id="passTopPrize">最高中獎金額</td>
                                         <td id="passCapital">總價</td>
                                     </tr>
                                     <tr>
@@ -325,6 +325,7 @@
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
+                                <button type="submit" class="btn btn-warning btn-xs" name="method:virtualLottery" >虛擬投注</button>
                             </div>
                         </form>
                     </div>
@@ -431,7 +432,7 @@
                                 <tbody>
                                     <tr>
                                         <td id="comBetsTotal">組合數</td>
-                                        <td id="comTopPrice">最高中獎金額</td>
+                                        <td id="comTopPrize">最高中獎金額</td>
                                         <td id="comTopCapital">投注金</td>
                                     </tr>
                                     <tr>
@@ -468,6 +469,7 @@
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
+                                <button type="submit" class="btn btn-warning btn-xs" name="method:virtualLottery" >虛擬投注</button>
                             </div>
                         </form>
                     </div>
@@ -512,8 +514,8 @@ function odds_refresh(){
 	var combination=true;
 	//投注的本金計錄；最高中獎金額紀錄
 	var capitalValue=100;
-	var singlePrice=0;
-	var passPrice=1;
+	var singlePrize=0;
+	var passPrize=1;
 	var bets=userOddIds.length;
 	var numerator=bets+0;
 	var denominator=1;
@@ -536,8 +538,8 @@ function odds_refresh(){
 	    var oddType=odds[userOddId].labelText;
 	    var oddValue=odds[userOddId].oddValue;
 	    //調整最高中獎金額
-	    singlePrice=singlePrice+oddValue;
-	    passPrice=passPrice*oddValue;
+	    singlePrize=singlePrize+oddValue;
+	    passPrize=passPrize*oddValue;
 	    var bet = games[odds[userOddId].gameNum];
 	        $('#lottery'+lotteryId).prop("hidden",false);
 	        $('#lottery'+lotteryId+'> div:eq(0)').html("編號:"+bet.gameNum+" "+bet.ballType);             
@@ -561,12 +563,12 @@ function odds_refresh(){
 	//過關總投注金、最高中獎金額
 	$('#passBet').html(1);
 	$('#passCapital').html($('#passBetValue').val()*capitalValue);
-	$('#passTopPrice').html(Math.floor(passPrice*100));            
+	$('#passTopPrize').html(Math.floor(passPrize*100));            
 	
 	//單場總投注金、最高中獎金額
 	$('#singleBet').html(userOddIds.length);
 	$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
-	$('#singleTopPrice').html(Math.floor(singlePrice*100));
+	$('#singleTopPrize').html(Math.floor(singlePrize*100));
 	//更新過關組合類型與計算金額
 	//計算每個組合的最高可能獎金
 	for(var i=1;i<=8;i++){
@@ -583,16 +585,16 @@ function odds_refresh(){
 	//更新總計
 	function refreshBetTable(){
 	    var bet=0;
-	    var topPrice=0;
+	    var topPrize=0;
 	    var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
 	    $.each(checkedlabel, function(index, checkedItem){
 	        
 	        $('input',checkedItem).val(1);
 	        bet+=parseInt($('td:eq(1)', checkedItem).text());
-	        topPrice+=parseInt($('td:eq(2)', checkedItem).text());
+	        topPrize+=parseInt($('td:eq(2)', checkedItem).text());
 	    });
 	    $('#comBetsTotal').html(bet);
-	    $('#comTopPrice').html(topPrice);
+	    $('#comTopPrize').html(topPrize);
 	    $('#comTopCapital').html(bet*capitalValue*$('#comBetValue').val());
 	    
 	}
