@@ -186,13 +186,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_A">讓分(客)(+1.5)</label>
+												<label for="ATS_A">讓分(客)</label>
 												<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_H">讓分(主)(-1.5)</label>
+												<label for="ATS_H">讓分(主)</label>
 												<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 											</div>
 										</div>
@@ -202,13 +202,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SC_H">總分(大7.5)</label>
+												<label for="SC_H">總分(大)</label>
 												<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SC_L">總分(小7.5)</label>
+												<label for="SC_L">總分(小)</label>
 												<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
 											</div>
 										</div>
@@ -232,6 +232,28 @@
 									<!-- .row -->
 								</div>
 								<!-- End of oddsInfo -->
+								
+								<div class="col-sm-4">
+									
+									<div class="form-group">
+										<label for="ATS_A_Combination">讓分數設定(客)</label>
+										<input class="form-control input-sm form-ats-a" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
+									</div>
+								</div>
+								
+								<div class="col-sm-4">
+									<div class="ATS_H_Combination">
+										<label for="ATS_H_Combination">讓分數設定(主)</label>
+										<input class="form-control input-sm form-ats-h" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
+									</div>
+								</div>
+								
+								<div class="col-sm-4">
+									<div class="SC_Combination">
+										<label for="SC_Combination">總分設定</label>
+										<input class="form-control input-sm form-sc" id="SC_Combination" type="text" name="SC_Combination">
+									</div>
+								</div>
 							</div>
 							<!-- .row -->
 		      			</div>
@@ -736,7 +758,10 @@
 		function resetInput() {
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
-			$('.form-decimal').val('2.00')
+			$('.form-decimal').val('2.00');
+			$('.form-ats-a').val('1.50');
+			$('.form-ats-h').val('-1.50');
+			$('.form-sc').val('7.50');
 			
 			$('#gameTime').datetimepicker({
 				'defaultDate': new Date(),
@@ -747,7 +772,7 @@
 			});
 			
 			$('.form-decimal').TouchSpin({
-				'min': 1,
+				'min': 1.00,
 				'step': 0.05,
 				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
@@ -758,6 +783,34 @@
 				'min': 0,
 				'initval': 0,
 				'step': 1,
+				'buttondown_class': 'btn btn-info',
+	            'buttonup_class': 'btn btn-success'
+			});
+			
+			$('.form-ats-a, .form-ats-h').TouchSpin({
+				'min': -3.50,
+				'max': 3.50,
+				'step': 0.05,
+				'decimals': 2,
+				'buttondown_class': 'btn btn-info',
+	            'buttonup_class': 'btn btn-success'
+			});
+			
+			$('.form-ats-a').change(function() {
+				value = $(this).val();
+				$('.form-ats-h').val('-' + value.toString());
+			});
+				
+			$('.form-ats-h').change(function() {
+				value = $(this).val();
+				$('.form-ats-a').val('-' + value.toString());
+			});
+			
+			$('.form-sc').TouchSpin({
+				'min': 6.5,
+				'max': 8.5,
+				'step': 1,
+				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
 	            'buttonup_class': 'btn btn-success'
 			});
