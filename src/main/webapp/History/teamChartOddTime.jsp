@@ -98,20 +98,20 @@ $(function () {
 			
 		 $.getJSON(url, function(data) { //透過countInfoGraph取回的Json型式的值
 			 /* console.log(data); */
-				$.each(data, function(key, value) {
-					//console.log(value['ATS_A']);
-					var time=value['ATS_A'].gameTime.iLocalMillis;
-					console.log(millisecondToDate(time)+millisecondToTime(time));
-					console.log(value['ATS_H'].percentage);
-					console.log(value['SU_A'].percentage);
-					console.log(value['SU_H'].percentage);
-					console.log(value['SC_H'].percentage);
-					console.log(value['SC_L'].percentage);
-					console.log(value['ODD'].percentage);
-					console.log(value['EVEN'].percentage);
-					console.log('\n');
-				});
+			$.each(data, function(key, value) {
+				//console.log(value['ATS_A']);
+				var time=value['ATS_A'].gameTime.iLocalMillis;
+				console.log(millisecondToDate(time)+millisecondToTime(time));
+				console.log(value['ATS_H'].percentage);
+				console.log(value['SU_A'].percentage);
+				console.log(value['SU_H'].percentage);
+				console.log(value['SC_H'].percentage);
+				console.log(value['SC_L'].percentage);
+				console.log(value['ODD'].percentage);
+				console.log(value['EVEN'].percentage);
+				console.log('\n');
 			});
+		});
 	}
 	function final1(){
 		var url = '<c:url value="/countInfoGraph"/>';
@@ -121,65 +121,62 @@ $(function () {
 		$('#searchMessage').text('取得 "'+'${linkTeamSearch}'+'"選取比賽之前的投注統計');
 		$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
- 		 $.post(url, {
+ 		$.post(url, {
  			'linkGameNum':'${linkGameNum}',
  			'linkTeamSearch':'${linkTeamSearch}'
- 		 },function(data) { //用POST透過countInfoGraph取回的Json型式的值
- 			 
- 			
- 			 console.log(data);
-				$.each(data, function(key, value) { 
-					
- 					var type=value['ATS_A'];
- 					teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
-		 			teamNameHome[i] = type.teamNameHome;
- 					console.log(i+' AAAway : '+teamNameAway[i]);
- 					//console.log(i+' Home : '+teamNameHome[i]);
+ 			},function(data) { //用POST透過countInfoGraph取回的Json型式的值
+ 			//console.log(data);
+			$.each(data, function(key, value) { 
+				var type=value['ATS_A'];
+				teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
+	 			teamNameHome[i] = type.teamNameHome;
+					console.log(i+' AAAway : '+teamNameAway[i]);
+					//console.log(i+' Home : '+teamNameHome[i]);
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				var percent=type.percentage;
+				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
+
+					var type=value['ATS_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+				
+					var type=value['SU_A'];
 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-					var percent=type.percentage;
-					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
-	
- 					var type=value['ATS_H'];
- 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
-					
- 					var type=value['SU_A'];
- 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-					var percent=type.percentage;
-					child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SU_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SC_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SC_L'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['ODD'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['EVEN'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
-					
-					i +=8;
- 				 });  
-				$('#tsv').append(child);
-			  },'json');  
-		 /* console.log(child); */
-		  
+				var percent=type.percentage;
+				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SU_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_L'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['ODD'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['EVEN'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+				
+				i +=8;
+			});  
+			$('#tsv').append(child);
+		},
+		'json');  
+		 /* console.log(child); */ 
 	}
 	
 	function final2(){
@@ -192,62 +189,60 @@ $(function () {
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		 $.post(url, {
  			'linkTeamSearch':'${linkTeamSearch}'
- 		 },function(data) { //用POST透過countInfoGraph取回的Json型式的值
- 			 
- 			
- 			 console.log(data);
-				$.each(data, function(key, value) { 
-					
- 					var type=value['ATS_A'];
- 					teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
-		 			teamNameHome[i] = type.teamNameHome;
- 					console.log(i+' AAAway : '+teamNameAway[i]);
- 					//console.log(i+' Home : '+teamNameHome[i]);
+ 		},function(data) { //用POST透過countInfoGraph取回的Json型式的值
+ 			console.log(data);
+			$.each(data, function(key, value) { 
+				
+					var type=value['ATS_A'];
+					teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
+	 			teamNameHome[i] = type.teamNameHome;
+					console.log(i+' AAAway : '+teamNameAway[i]);
+					//console.log(i+' Home : '+teamNameHome[i]);
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				var percent=type.percentage;
+				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
+
+					var type=value['ATS_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+				
+					var type=value['SU_A'];
 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-					var percent=type.percentage;
-					child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
-	
- 					var type=value['ATS_H'];
- 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
-					
- 					var type=value['SU_A'];
- 					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-					var percent=type.percentage;
-					child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SU_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SC_H'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['SC_L'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['ODD'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
-					
-					var type=value['EVEN'];
-					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-					var percent=type.percentage;
-					child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
-					
-					i +=8;
- 				 });  
-				$('#tsv').append(child);
-			  },'json');  
+				var percent=type.percentage;
+				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SU_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_L'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['ODD'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['EVEN'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+				
+				i +=8;
+				});  
+			$('#tsv').append(child);
+		},
+		'json');
 		 /* console.log(child); */
-		  
 	}
 	
 	function test4(){
@@ -257,6 +252,7 @@ $(function () {
 		child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
 		$('#tsv').append(child); 
 	}
+	
 	function test5(){
 		var url = '<c:url value="/countInfoGraph"/>';
 		var child='';	
@@ -264,16 +260,14 @@ $(function () {
 		var i=1;
 		child += '過關	歷史\n'; 
   		 $.post(url, function(data) { //透過countInfoGraph取回的Json型式的值
-  			
-				// $.each(data, function(key, value) {  
-					console.log('inside'+i); 
-					child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
-					child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
-  				 	i++;
-				//});  
-				
-				console.log(child);
-	  			$('#tsv').append(child);
+			// $.each(data, function(key, value) {  
+			console.log('inside'+i); 
+			child += '2014年08月22日08:05(五)'+' '+'1'+'\t'+'64.21'+'%'+'\n';
+			child += '2014年08月22日08:05(五)'+' '+'2'+'\t'+'8.05'+'%'+'\n';	
+ 				 i++;
+			//});  
+			console.log(child);
+  			$('#tsv').append(child);
 		}, 'json');
 	}
 

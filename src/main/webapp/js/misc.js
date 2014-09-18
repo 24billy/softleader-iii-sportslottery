@@ -3,7 +3,9 @@
  */
 
 function millisecondToDate(millisecond){
-	var d = new Date(millisecond);
+	var d = new Date();
+	var n = d.getTimezoneOffset()*60000;
+	d = new Date(millisecond+n);
 	var month = (d.getUTCMonth()+1);
 	if (month<10) {
 		month = "0" + month;
@@ -17,7 +19,9 @@ function millisecondToDate(millisecond){
 }
 
 function millisecondToTime(millisecond){
-	var d = new Date(millisecond);
+	var d = new Date();
+	var n = d.getTimezoneOffset()*60000;
+	d = new Date(millisecond+n);
 	var day = "";
 	if (d.getUTCDay() == 1) {
 		day = "一";
