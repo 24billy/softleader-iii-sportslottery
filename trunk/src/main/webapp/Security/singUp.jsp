@@ -307,21 +307,38 @@ hr {
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group has-feedback">
-											<label for="accountf">帳號</label> 
-											<input type="text" class="form-control" id="accountf" name="model.userAccount"
+											<label  for="accountf">帳號</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-user"></span> 
+												</span> 
+												<input type="text" class="form-control" id="accountf" name="model.userAccount"
 												placeholder="輸入帳號"  />
+											</div>
 											<span class="glyphicon form-control-feedback"></span>
 										</div>
+										
 										<div class="form-group has-feedback">
-											<label for="passwordf">密碼</label> 
-											<input type="text" class="form-control" id="passwordf" name="userPassword"
+											<label  for="passwordf">密碼</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-lock"></span> 
+												</span> 
+												<input type="text" class="form-control" id="passwordf" name="userPassword"
 												placeholder="輸入密碼" />
+											</div>
 											<span class="glyphicon form-control-feedback"></span>
 										</div>
+										
 										<div class="form-group has-feedback">
-											<label for="confirm_password">確認密碼</label> 
-											<input type="text" class="form-control" id="confirm_password"
-												name="confirm_password" placeholder="確認密碼" />
+											<label  for="confirm_password">確認密碼</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-check"></span> 
+												</span> 
+												<input type="text" class="form-control" id="confirm_password"
+													name="confirm_password" placeholder="確認密碼" />
+											</div>
 											<span class="glyphicon form-control-feedback"></span>
 										</div>
 										<div class="form-group has-feedback">
@@ -349,28 +366,46 @@ hr {
 									</div>
 									<div class="col-md-6">
 										<div class="form-group has-feedback">
-											<label for="name">姓名</label> <input type="text"
-												class="form-control" id="name" name="model.userName"
+											<label for="name">姓名</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-pencil"></span> 
+												</span> 
+												<input type="text" class="form-control" id="name" name="model.userName"
 												placeholder="輸入姓名" />
+											</div>
 											<span class="glyphicon form-control-feedback"></span>
 										</div>
+										
 										<div class="form-group has-feedback">
-											<label for="userId">身分證</label> 
-											<input type="text"class="form-control" id="userId" name="model.userCardId"
+											<label for="userId">身分證</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-tag"></span> 
+												</span> 
+												<input type="text"class="form-control" id="userId" name="model.userCardId"
 												placeholder="輸入號碼" />
+											</div>
 											<span class="glyphicon form-control-feedback"></span>
 										</div>
-										<div class="form-group has-feedback">
-											<label for="phone">電話</label> 
-											<input type="text" class="form-control" id="phone" name="model.userPhone"
+										
+										<div class="form-group">
+											<label for="phone">電話</label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-phone"></span> 
+												</span> 
+												<input type="text" class="form-control" id="phone" name="model.userPhone"
 												placeholder="輸入號碼" />
-											<span class="glyphicon form-control-feedback"></span>
+											</div>
+											<span class="glyphicon"></span>
 										</div>
+										
 										<div>
 											<label for="ba">匯款帳號</label>&nbsp;
 											<select name="select-transfer" id="select-transfer">
 											  	<option value="POST">郵局帳戶</option>
-											  	<option value="BOT">台灣營行</option>
+											  	<option value="BOT">台灣銀行</option>
 											</select>
 											<div class="post-div">
 												<input name="post1" class="post1" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
@@ -571,9 +606,6 @@ function next(obj,n,next) {
 		}, "Email已使用過");
 
 		//密碼規則驗證
-		jQuery.validator.addMethod("alnumpwd", function(value, element) {
-			return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
-		}, "只能包括英文字母和数字");
 		jQuery.validator.addMethod("checkPsw1", function() {
 			var re1 = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])\S{6,}$/g;
 			var password = $('#passwordf').val();
@@ -594,15 +626,21 @@ function next(obj,n,next) {
 			}
 			return checkPsw2;
 		}, "須包含英文");
+		jQuery.validator.addMethod("alnumpwd", function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+		}, "只能包括英文字母和数字");
 
 		//姓名電話
 		jQuery.validator.addMethod("input", function() {
 			$('#info-name').empty();
 			$('#info-name').append("(" + $('#name').val());
 			$('#info-phone').empty();
-			$('#info-phone').append(" " + $('#phone').val());
+			$('#info-phone').append("<p>&nbsp" + $('#phone').val() + "</p>");
 			return true;
 		});
+		jQuery.validator.addMethod("alnumName", function(value, element) {
+			return /^[a-zA-Z\u4E00-\u9FA5]+$/.test(value);
+		}, "只能是英文或中文");
 
 		//身分證驗證
 		jQuery.validator.addMethod("idCard", function() {
@@ -707,7 +745,7 @@ function next(obj,n,next) {
 			}
 			return check;
 		},"格式錯誤,請檢查");
-
+		var validateFail=0;
 		$('#registration-form').validate(
 				{
 					debug : true,
@@ -721,9 +759,9 @@ function next(obj,n,next) {
 						userPassword : {
 							required : true,
 							minlength : 6,
+							alnumpwd : true,
 							checkPsw1 : true,
-							checkPsw2 : true,
-							alnumpwd : true
+							checkPsw2 : true
 						},
 						confirm_password : {
 							required : true,
@@ -740,6 +778,7 @@ function next(obj,n,next) {
 						},
 						'model.userName' : {
 							required : true,
+							alnumName : true,
 							input : true
 						},
 						'model.userCardId' : {
@@ -764,6 +803,7 @@ function next(obj,n,next) {
 					},
 					highlight : function(element) {
 						console.log('fail');
+						validateFail=1;
 						var formGroup = $(element).closest('.form-group');
 						formGroup.removeClass('has-success').addClass(
 								'has-error');
@@ -783,12 +823,15 @@ function next(obj,n,next) {
 				});
 		$('#addUserButton').on('click',
 				function() {
+					console.log(validateFail);
 					$.ajax({
 						url : "<c:url value='/addAccount'/>",
 						type : "get",
+						async : false,
 						data : {
 							'model.userAccount' : $('#accountf').val(),
 							userPassword : $('#passwordf').val(),
+							'confirm_password' : $('#confirm_password').val(),
 							'model.userBirthday' : $('#userBirth').val(),
 							'model.userEmail' : $('#email').val(),
 							'model.userName' : $('#name').val(),
@@ -799,6 +842,7 @@ function next(obj,n,next) {
 						success : function(data) {
 							console.log(data);
 							if (data == "success") {
+								/*
 								$('#step2').removeClass("activestep");
 								$('#step3').addClass("activestep");
 								$('#page2').empty();
@@ -806,7 +850,7 @@ function next(obj,n,next) {
 								$(".progress-bar").css("width", "92.9%").attr(
 										"aria-valuenow", 90);
 								$(".progress-completed").text(90 + "%");
-								
+								*/
 								
 							} else {
 							}
