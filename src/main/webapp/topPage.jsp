@@ -105,7 +105,7 @@
 			               	<ul class="dropdown-menu">
 			               		<li>系統訊息</li>
 				                <li class="divider"></li>
-				                <li><a href="#">連結1</a></li>
+				                <li><a href="#">${user.addCoins}</a></li>
 				                <li class="divider"></li>
 				                <li><a href="#">連結2</a></li>
 				                <li class="divider"></li>
@@ -207,11 +207,11 @@
 					<c:if test="${not empty errorMsg}"><div class="alert alert-danger" role="alert">${errorMsg}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div></c:if>
 					<form method="post" action="" name="login_form">
 						<p>
-							<input type="text" class="span3" name="model.userAccount" id="account"
+							<input type="text" class="span3" name="model.userAccount" id="loginAccount"
 								placeholder="Account">
 						</p>
 						<p>
-							<input type="password" class="span3" name="userPassword" id="password"
+							<input type="password" class="span3" name="userPassword" id="loginPassword"
 								placeholder="Password">
 						</p>
 						<p>
@@ -240,6 +240,8 @@
 	
 	$('#toLogin').click(function() {
 		$('#loginError').html('');
+		setTimeout('$("#loginAccount").focus()' ,200);
+		
 	});
 			
 	$('#goUser').click(function() {
@@ -255,8 +257,8 @@
 	   		url:"<c:url value='/checkLogin'/>",
 			type:"get",
 			data:{
-				'model.userAccount': $('#account').val(),
-				userPassword: $('#password').val()
+				'model.userAccount': $('#loginAccount').val(),
+				userPassword: $('#loginPassword').val()
 			},
 			success: function(data) {
 				if(data=="success") {
@@ -311,11 +313,18 @@
 	});
 
 	$('#myModal').keyup(function() {
-		if($('#account').val()=='' || $('#password').val()=='') {
-		} else if(event.keyCode == 13) {
-			$("#login").click();
+		if($('#loginAccount').val()!='' && $('#loginPassword').val()!='') {
+			if(event.keyCode == 13) {
+				$("#login").click();
+			}
 		}
 	});
+	
+	
+	
+	
+	
+	
 })(jQuery); 
 </script>
 </body>
