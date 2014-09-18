@@ -153,6 +153,7 @@ public class UserAction extends ActionSupport {
 		return inputStream;
 	}
 	
+
 	@Override
 	public void validate() {
 		log.debug("here is userAction validate");
@@ -222,7 +223,7 @@ public class UserAction extends ActionSupport {
 	
 	//會員儲值下注得獎coins修改
 	public String coinsUpdate() {
-		
+		String message = null;
 		Map session = ActionContext.getContext().getSession();
 		UserEntity user = (UserEntity)session.get("user");
 		if (coins == null) {
@@ -235,47 +236,44 @@ public class UserAction extends ActionSupport {
 					
 					if (card.isState()) {
 						user.setCoins(user.getCoins() + card.getPoint());
-						service.update(user);
+						log.debug("coins"+card.getPoint());
+						message = card.getPoint().toString();
 						log.debug("儲值成功");
 						card.setUserId(user);
 						card.setState(false);
 						card.setUseTime(LocalDateTime.now());
 						cardService.update(card);
-						return SUCCESS;
 					} else {
 						log.debug("此卡已使用");
 //						this.addFieldError("cardError",
 //								this.getText("alreadyuse.card"));
-						inputStream = new ByteArrayInputStream(this.getText("alreadyuse.card").getBytes(StandardCharsets.UTF_8));
-						return ERROR;
+						message = "error 此卡已使用";
 					}
 				} catch (Exception e) {
 					log.debug("coins修改異常");
 //					this.addFieldError("cardError",
 //							this.getText("fieldvalue.card"));
-					inputStream = new ByteArrayInputStream(this.getText("fieldvalue.card").getBytes(StandardCharsets.UTF_8));
+					message = "error coins修改異常";
 					e.printStackTrace();
 				}
 			} else {
 				log.debug("查無此點數卡");
 				this.addFieldError("cardError", this.getText("fieldvalue.card"));
-				inputStream = new ByteArrayInputStream(this.getText("fieldvalue.card").getBytes(StandardCharsets.UTF_8));
-				return ERROR;
+				message = "error 查無此點數卡";
 			}
 			log.debug("coins修改非常異常");
-			return ERROR;
 		}else {
 			try {
 				log.debug("12132131131");
 				System.out.println(coins);
 				user.setCoins(user.getCoins() + coins);
-				service.update(user);
-				return SUCCESS;
+				message = new Gson().toJson(service.update(user));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return ERROR;
 		}
+		inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
+		return "message";
 	}
 	
 	//搜尋出所有會員資料

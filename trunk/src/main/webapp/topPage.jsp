@@ -105,7 +105,7 @@
 			               	<ul class="dropdown-menu">
 			               		<li>系統訊息</li>
 				                <li class="divider"></li>
-				                <li><a href="#">${user.addCoins}</a></li>
+				                <li><a href="#"></a></li>
 				                <li class="divider"></li>
 				                <li><a href="#">連結2</a></li>
 				                <li class="divider"></li>

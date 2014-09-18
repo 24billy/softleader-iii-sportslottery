@@ -25,7 +25,17 @@
 	tr.shown td.details-control {
 	    background: url('<c:url value="/Security/images/icon.gif"/>') no-repeat center center;
 	}
+	.winBtn
+	{
+	display:inline-block;
+	width:50px;
+	}
+	#pass3,#pass3-2
+	{
+		diaplay:none;
+	}
 </style>
+
 </head>
 <body>
 	<div id="page-wrapper">
@@ -179,32 +189,62 @@
 						lottery.win = data.win;
 						lottery.capital = data.capital;
 						//lottery.odds = data.lotteryOdds;
+						//console.log((data.lotteryOdds).length);
 						//判斷玩法
 						lottery.unique = data.com1;
 						lottery.com2 = data.com2;
 						lottery.com3 = data.com3;
 						lottery.com4 = data.com4;
 						lottery.com5 = data.com5;
+						if(typeof(lottery.com5) == "undefined") {
+							lottery.com5 = "未勾選";
+						}
 						lottery.com6 = data.com6;
 						lottery.com7 = data.com7;
 						lottery.com8 = data.com8;
 						lottery.com = data.com0;
-						if(lottery.unique!=null && lottery.com2==null && lottery.com3==null && 
-						   lottery.com4==null && lottery.com5==null && lottery.com6==null && 
-						   lottery.com7==null && lottery.com8==null && lottery.com==null) {
+						if(data.com1!=null && data.com2==null && data.com3==null && 
+								data.com4==null && data.com5==null && data.com6==null && 
+								data.com7==null && data.com8==null && data.com==null) {
 						
 						   lottery.play = "單場";
 						   
-						} else if(lottery.unique==null && lottery.com2==null && lottery.com3==null && 
-								  lottery.com4==null && lottery.com5==null && lottery.com6==null && 
-								  lottery.com7==null && lottery.com8==null && lottery.com!=null) {
+						} else if(data.com1==null && data.com2==null && data.com3==null && 
+								data.com4==null && data.com5==null && data.com6==null && 
+								data.com7==null && data.com8==null && data.com0!=null) {
 								  
 								  lottery.play = "過關";
 								  
-						} else if(lottery.com2!=null || lottery.com3!=null || lottery.com4!=null || lottery.com5!=null ||
-								  lottery.com6!=null || lottery.com7!=null || lottery.com8!=null) {
+						} else if(data.com2!=null || data.com3!=null || data.com4!=null || data.com5!=null ||
+								data.com6!=null || data.com7!=null || data.com8!=null) {
 								  
 								  lottery.play = "過關組合";
+						}
+						
+						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
+							lottery.com4 = "<img src='images/error2.png' />";
+							lottery.com5 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
+						}
+						if((data.lotteryOdds).length == 4 && lottery.play == "過關組合") {
+							lottery.com5 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
+						}
+						if((data.lotteryOdds).length == 5 && lottery.play == "過關組合") {
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
+						}
+						if((data.lotteryOdds).length == 6 && lottery.play == "過關組合") {;
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
+						}
+						if((data.lotteryOdds).length == 7 && lottery.play == "過關組合") {
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						
 						//每注資料以oddsId排列
@@ -337,9 +377,9 @@
 					        		{"data": "capital" },
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == -1) {
-					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
+					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
 					        			} else {
-					        				return row.win;
+					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn" data-toggle="modal" data-target="#statusModal">'+row.win+'</button></td>';
 					        			}
 					        		}},
 					        		{"data": "play" },
@@ -367,19 +407,20 @@
 			function formatDataRow (dataRow) {
 				var odds = new Object();
 				odds = dataRow.odds;
-				console.log(odds);
+				console.log(odds.length);
 				var temp = '';
-				temp += '<table class="table" cellspacing="0" border="0";">'+
+				var temp2 = '';
+				temp += '<table class="table table-hover" cellspacing="0" border="1";">'+
 		        '<thead>'+
 		        	'<tr>'+
-		        		'<td>球種</td>'+
-		        		'<td>比賽時間</td>'+
-		        		'<td>比賽隊伍</td>'+
-		        		'<td>下注類型</td>'+
-		        		'<td>賠率</td>'+
-		        		'<td>比分</td>'+
-		        		'<td>投注人數</td>'+
-		        		'<td>過關</td>'+
+		        		'<th>球種</th>'+
+		        		'<th>比賽時間</th>'+
+		        		'<th>比賽隊伍</th>'+
+		        		'<th>下注類型</th>'+
+		        		'<th>賠率</th>'+
+		        		'<th>比分</th>'+
+		        		'<th>投注人數</th>'+
+		        		'<th>過關</th>'+
 		        	'</tr>'+	
 				'</thead>';
 				
@@ -387,19 +428,51 @@
 				
 				temp += '<tbody>'+
 				'<tr>'+
-		            '<td>' + odd.ballType+ '</td>'+
-		            '<td>' + odd.gameTime+ '</td>'+
-		            '<td>' + odd.teamAwayName+'VS.'+ odd.teamHomeName+'</td>'+
-		            '<td>' + odd.labelText+ '</td>'+
-		            '<td>' + odd.value+ '</td>'+
-		            '<td>' + odd.gameName+ '</td>'+
-		            '<td>' + odd.count+ '</td>'+
-		            '<td>' + odd.isPass+ '</td>'+
+		            '<td><img src="images/baseball.jpg"/></td>'+
+		            '<td style="vertical-align:middle">' + odd.gameTime+ '</td>'+
+		            '<td style="vertical-align:middle">' + odd.teamAwayName+'VS.'+ odd.teamHomeName+'</td>'+
+		            '<td style="vertical-align:middle">' + odd.labelText+ '</td>'+
+		            '<td style="vertical-align:middle">' + odd.value+ '</td>'+
+		            '<td style="vertical-align:middle">' + odd.gameName+ '</td>'+
+		            '<td style="vertical-align:middle">' + odd.count+ '</td>'+
+		            '<td style="vertical-align:middle">' + odd.isPass+ '</td>'+
 		        '</tr>'+
 		        '</tbody>';
 				});
 				temp += '</table>';
-				return temp;
+				
+				if(dataRow.play == "過關組合") {
+				temp2 += '<table class="table" cellspacing="0" border="0";">'+
+		        '<thead>'+
+		        	'<tr>'+
+		        		'<th><img src="images/baseball.jpg"/></th>'+
+		        		'<th>單場</th>'+
+		        		'<th>過兩關</th>'+
+		        		'<th id="pass3">過三關</th>'+
+		        		'<th id="pass4">過四關</th>'+
+		        		'<th id="pass5">過五關</th>'+
+		        		'<th id="pass6">過六關</th>'+
+		        		'<th id="pass7">過七關</th>'+
+		        		'<th class="pass8">過八關</th>'+
+		        	'</tr>'+	
+				'</thead>';
+				
+				temp2 += '<tbody>'+
+				'<tr>'+
+					'<td style="vertical-align:middle">中獎金額</td>'+
+		            '<td style="vertical-align:middle">' + dataRow.unique + '</td>'+
+		            '<td style="vertical-align:middle">' + dataRow.com2+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass3-2">' + dataRow.com3+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass4-2">' + dataRow.com4+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass5-2">' + dataRow.com5+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass6-2">' + dataRow.com6+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass7-2">' + dataRow.com7+ '</td>'+
+		            '<td style="vertical-align:middle" id="pass8-2">' + dataRow.com8+ '</td>'+
+		        '</tr>'+
+		        '</tbody></table>';
+				}
+		        
+				return temp + temp2;
 			}
 		}
 		renewData();

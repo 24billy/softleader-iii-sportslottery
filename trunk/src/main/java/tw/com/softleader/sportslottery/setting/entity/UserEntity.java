@@ -51,7 +51,7 @@ public class UserEntity extends GenericEntity {
 	//驗證狀態
 	@Column(name="USER_STATE", length=10)
 	private String userState;
-	//營行帳戶
+	//銀行帳戶
 	@Column(name="USER_BANK_ACCOUNT", length=20, nullable=false)
 	private String userBankAccount;
 	//錢
