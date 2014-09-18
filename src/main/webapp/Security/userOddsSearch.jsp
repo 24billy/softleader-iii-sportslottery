@@ -192,16 +192,37 @@
 						//console.log((data.lotteryOdds).length);
 						//判斷玩法
 						lottery.unique = data.com1;
+						if(typeof(lottery.unique) == "undefined") {
+							lottery.unique = "未勾選";
+						}
 						lottery.com2 = data.com2;
+						if(typeof(lottery.com2) == "undefined") {
+							lottery.com2 = "未勾選";
+						}
 						lottery.com3 = data.com3;
+						if(typeof(lottery.com3) == "undefined") {
+							lottery.com3 = "未勾選";
+						}
 						lottery.com4 = data.com4;
+						if(typeof(lottery.com4) == "undefined") {
+							lottery.com4 = "未勾選";
+						}
 						lottery.com5 = data.com5;
 						if(typeof(lottery.com5) == "undefined") {
 							lottery.com5 = "未勾選";
 						}
 						lottery.com6 = data.com6;
+						if(typeof(lottery.com6) == "undefined") {
+							lottery.com6 = "未勾選";
+						}
 						lottery.com7 = data.com7;
+						if(typeof(lottery.com7) == "undefined") {
+							lottery.com7 = "未勾選";
+						}
 						lottery.com8 = data.com8;
+						if(typeof(lottery.com8) == "undefined") {
+							lottery.com8 = "未勾選";
+						}
 						lottery.com = data.com0;
 						if(data.com1!=null && data.com2==null && data.com3==null && 
 								data.com4==null && data.com5==null && data.com6==null && 
@@ -428,7 +449,7 @@
 				
 				temp += '<tbody>'+
 				'<tr>'+
-		            '<td><img src="images/baseball.jpg"/></td>'+
+		            '<td><img src="images/baseball.gif"/></td>'+
 		            '<td style="vertical-align:middle">' + odd.gameTime+ '</td>'+
 		            '<td style="vertical-align:middle">' + odd.teamAwayName+'VS.'+ odd.teamHomeName+'</td>'+
 		            '<td style="vertical-align:middle">' + odd.labelText+ '</td>'+
@@ -445,7 +466,7 @@
 				temp2 += '<table class="table" cellspacing="0" border="0";">'+
 		        '<thead>'+
 		        	'<tr>'+
-		        		'<th><img src="images/baseball.jpg"/></th>'+
+		        		'<th><img src="images/baseball.gif"/></th>'+
 		        		'<th>單場</th>'+
 		        		'<th>過兩關</th>'+
 		        		'<th id="pass3">過三關</th>'+
