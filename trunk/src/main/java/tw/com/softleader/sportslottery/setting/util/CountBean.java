@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 
 import org.joda.time.LocalDateTime;
 
-public class CountBean {
+//實做comparable，用來比較count的大小
+//CountBean是 一場比賽，特定投注型態的投注資訊
+//包含投注型態，投注數，是否過關，過關比數(此注過關數/此場比賽單筆總購買數)，比賽隊伍，比賽時間，比賽ID
+public class CountBean implements Comparable<CountBean>{
 
 	private Long count;
 	private String oddType;
@@ -71,6 +74,12 @@ public class CountBean {
 	}
 	public void setTeamNameHome(String teamNameHome) {
 		this.teamNameHome = teamNameHome;
+	}
+
+	@Override
+	public int compareTo(CountBean o) {
+		// TODO Auto-generated method stub
+		return this.getCount().compareTo(o.getCount());
 	}
 
 
