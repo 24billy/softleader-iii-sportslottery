@@ -83,8 +83,8 @@ public class CountBean implements Comparable<CountBean>, Serializable {
 
 	@Override
 	public int compareTo(CountBean o) {
-		// TODO Auto-generated method stub
-		return this.getCount().compareTo(o.getCount());
+		
+		return this.getPercentage().compareTo(o.getPercentage());
 	}
 
 
