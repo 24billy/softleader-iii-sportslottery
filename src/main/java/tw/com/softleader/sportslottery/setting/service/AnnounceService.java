@@ -1,5 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +21,7 @@ public class AnnounceService extends GenericService<AnnounceEntity> {
 		return dao;
 	}
 	
+	public List<AnnounceEntity> getLatestFiveRecord() {
+		return dao.findLatestFiveRecord();
+	}
 }

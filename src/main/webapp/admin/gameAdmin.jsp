@@ -186,13 +186,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_A">讓分(客)(-1.5)</label>
+												<label for="ATS_A">讓分(客)(+1.5)</label>
 												<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_H">讓分(主)(+1.5)</label>
+												<label for="ATS_H">讓分(主)(-1.5)</label>
 												<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 											</div>
 										</div>
@@ -650,9 +650,9 @@
 					if (oddType.indexOf('EO_') != -1) {
 						oddType = oddType.replace('EO_', '');
 					} else if (oddType == 'ATS_A') {
-						oddCombination = -1.5;
+						oddCombination = +1.5;
 					} else if (oddType == 'ATS_H') {
-						oddCombination = 1.5;
+						oddCombination = -1.5;
 					} else if (oddType.indexOf('SC_') != -1) {
 						oddCombination = 7.5;
 					}

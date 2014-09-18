@@ -62,6 +62,13 @@ public class AnnounceAction extends ActionSupport {
 		return "select";
 	}
 	
+	public String selectLatestFiveRecord() {
+		log.debug("AnnounceAction selectLatestFiveRecord()");
+		json = new Gson().toJson(service.getLatestFiveRecord());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
+	
 	public String insert() {
 		log.debug("AnnounceAction insert()");
 		log.debug("model = {}", model);
