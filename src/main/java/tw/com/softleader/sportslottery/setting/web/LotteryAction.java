@@ -254,9 +254,9 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public String virtualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
         System.out.println("去吧，虛擬投注!!");
 	    //從session中取出userId
-        Map session = ActionContext.getContext().getSession();
-            UserEntity user = (UserEntity)session.get("user");
-        model.setUserId(user.getId());  
+        //Map session = ActionContext.getContext().getSession();
+        //    UserEntity user = (UserEntity)session.get("user");
+        //model.setUserId(user.getId());  
         model.setConfirmTime(new LocalDateTime());  
         
         //將form的資料提取

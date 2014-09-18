@@ -23,11 +23,11 @@
             <div class="row top20">
                 <div class="col-lg-12">
                     <div class="alert alert-info text-center" role="alert">
-                        <h3>${user.userAccount}：你已經完成虛擬投注。                            
+                        <h3>你已經完成虛擬投注。                            
                         </h3>
                         <button id="back">回到賽事表</button>
                     </div>
-                    <table id ="lotteryTable" class="table table-hover table-condensed table-bordered table-striped nowrap" >
+                    <table id ="lotteryTable" class="table table-hover table-condensed table-bordered table-striped nowrap text-left" >
                         <thead>
                             <tr>
                                 <th></th>
@@ -36,7 +36,7 @@
                                 <th>下注金額</th>
                                 <th>組合數</th>                             
                                 <th>組合</th>
-                                <th class="danger">獎金</th>
+                                <th class="danger"><span class="glyphicon glyphicon-usd">獎金</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -253,8 +253,8 @@
     
     var lottery = '${jsonLottery}' ? JSON.parse('${jsonLottery}') : [];
     var com='';
-    $('#lottery td:eq(1)').html('需你投注');
-    $('#lottery td:eq(2)').html(millisecondToDate(lottery.confirmTime.iLocalMillis));
+    $('#lottery td:eq(1)').html('<h4>需你投注</h4>');
+    $('#lottery td:eq(2)').html('<h4>'+millisecondToDate(lottery.confirmTime.iLocalMillis)+'</h4>');
     
     if(lottery.com0==1){
     	$('#lottery td:eq(5)').html('<p>'+'(過關)'+'</p>');
@@ -331,8 +331,8 @@
 
         
    }
-    $('#lottery td:eq(3)').html(lottery.capital+" X "+totalCombinations+" = "+(lottery.capital*totalCombinations));
-    $('#lottery td:eq(4)').html(totalCombinations);
+    $('#lottery td:eq(3)').html('<h4>'+lottery.capital+" X "+totalCombinations+" = "+(lottery.capital*totalCombinations)+'</h4>');
+    $('#lottery td:eq(4)').html('<h4>'+totalCombinations+'</h4>');
     $('#lottery td:eq(6)').html('<h1>'+Math.floor(totalPrize)+'</h1>');
    //計算排列組合數 
    function cngm(n,m){
