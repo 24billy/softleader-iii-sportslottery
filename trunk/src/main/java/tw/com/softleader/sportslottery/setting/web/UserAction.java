@@ -164,13 +164,14 @@ public class UserAction extends ActionSupport {
 					log.debug("iValidate...(新增會員驗證中...");
 					if(model.getUserAccount()==null ||
 							!model.getUserAccount().matches("^[a-zA-Z0-9]\\S{5,}$")) {
-						log.debug("帳號問題" + model.getUserAccount());
 						this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
+						log.debug("帳號問題" + model.getUserAccount());
 					}
 					if(userPassword==null ||
+							!userPassword.matches("^[a-zA-Z0-9]\\S{5,}$") ||
 							!userPassword.matches("^[a-zA-Z0-9]\\S{5,}$")) {
-						log.debug("密碼問題" + userPassword);
 						this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
+						log.debug("密碼問題" + userPassword);
 					}
 					if(confirm_password==null && !confirm_password.equals(userPassword)) {
 						this.addFieldError("confirm_password", this.getText("invalid.fieldvalue.confirm_password"));
@@ -179,14 +180,12 @@ public class UserAction extends ActionSupport {
 							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {
 						
 						if(this.checkEmail().equals("error")){
-							log.debug("信箱已存在");
 							addFieldError("mail","此信箱已註冊");
-						} else {
-							log.debug("信箱可用");
-						}
+							log.debug("信箱已存在");
+						} 
 					} else {
-						addFieldError("mail","此信箱已註冊");
 						log.debug("Email格式不符合");
+						addFieldError("mail","此信箱已註冊");
 					}
 					break;
 				case 2 : 
@@ -233,11 +232,12 @@ public class UserAction extends ActionSupport {
 					
 					if (card.isState()) {
 						user.setCoins(user.getCoins() + card.getPoint());
-						log.debug("coins"+card.getPoint());
+						//log.debug("coins"+card.getPoint());
 						message = card.getPoint().toString();
-						log.debug("儲值成功");
 						card.setUserId(user);
 						card.setState(false);
+						service.update(user);
+						log.debug("儲值成功");
 						card.setUseTime(LocalDateTime.now());
 						cardService.update(card);
 					} else {
