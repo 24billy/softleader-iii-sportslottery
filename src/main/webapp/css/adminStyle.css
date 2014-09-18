@@ -67,6 +67,16 @@ textarea {
 	border: 5px solid;
 }
 
+.panel-heading{
+    position: relative;
+}
+
+.panel-title .btn {
+	position: absolute;
+    right: 8px;
+    top: 4px;
+}
+
 @media(min-width:768px) {
 	body {
 		margin-top: 75px;

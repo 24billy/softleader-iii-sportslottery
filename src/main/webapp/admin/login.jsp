@@ -69,6 +69,7 @@
 <script src="<c:url value="/js/highcharts.js"/>"></script>
 <script src="<c:url value="/js/exporting.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
+<script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
 		$('#username').focus();
