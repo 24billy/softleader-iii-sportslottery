@@ -34,18 +34,33 @@
 								<option value="Basketball">足球</option>
 							</select>
 						</div>
-                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="起始時間" >
-                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="截止時間" >
+                        <div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+							<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
+								<span class="glyphicon glyphicon-backward"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
+								<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+								<span id="searchDefault"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
+								<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
+								<span class="glyphicon glyphicon-forward"></span>
+							</a>
+						</div>
                         <input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
                         <div id="isEndGroup" class="btn-group" data-toggle="buttons">
 							<label class="btn btn-default active" id="isEndLabelDefault">
 								<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
 							</label>
 							<label class="btn btn-success">
-								<input type="radio" name="isEnd" id="option2" value="true" >已完賽
+								<input type="radio" name="isEnd" id="option2" value="true" >已派彩
 							</label>
 							<label class="btn btn-warning">
-								<input type="radio" name="isEnd" id="option3" value="false">未完賽
+								<input type="radio" name="isEnd" id="option3" value="false">未派彩
 							</label>
 						</div>
 						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
@@ -98,31 +113,122 @@
 	</form>
 <script>
 	(function($) {
-		$('#timeBegin').datetimepicker({
-			format:'Y-m-d',
-			onShow:function( ct ){
-				this.setOptions({
-					maxDate:$('#timeEnd').val()?$('#timeEnd').val().replace(/-/g,'/'):false
-				});
-			},
-			onSelectDate:function(){
-				renewData();
-			},
-			timepicker: false //取消掉顯示時間
+		
+		//取得今天日期
+		var d = new Date();
+		var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
+
+		//響應頁面大小
+		function responseSize(){
+			if ($(window).width() < 1543){
+				$('#sortGroup').css('float', 'none');
+			} else {
+				$('#sortGroup').css('float', 'right');
+			}
+			if ($(window).width() < 895) {
+				if(!$('form .form-ele').hasClass('input-sm')){
+					$('form .form-ele').addClass('input-sm');
+				}
+				$('#searchPreview').text('');
+				d = new Date(Date.parse(searchDay));
+				$('#searchDefault').html('<span class="glyphicon glyphicon-repeat"></span>');
+				d = new Date(Date.parse(searchDay));
+				$('#searchNextview').text('');
+				d = new Date(Date.parse(searchDay));
+			} else {
+				if($('form .form-ele').hasClass('input-sm')){
+					$('form .form-ele').removeClass('input-sm');
+				}
+				$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+				$('#searchDefault').text($.format.date(d.getTime(), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+				$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+			}
+		}
+
+		$(window).resize(function() {
+			responseSize();
 		});
-		$('#timeEnd').datetimepicker({
-			format:'Y-m-d',
-			onShow:function( ct ){
-				this.setOptions({
-					minDate:$('#timeBegin').val()?$('#timeBegin').val().replace(/-/g,'/'):false
-				});
-			},
-			onSelectDate:function(){
-				renewData();
-			},
-			timepicker: false //取消掉顯示時間
-		});
+		
+		//依時間顯示按鈕訊息
+		function changeDate(){
+			responseSize();
+			
+			$('#back3').tooltip({
+				placement:'top',
+				title:'往前三天',
+				container: 'body'
+			});
+			$('#back1').tooltip({
+				placement:'top',
+				title:'往前一天',
+				container: 'body'
+			});
+			$('#searchScopeDefault').tooltip({
+				placement:'top',
+				title:'返回今天日期',
+				container: 'body'
+			});
+			$('#next1').tooltip({
+				placement:'top',
+				title:'往後一天',
+				container: 'body'
+			});
+			$('#next3').tooltip({
+				placement:'top',
+				title:'往後三天',
+				container: 'body'
+			});
+		}
+		changeDate();
+
 		$('.btn').button();
+		
+		//往前一日
+		$('#searchScopeGroup a:eq(1)').off('click');
+		$('#searchScopeGroup a:eq(1)').on('click', function(){
+			d = new Date(Date.parse(searchDay));
+			searchDay = $.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd');
+			changeDate();
+			renewData();
+		});
+
+		//往後一日
+		$('#searchScopeGroup a:eq(3)').off('click');
+		$('#searchScopeGroup a:eq(3)').on('click', function(){
+			d = new Date(Date.parse(searchDay));
+			searchDay = $.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd');
+			changeDate();
+			renewData();
+		});
+
+		//往前三日
+		$('#searchScopeGroup a:eq(0)').off('click');
+		$('#searchScopeGroup a:eq(0)').on('click', function(){
+			d = new Date(Date.parse(searchDay));
+			searchDay = $.format.date(d.setDate(d.getDate()-3), 'yyyy-MM-dd');
+			changeDate();
+			renewData();
+		});
+
+		//往後三日
+		$('#searchScopeGroup a:eq(4)').off('click');
+		$('#searchScopeGroup a:eq(4)').on('click', function(){
+			d = new Date(Date.parse(searchDay));
+			searchDay = $.format.date(d.setDate(d.getDate()+3), 'yyyy-MM-dd');
+			changeDate();
+			renewData();
+		});
+
+		//回到今日
+		$('#searchScopeDefault').off('click');
+		$('#searchScopeDefault').on('click', function(){
+			searchDay = $.format.date(new Date, 'yyyy-MM-dd');
+			changeDate();
+			renewData();
+		});
 		
 		$('#ballType').on('change', function(){renewData();});
 		$('#teamName').on('keyup', function(){renewData();});	
@@ -130,8 +236,6 @@
 			renewData();
 		});
 		$('#cleanQuery').on('click', function(){
-			$('#timeBegin').val('');
-			$('#timeEnd').val('');
 			$('#ballType').val('');
 			$('#teamName').val('');
 			$('#isEndGroup>label').removeClass('active');
@@ -145,7 +249,7 @@
 		function renewData(){
 			var isEnd;
 			if($('input:checked').val()!='none'){
-				isEnd = $('input:checked').val();
+				isEnd = $('#isEndGroup input:checked').val();
 			}
 			
 			$.ajax({
@@ -153,11 +257,11 @@
 				type:'post',
 				dataType:'json',
 				data:{
-					'complexTimeBegin':$('#timeBegin').val(),
-					'complexTimeEnd':$('#timeEnd').val(),
+					'complexTimeBegin':$('#searchPreview').text(),
+					'complexTimeEnd':$('#searchNextview').text(),
 					'complexBallType':$('#ballType').val(),
 					'complexTeamName':$('#teamName').val(),
-					'complexIsEnd':isEnd
+					'complexIsEnd':isEnd,
 				},
 				success:function(datas){
 					
@@ -230,10 +334,10 @@
 
 				        		}},//end dataL function(row, type, val, meta)
 				        		{"data": function(row, type, val, meta){
-				        			if(row.isEnd){
-				        				return '<td><button type="button" class="btn btn-success btn-xs disabled">已完賽</button></td>';
+				        			if(row.gameStatus == 3){
+				        				return '<td><button type="button" class="btn btn-success btn-xs disabled">已派彩</button></td>';
 				        			} else {
-				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未完賽</button></td>'	
+				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未派彩</button></td>'	
 				        			}
 				        		}}//"data": function(row, type, val, meta)
 				        ],
@@ -277,8 +381,6 @@
 					}
 					
 					function sendDataToGraph2(){
-		
-						
 						$('#gameList').on('click', '.teamAwayDetail', function() {
 							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
 							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
@@ -296,48 +398,9 @@
 						});
 						
 					}
-					
-// 					sendDataToGraph();
-	
-// 					//點選隊伍，將對伍名稱和比賽號碼送出
-// 					function sendDataToGraph(){
-// 						$('#gameList tr').each(function() {//tr迴圈
-// 							$(this).find('td:eq(3)').on('click', function() {//尋找第四個TD
-							
-							
-// 								var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-// 								var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-// 								$('#linkGameNum').val(linkGameNum);
-// 								$('#linkTeamSearch').val(linkTeamSearch);
-// 								$('#countForm').submit();
-
-// 							});
-// 						});//end $('#gameList tr').each(function()
-								
-// 						$('#gameList tr').each(function() {//tr迴圈
-// 							$(this).find('td:eq(4)').on('click', function() {//尋找第四個TD
-							
-							
-// 								var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-// 								var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamAway
-// 								$('#linkGameNum').val(linkGameNum);
-// 								$('#linkTeamSearch').val(linkTeamSearch);
-// 								$('#countForm').submit();
-// 							});
-// 						});//end $('#gameList tr').each(function()
-// 					}//end sendDataToGraph()
-					
-
-/* 					$('#gameList tr>td:eq(4)').on('click', function(){
-						var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
-						var linkTeamAway = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
-						var linkTeamSearch = $('td:eq(4)' ,$(this).parent()).text(); //teamHome
-						console.log('linkGameNum'+linkGameNum);
-						console.log('linkTeamAway'+linkTeamAway);
-						console.log('linkTeamSearch'+linkTeamSearch);
-					}); */
 				}
 			});
+			
 			$(window).unbind('formatDataRow');
 			function formatDataRow (dataRow) {
 				var sortedOdds = sortGameOdds(dataRow.odds);

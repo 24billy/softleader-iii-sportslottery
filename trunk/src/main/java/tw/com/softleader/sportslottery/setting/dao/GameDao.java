@@ -159,16 +159,17 @@ public class GameDao extends GenericDao<GameEntity>{
 		return (GameEntity) query.setLong("gameNum", gameNum).uniqueResult();
 	}
 	
-	public List<GameEntity> findComplex(Long gameNum, String teamName, Long gameStatus, LocalDate timeBegin, LocalDate timeEnd, String ballType, String leagueName) {
+	public List<GameEntity> findComplex(Long gameNum, String teamName, Long gameStatusMin, Long gameStatusMax, LocalDate timeBegin, LocalDate timeEnd, String ballType, String leagueName) {
 		
 		String sql = "from GameEntity games where 1=1";
 		String sql1 = " and games.gameNum = :gameNum";
-		String sql2 = " and games.gameStatus = :gameStatus";
-		String sql3 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
-		String sql4 = " and games.gameTime >= :timeBegin";
-		String sql5 = " and games.gameTime < :timeEnd";
-		String sql6 = " and games.ballType like :ballType";
-		String sql7 = " and (games.teamAway.leagueName like :leagueName or games.teamHome.leagueName like :leagueName)";
+		String sql2 = " and games.gameStatus >= :gameStatusMin";
+		String sql3 = " and games.gameStatus <= :gameStatusMax";
+		String sql4 = " and (games.teamAway.teamName like :teamName or games.teamHome.teamName like :teamName)";
+		String sql5 = " and games.gameTime >= :timeBegin";
+		String sql6 = " and games.gameTime < :timeEnd";
+		String sql7 = " and games.ballType like :ballType";
+		String sql8 = " and (games.teamAway.leagueName like :leagueName or games.teamHome.leagueName like :leagueName)";
 		String sql99 = " order by games.gameTime";
 		
 		boolean hasGameNum = false;
@@ -176,34 +177,39 @@ public class GameDao extends GenericDao<GameEntity>{
 			sql += sql1;
 			hasGameNum = true;
 		}
-		boolean hasGameStatus = false;
-		if (gameStatus != null) {
+		boolean hasGameStatusMin = false;
+		if (gameStatusMin != null) {
 			sql += sql2;
-			hasGameStatus = true;
+			hasGameStatusMin = true;
+		}
+		boolean hasGameStatusMax = false;
+		if (gameStatusMax != null) {
+			sql += sql3;
+			hasGameStatusMax = true;
 		}
 		boolean hasTeamName = false;
 		if (teamName != null) {
-			sql += sql3;
+			sql += sql4;
 			hasTeamName = true;
 		}
 		boolean hasTimeBegin = false;
 		if (timeBegin != null) {
-			sql += sql4;
+			sql += sql5;
 			hasTimeBegin = true;
 		}
 		boolean hasTimeEnd = false;
 		if (timeEnd != null) {
-			sql += sql5;
+			sql += sql6;
 			hasTimeEnd = true;
 		}
 		boolean hasBallType = false;
 		if (ballType != null) {
-			sql += sql6;
+			sql += sql7;
 			hasBallType = true;
 		}
 		boolean hasLeagueName = false;
 		if (leagueName != null) {
-			sql += sql7;
+			sql += sql8;
 			hasLeagueName = true;
 		}
 		sql += sql99;
@@ -218,8 +224,11 @@ public class GameDao extends GenericDao<GameEntity>{
 		if (hasTeamName) {
 			query.setString("teamName", "%" + teamName + "%");
 		}
-		if (hasGameStatus) {
-			query.setLong("gameStatus", gameStatus);
+		if (hasGameStatusMin) {
+			query.setLong("gameStatusMin", gameStatusMin);
+		}
+		if (hasGameStatusMax) {
+			query.setLong("gameStatusMax", gameStatusMax);
 		}
 		if (hasTimeBegin) {
 			query.setDate("timeBegin", timeBegin.toDate());
