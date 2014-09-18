@@ -12,16 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDate;
@@ -165,22 +159,25 @@ public class UserAction extends ActionSupport {
 	//更新或新增帳號驗證
 	public void iValidate(int select) {
 		if(model!=null) {
-			if(model.getUserAccount()!=null && model.getUserAccount().length()>3) {
-			} else {
-				log.debug("帳號問題" + model.getUserAccount());
-				this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
-			}
-			if(userPassword!=null && userPassword.length()>5) {
-			} else {
-				log.debug("密碼問題" + userPassword);
-				this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
-			}
-			
 			switch(select) {
 				case 1 : 
-					log.debug("iValidate...(驗證1中");
+					log.debug("iValidate...(新增會員驗證中...");
+					if(model.getUserAccount()==null ||
+							!model.getUserAccount().matches("^[a-zA-Z0-9]\\S{5,}$")) {
+						log.debug("帳號問題" + model.getUserAccount());
+						this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
+					}
+					if(userPassword==null ||
+							!userPassword.matches("^[a-zA-Z0-9]\\S{5,}$")) {
+						log.debug("密碼問題" + userPassword);
+						this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
+					}
+					if(confirm_password==null && !confirm_password.equals(userPassword)) {
+						this.addFieldError("confirm_password", this.getText("invalid.fieldvalue.confirm_password"));
+					}
 					if(model.getUserEmail()!=null && 
 							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {
+						
 						if(this.checkEmail().equals("error")){
 							log.debug("信箱已存在");
 							addFieldError("mail","此信箱已註冊");
@@ -405,14 +402,12 @@ public class UserAction extends ActionSupport {
 	
 	//帳號重複驗證
 	public String check() throws Exception {
-		log.debug("check...");
 		log.debug("檢查帳號是否存在" + model.getUserAccount());
 		
 		String result = ERROR;
 		if (model!=null && model.getUserAccount().length()>0) {
 			UserEntity check = service.getByUserAccount(model.getUserAccount());
 			if (check == null) {
-				log.debug("不存在");
 				result = SUCCESS;
 			} else {
 				log.debug("存在");
@@ -425,6 +420,7 @@ public class UserAction extends ActionSupport {
 		return result;
 	}
 	
+
 	//登入
 	public String login() throws Exception {
 		log.debug("login...");
@@ -441,8 +437,8 @@ public class UserAction extends ActionSupport {
 		service.update(entity3);
 		
 		//正式程式碼
-		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
+		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
 		if(entity!=null) {
 			log.debug("可登入");
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
@@ -457,6 +453,8 @@ public class UserAction extends ActionSupport {
 		}
 	}
 	
+	
+
 	//依照帳號找會員
 	public String searchByAccount() throws Exception {
 		log.debug("searchByAccount...");

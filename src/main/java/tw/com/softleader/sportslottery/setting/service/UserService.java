@@ -118,8 +118,6 @@ public class UserService extends GenericService<UserEntity> {
 			}
 			bs.append((char) word);
 		}
-		
-		log.debug("成功取得新密碼(UserService)" + bs.toString());
 		return  bs.toString().getBytes();
 	}
 	
