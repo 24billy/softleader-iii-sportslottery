@@ -19,7 +19,7 @@ public class CountBeanTest extends BaseTest {
 //		bean2.setPercentage(new BigDecimal(0.2));
 		bean1.setPercentage(new BigDecimal(0.2));
 		bean2.setPercentage(new BigDecimal(1.2));
-		log.debug("compareTo = {}",bean1.compareTo(bean2) );
+
 		
 		
 	}
