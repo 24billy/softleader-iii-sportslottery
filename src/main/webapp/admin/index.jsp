@@ -42,6 +42,32 @@
 						
 						<div class="row">
 							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="panel panel-default">
+											<div class="panel-heading">最新賽事</div>
+												<div class="row">
+													<div class="col-sm-12">
+														<table class="table">
+															<thead>
+																<tr>
+																	<th>賽事編號</th>
+																	<th>主隊</th>
+																	<th>客隊</th>
+																</tr>
+															</thead>
+															<tbody id="gameList">
+															</tbody>
+														</table>
+													</div>
+												</div>
+											<div class="panel-body">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- .row -->
@@ -69,6 +95,21 @@
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
+		
+		/* Begin of gameTable */
+		$.post('<c:url value="/admin/gameAdmin?method:selectLatestFiveRecord"/>', function(data) {
+			$.each(data, function(index, game) {
+				var child = '';
+				child += '<tr>';
+				child += '<td>' + game.gameNum + '</td>';
+				child += '<td>' + game.teamAway.teamName + '</td>';
+				child += '<td>' + game.teamHome.teamName + '</td>';
+				child += '</tr>';
+				alert(child);
+				$('#gameList').append(child);
+			});
+		}, 'json');
+		/* End of gameTable */
 		
 		$('nav a[href$="admin"]').parent().addClass('active');
 	})(jQuery);
