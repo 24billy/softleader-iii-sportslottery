@@ -2,9 +2,14 @@ package tw.com.softleader.sportslottery.setting.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +102,7 @@ public class GameService extends GenericService<GameEntity> {
 		bean.setCount(this.getCount(gameId, oddType));
 		bean.setGameId(gameId);
 		bean.setOddType(oddType);
-		bean.setPass(this.getIsPass(gameId, oddType));
+		bean.setIsPass(this.getIsPass(gameId, oddType));
 		bean.setPercentage(this.getIsPassPercentage(gameId,oddType));
 		bean.setGameTime(game.getGameTime());
 		bean.setTeamNameAway(game.getTeamAway().getTeamName());
@@ -113,20 +118,20 @@ public class GameService extends GenericService<GameEntity> {
 	}
 	
 	//透過gameId和投注類型取得是否過關的資訊
-	public boolean getIsPass(Long gameId, String oddType){
+	public Boolean getIsPass(Long gameId, String oddType){
 		List<OddsEntity> oddsList= oddDao.findByGameId(gameId);//用GAMEID取得投注集合
-		boolean isPass = oddCountService.getOddsEntityByType(oddType, oddsList).getIsPass();//根據投注集合和投注類型，取得該OddsEntity，接著再取得投注數。
+		Boolean isPass = oddCountService.getOddsEntityByType(oddType, oddsList).getIsPass();//根據投注集合和投注類型，取得該OddsEntity，接著再取得投注數。
 		return isPass;
 	}
 	
 	//透過gameId和投注類型取得購買的過關比數
 	public BigDecimal getIsPassPercentage(Long gameId,String oddType){
 		BigDecimal percent=new BigDecimal(0);
-		boolean isPass = this.getIsPass(gameId, oddType);//根據gameId和oddtype取得此投注是否過關的資訊
+		Boolean isPass = this.getIsPass(gameId, oddType);//根據gameId和oddtype取得此投注是否過關的資訊
 		Long count = this.getCount(gameId, oddType);//取得此投注的購賣數
 		Long totalCountOftheGamae=this.getTotalCount(gameId);//取得此場比賽投注的總購買數
 		
-		if(isPass){//如果此種投注有過關，算出購買的過關比數，投注數除以總購買數，如果沒有過關則購買過關的比數是零
+		if(isPass!=null && isPass){//如果此種投注有過關，算出購買的過關比數，投注數除以總購買數，如果沒有過關則購買過關的比數是零
 			percent=oddCountService.getCountPercentage(count, totalCountOftheGamae);
 		}
 		
@@ -136,6 +141,7 @@ public class GameService extends GenericService<GameEntity> {
 	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
 	//一個MAP 是一場比賽的資訊
 	public Map<String, CountBean> getCountInfoByGameId(Long gameId){
+		System.out.println("inside getCountInfoByGameID......................");
 		Map<String, CountBean> map= new HashMap<String, CountBean>();
 		//用投注類型取得Bean
 		String oddType="SU_H";
@@ -169,7 +175,7 @@ public class GameService extends GenericService<GameEntity> {
 		oddType="EVEN";
 		bean = this.getCountBean(gameId, oddType);
 		map.put(oddType, bean);
-		
+		System.out.println("#@$@$@#R#RRR" + map);
 		return map;
 	}
 	
@@ -178,12 +184,17 @@ public class GameService extends GenericService<GameEntity> {
 	//這個LIST是之前所有比賽的投注資訊
 	public List<Map<String, CountBean>> getCountInfoHistory (String teamName, Long gameId){
 		try {
+			
+//			System.out.println("inside getCountInforHistory"+gameId);
 			List<GameEntity> games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
-//			List<GameEntity> games = dao.findForHistory(null, null, teamName);//取出跟隊伍有關的所有資訊
+
 			//結束時間則以輸入gameId來尋找
-			System.out.println(games.toString());
-			List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
+//			System.out.println(games.toString());
+			List<Map<String, CountBean>> listMap= new LinkedList<Map<String, CountBean>>();
 			for(GameEntity game : games){
+				System.out.println("inside for GameEntity..................");
+				System.out.println(game.toString());
+				System.out.println("I am here!!!!!!!!!!!!!!!"+this.getCountInfoByGameId(game.getId()));
 				listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
 			}
 			return listMap;
@@ -215,7 +226,7 @@ public class GameService extends GenericService<GameEntity> {
 	}
 	
 	//測試getCountInfoHistor，前端用的預設值
-	public List<Map<String, CountBean>> trialGetCountInfoHistor(){
+	public List<Map<String, CountBean>> trialGetCountInfoHistory(){
 		Long gameId=100L;
 		String teamName= "辛辛那堤紅人";
 		List<Map<String, CountBean>> listMap = this.getCountInfoHistory(teamName, gameId);
@@ -230,7 +241,33 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getFinishedGameToday() {
 		return dao.findFinishedGameToday();
 	}
-	
+
+	//取得單筆最高過關數目比
+	//回傳CountBean
+	public Map<String, CountBean> getMaxCountPercentByGameNumMap(Map<String, CountBean> unsortMap){
+		List<Entry<String, CountBean>> list = new LinkedList<Entry<String, CountBean>>(unsortMap.entrySet());
+
+        // Sorting the list based on values
+        Collections.sort(list, new Comparator<Entry<String, CountBean>>()
+        {
+            public int compare(Entry<String, CountBean> o1,
+                    Entry<String, CountBean> o2)
+            {
+                return o1.getValue().compareTo(o2.getValue());
+                
+            }
+        });
+
+        // Maintaining insertion order with the help of LinkedList
+        Map<String, CountBean> sortedMap = new LinkedHashMap<String, CountBean>();
+        for (Entry<String, CountBean> entry : list)
+        {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedMap;
+	}
+
 	public List<GameEntity> getLatestFiveRecord() {
 		return dao.findLatestFiveRecord();
 	}
