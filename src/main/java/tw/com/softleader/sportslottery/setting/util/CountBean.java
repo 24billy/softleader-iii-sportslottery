@@ -27,7 +27,7 @@ public class CountBean implements Comparable<CountBean>, Serializable {
 	}
 	private BigDecimal percentage;
 	private Long gameId;
-	boolean isPass;
+	Boolean isPass;
 	private LocalDateTime gameTime;
 	private String teamNameAway;
 	private String teamNameHome;
@@ -56,10 +56,10 @@ public class CountBean implements Comparable<CountBean>, Serializable {
 	public void setGameId(Long gameId) {
 		this.gameId = gameId;
 	}
-	public boolean isPass() {
+	public Boolean getIsPass() {
 		return isPass;
 	}
-	public void setPass(boolean isPass) {
+	public void setIsPass(Boolean isPass) {
 		this.isPass = isPass;
 	}
 	public LocalDateTime getGameTime() {
