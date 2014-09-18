@@ -346,6 +346,8 @@
 //先行隱藏警告
 $('.alert').hide();
 
+var todayMil = new Date().valueOf() - new Date().getTimezoneOffset()*60000;
+
 //生成動態磚
 function gameRefresh(games, odds){
 	//初始化gameList
@@ -416,7 +418,8 @@ function gameRefresh(games, odds){
 				thisGame.addClass('resulted');
 				$('#gameMark', thisGame).addClass('glyphicon-usd');
 				$('#gameMark', thisGame).text('已派彩');
-			} else if(game.gameStatus != 1) {
+			} else if(game.gameStatus != 1 || todayMil > game.iMillis) {
+				thisGame.attr('gameStatus', '2');
 				thisGame.addClass('warning');
 				$('#gameMark', thisGame).addClass('glyphicon-exclamation-sign');
 				$('#gameMark', thisGame).text('已開賽');

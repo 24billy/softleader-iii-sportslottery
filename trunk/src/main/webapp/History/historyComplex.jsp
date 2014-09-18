@@ -123,8 +123,8 @@
 		//響應頁面大小
 		function responseSize(){
 			d = new Date(Date.parse(searchDay));
-			searchDayPre = $.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd');
-			searchDayNex = $.format.date(d.setDate(d.getDate()+3), 'yyyy-MM-dd');
+			searchDayPre = $.format.date(d.setDate(d.getDate()), 'yyyy-MM-dd');
+			searchDayNex = $.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd');
 			d = new Date(Date.parse(searchDay));
 			
 			if ($(window).width() < 1543){
