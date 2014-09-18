@@ -184,8 +184,7 @@
 	</action>
 	<!-- 使用者點數修改 -->
 	<action name="coinsUpdate" class="userAction" method="coinsUpdate">
-		<result name="success">/Security/Result/success.jsp</result>
-		<result name="error" type="stream">
+		<result name="message" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>

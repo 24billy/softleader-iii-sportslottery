@@ -50,6 +50,7 @@
 <link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/datepicker.css"/>"> 
+<link rel="stylesheet" href="<c:url value="/css/coins.css"/>">
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);

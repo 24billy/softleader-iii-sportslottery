@@ -247,7 +247,7 @@
 						<div class="modal-content">
 							<div class="modal-body">
 								<img src="images/success.png">
-       							<h4>加值成功  3秒後自動跳轉</h4>
+       							<h4>加值<span id="addCoins"></span>虛幣成功  3秒後回首頁</h4>
       						</div>
 						</div>
 					</div>
@@ -282,8 +282,7 @@
 	});
 
 	$('ul.setup-panel li.active a').trigger('click');
-	
-	// DEMO ONLY //
+
 	$('.btn2').on('click', function(e) {
     	$('ul.setup-panel li:eq(1)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-2"]').trigger('click');
@@ -357,9 +356,7 @@
 		$('.p').hide();
         $('#fourWay-main div.' + $(this).attr('rel')).show();
 	});
-	
-	
-	
+
 	$('.addMoney').click(function() {
 		$.ajax({
 			url:"<c:url value='/coinsUpdate'/>",
@@ -369,17 +366,18 @@
 				'cardPassword':$('#cardPassword').val(),
 			},
 			success:function(data) {
-				console.log($('#cardAccount').val() + ":" + $('#cardPassword').val());
 				console.log(data);
-				if(data == 'success') {
+				if(data.indexOf('error') == -1) {
+					var user = $.parseJSON(data);
 					$('#dialog-coins').modal({
 						backdrop: 'static',
 						keyboard: false
 					});
-					
+					$('#addCoins').text(data);
 					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
 					
 				} else {
+					data = data.replace('error ', '');
 					if($('#cardAccount').val()=='' || $('#cardAccount').val()=='') {
 						$('.coins-error').empty();
 					} else {	
@@ -407,11 +405,7 @@
 			$(element).closest('.control-group').removeClass('success').addClass('error');
 		}
 	});
-	
-	function myrefresh(){
-		window.location.reload();
-	}
-	
+
 })(jQuery);
 </script>
 </body>
