@@ -3,9 +3,10 @@ package tw.com.softleader.sportslottery.setting.dao;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
@@ -268,7 +269,7 @@ public class GameDao extends GenericDao<GameEntity>{
 
 	public Long maxGameNum() {
 		return (Long) getSession().createCriteria(GameEntity.class)
-			.setProjection(Projections.max("gameNum")).uniqueResult();
+					.setProjection(Projections.max("gameNum")).uniqueResult();
 	}
 	
 	public List<GameEntity> findFinishedGameToday() {
@@ -276,9 +277,16 @@ public class GameDao extends GenericDao<GameEntity>{
 		Criterion isEnd = Restrictions.eq("isEnd", true);
 		Criterion gameStatus = Restrictions.eq("gameStatus", 2L);
 		return getSession().createCriteria(GameEntity.class)
-							.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-							.add(Restrictions.between("gameTime", today, today.plusDays(1)))
-							.add(Restrictions.or(isEnd, gameStatus))
-							.list();
+					.setFetchMode("odds", FetchMode.SELECT)
+					.add(Restrictions.between("gameTime", today, today.plusDays(1)))
+					.add(Restrictions.or(isEnd, gameStatus))
+					.list();
+	}
+	
+	public List<GameEntity> findLatestFiveRecord() {
+		return getSession().createCriteria(GameEntity.class)
+					.setFetchMode("odds", FetchMode.SELECT)
+					.addOrder(Order.desc("id"))
+					.setMaxResults(5).list();
 	}
 }

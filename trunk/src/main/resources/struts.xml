@@ -21,7 +21,7 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>select,insert,delete,update,payout,open,payoutToday</allowed-methods>
+		<allowed-methods>select,insert,delete,update,payout,open,payoutToday,selectLatestFiveRecord</allowed-methods>
   	</action>
   	
   	<action name="teamAdmin" class="teamAction" method="admin">

@@ -204,6 +204,13 @@ public class GameAction extends ActionSupport {
 		return "select";
 	}
 	
+	public String selectLatestFiveRecord() {
+		log.debug("GameAction selectLatestFiveRecord()");
+		json = new Gson().toJson(service.getLatestFiveRecord());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
+	
 	public String selectNearDays() {
 		log.debug("selectNearDays...");
 		json = new Gson().toJson(service.getComplex(null, null, null, new LocalDate().minusDays(1), new LocalDate().plusDays(3), complexBallType, null));

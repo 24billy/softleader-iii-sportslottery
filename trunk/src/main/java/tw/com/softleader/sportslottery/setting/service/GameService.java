@@ -230,4 +230,8 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getFinishedGameToday() {
 		return dao.findFinishedGameToday();
 	}
+	
+	public List<GameEntity> getLatestFiveRecord() {
+		return dao.findLatestFiveRecord();
+	}
 }

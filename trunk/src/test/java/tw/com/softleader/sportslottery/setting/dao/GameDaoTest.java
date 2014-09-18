@@ -149,18 +149,23 @@ public class GameDaoTest extends BaseTest{
 		
 		
 	}
-	
+	/*
 	@Test
-	public void TestFindFinishedGameToday() {
+	public void testFindFinishedGameToday() {
 		
 	    List<GameEntity> games = dao.findFinishedGameToday();
 		for (GameEntity game : games) {
 			System.out.println("game:"+game);
 		}
 	}
-
+	*/
 	
-
-	
+	@Test
+	public void testFindLatestFiveRecord() {
+		List<GameEntity> games = dao.findLatestFiveRecord();
+		for (GameEntity game : games) {
+			System.out.println("game:"+game);
+		}
+	}
 	
 }
