@@ -63,8 +63,8 @@ textarea {
 	border: 5px solid;
 }
 
-.thumbnail {
-  	border: none;
+.panel {
+	border: 5px solid;
 }
 
 @media(min-width:768px) {
