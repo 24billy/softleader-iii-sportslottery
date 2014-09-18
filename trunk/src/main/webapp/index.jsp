@@ -261,11 +261,37 @@
                             </div>
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
-                                    type="submit">投注</button>
-                                <button type="submit" class="btn btn-warning btn-xs" name="method:virtualLottery" >虛擬投注</button>
+                                    type="submit">投注</button>                                
+                            </div>
+                        </form> <!-- lottery form真實投注 End-->
+                        <form class="form"
+                            action="<c:url value="/virtualLottery"/>" method="post">
+                            <div class="lotteryOdds" hidden="true">
+                                <input type="text" class="capitalValue"
+                                    name="model.capital" value="">
+                                <input type="text" class="oddId1"
+                                    name="oddsIdList.oddId1" value="">
+                                <input type="text" class="oddId2"
+                                    name="oddsIdList.oddId2" value="">
+                                <input type="text" class="oddId3"
+                                    name="oddsIdList.oddId3" value="">
+                                <input type="text" class="oddId4"
+                                    name="oddsIdList.oddId4" value="">
+                                <input type="text" class="oddId5"
+                                    name="oddsIdList.oddId5" value="">
+                                <input type="text" class="oddId6"
+                                    name="oddsIdList.oddId6" value="">
+                                <input type="text" class="oddId7"
+                                    name="oddsIdList.oddId7" value="">
+                                <input type="text" class="oddId8"
+                                    name="oddsIdList.oddId8" value="">
+                                <input type="text" name="model.com1"
+                                    value="1">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-warning btn-xs" >虛擬投注</button>
                             </div>
                         </form>
-   
                     </div>
                     <!-- End of Single Bet Panel -->
 
@@ -326,7 +352,37 @@
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
                                     type="submit">投注</button>
-                                <button type="submit" class="btn btn-warning btn-xs" name="method:virtualLottery" >虛擬投注</button>
+                                
+                            </div>
+                        </form>
+                        <form class="form"
+                            action="<c:url value="/virtualLottery"/>" method="post">
+                            <div class="lotteryOdds" hidden="true">
+                                <input type="text" class="capitalValue"
+                                    name="model.capital" value="">
+                                <input type="text" class="oddId1"
+                                    name="oddsIdList.oddId1" value="">
+                                <input type="text" class="oddId2"
+                                    name="oddsIdList.oddId2" value="">
+                                <input type="text" class="oddId3"
+                                    name="oddsIdList.oddId3" value="">
+                                <input type="text" class="oddId4"
+                                    name="oddsIdList.oddId4" value="">
+                                <input type="text" class="oddId5"
+                                    name="oddsIdList.oddId5" value="">
+                                <input type="text" class="oddId6"
+                                    name="oddsIdList.oddId6" value="">
+                                <input type="text" class="oddId7"
+                                    name="oddsIdList.oddId7" value="">
+                                <input type="text" class="oddId8"
+                                    name="oddsIdList.oddId8" value="">
+                                <input type="text" name="model.com1"
+                                    value="1">
+                                <input type="text" name="model.com0"
+                                    value="1">                                    
+                            </div>                        
+                            <div>
+                                <button type="submit" class="btn btn-warning btn-xs">虛擬投注</button>    
                             </div>
                         </form>
                     </div>
@@ -335,7 +391,7 @@
                 <div class="tab-pane" id="passCom">
                     <!-- Begin of Combination Bet Panel -->
                     <div class=" ">
-                        <form class="form"
+                        <form id="passComForm" class="form"
                             action="<c:url value="/lottery"/>">
 
                             <table class="table table-striped  table-hover" id="comTable">
@@ -468,11 +524,16 @@
                                     name="oddsIdList.oddId8" value="">
                             </div>
                             <div>
-                                <button class="lottery btn btn-danger btn-xs"
-                                    type="submit">投注</button>
-                                <button type="submit" class="btn btn-warning btn-xs" name="method:virtualLottery" >虛擬投注</button>
+                                <button class="lottery btn btn-danger btn-xs" type="submit">投注</button>                                
                             </div>
+                           
+                            
                         </form>
+                            <div>
+                                <button  class="btn btn-warning btn-xs virtualButton" >虛擬投注</button>
+                            </div> 
+
+                        
                     </div>
                     <!-- End of Combination Bet Panel -->
                 </div>
@@ -590,7 +651,7 @@ function odds_refresh(){
 	    var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
 	    $.each(checkedlabel, function(index, checkedItem){
 	        
-	        $('input',checkedItem).val(1);
+	        $('input',checkedItem).val(1);	        
 	        bet+=parseInt($('td:eq(1)', checkedItem).text());
 	        topPrize+=parseInt($('td:eq(2)', checkedItem).text());
 	    });
@@ -702,7 +763,85 @@ function odds_refresh(){
 	    sessionStorage.userGameInfo = [];
 	    gameRefresh(galbalGames, galbalOdds);
 	    odds_refresh();
+	    
+   
+	    
+	    
 	});
+    //過關組合虛擬投注按鈕
+    $('.virtualButton').off('click');
+    $('.virtualButton').on('click',function(){
+        var com1=$('#passComForm input:eq(0)').val();
+        var com2=$('#passComForm input:eq(1)').val();
+        var com3=$('#passComForm input:eq(2)').val();
+        var com4=$('#passComForm input:eq(3)').val();
+        var com5=$('#passComForm input:eq(4)').val();
+        var com6=$('#passComForm input:eq(5)').val();
+        var com7=$('#passComForm input:eq(6)').val();
+        var com8=$('#passComForm input:eq(7)').val();
+        
+        var formCapital=$('#passComForm input:eq(9)').val();
+        
+        var odd1=$('#passComForm input:eq(10)').val();
+        var odd2=$('#passComForm input:eq(11)').val();
+        var odd3=$('#passComForm input:eq(12)').val();
+        var odd4=$('#passComForm input:eq(13)').val();
+        var odd5=$('#passComForm input:eq(14)').val();
+        var odd6=$('#passComForm input:eq(15)').val();
+        var odd7=$('#passComForm input:eq(16)').val();
+        var odd8=$('#passComForm input:eq(17)').val();
+       
+        var queryString = {
+             'model.com1':com1,
+             'model.com2':com2,
+             'model.com3':com3,
+             'model.com4':com4,
+             'model.com5':com5,
+             'model.com6':com6,
+             'model.com7':com7,
+             'model.com8':com8,
+             'model.capital':formCapital,
+             'oddsIdList.oddId1':odd1,
+             'oddsIdList.oddId2':odd2,
+             'oddsIdList.oddId3':odd3,
+             'oddsIdList.oddId4':odd4,
+             'oddsIdList.oddId5':odd5,
+             'oddsIdList.oddId6':odd6,
+             'oddsIdList.oddId7':odd7,
+             'oddsIdList.oddId8':odd8
+        };
+        $(location).attr("href",'<c:url value="/virtualLottery?"/>'+$.param(queryString));
+//         	{
+//         	url:'<c:url value="/virtualLottery"/>',
+//         	data:{
+//                 'model.com1':com1,
+//                 'model.com2':com2,
+//                 'model.com3':com3,
+//                 'model.com4':com4,
+//                 'model.com5':com5,
+//                 'model.com6':com6,
+//                 'model.com7':com7,
+//                 'model.com8':com8,
+//                 'model.capital':formCapital,
+//                 'oddsIdList.oddId1':odd1,
+//                 'oddsIdList.oddId2':odd2,
+//                 'oddsIdList.oddId3':odd3,
+//                 'oddsIdList.oddId4':odd4,
+//                 'oddsIdList.oddId5':odd5,
+//                 'oddsIdList.oddId6':odd6,
+//                 'oddsIdList.oddId7':odd7,
+//                 'oddsIdList.oddId8':odd8
+//         	}
+//        }
+
+        
+//         $.post(
+//         	    '<c:url value="/virtualLottery"/>',
+//         	    {
+
+//         	    }
+//         );
+    });  
 
 }
 

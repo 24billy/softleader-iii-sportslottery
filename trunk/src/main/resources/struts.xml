@@ -221,16 +221,15 @@
          <result name="success">/Security/Email/success.jsp</result>
          <result name="error">/Security/Email/index.jsp</result>
      </action>
-
+    <!-- lottery真實投注 -->
 	<action name="lottery" class="lotteryAction" method="lottery">
-		<result name="success">/Event/lottery.jsp</result>
         <result name="successtoo" >/Event/virtualLottery.jsp</result>
-<!--         <result name="successthree" type="stream">/Event/virtualLottery.jsp -->
-<!--             <param name="contentType">appliction/json</param> -->
-<!--             <param name="odds">inputStream</param> -->
-<!--         </result> -->
-        <allowed-methods>virtualLottery</allowed-methods>
 	</action>
+    <!-- lottery虛擬投注 -->
+    <action name="virtualLottery" class="lotteryAction" method="virtualLottery">
+        <result name="successtoo" >/Event/virtualLottery.jsp</result>
+    </action>
+
 
 	<!--
 	<action name="odds" class="oddsAction" method="execute">
