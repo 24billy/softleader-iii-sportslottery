@@ -136,7 +136,7 @@ public class GameService extends GenericService<GameEntity> {
 	//輸入GAMEID 取得圖表的柱子集合，可根據投注類型取得集合中投注數目資訊
 	//一個MAP 是一場比賽的資訊
 	public Map<String, CountBean> getCountInfoByGameId(Long gameId){
-		System.out.println("inside getCountInfoByGameID......................");
+//		System.out.println("inside getCountInfoByGameID......................");
 		Map<String, CountBean> map= new HashMap<String, CountBean>();
 		//用投注類型取得Bean
 		String oddType="SU_H";
@@ -170,7 +170,7 @@ public class GameService extends GenericService<GameEntity> {
 		oddType="EVEN";
 		bean = this.getCountBean(gameId, oddType);
 		map.put(oddType, bean);
-		System.out.println("#@$@$@#R#RRR" + map);
+//		System.out.println("#@$@$@#R#RRR" + map);
 		return map;
 	}
 	
@@ -187,9 +187,9 @@ public class GameService extends GenericService<GameEntity> {
 //			System.out.println(games.toString());
 			List<Map<String, CountBean>> listMap= new LinkedList<Map<String, CountBean>>();
 			for(GameEntity game : games){
-				System.out.println("inside for GameEntity..................");
-				System.out.println(game.toString());
-				System.out.println("I am here!!!!!!!!!!!!!!!"+this.getCountInfoByGameId(game.getId()));
+//				System.out.println("inside for GameEntity..................");
+//				System.out.println(game.toString());
+//				System.out.println("I am here!!!!!!!!!!!!!!!"+this.getCountInfoByGameId(game.getId()));
 				listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
 			}
 			return listMap;
@@ -237,10 +237,41 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.findFinishedGameToday();
 	}
 
-	//取得單筆最高過關數目比
-	//回傳CountBean
-	public Map<String, CountBean> getMaxCountPercentByGameNumMap(Map<String, CountBean> unsortMap){
-		List<Entry<String, CountBean>> list = new LinkedList<Entry<String, CountBean>>(unsortMap.entrySet());
+	//單筆過關投注按比率大小從大排到小
+	public List<CountBean> getSortCountHistory(List<Map<String, CountBean>> listMap){
+		List<CountBean> totalList = new LinkedList<CountBean>(); //用來裝List<Map<String, CountBean>>, 其中Map<String, CountBean>將轉成List
+		
+		//將map轉成List
+		for(Map<String, CountBean> map:listMap ){
+			//將map轉成List
+			List<CountBean> list = new LinkedList<CountBean>(map.values());
+			
+			//將原先map裡所有的CountBean加入totalList中
+			for(CountBean bean: list){
+				totalList.add(bean);
+			}
+			
+		}
+		
+		//依照percentage大小排序
+		Collections.sort(totalList, new Comparator<CountBean>(){
+
+			@Override
+			public int compare(CountBean o1, CountBean o2) {
+				
+				return o2.getPercentage().compareTo(o1.getPercentage());
+			}
+			
+		});
+
+		return totalList;
+	}
+	
+	//取得單筆最高過關數目比，MAP
+	
+	public Map<String, CountBean> getSortByComparator( Map<String, CountBean> unsortMap){
+
+        List<Entry<String, CountBean>> list = new LinkedList<Entry<String, CountBean>>(unsortMap.entrySet());
 
         // Sorting the list based on values
         Collections.sort(list, new Comparator<Entry<String, CountBean>>()
@@ -248,7 +279,9 @@ public class GameService extends GenericService<GameEntity> {
             public int compare(Entry<String, CountBean> o1,
                     Entry<String, CountBean> o2)
             {
-                return o1.getValue().compareTo(o2.getValue());
+               
+            		return o2.getValue().getPercentage().compareTo(o1.getValue().getPercentage());
+            		//以count percentage 來比，由大排到小
                 
             }
         });
@@ -261,7 +294,10 @@ public class GameService extends GenericService<GameEntity> {
         }
 
         return sortedMap;
-	}
+    }
+	
+
+	
 
 	public List<GameEntity> getLatestFiveRecord() {
 		return dao.findLatestFiveRecord();
