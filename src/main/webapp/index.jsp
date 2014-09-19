@@ -72,7 +72,7 @@
         </div>        
         <!-- TopPage end --> 
         <!-- content start -->
-	    <div  id="target" style="padding-top:120px;">	
+	    <div  id="target" style="padding-top:60px;">	
 		  <jsp:include page="/Event/test-events.jsp" />
 	    </div>
         <!-- content end --> 
