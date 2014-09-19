@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.web;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -303,7 +304,7 @@ public class GameAction extends ActionSupport {
 	
 	public String update() {
 		log.debug("GameAction update()");
-		
+		BigDecimal combination = null;
 		String result = null;
 		String su = null;
 		String ats = null;
@@ -319,14 +320,14 @@ public class GameAction extends ActionSupport {
 		} else if (gameScoreAway < gameScoreHome) {
 			su = "SU_H";
 		}
-		
-		if (gameScoreAway + 1.5 > gameScoreHome) {
+		combination = oddsService.getByGameIdWithOddType(gameId, "ATS_A").get(0).getOddCombination();
+		if (gameScoreAway + combination.doubleValue() > gameScoreHome) {
 			ats = "ATS_A";
-		} else if (gameScoreAway + 1.5 < gameScoreHome) {
+		} else {
 			ats = "ATS_H";
 		}
-		
-		if ((gameScoreAway + gameScoreHome) > 7.5) {
+		combination = oddsService.getByGameIdWithOddType(gameId, "SC_H").get(0).getOddCombination();
+		if ((gameScoreAway + gameScoreHome) > combination.doubleValue()) {
 			sc = "SC_H";
 		} else {
 			sc = "SC_L";

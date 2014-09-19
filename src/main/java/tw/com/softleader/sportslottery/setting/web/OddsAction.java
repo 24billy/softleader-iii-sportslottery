@@ -94,7 +94,6 @@ public class OddsAction extends ActionSupport {
     	String oddType = model.getOddType();
     	BigDecimal oddCombination = model.getOddCombination();
     	BigDecimal oddValue = model.getOddValue();
-    	
     	try {
 	    	List<OddsEntity> list = service.getByGameIdWithOddType(gameId, oddType);
 	    	
