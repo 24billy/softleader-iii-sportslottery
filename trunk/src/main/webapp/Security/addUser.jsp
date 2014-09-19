@@ -11,62 +11,70 @@
 <title>Add User</title>
 <link rel="stylesheet" href="<c:url value="/Security/css/creatAccount-style.css"/>">
 <link href="<c:url value="/Security/css/style.css"/>" rel="stylesheet">
+<script src="<c:url value='/js/jquery.validate.min.js'/>"></script> 
 </head>
 	
-	<script src="<c:url value="/Security/js/jquery-1.7.1.min.js"/>"></script>
-	<script src="<c:url value="/Security/js/bootstrap.min.js"/>"></script>
-	<script src="<c:url value='/Security/js/button.js'/>"></script> 
-	<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 	
 <body>
 	<div class="createaccount-body">
 		<div class="sing-up">
 			<form class="form-horizontal" id="registration-form" action="<c:url value='/addAccount'/>">
-				<label class="input-label">
-					<strong>帳號</strong>
-					<input class="input-xlarge" name="model.userAccount" id="username" type="text">
-				</label>
-				<span class="error"><s:property value="fieldErrors.username"/></span>
-				
-				<label>
-					<strong>密碼</strong><br>
-					<input class="input-xlarge" name="userPassword" id="password" type="password">
-				</label>
+				<div class="form-group">
+					<label class="input-label" for="username">
+						<strong>帳號</strong>
+					</label>
+					<input class="input-sm" name="model.userAccount" id="username" type="text">
+				</div>
+				<!--<span class="error"><s:property value="fieldErrors.username"/></span>-->
+				<div class="form-group">
+					<label for="password">
+						<strong>密碼</strong><br>
+					</label>
+					<input class="input-sm" name="userPassword" id="password" type="password">
+				</div>
 				<span class="error"><s:property value="fieldErrors.password"/></span>
-				
-				<label>
-					<strong>確認密碼</strong><br>
-					<input class="input-xlarge" name="confirm_password" id="confirm_password" type="password">
-				</label>
-				
-				<label id="label-account">
-					<strong>姓名</strong><br>
-					<input class="input-xlarge" name="model.userName" type="text">
-				</label>
-				
-				<label id="label-account">
-					<strong>E-mail</strong><br>
-					<input class="input-xlarge" name="model.userEmail" id="email" type="text">
-				</label>
+				<div class="form-group">
+					<label for="confirm_password">
+						<strong>確認密碼</strong><br>
+					</label>
+					<input class="input-sm" name="confirm_password" id="confirm_password" type="password">
+				</div>
+				<div class="form-group">
+					<label id="label-account">
+						<strong>姓名</strong><br>
+					</label>
+					<input class="input-sm" name="model.userName" type="text">
+				</div>
+				<div class="form-group">
+					<label id="" for="email">
+						<strong>E-mail</strong><br>
+						<input class="input-sm" name="model.userEmail" id="email" type="text">
+					</label>
+				</div>
 				<span class="error"><s:property value="fieldErrors.email"/></span>
 				
-				<label id="label-account">
-					<strong>電話</strong><br>
-					<input class="input-xlarge" name="model.userPhone" type="text">
-				</label>
+				<div class="form-group">
+					<label id="">
+						<strong>電話</strong><br>
+					</label>
+					<input class="input-sm" name="model.userPhone" type="text">
+				</div>
 				
-				<label id="label-account">
-					<strong>
-						<span>男</span><input type="radio" name="model.userGender" value="男">
-						<span>女</span><input type="radio" name="model.userGender" value="女">
-					</strong>
-				</label><br>
+				<div class="form-group">
+					<label id="">
+						<strong>
+							<span>男</span><input type="radio" name="model.userGender" value="男">
+							<span>女</span><input type="radio" name="model.userGender" value="女">
+						</strong>
+					</label><br>
+				</div>
 				
-				<label id="label-account">
-					<strong>生日</strong><br>
-					<input class="input-xlarge" name="model.userBirthday" id="birth" type="text">
-				</label><br>
-				
+				<div class="form-group">
+					<label id="">
+						<strong>生日</strong><br>
+						<input class="input-sm" name="model.userBirthday" id="birth" type="text">
+					</label><br>
+				</div>
 				<button type="submit" class="btn btn-success">註冊</button>
 				<button type="reset" class="btn btn-info">清除</button>
 				<span class="error"><s:property value="fieldErrors.other"/></span>
