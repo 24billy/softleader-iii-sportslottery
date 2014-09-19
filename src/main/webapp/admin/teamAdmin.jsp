@@ -24,13 +24,13 @@
 	<div id="wrapper">
 		<jsp:include page="navigation.jsp"/>
 		<div id="page-wrapper">
-			<div class="container animated fadeIn">
+			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 container-left">
 						<jsp:include page="sider.jsp"/>
 					</div>
 					<!-- .container-left -->
-					<div class="col-sm-9 container-right">
+					<div class="col-sm-9 container-right animated fadeIn">
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">

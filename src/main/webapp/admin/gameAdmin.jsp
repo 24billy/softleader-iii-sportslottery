@@ -24,13 +24,13 @@
 	<div id="wrapper">
 		<jsp:include page="navigation.jsp"/>
 		<div id="page-wrapper">
-			<div class="container animated fadeIn">
+			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 container-left">
 						<jsp:include page="sider.jsp"/>
 					</div>
 					<!-- .container-left -->
-					<div class="col-sm-9 container-right">
+					<div class="col-sm-9 container-right animated fadeIn">
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
@@ -64,7 +64,7 @@
 									<thead>
 										<tr>
 											<th>賽事編號</th>
-											<th>聯盟</th>
+											<th>賽事時程</th>
 											<th>客隊隊伍</th>
 											<th>主隊隊伍</th>
 											<th>狀態</th>
@@ -155,7 +155,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="gameTime">比賽時間</label>
+												<label for="gameTime">賽事時程</label>
 												<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 											</div>
 										</div>
@@ -500,7 +500,10 @@
 			var child = '';
 			child += '<tr>';
 			child += '<td>' + game.gameNum + '</td>';
-			child += '<td>' + game.teamHome.leagueName + '</td>';
+			child += '<td>';
+			var gameTime = game.gameTime.iLocalMillis;
+			child += millisecondToDate(gameTime) + ' ' + millisecondToTime(gameTime);
+			child += '</td>';
 			child += '<td>' + game.teamAway.teamName + '</td>';
 			child += '<td>' + game.teamHome.teamName + '</td>';
 			
@@ -866,10 +869,10 @@
 			'autoWidth': false,
 			'order': [[ 0, 'desc' ]],
 			'columns': [{'width': '15%'},
-			            {'width': '15%'},
+			            {'width': '25%'},
 			            {'width': '20%'},
 			            {'width': '20%'},
-			            {'width': '15%'},
+			            {'width': '10%'},
 			            {'width': '15%'}],
 			'oLanguage': {
 				'sProcessing': '處理中...',

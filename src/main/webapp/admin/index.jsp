@@ -50,7 +50,8 @@
 												<div class="panel-group" id="listPanel">
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">最新公告
+															<h4 class="panel-title">
+																<i class="fa fa-fw fa-bullhorn"></i><span class="left10">最新公告</span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#announcePanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -75,7 +76,8 @@
 													
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">最新賽事
+															<h4 class="panel-title">
+																<i class="fa fa-fw fa-table"></i><span class="left10">最新賽事</span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#gamePanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -111,7 +113,8 @@
 												<div class="panel-group" id="formPanel">
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">新增公告
+															<h4 class="panel-title">
+																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10">新增公告</span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#announceFormPanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -152,7 +155,8 @@
 													
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">新增賽事
+															<h4 class="panel-title">
+																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10">新增賽事</span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#gameFormPanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -202,7 +206,7 @@
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="gameTime">比賽時間</label>
+																				<label for="gameTime">賽事時程</label>
 																				<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 																			</div>
 																		</div>
@@ -280,16 +284,19 @@
 																		</div>
 																		
 																		<div class="col-sm-12">
-																			<div class="form-group">
-																				<label for="ATS_A_Combination">讓分數設定(客)</label>
-																				<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
-																			</div>
-																		</div>
-																		
-																		<div class="col-sm-12">
-																			<div class="form-group">
-																				<label for="ATS_H_Combination">讓分數設定(主)</label>
-																				<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="ATS_A_Combination">讓分數設定(客)</label>
+																						<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="ATS_H_Combination">讓分數設定(主)</label>
+																						<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
+																					</div>
+																				</div>
 																			</div>
 																		</div>
 																		
