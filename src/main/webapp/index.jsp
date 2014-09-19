@@ -625,19 +625,23 @@ function odds_refresh(){
 	//過關總投注金、最高中獎金額
 	$('#passBet').html(1);
 	$('#passCapital').html($('#passBetValue').val()*capitalValue);
-	$('#passTopPrize').html(Math.floor(passPrize*100));            
+	$('#passTopPrize').html(Math.floor(passPrize*$('#passBetValue').val()*capitalValue));            
 	
 	//單場總投注金、最高中獎金額
 	$('#singleBet').html(userOddIds.length);
 	$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
-	$('#singleTopPrize').html(Math.floor(singlePrize*100));
+	$('#singleTopPrize').html(Math.floor(singlePrize*$('#singleBetValue').val()*capitalValue));
 	//更新過關組合類型與計算金額
 	//計算每個組合的最高可能獎金
-	for(var i=1;i<=8;i++){
-	    if(i<=userOddIds.length){
-	        $('#comTable  tr:eq('+i+') td:eq(2)').html(Math.floor(getCapitalByOdd(lotteryOddValue,i)*capitalValue*$('#comBetValue').val()));    
-	    }
+	function calculateComTopPrize(){
+		for(var i=1;i<=8;i++){
+	        if(i<=userOddIds.length){
+	            $('#comTable  tr:eq('+i+') td:eq(2)').html(Math.floor(getCapitalByOdd(lotteryOddValue,i)*capitalValue*$('#comBetValue').val()));    
+	        }
+	    }	
 	}
+	calculateComTopPrize();
+	
 	
 	//計算過關組合投注金、最高中獎金額
 	    refreshBetTable();
@@ -664,19 +668,24 @@ function odds_refresh(){
 	$('#singleBetValue').off('keyup');
 	$('#singleBetValue').on('keyup', function(){            
 	    $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+	    $('#singleTopPrize').html(Math.floor(singlePrize*$('#singleBetValue').val()*capitalValue));
 	    $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+	    
 	});
 	
 	$('#passBetValue').off('keyup');
 	$('#passBetValue').on('keyup', function(){          
 	    $('#passCapital').html($('#passBetValue').val()*capitalValue);              
+	    $('#passTopPrize').html(Math.floor(passPrize*$('#passBetValue').val()*capitalValue));
 	    $('.capitalValue').val($('#passBetValue').val()*capitalValue);
+	    
 	});
 	
 	$('#comBetValue').off('keyup');
-	$('#comBetValue').on('keyup', function(){                           
-	    $('.capitalValue').val($('#comBetValue').val()*capitalValue);
+	$('#comBetValue').on('keyup', function(){                       
+	    calculateComTopPrize();
 	    refreshBetTable();
+	    $('.capitalValue').val($('#comBetValue').val()*capitalValue);
 	});               
 	
 	//每一注投注金計算
@@ -762,13 +771,13 @@ function odds_refresh(){
 	    sessionStorage.userOddInfo = [];
 	    sessionStorage.userGameInfo = [];
 	    gameRefresh(galbalGames, galbalOdds);
-	    odds_refresh();
-	    
+	    odds_refresh();	    
    
 	    
 	    
 	});
-    //過關組合虛擬投注按鈕
+	
+    //過關組合虛擬投注按鈕，將form裡的資料加入post的uri後
     $('.virtualButton').off('click');
     $('.virtualButton').on('click',function(){
         var com1=$('#passComForm input:eq(0)').val();
@@ -811,36 +820,6 @@ function odds_refresh(){
              'oddsIdList.oddId8':odd8
         };
         $(location).attr("href",'<c:url value="/virtualLottery?"/>'+$.param(queryString));
-//         	{
-//         	url:'<c:url value="/virtualLottery"/>',
-//         	data:{
-//                 'model.com1':com1,
-//                 'model.com2':com2,
-//                 'model.com3':com3,
-//                 'model.com4':com4,
-//                 'model.com5':com5,
-//                 'model.com6':com6,
-//                 'model.com7':com7,
-//                 'model.com8':com8,
-//                 'model.capital':formCapital,
-//                 'oddsIdList.oddId1':odd1,
-//                 'oddsIdList.oddId2':odd2,
-//                 'oddsIdList.oddId3':odd3,
-//                 'oddsIdList.oddId4':odd4,
-//                 'oddsIdList.oddId5':odd5,
-//                 'oddsIdList.oddId6':odd6,
-//                 'oddsIdList.oddId7':odd7,
-//                 'oddsIdList.oddId8':odd8
-//         	}
-//        }
-
-        
-//         $.post(
-//         	    '<c:url value="/virtualLottery"/>',
-//         	    {
-
-//         	    }
-//         );
     });  
 
 }
