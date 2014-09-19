@@ -14,6 +14,7 @@ import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
@@ -99,7 +100,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		return (OddsEntity) (game.getGameScoreAway() + game.getGameScoreHome() % 2 == 0 ? dao.findByGameIdWithOddType(game.getId(), "EVEN") : dao.findByGameIdWithOddType(game.getId(), "ODD"));
 	}
 	*/
-	public boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
+	public Boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
 		
 		try {
@@ -146,7 +147,20 @@ public class OddsService extends GenericService<OddsEntity> {
 		return dao.countByOddType(oddType);
 	}
 
-	
+	public Boolean countOddsOnComing(GameEntity game) {
+		try {
+			List<OddsEntity> oddsList = game.getOdds();
+			for (OddsEntity odds : oddsList) {
+				Long count = lotteryOddsDao.countLotterysByOddsId(odds);
+				odds.setCount(count);
+				dao.update(odds);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	
 	

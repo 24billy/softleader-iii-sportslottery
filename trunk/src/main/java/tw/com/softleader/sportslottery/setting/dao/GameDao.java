@@ -292,6 +292,14 @@ public class GameDao extends GenericDao<GameEntity>{
 					.list();
 	}
 	
+	public List<GameEntity> findGameOnComing() {
+		LocalDateTime today = LocalDate.now().toLocalDateTime(new LocalTime(0, 0));
+		return getSession().createCriteria(GameEntity.class)
+					.setFetchMode("odds", FetchMode.SELECT)
+					.add(Restrictions.between("gameTime", today, today.plusDays(4)))
+					.list();
+	}
+	
 	public List<GameEntity> findLatestFiveRecord() {
 		return getSession().createCriteria(GameEntity.class)
 					.setFetchMode("odds", FetchMode.SELECT)
