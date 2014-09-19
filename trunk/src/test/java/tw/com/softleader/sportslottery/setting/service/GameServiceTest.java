@@ -17,6 +17,7 @@ import tw.com.softleader.sportslottery.setting.util.CountBean;
 public class GameServiceTest extends BaseTest  {
 	@Autowired
 	private GameService gameService;
+	private Map<String, CountBean> map2;
 	
 ////	List<GameEntity> models=null;
 ////	GameEntity model=null;
@@ -127,18 +128,18 @@ public class GameServiceTest extends BaseTest  {
 //		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
 //		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
 //		//}
-	@Test
-	public void testGetCountInfoHistory(){
-		
-		Long gameId=gameService.getGameIdByGameNum(136L);
-//		System.out.println("gameId: "+ gameId);
-//		System.out.println(gameService.getComplex(136L, null, null, null, null, null, null, null));
-		String teamName= "密爾瓦基釀酒人";
-		List<Map<String, CountBean>> listMap = gameService.getCountInfoHistory(teamName, gameId);
-		log.debug("listMap = {}",listMap.toString() );
-		System.out.println("size of listMap: "+ listMap.size() );
-
-	}
+//	@Test
+//	public void testGetCountInfoHistory(){
+//		
+//		Long gameId=gameService.getGameIdByGameNum(136L);
+////		System.out.println("gameId: "+ gameId);
+////		System.out.println(gameService.getComplex(136L, null, null, null, null, null, null, null));
+//		String teamName= "密爾瓦基釀酒人";
+//		List<Map<String, CountBean>> listMap = gameService.getCountInfoHistory(teamName, gameId);
+//		log.debug("listMap = {}",listMap.toString() );
+//		System.out.println("size of listMap: "+ listMap.size() );
+//
+//	}
 	
 //	@Test
 //	public void testGetAllCountHistoryByTeam(){
@@ -149,5 +150,26 @@ public class GameServiceTest extends BaseTest  {
 //		
 //	}
 //	
+//	@Test
+//	public void testSortByComparator(){
+//		
+//		map2 = gameService.getSortByComparator(gameService.getCountInfoByGameId(36L));
+//		log.debug("map2 = {}", map2.toString());
+//	}
+	
+	@Test
+	public void testGetPopularOdd(){
+		String teamName= "密爾瓦基釀酒人";
+		Long gameId= 36L;
+		List<Map<String, CountBean>> listMap  = gameService.getCountInfoHistory(teamName, gameId);
+		List<CountBean> list = gameService.getSortCountHistory(listMap);
+		for(CountBean bean: list){
+			System.out.println(bean.toString());
+		}
+		System.out.println();
+		System.out.println(list.get(0));
+
+
+	}
 
 }
