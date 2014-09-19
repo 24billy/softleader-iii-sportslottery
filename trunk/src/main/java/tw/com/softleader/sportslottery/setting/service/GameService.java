@@ -201,6 +201,23 @@ public class GameService extends GenericService<GameEntity> {
 		return null;
 	}
 	
+	//將有最大count percentage的CountBean轉成map加入搜尋結果的List後
+	public List<Map<String, CountBean>> addMaxBeanToCountHistory(String teamName, Long gameId){
+		List<Map<String, CountBean>> listMap=this.getCountInfoHistory(teamName, gameId);
+		List<CountBean> listMapSorted= this.getSortCountHistory(listMap); //將listMap依據count percentage由大到小排序
+		CountBean maxBean= listMapSorted.get(0);//取得最大的bean
+		
+		//將最大的bean 轉成Map
+		Map<String, CountBean> maxMap = new HashMap<String, CountBean>();
+		maxMap.put("max",maxBean );
+		
+		//加入list裡
+		listMap.add(maxMap);
+		
+		
+		return listMap;
+	}
+	
 	public List<Map<String, CountBean>> getAllCountHistoryByTeam (String teamName){
 		try {
 
@@ -267,8 +284,9 @@ public class GameService extends GenericService<GameEntity> {
 		return totalList;
 	}
 	
-	//取得單筆最高過關數目比，MAP
 	
+	
+	//取得單筆最高過關數目比，MAP
 	public Map<String, CountBean> getSortByComparator( Map<String, CountBean> unsortMap){
 
         List<Entry<String, CountBean>> list = new LinkedList<Entry<String, CountBean>>(unsortMap.entrySet());
