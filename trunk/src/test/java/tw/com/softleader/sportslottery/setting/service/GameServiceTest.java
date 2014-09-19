@@ -157,19 +157,32 @@ public class GameServiceTest extends BaseTest  {
 //		log.debug("map2 = {}", map2.toString());
 //	}
 	
+//	@Test
+//	public void testGetPopularOdd(){
+//		String teamName= "密爾瓦基釀酒人";
+//		Long gameId= 36L;
+//		List<Map<String, CountBean>> listMap  = gameService.getCountInfoHistory(teamName, gameId);
+//		List<CountBean> list = gameService.getSortCountHistory(listMap);
+//		for(CountBean bean: list){
+//			System.out.println(bean.toString());
+//		}
+//		System.out.println();
+//		System.out.println(list.get(0));
+//
+//
+//	}
+	
 	@Test
-	public void testGetPopularOdd(){
+	public void testAddMaxBeanToCountHistory(){
 		String teamName= "密爾瓦基釀酒人";
 		Long gameId= 36L;
-		List<Map<String, CountBean>> listMap  = gameService.getCountInfoHistory(teamName, gameId);
-		List<CountBean> list = gameService.getSortCountHistory(listMap);
-		for(CountBean bean: list){
-			System.out.println(bean.toString());
+		List<Map<String, CountBean>> listMap = gameService.addMaxBeanToCountHistory(teamName, gameId);
+		System.out.println("AddMaxBeanToCountHistory().................");
+		for(Map<String, CountBean> map: listMap){
+			System.out.println(map);
 		}
-		System.out.println();
-		System.out.println(list.get(0));
 
-
+		
 	}
 
 }
