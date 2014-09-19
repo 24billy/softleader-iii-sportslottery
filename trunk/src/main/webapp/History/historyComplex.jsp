@@ -278,6 +278,10 @@
 						$('#gameTable').DataTable().destroy();
 					}//end if
 					
+					//取得今天日期
+					var d = new Date();
+					var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
+					
 					table = $('#gameTable').dataTable({
 						oLanguage: {
 							'sProcessing':'處理中...',
@@ -325,7 +329,7 @@
 				        		'defaultContent': ''
 				        		},
 				        		{"data": function(row, type, val, meta){
-									if(row.gameScoreAway||row.gameScoreHome){
+									if(row.gameStatus >= 2){
 										var rateA = parseInt(((row.gameScoreAway+1)/(row.gameScoreHome+row.gameScoreAway+2))*100);
 										var rateH = 100 - rateA;
 										
