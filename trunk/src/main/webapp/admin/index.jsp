@@ -108,166 +108,200 @@
 										<div class="row">
 											
 											<div class="col-sm-12">
-												<div class="panel panel-default">
-													<div class="panel-heading">新增公告</div>
-													<div class="panel-body">
-														<div class="row">
-														
-															<div class="col-sm-12">
-																<div class="form-group">
-																	<label for="announceTitle">公告標題</label>
-																	<input class="form-control" type="text" name="model.announceTitle" id="announceTitle">
-																</div>
-															</div>
-															
-															<div class="col-sm-12">
-																<div class="form-group">
-																	<label for="announceTitle">公告內容</label>
-																	<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
-																</div>
-															</div>
-															
+												<div class="panel-group" id="formPanel">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">新增公告
+																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#announceFormPanel"><i class="fa fa-fw fa-bars"></i></a>
+															</h4>
 														</div>
-														<!-- .row -->
+														<div id="announceFormPanel" class="panel-collapse collapse in">
+															<div class="panel-body">
+																<div class="row">
+																
+																	<div class="col-sm-12">
+																		<div class="form-group">
+																			<label for="announceTitle">公告標題</label>
+																			<input class="form-control" type="text" name="model.announceTitle" id="announceTitle">
+																		</div>
+																	</div>
+																	
+																	<div class="col-sm-12">
+																		<div class="form-group">
+																			<label for="announceTitle">公告內容</label>
+																			<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
+																		</div>
+																	</div>
+																	
+																</div>
+																<!-- .row -->
+															</div>
+															<!-- .panel-body -->
+														</div>
+														<!-- #announceFormPanel -->
 													</div>
-													<!-- .panel-body -->
-												</div>
-												<!-- .panel -->
-											</div>
-											
-											<div class="col-sm-12">
-												<div class="panel panel-default">
-													<div class="panel-heading">新增賽事</div>
-													<form role="form">
-														<div class="panel-body">
-															<div class="row">
-																<div class="col-sm-12">
-																	<div class="form-group">
-																		<label for="leagueName">聯盟名稱</label>
-																		<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-																			<option value="美國職棒" selected>美國職棒</option>
-																			<option value="中華職棒">中華職棒</option>
-																			<option value="中央聯盟">中央聯盟</option>
-																			<option value="太平洋聯盟">太平洋聯盟</option>
-																			<option value="韓國職棒">韓國職棒</option>
-																		</select>
-																	</div>
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="form-group">
-																		<label for="">賽事編號</label>
-																		<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
-																	</div>
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="teamAwayList">客隊隊伍</label>
-																				<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
-																				</select>
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="teamHomeList">主隊隊伍</label>
-																				<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
-																				</select>
-																			</div>
-																		</div>
-																	</div>
-																	<!-- .row -->
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="form-group">
-																		<label for="gameTime">比賽時間</label>
-																		<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
-																	</div>
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="SU_A">不讓分(客)</label>
-																				<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="SU_H">不讓分(主)</label>
-																				<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
-																			</div>
-																		</div>
-																	</div>
-																	<!-- .row -->
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="ATS_A">讓分(客)(-1.5)</label>
-																				<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="ATS_H">讓分(主)(+1.5)</label>
-																				<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
-																			</div>
-																		</div>
-																	</div>
-																	<!-- .row -->
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="SC_H">總分(大7.5)</label>
-																				<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="SC_L">總分(小7.5)</label>
-																				<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
-																			</div>
-																		</div>
-																	</div>
-																	<!-- .row -->
-																</div>
-																
-																<div class="col-sm-12">
-																	<div class="row">
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="EVEN">總分(單)</label>
-																				<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="form-group">
-																				<label for="ODD">總分(雙)</label>
-																				<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
-																			</div>
-																		</div>
-																	</div>
-																	<!-- .row -->
-																</div>
-															</div>
-															<!-- .row -->
+													<!-- .panel -->
+													
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">新增賽事
+																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#gameFormPanel"><i class="fa fa-fw fa-bars"></i></a>
+															</h4>
 														</div>
-														<!-- .panel-body -->
-													</form>
+														<div id="gameFormPanel" class="panel-collapse collapse">
+															<form role="form">
+																<div class="panel-body">
+																	<div class="row">
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="leagueName">聯盟名稱</label>
+																				<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+																					<option value="美國職棒" selected>美國職棒</option>
+																					<option value="中華職棒">中華職棒</option>
+																					<option value="中央聯盟">中央聯盟</option>
+																					<option value="太平洋聯盟">太平洋聯盟</option>
+																					<option value="韓國職棒">韓國職棒</option>
+																				</select>
+																			</div>
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="">賽事編號</label>
+																				<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
+																			</div>
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="teamAwayList">客隊隊伍</label>
+																						<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
+																						</select>
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="teamHomeList">主隊隊伍</label>
+																						<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+																			<!-- .row -->
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="gameTime">比賽時間</label>
+																				<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
+																			</div>
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="SU_A">不讓分(客)</label>
+																						<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="SU_H">不讓分(主)</label>
+																						<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
+																					</div>
+																				</div>
+																			</div>
+																			<!-- .row -->
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="ATS_A">讓分(客)(-1.5)</label>
+																						<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="ATS_H">讓分(主)(+1.5)</label>
+																						<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
+																					</div>
+																				</div>
+																			</div>
+																			<!-- .row -->
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="SC_H">總分(大7.5)</label>
+																						<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="SC_L">總分(小7.5)</label>
+																						<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
+																					</div>
+																				</div>
+																			</div>
+																			<!-- .row -->
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="EVEN">總分(單)</label>
+																						<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
+																					</div>
+																				</div>
+																				<div class="col-sm-6">
+																					<div class="form-group">
+																						<label for="ODD">總分(雙)</label>
+																						<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
+																					</div>
+																				</div>
+																			</div>
+																			<!-- .row -->
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="ATS_A_Combination">讓分數設定(客)</label>
+																				<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
+																			</div>
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="ATS_H_Combination">讓分數設定(主)</label>
+																				<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
+																			</div>
+																		</div>
+																		
+																		<div class="col-sm-12">
+																			<div class="form-group">
+																				<label for="SC_Combination">總分設定</label>
+																				<input class="form-control input-sm" id="SC_Combination" type="text" name="SC_Combination">
+																			</div>
+																		</div>
+																	</div>
+																	<!-- .row -->
+																</div>
+																<!-- .panel-body -->
+															</form>
+														<!-- #gameFormPanel -->
+													</div>
+													<!-- .panel -->
 												</div>
-												<!-- .panel -->
+												<!-- .panel-group -->
 											</div>
-											
 										</div>
 										<!-- .row -->
 									</div>
@@ -337,6 +371,9 @@
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
 			$('.form-decimal').val('2.00')
+			$('#ATS_A_Combination').val('1.50');
+			$('#ATS_H_Combination').val('-1.50');
+			$('#SC_Combination').val('7.50');
 			
 			$('#gameTime').datetimepicker({
 				'defaultDate': new Date(),
@@ -358,6 +395,44 @@
 				'min': 0,
 				'initval': 0,
 				'step': 1,
+				'buttondown_class': 'btn btn-info',
+	            'buttonup_class': 'btn btn-success'
+			});
+			
+			$('#ATS_A_Combination, #ATS_H_Combination').TouchSpin({
+				'min': -3.50,
+				'max': 3.50,
+				'step': 0.05,
+				'decimals': 2,
+				'buttondown_class': 'btn btn-info',
+	            'buttonup_class': 'btn btn-success'
+			});
+			
+			$('#ATS_A_Combination').change(function() {
+				value = $(this).val() * -1;
+				if (value % 1 == 0) {
+					value = value.toString() + '.00';
+				} else if (value * 10 % 1 == 0) {
+					value = value.toString() + '0';
+				}
+				$('#ATS_H_Combination').val(value);
+			});
+				
+			$('#ATS_H_Combination').change(function() {
+				value = $(this).val() * -1;
+				if (value % 1 == 0) {
+					value = value.toString() + '.00';
+				} else if (value * 10 % 1 == 0) {
+					value = value.toString() + '0';
+				}
+				$('#ATS_A_Combination').val(value);
+			});
+			
+			$('#SC_Combination').TouchSpin({
+				'min': 6.50,
+				'max': 8.50,
+				'step': 0.05,
+				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
 	            'buttonup_class': 'btn btn-success'
 			});

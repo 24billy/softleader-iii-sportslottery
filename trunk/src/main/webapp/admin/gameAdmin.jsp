@@ -825,9 +825,9 @@
 			});
 			
 			$('#SC_Combination').TouchSpin({
-				'min': 6.5,
-				'max': 8.5,
-				'step': 1,
+				'min': 6.50,
+				'max': 8.50,
+				'step': 0.05,
 				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
 	            'buttonup_class': 'btn btn-success'
