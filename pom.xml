@@ -63,11 +63,17 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>3.2.5.RELEASE</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -227,6 +233,14 @@
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.5.1</version>
 		</dependency>
+		
+		<!-- Quartz -->
+		<dependency>
+			<groupId>quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
