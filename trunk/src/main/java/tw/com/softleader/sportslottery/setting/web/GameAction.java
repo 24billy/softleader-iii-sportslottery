@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -23,6 +24,7 @@ import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
 import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
+import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
@@ -65,10 +67,19 @@ public class GameAction extends ActionSupport {
 	private LocalDate complexTimeEnd;
 	private String complexBallType;
 	private String complexLeagueName;
+	
 	private Long linkGameNum;
 	private String linkTeamSearch;
+	private List<Map<String, CountBean>> listMap;
 	
-	
+	public List<Map<String, CountBean>> getListMap() {
+		return listMap;
+	}
+
+	public void setListMap(List<Map<String, CountBean>> listMap) {
+		this.listMap = listMap;
+	}
+
 	public String getComplexLeagueName() {
 		return complexLeagueName;
 	}
@@ -480,21 +491,28 @@ public class GameAction extends ActionSupport {
 	}
 	
 	public String countInfoGraph(){
-		Long gameId= service.getGameIdByGameNum(linkGameNum);
-		System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
-		json = new Gson().toJson(service.getCountInfoHistory(linkTeamSearch, gameId));//輸入gamiId 和teamName取得COUT資訊
-		//System.out.println("HEHEHEHEHEHEHEHE"+json);
+		try {
+			Long gameId= service.getGameIdByGameNum(linkGameNum);
+			//輸入gamiId 和teamName取得COUNT資訊
+			listMap= service.getCountInfoHistory(linkTeamSearch, gameId);
+			
+			//附加Max CountBean 於將要傳出的list中，要傳出的list已在addMaxBeanToCountHistory方法裡取出
+//		listMap = service.addMaxBeanToCountHistory(linkTeamSearch, gameId);
+			json = new Gson().toJson(listMap);
 //		json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
+		} catch (Exception e) {
+			json = "error";
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-		
 		return "countInfoGraph";
 	}
 	
 	public String countAllHistoryByTeam(){
 		
-		System.out.println("HAAAAAAAAAAAAAAAAAAAAA"+linkTeamSearch);
+
 		json = new Gson().toJson(service.getAllCountHistoryByTeam(linkTeamSearch));//輸入teamName取得COUNT資訊
-		//System.out.println("HEHEHEHEHEHEHEHE"+json);
 //		json = new Gson().toJson(service.trialGetCountInfoHistory());//使用預設值
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
@@ -503,6 +521,17 @@ public class GameAction extends ActionSupport {
 	
 	public String teamChartOddTime() {
 		return Action.SUCCESS;
+	}
+	
+	//回傳count歷史中最大比率的CountBean
+	public String MaxCountBean(){
+		log.debug("Log listMap :{}",listMap);
+		List<CountBean> list = service.getSortCountHistory(listMap);
+		CountBean maxBean = list.get(0);//取得最大過關數比的CountBean
+		json = new Gson().toJson(maxBean);
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		System.out.println("...........jsfkidaiwerj3jlrujriwejr53 3wrjsdfjfsdlfdksfjk;jasdfkjasfj;lsdjfkjas;fjkasdfj;asdjfkdjsfkdks");
+		return "MaxCountBean";
 	}
 	
 	public String gameHistoryComplex() {
