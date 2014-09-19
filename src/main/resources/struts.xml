@@ -252,8 +252,15 @@
   	<!-- 用隊伍名取得所有COUNT歷史資訊 -->
 	<action name="countAllHistoryByTeam" class="gameAction" method="countAllHistoryByTeam">
   		<result name="countAllHistoryByTeam" type="stream">
-  			<param name="contentType">text/plain</param>
+  			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
+  		</result>
+  	</action>
+  	<!-- 取得最高單筆過關比的資訊 -->
+  	<action name="MaxCountBean" class="gameAction" method="MaxCountBean">
+  		<result name="MaxCountBean" type="stream">
+  			<param name = "contentType">appliction/json</param>
+  			<param name="inputName">inputStream</param>
   		</result>
   	</action>
   
