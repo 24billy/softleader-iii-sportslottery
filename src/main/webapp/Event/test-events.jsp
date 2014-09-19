@@ -696,6 +696,7 @@ function sortGameTag(){
 
 function superRefresh(){
 	//初始化gameList
+	$('.alert').hide();
 	var gameTagSample = $('#gametagSample').clone();
 	$('#game_list').fadeOut(110, function(){
 		$('#game_list *').remove();
