@@ -42,7 +42,7 @@ $(document).ready(function(){
 		<button type="button" class="button" id="money">以金額來看</button>
 		<button type="button" class="button" id="money">比分統計</button>
 	</div>  -->
-	<div id="modalBox" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- 	<div id="modalBox" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   		<div class="modal-dialog modal-sm">
     		<div class="modal-content">
     			
@@ -57,7 +57,7 @@ $(document).ready(function(){
       			
     		</div>
  		</div>
-	</div>
+	</div> -->
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
@@ -72,11 +72,11 @@ $(function () {
 	function appendToDiv(){
 		/* test1();  */
 		// test2();  
-		 final1();  
+		final1();  
 		 //final2(); 
 		/*  test4();  */
 		// test5(); 
-		
+		//test6();
 	}
 
 	function test1(){
@@ -270,6 +270,19 @@ $(function () {
   			$('#tsv').append(child);
 		}, 'json');
 	}
+	
+	function test6(){
+		var url = '<c:url value="/countInfoGraph"/>';
+  		 $.post(url, function(data) { 
+			if (data.indexOf('error') == -1) {
+				$.parseJSON(data, function(index, row) {
+					
+				});
+			} else {
+				alert(data);
+			}
+		});
+	}
 
 
 
@@ -412,7 +425,7 @@ $(function () {
 	                    	series: {
 	                        	borderWidth: 0,
 	                        	dataLabels: {
-	                            	enabled: true,
+	                            	enabled: false,
 	                            	format: '{point.y:.1f}%'
 	                        	}
 	                    	}
