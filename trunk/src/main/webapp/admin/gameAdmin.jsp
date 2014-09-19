@@ -237,21 +237,21 @@
 									
 									<div class="form-group">
 										<label for="ATS_A_Combination">讓分數設定(客)</label>
-										<input class="form-control input-sm form-ats-a" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
+										<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
 									</div>
 								</div>
 								
 								<div class="col-sm-4">
-									<div class="ATS_H_Combination">
+									<div class="form-group">
 										<label for="ATS_H_Combination">讓分數設定(主)</label>
-										<input class="form-control input-sm form-ats-h" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
+										<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
 									</div>
 								</div>
 								
 								<div class="col-sm-4">
-									<div class="SC_Combination">
+									<div class="form-group">
 										<label for="SC_Combination">總分設定</label>
-										<input class="form-control input-sm form-sc" id="SC_Combination" type="text" name="SC_Combination">
+										<input class="form-control input-sm" id="SC_Combination" type="text" name="SC_Combination">
 									</div>
 								</div>
 							</div>
@@ -568,6 +568,13 @@
 				if (data.odds.length != 0) {
 					$.each(data.odds, function(index, odd) {
 						$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
+						if (odd.oddType == "ATS_A") {
+							$('#ATS_A_Combination').val(odd.oddCombination.toFixed(2));
+						} else if (odd.oddType == "ATS_H") {
+							$('#ATS_H_Combination').val(odd.oddCombination.toFixed(2));
+						} else if (odd.oddType == "SC_H") {
+							$('#SC_Combination').val(odd.oddCombination.toFixed(2));
+						}
 					});
 				} else {
 					$('.form-decimal').val('2.00');
@@ -673,11 +680,11 @@
 					if (oddType.indexOf('EO_') != -1) {
 						oddType = oddType.replace('EO_', '');
 					} else if (oddType == 'ATS_A') {
-						oddCombination = +1.5;
+						oddCombination = $('#ATS_A_Combination').val();
 					} else if (oddType == 'ATS_H') {
-						oddCombination = -1.5;
+						oddCombination = $('#ATS_H_Combination').val();
 					} else if (oddType.indexOf('SC_') != -1) {
-						oddCombination = 7.5;
+						oddCombination = $('#SC_Combination').val();
 					}
 					$.post('<c:url value="/admin/oddsAdmin"/>', {
 						'model.gameId':data,
@@ -760,9 +767,9 @@
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
 			$('.form-decimal').val('2.00');
-			$('.form-ats-a').val('1.50');
-			$('.form-ats-h').val('-1.50');
-			$('.form-sc').val('7.50');
+			$('#ATS_A_Combination').val('1.50');
+			$('#ATS_H_Combination').val('-1.50');
+			$('#SC_Combination').val('7.50');
 			
 			$('#gameTime').datetimepicker({
 				'defaultDate': new Date(),
@@ -788,7 +795,7 @@
 	            'buttonup_class': 'btn btn-success'
 			});
 			
-			$('.form-ats-a, .form-ats-h').TouchSpin({
+			$('#ATS_A_Combination, #ATS_H_Combination').TouchSpin({
 				'min': -3.50,
 				'max': 3.50,
 				'step': 0.05,
@@ -797,17 +804,27 @@
 	            'buttonup_class': 'btn btn-success'
 			});
 			
-			$('.form-ats-a').change(function() {
-				value = $(this).val();
-				$('.form-ats-h').val('-' + value.toString());
+			$('#ATS_A_Combination').change(function() {
+				value = $(this).val() * -1;
+				if (value % 1 == 0) {
+					value = value.toString() + '.00';
+				} else if (value * 10 % 1 == 0) {
+					value = value.toString() + '0';
+				}
+				$('#ATS_H_Combination').val(value);
 			});
 				
-			$('.form-ats-h').change(function() {
-				value = $(this).val();
-				$('.form-ats-a').val('-' + value.toString());
+			$('#ATS_H_Combination').change(function() {
+				value = $(this).val() * -1;
+				if (value % 1 == 0) {
+					value = value.toString() + '.00';
+				} else if (value * 10 % 1 == 0) {
+					value = value.toString() + '0';
+				}
+				$('#ATS_A_Combination').val(value);
 			});
 			
-			$('.form-sc').TouchSpin({
+			$('#SC_Combination').TouchSpin({
 				'min': 6.5,
 				'max': 8.5,
 				'step': 1,
