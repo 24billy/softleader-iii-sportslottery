@@ -192,36 +192,53 @@
 						//console.log((data.lotteryOdds).length);
 						//判斷玩法
 						lottery.unique = data.com1;
+						
 						if(typeof(lottery.unique) == "undefined") {
-							lottery.unique = "未勾選";
+							lottery.unique = "<h4 style='color:red'>未勾選</h4>";
+						} else {
+							lottery.unique = "<img src='images/success2.png' />";
 						}
 						lottery.com2 = data.com2;
 						if(typeof(lottery.com2) == "undefined") {
-							lottery.com2 = "未勾選";
+							lottery.com2 = "<h4 style='color:red'>未勾選</h4>";
+						} else {
+							lottery.com2 = "<img src='images/success2.png' />";
 						}
 						lottery.com3 = data.com3;
 						if(typeof(lottery.com3) == "undefined") {
-							lottery.com3 = "未勾選";
+							lottery.com3 = "<h4 style='color:red'>未勾選</h4>";
+						} else {
+							lottery.com3 = "<img src='images/success2.png' />";
 						}
 						lottery.com4 = data.com4;
 						if(typeof(lottery.com4) == "undefined") {
 							lottery.com4 = "未勾選";
+						} else {
+							lottery.com4 = "<img src='images/success2.png' />";
 						}
 						lottery.com5 = data.com5;
 						if(typeof(lottery.com5) == "undefined") {
 							lottery.com5 = "未勾選";
+						} else {
+							lottery.com5 = "<img src='images/success2.png' />";
 						}
 						lottery.com6 = data.com6;
 						if(typeof(lottery.com6) == "undefined") {
 							lottery.com6 = "未勾選";
+						} else {
+							lottery.com6 = "<img src='images/success2.png' />";
 						}
 						lottery.com7 = data.com7;
 						if(typeof(lottery.com7) == "undefined") {
 							lottery.com7 = "未勾選";
+						} else {
+							lottery.com7 = "<img src='images/success2.png' />";
 						}
 						lottery.com8 = data.com8;
 						if(typeof(lottery.com8) == "undefined") {
 							lottery.com8 = "未勾選";
+						} else {
+							lottery.com8 = "<img src='images/success2.png' />";
 						}
 						lottery.com = data.com0;
 						if(data.com1!=null && data.com2==null && data.com3==null && 
@@ -243,29 +260,29 @@
 						}
 						
 						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
-							lottery.com4 = "<img src='images/error2.png' />";
-							lottery.com5 = "<img src='images/error2.png' />";
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com4 = "<img src='images/error.png' />";
+							lottery.com5 = "<img src='images/error.png' />";
+							lottery.com6 = "<img src='images/error.png' />";
+							lottery.com7 = "<img src='images/error.png' />";
+							lottery.com8 = "<img src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 4 && lottery.play == "過關組合") {
-							lottery.com5 = "<img src='images/error2.png' />";
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com5 = "<img src='images/error.png' />";
+							lottery.com6 = "<img src='images/error.png' />";
+							lottery.com7 = "<img src='images/error.png' />";
+							lottery.com8 = "<img src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 5 && lottery.play == "過關組合") {
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img src='images/error.png' />";
+							lottery.com7 = "<img src='images/error.png' />";
+							lottery.com8 = "<img src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 6 && lottery.play == "過關組合") {;
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error.png' />";
+							lottery.com8 = "<img src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 7 && lottery.play == "過關組合") {
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error.png' />";
 						}
 						
 						//每注資料以oddsId排列
@@ -273,9 +290,11 @@
 							
 							var info = {};
 							var gameId = odd.oddsId.gameId;
+							//撈出game的資料
 							$.getJSON('<c:url value="/game?method:select" />',{
 								'model.id':gameId
 							}).done(function(game) {
+								//console.log(game);
 								info['oddId'] = odd.oddsId.id;
 								info['count'] = odd.oddsId.count;
 								info['value'] = odd.oddsId.oddValue;
@@ -296,6 +315,7 @@
 								timeString += " ";
 								timeString += millisecondToTime(game.gameTime.iLocalMillis);
 								info['gameTime'] = timeString;
+								info['gameStatus'] = game.gameStatus; //等於3 派彩
 								if(game.gameScoreHome == 0 && game.gameScoreAway == 0) {
 									info['gameName'] = "未完賽";
 								} else {
@@ -423,7 +443,8 @@
 					//});//ajaxStop	
 				}//success
 			});//ajax
-				
+			
+			//塞第二層資料
 			$(window).unbind('formatDataRow');
 			function formatDataRow (dataRow) {
 				var odds = new Object();
@@ -480,7 +501,7 @@
 				
 				temp2 += '<tbody>'+
 				'<tr>'+
-					'<td style="vertical-align:middle">中獎金額</td>'+
+					'<td style="vertical-align:middle">過關組合</td>'+
 		            '<td style="vertical-align:middle">' + dataRow.unique + '</td>'+
 		            '<td style="vertical-align:middle">' + dataRow.com2+ '</td>'+
 		            '<td style="vertical-align:middle" id="pass3-2">' + dataRow.com3+ '</td>'+
