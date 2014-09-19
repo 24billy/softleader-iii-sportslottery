@@ -106,12 +106,12 @@
 <div id="sidr">
   <!-- lottery content -->
 <!--start lottery panel  -->
-        <div class="panel panel-primary  ">
+        <div class="panel panel-primary">
             <div class="panel-heading ">
-                <h4>投注區</h4>
+                                         投注區             
             </div>
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" id="myTab">
+            <ul class="nav nav-tabs" role="tablist" id="myTab" >
                 <li class="active"><a href="#single" role="tab"
                     data-toggle="tab">單場</a></li>
                 <li><a href="#pass" role="tab" data-toggle="tab">過關</a></li>
@@ -192,14 +192,34 @@
                     </td>
                 </tr>
             </table>
+            <!-- start of autoLottery Panel -->
+            <div id="autoLottery" class="panel panel-success" hidden="true" >
+                <div class="panel-heading text-center ">
+                                         自動投注
+                </div>
+                <div>
+                    <ul class="pager">
+                        <li><a href="#">牆頭草</a></li>
+                        <li><a href="#">逆水行舟</a></li>
+                        <li><a href="#">錢丟水溝</a></li>
+                        <li><a href="#">背水一戰</a></li>
+                    </ul>
+                 </div>
+            </div>
+            <!-- End of autoLottery Panel -->   
+
         </div>
         <!-- End of Lottery Panel   -->
+        
+        
 
+        
+        
         <!-- start of BetBoard -->
         <div id="betBoard" hidden="true" class="panel panel-primary ">
             <!-- Tab panes -->
             <div class="panel-heading">
-                <h3>投注板</h3>
+                                     投注板
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="single">
@@ -632,7 +652,7 @@ function odds_refresh(){
 	$('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
 	$('#singleTopPrize').html(Math.floor(singlePrize*$('#singleBetValue').val()*capitalValue));
 	//更新過關組合類型與計算金額
-	//計算每個組合的最高可能獎金
+	//計算每個過關組合的最高可能獎金
 	function calculateComTopPrize(){
 		for(var i=1;i<=8;i++){
 	        if(i<=userOddIds.length){
@@ -664,7 +684,7 @@ function odds_refresh(){
 	    $('#comTopCapital').html(bet*capitalValue*$('#comBetValue').val());
 	    
 	}
-	
+	//更改投注金額控制
 	$('#singleBetValue').off('keyup');
 	$('#singleBetValue').on('keyup', function(){            
 	    $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
@@ -738,15 +758,21 @@ function odds_refresh(){
 	}
 	
 	if (userOddIds!=""){
-	    //有投注時才顯示投注區
+	    //有投注時才顯示投注區   
 	    $('#betBoard').attr("hidden",false);
 	    $('#clearLottery').attr("hidden",false);
-	
+   	    $('#autoLottery').attr("hidden",true);
+	    
 	}
 	else{
 	    //沒有投注時才隱藏投注區
 	    $('#betBoard').attr("hidden",true);
 	    $('#clearLottery').attr("hidden",true);
+	    
+	    if('${user.userAccount}'!=""){
+	    	$('#autoLottery').attr("hidden",false);	
+	    }
+	    
 	}
 	
 	//刪除指定投注
