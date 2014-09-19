@@ -210,10 +210,10 @@
                		<div class="topWay">超商繳款操作步驟</div>
                     	<div class="payWay2-1">
                         	<div class="fourWay">
-                            	<a href="#" rel="p1" class="btn btn-info btn-lg marketbut active">7-11 ibon</a><br>
-                                <a href="#" rel="p2" class="btn btn-info btn-lg marketbut">全家Famiport</a><br>
-                                <a href="#" rel="p3" class="btn btn-info btn-lg marketbut">萊爾富Life-ET</a><br>
-                                <a href="#" rel="p4" class="btn btn-info btn-lg marketbut">OK超商OK-GO</a>
+                            	<button value="p1" class="btn btn-info btn-lg marketbut active">7-11 ibon</button><br>
+                                <button value="p2" class="btn btn-info btn-lg marketbut">全家Famiport</button><br>
+                                <button value="p3" class="btn btn-info btn-lg marketbut">萊爾富Life-ET</button><br>
+                                <button value="p4" class="btn btn-info btn-lg marketbut">OK超商OK-GO</button>
                             </div>
                             <div id="fourWay-main" style="background-color:white">
                                 <div class="p1 p market"><img src="images/ibonPayway.jpg" alt="7-11 ibon操作方式"/></div>
@@ -350,11 +350,11 @@
     	//$('.finish').val($(this).val());
 	});
 	
-	$('.fourWay a').click(function() {
-		$('.fourWay a').removeClass('active');
+	$('.fourWay button').click(function() {
+		$('.fourWay button').removeClass('active');
 		$(this).addClass('active');
 		$('.p').hide();
-        $('#fourWay-main div.' + $(this).attr('rel')).show();
+        $('#fourWay-main div.' + $(this).val()).show();
 	});
 
 	$('.addMoney').click(function() {
