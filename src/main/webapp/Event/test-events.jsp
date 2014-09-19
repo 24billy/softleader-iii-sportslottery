@@ -47,7 +47,10 @@
 		background: #777777 url(<c:url value="/images/bg-blueprint.png"/>);
 	}
 	.gametag.resulted{
-		background: rgba(217,83,79,0.7) url(<c:url value="/images/bg-blueprint.png"/>);
+		background: rgba(229,80,75,0.9) url(<c:url value="/images/bg-blueprint.png"/>);
+	}
+	.gametag.gameset{
+		background: rgba(237,128,78,0.9) url(<c:url value="/images/bg-blueprint.png"/>);
 	}
 	
 	.clickfield.clickable{
@@ -418,7 +421,15 @@ function gameRefresh(games, odds){
 				thisGame.addClass('resulted');
 				$('#gameMark', thisGame).addClass('glyphicon-usd');
 				$('#gameMark', thisGame).text('已派彩');
-			} else if(game.gameStatus != 1 || todayMil > game.iMillis) {
+				$('[name="teamAway"]', thisGame).text(game.teamAway.teamName + ' ' + game.gameScoreAway);
+				$('[name="teamHome"]', thisGame).text(game.teamHome.teamName + ' ' + game.gameScoreHome);
+			} else if(game.gameStatus == 2 && (game.gameScoreAway || game.gameScoreHome)) {
+				thisGame.addClass('gameset');
+				$('#gameMark', thisGame).addClass('glyphicon-flag');
+				$('#gameMark', thisGame).text('已完賽');
+				$('[name="teamAway"]', thisGame).text(game.teamAway.teamName + ' ' + game.gameScoreAway);
+				$('[name="teamHome"]', thisGame).text(game.teamHome.teamName + ' ' + game.gameScoreHome);
+			} else if(game.gameStatus == 2 || todayMil > game.iMillis) {
 				thisGame.attr('gameStatus', '2');
 				thisGame.addClass('warning');
 				$('#gameMark', thisGame).addClass('glyphicon-exclamation-sign');
