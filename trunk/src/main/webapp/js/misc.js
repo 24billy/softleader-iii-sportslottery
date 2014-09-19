@@ -6,15 +6,15 @@ function millisecondToDate(millisecond){
 	var d = new Date();
 	var n = d.getTimezoneOffset()*60000;
 	d = new Date(millisecond+n);
-	var month = (d.getUTCMonth()+1);
+	var month = (d.getMonth()+1);
 	if (month<10) {
 		month = "0" + month;
 	}
-	var day = d.getUTCDate();
+	var day = d.getDate();
 	if (day<10) {
 		day = "0" + day;
 	}
-	var str = d.getUTCFullYear() + "年" + month + "月" + day + "日";
+	var str = d.getFullYear() + "年" + month + "月" + day + "日";
 	return str;
 }
 
@@ -23,30 +23,30 @@ function millisecondToTime(millisecond){
 	var n = d.getTimezoneOffset()*60000;
 	d = new Date(millisecond+n);
 	var day = "";
-	if (d.getUTCDay() == 1) {
+	if (d.getDay() == 1) {
 		day = "一";
-	} else if (d.getUTCDay() == 2) {
+	} else if (d.getDay() == 2) {
 		day = "二";
-	} else if (d.getUTCDay() == 3) {
+	} else if (d.getDay() == 3) {
 		day = "三";
-	} else if (d.getUTCDay() == 4) {
+	} else if (d.getDay() == 4) {
 		day = "四";
-	} else if (d.getUTCDay() == 5) {
+	} else if (d.getDay() == 5) {
 		day = "五";
-	} else if (d.getUTCDay() == 6) {
+	} else if (d.getDay() == 6) {
 		day = "六";
-	} else if (d.getUTCDay() == 0) {
+	} else if (d.getDay() == 0) {
 		day = "日";
 	} else {
 		day = "大老你開掛吧";
 	}
 
-	var hr = d.getUTCHours();
+	var hr = d.getHours();
 	if (hr<10){
 		hr = "0" + hr;	
 	}
 	
-	var min = d.getUTCMinutes();
+	var min = d.getMinutes();
 	if (min<10){
 		min = "0" + min;	
 	}
