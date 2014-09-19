@@ -10,10 +10,6 @@ import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.TeamDao;
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
 
-/**
- * @Author:Rhys
- */
-
 @Service
 public class TeamService extends GenericService<TeamEntity> {
 

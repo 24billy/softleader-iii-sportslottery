@@ -19,12 +19,6 @@ import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
 import com.google.gson.Gson;
 
-/**
- * 
- * @author ebikyatto
- *
- */
-
 @Service
 public class OddsService extends GenericService<OddsEntity> {
 	

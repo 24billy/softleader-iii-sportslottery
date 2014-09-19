@@ -23,11 +23,6 @@ import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.util.CountBean;
 
-/**
- * 
- * @author nick
- *
- */
 @Service
 public class GameService extends GenericService<GameEntity> {
 	@Autowired

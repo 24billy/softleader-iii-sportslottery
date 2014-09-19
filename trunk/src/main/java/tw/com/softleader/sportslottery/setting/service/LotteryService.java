@@ -18,10 +18,6 @@ import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.entity.*;
 
-/**
-@Author:Billy 
- */
-
 @Service
 public class LotteryService extends GenericService<LotteryEntity> {
     private BigDecimal result;
