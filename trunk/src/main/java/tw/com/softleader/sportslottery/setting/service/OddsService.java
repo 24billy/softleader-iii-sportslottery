@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
+import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
@@ -32,7 +33,8 @@ public class OddsService extends GenericService<OddsEntity> {
 	@Autowired
 	private LotteryDao lotteryDao;
 	
-
+	@Autowired
+	private GameDao gameDao;
 	
 	
 	@Override
@@ -147,13 +149,16 @@ public class OddsService extends GenericService<OddsEntity> {
 		return dao.countByOddType(oddType);
 	}
 
-	public Boolean countOddsOnComing(GameEntity game) {
+	public Boolean countOddsOnComing() {
 		try {
-			List<OddsEntity> oddsList = game.getOdds();
-			for (OddsEntity odds : oddsList) {
-				Long count = lotteryOddsDao.countLotterysByOddsId(odds);
-				odds.setCount(count);
-				dao.update(odds);
+			List<GameEntity> games = gameDao.findGameOnComing();
+			for (GameEntity game : games) {
+				List<OddsEntity> oddsList = game.getOdds();
+				for (OddsEntity odds : oddsList) {
+					Long count = lotteryOddsDao.countLotterysByOddsId(odds);
+					odds.setCount(count);
+					dao.update(odds);
+				}
 			}
 			return true;
 		} catch (Exception e) {
