@@ -316,8 +316,8 @@ hr {
 												placeholder="輸入帳號"  />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
-										
 										<div class="form-group has-feedback">
 											<label  for="passwordf">密碼</label>
 											<div class="input-group">
@@ -328,6 +328,7 @@ hr {
 												placeholder="輸入密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 										
 										<div class="form-group has-feedback">
@@ -340,6 +341,7 @@ hr {
 													name="confirm_password" placeholder="確認密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 										<div class="form-group has-feedback">
 											<label for=userBirth>生日</label>
@@ -351,6 +353,7 @@ hr {
 													name="model.userBirthday" placeholder="日期"/>
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 										<div class="form-group has-feedback">
 											<label for="email">信箱</label>
@@ -362,6 +365,7 @@ hr {
 													name="model.userEmail" placeholder="user@email.com" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -375,6 +379,7 @@ hr {
 												placeholder="輸入姓名" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 										
 										<div class="form-group has-feedback">
@@ -387,6 +392,7 @@ hr {
 												placeholder="輸入號碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
+											<div class="errorMsg"></div>
 										</div>
 										
 										<div class="form-group">
@@ -399,6 +405,7 @@ hr {
 												placeholder="輸入號碼" />
 											</div>
 											<span class="glyphicon"></span>
+											<div class="errorMsg"></div>
 										</div>
 										
 										<div>
@@ -417,6 +424,7 @@ hr {
 												<input type="text" class="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
 											</div>
 											<input type="text" id="credit" name="model.userBankAccount" style="display:none;"/>
+											<div class="errorMsg"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -632,10 +640,8 @@ function next(obj,n,next) {
 
 		//姓名電話
 		jQuery.validator.addMethod("input", function() {
-			$('#info-name').empty();
-			$('#info-name').append("(" + $('#name').val());
-			$('#info-phone').empty();
-			$('#info-phone').append("<p>&nbsp" + $('#phone').val() + "</p>");
+			$('#info-name').text("(" + $('#name').val() + ")");
+			$('#info-phone').text("<p>&nbsp" + $('#phone').val() + "</p>");
 			return true;
 		});
 		jQuery.validator.addMethod("alnumName", function(value, element) {
@@ -748,6 +754,10 @@ function next(obj,n,next) {
 		var validateFail=0;
 		$('#registration-form').validate(
 				{
+					errorPlacement: function(error, element) {
+						var parent = element.parent().parent();
+						$('div.errorMsg',parent).html(error);
+					},
 					debug : true,
 					rules : {
 						'model.userAccount' : {
