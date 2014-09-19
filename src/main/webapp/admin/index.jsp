@@ -115,6 +115,7 @@
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#announceFormPanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
+														<!-- .panel-heading -->
 														<div id="announceFormPanel" class="panel-collapse collapse in">
 															<div class="panel-body">
 																<div class="row">
@@ -132,11 +133,18 @@
 																			<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
 																		</div>
 																	</div>
-																	
 																</div>
 																<!-- .row -->
 															</div>
 															<!-- .panel-body -->
+															<div class="panel-footer">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnAnnounce">新增</button>
+																	</div>
+																</div>
+															</div>
+															<!-- .panel-footer -->
 														</div>
 														<!-- #announceFormPanel -->
 													</div>
@@ -221,13 +229,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_A">讓分(客)(-1.5)</label>
+																						<label for="ATS_A">讓分(客)</label>
 																						<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_H">讓分(主)(+1.5)</label>
+																						<label for="ATS_H">讓分(主)</label>
 																						<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 																					</div>
 																				</div>
@@ -239,13 +247,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SC_H">總分(大7.5)</label>
+																						<label for="SC_H">總分(大)</label>
 																						<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SC_L">總分(小7.5)</label>
+																						<label for="SC_L">總分(小)</label>
 																						<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
 																					</div>
 																				</div>
@@ -296,6 +304,15 @@
 																</div>
 																<!-- .panel-body -->
 															</form>
+															<div class="panel-footer">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnGame">新增</button>
+																	</div>
+																</div>
+															</div>
+															<!-- .panel-footer -->
+														</div>
 														<!-- #gameFormPanel -->
 													</div>
 													<!-- .panel -->
@@ -337,6 +354,7 @@
 	(function($) {
 		
 		/* Begin of gameTable */
+		var gameNumArray = new Array();
 		$.post('<c:url value="/admin/gameAdmin?method:selectLatestFiveRecord"/>', function(data) {
 			
 			$.each(data, function(index, game) {
@@ -347,7 +365,12 @@
 				child += '<td>' + game.teamHome.teamName + '</td>';
 				child += '</tr>';
 				$('#gameList').append(child);
+				
+				gameNumArray.push(game.gameNum);
 			});
+			
+			var maxGameNum = Math.max.apply(Math, gameNumArray);
+			$('[name="model.gameNum"]').val(maxGameNum + 1);
 		}, 'json');
 		/* End of gameTable */
 		
@@ -365,6 +388,103 @@
 			});
 		}, 'json');
 		/* End of announceTable */
+		
+		//Begin of btnAnnounce
+		$('#btnAnnounce').click(function() {
+			$.post('<c:url value="/admin/announceAdmin?method:insert"/>',{
+				'model.announceTitle':$('#announceTitle').val(),
+				'model.announceContent':$('#announceContent').val()
+			});
+			
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnAnnounce
+		
+		//Begin of teamListChangeEvent
+		$('#teamAwayList').change(function() {
+			var value = $(this).val();
+			$('#teamHomeList option').prop('disabled', false).css('display', 'inline');
+			$('#teamHomeList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
+		});
+		
+		$('#teamHomeList').change(function() {
+			var value = $(this).val();
+			$('#teamAwayList option').prop('disabled', false).css('display', 'inline');
+			$('#teamAwayList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
+		});
+		//End of teamListChangeEvent
+		
+		//Begin of listTeam
+		$('#leagueName').change(function() {
+			listTeam();
+		});
+		
+		function listTeam() {
+			$('#teamAwayList,#teamHomeList').empty();
+
+			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
+				'model.leagueName':$('#leagueName').val()
+			}, function(data) {
+				$.each(data, function(key, value) {
+					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					$('#teamAwayList,#teamHomeList').append(str);
+				});
+				
+				$('#teamAwayList')[0].selectedIndex = 0;
+				$('#teamAwayList').change();
+				$('#teamHomeList')[0].selectedIndex = 1;
+				$('#teamHomeList').change();
+			}, 'json');
+		}
+		
+		listTeam();
+		//End of listTeam
+		
+		//Begin of btnGame
+		$('#btnGame').click(function() {
+			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
+				//'model.ballType':$('[name="catagory"]').val(),
+				'model.ballType':'Baseball',
+				'model.leagueName':$('[name="model.leagueName"]').val(),
+				'model.gameNum':$('[name="model.gameNum"]').val(),
+				'model.gameTime':$('[name="model.gameTime"]').val(),
+				'teamAwayId':$('[name="teamAwayId"]').val(),
+				'teamHomeId':$('[name="teamHomeId"]').val(),
+				'model.gameScoreAway':0,
+				'model.gameScoreHome':0
+			}, function(data) {
+				$('.form-decimal').each(function() {
+					var oddCombination = 0;
+					
+					var oddType = $(this).attr('name');
+					if (oddType.indexOf('EO_') != -1) {
+						oddType = oddType.replace('EO_', '');
+					} else if (oddType == 'ATS_A') {
+						oddCombination = $('#ATS_A_Combination').val();
+					} else if (oddType == 'ATS_H') {
+						oddCombination = $('#ATS_H_Combination').val();
+					} else if (oddType.indexOf('SC_') != -1) {
+						oddCombination = $('#SC_Combination').val();
+					}
+					$.post('<c:url value="/admin/oddsAdmin"/>', {
+						'model.gameId':data,
+				    	'model.oddType':oddType,
+				    	'model.oddValue':$(this).val(),
+				    	'model.oddCombination':oddCombination,
+				    	'model.count':0,
+					}, function(data) {
+						return true;
+					});
+				});
+			});
+				
+			$(document).ajaxStop(function() {
+				window.location.reload(true);
+			});
+		});
+		//End of btnGame
 		
 		/* Begin of styling */
 		function resetInput() {
