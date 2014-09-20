@@ -869,7 +869,7 @@
 			'autoWidth': false,
 			'order': [[ 0, 'desc' ]],
 			'columns': [{'width': '15%'},
-			            {'width': '25%'},
+			            {'width': '20%'},
 			            {'width': '20%'},
 			            {'width': '20%'},
 			            {'width': '10%'},
