@@ -126,7 +126,7 @@
 																	<div class="col-sm-12">
 																		<div class="form-group">
 																			<label for="announceTitle">公告標題</label>
-																			<input class="form-control" type="text" name="model.announceTitle" id="announceTitle">
+																			<input class="form-control input-sm" type="text" name="model.announceTitle" id="announceTitle">
 																		</div>
 																	</div>
 																	
