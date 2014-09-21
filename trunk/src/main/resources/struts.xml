@@ -8,6 +8,7 @@
   <constant name="struts.devMode" value="true" />
   <constant name="struts.ui.theme" value="simple" />
   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+  <constant name="struts.custom.i18n.resources" value="language" />
   
   <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
   
@@ -70,10 +71,16 @@
   		<result>/admin/login.jsp</result>
   	</action>
   	
-  	<action name="">
+  	<action name="home">
 		<result>/admin/index.jsp</result>
 	</action>
 	
+	<action name="">
+		<result type="redirect">
+			<param name="location">/admin/home</param>
+			<param name="parse">false</param>
+		</result>
+	</action>
   </package>
   
   

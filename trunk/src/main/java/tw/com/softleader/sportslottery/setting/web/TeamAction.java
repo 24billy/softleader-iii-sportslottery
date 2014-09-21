@@ -15,6 +15,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeamAction extends ActionSupport {
@@ -147,7 +148,6 @@ public class TeamAction extends ActionSupport {
 		} else {
 			json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
 		}
-		
 		return Action.SUCCESS;
 	}
 	
