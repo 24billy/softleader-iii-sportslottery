@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<h4 class="panel-title">
-																<i class="fa fa-fw fa-bullhorn"></i><span class="left10">最新公告</span>
+																<i class="fa fa-fw fa-bullhorn"></i><span class="left10"><s:text name="admin.index.announce.title"/></span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#announcePanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
