@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,8 @@ public class TeamAction extends ActionSupport {
 	private String json;
 
 	private String leagueName;
+	
+	private Locale locale = ActionContext.getContext().getLocale();
 	
 	public String getLeagueName() {
 		return leagueName;
@@ -148,6 +151,7 @@ public class TeamAction extends ActionSupport {
 		} else {
 			json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
 		}
+		
 		return Action.SUCCESS;
 	}
 	
