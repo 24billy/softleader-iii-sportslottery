@@ -33,10 +33,10 @@
 					<div class="col-sm-9 container-right animated fadeIn">
 						<div class="row">
 							<div class="col-sm-12">
-								<ol class="breadcrumb">
+								<ul class="breadcrumb">
 		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
 		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
-								</ol>
+								</ul>
 							</div>
 						</div>
 						<!-- .row -->
@@ -68,6 +68,7 @@
 <script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/highcharts.js"/>"></script>
+<script src="<c:url value="/js/highcharts.theme.sand-signika.js"/>"></script>
 <script src="<c:url value="/js/exporting.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
@@ -87,7 +88,7 @@
 		
 		$('#profitChart').highcharts({
 			'chart': {
-				'type': 'area'
+				'type': 'area',
 			},
 			'title': {
 				'text': '獲利表',
@@ -117,7 +118,8 @@
 			},
 			'series': [{
 				'name': '總獲利',
-				'data': $.parseJSON('${json}')
+				'data': $.parseJSON('${json}'),
+				'color': 'rgba(119,136,153,.25)',
 			}]
 		});
 		//End of profitChart

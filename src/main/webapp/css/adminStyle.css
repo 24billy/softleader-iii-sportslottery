@@ -47,7 +47,8 @@ textarea {
 	background-color: #fff;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border: 5px solid;
+	border-radius: 5px;
+	/*border: 5px solid;*/
 }
 
 .modal {
@@ -61,11 +62,11 @@ textarea {
 }
 
 .breadcrumb {
-	border: 5px solid;
+	/*border: 5px solid;*/
 }
 
 .panel {
-	border: 5px solid;
+	/*border: 5px solid;*/
 }
 
 .panel-heading{
