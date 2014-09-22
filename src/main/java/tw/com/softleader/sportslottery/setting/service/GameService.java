@@ -336,4 +336,8 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getGameOnComing() {
 		return dao.findGameOnComing();
 	}
+	
+	public List<String> getBallTypes() {
+		return dao.findBallTypes();
+	}
 }

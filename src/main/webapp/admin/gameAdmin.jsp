@@ -46,9 +46,18 @@
 							<div class="col-sm-12">
 								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
 									<select class="input-sm" id="catagory" name="catagory">
-										<option value="Baseball">棒球</option>
-										<option value="Basketball">籃球</option>
-										<option value="soccer">足球</option>
+										<c:choose>
+											<c:when test="${locale.language eq 'zh'}">
+												<option value="Baseball">棒球</option>
+												<option value="Basketball">籃球</option>
+												<option value="soccer">足球</option>
+											</c:when>
+											<c:otherwise>
+												<option value="Baseball">Baseball</option>
+												<option value="Basketball">Basketball</option>
+												<option value="Soccer">Soccer</option>
+											</c:otherwise>
+										</c:choose>
 									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
