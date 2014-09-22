@@ -71,16 +71,10 @@
   		<result>/admin/login.jsp</result>
   	</action>
   	
-  	<action name="home">
-		<result>/admin/index.jsp</result>
+  	<action name="home" class="adminAction" method="execute">
+		<result name="success">/admin/index.jsp</result>
 	</action>
 	
-	<action name="">
-		<result type="redirect">
-			<param name="location">/admin/home</param>
-			<param name="parse">false</param>
-		</result>
-	</action>
   </package>
   
   
@@ -299,7 +293,12 @@
   		</result>
   	</action>
   
-  	
+  	<action name="admin">
+		<result type="redirect">
+			<param name="location">home</param>
+			<param name="namespace">admin</param>
+		</result>
+	</action>
   	
   </package>
 </struts>
