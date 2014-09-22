@@ -24,8 +24,6 @@
 <script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
 
 
-
-
 <!--sidepanel  -->  
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
@@ -54,7 +52,6 @@
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
-
 </style>
 
 <script>

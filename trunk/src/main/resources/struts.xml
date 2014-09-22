@@ -196,6 +196,27 @@
 			<param name="inputName">inputStream</param>
 		</result>
 	</action>
+	<!-- 提取使用者資料 -->
+	<action name="userInfo" class="userAction" method="select">
+		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>
+	<!-- 驗證登入 -->
+	<action name="checkUser" class="userAction" method="checkUser">
+		<result name="checkUser" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>
+	<!-- 修改使用者資料 -->
+	<action name="updateUserInfo" class="userAction" method="updateUserInfo">
+		<result name="updateUserInfo" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>
 	
 	<!-- 回首頁action -->
 	<action name="goIndex" class="passToAction" method="goIndex">
