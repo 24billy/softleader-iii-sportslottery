@@ -118,7 +118,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('取得 "'+'${linkTeamSearch}'+'"選取比賽之前的投注統計');
+		$('#searchMessage').text('此場比賽之前，"'+'${linkTeamSearch}'+'"熱門過關統計');
 		$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		$.post(url, {
@@ -273,15 +273,85 @@ $(function () {
 	
 	function test6(){
 		var url = '<c:url value="/countInfoGraph"/>';
+		//傳過去teamName 和gameNum 皆為NULL, 所以會傳回所有資料
   		 $.post(url, function(data) { 
+  			 console.log(data);
 			if (data.indexOf('error') == -1) {
+				alert("successful");
 				$.parseJSON(data, function(index, row) {
+					alert("in parseJson");//沒進來
 					
 				});
 			} else {
 				alert(data);
 			}
 		});
+	}
+	
+	function test7(){
+		var url = '<c:url value="/countInfoGraph"/>';
+		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
+		var child='';	
+		child += '過關	歷史\n'; 
+		$('#searchMessage').text('取得 "'+'${linkTeamSearch}'+'"選取比賽之前的投注統計');
+		$('#modalBox').modal('show');
+		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+ 		$.post(url, {
+ 			'linkGameNum':'${linkGameNum}',
+ 			'linkTeamSearch':'${linkTeamSearch}'
+ 			},function(data) { //用POST透過countInfoGraph取回的Json型式的值
+ 			//console.log(data);
+			$.each(data, function(key, value) { 
+				var type=value['ATS_A'];
+				teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
+	 			teamNameHome[i] = type.teamNameHome;
+					console.log(i+' AAAway : '+teamNameAway[i]);
+					//console.log(i+' Home : '+teamNameHome[i]);
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				var percent=type.percentage;
+				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
+
+					var type=value['ATS_H'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+				
+					var type=value['SU_A'];
+					var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				var percent=type.percentage;
+				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SU_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_H'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['SC_L'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['ODD'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+				
+				var type=value['EVEN'];
+				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				var percent=type.percentage;
+				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+				
+				i +=8;
+			});  
+			$('#tsv').append(child);
+		},
+		'json');  
+		 /* console.log(child); */ 
 	}
 
 
@@ -456,7 +526,7 @@ $(function () {
 
 	
 	
-<div class="alert alert-danger" role="alert">最熱門的單場過關投注是..........</div>
+<div class="alert alert-danger" role="alert" id ="searchMessage"></div>
 
 
 
