@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>隊伍管理</title>
+<title><s:text name="admin.teamAdmin"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
@@ -34,8 +35,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
-			  						<li class="active"><i class="fa fa-fw fa-users"></i><span class="left5">隊伍管理</span></li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
+			  						<li class="active"><i class="fa fa-fw fa-users"></i><span class="left5"><s:text name="admin.teamAdmin"/></span></li>
 								</ol>
 							</div>
 						</div>
@@ -53,7 +54,7 @@
 									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
-								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增隊伍</span></button>
+								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.teamAdmin.add"/></span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -64,9 +65,9 @@
 								<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
 									<thead>
 										<tr>
-											<th>聯盟</th>
-											<th>隊伍名稱</th>
-											<th>功能</th>
+											<th><s:text name="admin.team.leagueName"/></th>
+											<th><s:text name="admin.team.teamName"/></th>
+											<th><s:text name="admin.btn.action"/></th>
 										</tr>
 									</thead>
 									<tbody id="teamList">
@@ -95,7 +96,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="teamModalTitle" class="modal-title">新增隊伍</h3>
+						<h3 id="teamModalTitle" class="modal-title"><s:text name="admin.teamAdmin.add"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -104,7 +105,7 @@
 						
 							<div class="row">
 								<div class="col-sm-12">
-									<label for="leagueName">聯盟</label>
+									<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 									<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 										<option value="美國職棒" selected>美國職棒</option>
 										<option value="中華職棒">中華職棒</option>
@@ -119,8 +120,8 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label for="teamName">隊伍名稱</label>
-										<input class="form-control input-sm" id="teamName" name="model.teamName" placeholder="隊伍名稱">
+										<label for="teamName"><s:text name="admin.team.teamName"/></label>
+										<input class="form-control input-sm" id="teamName" name="model.teamName" placeholder="<s:text name="admin.team.teamName"/>">
 									</div>
 								</div>
 							</div>
@@ -131,8 +132,8 @@
 					</form>
 					<!-- #teamform -->
 			      	<div id="teamModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnMerge"><s:text name="admin.btn.confirm"/></button>
 			      	</div>
 		      		
 		      		<!-- .modal-footer -->
@@ -153,7 +154,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="deleteModalTitle" class="modal-title">刪除隊伍</h3>
+						<h3 id="deleteModalTitle" class="modal-title"><s:text name="admin.teamAdmin.delete"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -161,7 +162,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認刪除隊伍？</h4>
+								<h4 class="text-center"><s:text name="admin.teamAdmin.delete.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -169,8 +170,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="deleteModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnDelete">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnDelete"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -196,7 +197,6 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
-		
 		//Begin of leagueName
 		var leagueName = '${leagueName}';
 		if (leagueName == null || leagueName == "") {
@@ -211,8 +211,14 @@
 		$.each(teamList, function(index, team) {
 			var child = '';
 			child += '<tr>';
-			child += '<td>' + team.leagueName + '</td>';
-			child += '<td>' + team.teamName + '</td>';
+			if ('${locale.language}' == 'zh') {
+				child += '<td>' + team.leagueName + '</td>';
+				child += '<td>' + team.teamName + '</td>';
+			} else {
+				child += '<td>' + team.leagueNameEn + '</td>';
+				child += '<td>' + team.teamNameEn + '</td>';
+			}
+			
 			child += '<td>';
 			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
 			child += '<button type="button" value="' + team.id + '"class="btn btn-default btn-xs btn-del left10" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
@@ -224,11 +230,11 @@
 		
 		//Begin of listTeam
 		$('#btnAddTeam').click(function() {
-			$('#teamModalTitle').text('新增隊伍');
+			$('#teamModalTitle').text('<s:text name="admin.teamAdmin.add"/>');
 			resetInput();
 		});
 		$('.btn-edit').click(function() {
-			$('#teamModalTitle').text('編輯隊伍');
+			$('#teamModalTitle').text('<s:text name="admin.teamAdmin.edit"/>');
 			$.post('<c:url value="/admin/teamAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
@@ -282,12 +288,12 @@
 		
 		$('.btn-edit').tooltip({
 			'placement': 'top',
-			'title': '編輯隊伍'
+			'title': '<s:text name="admin.teamAdmin.edit"/>'
 		});
 		
 		$('.btn-del').tooltip({
 			'placement': 'top',
-			'title': '刪除隊伍'
+			'title': '<s:text name="admin.teamAdmin.delete"/>'
 		});
 		
 		$('#teamTable').dataTable({

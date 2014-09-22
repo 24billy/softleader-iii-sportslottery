@@ -7,9 +7,9 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<p class="lead">
-					<i class="fa fa-fw fa-copyright"></i> CECJ05. All Rights Reserved
+					<i class="fa fa-fw fa-copyright"></i><span class="left5">CECJ05. All Rights Reserved</span>
 					<span class="pull-right hidden-xs">
-						<a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i> Sports Lottery Admin</a>
+						<a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left">Sports Lottery Admin</span></a>
 					</span>
 				</p>
 			</div>

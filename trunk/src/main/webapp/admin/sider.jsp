@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <nav class="navbar navbar-inverse navbar-slider">
 	<div class="navbar-header">
@@ -15,11 +16,11 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left10">首頁</span></a></li>
-			<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i><span class="left10">賽事管理</span></a></li>
-			<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i><span class="left10">隊伍管理</span></a></li>
-			<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i><span class="left10">公告管理</span></a></li>
-			<li><a href="<c:url value="/admin/adminChart"/>"><i class="fa fa-fw fa-line-chart"></i><span class="left10">報表</span></a></li>
+			<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left10"><s:text name="admin.home"/></span></a></li>
+			<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i><span class="left10"><s:text name="admin.gameAdmin"/></span></a></li>
+			<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i><span class="left10"><s:text name="admin.teamAdmin"/></span></a></li>
+			<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i><span class="left10"><s:text name="admin.announceAdmin"/></span></a></li>
+			<li><a href="<c:url value="/admin/adminChart"/>"><i class="fa fa-fw fa-line-chart"></i><span class="left10"><s:text name="admin.adminChart"/></span></a></li>
 		</ul>
 	</div>
 	<!-- .navbar-slider -->
