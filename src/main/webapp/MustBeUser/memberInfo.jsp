@@ -60,9 +60,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputAddress" class="col-sm-2 control-label">地址</label>
+								<label for="inputPhone" class="col-sm-2 control-label">電話</label>
 								<div class="col-sm-10">
-									<input id="inputAddress" type="text" class="form-control editable" disabled>
+									<input id="inputPhone" type="text" class="form-control editable" disabled>
 								</div>
 							</div>
 							<div class="form-group">
@@ -119,14 +119,16 @@
 				type:'post',
 				dataType:'json',
 				success:function(datas){
+					console.log(datas)
 					$('#inputAccount').val(datas.userAccount);
 					$('#inputBankAccount').val(datas.userBankAccount);
 					$('#inputName').val(datas.userName);
 					$('#inputBirth').val(millisecondToDate(datas.userBirthday.iLocalMillis));
-					$('#inputAddress').val(datas.userAddress);
+					$('#inputPhone').val(datas.userPhone);
 					$('#inputEmail').val(datas.userEmail);
 				}
 			});
+			$('#inputPass').val('');
 		}
 		
 		//開始編輯
@@ -142,7 +144,8 @@
 		$('#save').on('click', function(){
 			if($('#inputPass').val().trim().length <= 0){
 				$('#passConfirm').addClass('has-error');
-				$('#passConfirm').attr('placeholder', '請輸入密碼');
+				$('#alert').html('<strong>密碼不能為空:</strong>請輸入密碼');
+				$('#alert').show();
 			} else {
 				$('#passConfirm').removeClass('has-error');
 				//登入驗證先
@@ -171,7 +174,7 @@
 									'model.userName':$('#inputName').val(),
 									'model.userEmail':$('#inputEmail').val(),
 									'model.userBirthday':dateFormat,
-									'model.userAddress':$('#inputAddress').val(),
+									'model.userPhone':$('#inputPhone').val(),
 								},
 								success:function(updateResult){
 									if(updateResult){
@@ -186,7 +189,7 @@
 						} else {
 							//驗證登入失敗
 							$('#passConfirm').addClass('has-error');
-							$('#alert').text('密碼錯誤，請重新輸入密碼');
+							$('#alert').html('<strong>密碼錯誤:</strong>請重新輸入密碼');
 							$('#alert').show();
 						}
 					}
