@@ -250,8 +250,11 @@
 
 	<!-- email -->
     <action name="emailer" class="userAction" method="forgetPassword">
-         <result name="success">/Security/Email/success.jsp</result>
-         <result name="error">/Security/Email/index.jsp</result>
+         <result name="success">/Security/Result/success.jsp</result>
+         <result name="error" type="stream">
+         	<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+         </result>
      </action>
     <!-- lottery真實投注 -->
 	<action name="lottery" class="lotteryAction" method="lottery">
