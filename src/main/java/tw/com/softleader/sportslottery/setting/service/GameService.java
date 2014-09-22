@@ -179,10 +179,13 @@ public class GameService extends GenericService<GameEntity> {
 	//這個LIST是之前所有比賽的投注資訊
 	public List<Map<String, CountBean>> getCountInfoHistory (String teamName, Long gameId){
 		try {
-			
+			List<GameEntity> games = new ArrayList<GameEntity>();
+			if(gameId ==null){
+				games = dao.findForHistory(null, null, teamName);
+			}else{
 //			System.out.println("inside getCountInforHistory"+gameId);
-			List<GameEntity> games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
-
+				games = dao.findForHistory(null, dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
+			}	
 			//結束時間則以輸入gameId來尋找
 //			System.out.println(games.toString());
 			List<Map<String, CountBean>> listMap= new LinkedList<Map<String, CountBean>>();
@@ -247,14 +250,21 @@ public class GameService extends GenericService<GameEntity> {
 	
 	//從gameNum取得gameId
 	public Long getGameIdByGameNum(Long gameNum){
-		return this.getByGameNum(gameNum).getId();
+		
+		if(gameNum ==null){
+			return null;
+			
+		}
+	
+		return this.getByGameNum(1L).getId();//如果gameNum = null 不會到達這裡
+		
 	}
 	
 	public List<GameEntity> getFinishedGameToday() {
 		return dao.findFinishedGameToday();
 	}
 
-	//單筆過關投注按比率大小從大排到小
+	//單筆過關投注按比率大小從大排到小，取得List<CountBean>
 	public List<CountBean> getSortCountHistory(List<Map<String, CountBean>> listMap){
 		List<CountBean> totalList = new LinkedList<CountBean>(); //用來裝List<Map<String, CountBean>>, 其中Map<String, CountBean>將轉成List
 		
