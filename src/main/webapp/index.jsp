@@ -196,10 +196,7 @@
                 </div>
                 <div>
                     <ul class="pager">
-                        <li><a href="#">牆頭草</a></li>
-                        <li><a href="#">逆水行舟</a></li>
-                        <li><a href="#">錢丟水溝</a></li>
-                        <li><a href="#">背水一戰</a></li>
+                       <li id='randomLottery'><a href="#">錢丟水溝</a></li>
                     </ul>
                  </div>
             </div>
@@ -846,6 +843,32 @@ function odds_refresh(){
     });  
 
 }
+$('#randomLottery').on('click',function(){
+    var randomOdd=0;
+    
+    while(!galbalOdds[randomOdd]){
+            randomOdd=parseInt(Math.random()*galbalOdds.length)+1;              
+            console.log("randomOdd"+randomOdd);             
+    }
+
+    
+    var userOddInfo = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
+    var userGameInfo = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
+    
+    if(!userOddInfo[randomOdd]){
+        var thisOdd = galbalOdds[randomOdd];
+        var thisGame = galbalGames[thisOdd.gameNum];
+        userOddInfo[randomOdd] = thisOdd;
+        userGameInfo[thisOdd.gameNum] = thisGame;
+    }
+    
+    sessionStorage.userOddInfo = JSON.stringify(userOddInfo);
+    sessionStorage.userGameInfo = JSON.stringify(userGameInfo);
+    sessionStorage.userOdds=galbalOdds[randomOdd].id;
+    
+    odds_refresh();
+    
+});
 
 //-----------------------------------------------------
 //投注區更新結束
