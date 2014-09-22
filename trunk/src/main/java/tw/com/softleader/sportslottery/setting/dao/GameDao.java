@@ -306,4 +306,10 @@ public class GameDao extends GenericDao<GameEntity>{
 					.addOrder(Order.desc("id"))
 					.setMaxResults(5).list();
 	}
+	
+	public List<String> findBallTypes() {
+		return getSession().createCriteria(GameEntity.class)
+					.setProjection(Projections.distinct(Projections.property("ballType")))
+					.list();
+	}
 }
