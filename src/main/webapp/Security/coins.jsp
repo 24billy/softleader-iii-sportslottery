@@ -316,7 +316,7 @@
     	$('#payWay2').hide();
     	$('#payWay3').show();
     	$('.account').html("繳款方式");
-    	$('.numberCoins').html('請輸入卡片上帳號密碼，並注意大小寫');
+    	$('.numberCoins').html('請輸入卡片上卡號及密碼，並注意大小寫');
 	});
 	
 	$('#activate-step-3').on('click', function(e) {

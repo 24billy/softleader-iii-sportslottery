@@ -44,7 +44,7 @@
 	width:100px;
 }
 
-.login-error
+.login-error,.forgetPass
 {
 	color: red;
 }
@@ -200,7 +200,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">x</button>
+					<button type="button" class="close" id="close2" data-dismiss="modal">x</button>
 					<h3>全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
@@ -216,7 +216,7 @@
 						</p>
 						<p>
 							<button type="button" id="login" class="btn btn-primary">登入</button>
-							<a href="#">忘記密碼</a>
+							<a href="#" id="forgetPass">忘記密碼</a>
 							<div id="loginError" class="login-error"></div>
 						</p>
 					</form>
@@ -227,8 +227,44 @@
 			</div>
 		</div>
 	</div>
+	<!--忘記密碼 -->
+	<div class="modal fade" id="myModal2">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">x</button>
+					<h3>馬上找回您寶貝的密碼</h3>
+				</div>
+				<form role="form">
+				 	<div class="form-group">
+				    	<label for="forgetAccount">輸入您註冊的帳號:</label>
+				    	<input type="text" id="forgetAccount"/><br/>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="forgetEmail">輸入您註冊的Email:</label>
+				    	<input type="text" id="forgetEmail"/><br/>
+				  	</div>
+				</form>
+				<button class="btn btn-success" id="forgetSumbit" >確認送出</button>
+				<span class="forgetPass"></span>
+			</div>
+		</div>
+	</div>
+	<div id="dialog-forget" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+					<img src="images/success.png">
+					<h4>
+						<span id="forgetSuccess">密碼已寄至您信箱 請速收信</span>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<script>
+	<script>
 
 (function($) {
 	var str = "";
@@ -238,6 +274,12 @@
     	$('#myModal').modal('show');
     	$('#loginError').html('您必須登入才能投注!!!');
     }
+	
+	$('#forgetPass').click(function() {
+		$('#close2').click();
+		//$('#myModal').modal('hide');
+		$('#myModal2').modal('show');
+	});
 	
 	$('#toLogin').click(function() {
 		$('#loginError').html('');
@@ -319,6 +361,42 @@
 				$("#login").click();
 			}
 		}
+	});
+	
+	$('#myModal2').keyup(function() {
+		if($('#forgetAccount').val()!='' && $('#forgetEmail').val()!='') {
+			if(event.keyCode == 13) {
+				$("#forgetSumbit").click();
+			}
+		}
+	});
+	
+	//忘記密碼
+	$('#forgetSumbit').click(function() {
+		$.ajax({
+			url:"<c:url value='/emailer'/>",
+			type:'post',
+			data:{
+				account:$('#forgetAccount').val(),
+				to:$('#forgetEmail').val(),
+			},
+			success:function(data) {
+				if(data=="success"){
+					console.log(data);
+					$('.forgetPass').empty();
+					$('#myModal2').modal('hide');
+					$('#dialog-forget').modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
+				} else {
+					$('.forgetPass').empty();
+					$('.forgetPass').append(data);
+				}
+				
+			}
+		});
 	});
 	
 	

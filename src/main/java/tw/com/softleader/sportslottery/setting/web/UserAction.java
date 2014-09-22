@@ -208,20 +208,26 @@ public class UserAction extends ActionSupport {
 	
 	//發送新密碼
 	public String forgetPassword() {
+		String message = null;
 		int ret = service.forgetPassword(to, account);
 		switch(ret) { 
 			case 0:
 				return SUCCESS;
 			case 1:
-				this.addFieldError("emailCheck", getText("invalid.fieldvalue.forget.email")); 
+				message = new Gson().toJson(getText("invalid.fieldvalue.forget.email"));
+				//addFieldError("emailCheck", getText("invalid.fieldvalue.forget.email")); 
 				break;
 			case 2:
-				this.addFieldError("accountCheck", this.getText("invalid.fieldvalue.forget.account"));
+				message = new Gson().toJson(this.getText("invalid.fieldvalue.forget.account"));
+				//this.addFieldError("accountCheck", this.getText("invalid.fieldvalue.forget.account"));
 				break;
 			default: 
-				this.addFieldError("orther", this.getText("invalid.fieldvalue.other"));
+				message = new Gson().toJson(this.getText("invalid.fieldvalue.other"));
+				//this.addFieldError("orther", this.getText("invalid.fieldvalue.other"));
 				break;
 		}
+		inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
+		//inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
 		return ERROR;
 	}
 	

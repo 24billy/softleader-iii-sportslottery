@@ -260,29 +260,29 @@
 						}
 						
 						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
-							lottery.com4 = "<img src='images/error.png' />";
-							lottery.com5 = "<img src='images/error.png' />";
-							lottery.com6 = "<img src='images/error.png' />";
-							lottery.com7 = "<img src='images/error.png' />";
-							lottery.com8 = "<img src='images/error.png' />";
+							lottery.com4 = "<img src='images/error2.png' />";
+							lottery.com5 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						if((data.lotteryOdds).length == 4 && lottery.play == "過關組合") {
-							lottery.com5 = "<img src='images/error.png' />";
-							lottery.com6 = "<img src='images/error.png' />";
-							lottery.com7 = "<img src='images/error.png' />";
-							lottery.com8 = "<img src='images/error.png' />";
+							lottery.com5 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						if((data.lotteryOdds).length == 5 && lottery.play == "過關組合") {
-							lottery.com6 = "<img src='images/error.png' />";
-							lottery.com7 = "<img src='images/error.png' />";
-							lottery.com8 = "<img src='images/error.png' />";
+							lottery.com6 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						if((data.lotteryOdds).length == 6 && lottery.play == "過關組合") {;
-							lottery.com7 = "<img src='images/error.png' />";
-							lottery.com8 = "<img src='images/error.png' />";
+							lottery.com7 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						if((data.lotteryOdds).length == 7 && lottery.play == "過關組合") {
-							lottery.com8 = "<img src='images/error.png' />";
+							lottery.com8 = "<img src='images/error2.png' />";
 						}
 						
 						//每注資料以oddsId排列
