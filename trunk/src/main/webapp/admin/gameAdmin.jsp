@@ -123,11 +123,6 @@
 											<div class="form-group">
 												<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 												<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-													<option value="美國職棒" selected>美國職棒</option>
-													<option value="中華職棒">中華職棒</option>
-													<option value="中央聯盟">中央聯盟</option>
-													<option value="太平洋聯盟">太平洋聯盟</option>
-													<option value="韓國職棒">韓國職棒</option>
 												</select>
 											</div>
 										</div>
@@ -559,6 +554,15 @@
 		});
 		//End of gameTable
 		
+		//Begin of listLeague
+		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
+			$.each(data, function(index, leagueName) {
+				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+				$('#leagueName').append(str);
+			});
+		}, 'json');
+		//End of listLeague
+		
 		//Begin of listTeam
 		$('#btnAddGame').click(function() {
 			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.add"/>');
@@ -621,9 +625,10 @@
 			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
 				'model.leagueName':$('#leagueName').val()
 			}, function(data) {
-				var teamName = zh? value.teamName:value.teamNameEn;
 				$.each(data, function(key, value) {
+					var teamName = zh? value.teamName:value.teamNameEn;
 					var str = '<option value=' + value.id + '>' + teamName + '</option>';
+					console.log(str);
 					$('#teamAwayList,#teamHomeList').append(str);
 				});
 				

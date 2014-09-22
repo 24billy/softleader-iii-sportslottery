@@ -417,8 +417,8 @@ public class GameAction extends ActionSupport {
 			}
 			
 		} else {
-			model.setTeamHome(teamAway);
-			model.setTeamAway(teamHome);
+			model.setTeamAway(teamAway);
+			model.setTeamHome(teamHome);
 			model.setIsEnd(false);
 			model.setGameStatus(0L);
 			
