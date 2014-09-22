@@ -24,12 +24,12 @@ public class TeamDao  extends GenericDao<TeamEntity> {
 	
 	public List<String> leagueNames() {
 		return getSession().createCriteria(TeamEntity.class)
-				.setProjection(Projections.distinct(Projections.property("leagueNamesEn"))).list();
+				.setProjection(Projections.distinct(Projections.property("leagueNameEn"))).list();
 	}
 	
 	public List<String> leagueNamesEn() {
 		return getSession().createCriteria(TeamEntity.class)
-				.setProjection(Projections.distinct(Projections.property("leagueNamesEn"))).list();
+				.setProjection(Projections.distinct(Projections.property("leagueNameEn"))).list();
 	}
 	
 }
