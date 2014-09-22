@@ -14,8 +14,14 @@ public class TeamEntity extends GenericEntity {
 	@Column(name = "TEAM_NAME", length = 50, nullable = false, unique = true)
 	private String teamName;
 	
+	@Column(name = "TEAM_NAME_EN", length = 50, nullable = false, unique = true)
+	private String teamNameEn;
+	
 	@Column(name="LEAGUE_NAME", length=50, nullable = false)
 	private String leagueName;
+	
+	@Column(name="LEAGUE_NAME_EN", length=50, nullable = false)
+	private String leagueNameEn;
 
 	public String getTeamName() {
 		return teamName;
@@ -23,6 +29,14 @@ public class TeamEntity extends GenericEntity {
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+
+	public String getTeamNameEn() {
+		return teamNameEn;
+	}
+
+	public void setTeamNameEn(String teamNameEn) {
+		this.teamNameEn = teamNameEn;
 	}
 
 	public String getLeagueName() {
@@ -33,10 +47,19 @@ public class TeamEntity extends GenericEntity {
 		this.leagueName = leagueName;
 	}
 
+	public String getLeagueNameEn() {
+		return leagueNameEn;
+	}
+
+	public void setLeagueNameEn(String leagueNameEn) {
+		this.leagueNameEn = leagueNameEn;
+	}
+
 	@Override
 	public String toString() {
-		return "TeamEntity [teamName=" + teamName + ", leagueName="
-				+ leagueName + ", id=" + id + "]";
+		return "TeamEntity [teamName=" + teamName + ", teamNameEn="
+				+ teamNameEn + ", leagueName=" + leagueName + ", leagueNameEn="
+				+ leagueNameEn + "]";
 	}
 
 }

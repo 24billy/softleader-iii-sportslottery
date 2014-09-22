@@ -33,4 +33,11 @@ public class TeamService extends GenericService<TeamEntity> {
 		return dao.leagueNames();
 	}
 	
+	public List<TeamEntity> getTeamsByLeagueNameEn(String leagueNameEn){
+		return dao.findByLeagueNameEn(leagueNameEn);
+	}
+	
+	public List<String> leagueNamesEn() {
+		return dao.leagueNamesEn();
+	}
 }
