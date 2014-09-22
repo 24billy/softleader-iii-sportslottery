@@ -17,9 +17,19 @@ public class TeamDao  extends GenericDao<TeamEntity> {
 				.add(Restrictions.eq("leagueName", leagueName)).list();
 	}
 	
+	public List<TeamEntity> findByLeagueNameEn(String leagueNameEn){
+		return getSession().createCriteria(TeamEntity.class)
+				.add(Restrictions.eq("leagueNameEn", leagueNameEn)).list();
+	}
+	
 	public List<String> leagueNames() {
 		return getSession().createCriteria(TeamEntity.class)
-				.setProjection(Projections.distinct(Projections.property("leagueName"))).list();
+				.setProjection(Projections.distinct(Projections.property("leagueNamesEn"))).list();
+	}
+	
+	public List<String> leagueNamesEn() {
+		return getSession().createCriteria(TeamEntity.class)
+				.setProjection(Projections.distinct(Projections.property("leagueNamesEn"))).list();
 	}
 	
 }
