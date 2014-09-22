@@ -18,6 +18,22 @@ function millisecondToDate(millisecond){
 	return str;
 }
 
+function millisecondToDateEn(millisecond){
+	var d = new Date();
+	var n = d.getTimezoneOffset()*60000;
+	d = new Date(millisecond+n);
+	var month = (d.getMonth()+1);
+	if (month<10) {
+		month = "0" + month;
+	}
+	var day = d.getDate();
+	if (day<10) {
+		day = "0" + day;
+	}
+	var str = day + "/" + month + "/" + d.getFullYear();
+	return str;
+}
+
 function millisecondToTime(millisecond){
 	var d = new Date();
 	var n = d.getTimezoneOffset()*60000;
@@ -39,6 +55,43 @@ function millisecondToTime(millisecond){
 		day = "日";
 	} else {
 		day = "大老你開掛吧";
+	}
+
+	var hr = d.getHours();
+	if (hr<10){
+		hr = "0" + hr;	
+	}
+	
+	var min = d.getMinutes();
+	if (min<10){
+		min = "0" + min;	
+	}
+	
+	var str = hr + ":" + (min) + "(" + day + ")";
+	return str;
+}
+
+function millisecondToTimeEn(millisecond){
+	var d = new Date();
+	var n = d.getTimezoneOffset()*60000;
+	d = new Date(millisecond+n);
+	var day = "";
+	if (d.getDay() == 1) {
+		day = "Mon";
+	} else if (d.getDay() == 2) {
+		day = "Tue";
+	} else if (d.getDay() == 3) {
+		day = "Wed";
+	} else if (d.getDay() == 4) {
+		day = "Thur";
+	} else if (d.getDay() == 5) {
+		day = "Fri";
+	} else if (d.getDay() == 6) {
+		day = "Sat";
+	} else if (d.getDay() == 0) {
+		day = "Sun";
+	} else {
+		day = "Dont cheat!";
 	}
 
 	var hr = d.getHours();

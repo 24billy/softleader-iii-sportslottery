@@ -183,6 +183,7 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
+		var zh = '{locale.language}' == 'zh';
 		
 		//Begin of announceTable
 		var announceList = $.parseJSON('${json}');
@@ -192,11 +193,19 @@
 			child += '<td>' + announce.announceTitle + '</td>';
 			child += '<td>'; 
 			var announceTime = announce.announceTime.iLocalMillis;
-			child += millisecondToDate(announceTime) + ' ' + millisecondToTime(announceTime);
+			if (zh) {
+				child += millisecondToDate(announceTime) + ' ' + millisecondToTime(announceTime);
+			} else {
+				child += millisecondToDateEn(announceTime) + ' ' + millisecondToTimeEn(announceTime);
+			}
 			child += '</td>'; 
-			child += '<td>'; 
+			child += '<td>';
 			var modifiedTime = announce.modifiedTime.iLocalMillis;
-			child += millisecondToDate(modifiedTime) + ' ' + millisecondToTime(modifiedTime);
+			if (zh) {
+				child += millisecondToDate(modifiedTime) + ' ' + millisecondToTime(modifiedTime);
+			} else {
+				child += millisecondToDateEn(modifiedTime) + ' ' + millisecondToTimeEn(modifiedTime);
+			}
 			child += '</td>'; 
 			child += '<td>';
 			child += '<button type="button" value="' + announce.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
@@ -267,12 +276,12 @@
 		
 		$('.btn-edit').tooltip({
 			'placement': 'top',
-			'title': '編輯公告'
+			'title': '<s:text name="admin.announceAdmin.edit"/>'
 		});
 		
 		$('.btn-del').tooltip({
 			'placement': 'top',
-			'title': '刪除公告'
+			'title': '<s:text name="admin.announceAdmin.delete"/>'
 		});
 		
 		$('#announceTable').dataTable({

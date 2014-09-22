@@ -484,6 +484,7 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
+		var zh = '{locale.language}' == 'zh';
 		
 		//Begin of catagory
 		var catagory = '${catagory}';
@@ -503,10 +504,17 @@
 			child += '<td>' + game.gameNum + '</td>';
 			child += '<td>';
 			var gameTime = game.gameTime.iLocalMillis;
-			child += millisecondToDate(gameTime) + ' ' + millisecondToTime(gameTime);
+			if (zh) {
+				child += millisecondToDate(gameTime) + ' ' + millisecondToTime(gameTime);
+			} else {
+				child += millisecondToDateEn(gameTime) + ' ' + millisecondToTimeEn(gameTime);
+			}
+			
 			child += '</td>';
-			child += '<td>' + game.teamAway.teamName + '</td>';
-			child += '<td>' + game.teamHome.teamName + '</td>';
+			var teamAway = zh? game.teamAway.teamName:game.teamAway.teamNameEn;
+			var teamHome = zh? game.teamHome.teamName:game.teamHome.teamNameEn;
+			child += '<td>' + teamAway + '</td>';
+			child += '<td>' + teamHome + '</td>';
 			
 			var currentDate = new Date().getTime();
 			var gameTime = new Date(game.gameTime.iLocalMillis - 8 * 60 * 60 * 1000).getTime();
@@ -604,8 +612,9 @@
 			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
 				'model.leagueName':$('#leagueName').val()
 			}, function(data) {
+				var teamName = zh? value.teamName:value.teamNameEn;
 				$.each(data, function(key, value) {
-					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					var str = '<option value=' + value.id + '>' + teamName + '</option>';
 					$('#teamAwayList,#teamHomeList').append(str);
 				});
 				
