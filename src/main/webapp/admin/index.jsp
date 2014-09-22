@@ -169,11 +169,6 @@
 																			<div class="form-group">
 																				<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 																				<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-																					<option value="美國職棒" selected>美國職棒</option>
-																					<option value="中華職棒">中華職棒</option>
-																					<option value="中央聯盟">中央聯盟</option>
-																					<option value="太平洋聯盟">太平洋聯盟</option>
-																					<option value="韓國職棒">韓國職棒</option>
 																				</select>
 																			</div>
 																		</div>
@@ -360,6 +355,7 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
+		var zh = '${locale.language}' == 'zh';
 		
 		/* Begin of gameTable */
 		var gameNumArray = new Array();
@@ -369,8 +365,13 @@
 				var child = '';
 				child += '<tr>';
 				child += '<td>' + game.gameNum + '</td>';
-				child += '<td>' + game.teamAway.teamName + '</td>';
-				child += '<td>' + game.teamHome.teamName + '</td>';
+				if (zh) {
+					child += '<td>' + game.teamAway.teamName + '</td>';
+					child += '<td>' + game.teamHome.teamName + '</td>';
+				} else {
+					child += '<td>' + game.teamAway.teamNameEn + '</td>';
+					child += '<td>' + game.teamHome.teamNameEn + '</td>';
+				}
 				child += '</tr>';
 				$('#gameList').append(child);
 				
@@ -424,6 +425,15 @@
 		});
 		//End of teamListChangeEvent
 		
+		//Begin of listLeague
+		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
+			$.each(data, function(index, leagueName) {
+				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+				$('#leagueName').append(str);
+			});
+		}, 'json');
+		//End of listLeague
+		
 		//Begin of listTeam
 		$('#leagueName').change(function() {
 			listTeam();
@@ -436,7 +446,11 @@
 				'model.leagueName':$('#leagueName').val()
 			}, function(data) {
 				$.each(data, function(key, value) {
-					var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					if (zh) {
+						var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+					} else {
+						var str = '<option value=' + value.id + '>' + value.teamNameEn + '</option>';
+					}
 					$('#teamAwayList,#teamHomeList').append(str);
 				});
 				

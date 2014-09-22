@@ -46,11 +46,6 @@
 							<div class="col-sm-12">
 								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
 									<select class="input-sm" id="leagueNameList" name="leagueName">
-										<option value="美國職棒" selected>美國職棒</option>
-										<option value="中華職棒">中華職棒</option>
-										<option value="中央聯盟">中央聯盟</option>
-										<option value="太平洋聯盟">太平洋聯盟</option>
-										<option value="韓國職棒">韓國職棒</option>
 									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
@@ -107,11 +102,6 @@
 								<div class="col-sm-12">
 									<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 									<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-										<option value="美國職棒" selected>美國職棒</option>
-										<option value="中華職棒">中華職棒</option>
-										<option value="中央聯盟">中央聯盟</option>
-										<option value="太平洋聯盟">太平洋聯盟</option>
-										<option value="韓國職棒">韓國職棒</option>
 									</select>
 								</div>
 							</div>
@@ -229,6 +219,18 @@
 			$('#teamList').append(child);
 		});
 		//End of teamTable
+		
+		//Begin of listLeague
+		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
+			$.each(data, function(index, leagueName) {
+				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+				$('#leagueNameList').append(str);
+				$('#leagueName').append(str);
+			});
+			$('#leagueNameList')[0].selectedIndex = 0;
+			$('#leagueName')[0].selectedIndex = 0;
+		}, 'json');
+		//End of listLeague
 		
 		//Begin of listTeam
 		$('#btnAddTeam').click(function() {
