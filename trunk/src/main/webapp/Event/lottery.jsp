@@ -61,7 +61,6 @@
                                     <th>客隊隊伍</th>
                                     <th>主隊隊伍</th>
                                     <th>玩法</th>
-                                    <th>過關</th>
                                 </tr>
                             </thead>
                             <tbody id="oddsList">
@@ -73,7 +72,6 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr hidden="true">
                                     <td></td>
@@ -83,20 +81,8 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                </tr>                               
+                                 </tr>                               
                                 <tr hidden="true">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr hidden="true">
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -113,6 +99,14 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                </tr>
+                                <tr hidden="true">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                 </tr>
                                 <tr hidden="true">
@@ -123,7 +117,6 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr hidden="true">
                                     <td></td>
@@ -133,10 +126,8 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr hidden="true">
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -188,56 +179,13 @@
     });
     
     $.each(odds, function(index, odd){
-
-
-        var pass = '不知道有沒有過關';      
-        //console.log("odd:");
-        //console.log(odd);
-  
         $('#oddsList tr:eq('+index+') td:eq(6)').html(odd.oddType);  
-        pass = isPass(awayScoreByGameId[odd.gameId],homeScoreByGameId[odd.gameId],odd.oddCombination,odd.oddType);
-        if(pass=='過關'){
-            lotteryOddValue[prizeCount]=odd.oddValue;
-            prizeCount++;
-        }
-        
-        $('#oddsList tr:eq('+index+') td:eq(7)').html(pass);
     });
-
-    function isPass(awayScore,homeScore,oddCombination,oddType){
-        if(oddType=='SU_H' && (homeScore-awayScore)>0){
-            return '過關'; //不讓分主隊贏           
-        }
-        if(oddType=='SU_A' && (homeScore-awayScore)<0){
-            return '過關'; //不讓分客隊贏           
-        }
-        if(oddType=='ATS_H' && (homeScore-awayScore)>oddCombination){
-            return '過關'; //讓分主隊贏           
-        }
-        if(oddType=='ATS_A' && (awayScore-homeScore)>oddCombination){
-            return '過關'; //讓分客隊贏           
-        }
-        if(oddType=='SC_H' && (homeScore+awayScore)>oddCombination){
-            return '過關'; //總分合大於           
-        }
-        if(oddType=='SC_L' && (homeScore+awayScore)<oddCombination){
-            return '過關'; //總分合小於           
-        }
-        if(oddType=='ODD' && (homeScore+awayScore)%2==1){
-            return '過關'; //總分奇數           
-        }
-        if(oddType=='EVEN' && (homeScore+awayScore)%2==0){
-            return '過關'; //總分偶數           
-        }
-        else{
-            return '沒過關';
-        }
-    }
-    
+       
     
     var lottery = '${jsonLottery}' ? JSON.parse('${jsonLottery}') : [];
     var com='';
-    $('#lottery td:eq(1)').html('<h4>需你投注</h4>');
+    $('#lottery td:eq(1)').html('<h4>'+lottery.id+'</h4>');
     $('#lottery td:eq(2)').html('<h4>'+millisecondToDate(lottery.confirmTime.iLocalMillis)+'</h4>');
     
     if(lottery.com0==1){
