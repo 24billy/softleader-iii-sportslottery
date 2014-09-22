@@ -147,6 +147,7 @@ public class TeamAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("TeamAction admin()");
+		System.out.println(locale.getLanguage());
 		if (locale.getLanguage().equals("zh")) {
 			if (!StringUtils.isEmpty(leagueName)) {
 				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));

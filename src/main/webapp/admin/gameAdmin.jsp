@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>賽事管理</title>
+<title><s:text name="admin.gameAdmin"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
@@ -34,8 +35,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
-		  							<li class="active"><i class="fa fa-fw fa-table"></i><span class="left5">賽事管理</span></li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
+		  							<li class="active"><i class="fa fa-fw fa-table"></i><span class="left5"><s:text name="admin.gameAdmin"/></span></li>
 								</ol>
 							</div>
 						</div>
@@ -51,8 +52,8 @@
 									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
-								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增賽事</span></button>
-								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="fa fa-fw fa-trophy"></i><span class="left5">今日派彩</span></button>
+								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.gameAdmin.add"/></span></button>
+								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="fa fa-fw fa-trophy"></i><span class="left5"><s:text name="admin.gameAdmin.payoutToday"/></span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -63,12 +64,12 @@
 								<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
 									<thead>
 										<tr>
-											<th>賽事編號</th>
-											<th>賽事時程</th>
-											<th>客隊隊伍</th>
-											<th>主隊隊伍</th>
-											<th>狀態</th>
-											<th>功能</th>
+											<th><s:text name="admin.game.gameNum"/></th>
+											<th><s:text name="admin.game.gameTime"/></th>
+											<th><s:text name="admin.game.teamAway"/></th>
+											<th><s:text name="admin.game.teamHome"/></th>
+											<th><s:text name="admin.game.gameStatus"/></th>
+											<th><s:text name="admin.btn.action"/></th>
 										</tr>
 									</thead>
 									<tbody id="gameList">
@@ -97,7 +98,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="gameModalTitle" class="modal-title">新增賽事</h3>
+						<h3 id="gameModalTitle" class="modal-title"><s:text name="admin.form.gameForm"/></h3>
 					</div>
 					<!-- modal-header -->
 					<form role="form" id="gameForm">
@@ -111,7 +112,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="leagueName">聯盟名稱</label>
+												<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 												<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 													<option value="美國職棒" selected>美國職棒</option>
 													<option value="中華職棒">中華職棒</option>
@@ -127,7 +128,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="">賽事編號</label>
+												<label for="gameNum"><s:text name="admin.game.gameNum"/></label>
 												<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
 											</div>
 										</div>
@@ -137,14 +138,14 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="teamAwayList">客隊隊伍</label>
+												<label for="teamAwayList"><s:text name="admin.game.teamAway"/></label>
 												<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
 												</select>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="teamHomeList">主隊隊伍</label>
+												<label for="teamHomeList"><s:text name="admin.game.teamHome"/></label>
 												<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
 												</select>
 											</div>
@@ -155,7 +156,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="gameTime">賽事時程</label>
+												<label for="gameTime"><s:text name="admin.game.gameTime"/></label>
 												<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 											</div>
 										</div>
@@ -170,13 +171,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SU_A">不讓分(客)</label>
+												<label for="SU_A"><s:text name="admin.odds.SU_A"/></label>
 												<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SU_H">不讓分(主)</label>
+												<label for="SU_H"><s:text name="admin.odds.SU_H"/></label>
 												<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
 											</div>
 										</div>
@@ -186,13 +187,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_A">讓分(客)</label>
+												<label for="ATS_A"><s:text name="admin.odds.ATS_A"/></label>
 												<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ATS_H">讓分(主)</label>
+												<label for="ATS_H"><s:text name="admin.odds.ATS_H"/></label>
 												<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 											</div>
 										</div>
@@ -202,13 +203,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SC_H">總分(大)</label>
+												<label for="SC_H"><s:text name="admin.odds.SC_H"/></label>
 												<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="SC_L">總分(小)</label>
+												<label for="SC_L"><s:text name="admin.odds.SC_L"/></label>
 												<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
 											</div>
 										</div>
@@ -218,13 +219,13 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="EVEN">總分(單)</label>
+												<label for="EVEN"><s:text name="admin.odds.SC_EVEN"/></label>
 												<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label for="ODD">總分(雙)</label>
+												<label for="ODD"><s:text name="admin.odds.SC_ODD"/></label>
 												<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
 											</div>
 										</div>
@@ -236,21 +237,21 @@
 								<div class="col-sm-4">
 									
 									<div class="form-group">
-										<label for="ATS_A_Combination">讓分數設定(客)</label>
+										<label for="ATS_A_Combination"><s:text name="admin.odds.ATS_A_Combination"/></label>
 										<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
 									</div>
 								</div>
 								
 								<div class="col-sm-4">
 									<div class="form-group">
-										<label for="ATS_H_Combination">讓分數設定(主)</label>
+										<label for="ATS_H_Combination"><s:text name="admin.odds.ATS_H_Combination"/></label>
 										<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
 									</div>
 								</div>
 								
 								<div class="col-sm-4">
 									<div class="form-group">
-										<label for="SC_Combination">總分設定</label>
+										<label for="SC_Combination"><s:text name="admin.odds.SC_Combination"/></label>
 										<input class="form-control input-sm" id="SC_Combination" type="text" name="SC_Combination">
 									</div>
 								</div>
@@ -261,8 +262,8 @@
 		      		</form>
 					<!-- #gameForm -->	
 		      		<div id="gameModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnMerge"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 	      			
 				</div>
@@ -282,7 +283,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="deleteModalTitle" class="modal-title">刪除賽事</h3>
+						<h3 id="deleteModalTitle" class="modal-title"><s:text name="admin.gameAdmin.delete"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -290,7 +291,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認刪除賽事？</h4>
+								<h4 class="text-center"><s:text name="admin.gameAdmin.delete.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -298,8 +299,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="deleteModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnDelete">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnDelete"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -319,7 +320,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="statusModalTitle" class="modal-title">設定最後比分</h3>
+						<h3 id="statusModalTitle" class="modal-title"><s:text name="admin.gameAdmin.setGameScore"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -328,13 +329,13 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="">客隊分數</label>
+									<label for="gameScoreAway"><s:text name="admin.game.gameScoreAway"/></label>
 									<input class="form-control input-sm form-score" id="gameScoreAway" type="text" name="model.gameScoreAway">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="">主隊分數</label>
+									<label for="gameScoreHome"><s:text name="admin.game.gameScoreHome"/></label>
 									<input class="form-control input-sm form-score" id="gameScoreHome" type="text" name="model.gameScoreHome">
 								</div>
 							</div>
@@ -345,8 +346,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="statusModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnStatus">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnStatus"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -366,7 +367,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="openModalTitle" class="modal-title">開放投注</h3>
+						<h3 id="openModalTitle" class="modal-title"><s:text name="admin.gameAdmin.openOdds"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -374,7 +375,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認開放投注？</h4>
+								<h4 class="text-center"><s:text name="admin.gameAdmin.openOdds.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -382,8 +383,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="openModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnOpen">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnOpen"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -403,7 +404,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="payoutModalTitle" class="modal-title">樂透派彩</h3>
+						<h3 id="payoutModalTitle" class="modal-title"><s:text name="admin.gameAdmin.payout"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -411,7 +412,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認派彩？</h4>
+								<h4 class="text-center"><s:text name="admin.gameAdmin.payout.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -419,8 +420,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="payoutModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnPayout">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnPayout"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -440,7 +441,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="payoutTodayModalTitle" class="modal-title">今日樂透派彩</h3>
+						<h3 id="payoutTodayModalTitle" class="modal-title"><s:text name="admin.gameAdmin.payoutToday"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -448,7 +449,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認派彩？</h4>
+								<h4 class="text-center"><s:text name="admin.gameAdmin.payoutToday.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -456,8 +457,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="payoutTodayModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnPayoutToday">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnPayoutToday"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -543,7 +544,7 @@
 		
 		//Begin of listTeam
 		$('#btnAddGame').click(function() {
-			$('#gameModalTitle').text("新增賽事");
+			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.add"/>');
 			resetInput();
 			var maxGameNum = Math.max.apply(Math, gameNumArray);
 			$('[name="model.gameNum"]').val(maxGameNum + 1);
@@ -551,7 +552,7 @@
 		});
 		
 		$('.btn-edit').click(function() {
-			$('#gameModalTitle').text("編輯賽事");
+			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.edit"/>');
 			$.post('<c:url value="/admin/gameAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
@@ -841,27 +842,27 @@
 		
 		$('.btn-edit').tooltip({
 			'placement': 'top',
-			'title': '編輯賽事'
+			'title': '<s:text name="admin.gameAdmin.edit"/>'
 		});
 		
 		$('.btn-del').tooltip({
 			'placement': 'top',
-			'title': '刪除賽事'
+			'title': '<s:text name="admin.gameAdmin.delete"/>'
 		});
 		
 		$('.btn-status').tooltip({
 			'placement': 'top',
-			'title': '設定比分'
+			'title': '<s:text name="admin.gameAdmin.setGameScore"/>'
 		});
 		
 		$('.btn-payout').tooltip({
 			'placement': 'top',
-			'title': '派彩'
+			'title': '<s:text name="admin.gameAdmin.payout"/>'
 		});
 		
 		$('.btn-open').tooltip({
 			'placement': 'top',
-			'title': '開放投注'
+			'title': '<s:text name="admin.gameAdmin.openOdds"/>'
 		});
 		
 		$('#gameTable').dataTable({

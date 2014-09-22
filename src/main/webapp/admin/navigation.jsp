@@ -16,7 +16,7 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i><span class="left5"><sec:authentication property="principal.username"/><span class="caret"></span></span></a>
 				<ul class="dropdown-menu">
                     <li>
-                        <a href="<c:url value="/admin/j_spring_security_logout"/>"><i class="fa fa-fw fa-power-off"></i><span class="left5">登出</span></a>
+                        <a href="<c:url value="/admin/j_spring_security_logout"/>"><i class="fa fa-fw fa-power-off"></i><span class="left5"><s:text name="admin.logoutBtn"/></span></a>
                     </li>
                 </ul>
 			</li>

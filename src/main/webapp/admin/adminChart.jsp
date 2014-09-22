@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>報表</title>
+<title><s:text name="admin.adminChart"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
@@ -34,8 +35,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ul class="breadcrumb">
-		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
-		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i> 報表</li>
+		  							<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
+		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i></i><span class="left5"><s:text name="admin.adminChart"/></span></li>
 								</ul>
 							</div>
 						</div>

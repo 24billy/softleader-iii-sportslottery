@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>首頁</title>
+<title><s:text name="admin.home"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
@@ -35,7 +35,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-		  							<li class="active"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></li>
+		  							<li class="active"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></li>
 								</ol>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<h4 class="panel-title">
-																<i class="fa fa-fw fa-bullhorn"></i><span class="left10"><s:text name="admin.index.announce.title"/></span>
+																<i class="fa fa-fw fa-bullhorn"></i><span class="left10"><s:text name="admin.home.announce"/></span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#announcePanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -61,8 +61,8 @@
 																<table id="announceTable" class="table table-hover table-condensed">
 																	<thead>
 																		<tr>
-																			<th>公告標題</th>
-																			<th>公告內容</th>
+																			<th><s:text name="admin.announce.announceTitle"/></th>
+																			<th><s:text name="admin.announce.announceContent"/></th>
 																		</tr>
 																	</thead>
 																	<tbody id="announceList">
@@ -78,7 +78,7 @@
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<h4 class="panel-title">
-																<i class="fa fa-fw fa-table"></i><span class="left10">最新賽事</span>
+																<i class="fa fa-fw fa-table"></i><span class="left10"><s:text name="admin.home.game"/></span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#listPanel" href="#gamePanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -87,9 +87,9 @@
 																<table id="gameTable" class="table table-hover table-condensed">
 																	<thead>
 																		<tr>
-																			<th>賽事編號</th>
-																			<th>主隊</th>
-																			<th>客隊</th>
+																			<th><s:text name="admin.game.gameNum"/></th>
+																			<th><s:text name="admin.game.teamAway"/></th>
+																			<th><s:text name="admin.game.teamHome"/></th>
 																		</tr>
 																	</thead>
 																	<tbody id="gameList">
@@ -115,7 +115,7 @@
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<h4 class="panel-title">
-																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10">新增公告</span>
+																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10"><s:text name="admin.form.announceForm"/></span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#announceFormPanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -126,14 +126,14 @@
 																
 																	<div class="col-sm-12">
 																		<div class="form-group">
-																			<label for="announceTitle">公告標題</label>
+																			<label for="announceTitle"><s:text name="admin.announce.announceTitle"/></label>
 																			<input class="form-control input-sm" type="text" name="model.announceTitle" id="announceTitle">
 																		</div>
 																	</div>
 																	
 																	<div class="col-sm-12">
 																		<div class="form-group">
-																			<label for="announceTitle">公告內容</label>
+																			<label for="announceContent"><s:text name="admin.announce.announceContent"/></label>
 																			<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
 																		</div>
 																	</div>
@@ -144,7 +144,7 @@
 															<div class="panel-footer">
 																<div class="row">
 																	<div class="col-sm-12">
-																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnAnnounce">新增</button>
+																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnAnnounce"><s:text name="admin.btn.insert"/></button>
 																	</div>
 																</div>
 															</div>
@@ -157,7 +157,7 @@
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<h4 class="panel-title">
-																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10">新增賽事</span>
+																<i class="fa fa-fw fa-pencil-square-o"></i><span class="left10"><s:text name="admin.form.gameForm"/></span>
 																<a class="btn btn-default btn-sm" data-toggle="collapse" data-parent="#formPanel" href="#gameFormPanel"><i class="fa fa-fw fa-bars"></i></a>
 															</h4>
 														</div>
@@ -167,7 +167,7 @@
 																	<div class="row">
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="leagueName">聯盟名稱</label>
+																				<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
 																				<select class="form-control input-sm" id="leagueName" name="model.leagueName">
 																					<option value="美國職棒" selected>美國職棒</option>
 																					<option value="中華職棒">中華職棒</option>
@@ -180,7 +180,7 @@
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="">賽事編號</label>
+																				<label for=""><s:text name="admin.game.gameNum"/></label>
 																				<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
 																			</div>
 																		</div>
@@ -189,14 +189,14 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="teamAwayList">客隊隊伍</label>
+																						<label for="teamAwayList"><s:text name="admin.game.teamAway"/></label>
 																						<select class="form-control input-sm" id="teamAwayList" name="teamAwayId">
 																						</select>
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="teamHomeList">主隊隊伍</label>
+																						<label for="teamHomeList"><s:text name="admin.game.teamHome"/></label>
 																						<select class="form-control input-sm" id="teamHomeList" name="teamHomeId">
 																						</select>
 																					</div>
@@ -207,7 +207,7 @@
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="gameTime">賽事時程</label>
+																				<label for="gameTime"><s:text name="admin.game.gameTime"/></label>
 																				<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 																			</div>
 																		</div>
@@ -216,13 +216,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SU_A">不讓分(客)</label>
+																						<label for="SU_A"><s:text name="admin.odds.SU_A"/></label>
 																						<input class="form-control input-sm form-decimal" id="SU_A" type="text" name="SU_A">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SU_H">不讓分(主)</label>
+																						<label for="SU_H"><s:text name="admin.odds.SU_H"/></label>
 																						<input class="form-control input-sm form-decimal" id="SU_H" type="text" name="SU_H">
 																					</div>
 																				</div>
@@ -234,13 +234,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_A">讓分(客)</label>
+																						<label for="ATS_A"><s:text name="admin.odds.ATS_A"/></label>
 																						<input class="form-control input-sm form-decimal" id="ATS_A" type="text" name="ATS_A">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_H">讓分(主)</label>
+																						<label for="ATS_H"><s:text name="admin.odds.ATS_H"/></label>
 																						<input class="form-control input-sm form-decimal" id="ATS_H" type="text" name="ATS_H">
 																					</div>
 																				</div>
@@ -252,13 +252,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SC_H">總分(大)</label>
+																						<label for="SC_H"><s:text name="admin.odds.SC_H"/></label>
 																						<input class="form-control input-sm form-decimal" id="SC_H" type="text" name="SC_H">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="SC_L">總分(小)</label>
+																						<label for="SC_L"><s:text name="admin.odds.SC_L"/></label>
 																						<input class="form-control input-sm form-decimal" id="SC_L" type="text" name="SC_L">
 																					</div>
 																				</div>
@@ -270,13 +270,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="EVEN">總分(單)</label>
+																						<label for="EVEN"><s:text name="admin.odds.SC_EVEN"/></label>
 																						<input class="form-control input-sm form-decimal" id="EVEN" type="text" name="EO_EVEN">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ODD">總分(雙)</label>
+																						<label for="ODD"><s:text name="admin.odds.SC_ODD"/></label>
 																						<input class="form-control input-sm form-decimal" id="ODD" type="text" name="EO_ODD">
 																					</div>
 																				</div>
@@ -288,13 +288,13 @@
 																			<div class="row">
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_A_Combination">讓分數設定(客)</label>
+																						<label for="ATS_A_Combination"><s:text name="admin.odds.ATS_A_Combination"/></label>
 																						<input class="form-control input-sm" id="ATS_A_Combination" type="text" name="ATS_A_Combination">
 																					</div>
 																				</div>
 																				<div class="col-sm-6">
 																					<div class="form-group">
-																						<label for="ATS_H_Combination">讓分數設定(主)</label>
+																						<label for="ATS_H_Combination"><s:text name="admin.odds.ATS_H_Combination"/></label>
 																						<input class="form-control input-sm" id="ATS_H_Combination" type="text" name="ATS_H_Combination">
 																					</div>
 																				</div>
@@ -303,7 +303,7 @@
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="SC_Combination">總分設定</label>
+																				<label for="SC_Combination"><s:text name="admin.odds.SC_Combination"/></label>
 																				<input class="form-control input-sm" id="SC_Combination" type="text" name="SC_Combination">
 																			</div>
 																		</div>
@@ -315,7 +315,7 @@
 															<div class="panel-footer">
 																<div class="row">
 																	<div class="col-sm-12">
-																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnGame">新增</button>
+																		<button type="button" class="btn btn-success btn-sm pull-right" id="btnGame"><s:text name="admin.btn.insert"/></button>
 																	</div>
 																</div>
 															</div>

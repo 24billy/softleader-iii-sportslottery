@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>公告管理</title>
+<title><s:text name="admin.announceAdmin"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
@@ -34,15 +35,15 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5">首頁</span></a></li>
-		  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i><span class="left5">公告管理</span></li>
+									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
+		  							<li class="active"><i class="fa fa-fw fa-bullhorn"></i><span class="left5"><s:text name="admin.announceAdmin"/></span></li>
 								</ol>
 							</div>
 						</div>
 						<!-- row -->
 						<div class="row">
 							<div class="col-sm-12">
-								<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-plus"></i><span class="left5">新增公告</span></button>
+								<button id="btnAddAnnounce" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#announceModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.announceAdmin.add"/></span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -53,10 +54,10 @@
 								<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
 									<thead>
 										<tr>
-											<th>公告標題</th>
-											<th>公告日期</th>
-											<th>修改日期</th>
-											<th>功能</th>
+											<th><s:text name="admin.announce.announceTitle"/></th>
+											<th><s:text name="admin.announce.createTime"/></th>
+											<th><s:text name="admin.announce.modifiedTime"/></th>
+											<th><s:text name="admin.btn.action"/></th>
 										</tr>
 									</thead>
 									<tbody id="announceList">
@@ -85,7 +86,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="announceModalTitle" class="modal-title">新增公告</h3>
+						<h3 id="announceModalTitle" class="modal-title"><s:text name="admin.announceAdmin.add"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -95,7 +96,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label for="announceTitle">公告標題</label>
+										<label for="announceTitle"><s:text name="admin.announce.announceTitle"/></label>
 										<input class="form-control" type="text" name="model.announceTitle" id="announceTitle">
 									</div>
 								</div>
@@ -105,7 +106,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label for="announceTitle">公告內容</label>
+										<label for="announceContent"><s:text name="admin.announce.announceContent"/></label>
 										<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
 									</div>
 								</div>
@@ -117,8 +118,8 @@
 					</form>
 					<!-- #announceform -->
 			      	<div id="announceModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnMerge">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnMerge"><s:text name="admin.btn.confirm"/></button>
 			      	</div>
 		      		
 		      		<!-- .modal-footer -->
@@ -139,7 +140,7 @@
 							<span aria-hidden="true">&times;</span>
 							<span class="sr-only">Close</span>
 						</button>
-						<h3 id="deleteModalTitle" class="modal-title">刪除公告</h3>
+						<h3 id="deleteModalTitle" class="modal-title"><s:text name="admin.announceAdmin.delete"/></h3>
 					</div>
 					<!-- modal-header -->
 					
@@ -147,7 +148,7 @@
 					
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="text-center">確認刪除公告？</h4>
+								<h4 class="text-center"><s:text name="admin.announceAdmin.delete.message"/></h4>
 							</div>
 						</div>
 						<!-- .row -->
@@ -155,8 +156,8 @@
 					<!-- .modal-body -->
 							
 		      		<div id="deleteModalFooter" class="modal-footer">
-						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary btn-sm" id="btnDelete">確認</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><s:text name="admin.btn.cancel"/></button>
+						<button type="button" class="btn btn-primary btn-sm" id="btnDelete"><s:text name="admin.btn.confirm"/></button>
 		      		</div>
 		      		<!-- .modal-footer -->
 				</div>
@@ -208,11 +209,11 @@
 		
 		//Begin of listannounce
 		$('#btnAddAnnounce').click(function() {
-			$('#announceModalTitle').text('新增公告');
+			$('#announceModalTitle').text('<s:text name="admin.announceAdmin.add"/>');
 			resetInput();
 		});
 		$('.btn-edit').click(function() {
-			$('#announceModalTitle').text('編輯公告');
+			$('#announceModalTitle').text('<s:text name="admin.announceAdmin.edit"/>');
 			$.post('<c:url value="/admin/announceAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
