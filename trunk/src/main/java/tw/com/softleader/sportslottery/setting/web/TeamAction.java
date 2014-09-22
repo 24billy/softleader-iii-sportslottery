@@ -63,11 +63,13 @@ public class TeamAction extends ActionSupport {
 	public InputStream getInputStream() {
 		return inputStream;
 	}
-
+	
+	public Locale getLocale() {
+		return locale;
+	}
+	
 	@Override
 	public void validate() {
-		
-		
 		
 	}
 	
@@ -145,11 +147,18 @@ public class TeamAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("TeamAction admin()");
-		
-		if (!StringUtils.isEmpty(leagueName)) {
-			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+		if (locale.getLanguage().equals("zh")) {
+			if (!StringUtils.isEmpty(leagueName)) {
+				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+			} else {
+				json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
+			}
 		} else {
-			json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
+			if (!StringUtils.isEmpty(leagueName)) {
+				json = new Gson().toJson(service.getTeamsByLeagueNameEn(leagueName));
+			} else {
+				json = new Gson().toJson(service.getTeamsByLeagueNameEn("Major League Baseball"));
+			}
 		}
 		
 		return Action.SUCCESS;
