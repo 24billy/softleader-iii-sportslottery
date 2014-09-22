@@ -12,8 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -167,22 +165,32 @@ public class UserAction extends ActionSupport {
 						this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
 						log.debug("帳號問題" + model.getUserAccount());
 					}
-					if(userPassword==null ||
-							!userPassword.matches("^[a-zA-Z0-9]\\S{5,}$") ||
-							!userPassword.matches("^[a-zA-Z0-9]\\S{5,}$")) {
+					if(userPassword==null || userPassword.length()<5 ||
+							!userPassword.matches(".*[0-9].*") ||
+							!userPassword.matches(".*[A-Za-z].*") ||
+							!userPassword.matches("^[a-zA-Z0-9]+$")) {
 						this.addFieldError("password", this.getText("invalid.fieldvalue.password"));
 						log.debug("密碼問題" + userPassword);
 					}
-					if(confirm_password==null && !confirm_password.equals(userPassword)) {
+					if(confirm_password==null || !confirm_password.equals(userPassword)) {
 						this.addFieldError("confirm_password", this.getText("invalid.fieldvalue.confirm_password"));
+						log.debug("密碼不匹配" + confirm_password + ":" + userPassword);
+					}
+					if(model.getUserBirthday()!=null) {
+						try {
+							LocalDate date = new LocalDate();
+							log.debug(""+date);
+							
+						} catch(Exception e) {
+							
+						}
 					}
 					if(model.getUserEmail()!=null && 
-							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {
-						
+							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {						
 						if(this.checkEmail().equals("error")){
 							addFieldError("mail","此信箱已註冊");
 							log.debug("信箱已存在");
-						} 
+						}
 					} else {
 						log.debug("Email格式不符合");
 						addFieldError("mail","此信箱已註冊");
