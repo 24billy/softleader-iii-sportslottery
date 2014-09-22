@@ -15,6 +15,10 @@ textarea {
 	resize: none;
 }
 
+table td {
+	text-overflow:ellipsis;
+}
+
 #loginTitle {
 	color: #fff;
 }

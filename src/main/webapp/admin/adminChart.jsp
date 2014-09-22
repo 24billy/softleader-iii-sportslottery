@@ -75,6 +75,7 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
+		var zh = '${locale.language}' == 'zh';
 		
 		//Begin of profitChart
 		var months = [];
