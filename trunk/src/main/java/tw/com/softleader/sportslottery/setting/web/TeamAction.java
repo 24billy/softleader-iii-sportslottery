@@ -171,4 +171,12 @@ public class TeamAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "getTeamsByCountry";
 	}
+	
+	public String getLeagueNames() {
+		log.debug("TeamAction getLeagueNames()");
+		
+		json = new Gson().toJson(service.leagueNames());
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
 }

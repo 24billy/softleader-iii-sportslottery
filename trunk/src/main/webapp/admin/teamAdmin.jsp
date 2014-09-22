@@ -197,6 +197,8 @@
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
 	(function($) {
+		var zh = '{locale.language}' == 'zh';
+		
 		//Begin of leagueName
 		var leagueName = '${leagueName}';
 		if (leagueName == null || leagueName == "") {
@@ -211,7 +213,7 @@
 		$.each(teamList, function(index, team) {
 			var child = '';
 			child += '<tr>';
-			if ('${locale.language}' == 'zh') {
+			if (zh) {
 				child += '<td>' + team.leagueName + '</td>';
 				child += '<td>' + team.teamName + '</td>';
 			} else {
