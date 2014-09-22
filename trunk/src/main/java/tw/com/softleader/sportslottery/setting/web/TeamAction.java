@@ -80,7 +80,11 @@ public class TeamAction extends ActionSupport {
 		if (teamId != null && teamId > 0) {
 			json = new Gson().toJson(service.getById(teamId));
 		} else if (!StringUtils.isEmpty(leagueName)) {
-			json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+			if (locale.getLanguage().equals("zh")) {
+				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+			} else {
+				json = new Gson().toJson(service.getTeamsByLeagueNameEn(leagueName));
+			}
 		} else {
 			json = new Gson().toJson(service.getAll());
 		}
@@ -175,7 +179,12 @@ public class TeamAction extends ActionSupport {
 	public String getLeagueNames() {
 		log.debug("TeamAction getLeagueNames()");
 		
-		json = new Gson().toJson(service.leagueNames());
+		if (locale.getLanguage().equals("zh")) {
+			json = new Gson().toJson(service.leagueNames());
+		} else {
+			json = new Gson().toJson(service.leagueNamesEn());
+		}
+		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
