@@ -520,23 +520,23 @@
 			var gameTime = new Date(game.gameTime.iLocalMillis - 8 * 60 * 60 * 1000).getTime();
 			
 			if (game.gameStatus == 3) {
-				child += '<td><button type="button" class="btn btn-success btn-xs disabled">已派彩</button></td>';
+				child += '<td><button type="button" class="btn btn-success btn-xs disabled"><s:text name="admin.gameAdmin.status.dividend"/></button></td>';
 				child += '<td>';
 			} else if (game.gameStatus == 2)  {
-				child += '<td><button type="button" class="btn btn-warning btn-xs disabled">已結束</button></td>';
+				child += '<td><button type="button" class="btn btn-warning btn-xs disabled"><s:text name="admin.gameAdmin.status.finished"/></button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-fw fa-flag"></i></button>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-payout left5" data-toggle="modal" data-target="#payoutModal"><i class="fa fa-fw fa-trophy"></i></button>';
 			} else if (currentDate >= gameTime) {
-				child += '<td><button type="button" class="btn btn-primary btn-xs disabled">進行中</button></td>';
+				child += '<td><button type="button" class="btn btn-primary btn-xs disabled"><s:text name="admin.gameAdmin.status.progress"/></button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '" class="btn btn-default btn-xs btn-status" data-toggle="modal" data-target="#statusModal"><i class="fa fa-fw fa-flag"></i></button>';
 			} else if (game.gameStatus == 1) {
-				child += '<td><button type="button" class="btn btn-info btn-xs btn-status disabled">可投注</button></td>';
+				child += '<td><button type="button" class="btn btn-info btn-xs btn-status disabled"><s:text name="admin.gameAdmin.status.opened"/></button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
 			} else {
-				child += '<td><button type="button" class="btn btn-xs btn-status disabled">未開放</button></td>';
+				child += '<td><button type="button" class="btn btn-xs btn-status disabled"><s:text name="admin.gameAdmin.status.unopened"/></button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-del left5" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
