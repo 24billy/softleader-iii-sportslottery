@@ -118,7 +118,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('此場比賽之前，"'+'${linkTeamSearch}'+'"熱門過關統計');
+		$('#searchMessage').text('#'+'${linkGameNum}'+'比賽之前，"'+'${linkTeamSearch}'+'"熱門過關統計');
 		$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		$.post(url, {
