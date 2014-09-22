@@ -207,6 +207,8 @@ public class GameService extends GenericService<GameEntity> {
 	//將有最大count percentage的CountBean轉成map加入搜尋結果的List後
 	public List<Map<String, CountBean>> addMaxBeanToCountHistory(String teamName, Long gameId){
 		List<Map<String, CountBean>> listMap=this.getCountInfoHistory(teamName, gameId);
+		System.out.println("in addMaxBeanToCountHistory, listMap: ..............."+ listMap);
+		System.out.println("size of listMap: ........."+ listMap.size());
 		List<CountBean> listMapSorted= this.getSortCountHistory(listMap); //將listMap依據count percentage由大到小排序
 		CountBean maxBean= listMapSorted.get(0);//取得最大的bean
 		
@@ -256,7 +258,7 @@ public class GameService extends GenericService<GameEntity> {
 			
 		}
 	
-		return this.getByGameNum(1L).getId();//如果gameNum = null 不會到達這裡
+		return this.getByGameNum(gameNum).getId();//如果gameNum = null 不會到達這裡
 		
 	}
 	
