@@ -109,11 +109,7 @@
                             <div class="form-group">
                             	<label class="sr-only" for="country">隊名:</label>
                                 <select class="form-control form-country" id="country" name="country"  >
-                                	<option >不選擇區域 </option>
-                                  	<option value="中華民國">中華職棒</option>
-                                  	<option value="美國">美國職棒</option>
-                                  	<option value="日本">日本職棒</option>
-                                  	<option value="韓國">韓國職棒</option>
+                                	
                                 </select>
 
                             </div>
@@ -180,6 +176,7 @@
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 	(function($) {
+		listLeague();
 		listTeam();
 		$( ".form-country" ).change(function() { 
 
@@ -207,6 +204,20 @@
 					$.each(data, function(key, value) {
 						var str = '<option value=' + value.teamName + '>' + value.teamName + '</option>';
 						$('.form-team').append(str);
+					});
+				});
+		}
+		function listLeague() {
+		 	$('.form-country').empty(); 
+			
+			var url = '<c:url value="/team.action?method:getLeagueNames"/>';
+			 $('.form-country').append('<option value="">不選擇聯盟 </option>'); 
+				
+			 $.getJSON(url, function(data) { //透過team.action從資料庫，取回的Json型式的值，一條條成option
+				//console.log(data);	
+				 $.each(data, function(key, value) {
+						var str = '<option value=' + value+ '>' + value+ '</option>';
+						$('.form-country').append(str);
 					});
 				});
 		}
@@ -253,7 +264,7 @@
 				console.log(game.gameTime);
 				child += '<tr>';
 				child += '<td>' + millisecondToDate(millis) + '</td>';
-				child += '<td>' + game.leagueName + '</td>';
+				child += '<td>' + game.teamHome.leagueName + '</td>';
 				child += '<td>' + game.gameNum + '</td>';
 				child += '<td>' + game.teamAway.teamName + '</td>';
 				child += '<td>' + game.teamHome.teamName + '</td>';
@@ -271,13 +282,14 @@
 		function getTeamsByCountry(){
 			
 			$.ajax({
-				url:'<c:url value="/teamsByCountry?method:getTeamsByCountry"/>',
+				url:'<c:url value="/teamsByCountry?method:getTeamsByLeagueName"/>',
 				type:'post',
 				dataType:'json',//不可為text, 不然不是物件
 				data:{
-					'country':$('#country').val()
+					'leagueName':$('#country').val()
 				},
 				success:function(data) {
+					console.log(data);	
 					$('.form-team').empty(); 
 				/* 	$('.form-team').append('<option value="">不選擇隊伍 </option>');  */
 					$.each(data, function(key, value) {
