@@ -193,7 +193,7 @@ public class UserAction extends ActionSupport {
 						}
 					} else {
 						log.debug("Email格式不符合");
-						addFieldError("mail","此信箱已註冊");
+						addFieldError("mail","Email格式不符合");
 					}
 					break;
 				case 2 : 
@@ -320,16 +320,23 @@ public class UserAction extends ActionSupport {
 		return ERROR;
 	}
 	
+	//取出會員資料
+	public String select() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity)session.get("user");
+		
+		json = new Gson().toJson(userEntity);
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
+		return "select";
+	}
+	
 	//更新會員資料
 	public String update() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
-		if(userEntity.getUserEmail().equals(model.getUserEmail())) {
-			this.iValidate(2);//驗證資料
-		} else {
-			this.iValidate(1);//驗證資料
-		}
 		
 		if(getFieldErrors().isEmpty()) {
 			log.debug("修改會員資料");
@@ -370,6 +377,52 @@ public class UserAction extends ActionSupport {
 			return SUCCESS;
 		}
 		return ERROR;
+	}
+	
+	//驗證會員登入 
+	public String checkUser(){
+		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
+		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
+		if(entity!=null) {
+			log.debug("登入驗證成功");
+			inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
+		} else {
+			log.debug("登入驗證失敗");
+			addFieldError("LoginFail","帳號或密碼不正確");
+			inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+		}
+		return "checkUser";
+	}
+	
+	// 更新會員資料
+	public String updateUserInfo(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity) session.get("user");
+
+		log.debug("修改會員資料");
+		log.debug("Model = {}", model);
+		model.setModifier("Guest");
+		model.setModifiedTime(LocalDateTime.now());
+		// log.debug(""+userEntity);
+		try {
+			if (model != null) {
+				userEntity.setUserPassword(model.getUserPassword());
+				userEntity.setUserName(model.getUserName());
+				userEntity.setUserBirthday(model.getUserBirthday());
+				userEntity.setUserEmail(model.getUserEmail());
+				userEntity.setUserPhone(model.getUserPhone());
+				service.update(userEntity);
+				log.debug("!!修改成功!!");
+				inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
+			}
+		} catch (Exception e) {
+			log.debug("!!新增錯誤!!");
+			inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+			e.printStackTrace();
+		}
+		
+		return "updateUserInfo";
 	}
 	
 	//身分證重複驗證
@@ -443,6 +496,7 @@ public class UserAction extends ActionSupport {
 		log.debug(entity3.toString());
 		entity3.setUserPassword("a123456".getBytes());
 		service.update(entity3);
+
 		
 		//正式程式碼
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
