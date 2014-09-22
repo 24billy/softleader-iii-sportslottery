@@ -14,14 +14,6 @@ footer * {
 textarea {
 	resize: none;
 }
-table {
-	table-layout: fixed
-}
-
-table td {
-	overflow: hidden;
-	text-overflow:ellipsis;
-}
 
 #loginTitle {
 	color: #fff;
