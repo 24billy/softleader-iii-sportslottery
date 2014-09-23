@@ -95,9 +95,9 @@
 									<div class="errorMsg"></div>
 								</div>
 							</div>
-							
 						</form>
-						<div id="buttonGroup">
+						<label class="col-sm-2 control-label"></label>
+						<div id="buttonGroup" class="form-group col-sm-10">
 							<button id="edit" class="btn btn-primary">編輯</button>
 							<button id="save" class="btn btn-success" disabled>儲存</button>
 							<button id="cancel" class="btn btn-danger" disabled>取消</button>
@@ -107,7 +107,7 @@
 				</div>
 			</div>
 
-	      	<div id="pageFixPassword" class="tab-pane fade ">
+	      	<div id="pageFixPassword" class="tab-pane fade">
 	      		<form action="">
 	      	 		<h3>舊密碼<input type="text"></h3>
 	      	 		<h3>新密碼<input type="text"></h3>
@@ -255,7 +255,6 @@
 				async : false,
 				success : function(data) {
 					checeEmail = data;
-					console.log(data);
 				}
 			});
 			return checeEmail;
