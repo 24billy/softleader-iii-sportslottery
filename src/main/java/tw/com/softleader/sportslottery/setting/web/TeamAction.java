@@ -184,11 +184,20 @@ public class TeamAction extends ActionSupport {
 	
 	public String getLeagueNames() {
 		log.debug("TeamAction getLeagueNames()");
-		
+		String ballType = model != null? model.getBallType():null;
+				
 		if (locale.getLanguage().equals("zh")) {
-			json = new Gson().toJson(service.leagueNames());
+			if (ballType != null) {
+				json = new Gson().toJson(service.getLeagueNamesByBallType(ballType));
+			} else {
+				json = new Gson().toJson(service.leagueNames());
+			}
 		} else {
-			json = new Gson().toJson(service.leagueNamesEn());
+			if (ballType != null) {
+				json = new Gson().toJson(service.getLeagueNamesByBallTypeEn(ballType));
+			} else {
+				json = new Gson().toJson(service.leagueNamesEn());
+			}
 		}
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
