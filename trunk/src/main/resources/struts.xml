@@ -304,6 +304,14 @@
 			<param name="inputName">inputStream</param>
   		</result>
   	</action>
+  	
+  	<!-- 用點選時間取得之前的COUNT歷史資訊 -->
+	<action name="countAllHistoryByTime" class="gameAction" method="countAllHistoryByTime">
+  		<result name="countAllHistoryByTime" type="stream">
+  			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+  		</result>
+  	</action>
   	<!-- 取得最高單筆過關比的資訊 -->
   	<action name="MaxCountBean" class="gameAction" method="MaxCountBean">
   		<result name="MaxCountBean" type="stream">
