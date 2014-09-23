@@ -342,8 +342,8 @@
 				'responsive': true,
 				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
-				'columns': [{'width': '10%'},
-				            {'width': '10%'},
+				'columns': [{'width': '9%'},
+				            {'width': '21%'},
 				            {'width': '25%'},
 				            {'width': '25%'},
 				            {'width': '20%'}]
