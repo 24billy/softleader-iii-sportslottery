@@ -390,9 +390,9 @@
 				'autoWidth': false,
 				'order': [[ 0, 'asc' ]],
 				'columns': [{'width': '10%'},
-				            {'width': '10%'},
-				            {'width': '30%'},
-				            {'width': '30%'},
+				            {'width': '20%'},
+				            {'width': '25%'},
+				            {'width': '25%'},
 				            {'width': '20%'}],
 				'oLanguage': {
 					'sProcessing': '處理中...',
@@ -418,9 +418,9 @@
 				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
 				'columns': [{'width': '10%'},
-				            {'width': '10%'},
-				            {'width': '30%'},
-				            {'width': '30%'},
+				            {'width': '20%'},
+				            {'width': '25%'},
+				            {'width': '25%'},
 				            {'width': '20%'}]
 			});
 		}
