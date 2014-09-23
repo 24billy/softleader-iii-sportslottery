@@ -556,7 +556,17 @@
 		//End of gameTable
 		
 		//Begin of listBallType
-		$.post('');
+		$.post('<c:url value="/admin/teamAdmin?method:getBallTypes"/>', function(data) {
+			var child = '';
+			$.each(data, function(index, ballType) {
+				switch(ballType) {
+					case 'Baseball': child += '<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>'; break;
+					case 'Basketball': child += '<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>'; break;
+					case 'Soccer': child += '<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>'; break;
+				}
+			});
+			$('#ballType').append(child);
+		}, 'json');
 		//End of listBallType
 		
 		//Begin of listLeague
