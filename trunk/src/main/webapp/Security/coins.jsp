@@ -18,7 +18,7 @@
 	font-size:0.5cm;
 	color:#000000;
 	font-weight:bolder;
-	
+	list-style-position:outside;
 }
 
 .ul-li-a
@@ -28,7 +28,7 @@
 	font-size:0.5cm;
 	color:#585858;
 	font-weight:bolder;
-	
+	list-style-position:outside;
 }
 </style>
 </head>
@@ -201,10 +201,10 @@
                		<ul class="ul-li-a">
                			<li>選擇"其他服務"→選擇"跨行轉帳"→輸入銀行代號→輸入轉帳帳號(共16位)→輸入繳款金額→確認</li>
                		</ul>
-               		<form action="" method="post">
+               		<div>
                 		<input class="finish" type="text" name="coins">
-                		<button class="btn btn-success btn-lg">Finish</button>
-               	 	</form>
+                		<button class="btn btn-success btn-lg payWay-1-2">Finish</button>
+               	 	</div>
                 </div>
                 <div id="payWay2">
                		<div class="topWay">超商繳款操作步驟</div>
@@ -222,10 +222,10 @@
                                 <div class="p4 p market"><img src="images/ok-go_flow.jpg" alt="OK超商OK-GO"/></div>
                             </div>
                        </div>
-                	<form action="" method="post">
+                	<div>
                 		<input class="finish" type="text" name="coins">
-                		<button class="btn btn-success btn-lg">Finish</button>
-               	 	</form>
+                		<button class="btn btn-success btn-lg payWay-1-2">Finish</button>
+               	 	</div>
                 </div>
                 <div class="way" id="payWay3">
                 <form id="deposit-form">
@@ -287,10 +287,10 @@
     	$('ul.setup-panel li:eq(1)').removeClass('disabled');
     	$('ul.setup-panel li a[href="#step-2"]').trigger('click');
     	$('.coinType').text($(this).val());
-    	/* //sessionStorge
+    	 //sessionStorge
     	sessionStorage.coinBuy = $(this).val();
     	console.log(sessionStorage.coinBuy*1);
-		*/
+		
     	$('#activate-step-3').val($(this).val());
     	$('#activate-step-4').val($(this).val());
     	$('#activate-step-5').val($(this).val());
@@ -368,7 +368,7 @@
 			success:function(data) {
 				console.log(data);
 				if(data.indexOf('error') == -1) {
-					var user = $.parseJSON(data);
+					
 					$('#dialog-coins').modal({
 						backdrop: 'static',
 						keyboard: false
@@ -406,6 +406,10 @@
 		}
 	});
 
+	$('.payWay-1-2').click(function() {
+		document.location.href="<c:url value='/goIndex'/>";
+	});
+	
 })(jQuery);
 </script>
 </body>
