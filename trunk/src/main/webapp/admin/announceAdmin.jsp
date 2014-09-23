@@ -54,6 +54,7 @@
 								<table id="announceTable" class="table table-hover table-condensed order-column compact nowrap">
 									<thead>
 										<tr>
+											<th>Id</th>
 											<th><s:text name="admin.announce.announceTitle"/></th>
 											<th><s:text name="admin.announce.createTime"/></th>
 											<th><s:text name="admin.announce.modifiedTime"/></th>
@@ -190,6 +191,7 @@
 		$.each(announceList, function(index, announce) {
 			var child = '';
 			child += '<tr>';
+			child += '<td>' + announce.id + '</td>'; 
 			child += '<td>' + announce.announceTitle + '</td>';
 			child += '<td>'; 
 			var announceTime = announce.announceTime.iLocalMillis;
@@ -236,6 +238,30 @@
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
 			var announceId = $(this).val();
+			var error = 0;
+			
+			if ($('#announceTitle').val() == "") {
+				if (!$('#announceTitle').parent().hasClass('has-error')) {
+					$('#announceTitle').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#announceTitle').parent().removeClass('has-error');
+			}
+			
+			if ($('#announceContent').val() == "") {
+				if (!$('#announceContent').parent().hasClass('has-error')) {
+					$('#announceContent').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#announceContent').parent().removeClass('has-error');
+			}
+			
+			if (error > 0) {
+				return;
+			}
+			
 			$.post('<c:url value="/admin/announceAdmin?method:insert"/>',{
 				'model.id':announceId,
 				'model.announceTitle':$('#announceTitle').val(),
@@ -315,10 +341,11 @@
 			$('#announceTable').dataTable({
 				'responsive': true,
 				'autoWidth': false,
-				'order': [[ 0, 'asc' ]],
-				'columns': [{'width': '20%'},
-				            {'width': '30%'},
-				            {'width': '30%'},
+				'order': [[ 0, 'desc' ]],
+				'columns': [{'width': '10%'},
+				            {'width': '10%'},
+				            {'width': '25%'},
+				            {'width': '25%'},
 				            {'width': '20%'}]
 			});
 		}

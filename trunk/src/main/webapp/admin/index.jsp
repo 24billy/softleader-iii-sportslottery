@@ -61,8 +61,9 @@
 																<table id="announceTable" class="table table-hover table-condensed">
 																	<thead>
 																		<tr>
-																			<th><s:text name="admin.announce.announceTitle"/></th>
-																			<th><s:text name="admin.announce.announceContent"/></th>
+																			<th style="width: 20%">Id</th>
+																			<th style="width: 40%"><s:text name="admin.announce.announceTitle"/></th>
+																			<th style="width: 40%"><s:text name="admin.announce.announceContent"/></th>
 																		</tr>
 																	</thead>
 																	<tbody id="announceList">
@@ -87,9 +88,9 @@
 																<table id="gameTable" class="table table-hover table-condensed">
 																	<thead>
 																		<tr>
-																			<th><s:text name="admin.game.gameNum"/></th>
-																			<th><s:text name="admin.game.teamAway"/></th>
-																			<th><s:text name="admin.game.teamHome"/></th>
+																			<th style="width: 30%"><s:text name="admin.game.gameNum"/></th>
+																			<th style="width: 35%"><s:text name="admin.game.teamAway"/></th>
+																			<th style="width: 35%"><s:text name="admin.game.teamHome"/></th>
 																		</tr>
 																	</thead>
 																	<tbody id="gameList">
@@ -389,6 +390,7 @@
 				
 				var child = '';
 				child += '<tr>';
+				child += '<td>' + announce.id + '</td>';
 				child += '<td>' + announce.announceTitle + '</td>';
 				child += '<td>' + announce.announceContent + '</td>';
 				child += '</tr>';
