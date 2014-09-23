@@ -44,7 +44,7 @@ public class TeamDao  extends GenericDao<TeamEntity> {
 				.setProjection(Projections.distinct(Projections.property("leagueNameEn"))).list();
 	}
 	
-	public List<String> ballTypes() {
+	public List<String> findBallTypes() {
 		return getSession().createCriteria(TeamEntity.class)
 				.setProjection(Projections.distinct(Projections.property("ballType"))).list();
 	}
