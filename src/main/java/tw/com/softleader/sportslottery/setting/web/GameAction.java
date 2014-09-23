@@ -74,6 +74,7 @@ public class GameAction extends ActionSupport {
 	private Long linkGameNum;
 	private String linkTeamSearch;
 	private List<Map<String, CountBean>> listMap;
+	private LocalDate linkTime;
 	
 	public List<String> getBallTypes() {
 		return ballTypes;
@@ -531,6 +532,16 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "countAllHistoryByTeam";
+	}
+	
+	public String countAllHistoryByTime(){
+		
+
+		json = new Gson().toJson(service.getAllCountHistoryByTime(linkTime));//輸入time取得之前的COUNT資訊
+//		json = new Gson().toJson(service.trialGetCountInfoHistory());//使用預設值
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		
+		return "countAllHistoryByTime";
 	}
 	
 	public String teamChartOddTime() {
