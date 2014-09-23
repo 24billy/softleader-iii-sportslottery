@@ -68,9 +68,17 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/js/highcharts.js"/>"></script>
+<c:choose>
+	<c:when test="${locale.language eq 'zh'}">
+		<script src="<c:url value="/js/highcharts_zh.js"/>"></script>
+		<script src="<c:url value="/js/exporting_zh.js"/>"></script>
+	</c:when>
+	<c:otherwise>
+		<script src="<c:url value="/js/highcharts.js"/>"></script>
+		<script src="<c:url value="/js/exporting.js"/>"></script>
+	</c:otherwise>
+</c:choose>
 <script src="<c:url value="/js/highcharts.theme.sand-signika.js"/>"></script>
-<script src="<c:url value="/js/exporting.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script src="<c:url value="/js/admin-navgation.js"/>"></script>
 <script>
@@ -85,7 +93,28 @@
 			if (month <= 0) {
 				month = 12 + month;
 			}
-			months.push(month + '月');				
+			if (zh) {
+				months.push(month + '月');
+			} else {
+				months.push(toMonth(month));
+			}
+		}
+		
+		function toMonth(num) {
+			switch(num) {
+				case 1: return 'Jan'; break;
+				case 2: return 'Feb'; break;
+				case 3: return 'Mar'; break;
+				case 4: return 'Apr'; break;
+				case 5: return 'May'; break;
+				case 6: return 'Jun'; break;
+				case 7: return 'Jul'; break;
+				case 8: return 'Aug'; break;
+				case 9: return 'Sep'; break;
+				case 10: return 'Oct'; break;
+				case 11: return 'Nov'; break;
+				case 12: return 'Dec'; break;
+			}
 		}
 		
 		$('#profitChart').highcharts({
@@ -93,7 +122,7 @@
 				'type': 'area',
 			},
 			'title': {
-				'text': '獲利表',
+				'text': '<s:text name="admin.adminChart.chartTitle"/>',
 				'x': -20
 			},
 			'xAxis': {
@@ -101,7 +130,7 @@
 			},
 			'yAxis': {
 				'title': {
-					'text': '台幣'
+					'text': '<s:text name="admin.adminChart.chartYAxis"/>'
 				},
 				'plotLines': [{
 					'value': 0,
@@ -110,7 +139,7 @@
 				}]
 			},
 			'tooltip': {
-				'valueSuffix': '台幣'
+				'valueSuffix': '<s:text name="admin.adminChart.chartTooltip"/>'
 			},
 			'legend': {
 				'layout': 'vertical',
@@ -119,7 +148,7 @@
 				'borderWidth': 0
 			},
 			'series': [{
-				'name': '總獲利',
+				'name': '<s:text name="admin.adminChart.chartSeries"/>',
 				'data': $.parseJSON('${json}'),
 				'color': 'rgba(119,136,153,.25)',
 			}]
