@@ -459,7 +459,7 @@ public class GameAction extends ActionSupport {
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));
 		} else {
-			json = new Gson().toJson(service.getByBallType("Baseball"));
+			json = new Gson().toJson(service.getByBallType(service.getBallTypes().get(0)));
 		}
 		
 		return Action.SUCCESS;
