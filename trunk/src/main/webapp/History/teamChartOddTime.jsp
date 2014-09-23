@@ -414,7 +414,8 @@ $(function () {
 	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
 	                	},
 	                	xAxis: {
-	                    	type: 'category'
+	                    	//type: 'category'
+	                    	//不再列出時間
 	                	},
 	                	yAxis: {
 	                    	title: {
