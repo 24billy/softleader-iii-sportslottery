@@ -956,7 +956,7 @@
 				
 		if (zh) {
 			$('#gameTable').dataTable({
-				'responsive': true,
+				'responsive': false,
 				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
 				'columns': [{'width': '10%'},
