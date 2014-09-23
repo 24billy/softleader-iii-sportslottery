@@ -205,9 +205,12 @@
                 </div>
                 <div>
                     <ul class="pager">
-                       <li id='randomLottery'><a href="#">錢丟水溝</a></li>
+                       <li id='randomLottery'><a href="#">小試牛刀</a></li>
                     </ul>
                  </div>
+                 <button id="hasGameForBet" class="text-center bg-danger" hidden="true">
+                                                     近三日無可投注賽事
+                 </button>
             </div>
             <!-- End of autoLottery Panel -->   
 
@@ -854,15 +857,42 @@ function odds_refresh(){
 }
 $('#randomLottery').on('click',function(){
     var randomOdd=0;
-    
-    while(!galbalOdds[randomOdd]){
-            randomOdd=parseInt(Math.random()*galbalOdds.length)+1;              
-            console.log("randomOdd"+randomOdd);             
-    }
-
-    
     var userOddInfo = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
     var userGameInfo = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
+    var hasGameToBet = -1;
+    $.each(galbalGames,function(index, game){
+
+    	if(game && game.gameStatus==1){
+    	    console.log(game);
+    		hasGameToBet=1;
+    	}
+    });
+    
+    if(hasGameToBet==-1){
+    	$('#hasGameForBet').prop('hidden',false);
+    	//$('#randomLottery').off('click');
+    	$('#hasGameForBet').fadeIn(1000);
+    	$('#hasGameForBet').fadeOut(2000);
+    	setTimeout(function(){    		
+    		$('#hasGameForBet').prop('hidden',true);
+    		$('#hasGameForBet').attr("disabled", false);
+    		//$('#randomLottery').on('click');
+    	},3000);
+    	return;
+    }else{
+    	$('#hasGameForBet').prop('hidden',true);
+    }
+   
+    
+    while(!galbalOdds[randomOdd] || galbalGames[galbalOdds[randomOdd].gameNum].gameStatus!=1){
+        randomOdd=parseInt(Math.random()*galbalOdds.length)+1;	                          
+    }
+    
+    console.log("game:"+randomOdd);
+    console.log(galbalGames[galbalOdds[randomOdd].gameNum]); 		
+    console.log(galbalGames[galbalOdds[randomOdd].gameNum].gameStatus==1); 
+    
+    
     
     if(!userOddInfo[randomOdd]){
         var thisOdd = galbalOdds[randomOdd];
