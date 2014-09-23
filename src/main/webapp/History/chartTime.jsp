@@ -228,13 +228,13 @@ $(function () {
 
 	            });
 
-	            $.each(brands, function (name, y) {
+	           $.each(brands, function (name, y) {
 	                brandsData.push({
 	                    name: name,
 	                    y: y,
 	                    drilldown: versions[name] ? name : null
 	                });
-	            });
+	            }); 
 	            $.each(versions, function (key, value) {
 	                drilldownSeries.push({
 	                    name: key,
@@ -255,8 +255,8 @@ $(function () {
 	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
 	                	},
 	                	xAxis: {
-	                    	type: 'category'
-	                	},
+	                    	/* type: 'category' */
+	                	}, 
 	                	yAxis: {
 	                    	title: {
 	                        	text: '過關數比例'
