@@ -284,32 +284,44 @@
 			'title': '<s:text name="admin.announceAdmin.delete"/>'
 		});
 		
-		$('#announceTable').dataTable({
-			'responsive': true,
-			'autoWidth': false,
-			'order': [[ 3, 'asc' ]],
-			'columns': [{'width': '20%'},
-			            {'width': '30%'},
-			            {'width': '30%'},
-			            {'width': '20%'}],
-			'oLanguage': {
-				'sProcessing': '處理中...',
-				'sLengthMenu': '顯示 _MENU_ 項結果',
-				'sZeroRecords': '沒有匹配結果',
-				'sInfo': '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
-				'sInfoEmpty': '顯示第 0 至 0 項結果，共 0 項',
-				'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
-				'sInfoPostFix': '',
-				'sSearch': '搜索:',
-				'sUrl': '',
-				'oPaginate': {
-					'sFirst': '首頁',
-					'sPrevious': '上頁',
-					'sNext': '下頁',
-					'sLast': '尾頁'
+		if (zh) {
+			$('#announceTable').dataTable({
+				'responsive': true,
+				'autoWidth': false,
+				'order': [[ 0, 'asc' ]],
+				'columns': [{'width': '20%'},
+				            {'width': '30%'},
+				            {'width': '30%'},
+				            {'width': '20%'}],
+				'oLanguage': {
+					'sProcessing': '處理中...',
+					'sLengthMenu': '顯示 _MENU_ 項結果',
+					'sZeroRecords': '沒有匹配結果',
+					'sInfo': '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+					'sInfoEmpty': '顯示第 0 至 0 項結果，共 0 項',
+					'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
+					'sInfoPostFix': '',
+					'sSearch': '搜索:',
+					'sUrl': '',
+					'oPaginate': {
+						'sFirst': '首頁',
+						'sPrevious': '上頁',
+						'sNext': '下頁',
+						'sLast': '尾頁'
+					}
 				}
-			}
-		});
+			});
+		} else {
+			$('#announceTable').dataTable({
+				'responsive': true,
+				'autoWidth': false,
+				'order': [[ 0, 'asc' ]],
+				'columns': [{'width': '20%'},
+				            {'width': '30%'},
+				            {'width': '30%'},
+				            {'width': '20%'}]
+			});
+		}
 		
 		var currentUrl = document.location.pathname;
 		var currentPath = currentUrl.substr(currentUrl.lastIndexOf('/') + 1);
