@@ -492,17 +492,19 @@ public class GameAction extends ActionSupport {
 	
 	public String countInfoGraph(){
 		try {
+			System.out.println("linkGameNum............................"+ linkGameNum);
+			System.out.println("linkTeamSearch........................."+ linkTeamSearch);
 			Long gameId= service.getGameIdByGameNum(linkGameNum);
 			//輸入gamiId 和teamName取得COUNT資訊
 			listMap= service.getCountInfoHistory(linkTeamSearch, gameId);
 			
 			//附加Max CountBean 於將要傳出的list中，要傳出的list已在addMaxBeanToCountHistory方法裡取出
-//		listMap = service.addMaxBeanToCountHistory(linkTeamSearch, gameId);
+//			listMap = service.addMaxBeanToCountHistory(linkTeamSearch, gameId);
 			json = new Gson().toJson(listMap);
-//		json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
+//			json = new Gson().toJson(service.trialGetCountInfoHistor());//使用預設值
 		} catch (Exception e) {
 			json = "error";
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));

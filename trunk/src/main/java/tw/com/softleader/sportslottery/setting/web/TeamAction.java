@@ -174,8 +174,10 @@ public class TeamAction extends ActionSupport {
 	}
 	
 	public String getTeamsByLeagueName(){
-		
-		json = new Gson().toJson(service.getTeamsByLeagueName(model.getLeagueName()));
+		System.out.println("leagueName"+leagueName);
+		json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
+
+//		json = new Gson().toJson(service.getTeamsByLeagueName(model.getLeagueName()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "getTeamsByCountry";
 	}
