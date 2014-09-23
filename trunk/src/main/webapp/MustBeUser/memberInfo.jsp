@@ -247,18 +247,15 @@
 		//驗證Email
 		$.validator.addMethod("checkEmail", function() {
 			$.ajax({
-				url : "<c:url value='/checkEmail'/>",
+				url : "<c:url value='/checkEmailSelf'/>",
 				type : "get",
 				data : {
 					'model.userEmail' : $('#inputEmail').val()
 				},
 				async : false,
 				success : function(data) {
-					if (data == "success") {
-						checeEmail = true;
-					} else {
-						checeEmail = false;
-					}
+					checeEmail = data;
+					console.log(data);
 				}
 			});
 			return checeEmail;
