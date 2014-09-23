@@ -556,7 +556,9 @@
 		//End of gameTable
 		
 		//Begin of listLeague
-		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
+		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
+			'model.ballType':$('#catagory').val()
+		}, function(data) {
 			$.each(data, function(index, leagueName) {
 				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
 				$('#leagueName').append(str);
