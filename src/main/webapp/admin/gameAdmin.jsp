@@ -688,6 +688,15 @@
 		
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
+			if ($('[name="model.gameTime"]').val().search(/[0-9]/) == -1) {
+				if (!$('[name="model.gameTime"]').parent().hasClass('has-error')) {
+					$('[name="model.gameTime"]').parent().addClass('has-error');
+				}
+				return;
+			} else {
+				$('[name="model.gameTime"]').parent().removeClass('has-error');
+			}
+			
 			var gameId = $(this).val();
 			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
 				'model.id':gameId,
