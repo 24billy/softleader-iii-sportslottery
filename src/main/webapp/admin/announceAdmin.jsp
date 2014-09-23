@@ -315,9 +315,10 @@
 				'responsive': true,
 				'autoWidth': false,
 				'order': [[ 0, 'asc' ]],
-				'columns': [{'width': '20%'},
-				            {'width': '30%'},
-				            {'width': '30%'},
+				'columns': [{'width': '9%'},
+				            {'width': '21%'},
+				            {'width': '25%'},
+				            {'width': '25%'},
 				            {'width': '20%'}],
 				'oLanguage': {
 					'sProcessing': '處理中...',
