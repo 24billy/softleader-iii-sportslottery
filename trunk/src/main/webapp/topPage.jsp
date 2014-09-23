@@ -282,8 +282,6 @@
 	<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
 	function callMyModal(){
     	$('#myModal').modal('show');
-    	$('#myModal .alert').css('display', 'block');
-    	//$('#loginError').text('${errorMsg}');
     }
 	
 	$('#forgetPass').click(function() {
