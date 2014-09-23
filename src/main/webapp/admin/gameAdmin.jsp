@@ -121,8 +121,11 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
-												<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+												<label for="ballType"><s:text name="admin.team.ballType"/></label>
+												<select class="form-control input-sm" id="ballType" name="model.ballType">
+													<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
+													<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
+													<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
 												</select>
 											</div>
 										</div>
@@ -132,13 +135,14 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label for="gameNum"><s:text name="admin.game.gameNum"/></label>
-												<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
+												<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
+												<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+												</select>
 											</div>
 										</div>
 									</div>
 									<!-- .row -->
-								
+									
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
@@ -500,8 +504,6 @@
 		//End of catagory
 		
 		//Begin of gameTable
-		var gameNumArray = new Array();
-		gameNumArray.push(0);
 		var gameList = $.parseJSON('${json}');
 		$.each(gameList, function(index, game) {
 			var child = '';
@@ -551,27 +553,31 @@
 			child += '</tr>';
 			
 			$('#gameList').append(child);
-			gameNumArray.push(game.gameNum);
 		});
 		//End of gameTable
 		
 		//Begin of listLeague
-		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
-			'model.ballType':$('#catagory').val()
-		}, function(data) {
-			$.each(data, function(index, leagueName) {
-				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-				$('#leagueName').append(str);
-			});
-		}, 'json');
+		$('#ballType').change(listLeague);
+		
+		function listLeague() {
+			$('#leagueName').empty();
+			$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
+				'model.ballType':$('#ballType').val()
+			}, function(data) {
+				$.each(data, function(index, leagueName) {
+					var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+					$('#leagueName').append(str);
+				});
+				$('#leagueName')[0].selectedIndex = 0;
+				$('#leagueName').change();
+			}, 'json');
+		}
 		//End of listLeague
 		
 		//Begin of listTeam
 		$('#btnAddGame').click(function() {
 			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.add"/>');
 			resetInput();
-			var maxGameNum = Math.max.apply(Math, gameNumArray);
-			$('[name="model.gameNum"]').val(maxGameNum + 1);
 			listTeam(null, null);
 		});
 		
@@ -590,7 +596,6 @@
 					return $(this).text() == data.teamHome.leagueName;
 				}).prop('selected', true);
 				listTeam(data.teamAway.id, data.teamHome.id);
-				$('[name="model.gameNum"]').val(data.gameNum);
 				$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 				$('#btnMerge').val(data.id);
 				if (data.odds.length != 0) {
@@ -631,7 +636,6 @@
 				$.each(data, function(key, value) {
 					var teamName = zh? value.teamName:value.teamNameEn;
 					var str = '<option value=' + value.id + '>' + teamName + '</option>';
-					console.log(str);
 					$('#teamAwayList,#teamHomeList').append(str);
 				});
 				
@@ -703,9 +707,9 @@
 			var gameId = $(this).val();
 			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
 				'model.id':gameId,
-				'model.ballType':$('[name="catagory"]').val(),
+				'model.ballType':$('#ballType').val(),
 				'model.leagueName':$('[name="model.leagueName"]').val(),
-				'model.gameNum':$('[name="model.gameNum"]').val(),
+				'model.gameNum':'${maxGameNum + 1}',
 				'model.gameTime':$('[name="model.gameTime"]').val(),
 				'teamAwayId':$('[name="teamAwayId"]').val(),
 				'teamHomeId':$('[name="teamHomeId"]').val(),
@@ -803,6 +807,7 @@
 		
 		//Begin of styling
 		function resetInput() {
+			listLeague();
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
 			$('.form-decimal').val('2.00');

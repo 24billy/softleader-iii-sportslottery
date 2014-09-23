@@ -203,4 +203,9 @@ public class TeamAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
+	
+	public String getBallTypes() {
+		log.debug("TeamAction getBallTypes()");
+		return "select";
+	}
 }
