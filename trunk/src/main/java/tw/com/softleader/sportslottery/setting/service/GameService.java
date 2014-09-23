@@ -242,6 +242,24 @@ public class GameService extends GenericService<GameEntity> {
 		return null;
 	}
 	
+	public List<Map<String, CountBean>> getAllCountHistoryByTime (LocalDate timeTo){
+		try {
+
+			List<GameEntity> games = dao.findForHistory(null, timeTo, null);//取出跟隊伍有關的所有資訊
+			
+			List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
+			for(GameEntity game : games){
+				listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
+			}
+			return listMap;
+		} catch (Exception e) {
+			System.out.println("getAllCountHistoryByTime出問題..................................");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	//測試getCountInfoHistor，前端用的預設值
 	public List<Map<String, CountBean>> trialGetCountInfoHistory(){
 		Long gameId=100L;
