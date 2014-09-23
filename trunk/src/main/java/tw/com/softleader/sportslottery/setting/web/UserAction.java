@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -148,7 +149,6 @@ public class UserAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-		log.debug("here is userAction validate");
 		if(userPassword!=null && userPassword.length()>0) {
 			model.setUserPassword(userPassword.getBytes());
 		}
@@ -156,12 +156,15 @@ public class UserAction extends ActionSupport {
 	
 	//更新或新增帳號驗證
 	public void iValidate(int select) {
+		getFieldErrors().clear();
 		if(model!=null) {
 			switch(select) {
 				case 1 : 
 					log.debug("iValidate...(新增會員驗證中...");
-					if(model.getUserAccount()==null ||
-							!model.getUserAccount().matches("^[a-zA-Z0-9]\\S{5,}$")) {
+					if(model.getUserAccount()!=null &&
+							model.getUserAccount().matches("^[a-zA-Z0-9]\\S{5,}$")) {
+						this.check();
+					}else {
 						this.addFieldError("username", this.getText("invalid.fieldvalue.id"));
 						log.debug("帳號問題" + model.getUserAccount());
 					}
@@ -178,22 +181,37 @@ public class UserAction extends ActionSupport {
 					}
 					if(model.getUserBirthday()!=null) {
 						try {
-							LocalDate date = new LocalDate();
-							log.debug(""+date);
-							
+							LocalDate checkDate = new LocalDate();
+							if((checkDate.getValue(0)-model.getUserBirthday().getValue(0)) < 18 || 
+									((checkDate.getValue(0)-model.getUserBirthday().getValue(0)) == 18 &&
+									(model.getUserBirthday().getValue(1)-checkDate.getValue(1)) > 0) ||
+									((checkDate.getValue(0)-model.getUserBirthday().getValue(0)) == 18 &&
+									(model.getUserBirthday().getValue(1)-checkDate.getValue(1)) == 0 &&
+									(model.getUserBirthday().getValue(2)-checkDate.getValue(2) > 0))) {
+								addFieldError("userBirth", this.getText("invalid.fieldvalue.birth"));
+								log.debug(checkDate+"年齡不足"+model.getUserBirthday());
+							}
 						} catch(Exception e) {
-							
+							addFieldError("userBirth", this.getText("invalid.fieldvalue.birth"));
+							log.debug("日期轉換問題");
 						}
 					}
 					if(model.getUserEmail()!=null && 
 							model.getUserEmail().matches( "^[_a-z0-9-]+([.][_a-z0-9-]+)*@[a-z0-9-]+([.][a-z0-9-]+)*$")) {						
-						if(this.checkEmail().equals("error")){
-							addFieldError("mail","此信箱已註冊");
-							log.debug("信箱已存在");
-						}
+						this.checkEmail().equals("error");
 					} else {
+						addFieldError("mail","mail格式不符");
 						log.debug("Email格式不符合");
-						addFieldError("mail","Email格式不符合");
+					}
+					if(model.getUserName()==null ||
+							!model.getUserName().matches("^[\\u4E00-\\u9FA5]+$")) {
+						addFieldError("name",this.getText("invalid.fieldvalue.name"));
+						log.debug("姓名只能輸入中文");
+					}
+					if(model.getUserCardId()!=null && isValidTWPID(model.getUserCardId())) {
+						this.checkUserCardId();
+					}else {
+						this.addFieldError("userCardId", this.getText("invalid.fieldvalue.cardid"));
 					}
 					break;
 				case 2 : 
@@ -202,7 +220,6 @@ public class UserAction extends ActionSupport {
 				default: 
 					break;
 			}
-			
 		}
 	}
 	
@@ -243,7 +260,6 @@ public class UserAction extends ActionSupport {
 					cardPassword);
 			if (card != null) {
 				try {
-					
 					if (card.isState()) {
 						user.setCoins(user.getCoins() + card.getPoint());
 						//log.debug("coins"+card.getPoint());
@@ -275,8 +291,6 @@ public class UserAction extends ActionSupport {
 			log.debug("coins修改非常異常");
 		}else {
 			try {
-				log.debug("12132131131");
-				System.out.println(coins);
 				user.setCoins(user.getCoins() + coins);
 				message = new Gson().toJson(service.update(user));
 			} catch (Exception e) {
@@ -321,9 +335,10 @@ public class UserAction extends ActionSupport {
 				return ERROR;
 			}
 			return SUCCESS;
+		} else {
+			log.debug("有誤" + getFieldErrors().toString());
+			return ERROR;
 		}
-		log.debug("有誤");
-		return ERROR;
 	}
 	
 	//取出會員資料
@@ -435,10 +450,32 @@ public class UserAction extends ActionSupport {
 	public String checkUserCardId() {
 		String result = ERROR;
 		String userCardId = model.getUserCardId().toUpperCase();
-		log.debug("檢查身分證是否重複" + userCardId);
+		//log.debug("檢查身分證是否重複" + userCardId);
 		if(service.getByuserCardId(userCardId)==null) {
-			log.debug("身分證可使用");
 			result = SUCCESS;
+		}else {
+			this.addFieldError("userCardId", this.getText("invalid.fieldvalue.cardid"));
+		}
+		return result;
+	}
+	public final Pattern TWPID_PATTERN = Pattern.compile("[ABCDEFGHJKLMNPQRSTUVXYWZIO][12]\\d{8}");
+	public boolean isValidTWPID(String twpid) {
+		boolean result = false;
+		String pattern = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+		if (TWPID_PATTERN.matcher(twpid.toUpperCase()).matches()) {
+			int code = pattern.indexOf(twpid.toUpperCase().charAt(0)) + 10;
+			int sum = 0;
+			sum = (int) (code / 10) + 9 * (code % 10) + 8
+					* (twpid.charAt(1) - '0') + 7 * (twpid.charAt(2) - '0') + 6
+					* (twpid.charAt(3) - '0') + 5 * (twpid.charAt(4) - '0') + 4
+					* (twpid.charAt(5) - '0') + 3 * (twpid.charAt(6) - '0') + 2
+					* (twpid.charAt(7) - '0') + 1 * (twpid.charAt(8) - '0')
+					+ (twpid.charAt(9) - '0');
+			if ((sum % 10) == 0) {
+				result = true;
+			}else {
+				this.addFieldError("userCardId", this.getText("invalid.fieldvalue.cardid"));
+			}
 		}
 		return result;
 	}
@@ -446,7 +483,7 @@ public class UserAction extends ActionSupport {
 	//Email重複驗證
 	public String checkEmail() {
 		String result = ERROR;
-		log.debug("檢查Email是否存在" + model.getUserEmail());
+		//log.debug("檢查Email是否存在" + model.getUserEmail());
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity)session.get("user");
 		if(userEntity!=null && userEntity.getUserEmail().equals(model.getUserEmail())) {
@@ -454,11 +491,10 @@ public class UserAction extends ActionSupport {
 		}else if (model!=null && model.getUserEmail().length()>0) {
 			UserEntity check = service.getByUserEmail(model.getUserEmail());
 			if (check == null) {
-				log.debug("Email可使用");
 				result = SUCCESS;
 			} else {
-				log.debug("Email存在");
-				addFieldError("QueryFail", "Email已存在");
+				//log.debug("Email已存在");
+				addFieldError("mail", "Email已存在");
 				result = ERROR;
 			}
 			return result;
@@ -468,22 +504,19 @@ public class UserAction extends ActionSupport {
 	}
 	
 	//帳號重複驗證
-	public String check() throws Exception {
-		log.debug("檢查帳號是否存在" + model.getUserAccount());
-		
+	public String check() {
 		String result = ERROR;
-		if (model!=null && model.getUserAccount().length()>0) {
+		if (model!=null && model.getUserAccount().length()>5) {
 			UserEntity check = service.getByUserAccount(model.getUserAccount());
 			if (check == null) {
 				result = SUCCESS;
 			} else {
-				log.debug("存在");
-				addFieldError("QueryFail", "帳號已存在");
-				result = ERROR;
+				//log.debug("帳號已存在");
+				addFieldError("account", "帳號已存在");
 			}
-			return result;
+		}else {
+			this.addFieldError("account", this.getText("invalid.fieldvalue.id"));
 		}
-		
 		return result;
 	}
 	
@@ -494,12 +527,10 @@ public class UserAction extends ActionSupport {
 
 		//測試期間用 無法改密碼
 		UserEntity entity2 = service.getById(2l);
-		log.debug(entity2.toString());
 		entity2.setUserPassword("a123456".getBytes());
 		service.update(entity2);
 		
 		UserEntity entity3 = service.getById(3l);
-		log.debug(entity3.toString());
 		entity3.setUserPassword("a123456".getBytes());
 		service.update(entity3);
 
@@ -508,14 +539,13 @@ public class UserAction extends ActionSupport {
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
 		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
 		if(entity!=null) {
-			log.debug("可登入");
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
 			UserEntity e = session.get("user");
 			//log.debug(""+e);
 			return SUCCESS;
 		} else {
-			log.debug("帳號不存在");
+			log.debug("帳號不正確");
 			addFieldError("LoginFail","帳號或密碼不正確");
 			return INPUT;
 		}
