@@ -145,14 +145,14 @@ public class GameServiceTest extends BaseTest  {
 //
 //	}
 	
-//	@Test
-//	public void testGetAllCountHistoryByTeam(){
-//		String teamName= "辛辛那堤紅人";
-//		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTeam(teamName);
-//		log.debug("listMap = {}",listMap.toString() );
-//		System.out.println("size of listMap: "+ listMap.size() );
-//		
-//	}
+	@Test
+	public void testGetAllCountHistoryByTeam(){
+		String teamName= "紐約洋基";
+		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTeam(teamName);
+		log.debug("listMap = {}",listMap.toString() );
+		System.out.println("size of listMap: "+ listMap.size() );
+		
+	}
 //	
 //	@Test
 //	public void testSortByComparator(){
@@ -176,20 +176,20 @@ public class GameServiceTest extends BaseTest  {
 //
 //	}
 	
-	@Test
-	public void testAddMaxBeanToCountHistory(){
-//		String teamName= "密爾瓦基釀酒人";
-		
-		String teamName = null;
-		Long gameId= null;
-		List<Map<String, CountBean>> listMap = gameService.addMaxBeanToCountHistory(teamName, gameId);
-		System.out.println("AddMaxBeanToCountHistory().................");
-		for(Map<String, CountBean> map: listMap){
-			System.out.println(map);
-		}
-		System.out.println("size of map:"+listMap.size());
-
-		
-	}
+//	@Test
+//	public void testAddMaxBeanToCountHistory(){
+////		String teamName= "密爾瓦基釀酒人";
+//		
+//		String teamName = null;
+//		Long gameId= null;
+//		List<Map<String, CountBean>> listMap = gameService.addMaxBeanToCountHistory(teamName, gameId);
+//		System.out.println("AddMaxBeanToCountHistory().................");
+//		for(Map<String, CountBean> map: listMap){
+//			System.out.println(map);
+//		}
+//		System.out.println("size of map:"+listMap.size());
+//
+//		
+//	}
 
 }
