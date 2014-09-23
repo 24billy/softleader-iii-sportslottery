@@ -22,6 +22,7 @@
 <script src="<c:url value='/js/jquery.validate.min.js'/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
+<script src="<c:url value="/js/jquery.jdigiclock.js"/>"></script>
 
 
 <!--sidepanel  -->  
@@ -49,6 +50,7 @@
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/datepicker.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/coins.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jquery.jdigiclock.css"/>">
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
