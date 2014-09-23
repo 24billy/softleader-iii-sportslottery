@@ -107,7 +107,7 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-	<form style="display:none;" id="countForm" method="post" action="<c:url value="/teamChartOdd"/>">
+	<form style="display:none;" id="countForm" method="post" action="<c:url value="/teamChartOddTime"/>">
 		<input id="linkGameNum" name="linkGameNum">
 		<input id="linkTeamSearch" name="linkTeamSearch">
 	</form>
