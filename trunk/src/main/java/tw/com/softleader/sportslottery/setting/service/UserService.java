@@ -79,7 +79,7 @@ public class UserService extends GenericService<UserEntity> {
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(to));
-			message.setSubject("您的密碼來了,請盡快更改");
+			message.setSubject("Sport Lottery-您的密碼來了,請盡快更改");
 			message.setText(body);
 			Transport.send(message);
 		} catch (Exception e) {
@@ -129,6 +129,31 @@ public class UserService extends GenericService<UserEntity> {
 		entity.setUserEmail(email);		
 		return dao.insert(this.encoding(entity));
 	}
+	public String sendLockmail(UserEntity userEntity) {
+		String body = "親愛的" + userEntity.getUserName() + "您的驗證碼為:"
+				+ userEntity.getUserState();
+		try {
+			Session session = Session.getDefaultInstance(properties,
+					new javax.mail.Authenticator() {
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(from, password);
+						}
+					});
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(userEntity.getUserEmail()));
+			message.setSubject("Sport Lottery-會員認證信");
+			message.setText(body);
+			Transport.send(message);
+		} catch (Exception e) {
+			log.debug("認證信發信失敗");
+			return "error";
+		}
+		return "success";
+	}
+	
+	
 	@Override
 	public UserEntity update(UserEntity entity) {
 		UserEntity enEntity = this.encoding(entity);

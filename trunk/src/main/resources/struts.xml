@@ -273,6 +273,15 @@
     <action name="virtualLottery" class="lotteryAction" method="virtualLottery">
         <result name="successtoo" >/Event/virtualLottery.jsp</result>
     </action>
+	<!-- 驗證狀態 -->
+  	<action name="verify" class="userAction" method="onLock">
+  		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
+  	</action>
+	<action name="sendLock" class="userAction" method="sendLock">
+		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
+	</action>
 
 
 	<!--
@@ -319,6 +328,7 @@
   			<param name="inputName">inputStream</param>
   		</result>
   	</action>
+  	
   	
   	<action name="statistic" class ="statisticAction" method="countAllHistoryByTeam">
   		<result name="countAllHistoryByTeam">/History/statisticResult.jsp</result>

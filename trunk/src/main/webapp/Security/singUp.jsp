@@ -63,13 +63,15 @@
     font-size: 40px;
 }
 
-
-
 .infot {
 	color: #c0c0c0;
 	float: left;
 	font-weight: 800;
 	font-size: 0.4cm;
+}
+.send-mail-div {
+	text-align: center;
+	height: 431px;
 }
 #page1 {
 	display: none;
@@ -78,6 +80,9 @@
 	display: none;
 }
 #page3 {
+	display: none;
+}
+#page4 {
 	display: none;
 }
 #sigUp-body {
@@ -480,10 +485,21 @@ hr {
 			</div>
 		</div>
 		<div id="page3">
-			<form action="">
+			<div class="send-mail-div">
 				<h1>請輸入驗證碼</h1>
-				<input type="text" >
-			</form>
+				<input name="lockCharacter" id="lockCharacter" type="text" ><br>
+				<div>
+					<button class="btn btn-primary">驗證</button>
+					<button class="btn btn-warning">重寄</button>
+				</div>
+				<div class="onlock-error-div"></div>
+			</div>
+		</div>
+		<div id="page4">
+			<div class="send-mail-div">
+				<div style="font-size:2em">${user.userName}感謝您的註冊您可以開始。。。↓</div>
+				<img src="<c:url value='/images/gameValidate.JPG'/>" alt="玩法介紹">
+			</div>
 		</div>
 	</div>
 
@@ -726,18 +742,18 @@ function next(obj,n,next) {
 			var bankAccount = $('.post1').val() + "-" + $('.post2').val()
 								+ "-" + $('.post3').val() + "-" + $('.post4').val();
 			$('#credit').val(bankAccount);
-			$('#info-card').empty();
-			$('#info-card').append(" " + $('#credit').val());
-			console.log(bankAccount.replace(/-/g, ""));
+			$('#info-card').html(" " + $('#credit').val());
+			//console.log(bankAccount.replace(/-/g, ""));
 			var check=false;
-			if(isNaN(bankAccount.replace(/-/g, "")) || bankAccount.length!=17) {
+			bankAccount = bankAccount.replace(/-/g, "");
+			if(isNaN(bankAccount) || bankAccount.length!=14 ||
+					/[Ee]/.test(bankAccount)) {
 				check = false;
 			}else {
 				check = true;
 			}
 			return check;
 		},"格式錯誤,請檢查");
-		var validateFail=0;
 		$('#registration-form').validate(
 				{
 					errorPlacement: function(error, element) {
@@ -799,7 +815,6 @@ function next(obj,n,next) {
 					},
 					highlight : function(element) {
 						console.log('fail');
-						validateFail=1;
 						var formGroup = $(element).closest('.form-group');
 						formGroup.removeClass('has-success').addClass(
 								'has-error');
@@ -819,7 +834,6 @@ function next(obj,n,next) {
 				});
 		$('#addUserButton').on('click',
 				function() {
-					console.log(validateFail);
 					$.ajax({
 						url : "<c:url value='/addAccount'/>",
 						type : "get",
@@ -838,17 +852,16 @@ function next(obj,n,next) {
 						success : function(data) {
 							console.log(data);
 							if (data == "success") {
-								/*
+								$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
 								$('#step2').removeClass("activestep");
 								$('#step3').addClass("activestep");
-								$('#page2').empty();
-								$('#page3').fadeIn(1000);
+								$('#page2').hide();
+								$('#page3').fadeIn(500);
 								$(".progress-bar").css("width", "92.9%").attr(
 										"aria-valuenow", 90);
 								$(".progress-completed").text(90 + "%");
-								*/
-								
-							} else {
+							}else {
+								//
 							}
 						}
 					});
@@ -864,20 +877,66 @@ function next(obj,n,next) {
 			keyboardNavigation : false
 		});
 
+		if('${empty user}'=='true') {
+			$('#page1').fadeIn(500);
+		}else {
+			$('#page3').fadeIn(500);
+			$(".progress-bar").css("width", "92.9%").attr(
+					"aria-valuenow", 90);
+			$(".progress-completed").text(90 + "%");
+			$('#step1').removeClass("activestep");
+			($('#step3').addClass("activestep")).fadeIn(500);
+		}
 		
-		$('#page1').fadeIn(1000);
 		$('#agree').on(
 				'click',
 				function() {
 					$('#step1').removeClass("activestep");
-					($('#step2').addClass("activestep")).fadeIn(1000);
-					$('#page1').empty();
-					$('#page2').fadeIn(1000);
+					($('#step2').addClass("activestep")).fadeIn(500);
+					$('#page1').hide();
+					$('#page2').fadeIn(500);
 					$(".progress-bar").css("width", "50%").attr(
 							"aria-valuenow", 50);
 					$(".progress-completed").text(50 + "%");
 				});
-
+		$('.btn-primary','.send-mail-div').on('click',function() {
+			$.ajax({
+				url : "<c:url value='/verify'/>",
+				type : "get",
+				async : false,
+				data : {
+					lockCharacter:$('#lockCharacter').val()
+				},
+				success : function(data) {
+					if (data == "success") {
+						$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
+						$(".progress-bar").css("width", "100%").attr(
+								"aria-valuenow", 100);
+						$(".progress-completed").text(100 + "%");
+						$('#step1').removeClass("activestep");
+						$('#page3').hide();
+						$('#page4').fadeIn(500);
+					}else {
+						$('.onlock-error-div').html('驗證失敗,請重新填入').css('color','red');
+					}
+				}
+			});
+		});
+		$('.btn-warning','.send-mail-div').on('click',function() {
+			$.ajax({
+				url : "<c:url value='/sendLock'/>",
+				type : "get",
+				async : false,
+				success : function(data) {
+					if (data == "success") {
+						$('.onlock-error-div').html('驗證信已重新寄出,請查看').css('color','green');
+					}else {
+						$('.onlock-error-div').html('發送失敗請檢查帳號與Email').css('color','red');
+					}
+				}
+			});
+		});
+		
 	})(jQuery);
 </script>
 </html>

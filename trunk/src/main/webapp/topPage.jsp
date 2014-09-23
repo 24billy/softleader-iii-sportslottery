@@ -129,7 +129,10 @@
 		                            <div class="navbar-login">
 		                            	<div class="row">
 		                                   	<div class="col-sm-4">
-		                                   		<p class="text-left"><strong>${user.userName}</strong></p>    
+		                                   		<p class="text-left"><strong>${user.userName}</strong></p>
+		                                   		<c:if test="${user.userState!='0'}">
+		                                   			<a id="goVerify" href="#"><p style="color:red"><strong>未認證</strong></p><a>        
+		                                   		</c:if>
 		                                   	</div>          
 		                                   	<div class="col-sm-8">
 		                                   		<button id="goUser" class="btn-primary btn-xs" data-dismiss="modal">個人資料</button>
@@ -209,7 +212,9 @@
 					<h3>全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
-					<c:if test="${not empty errorMsg}"><div class="alert alert-danger" role="alert">${errorMsg}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div></c:if>
+				<c:if test="${not empty errorMsg}">
+					<div class="alert alert-danger" role="alert">${errorMsg}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
+				</c:if>
 					<form method="post" action="" name="login_form">
 						<p>
 							<input type="text" class="span3" name="model.userAccount" id="loginAccount"
@@ -268,16 +273,17 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<script>
-
+	
 (function($) {
 	var str = "";
 
 	<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
 	function callMyModal(){
     	$('#myModal').modal('show');
-    	$('#loginError').html('您必須登入才能投注!!!');
+    	$('#myModal .alert').css('display', 'block');
+    	//$('#loginError').text('${errorMsg}');
     }
 	
 	$('#forgetPass').click(function() {
@@ -406,12 +412,32 @@
 		});
 	});
 	
+	$('#goVerify').on('click',function() {
+		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+	});
 	
-	
-	
-	
+
 	
 })(jQuery); 
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    	  $('.simple-menu').sidr();
+    });
+
+  	$('.game').click(function() {		  		
+  		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
+ 	});
+	$('.history').click(function() {
+		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
+	});
+	$('.user').click(function() {
+		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+	});
+	$('.lotteryBoard').click(function() {
+		odds_refresh();
+	});
+</script>
+
 </body>
 </html>
