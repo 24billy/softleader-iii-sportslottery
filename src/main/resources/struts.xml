@@ -282,8 +282,12 @@
 			<param name="inputName">inputStream</param>
   		</result>
   	</action>
-  	<action name="teamChartOdd" class="gameAction" method="teamChartOddTime">
-  		<result name="success">/History/teamChartOdd.jsp</result>
+
+  	<!-- 從歷史資訊轉到統計頁面 -->
+  	<action name="teamChartOddTime" class="gameAction" method="teamChartOddTime">
+  		<result name="success">/History/teamChartOddTime.jsp</result>
+
+
   	</action>
   	
   	<!-- 用隊伍名取得所有COUNT歷史資訊 -->
