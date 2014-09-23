@@ -50,7 +50,7 @@ public class OddsServiceTest extends BaseTest {
 
 	
 //	LocalDate date1 = new LocalDate();
-//	date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDateTime
+//	date1 = LocalDate.parse("2014-08-19");//將時間自串轉成 LocalDate
 //	//log.debug("date1= {} ", date1);
 //	String teamName= "辛辛那堤紅人";
 //	List<OddsEntity> oddList = gamedao.getOddsByTimeAndTeamName(date1, teamName);
