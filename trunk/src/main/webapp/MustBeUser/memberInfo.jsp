@@ -10,9 +10,13 @@
 
 <style>
 
+.errorMsg{
+	display:none;
+}
+
 </style>
 <div class="container top20">
-	<div class="row">
+	<div class="row" id="editUserInfo">
 	
     	<nav class="col-sm-3"><!--nav-->
 	        <ul id="naver" class="nav nav-pills nav-stacked nav-ul">
@@ -34,47 +38,61 @@
 					</div>
 					<div class="panel-body">
 						<form id="userForm" class="form-horizontal" role="form">
-							<div class="form-group">
-								<label for="inputAccount" class="col-sm-2 control-label">帳號</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">帳號</label>
 								<div class="col-sm-10">
 									<input id="inputAccount" type="text" class="form-control" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="inputBankAccount" class="col-sm-2 control-label">帳戶</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">帳戶</label>
 								<div class="col-sm-10">
 									<input id="inputBankAccount" type="text" class="form-control" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
 							
-							<div class="form-group">
-								<label for="inputName" class="col-sm-2 control-label">姓名</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-10">
-									<input id="inputName" type="text" class="form-control editable" disabled>
+									<input id="inputName" type="text" class="form-control editable" name="model.userName" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="inputBirth" class="col-sm-2 control-label">生日</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">生日</label>
 								<div class="col-sm-10">
-									<input id="inputBirth" type="text" class="form-control editable" disabled>
+									<input id="inputBirth" type="text" class="form-control editable" name="model.userBirthday" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="inputPhone" class="col-sm-2 control-label">電話</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">電話</label>
 								<div class="col-sm-10">
-									<input id="inputPhone" type="text" class="form-control editable" disabled>
+									<input id="inputPhone" type="text" class="form-control editable" name="model.userPhone" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="inputEmail" class="col-sm-2 control-label">信箱</label>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">信箱</label>
 								<div class="col-sm-10">
-									<input id="inputEmail" type="text" class="form-control editable" disabled>
+									<input id="inputEmail" type="text" class="form-control editable" name="model.userEmail" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
-							<div class="form-group" id="passConfirm">
-								<label for="inputPass" class="col-sm-2 control-label">密碼</label>
+							<div class="form-group has-feedback" id="passConfirm">
+								<label class="col-sm-2 control-label">密碼</label>
 								<div class="col-sm-10">
 									<input id="inputPass" type="password" class="form-control editable" placeholder="請輸入密碼以進行身分驗證" disabled>
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
 								</div>
 							</div>
 							
@@ -102,6 +120,8 @@
 <footer class="row footer">
 	<div class="panel-footer"></div>
 </footer>
+
+<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 <script>
 	(function($) {
 		editMode(false);
@@ -112,6 +132,7 @@
 		});
 		//取得使用者資訊
 		getUserInfo();
+		
 		function getUserInfo(){
 			$('#alert').hide();
 			$.ajax({
@@ -139,10 +160,16 @@
 		$('#cancel').on('click', function(){
 			editMode(false);
 			getUserInfo();
+			$('input').tooltip('hide');
+			$('.form-group').removeClass('has-error').removeClass('has-success');
+			$('.form-control-feedback').removeClass('glyphicon-remove').removeClass('glyphicon-ok');
 		});
 		
 		$('#save').on('click', function(){
-			if($('#inputPass').val().trim().length <= 0){
+			if(!$('#userForm').valid()){
+				$('#alert').html('<strong>欄位填寫有誤:</strong>請檢查資料是否正確');
+				$('#alert').show();
+			}else if($('#inputPass').val().trim().length <= 0){
 				$('#passConfirm').addClass('has-error');
 				$('#alert').html('<strong>密碼不能為空:</strong>請輸入密碼');
 				$('#alert').show();
@@ -215,6 +242,128 @@
 				$('#passConfirm').hide();
 			}
 		}
+		
+		//驗證區
+		//驗證Email
+		$.validator.addMethod("checkEmail", function() {
+			$.ajax({
+				url : "<c:url value='/checkEmail'/>",
+				type : "get",
+				data : {
+					'model.userEmail' : $('#inputEmail').val()
+				},
+				async : false,
+				success : function(data) {
+					if (data == "success") {
+						checeEmail = true;
+					} else {
+						checeEmail = false;
+					}
+				}
+			});
+			return checeEmail;
+		}, "Email已使用過");
+		
+		//姓名電話
+		$.validator.addMethod("input", function() {
+			return true;
+		});
+		$.validator.addMethod("alnumName", function(value, element) {
+			return /^[a-zA-Z\u4E00-\u9FA5]+$/.test(value);
+		}, "只能是英文或中文");
+		
+		//年齡驗證
+		$.validator.addMethod('checkBirth', function() {
+			var check = true;
+			var userBirth = $("#inputBirth").val();
+			var year = new Date().getFullYear();
+			var month = new Date().getMonth() + 1;
+			var day = new Date().getDate();
+			var res;
+			userBirth = userBirth.replace(/年|月/g,'-');
+			userBirth = userBirth.replace(/日/g,'');
+			res = userBirth.split("-");
+			if ((year - res[0]) < 18) {
+				check = false;
+			} else if ((year - res[0]) == 18 && (res[1] - month) > 0) {
+				check = false;
+			} else if ((year - res[0]) == 18 && (res[1] - month) == 0
+					&& (res[2] - day) < 0) {
+				check = false;
+			}
+			return check;
+		}, function() {
+			var res;
+			var month = new Date().getMonth() + 1;
+			var userBirth = $("#inputBirth").val();
+			var year = new Date().getFullYear();
+			var day = new Date().getDate();
+			userBirth = userBirth.replace(/年|月/g,'-');
+			userBirth = userBirth.replace(/日/g,'');
+			res = userBirth.split("-");
+			year = 18 - (year - res[0]);
+			month = res[1] - month;
+			day = day - res[2];
+			if (year == 0 && month == 0) {
+				return "再忍耐" + day + "天再來註冊!";
+			} else if (year == 0) {
+				return "快了快了,剩" + month + "個月就能來了";
+			}
+			return "別急別急,再等" + year + "年再來";
+		});
+		$('#userForm').validate({
+			errorPlacement: function(error, element) {
+				var parent = element.parent().parent();
+				$('div.errorMsg',parent).html(error);
+			},
+			rules : {
+				'model.userEmail' : {
+					required : true,
+					email : true,
+					checkEmail : true
+				},
+				'model.userName' : {
+					required : true,
+					alnumName : true,
+					input : true
+				},
+				'model.userBirthday' : {
+					required : true,
+					checkBirth : true
+				},
+				'model.userPhone' : {
+					number : true,
+					input : true
+				}
+			},
+			highlight : function(element) {
+				validateFail=1;
+				var formGroup = $(element).closest('.form-group');
+				if(!formGroup.hasClass('has-error')){
+					formGroup.removeClass('has-success');
+					formGroup.addClass('has-error');
+				}
+				$('.form-control-feedback', formGroup).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+				var errorMsg = $('div.errorMsg',formGroup).text();
+				$('input',formGroup).tooltip('destroy');
+				$('input',formGroup).tooltip({
+					placement: 'right',
+					title: errorMsg,
+					container: '#editUserInfo',
+					trigger: 'manual',
+				});
+				$('input',formGroup).tooltip('show');
+			},
+			success : function(element) {
+				var formGroup = $(element).closest('.form-group');
+				if(!formGroup.hasClass('has-success')){
+					formGroup.removeClass('has-error');
+					formGroup.addClass('has-success');
+				}
+				$('.form-control-feedback', formGroup).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+				$('input',formGroup).tooltip('hide');
+			},
+		});
 		
 	})(jQuery);
 
