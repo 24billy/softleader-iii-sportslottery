@@ -219,6 +219,13 @@
 			<param name="inputName">inputStream</param>
 		</result>
 	</action>
+	<!-- 檢查Email重複2 -->
+	<action name="checkEmailSelf" class="userAction" method="checkEmailSelf">
+		<result name="checkEmailSelf" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>	
 	
 	<!-- 回首頁action -->
 	<action name="goIndex" class="passToAction" method="goIndex">

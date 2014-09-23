@@ -503,6 +503,31 @@ public class UserAction extends ActionSupport {
 		return result;
 	}
 	
+	//Email重複驗證2 本驗證可允許與自己的Email重複
+	public String checkEmailSelf() {
+		//log.debug("檢查Email是否存在" + model.getUserEmail());
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity)session.get("user");
+		if(userEntity!=null && userEntity.getUserEmail().equals(model.getUserEmail())) {
+			log.debug("驗證輸入自己的Email");
+			inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
+		}else if (model!=null && model.getUserEmail().length()>0) {
+			UserEntity check = service.getByUserEmail(model.getUserEmail());
+			if (check == null) {
+				log.debug("驗證輸入不重複的Eamil");
+				inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
+			} else {
+				log.debug("驗證輸入重複的Email");
+				inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+			}
+		}else{
+			log.debug("驗證沒有輸入Email");
+			inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+		}
+		
+		return "checkEmailSelf";
+	}
+	
 	//帳號重複驗證
 	public String check() {
 		String result = ERROR;
