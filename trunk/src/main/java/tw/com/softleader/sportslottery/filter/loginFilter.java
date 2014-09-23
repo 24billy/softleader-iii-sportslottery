@@ -64,8 +64,11 @@ public class loginFilter implements Filter {
 				System.out.println(contextPath);
 				//resp.getOutputStream().println("<script>callMyModal();</script>");
 				req.setAttribute("mustBeLogin", "true");
+				System.out.println(req.getRequestURI());
 				if(req.getRequestURI().indexOf("/lottery")>0){
 					req.setAttribute("errorMsg", "請登入後在進行投注!");
+				} else if(req.getRequestURI().indexOf("/userOddsSearch")>0){
+					req.setAttribute("errorMsg", "登入後才能觀看使用者投注資訊!");
 				}
 				req.getRequestDispatcher("/index.jsp").forward(req, resp);
 				//resp.sendRedirect(contextPath + "/goIndex");
