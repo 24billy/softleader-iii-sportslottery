@@ -319,7 +319,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-lock"></span> 
 												</span> 
-												<input type="text" class="form-control" id="passwordf" name="userPassword"
+												<input type="password" class="form-control" id="passwordf" name="userPassword"
 												placeholder="輸入密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -332,7 +332,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-check"></span> 
 												</span> 
-												<input type="text" class="form-control" id="confirm_password"
+												<input type="password" class="form-control" id="confirm_password"
 													name="confirm_password" placeholder="確認密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -561,8 +561,7 @@ function next(obj,n,next) {
 			return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
 		}, "只能包括英文字母和数字");
 		jQuery.validator.addMethod("checkAccount", function() {
-			$('#info-account').empty();
-			$('#info-account').append($('#accountf').val());
+			$('#info-account').html($('#accountf').val());
 			$.ajax({
 				url : "<c:url value='/checkAccount'/>",
 				type : "get",
@@ -583,8 +582,7 @@ function next(obj,n,next) {
 
 		//驗證Email
 		jQuery.validator.addMethod("checkEmail", function() {
-			$('#info-mail').empty();
-			$('#info-mail').append($('#email').val());
+			$('#info-mail').html($('#email').val());
 			$.ajax({
 				url : "<c:url value='/checkEmail'/>",
 				type : "get",
@@ -631,12 +629,12 @@ function next(obj,n,next) {
 		//姓名電話
 		jQuery.validator.addMethod("input", function() {
 			$('#info-name').text("(" + $('#name').val() + ")");
-			$('#info-phone').text("<p>&nbsp" + $('#phone').val() + "</p>");
+			$('#info-phone').html("<p>&nbsp" + $('#phone').val() + "</p>");
 			return true;
 		});
 		jQuery.validator.addMethod("alnumName", function(value, element) {
-			return /^[a-zA-Z\u4E00-\u9FA5]+$/.test(value);
-		}, "只能是英文或中文");
+			return /^[\u4E00-\u9FA5]+$/.test(value);
+		}, "只能輸入中文");
 
 		//身分證驗證
 		jQuery.validator.addMethod("idCard", function() {
@@ -660,8 +658,7 @@ function next(obj,n,next) {
 			return /^[A-Z]{1}[1-2]{1}[0-9]{8}$/.test(citizenid);
 		}, "格式不正確");
 		jQuery.validator.addMethod("checkIdCard", function() {
-			$('#info-idcard').empty();
-			$('#info-idcard').append($('#userId').val().toUpperCase());
+			$('#info-idcard').html($('#userId').val().toUpperCase());
 			var check = false;
 			$.ajax({
 				url : "<c:url value='checkUserCardId' />",
@@ -681,8 +678,7 @@ function next(obj,n,next) {
 		
 		//年齡驗證
 		jQuery.validator.addMethod('checkBirth', function() {
-			$('#info-birth').empty();
-			$('#info-birth').append($('#userBirth').val());
+			$('#info-birth').text($('#userBirth').val());
 			var check = true;
 			var userBirth = $("#userBirth").val();
 			var year = new Date().getFullYear();
@@ -699,7 +695,7 @@ function next(obj,n,next) {
 			} else if ((year - res[0]) == 18 && (res[1] - month) > 0) {
 				check = false;
 			} else if ((year - res[0]) == 18 && (res[1] - month) == 0
-					&& (res[2] - day) < 0) {
+					&& (res[2] - day) > 0) {
 				check = false;
 			}
 			return check;
@@ -716,7 +712,7 @@ function next(obj,n,next) {
 			}
 			year = 18 - (year - res[0]);
 			month = res[1] - month;
-			day = day - res[2];
+			day = res[2] - day ;
 			if (year == 0 && month == 0) {
 				return "再忍耐" + day + "天再來註冊!";
 			} else if (year == 0) {

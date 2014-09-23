@@ -94,7 +94,7 @@ public class UserService extends GenericService<UserEntity> {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] temp = md.digest(entity.getUserPassword());
 			entity.setUserPassword(temp);
-			log.debug("編碼成功: " + temp);
+			//log.debug("編碼成功: " + temp);
 		} catch (NoSuchAlgorithmException e) {
 			log.debug("編碼失敗");
 			e.printStackTrace();
