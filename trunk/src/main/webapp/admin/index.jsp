@@ -126,14 +126,14 @@
 																
 																	<div class="col-sm-12">
 																		<div class="form-group">
-																			<label for="announceTitle"><s:text name="admin.announce.announceTitle"/></label>
+																			<label for="announceTitle" class="control-label"><s:text name="admin.announce.announceTitle"/></label>
 																			<input class="form-control input-sm" type="text" name="model.announceTitle" id="announceTitle">
 																		</div>
 																	</div>
 																	
 																	<div class="col-sm-12">
 																		<div class="form-group">
-																			<label for="announceContent"><s:text name="admin.announce.announceContent"/></label>
+																			<label for="announceContent" class="control-label"><s:text name="admin.announce.announceContent"/></label>
 																			<textarea class="form-control" name="model.announceContent" id="announceContent" rows="5"></textarea>
 																		</div>
 																	</div>
@@ -202,7 +202,7 @@
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="gameTime"><s:text name="admin.game.gameTime"/></label>
+																				<label for="gameTime" class="control-label"><s:text name="admin.game.gameTime"/></label>
 																				<input class="form-control input-sm" id="gameTime" type="text" name="model.gameTime">
 																			</div>
 																		</div>
@@ -400,6 +400,30 @@
 		
 		//Begin of btnAnnounce
 		$('#btnAnnounce').click(function() {
+			var error = 0;
+			
+			if ($('#announceTitle').val() == "") {
+				if (!$('#announceTitle').parent().hasClass('has-error')) {
+					$('#announceTitle').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#announceTitle').parent().removeClass('has-error');
+			}
+			
+			if ($('#announceContent').val() == "") {
+				if (!$('#announceContent').parent().hasClass('has-error')) {
+					$('#announceContent').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#announceContent').parent().removeClass('has-error');
+			}
+			
+			if (error > 0) {
+				return;
+			}
+			
 			$.post('<c:url value="/admin/announceAdmin?method:insert"/>',{
 				'model.announceTitle':$('#announceTitle').val(),
 				'model.announceContent':$('#announceContent').val()
@@ -446,10 +470,11 @@
 				'model.leagueName':$('#leagueName').val()
 			}, function(data) {
 				$.each(data, function(key, value) {
+					var str = "";
 					if (zh) {
-						var str = '<option value=' + value.id + '>' + value.teamName + '</option>';
+						str = '<option value=' + value.id + '>' + value.teamName + '</option>';
 					} else {
-						var str = '<option value=' + value.id + '>' + value.teamNameEn + '</option>';
+						str = '<option value=' + value.id + '>' + value.teamNameEn + '</option>';
 					}
 					$('#teamAwayList,#teamHomeList').append(str);
 				});
@@ -466,6 +491,11 @@
 		
 		//Begin of btnGame
 		$('#btnGame').click(function() {
+			if ($('[name="model.gameTime"]').val().search(/[0-9]/) == -1) {
+				$('[name="model.gameTime"]').parent().addClass('has-error');
+				return;
+			}
+			
 			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
 				//'model.ballType':$('[name="catagory"]').val(),
 				'model.ballType':'Baseball',
