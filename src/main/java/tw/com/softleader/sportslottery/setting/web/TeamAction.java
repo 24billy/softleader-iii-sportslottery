@@ -160,13 +160,13 @@ public class TeamAction extends ActionSupport {
 			if (!StringUtils.isEmpty(leagueName)) {
 				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
 			} else {
-				json = new Gson().toJson(service.getTeamsByLeagueName("美國職棒"));
+				json = new Gson().toJson(service.getTeamsByLeagueName(service.leagueNames().get(0)));
 			}
 		} else {
 			if (!StringUtils.isEmpty(leagueName)) {
 				json = new Gson().toJson(service.getTeamsByLeagueNameEn(leagueName));
 			} else {
-				json = new Gson().toJson(service.getTeamsByLeagueNameEn("Major League Baseball"));
+				json = new Gson().toJson(service.getTeamsByLeagueNameEn(service.leagueNamesEn().get(0)));
 			}
 		}
 		
