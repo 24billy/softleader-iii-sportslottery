@@ -63,6 +63,8 @@
 <!-- page start -->
 <div>
     <div class="page-wraper">
+        <div class="hidden visible-xs"><br></div>
+        
         <!-- TopPage start -->
         <div >
             <jsp:include page="topPage.jsp" />
@@ -110,8 +112,10 @@
 <!--start lottery panel  -->
         <div class="panel panel-primary">
             <div class="panel-heading ">
-                                         投注區             
+                                         投注區
+                <span id="closeLotteryPanel" class="glyphicon glyphicon glyphicon-arrow-left pull-right simple-menu" ></span>                                      
             </div>
+            
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist" id="myTab" >
                 <li class="active"><a href="#single" role="tab"
@@ -874,7 +878,16 @@ $('#randomLottery').on('click',function(){
     odds_refresh();
     
 });
+$('#closeLotteryPanel').on("mouseover",function(){
+    $(this).addClass("closeOver");
+});
+$('#closeLotteryPanel').on("mouseout",function(){
+	$(this).removeClass("closeOver");
+});
 
+$('#closeLotteryPanel').on("click",function(){
+	
+});
 //-----------------------------------------------------
 //投注區更新結束
 </script>

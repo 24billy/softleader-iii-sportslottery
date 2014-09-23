@@ -71,12 +71,11 @@
                 <span class="icon-bar"></span>
             </button>
             <span class="navbar navbar-toggle" data-toggle="collapse" >
-                <button class="game">賽事</button>
-                <button class="history">歷史</button>
-                <button class="user">使用者</button>
-                <button class="lotteryBoard simple-menu">投注</button>
-            </span>
-            
+                <button class="btn btn-hot game">賽事</button>
+                <button class="btn btn-sunny history">歷史</button>
+                <button class="btn btn-sky user">使用者</button>
+                <button class="btn btn-tree lotteryBoard simple-menu">投注</button>
+            </span>              
             
         </div>
         
@@ -190,7 +189,7 @@
                     <button
                             type="button"
                             class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu"
-                            >投注區</button>
+                            >顯示投注區</button>
                 </div>
             </div>
         </div>        

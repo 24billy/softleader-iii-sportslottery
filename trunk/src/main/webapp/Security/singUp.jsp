@@ -429,7 +429,7 @@ hr {
 							</form>
 						</div>
 					</div>
-					<div id="info-form" class="col-md-4 hidden-xs">
+					<div id="info-form" class="col-md-4 hidden-sm hidden-xs">
 						<form>
 							<legend>
 								<span class="glyphicon glyphicon-user"></span>  
