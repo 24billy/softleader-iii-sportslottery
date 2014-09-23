@@ -599,6 +599,8 @@
 			$.post('<c:url value="/admin/gameAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
+				$('#ballType').val(data.ballType);
+				$('#ballType').change();
 				var dateTime = new Date(data.gameTime.iLocalMillis);
 				var year = dateTime.getUTCFullYear();
 				var month = addZero(dateTime.getUTCMonth() + 1);
@@ -606,7 +608,11 @@
 				var hours = addZero(dateTime.getUTCHours());
 				var minutes = addZero(dateTime.getUTCMinutes());
 				$('[name="model.leagueName"] option').filter(function() {
-					return $(this).text() == data.teamHome.leagueName;
+					if (zh) {
+						return $(this).text() == data.teamHome.leagueName;
+					} else {
+						return $(this).text() == data.teamHome.leagueNameEn;
+					}
 				}).prop('selected', true);
 				listTeam(data.teamAway.id, data.teamHome.id);
 				$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
