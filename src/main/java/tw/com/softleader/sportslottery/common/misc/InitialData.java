@@ -67,7 +67,7 @@ public class InitialData implements ServletContextListener {
 			} else {
 				gameNum = 100L;
 			}
-			String ballType = "Baseball";
+			String ballType = teamAway.getBallType();
 			Boolean isEnd = null;
 			Long gameScoreAway = 0L;
 			Long gameScoreHome = 0L;
