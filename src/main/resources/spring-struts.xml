@@ -27,7 +27,9 @@
 	<bean id="passToAction" class="tw.com.softleader.sportslottery.setting.util.PassToAction" scope="prototype"/>
 	<bean id="adminLogAction" class="tw.com.softleader.sportslottery.setting.web.AdminLogAction" scope="prototype"/>
 	<bean id="announceAction" class="tw.com.softleader.sportslottery.setting.web.AnnounceAction" scope="prototype"/>
+	<bean id="statisticAction" class="tw.com.softleader.sportslottery.setting.web.StatisticAction" scope="prototype"/>
 	<bean id="adminAction" class="tw.com.softleader.sportslottery.setting.web.AdminAction" scope="prototype"/>
+
 	<!-- 此頁提供 xxxxAction的程式碼位置-->
 	<!-- 以下以gameAction為例:
 			<bean id ="gameAction" ....>的值對應到 struts.xml裡的  
