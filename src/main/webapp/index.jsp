@@ -85,13 +85,18 @@
     });
 
   	$('.game').click(function() {		  		
-  		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
+  		$("#target").load('<c:url value="/Event/test-events.jsp"/>'); 
+  		$(window).on('resize', function() {
+  		    responseSize();
+  		});
  	});
 	$('.history').click(function() {
 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
+		$(window).off('resize');
 	});
 	$('.user').click(function() {
 		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+		$(window).off('resize');
 	});
 	$('.lotteryBoard').click(function() {
 		odds_refresh();
