@@ -40,4 +40,12 @@ public class TeamService extends GenericService<TeamEntity> {
 	public List<String> leagueNamesEn() {
 		return dao.leagueNamesEn();
 	}
+	
+	public List<String> getLeagueNamesByBallType(String ballType) {
+		return dao.findLeagueNamesByBallType(ballType);
+	}
+	
+	public List<String> getLeagueNamesByBallTypeEn(String ballType) {
+		return dao.findLeagueNamesByBallTypeEn(ballType);
+	}
 }

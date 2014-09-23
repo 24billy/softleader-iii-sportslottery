@@ -501,6 +501,7 @@
 		
 		//Begin of gameTable
 		var gameNumArray = new Array();
+		gameNumArray.push(0);
 		var gameList = $.parseJSON('${json}');
 		$.each(gameList, function(index, game) {
 			var child = '';
