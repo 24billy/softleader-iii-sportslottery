@@ -540,7 +540,7 @@
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
 			} else {
-				child += '<td><button type="button" class="btn btn-xs btn-status disabled btn-block"><s:text name="admin.gameAdmin.status.unopened"/></button></td>';
+				child += '<td><button type="button" class="btn btn-xs disabled btn-block"><s:text name="admin.gameAdmin.status.unopened"/></button></td>';
 				child += '<td>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-edit" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-pencil-square-o"></i></button>';
 				child += '<button type="button" value="' + game.id + '"class="btn btn-default btn-xs btn-del left5" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-fw fa-trash-o"></i></button>';
@@ -887,34 +887,52 @@
 			'placement': 'top',
 			'title': '<s:text name="admin.gameAdmin.openOdds"/>'
 		});
-		
-		$('#gameTable').dataTable({
-			'responsive': true,
-			'autoWidth': false,
-			'order': [[ 0, 'desc' ]],
-			'columns': [{'width': '10%'},
-			            {'width': '25%'},
-			            {'width': '20%'},
-			            {'width': '20%'},
-			            {'width': '10%'},
-			            {'width': '15%'}],
-			'oLanguage': {
-				'sProcessing': '處理中...',
-				'sLengthMenu': '顯示 _MENU_ 項結果',
-				'sZeroRecords': '沒有匹配結果',
-				'sInfo': '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
-				'sInfoEmpty': '顯示第 0 至 0 項結果，共 0 項',
-				'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
-				'sInfoPostFix': '',
-				'sSearch': '搜索:',
-				'sUrl': '',
-				'oPaginate': {
-					'sFirst': '首頁',
-					'sPrevious': '上頁',
-					'sNext': '下頁',
-					'sLast': '尾頁'
+				
+		if (zh) {
+			$('#gameTable').dataTable({
+				'responsive': true,
+				'autoWidth': false,
+				'order': [[ 0, 'desc' ]],
+				'columns': [{'width': '10%'},
+				            {'width': '25%'},
+				            {'width': '20%'},
+				            {'width': '20%'},
+				            {'width': '10%'},
+				            {'width': '15%'}],
+				'oLanguage': {
+					'sProcessing': '處理中...',
+					'sLengthMenu': '顯示 _MENU_ 項結果',
+					'sZeroRecords': '沒有匹配結果',
+					'sInfo': '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+					'sInfoEmpty': '顯示第 0 至 0 項結果，共 0 項',
+					'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
+					'sInfoPostFix': '',
+					'sSearch': '搜索:',
+					'sUrl': '',
+					'oPaginate': {
+						'sFirst': '首頁',
+						'sPrevious': '上頁',
+						'sNext': '下頁',
+						'sLast': '尾頁'
+					}
 				}
-			}
+			});
+		} else {
+			$('#gameTable').dataTable({
+				'responsive': true,
+				'autoWidth': false,
+				'order': [[ 0, 'desc' ]],
+				'columns': [{'width': '10%'},
+				            {'width': '25%'},
+				            {'width': '20%'},
+				            {'width': '20%'},
+				            {'width': '10%'},
+				            {'width': '15%'}]
+			});
+		}
+		
+		$('#gameTable').on('Responsive', function() {
+			tooltips();
 		});
 		
 		var currentUrl = document.location.pathname;
