@@ -272,6 +272,48 @@
 		
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
+			var error = 0;
+			
+			if ($('#leagueName').val() == "") {
+				if (!$('#leagueName').parent().hasClass('has-error')) {
+					$('#leagueName').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#leagueName').parent().removeClass('has-error');
+			}
+			
+			if ($('#leagueNameEn').val() == "") {
+				if (!$('#leagueNameEn').parent().hasClass('has-error')) {
+					$('#leagueNameEn').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#leagueNameEn').parent().removeClass('has-error');
+			}
+			
+			if ($('#teamName').val() == "") {
+				if (!$('#teamName').parent().hasClass('has-error')) {
+					$('#teamName').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#teamName').parent().removeClass('has-error');
+			}
+			
+			if ($('#teamNameEn').val() == "") {
+				if (!$('#teamNameEn').parent().hasClass('has-error')) {
+					$('#teamNameEn').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#teamNameEn').parent().removeClass('has-error');
+			}
+			
+			if (error > 0) {
+				return;
+			}
+			
 			var teamId = $(this).val();
 			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
 				'model.id':teamId,
