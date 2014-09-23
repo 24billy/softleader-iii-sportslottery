@@ -72,8 +72,8 @@ $(function () {
 	function appendToDiv(){
 		/* test1();  */
 		// test2();  
-		final1();  
-		 //final2(); 
+		//final1();  
+		 final2(); 
 		/*  test4();  */
 		// test5(); 
 		//test6();
@@ -184,62 +184,76 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('正在搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
+		$('#searchMessage').text('以"'+'${linkTeamSearch}'+'"為搜尋對象的過關投注統計');
 		$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		 $.post(url, {
  			'linkTeamSearch':'${linkTeamSearch}'
  		},function(data) { //用POST透過countInfoGraph取回的Json型式的值
- 			console.log(data);
+ 			
 			$.each(data, function(key, value) { 
 				
-				var type=value['ATS_A'];
+				var time, percent, type;
+				
+				type=value['ATS_A'];
 				teamNameAway[i] = type.teamNameAway;//取得teamNameAway和teamNameHome, 將在mainFunction()使用
 	 			teamNameHome[i] = type.teamNameHome;
 				//console.log(i+' AAAway : '+teamNameAway[i]);
 				//console.log(i+' Home : '+teamNameHome[i]);
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-				var percent=type.percentage;
-				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
-
-				var type=value['ATS_H'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'4'+'\t'+percent*100+'%'+'\n';}
 				
-				var type=value['SU_A'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-				var percent=type.percentage;
-				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
 				
-				var type=value['SU_H'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
 				
-				var type=value['SC_H'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
+				type=value['ATS_H'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'3'+'\t'+percent*100+'%'+'\n';}
 				
-				var type=value['SC_L'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
 				
-				var type=value['ODD'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
+				type=value['SU_A'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'2'+'\t'+percent*100+'%'+'\n';}
 				
-				var type=value['EVEN'];
-				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				var percent=type.percentage;
-				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
+				
+				type=value['SU_H'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'1'+'\t'+percent*100+'%'+'\n';}
+				
+				
+				type=value['SC_H'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'5'+'\t'+percent*100+'%'+'\n';}
+				
+				
+				type=value['SC_L'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'6'+'\t'+percent*100+'%'+'\n';}
+				
+				
+				type=value['ODD'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'7'+'\t'+percent*100+'%'+'\n';}
+				
+				
+				type=value['EVEN'];
+				time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				percent=type.percentage;
+				if(percent !=0){child += time+' '+'8'+'\t'+percent*100+'%'+'\n';}
+				
 				
 				i +=8;
+				
+				
 				});  
 			$('#tsv').append(child);
+			
 		},
 		'json');
 		 /* console.log(child); */
@@ -361,14 +375,14 @@ $(function () {
 	                            versions[brand] = [];
 	                        }
 	                        if(version == 1){
-	                        	versions[brand].push(['主隊不讓分<br>('+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊不讓分', columns[1][i]]);
 	                        }else if(version == 2){
-	                        	versions[brand].push(['客隊不讓分<br>('+awayName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊不讓分', columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 3){
-	                        	versions[brand].push(['主隊讓分<br>('+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊讓分', columns[1][i]]);
 	                        }else if(version == 4){
-	                        	versions[brand].push(['客隊讓分<br>('+awayName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊讓分', columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 5){
 	                        	versions[brand].push(['高於總和', columns[1][i]]);
@@ -407,10 +421,10 @@ $(function () {
 	                    	type: 'column'
 	                	},
 	                	title: {
-	                    	text: '有賺到錢的投注統計, 2014'
+	                    	text: '單筆過關投注統計, 2014'
 	                	},
 	                	subtitle: {
-	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
+	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節，沒有過關將不會顯示'
 	                	},
 	                	xAxis: {
 	                    	type: 'category'
@@ -434,12 +448,12 @@ $(function () {
 	                	},
 
 	                	tooltip: {
-	                    	headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-	                    	pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+	                    	headerFormat: '<span style="font-size:11px">{series.name}</span>: ',
+	                    	pointFormat: '<b>{point.y:.2f}%</b> of total<br><div style="color:{point.color}">{point.name} <br>主隊:'+homeName+'<br>客隊:'+ awayName+'</div>'
 	                	},
 
 	                	series: [{
-	                    	name: '總和',
+	                    	name: '單場比賽過關統計',
 	                    	colorByPoint: true,
 	                    	data: brandsData
 	                	}],
