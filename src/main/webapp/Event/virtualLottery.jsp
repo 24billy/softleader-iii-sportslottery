@@ -25,7 +25,7 @@
                     <div class="alert alert-info text-center" role="alert">
                         <h3>你已經完成虛擬投注。                            
                         </h3>
-                        <button id="back">回到賽事表</button>
+                        <button  class="btn" id="back">回到賽事表</button>
                     </div>
                     <table id ="lotteryTable" class="table table-hover table-condensed table-bordered table-striped nowrap text-left" >
                         <thead>
