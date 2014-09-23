@@ -30,6 +30,7 @@
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/MustBeUser/*</url-pattern>
+    <url-pattern>/Security/userOddsSearch.jsp</url-pattern>
     <url-pattern>/lottery</url-pattern>
   </filter-mapping>
   <filter>
