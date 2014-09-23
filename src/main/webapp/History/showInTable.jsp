@@ -107,7 +107,7 @@
                             </div>
                             
                             <div class="form-group">
-                            	<label class="sr-only" for="country">隊名:</label>
+                            	<label class="sr-only" for="country">聯盟:</label>
                                 <select class="form-control form-country" id="country" name="country"  >
                                 	
                                 </select>
@@ -179,9 +179,11 @@
 		listLeague();
 		listTeam();
 		$( ".form-country" ).change(function() { 
-
-			getTeamsByCountry();
-
+			if($(this).val() == "") {
+				listTeam();
+			}else{
+				getTeamsByCountry();//根據聯盟名稱列出隊名
+			}
 		});
 
 
