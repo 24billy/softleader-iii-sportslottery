@@ -100,9 +100,20 @@
 						
 							<div class="row">
 								<div class="col-sm-12">
-									<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
-									<select class="form-control input-sm" id="leagueName" name="model.leagueName">
-									</select>
+									<div class="form-group">
+										<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
+										<input class="form-control input-sm" id="leagueName" name="model.leagueName" placeholder="<s:text name="admin.team.leagueName"/>">
+									</div>
+								</div>
+							</div>
+							<!-- .row -->
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="leagueNameEn"><s:text name="admin.team.leagueNameEn"/></label>
+										<input class="form-control input-sm" id="leagueNameEn" name="model.leagueNameEn" placeholder="<s:text name="admin.team.leagueNameEn"/>">
+									</div>
 								</div>
 							</div>
 							<!-- .row -->
@@ -112,6 +123,16 @@
 									<div class="form-group">
 										<label for="teamName"><s:text name="admin.team.teamName"/></label>
 										<input class="form-control input-sm" id="teamName" name="model.teamName" placeholder="<s:text name="admin.team.teamName"/>">
+									</div>
+								</div>
+							</div>
+							<!-- .row -->
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="teamNameEn"><s:text name="admin.team.teamNameEn"/></label>
+										<input class="form-control input-sm" id="teamNameEn" name="model.teamNameEn" placeholder="<s:text name="admin.team.teamNameEn"/>">
 									</div>
 								</div>
 							</div>
@@ -225,10 +246,8 @@
 			$.each(data, function(index, leagueName) {
 				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
 				$('#leagueNameList').append(str);
-				$('#leagueName').append(str);
 			});
 			$('#leagueNameList')[0].selectedIndex = 0;
-			$('#leagueName')[0].selectedIndex = 0;
 		}, 'json');
 		//End of listLeague
 		
@@ -243,7 +262,9 @@
 				'model.id':$(this).val()
 			}, function(data) {
 				$('#leagueName').val(data.leagueName);
+				$('#leagueNameEn').val(data.leagueNameEn);					
 				$('#teamName').val(data.teamName);
+				$('#teamNameEn').val(data.teamNameEn);
 				$('#btnMerge').val(data.id);
 			}, 'json');
 		});
@@ -255,7 +276,9 @@
 			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
 				'model.id':teamId,
 				'model.leagueName':$('#leagueName').val(),
-				'model.teamName':$('#teamName').val()
+				'model.leagueNameEn':$('#leagueNameEn').val(),
+				'model.teamName':$('#teamName').val(),
+				'model.teamNameEn':$('#teamNameEn').val()
 			});
 			
 			$(document).ajaxStop(function() {
@@ -283,8 +306,10 @@
 		
 		//Begin of styling		
 		function resetInput() {
-			$('#leagueName')[0].selectedIndex = 0;
+			$('#leagueName').val('');
+			$('#leagueNameEn').val('');
 			$('#teamName').val('');
+			$('#teamNameEn').val('');
 			$('#btnMerge').val('');
 		}
 		

@@ -138,7 +138,11 @@ public class TeamAction extends ActionSupport {
 		log.debug("TeamAction insert()");
 		log.debug("Model = {}", model);
 		try {
-			service.update(model);
+			if (model.getId() != null && model.getId() > 0) {
+				service.update(model);
+			} else {
+				service.insert(model);
+			}
 		} catch (Exception e) {
 			log.debug("!!TeamAction insertFail!!");
 			addFieldError("QueryFail","Insert Fail : target not found");
