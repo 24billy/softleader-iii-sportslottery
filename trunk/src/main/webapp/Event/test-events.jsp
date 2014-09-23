@@ -590,7 +590,8 @@ function responseSize(){
 	}
 }
 
-$(window).resize(function() {
+$(window).off('resize');
+$(window).on('resize', function() {
 	responseSize();
 });
 
