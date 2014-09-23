@@ -61,6 +61,7 @@
 									<thead>
 										<tr>
 											<th>Id</th>
+											<th><s:text name="admin.team.ballType"/></th>
 											<th><s:text name="admin.team.leagueName"/></th>
 											<th><s:text name="admin.team.teamName"/></th>
 											<th><s:text name="admin.btn.action"/></th>
@@ -99,6 +100,20 @@
 					<form role="form" id="teamForm">
 						<div class="modal-body">
 						
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="ballType"><s:text name="admin.team.ballType"/></label>
+										<select id="ballType" class="input-sm form-control">
+											<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
+											<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
+											<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- .row -->
+							
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
@@ -217,6 +232,7 @@
 			var child = '';
 			child += '<tr>';
 			child += '<td>' + team.id + '</td>';
+			child += '<td>' + team.ballType + '</td>';
 			if (zh) {
 				child += '<td>' + team.leagueName + '</td>';
 				child += '<td>' + team.teamName + '</td>';
@@ -259,6 +275,7 @@
 			$.post('<c:url value="/admin/teamAdmin?method:select"/>', {
 				'model.id':$(this).val()
 			}, function(data) {
+				$('#ballType').val(data.ballType);
 				$('#leagueName').val(data.leagueName);
 				$('#leagueNameEn').val(data.leagueNameEn);					
 				$('#teamName').val(data.teamName);
@@ -315,6 +332,7 @@
 			var teamId = $(this).val();
 			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
 				'model.id':teamId,
+				'model.ballType':$('#ballType').val(),
 				'model.leagueName':$('#leagueName').val(),
 				'model.leagueNameEn':$('#leagueNameEn').val(),
 				'model.teamName':$('#teamName').val(),
@@ -346,6 +364,7 @@
 		
 		//Begin of styling		
 		function resetInput() {
+			$('#ballType')[0].selectedIndex = 0;
 			$('#leagueName').val('');
 			$('#leagueNameEn').val('');
 			$('#teamName').val('');
@@ -370,9 +389,11 @@
 				'responsive': true,
 				'autoWidth': false,
 				'order': [[ 0, 'asc' ]],
-				'columns': [{'width': '30%'},
-				            {'width': '35%'},
-				            {'width': '35%'}],
+				'columns': [{'width': '10%'},
+				            {'width': '10%'},
+				            {'width': '30%'},
+				            {'width': '30%'},
+				            {'width': '20%'}],
 				'oLanguage': {
 					'sProcessing': '處理中...',
 					'sLengthMenu': '顯示 _MENU_ 項結果',
@@ -397,9 +418,10 @@
 				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
 				'columns': [{'width': '10%'},
+				            {'width': '10%'},
 				            {'width': '30%'},
 				            {'width': '30%'},
-				            {'width': '30%'}]
+				            {'width': '20%'}]
 			});
 		}
 		
