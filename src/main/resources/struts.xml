@@ -31,7 +31,7 @@
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>insert,select,delete,getLeagueNames</allowed-methods>
+		<allowed-methods>insert,select,delete,getLeagueNames,getBallTypes</allowed-methods>
   	</action>
   	
   	<action name="oddsAdmin" class="oddsAction" method="insert"> 
