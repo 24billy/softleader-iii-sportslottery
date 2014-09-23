@@ -456,7 +456,7 @@ function gameRefresh(games, odds){
 			enableDrag:false,
 			enableCrossDrop: false,
 		});
-		$('.alert').hide();
+		$('div.gameList .alert').hide();
 	}
 	catch(err) {
 	    $('#noGameResult').show();
@@ -707,7 +707,7 @@ function sortGameTag(){
 
 function superRefresh(){
 	//初始化gameList
-	$('.alert').hide();
+	$('div.gameList .alert').hide();
 	var gameTagSample = $('#gametagSample').clone();
 	$('#game_list').fadeOut(110, function(){
 		$('#game_list *').remove();
