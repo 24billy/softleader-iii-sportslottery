@@ -44,6 +44,7 @@ public class loginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		System.out.println("login filter");
 		try {
 			System.out.println("diFilter...");
 			HttpServletRequest req = (HttpServletRequest) request;

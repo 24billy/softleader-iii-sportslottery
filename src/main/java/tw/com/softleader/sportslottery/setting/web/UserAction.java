@@ -54,7 +54,16 @@ public class UserAction extends ActionSupport {
 	private String account;
 	private String cardAccount;
 	private Long coins;		//把值送進coins讓使用者coins更新
+	private String lockCharacter;
 	
+	public String getLockCharacter() {
+		return lockCharacter;
+	}
+
+	public void setLockCharacter(String lockCharacter) {
+		this.lockCharacter = lockCharacter;
+	}
+
 	public String getOldUserPassword() {
 		return oldUserPassword;
 	}
@@ -212,6 +221,20 @@ public class UserAction extends ActionSupport {
 						this.checkUserCardId();
 					}else {
 						this.addFieldError("userCardId", this.getText("invalid.fieldvalue.cardid"));
+						log.debug("身分證不符");
+					}
+					if(model.getUserBankAccount()!=null && model.getUserBankAccount().replaceAll("-", "").length()==14 &&
+							!model.getUserBankAccount().matches(".*[eE].*")) {
+						String temp = model.getUserBankAccount().replaceAll("-", "");
+						try {
+							Double userBank = Double.parseDouble(temp);
+						} catch (NumberFormatException e) {
+							this.addFieldError("userBankAccount", this.getText("invalid.fieldvalue.bank"));
+							log.debug("營行帳不是數字");
+						}
+					}else {
+						this.addFieldError("userBankAccount", this.getText("invalid.fieldvalue.bank"));
+						log.debug("營行帳格式不符" + model.getUserBankAccount());
 					}
 					break;
 				case 2 : 
@@ -221,6 +244,23 @@ public class UserAction extends ActionSupport {
 					break;
 			}
 		}
+	}
+	
+	public String onLock() {
+		Map session = ActionContext.getContext().getSession();
+		UserEntity user = (UserEntity)session.get("user");
+		if(user.getUserState().equals(lockCharacter)) {
+			user.setUserState("0");
+		}else {
+			log.debug("驗證碼不正確");
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+	public String sendLock() {
+		Map session = ActionContext.getContext().getSession();
+		UserEntity user = (UserEntity)session.get("user");
+		return service.sendLockmail(user);
 	}
 	
 	//發送新密碼
@@ -328,6 +368,12 @@ public class UserAction extends ActionSupport {
 			
 			try {
 				service.insert(model);
+				UserEntity entity = service.getByUserAccount(model.getUserAccount());
+				log.debug("新會員"+entity);
+				Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
+				session.put("user", entity);
+				service.sendLockmail(entity);
+				log.debug("註冊成功");
 			} catch (Exception e) {
 				log.debug("!!新增錯誤!!");
 				this.addFieldError("other", this.getText("invalid.fieldvalue.other"));
@@ -442,7 +488,6 @@ public class UserAction extends ActionSupport {
 			inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
 			e.printStackTrace();
 		}
-		
 		return "updateUserInfo";
 	}
 	
@@ -549,16 +594,15 @@ public class UserAction extends ActionSupport {
 	//登入
 	public String login() throws Exception {
 		log.debug("login...");
-
+		
 		//測試期間用 無法改密碼
 		UserEntity entity2 = service.getById(2l);
 		entity2.setUserPassword("a123456".getBytes());
 		service.update(entity2);
-		
 		UserEntity entity3 = service.getById(3l);
 		entity3.setUserPassword("a123456".getBytes());
 		service.update(entity3);
-
+		
 		
 		//正式程式碼
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
@@ -566,7 +610,7 @@ public class UserAction extends ActionSupport {
 		if(entity!=null) {
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
-			UserEntity e = session.get("user");
+			//UserEntity e = session.get("user");
 			//log.debug(""+e);
 			return SUCCESS;
 		} else {

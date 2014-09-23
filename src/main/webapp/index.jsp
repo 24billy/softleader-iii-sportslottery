@@ -68,7 +68,7 @@
         <div class="hidden visible-xs"><br></div>
         
         <!-- TopPage start -->
-        <div >
+        <div id="top-page-div">
             <jsp:include page="topPage.jsp" />
         </div>        
         <!-- TopPage end --> 
@@ -82,30 +82,9 @@
 <!-- page end -->
 
 
-  <script type="text/javascript">
-
-    $(document).ready(function(){
-    	  $('.simple-menu').sidr();
-    });
-
-  	$('.game').click(function() {		  		
-  		$("#target").load('<c:url value="/Event/test-events.jsp"/>'); 
-  		$(window).on('resize', function() {
-  		    responseSize();
-  		});
- 	});
-	$('.history').click(function() {
-		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
-		$(window).off('resize');
-	});
-	$('.user').click(function() {
-		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
-		$(window).off('resize');
-	});
-	$('.lotteryBoard').click(function() {
-		odds_refresh();
-	});
-</script>
+<!-- <script type="text/javascript"> -->
+<%--    	$('#top-page-div').load('<c:url value="/topPage.jsp"/>');   --%>
+<!-- </script> -->
 
 
 
