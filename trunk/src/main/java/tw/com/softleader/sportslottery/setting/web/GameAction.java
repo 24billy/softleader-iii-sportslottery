@@ -49,6 +49,8 @@ public class GameAction extends ActionSupport {
 	@Autowired
 	private LotteryService lotteryService;
 	
+	private Long maxGameNum;
+	
 	private GameEntity model;
 	private List<GameEntity> models;
 	private Logger log = LoggerFactory.getLogger(GameAction.class);
@@ -72,6 +74,10 @@ public class GameAction extends ActionSupport {
 	private String linkTeamSearch;
 	private List<Map<String, CountBean>> listMap;
 	
+	public Long getMaxGameNum() {
+		return maxGameNum;
+	}
+
 	public List<Map<String, CountBean>> getListMap() {
 		return listMap;
 	}
@@ -395,7 +401,6 @@ public class GameAction extends ActionSupport {
 		String result = null;
 		Long gameId = model.getId();
 		String ballType = model.getBallType();
-		Long gameNum = model.getGameNum();
 		LocalDateTime gameTime = model.getGameTime();
 		TeamEntity teamAway = teamService.getById(teamAwayId);
 		TeamEntity teamHome = teamService.getById(teamHomeId);
@@ -403,7 +408,6 @@ public class GameAction extends ActionSupport {
 		if (gameId != null && gameId > 0) {
 			model = service.getById(gameId);
 			model.setBallType(ballType);
-			model.setGameNum(gameNum);
 			model.setGameTime(gameTime);
 			model.setTeamAway(teamAway);
 			model.setTeamHome(teamHome);
@@ -455,6 +459,8 @@ public class GameAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("GameAction admin()");
+		
+		maxGameNum = service.maxGameNum();
 		
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));
