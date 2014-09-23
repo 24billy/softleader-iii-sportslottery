@@ -115,13 +115,21 @@
 		<allowed-methods>searchHistoryMethod</allowed-methods>
 	</action>
 	
-	<action name="teamsByCountry" class="teamAction" method="teamsByCountry">
+	<action name="teamsByCountry" class="teamAction" method="getTeamsByLeagueName">
 		<result name="success" >/History/showInTable.jsp</result>
 		<result name="getTeamsByCountry" type="stream">
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>getTeamsByCountry</allowed-methods>
+		<allowed-methods>getTeamsByLeagueName</allowed-methods>
+	</action>
+	<action name="teamsByCountryStatistic" class="teamAction" method="getTeamsByLeagueName">
+		<result name="success" >/History/statisticResult.jsp</result>
+		<result name="getTeamsByCountry" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>getTeamsByLeagueName</allowed-methods>
 	</action>
 	
 	<action name="searchHistoryComplex" class="gameAction" method="gameHistoryComplex">
@@ -274,8 +282,8 @@
 			<param name="inputName">inputStream</param>
   		</result>
   	</action>
-  	<action name="teamChartOddTime" class="gameAction" method="teamChartOddTime">
-  		<result name="success">/History/teamChartOddTime.jsp</result>
+  	<action name="teamChartOdd" class="gameAction" method="teamChartOddTime">
+  		<result name="success">/History/teamChartOdd.jsp</result>
   	</action>
   	
   	<!-- 用隊伍名取得所有COUNT歷史資訊 -->
@@ -291,6 +299,10 @@
   			<param name = "contentType">appliction/json</param>
   			<param name="inputName">inputStream</param>
   		</result>
+  	</action>
+  	
+  	<action name="statistic" class ="statisticAction" method="countAllHistoryByTeam">
+  		<result name="countAllHistoryByTeam">/History/statisticResult.jsp</result>
   	</action>
   
   	<action name="admin">
