@@ -74,13 +74,13 @@ public class GameAction extends ActionSupport {
 	private Long linkGameNum;
 	private String linkTeamSearch;
 	private List<Map<String, CountBean>> listMap;
-	private LocalDate linkGameTime;
+	private String linkGameTime;
 	
-	public LocalDate getLinkGameTime() {
+	public String getLinkGameTime() {
 		return linkGameTime;
 	}
 
-	public void setLinkGameTime(LocalDate linkGameTime) {
+	public void setLinkGameTime(String linkGameTime) {
 		this.linkGameTime = linkGameTime;
 	}
 
@@ -540,16 +540,29 @@ public class GameAction extends ActionSupport {
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "countAllHistoryByTeam";
+		
 	}
 	
 	public String countAllHistoryByTime(){
 		
-
-		json = new Gson().toJson(service.getAllCountHistoryByTime(linkGameTime));//輸入time取得之前的COUNT資訊
-//		json = new Gson().toJson(service.trialGetCountInfoHistory());//使用預設值
+//		System.out.println("linkGameTime......."+ linkGameTime);
+		//linkGameTime.......2014年03月26日 21:06(三)
+		//想要2014-03-26
+		linkGameTime=linkGameTime.substring(0, 4)+"-"+linkGameTime.substring(5,7)+"-"+linkGameTime.substring(8, 10);
+		System.out.println("linkGameTime......."+ linkGameTime);
+		
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse(linkGameTime);
+		
+		json = new Gson().toJson(service.getAllCountHistoryByTime(date1));//輸入time取得之前的COUNT資訊
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		
 		return "countAllHistoryByTime";
+		//return "countInfoGraph";
+	}
+	
+	public String successCountAllHistoryByTime() {
+		return Action.SUCCESS;
 	}
 	
 	public String teamChartOddTime() {
