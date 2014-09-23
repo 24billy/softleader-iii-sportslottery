@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -145,14 +146,14 @@ public class GameServiceTest extends BaseTest  {
 //
 //	}
 	
-	@Test
-	public void testGetAllCountHistoryByTeam(){
-		String teamName= "紐約洋基";
-		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTeam(teamName);
-		log.debug("listMap = {}",listMap.toString() );
-		System.out.println("size of listMap: "+ listMap.size() );
-		
-	}
+//	@Test
+//	public void testGetAllCountHistoryByTeam(){
+//		String teamName= "紐約洋基";
+//		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTeam(teamName);
+//		log.debug("listMap = {}",listMap.toString() );
+//		System.out.println("size of listMap: "+ listMap.size() );
+//		
+//	}
 //	
 //	@Test
 //	public void testSortByComparator(){
@@ -191,5 +192,16 @@ public class GameServiceTest extends BaseTest  {
 //
 //		
 //	}
+	
+	@Test
+	public void testGetAllCountHistoryByTime(){
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-09-17");//將時間自串轉成 LocalDate
+		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTime(date1);
+		log.debug("getAllCountHistoryByTime ={}",listMap );
+		System.out.println("size of map:"+listMap.size());
+		
+		
+	}
 
 }
