@@ -60,6 +60,7 @@
 								<table id="teamTable" class="table table-hover table-condensed order-column compact nowrap">
 									<thead>
 										<tr>
+											<th>Id</th>
 											<th><s:text name="admin.team.leagueName"/></th>
 											<th><s:text name="admin.team.teamName"/></th>
 											<th><s:text name="admin.btn.action"/></th>
@@ -210,20 +211,12 @@
 	(function($) {
 		var zh = '${locale.language}' == 'zh';
 		
-		//Begin of leagueName
-		var leagueName = '${leagueName}';
-		if (leagueName == null || leagueName == "") {
-			$('#leagueNameList')[0].selectedIndex = 0;
-		} else {
-			$('#leagueNameList').val(leagueName);
-		}
-		//End of leagueName
-		
 		//Begin of teamTable
 		var teamList = $.parseJSON('${json}');
 		$.each(teamList, function(index, team) {
 			var child = '';
 			child += '<tr>';
+			child += '<td>' + team.id + '</td>';
 			if (zh) {
 				child += '<td>' + team.leagueName + '</td>';
 				child += '<td>' + team.teamName + '</td>';
@@ -247,7 +240,12 @@
 				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
 				$('#leagueNameList').append(str);
 			});
-			$('#leagueNameList')[0].selectedIndex = 0;
+			var leagueName = '${leagueName}';
+			if (leagueName == null || leagueName == "") {
+				$('#leagueNameList')[0].selectedIndex = 0;
+			} else {
+				$('#leagueNameList').val(leagueName);
+			}
 		}, 'json');
 		//End of listLeague
 		
@@ -397,10 +395,11 @@
 			$('#teamTable').dataTable({
 				'responsive': true,
 				'autoWidth': false,
-				'order': [[ 0, 'asc' ]],
-				'columns': [{'width': '30%'},
-				            {'width': '35%'},
-				            {'width': '35%'}]
+				'order': [[ 0, 'desc' ]],
+				'columns': [{'width': '10%'},
+				            {'width': '30%'},
+				            {'width': '30%'},
+				            {'width': '30%'}]
 			});
 		}
 		
