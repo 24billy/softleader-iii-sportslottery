@@ -111,6 +111,9 @@
 		<input id="linkGameNum" name="linkGameNum">
 		<input id="linkTeamSearch" name="linkTeamSearch">
 	</form>
+	<form style="display:none;" id="timeCountForm" method="post" action="<c:url value="successCountAllHistoryByTime"/>">
+		<input id= "linkGameTime" name = "linkGameTime">
+	</form>
 <script>
 	(function($) {
 		
@@ -317,7 +320,9 @@
 									timeString += " ";
 									timeString += millisecondToTime(row.gameTime.iLocalMillis);
 									return timeString;
-				        		}},
+				        		},
+				        		"class":"gameTimeDetail"
+				        		},
 				        		{
 				        		"data": "teamAway.teamName",
 				        		"class":"teamAwayDetail",
@@ -371,8 +376,6 @@
 					sendDataToGraph1();//以隊伍搜尋此場賽事(含)之前所有的COUNT資訊
 					//sendDataToGraph2();//以隊伍搜尋所有COUNT資訊
 					function sendDataToGraph1(){
-						
-						
 						$('#gameList').on('click', '.teamAwayDetail', function() {
 							var linkGameNum = $('td:eq(1)' ,$(this).parent()).text(); //gameNum
 							var linkTeamSearch = $('td:eq(3)' ,$(this).parent()).text(); //teamAway
@@ -388,6 +391,13 @@
 							$('#linkTeamSearch').val(linkTeamSearch);
 							$('#countForm').submit();
 						});
+					
+						$('#gameList').on('click', '.gameTimeDetail', function() {
+							var linkGameTime = $('td:eq(2)' ,$(this).parent()).text(); //gameNum
+							$('#linkGameTime').val(linkGameTime);
+							$('#timeCountForm').submit();
+						});
+						
 						
 					}
 					
