@@ -50,6 +50,7 @@ public class GameAction extends ActionSupport {
 	private LotteryService lotteryService;
 	
 	private Long maxGameNum;
+	private List<String> ballTypes;
 	
 	private GameEntity model;
 	private List<GameEntity> models;
@@ -73,6 +74,10 @@ public class GameAction extends ActionSupport {
 	private Long linkGameNum;
 	private String linkTeamSearch;
 	private List<Map<String, CountBean>> listMap;
+	
+	public List<String> getBallTypes() {
+		return ballTypes;
+	}
 	
 	public Long getMaxGameNum() {
 		return maxGameNum;
@@ -461,6 +466,7 @@ public class GameAction extends ActionSupport {
 		log.debug("GameAction admin()");
 		
 		maxGameNum = service.maxGameNum();
+		ballTypes = service.getBallTypes();
 		
 		if (!StringUtils.isEmpty(catagory)) {
 			json = new Gson().toJson(service.getByBallType(catagory));

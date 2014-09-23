@@ -207,7 +207,7 @@ public class TeamAction extends ActionSupport {
 	public String getBallTypes() {
 		log.debug("TeamAction getBallTypes()");
 		
-		json = new Gson().toJson(service.ballTypes());
+		json = new Gson().toJson(service.getBallTypes());
 		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";

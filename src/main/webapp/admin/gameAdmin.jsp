@@ -46,18 +46,19 @@
 							<div class="col-sm-12">
 								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
 									<select class="input-sm" id="catagory" name="catagory">
-										<c:choose>
-											<c:when test="${locale.language eq 'zh'}">
-												<option value="Baseball">棒球</option>
-												<option value="Basketball">籃球</option>
-												<option value="soccer">足球</option>
-											</c:when>
-											<c:otherwise>
-												<option value="Baseball">Baseball</option>
-												<option value="Basketball">Basketball</option>
-												<option value="Soccer">Soccer</option>
-											</c:otherwise>
-										</c:choose>
+										<c:forEach var="ballType" items="${ballTypes}">
+											<c:choose>
+												<c:when test="${ballType eq 'Baseball'}">
+													<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
+												</c:when>
+												<c:when test="${ballType eq 'Basketball'}">
+													<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
+												</c:when>
+												<c:when test="${ballType eq 'Soccer'}">
+													<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
+												</c:when>
+											</c:choose>
+										</c:forEach>
 									</select>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
 								</form>
@@ -123,9 +124,7 @@
 											<div class="form-group">
 												<label for="ballType"><s:text name="admin.team.ballType"/></label>
 												<select class="form-control input-sm" id="ballType" name="model.ballType">
-													<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
-													<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
-													<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
+													
 												</select>
 											</div>
 										</div>
@@ -555,6 +554,10 @@
 			$('#gameList').append(child);
 		});
 		//End of gameTable
+		
+		//Begin of listBallType
+		$.post('');
+		//End of listBallType
 		
 		//Begin of listLeague
 		$('#ballType').change(listLeague);
