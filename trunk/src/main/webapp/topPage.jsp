@@ -60,7 +60,7 @@
 		
 		<!-- 摺疊書籤 -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index.jsp">Sport Lottery</a>
+            <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sport Lottery</a>
                        
         
         
@@ -282,6 +282,7 @@
 	});
 	
 	$('#toLogin').click(function() {
+		$(window).off('resize');
 		$('#loginError').html('');
 		setTimeout('$("#loginAccount").focus()' ,200);
 		
@@ -296,6 +297,7 @@
 	});
 			
 	$('#login').click(function() {
+		
 		$.ajax({
 	   		url:"<c:url value='/checkLogin'/>",
 			type:"get",
