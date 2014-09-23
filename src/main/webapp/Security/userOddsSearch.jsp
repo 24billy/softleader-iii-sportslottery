@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/global.css"/>">
 -->
+
 <style>
 	td.details-control {
 	    background: url('<c:url value="/Security/images/icon.gif"/>') no-repeat center center;
@@ -27,12 +28,26 @@
 	}
 	.winBtn
 	{
-	display:inline-block;
-	width:50px;
+		display:inline-block;
+		width:50px;
 	}
 	#pass3,#pass3-2
 	{
 		diaplay:none;
+	}
+	.successImg
+	{
+		margin-left:5px
+	}
+	#radioBtn .notActive{
+    	color: #3276b1;
+    	background-color: #fff;
+	}
+	#yes,#no
+	{
+		width:30px;
+		height:20px;
+		font-size:5px;
 	}
 </style>
 
@@ -75,6 +90,7 @@
 									<th>下注時間</th>
 									<th>下注金額</th>
 									<th>獎金</th>
+									<th>領獎</th>
 									<th>玩法</th>
 	                            </tr>
 							</thead>
@@ -103,6 +119,7 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
 -->
+
 <script>
 	(function($) {
 		$('#timeBegin').datetimepicker({
@@ -202,43 +219,43 @@
 						if(typeof(lottery.com2) == "undefined") {
 							lottery.com2 = "<h4 style='color:red'>未勾選</h4>";
 						} else {
-							lottery.com2 = "<img src='images/success2.png' />";
+							lottery.com2 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com3 = data.com3;
 						if(typeof(lottery.com3) == "undefined") {
 							lottery.com3 = "<h4 style='color:red'>未勾選</h4>";
 						} else {
-							lottery.com3 = "<img src='images/success2.png' />";
+							lottery.com3 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com4 = data.com4;
 						if(typeof(lottery.com4) == "undefined") {
 							lottery.com4 = "未勾選";
 						} else {
-							lottery.com4 = "<img src='images/success2.png' />";
+							lottery.com4 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com5 = data.com5;
 						if(typeof(lottery.com5) == "undefined") {
 							lottery.com5 = "未勾選";
 						} else {
-							lottery.com5 = "<img src='images/success2.png' />";
+							lottery.com5 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com6 = data.com6;
 						if(typeof(lottery.com6) == "undefined") {
 							lottery.com6 = "未勾選";
 						} else {
-							lottery.com6 = "<img src='images/success2.png' />";
+							lottery.com6 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com7 = data.com7;
 						if(typeof(lottery.com7) == "undefined") {
 							lottery.com7 = "未勾選";
 						} else {
-							lottery.com7 = "<img src='images/success2.png' />";
+							lottery.com7 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com8 = data.com8;
 						if(typeof(lottery.com8) == "undefined") {
 							lottery.com8 = "未勾選";
 						} else {
-							lottery.com8 = "<img src='images/success2.png' />";
+							lottery.com8 = "<img class='successImg' src='images/success2.png' />";
 						}
 						lottery.com = data.com0;
 						if(data.com1!=null && data.com2==null && data.com3==null && 
@@ -260,29 +277,29 @@
 						}
 						
 						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
-							lottery.com4 = "<img src='images/error2.png' />";
-							lottery.com5 = "<img src='images/error2.png' />";
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com4 = "<img class='successImg' src='images/error.png' />";
+							lottery.com5 = "<img class='successImg' src='images/error.png' />";
+							lottery.com6 = "<img class='successImg' src='images/error.png' />";
+							lottery.com7 = "<img class='successImg' src='images/error.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 4 && lottery.play == "過關組合") {
-							lottery.com5 = "<img src='images/error2.png' />";
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com5 = "<img class='successImg' src='images/error.png' />";
+							lottery.com6 = "<img class='successImg' src='images/error.png' />";
+							lottery.com7 = "<img class='successImg' src='images/error.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 5 && lottery.play == "過關組合") {
-							lottery.com6 = "<img src='images/error2.png' />";
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com6 = "<img class='successImg' src='images/error.png' />";
+							lottery.com7 = "<img class='successImg' src='images/error.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 6 && lottery.play == "過關組合") {;
-							lottery.com7 = "<img src='images/error2.png' />";
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com7 = "<img class='successImg' src='images/error.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
 						}
 						if((data.lotteryOdds).length == 7 && lottery.play == "過關組合") {
-							lottery.com8 = "<img src='images/error2.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
 						}
 						
 						//每注資料以oddsId排列
@@ -423,6 +440,9 @@
 					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn" data-toggle="modal" data-target="#statusModal">'+row.win+'</button></td>';
 					        			}
 					        		}},
+					        		{"data": function(row, type, val, meta){
+					        			return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" data-toggle="modal" data-target="#statusModal">未做好</button></td>';
+					        		}},
 					        		{"data": "play" },
 					        ],
 					        
@@ -488,28 +508,28 @@
 		        '<thead>'+
 		        	'<tr>'+
 		        		'<th><img src="images/baseball.gif"/></th>'+
-		        		'<th>單場</th>'+
-		        		'<th>過兩關</th>'+
-		        		'<th id="pass3">過三關</th>'+
-		        		'<th id="pass4">過四關</th>'+
-		        		'<th id="pass5">過五關</th>'+
-		        		'<th id="pass6">過六關</th>'+
-		        		'<th id="pass7">過七關</th>'+
-		        		'<th class="pass8">過八關</th>'+
+		        		'<th style="vertical-align:middle">單場</th>'+
+		        		'<th style="vertical-align:middle">過兩關</th>'+
+		        		'<th id="pass3" style="vertical-align:middle">過三關</th>'+
+		        		'<th id="pass4" style="vertical-align:middle">過四關</th>'+
+		        		'<th id="pass5" style="vertical-align:middle">過五關</th>'+
+		        		'<th id="pass6" style="vertical-align:middle">過六關</th>'+
+		        		'<th id="pass7" style="vertical-align:middle">過七關</th>'+
+		        		'<th class="pass8" style="vertical-align:middle">過八關</th>'+
 		        	'</tr>'+	
 				'</thead>';
 				
 				temp2 += '<tbody>'+
 				'<tr>'+
-					'<td style="vertical-align:middle">過關組合</td>'+
-		            '<td style="vertical-align:middle">' + dataRow.unique + '</td>'+
-		            '<td style="vertical-align:middle">' + dataRow.com2+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass3-2">' + dataRow.com3+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass4-2">' + dataRow.com4+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass5-2">' + dataRow.com5+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass6-2">' + dataRow.com6+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass7-2">' + dataRow.com7+ '</td>'+
-		            '<td style="vertical-align:middle" id="pass8-2">' + dataRow.com8+ '</td>'+
+					'<td >過關組合</td>'+
+		            '<td >' + dataRow.unique + '</td>'+
+		            '<td>' + dataRow.com2+ '</td>'+
+		            '<td  id="pass3-2">' + dataRow.com3+ '</td>'+
+		            '<td  id="pass4-2">' + dataRow.com4+ '</td>'+
+		            '<td  id="pass5-2">' + dataRow.com5+ '</td>'+
+		            '<td  id="pass6-2">' + dataRow.com6+ '</td>'+
+		            '<td  id="pass7-2">' + dataRow.com7+ '</td>'+
+		            '<td  id="pass8-2">' + dataRow.com8+ '</td>'+
 		        '</tr>'+
 		        '</tbody></table>';
 				}

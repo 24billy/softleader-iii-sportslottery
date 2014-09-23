@@ -52,6 +52,24 @@
 {
 	size:100;
 }
+#forgetImg
+{
+	display:none
+}
+.forgetLable
+{
+	width:150px;
+	margin-left:17px;
+}
+.loginFont
+{
+	font-family: 微軟正黑體;
+	font-weight:bolder;
+}
+#forgetSumbit
+{
+	margin-left:17px;
+}
 </style>
 
 
@@ -209,7 +227,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" id="close2" data-dismiss="modal">x</button>
-					<h3>全民瘋運彩</h3>
+					<h3 class="loginFont">全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
 				<c:if test="${not empty errorMsg}">
@@ -243,20 +261,21 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">x</button>
-					<h3>馬上找回您寶貝的密碼</h3>
+					<h3 class="loginFont">馬上找回您寶貝的密碼</h3>
 				</div>
 				<form role="form">
 				 	<div class="form-group">
-				    	<label for="forgetAccount">輸入您註冊的帳號:</label>
+				    	<label for="forgetAccount" class="forgetLable">輸入您註冊的帳號:</label>
 				    	<input type="text" id="forgetAccount"/><br/>
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="forgetEmail">輸入您註冊的Email:</label>
+				    	<label for="forgetEmail" class="forgetLable">輸入您註冊的Email:</label>
 				    	<input type="text" id="forgetEmail"/><br/>
 				  	</div>
 				</form>
 				<button class="btn btn-success" id="forgetSumbit" >確認送出</button>
 				<span class="forgetPass"></span>
+				<img src="images/loader.gif" id="forgetImg">
 			</div>
 		</div>
 	</div>
@@ -288,6 +307,7 @@
 		$('#close2').click();
 		//$('#myModal').modal('hide');
 		$('#myModal2').modal('show');
+		setTimeout("$('#forgetAccount').focus()" ,500);
 	});
 	
 	$('#toLogin').click(function() {
@@ -384,30 +404,41 @@
 	
 	//忘記密碼
 	$('#forgetSumbit').click(function() {
-		$.ajax({
-			url:"<c:url value='/emailer'/>",
-			type:'post',
-			data:{
-				account:$('#forgetAccount').val(),
-				to:$('#forgetEmail').val(),
-			},
-			success:function(data) {
-				if(data=="success"){
-					console.log(data);
-					$('.forgetPass').empty();
-					$('#myModal2').modal('hide');
-					$('#dialog-forget').modal({
-						backdrop: 'static',
-						keyboard: false
-					});
-					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
-				} else {
-					$('.forgetPass').empty();
-					$('.forgetPass').append(data);
-				}
-				
-			}
-		});
+		$('.forgetPass').empty();
+		if($('#forgetAccount').val()!='' && $('#forgetEmail').val()!=''){
+			$.ajax({
+				url:"<c:url value='/emailer'/>",
+				type:'post',
+				data:{
+					account:$('#forgetAccount').val(),
+					to:$('#forgetEmail').val(),
+				},
+				success:function(data) {
+					if(data=="success"){
+						console.log(data);
+						$('.forgetPass').empty();
+						$('#myModal2').modal('hide');
+						$('#dialog-forget').modal({
+							backdrop: 'static',
+							keyboard: false
+						});
+						setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
+					} else {
+						$('.forgetPass').empty();
+						$('.forgetPass').append(data);
+					}
+					
+				},
+				beforeSend:function(){
+	                $('#forgetImg').show();
+	            },
+	            complete:function(){
+	                $('#forgetImg').hide();
+	            }
+			});
+		} else {
+			$('.forgetPass').text("欄位不可空白");
+		}
 	});
 	
 	$('#goVerify').on('click',function() {
