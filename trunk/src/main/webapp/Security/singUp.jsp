@@ -44,32 +44,27 @@
 }
 .step {
 	text-align: center;
-	margin-left: 65px;
+	margin: 5px 10px 5px 10px;
 }
-.step .col-md-2:hover {
+.step .col-sm-3.col-xs-2:hover {
     color: #F58723;
     cursor: pointer;
 }
 .step .activestep {
     color: #F58723;
-    height: 80px;
-    margin-top: -7px;
-    padding-top: 7px;
-    border-left: 6px solid #5CB85C !important;
-    border-right: 6px solid #5CB85C !important;
-    border-top: 3px solid #5CB85C !important;
-    border-bottom: 3px solid #5CB85C !important;
+    border:3px solid #5CB85C;
+    margin:5px 10px 5px 10px
     vertical-align: central;
     
-    transition: display .5s ease;
-  	-webkit-transition: display .5s ease;
-  	-moz-transition: display .5s ease;
-  	-o-transition: display .5s ease;
 }
 .step .fa {
-    padding-top: 15px;
+    padding: 10px 10px 10px 10px;
+    margin:5px 5px 5px 5px;
     font-size: 40px;
 }
+
+
+
 .infot {
 	color: #c0c0c0;
 	float: left;
@@ -434,7 +429,7 @@ hr {
 							</form>
 						</div>
 					</div>
-					<div id="info-form" class="col-md-4">
+					<div id="info-form" class="col-md-4 hidden-xs">
 						<form>
 							<legend>
 								<span class="glyphicon glyphicon-user"></span>  
@@ -502,28 +497,23 @@ hr {
 	            <span class="progress-completed">10%</span>
 	        </div>      
 	    </div>
-	    <div class="row">
-	        <div class="row step">
-	            <div id="step1" class="col-md-3 activestep">
-	                <span class="fa fa-check-square-o"></span>
-	                <p></p>
-	            </div>
-	            <div class="col-md-1">
-	            	<span class="fa fa-arrow-right"></span>
-	            </div>
-	            <div id="step2" class="col-md-3" >
-	                <span class="fa fa-pencil"></span>
-	                <p></p>
-	            </div>
-	            <div class="col-md-1">
-	            	<span class="fa fa-arrow-right"></span>
-	            </div>
-	            <div id="step3" class="col-md-3">
-	                <span class="fa fa-envelope-o"></span>
-	                <p></p>
-	            </div>
-	        </div>
-	    </div>
+
+        <div class="row">
+            <div class="row step">
+                <div id="step1" class="fa fa-check-square-o col-sm-3 col-xs-2 activestep">
+                </div>
+                <div class="fa fa-arrow-right col-sm-1 col-xs-1">               
+                </div>
+                <div id="step2" class="fa fa-pencil col-sm-3 col-xs-2" >
+                </div>
+                <div class="fa fa-arrow-right col-sm-1 col-xs-1">
+                </div>
+                <div id="step3" class="fa fa-envelope-o col-sm-3 col-xs-2">
+                </div>
+            </div>
+        </div>
+        
+
     </div>
 </div>
 </body>
