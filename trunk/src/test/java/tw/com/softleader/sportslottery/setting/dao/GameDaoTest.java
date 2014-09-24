@@ -177,10 +177,10 @@ public class GameDaoTest extends BaseTest{
 //		System.out.println("size of games = "+ games.size());
 //	}
 	@Test
-	public void testFindOddsByTime(){
+	public void testFindGameByLocalDate(){
 		LocalDate date1 = new LocalDate();
 		date1 = LocalDate.parse("2014-09-10");
-		List<GameEntity> gameList = dao.findOddsByTime(date1);
+		List<GameEntity> gameList = dao.findGameByLocalDate(date1);
 		System.out.println(gameList);
 	
 		for(GameEntity game : gameList){
