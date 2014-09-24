@@ -3,9 +3,12 @@ package tw.com.softleader.sportslottery.setting.service;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.OddsDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.util.CountBean;
 import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
 //這個bean 主要用於儲存遊時間和隊伍名稱相關的odd資訊和以及購買數 和 odd在當天購賣的百分比
@@ -112,6 +116,31 @@ public class OddCountService {
 		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
 
 		return new BigDecimal(count).divide(new BigDecimal(totalCountOftheDay), mc);
+	}
+	
+	//取出當天比賽所有的countBean, 不限聯盟和隊伍
+	public List<CountBean> getBeanListByGameDay(LocalDate gameTime){
+		List<CountBean> result=new ArrayList<CountBean>();
+		List<GameEntity> games = gameDao.findGameByLocalDate(gameTime);
+		CountBean bean = new CountBean();
+		
+		for(GameEntity game: games){
+			List<OddsEntity> odds= game.getOdds();//得一場比賽的八種odds
+			for(OddsEntity odd: odds){//將每一個odd取出加入一個CountBean
+				Long count= odd.getCount();
+				bean.setCount(count);
+				bean.setGameId(odd.getGameId());
+				bean.setGameTime(game.getGameTime());
+				bean.setIsPass(odd.getIsPass());
+				bean.setOddType(odd.getOddType());
+				bean.setPercentage(this.getCountPercentage(count, this.getTotalCountOftheDay(gameTime)));
+				bean.setTeamNameAway(game.getTeamAway().getTeamName());
+				bean.setTeamNameHome(game.getTeamHome().getTeamName());
+				result.add(bean);	
+			}
+		}
+		
+		return result;
 	}
 
 }
