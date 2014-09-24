@@ -43,7 +43,7 @@ public class InitialData implements ServletContextListener {
 		List<String> leagueNames = teamService.leagueNames();
 		
 		for (int i = 0; i < num; i ++) {
-			int leagueIndex = rand.nextInt(leagueNames.size() - 1);
+			int leagueIndex = rand.nextInt(leagueNames.size());
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
 			LocalDateTime gameTime = LocalDateTime.now()
@@ -106,13 +106,13 @@ public class InitialData implements ServletContextListener {
 		List<TeamEntity> teams = new ArrayList<TeamEntity>();
 		List<TeamEntity> teamList = teamService.getTeamsByLeagueName(leagueName);
 		
-		int teamAwayIndex = rand.nextInt(teamList.size() - 1);
+		int teamAwayIndex = rand.nextInt(teamList.size());
 		TeamEntity teamAway = teamList.get(teamAwayIndex);
 		teams.add(teamAway);
 		teamList.remove(teamAwayIndex);
 		
 		
-		int teamHomeIndex = rand.nextInt(teamList.size() - 1);
+		int teamHomeIndex = rand.nextInt(teamList.size());
 		TeamEntity teamHome = teamList.get(teamHomeIndex);
 		teams.add(teamHome);
 		
