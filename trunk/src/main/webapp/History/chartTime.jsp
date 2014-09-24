@@ -16,12 +16,7 @@
 
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 <style type="text/css">
-
 #loading {
-
-	
-	
-	
 	position:absolute;
 	left:30%;
 	top:30%;
@@ -34,21 +29,14 @@
 <div id="loading"><img src="<c:url value="/images/10secondsCountDown.gif"/>" />     Loading.....  </div>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <div id="tsv" style="display:none"></div>  
-	
-
-
-
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
 	var teamNameHome=[], teamNameAway=[];
-	
 	appendToDiv(); 
 	$(document).ajaxStop(function() {//確認appendToDiv()先執行完，才執行 mainFunction()
 		mainFunction();
-	});
-	
-	
+	});	
 	function appendToDiv(){
 		final1(); 
 	}
@@ -61,7 +49,7 @@ $(function () {
  		$.post(url, {
  			'linkGameTime':'${linkGameTime}'
  			},function(data) { //用POST透過countInfoGraph取回的Json型式的值
- 				loading();
+ 				loading();//資料顯示之前的圖示
  				//console.log(data);
 			$.each(data, function(key, value) { 
 				var type=value['ATS_A'];
@@ -116,6 +104,7 @@ $(function () {
 		 /* console.log(child); */ 
 	}
 	
+	//資料顯示出之前的圖示
 	function loading(){
 		$("#loading").ajaxStart(function(){
 			   $(this).show();
