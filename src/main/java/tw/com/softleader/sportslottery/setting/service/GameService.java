@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -357,5 +358,9 @@ public class GameService extends GenericService<GameEntity> {
 	
 	public List<String> getBallTypes() {
 		return dao.findBallTypes();
+	}
+	
+	public List<GameEntity> getGameByLocalDateTime(LocalDateTime gameTime){
+		return dao.findByLocalDateTime(gameTime);
 	}
 }
