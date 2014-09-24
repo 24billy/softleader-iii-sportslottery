@@ -23,7 +23,7 @@ $(document).ready(function(){
 <style type="text/css">
 #loading {
 	position:absolute;
-	left:30%;
+	left:50%;
 	top:30%;
 	
 	margin-top:-150px;
