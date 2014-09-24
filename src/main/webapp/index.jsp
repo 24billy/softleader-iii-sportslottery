@@ -572,6 +572,7 @@
 
 
 <script>
+var hasLocking;
 //建立本次token
 $('input[name="lotteryToken"]').val(getUuid());
 

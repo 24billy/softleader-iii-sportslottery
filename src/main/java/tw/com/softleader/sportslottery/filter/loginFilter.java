@@ -58,7 +58,7 @@ public class loginFilter implements Filter {
 			if(checkLogin(req)) {
 				System.out.println(loginToken);
 				if (loginToken != null) {
-					if(req.getRequestURI().indexOf("/MustBeUser")==0){
+					if(req.getRequestURI().indexOf("/MustBeUser")==-1){
 						if (loginToken.getUserState() == null
 								|| loginToken.getUserState().isEmpty()
 								|| !loginToken.getUserState().equals("0")) {

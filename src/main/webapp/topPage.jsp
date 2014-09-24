@@ -374,7 +374,16 @@
 		$('.allOdds').off('click');
 		$('.allOdds').on('click',function() {
 			console.log('all check');
-			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+			<c:if test="${user.userState!='0'}">
+				<c:if test="${not empty user}">
+					hasLocking = true;
+				</c:if>	
+			</c:if>
+			if(hasLocking){
+				$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+			}else{
+				$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+			}
 		});
 	});
 	
@@ -470,7 +479,9 @@
 	$('.user').off('click');
 	$('.user').on('click',function() {
 		<c:if test="${user.userState!='0'}">
-			hasLocking = true;
+			<c:if test="${not empty user}">
+				hasLocking = true;
+			</c:if>	
 		</c:if>
 		if(hasLocking){
 			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
