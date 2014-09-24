@@ -103,16 +103,50 @@
 							<button id="cancel" class="btn btn-danger" disabled>取消</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 
 	      	<div id="pageFixPassword" class="tab-pane fade">
-	      		<form action="">
-	      	 		<h3>舊密碼<input type="text"></h3>
-	      	 		<h3>新密碼<input type="text"></h3>
-	      	 		<h3>確認新密碼<input type="text"></h3>
-	      	 	</form>
+	      		<div id="alert2" class="alert alert-danger" role="alert"></div>
+	      		<div id="alert3" class="alert alert-success" role="alert"></div>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">修改密碼</h3>
+					</div>
+					<div class="panel-body">
+						<form id="fixForm" class="form-horizontal" role="form">	
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">舊密碼</label>
+								<div class="col-sm-10">
+									<input id="inputOldPass" type="password" class="form-control editable" placeholder="請輸入舊密碼" name="oldPassword">
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
+								</div>
+							</div>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">新密碼</label>
+								<div class="col-sm-10">
+									<input id="inputNewPass" type="password" class="form-control editable" placeholder="請輸入新密碼" name="newPassword">
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
+								</div>
+							</div>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">確認新密碼</label>
+								<div class="col-sm-10">
+									<input id="inputNewPassConfirm" type="password" class="form-control editable" placeholder="請再輸入一次新密碼"  name="newPasswordConfirm">
+									<span class="glyphicon form-control-feedback"></span>
+									<div class="errorMsg"></div>
+								</div>
+							</div>
+			      	 	</form>
+			      	 	<label class="col-sm-2 control-label"></label>
+			      	 	<div id="buttonGroup" class="form-group col-sm-10">
+							<button id="save2" class="btn btn-success">送出</button>
+							<button id="cancel2" class="btn btn-danger">取消</button>
+						</div>
+					</div>
+				</div>
 	    	</div>
       	</div>
 	</div>
@@ -124,6 +158,9 @@
 <script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 <script>
 	(function($) {
+		//
+		//使用者資料修改頁面
+		//
 		editMode(false);
 		
 		$('#inputBirth').datetimepicker({
@@ -171,6 +208,7 @@
 				$('#alert').show();
 			}else if($('#inputPass').val().trim().length <= 0){
 				$('#passConfirm').addClass('has-error');
+				$('#passConfirm .form-control-feedback').addClass('glyphicon-remove');
 				$('#alert').html('<strong>密碼不能為空:</strong>請輸入密碼');
 				$('#alert').show();
 			} else {
@@ -216,6 +254,7 @@
 						} else {
 							//驗證登入失敗
 							$('#passConfirm').addClass('has-error');
+							$('#passConfirm .form-control-feedback').addClass('glyphicon-remove');
 							$('#alert').html('<strong>密碼錯誤:</strong>請重新輸入密碼');
 							$('#alert').show();
 						}
@@ -331,6 +370,128 @@
 					number : true,
 					input : true
 				}
+			},
+			highlight : function(element) {
+				validateFail=1;
+				var formGroup = $(element).closest('.form-group');
+				if(!formGroup.hasClass('has-error')){
+					formGroup.removeClass('has-success');
+					formGroup.addClass('has-error');
+				}
+				$('.form-control-feedback', formGroup).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+				var errorMsg = $('div.errorMsg',formGroup).text();
+				$('input',formGroup).tooltip('destroy');
+				$('input',formGroup).tooltip({
+					placement: 'right',
+					title: errorMsg,
+					container: '#editUserInfo',
+					trigger: 'manual',
+				});
+				$('input',formGroup).tooltip('show');
+			},
+			success : function(element) {
+				var formGroup = $(element).closest('.form-group');
+				if(!formGroup.hasClass('has-success')){
+					formGroup.removeClass('has-error');
+					formGroup.addClass('has-success');
+				}
+				$('.form-control-feedback', formGroup).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+				$('input',formGroup).tooltip('hide');
+			},
+		});
+		
+		//
+		//密碼修改頁面
+		//
+		$('#alert2').hide();
+		$('#alert3').hide();
+		
+		$('#cancel2').on('click', function(){
+			$('#inputOldPass').val('');
+			$('#inputNewPass').val('');
+			$('#inputNewPassConfirm').val('');
+		});
+		
+		$('#save2').on('click', function(){
+			console.log('開始修改密碼');
+			console.log($('#inputOldPass').val());
+			console.log($('#inputNewPass').val());
+			if(!$('#fixForm').valid()){
+				$('#alert2').html('<strong>欄位填寫有誤:</strong>請檢查資料是否正確');
+				$('#alert2').show();
+			} else {
+				$('#alert2').hide();
+				$.ajax({
+					url: '<c:url value="/updateUserPassword" />',
+					type:'post',
+					dataType:'json',
+					data:{
+						'model.userAccount':$('#inputAccount').val(),
+						'oldUserPassword':$('#inputOldPass').val(),
+						'userPassword':$('#inputNewPass').val()
+					},
+					success:function(result){
+						console.log('接收到資料');
+						if(result){
+							//成功
+							$('#alert3').html('<strong>密碼修改成功:</strong>往後請使用新密碼登入');
+							$('#alert3').show();
+						} else {
+							//失敗
+							$('#alert2').html('<strong>密碼有誤:</strong>請確認密碼是否正確');
+							$('#alert2').show();
+						}
+					}
+				});
+			}
+		});
+		
+		//密碼規則驗證
+		$.validator.addMethod("checkPsw1", function() {
+			var re1 = /^(?!.*[\u4E00-\u9FA5])(?=.*[0-9])\S{6,}$/g;
+			var password = $('#inputNewPass').val();
+			//var password = $('#passwordf').val().replace(/ /g, "");
+			if (re1.test(password)) {
+				checkPsw1 = true;
+			} else {
+				checkPsw1 = false;
+			}
+			return checkPsw1;
+		}, "須包含數字");
+		$.validator.addMethod("checkPsw2", function() {
+			var re2 = /^(?!.*[\u4E00-\u9FA5])(?=.*[a-zA-Z])\S{6,}$/g;
+			if (re2.test($('#inputNewPass').val())) {
+				checkPsw2 = true;
+			} else {
+				checkPsw2 = false;
+			}
+			return checkPsw2;
+		}, "須包含英文");
+		$.validator.addMethod("alnumpwd", function(value, element) {
+			return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+		}, "只能包括英文字母和数字");
+		
+		$('#fixForm').validate({
+			errorPlacement: function(error, element) {
+				var parent = element.parent().parent();
+				$('div.errorMsg',parent).html(error);
+			},
+			debug : true,
+			rules : {
+				oldPassword : {
+					required : true,
+				},
+				newPassword : {
+					required : true,
+					minlength : 6,
+					alnumpwd : true,
+					checkPsw1 : true,
+					checkPsw2 : true
+				},
+				newPasswordConfirm : {
+					required : true,
+					equalTo : '#inputNewPass',
+				},
 			},
 			highlight : function(element) {
 				validateFail=1;
