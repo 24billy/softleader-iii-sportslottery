@@ -213,7 +213,7 @@
                     <!-- Begin of Single Bet Panel -->
                     <div  >
                         <form class="form"
-                            action="<c:url value="/lottery"/>" method="post">
+                            action="<c:url value='/lottery'/>" method="post">
                             <table
                                 class="table table-striped  table-hover">
                                 <thead>
@@ -267,8 +267,9 @@
                                     value="1">
                             </div>
                             <div>
-                                <button class="lottery btn btn-danger btn-xs"
-                                    type="submit">投注</button>                                
+                                <button class="lottery btn btn-danger btn-xs checkOdds"
+                                    type="submit">投注</button>
+                            	<span class=checkOddsError></span>                                
                             </div>
                         </form> <!-- lottery form真實投注 End-->
                         <form class="form"
@@ -531,7 +532,8 @@
                                     name="oddsIdList.oddId8" value="">
                             </div>
                             <div>
-                                <button class="lottery btn btn-danger btn-xs" type="submit">投注</button>                                
+                                <button class="lottery btn btn-danger btn-xs">投注</button>     
+                                <span class="submitError"></span>                          
                             </div>
                            
                             
@@ -551,8 +553,28 @@
     </div>
 <!--sidepanel  -->  
 
-<script>
+	<div id="youAreSoPoor" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+					<img src="images/success.png">
+					<h4>
+						<span id="forgetSuccess">抱歉 大哥你錢不夠用 請加值虛擬幣</span>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
+
+<script>
+//判斷錢夠不夠
+<c:if test="${not empty errorMsg}">callErrorModal()</c:if>
+function callErrorModal(){
+	$('#youAreSoPoor').modal('show');
+	setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,2000);
+}
 
 var galbalGames;
 var galbalOdds;
@@ -682,7 +704,7 @@ function odds_refresh(){
 	
 	$('#passBetValue').off('keyup');
 	$('#passBetValue').on('keyup', function(){          
-	    $('#passCapital').html($('#passBetValue').val()*capitalValue);              
+	    $('#passCapital').html($('#passBetValue').val()*capitalValue);
 	    $('#passTopPrize').html(Math.floor(passPrize*$('#passBetValue').val()*capitalValue));
 	    $('.capitalValue').val($('#passBetValue').val()*capitalValue);
 	    
@@ -693,8 +715,7 @@ function odds_refresh(){
 	    calculateComTopPrize();
 	    refreshBetTable();
 	    $('.capitalValue').val($('#comBetValue').val()*capitalValue);
-	});               
-	
+	});
 	//每一注投注金計算
 	$('.capitalValue').val($('#singleBetValue').val()*capitalValue);
 	$('.capitalValue').val($('#passBetValue').val()*capitalValue);
@@ -789,7 +810,6 @@ function odds_refresh(){
 	    
 	    
 	});
-	
     //過關組合虛擬投注按鈕，將form裡的資料加入post的uri後
     $('.virtualButton').off('click');
     $('.virtualButton').on('click',function(){

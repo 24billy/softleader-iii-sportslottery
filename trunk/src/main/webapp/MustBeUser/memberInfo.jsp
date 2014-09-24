@@ -438,6 +438,7 @@
 							$('#oldPass').removeClass('has-error');
 							$('#oldPass .form-control-feedback').removeClass('glyphicon-remove');
 							$('#alert3').html('<strong>密碼修改成功:</strong>往後請使用新密碼登入');
+							
 							$('#alert3').show();
 						} else {
 							//失敗

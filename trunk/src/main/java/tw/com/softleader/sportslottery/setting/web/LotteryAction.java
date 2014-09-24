@@ -68,6 +68,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
 	private Long winOpen;
+	private String errorMsg;
 	
 	private Locale locale = ActionContext.getContext().getLocale();
 	
@@ -167,7 +168,14 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public void setWinOpen(Long winOpen) {
 		this.winOpen = winOpen;
 	}
+	
+	public String getErrorMsg() {
+		return errorMsg;
+	}
 
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
 
 	@Override
 	public void validate() {
@@ -192,14 +200,15 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    //從session中取出userId
 	    Map session = ActionContext.getContext().getSession();
 	        UserEntity user = (UserEntity)session.get("user");
+	        
 	    model.setUserId(user.getId());  
 	    model.setConfirmTime(new LocalDateTime());  
-		
+	    model=service.insert(model);
+	    
 	    //將form的資料提取
         Long capital = model.getCapital();
         model.setWin(-1L);
         System.out.println("capital:"+capital);
-        model=service.insert(model);
         
         Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
         LotteryOddsEntity lotteryOdd = new LotteryOddsEntity();
@@ -231,9 +240,22 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
             }      
         }
         System.out.println("lotteryOdds:"+lotteryOdds);
+        System.out.println("oddsCount:"+oddsCount);
+        
+        //更新coins
+        if(capital <= user.getCoins()) {
+        	user.setCoins(user.getCoins() - capital*oddsCount);
+        	userService.update(user);
+        	log.debug("更新成功");
+        } else {
+        	service.delete(model);
+        	log.debug("更新失敗");
+        	errorMsg = "虛擬幣不足 請加值!!!";
+        	return ERROR;
+        }
         
         String temp=oddsArray.toString().substring(1);
-        System.out.println("oddsCount:"+oddsCount);
+        
         System.out.println("oddsArray1:"+temp);
         model.setLotteryOdds(lotteryOdds);
         service.update(model);
