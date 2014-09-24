@@ -164,8 +164,9 @@ public class GameDaoTest extends BaseTest{
 
 	@Test
 	public void testFindByLocalDateTime(){
-		String gameTimeStr="2014-09-15T08:50:20";
+		String gameTimeStr="2014-09-16T08:55";
 		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
+		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
 		List<GameEntity> games = dao.findByLocalDateTime(gameTime);
 //		log.debug("testFindByLocalDateTime = {}", games);
 		for(GameEntity game:games){
