@@ -91,7 +91,7 @@ public class OddCountService {
 	public Long getTotalCountOftheDay(LocalDate gameTime){
 		Long totalCountOftheDay = 0L;
 		try{
-			List<GameEntity> gameList = gameDao.findOddsByTime(gameTime);
+			List<GameEntity> gameList = gameDao.findGameByLocalDate(gameTime);
 			for(GameEntity game: gameList){
 				for(OddsEntity odd:game.getOdds()){
 					totalCountOftheDay += odd.getCount();
