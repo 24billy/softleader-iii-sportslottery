@@ -122,11 +122,10 @@ public class OddCountService {
 	public List<CountBean> getBeanListByGameDay(LocalDate gameTime){
 		List<CountBean> result=new ArrayList<CountBean>();
 		List<GameEntity> games = gameDao.findGameByLocalDate(gameTime);
-		CountBean bean = new CountBean();
-		
 		for(GameEntity game: games){
 			List<OddsEntity> odds= game.getOdds();//得一場比賽的八種odds
 			for(OddsEntity odd: odds){//將每一個odd取出加入一個CountBean
+				CountBean bean = new CountBean();
 				Long count= odd.getCount();
 				bean.setCount(count);
 				bean.setGameId(odd.getGameId());
