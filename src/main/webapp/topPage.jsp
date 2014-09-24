@@ -445,8 +445,6 @@
 		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
 	});
 	
-
-	
 })(jQuery); 
 </script>
 <script type="text/javascript">

@@ -25,6 +25,7 @@ public class loginFilter implements Filter {
 	String servletPath;
 	String contextPath;
 	String requestURI;
+	private UserEntity loginToken;
 	
     /**
      * Default constructor. 
@@ -55,7 +56,12 @@ public class loginFilter implements Filter {
 			boolean isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 			if(checkLogin(req)) {
-				chain.doFilter(request, response);
+				if(loginToken.getUserState().isEmpty() || !loginToken.getUserState().equals("0")) {
+					req.setAttribute("locking", "true");
+					req.getRequestDispatcher("/index.jsp").forward(req, resp);
+				}else {
+					chain.doFilter(request, response);
+				}
 			} else {				//  需要登入，尚未登入
 				HttpSession session = req.getSession();
 				if (!isRequestedSessionIdValid ) {
@@ -83,9 +89,9 @@ public class loginFilter implements Filter {
 	}
 
 	private boolean checkLogin(HttpServletRequest req) {
-		System.out.println("checkLogin...");
+		//System.out.println("checkLogin...");
 		HttpSession session = req.getSession();
-		UserEntity loginToken = (UserEntity) session.getAttribute("user");
+		loginToken = (UserEntity) session.getAttribute("user");
 		if (loginToken == null) {
 			System.out.println("checkLogin !!FAIL!!");
 			return false;
