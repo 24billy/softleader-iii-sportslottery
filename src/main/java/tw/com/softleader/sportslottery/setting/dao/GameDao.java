@@ -253,10 +253,28 @@ public class GameDao extends GenericDao<GameEntity>{
 		Query query = getSession().createQuery("select game.odds from GameEntity as game where game.gameTime >= :gameTime and game.gameTime < :newGameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName) ");
 		query.setDate("gameTime", gameTime.toDate());
 		query.setDate("newGameTime", newGameTime.toDate());
+//		if(teamName==null){
+//			teamName="";
+//		}
 		query.setString("teamName", teamName);
 		return query.list();
 		
 	}
+	
+	//找出當天比賽所有的投注一個list 是一場比賽的投注集合，list<list...>是多場比賽的投注集合
+	public List<GameEntity> findGameByLocalDate(LocalDate gameTime){
+		LocalDateTime gameTimeLocalDateTime = gameTime.toLocalDateTime(new LocalTime(0, 0));
+		
+		Criterion lessEqualGameTime = Restrictions.between("gameTime", gameTimeLocalDateTime, gameTimeLocalDateTime.plusDays(1));
+		return getSession().createCriteria(GameEntity.class)
+					.setFetchMode("odds", FetchMode.SELECT)
+					.add(lessEqualGameTime)
+					/*.setProjection(Projections.property("odds"))*/
+					.list();
+		
+	}
+	
+	
 	public List<GameEntity> findGameByTimeAndName(LocalDate gameTime, String teamName){
 		LocalDate newGameTime= gameTime.plusDays(1);//add one day to the gameTime
 		Query query = getSession().createQuery("from GameEntity as game where game.gameTime >= :gameTime and game.gameTime < :newGameTime and (game.teamHome.teamName = :teamName or game.teamAway.teamName = :teamName)");
