@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,8 +13,8 @@ public class GameDaoTest extends BaseTest{
 
 	@Autowired
 	private GameDao dao;
-	@Test
-	public void test() {
+//	@Test
+//	public void test() {
 		
 //		int os = 0;
 //		int ts = 0;
@@ -148,7 +149,7 @@ public class GameDaoTest extends BaseTest{
 		
 		
 		
-	}
+//	}
 	/*
 	@Test
 	public void testFindFinishedGameToday() {
@@ -160,12 +161,16 @@ public class GameDaoTest extends BaseTest{
 	}
 	*/
 	
+
 	@Test
-	public void testFindLatestFiveRecord() {
-		List<GameEntity> games = dao.findLatestFiveRecord();
-		for (GameEntity game : games) {
-			System.out.println("game:"+game);
+	public void testFindByLocalDateTime(){
+		String gameTimeStr="2014-09-15T08:50:20";
+		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
+		List<GameEntity> games = dao.findByLocalDateTime(gameTime);
+//		log.debug("testFindByLocalDateTime = {}", games);
+		for(GameEntity game:games){
+			System.out.println(game);
 		}
+		System.out.println("size of games = "+ games.size());
 	}
-	
 }
