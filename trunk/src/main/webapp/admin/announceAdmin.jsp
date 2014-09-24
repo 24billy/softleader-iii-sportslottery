@@ -288,7 +288,6 @@
 		//Begin of btnDelete
 		$('.btn-del').click(function() {
 			$('#btnDelete').val($(this).val());
-			console.log($(this).val());
 		});
 		
 		$('#btnDelete').click(function() {
