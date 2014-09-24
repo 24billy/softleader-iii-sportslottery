@@ -250,18 +250,24 @@
 		//End of teamTable
 		
 		//Begin of listLeague
-		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
-			$.each(data, function(index, leagueName) {
-				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-				$('#leagueNameList').append(str);
-			});
-			var leagueName = '${leagueName}';
-			if (leagueName == null || leagueName == "") {
-				$('#leagueNameList')[0].selectedIndex = 0;
-			} else {
-				$('#leagueNameList').val(leagueName);
-			}
-		}, 'json');
+		$.ajax({
+			url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
+			type: 'post',
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(index, leagueName) {
+					var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+					$('#leagueNameList').append(str);
+				});
+				var leagueName = '${leagueName}';
+				if (leagueName == null || leagueName == "") {
+					$('#leagueNameList')[0].selectedIndex = 0;
+				} else {
+					$('#leagueNameList').val(leagueName);
+				}
+			},
+			async: false
+		});
 		//End of listLeague
 		
 		//Begin of listTeam
@@ -270,17 +276,24 @@
 			resetInput();
 		});
 		$('.btn-edit').click(function() {
+			$('#btnMerge').val($(this).val());
 			$('#teamModalTitle').text('<s:text name="admin.teamAdmin.edit"/>');
-			$.post('<c:url value="/admin/teamAdmin?method:select"/>', {
-				'model.id':$(this).val()
-			}, function(data) {
-				$('#ballType').val(data.ballType);
-				$('#leagueName').val(data.leagueName);
-				$('#leagueNameEn').val(data.leagueNameEn);					
-				$('#teamName').val(data.teamName);
-				$('#teamNameEn').val(data.teamNameEn);
-				$('#btnMerge').val(data.id);
-			}, 'json');
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:select"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+					$('#ballType').val(data.ballType);
+					$('#leagueName').val(data.leagueName);
+					$('#leagueNameEn').val(data.leagueNameEn);					
+					$('#teamName').val(data.teamName);
+					$('#teamNameEn').val(data.teamNameEn);
+				},
+				async: false
+			});
 		});
 		//End of listTeam
 		
@@ -329,35 +342,44 @@
 			}
 			
 			var teamId = $(this).val();
-			$.post('<c:url value="/admin/teamAdmin?method:insert"/>',{
-				'model.id':teamId,
-				'model.ballType':$('#ballType').val(),
-				'model.leagueName':$('#leagueName').val(),
-				'model.leagueNameEn':$('#leagueNameEn').val(),
-				'model.teamName':$('#teamName').val(),
-				'model.teamNameEn':$('#teamNameEn').val()
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:insert"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':teamId,
+					'model.ballType':$('#ballType').val(),
+					'model.leagueName':$('#leagueName').val(),
+					'model.leagueNameEn':$('#leagueNameEn').val(),
+					'model.teamName':$('#teamName').val(),
+					'model.teamNameEn':$('#teamNameEn').val()
+				},
+				success: function(data) {
+				},
+				async: false
 			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
-			});
+			window.location.reload(true);
 		});
 		//End of btnMerge
 		
 		//Begin of btnDelete
 		$('.btn-del').click(function() {
 			$('#btnDelete').val($(this).val());
-			console.log($(this).val());
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/admin/teamAdmin?method:delete"/>', {
-				'model.id':$(this).val()
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:delete"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+				},
+				async: false
 			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
-			});
+			window.location.reload(true);
 		});
 		//End of btnDelete
 		
