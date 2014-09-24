@@ -2,12 +2,14 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 
 public class GameDaoTest extends BaseTest{
 
@@ -162,16 +164,29 @@ public class GameDaoTest extends BaseTest{
 	*/
 	
 
+//	@Test
+//	public void testFindByLocalDateTime(){
+//		String gameTimeStr="2014-09-16T08:55";
+//		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
+//		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
+//		List<GameEntity> games = dao.findByLocalDateTime(gameTime);
+////		log.debug("testFindByLocalDateTime = {}", games);
+//		for(GameEntity game:games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of games = "+ games.size());
+//	}
 	@Test
-	public void testFindByLocalDateTime(){
-		String gameTimeStr="2014-09-16T08:55";
-		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
-		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
-		List<GameEntity> games = dao.findByLocalDateTime(gameTime);
-//		log.debug("testFindByLocalDateTime = {}", games);
-		for(GameEntity game:games){
+	public void testFindOddsByTime(){
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-09-10");
+		List<GameEntity> gameList = dao.findOddsByTime(date1);
+		System.out.println(gameList);
+	
+		for(GameEntity game : gameList){
 			System.out.println(game);
 		}
-		System.out.println("size of games = "+ games.size());
+		
+		System.out.println("size of oddsListList: "+ gameList.size());
 	}
 }
