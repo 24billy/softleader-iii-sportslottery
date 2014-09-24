@@ -26,7 +26,7 @@
 }</style>
 </head>
 <body>
-<div id="loading"><img src="<c:url value="/images/10secondsCountDown.gif"/>" />     Loading.....  </div>
+<div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />     Loading.....  </div>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <div id="tsv" style="display:none"></div>  
 <script src="<c:url value="/js/misc.js"/>"></script>
