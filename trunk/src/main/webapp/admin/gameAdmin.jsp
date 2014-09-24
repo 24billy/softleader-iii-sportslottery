@@ -555,58 +555,82 @@
 		//End of gameTable
 		
 		//Begin of listBallType
-		$.post('<c:url value="/admin/teamAdmin?method:getBallTypes"/>', function(data) {
-			var child = '';
-			$.each(data, function(index, ballType) {
-				switch(ballType) {
-					case 'Baseball': child += '<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>'; break;
-					case 'Basketball': child += '<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>'; break;
-					case 'Soccer': child += '<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>'; break;
-				}
-			});
-			$('#ballType').append(child);
-		}, 'json');
+		$.ajax({
+			url: '<c:url value="/admin/teamAdmin?method:getBallTypes"/>',
+			type: 'post',
+			dataType: 'json',
+			success: function(data) {
+				var child = '';
+				$.each(data, function(index, ballType) {
+					switch(ballType) {
+						case 'Baseball': child += '<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>'; break;
+						case 'Basketball': child += '<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>'; break;
+						case 'Soccer': child += '<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>'; break;
+					}
+				});
+				$('#ballType').append(child);
+			},
+			async: false
+		});
+		$('#ballType').change(listLeague);
 		//End of listBallType
 		
-		//Begin of btnAddGame
-		$('#btnAddGame').click(function() {
-			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.add"/>');
-			$('#ballType')[0].selectedIndex = 0;
-			$('#ballType').change(listLeague);
-			listLeague();
-			function listLeague() {
-				$('#leagueName').empty();
-				$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
+		//Begin of listLeague
+		function listLeague() {
+			$('#leagueName').empty();
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
 					'model.ballType':$('#ballType').val()
-				}, function(data) {
+				},
+				success: function(data) {
 					$.each(data, function(index, leagueName) {
 						var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
 						$('#leagueName').append(str);
 					});
 					$('#leagueName')[0].selectedIndex = 0;
-					$('#leagueName').change(listTeam);
-					listTeam();
+				},
+				async: false
+			});
+		}
+		$('#leagueName').change(listTeam);
+		//End of listLeague
+		
+		//Begin of listTeam
+		function listTeam() {
+			$('#teamAwayList,#teamHomeList').empty();
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:select"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.leagueName':$('#leagueName').val()
+				},
+				success: function(data) {
+					$.each(data, function(key, value) {
+						var teamName = zh? value.teamName:value.teamNameEn;
+						var str = '<option value=' + value.id + '>' + teamName + '</option>';
+						$('#teamAwayList,#teamHomeList').append(str);
+					});
 					
-					function listTeam() {
-						$('#teamAwayList,#teamHomeList').empty();
-						$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
-							'model.leagueName':$('#leagueName').val()
-						}, function(data) {
-							$.each(data, function(key, value) {
-								var teamName = zh? value.teamName:value.teamNameEn;
-								var str = '<option value=' + value.id + '>' + teamName + '</option>';
-								$('#teamAwayList,#teamHomeList').append(str);
-							});
-							
-							$('#teamAwayList')[0].selectedIndex = 0;
-							$('#teamAwayList').change();
-							$('#teamHomeList')[0].selectedIndex = 1;
-							$('#teamHomeList').change();
-							resetInput();
-						}, 'json');
-					}
-				}, 'json');
-			}
+					$('#teamAwayList')[0].selectedIndex = 0;
+					$('#teamAwayList').change();
+					$('#teamHomeList')[0].selectedIndex = 1;
+					$('#teamHomeList').change();
+				},
+				async: false
+			});
+		}
+		//End of listTeam
+		
+		//Begin of btnAddGame
+		$('#btnAddGame').click(function() {
+			$('#ballType')[0].selectedIndex = 0;
+			$('#ballType').change();
+			$('#leagueName').change();
+			resetInput();
 		});
 		//End of btnAddGame
 		
@@ -614,91 +638,69 @@
 		$('.btn-edit').click(function() {
 			var gameId = $(this).val();
 			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.edit"/>');
-			$.post('<c:url value="/admin/gameAdmin?method:select"/>', {
-				'model.id':gameId
-			}, function(data) {
-				var dateTime = new Date(data.gameTime.iLocalMillis);
-				var year = dateTime.getUTCFullYear();
-				var month = addZero(dateTime.getUTCMonth() + 1);
-				var date = addZero(dateTime.getUTCDate());
-				var hours = addZero(dateTime.getUTCHours());
-				var minutes = addZero(dateTime.getUTCMinutes());
-				var teamAwayId = data.teamAway.id;
-				var teamHomeId = data.teamHome.id;
-				var dataLeagueName = data.teamHome.leagueName;
-				var dataLeagueNameEn = data.teamHome.leagueNameEn;
-				var odds = data.odds;
-				function addZero(str) {
-					if (str < 10) {
-						str = '0' + str;
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:select"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':gameId
+				},
+				success: function(data) {
+					var dateTime = new Date(data.gameTime.iLocalMillis);
+					var year = dateTime.getUTCFullYear();
+					var month = addZero(dateTime.getUTCMonth() + 1);
+					var date = addZero(dateTime.getUTCDate());
+					var hours = addZero(dateTime.getUTCHours());
+					var minutes = addZero(dateTime.getUTCMinutes());
+					var teamAwayId = data.teamAway.id;
+					var teamHomeId = data.teamHome.id;
+					var dataLeagueName = data.teamHome.leagueName;
+					var dataLeagueNameEn = data.teamHome.leagueNameEn;
+					var odds = data.odds;
+					function addZero(str) {
+						if (str < 10) {
+							str = '0' + str;
+						}
+						return str;
 					}
-					return str;
-				}
-				$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
-				$('#ballType').val(data.ballType);
-				$('#ballType').change(listLeague);
-				$('#btnMerge').val(gameId);
-				listLeague();
-				function listLeague() {
-					$('#teamAwayList,#teamHomeList').empty();
-					$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
-						'model.ballType':$('#ballType').val()
-					}, function(data) {
-						$.each(data, function(index, leagueName) {
-							var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-							$('#leagueName').append(str);
-						});
-						if (zh) {
-							$('#leagueName').val(dataLeagueName);
-						} else {
-							$('#leagueName').val(dataLeagueNameEn);
-						}
-						$('#leagueName').change(function() {
-							listTeam(null, null);
-						});
-						listTeam(teamAwayId, teamHomeId);
-						function listTeam(teamAwayId, teamHomeId) {
-							$('#teamAwayList,#teamHomeList').empty();
-							$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
-								'model.leagueName':$('#leagueName').val()
-							}, function(data) {
-								$.each(data, function(key, value) {
-									var teamName = zh? value.teamName:value.teamNameEn;
-									var str = '<option value=' + value.id + '>' + teamName + '</option>';
-									$('#teamAwayList,#teamHomeList').append(str);
-								});
-								
-								if (teamAwayId != null && teamHomeId != null) {
-									$('#teamAwayList').val(teamAwayId);
-									$('#teamAwayList').change();
-									$('#teamHomeList').val(teamHomeId);
-									$('#teamHomeList').change();
-									if (odds.length != 0) {
-										$.each(odds, function(index, odd) {
-											$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
-											if (odd.oddType == "ATS_A") {
-												$('#ATS_A_Combination').val(odd.oddCombination.toFixed(2));
-											} else if (odd.oddType == "ATS_H") {
-												$('#ATS_H_Combination').val(odd.oddCombination.toFixed(2));
-											} else if (odd.oddType == "SC_H") {
-												$('#SC_Combination').val(odd.oddCombination.toFixed(2));
-											}
-										});
-									} else {
-										$('.form-decimal').val('2.00');
-									}
-								} else {
-									$('#teamAwayList')[0].selectedIndex = 0;
-									$('#teamAwayList').change();
-									$('#teamHomeList')[0].selectedIndex = 1;
-									$('#teamHomeList').change();
-									resetInput();
+					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
+					$('#ballType').val(data.ballType);
+					$('#ballType').change()
+					if (zh) {
+						$('#leagueName').val(dataLeagueName);
+					} else {
+						$('#leagueName').val(dataLeagueNameEn);
+					}
+					$('#leagueName').change();
+					if (teamAwayId != null && teamHomeId != null) {
+						$('#teamAwayList').val(teamAwayId);
+						$('#teamAwayList').change();
+						$('#teamHomeList').val(teamHomeId);
+						$('#teamHomeList').change();
+						if (odds.length != 0) {
+							$.each(odds, function(index, odd) {
+								$('[name$="' + odd.oddType + '"]').val(odd.oddValue.toFixed(2));
+								if (odd.oddType == "ATS_A") {
+									$('#ATS_A_Combination').val(odd.oddCombination.toFixed(2));
+								} else if (odd.oddType == "ATS_H") {
+									$('#ATS_H_Combination').val(odd.oddCombination.toFixed(2));
+								} else if (odd.oddType == "SC_H") {
+									$('#SC_Combination').val(odd.oddCombination.toFixed(2));
 								}
-							}, 'json');
+							});
+						} else {
+							$('.form-decimal').val('2.00');
 						}
-					}, 'json');
-				}
-			}, 'json');
+					} else {
+						$('#teamAwayList')[0].selectedIndex = 0;
+						$('#teamAwayList').change();
+						$('#teamHomeList')[0].selectedIndex = 1;
+						$('#teamHomeList').change();
+						resetInput();
+					}
+				},
+				async: false
+			});
 		});
 		//End of btnEdit
 		
@@ -718,25 +720,36 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:select"/>',{
-				'model.id':$(this).val()
-			}, function(data) {
-				$('#gameScoreAway').val(data.gameScoreAway);
-				$('#gameScoreHome').val(data.gameScoreHome);
-			}, 'json');
-			$('#btnStatus').val($(this).val());
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:select"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+					$('#gameScoreAway').val(data.gameScoreAway);
+					$('#gameScoreHome').val(data.gameScoreHome);
+				},
+				async: false
+			});
 		});
 		
 		$('#btnStatus').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:update"/>', {
-				'model.id':$(this).val(),
-				'model.isEnd':true,
-				'model.gameScoreAway':$('#gameScoreAway').val(),
-				'model.gameScoreHome':$('#gameScoreHome').val()
-			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:update"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val(),
+					'model.isEnd':true,
+					'model.gameScoreAway':$('#gameScoreAway').val(),
+					'model.gameScoreHome':$('#gameScoreHome').val()
+				},
+				success: function(data) {
+					window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnStatus
@@ -753,44 +766,54 @@
 			}
 			
 			var gameId = $(this).val();
-			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
-				'model.id':gameId,
-				'model.ballType':$('#ballType').val(),
-				'model.leagueName':$('#leagueName').val(),
-				'model.gameNum':'${maxGameNum + 1}',
-				'model.gameTime':$('#gameTime').val(),
-				'teamAwayId':$('#teamAwayList').val(),
-				'teamHomeId':$('#teamHomeList').val(),
-				'model.gameScoreAway':0,
-				'model.gameScoreHome':0
-			}, function(data) {
-				$('.form-decimal').each(function() {
-					var oddCombination = 0;
-					
-					var oddType = $(this).attr('name');
-					if (oddType.indexOf('EO_') != -1) {
-						oddType = oddType.replace('EO_', '');
-					} else if (oddType == 'ATS_A') {
-						oddCombination = $('#ATS_A_Combination').val();
-					} else if (oddType == 'ATS_H') {
-						oddCombination = $('#ATS_H_Combination').val();
-					} else if (oddType.indexOf('SC_') != -1) {
-						oddCombination = $('#SC_Combination').val();
-					}
-					$.post('<c:url value="/admin/oddsAdmin"/>', {
-						'model.gameId':data,
-				    	'model.oddType':oddType,
-				    	'model.oddValue':$(this).val(),
-				    	'model.oddCombination':oddCombination,
-				    	'model.count':0,
-					}, function(data) {
-						return true;
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:insert"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':gameId,
+					'model.ballType':$('#ballType').val(),
+					'model.leagueName':$('#leagueName').val(),
+					'model.gameNum':'${maxGameNum + 1}',
+					'model.gameTime':$('#gameTime').val(),
+					'teamAwayId':$('#teamAwayList').val(),
+					'teamHomeId':$('#teamHomeList').val(),
+					'model.gameScoreAway':0,
+					'model.gameScoreHome':0
+				},
+				success: function(data) {
+					$('.form-decimal').each(function() {
+						var oddCombination = 0;
+						
+						var oddType = $(this).attr('name');
+						if (oddType.indexOf('EO_') != -1) {
+							oddType = oddType.replace('EO_', '');
+						} else if (oddType == 'ATS_A') {
+							oddCombination = $('#ATS_A_Combination').val();
+						} else if (oddType == 'ATS_H') {
+							oddCombination = $('#ATS_H_Combination').val();
+						} else if (oddType.indexOf('SC_') != -1) {
+							oddCombination = $('#SC_Combination').val();
+						}
+						$.ajax({
+							url: '<c:url value="/admin/oddsAdmin"/>',
+							type: 'post',
+							dataType: 'json',
+							data: {
+								'model.gameId':data,
+						    	'model.oddType':oddType,
+						    	'model.oddValue':$(this).val(),
+						    	'model.oddCombination':oddCombination,
+						    	'model.count':0,
+							},
+							success: function(data) {
+								window.location.reload(true);
+							},
+							async: false
+						});
 					});
-				});
-			});
-				
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnMerge
@@ -801,12 +824,17 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:delete"/>', {
-				'model.id':$(this).val()
-			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:delete"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+					window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnDelete
@@ -817,22 +845,31 @@
 		});
 		
 		$('#btnPayout').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:payout"/>',{
-				'model.id':$(this).val()
-			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:payout"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+					window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnPayout
 		
 		//Begin of btnPayoutToday
 		$('#btnPayoutToday').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:payoutToday"/>');
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:payoutToday"/>',
+				type: 'post',
+				dataType: 'json',
+				success: function(data) {
+					window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnPayoutToday
@@ -843,12 +880,17 @@
 		});
 		
 		$('#btnOpen').click(function() {
-			$.post('<c:url value="/admin/gameAdmin?method:open"/>',{
-				'model.id':$(this).val()
-			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
+			$.ajax({
+				url: '<c:url value="/admin/gameAdmin?method:open"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function() {
+					window.location.reload(true);
+				},
+				async: false
 			});
 		});
 		//End of btnOpen
