@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
+import tw.com.softleader.sportslottery.setting.dao.OddsDao;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
@@ -19,6 +21,9 @@ public class OddCountService {
 
 	@Autowired
 	private GameDao gameDao;
+	
+	@Autowired
+	private OddsDao oddDao;
 	
 	//new 物件時，會在CONSTRUCTOR 把當日同隊所有的投注種類加總，並算出比率
 	public OddCountBean getBeanByGameTimeAndTeamName(LocalDate gameTime, String teamName, String oddType) {
@@ -62,18 +67,16 @@ public class OddCountService {
 		
 		return null;
 	}
-
+	
+	//只針對單一隊伍，取得當天投注總數
 	public Long getTotalCountOftheDay(LocalDate gameTime, String teamName) {
 		//從比賽時間和隊名取得投注物件list
-
 		Long totalCountOftheDay;
 		try {
 			List<OddsEntity> OddsList= gameDao.findOddsByTimeAndTeamName(gameTime, teamName);
 			totalCountOftheDay = 0L;
-			
 			for(OddsEntity odd: OddsList){
-				totalCountOftheDay += odd.getCount();
-				
+				totalCountOftheDay += odd.getCount();		
 			}
 			System.out.println("totalCountOftheDay: "+totalCountOftheDay+" on"+gameTime);
 			return totalCountOftheDay;
@@ -81,9 +84,25 @@ public class OddCountService {
 			System.out.println("somethig wrong in getTotalCountOftheDay");
 			e.printStackTrace();
 		}
-		
-		return null;
-		
+		return 0L;
+	}
+	
+	//取得當天比賽的投注總數，不限區域和隊伍
+	public Long getTotalCountOftheDay(LocalDate gameTime){
+		Long totalCountOftheDay = 0L;
+		try{
+			List<GameEntity> gameList = gameDao.findOddsByTime(gameTime);
+			for(GameEntity game: gameList){
+				for(OddsEntity odd:game.getOdds()){
+					totalCountOftheDay += odd.getCount();
+				}
+			}
+			
+		}catch(Exception e){
+			System.out.println("someThing woring in getTotalCountOftheDay(LocalDate gameTime)");
+			
+		}
+		return totalCountOftheDay;
 	}
 	
 	
