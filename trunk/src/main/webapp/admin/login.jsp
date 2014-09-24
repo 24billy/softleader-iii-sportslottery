@@ -21,7 +21,7 @@
 </head>
 <body>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<c:redirect url="/admin"/>
+		<c:redirect url="/admin/home"/>
 	</sec:authorize>
 	<div id="wrapper">
 		<div class="container animated fadeIn">

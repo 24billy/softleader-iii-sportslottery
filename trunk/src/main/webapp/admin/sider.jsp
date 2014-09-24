@@ -16,7 +16,7 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left10"><s:text name="admin.home"/></span></a></li>
+			<li><a href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-home"></i><span class="left10"><s:text name="admin.home"/></span></a></li>
 			<li><a href="<c:url value="/admin/gameAdmin"/>"><i class="fa fa-fw fa-table"></i><span class="left10"><s:text name="admin.gameAdmin"/></span></a></li>
 			<li><a href="<c:url value="/admin/teamAdmin"/>"><i class="fa fa-fw fa-users"></i><span class="left10"><s:text name="admin.teamAdmin"/></span></a></li>
 			<li><a href="<c:url value="/admin/announceAdmin"/>"><i class="fa fa-fw fa-bullhorn"></i><span class="left10"><s:text name="admin.announceAdmin"/></span></a></li>

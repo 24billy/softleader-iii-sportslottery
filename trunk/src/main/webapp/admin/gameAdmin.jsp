@@ -33,7 +33,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<ol class="breadcrumb">
-									<li><a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
+									<li><a href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
 		  							<li class="active"><i class="fa fa-fw fa-table"></i><span class="left5"><s:text name="admin.gameAdmin"/></span></li>
 								</ol>
 							</div>
