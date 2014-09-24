@@ -637,6 +637,7 @@
 		//Begin of btnEdit
 		$('.btn-edit').click(function() {
 			var gameId = $(this).val();
+			$('#btnMerge').val(gameId);
 			$('#gameModalTitle').text('<s:text name="admin.gameAdmin.edit"/>');
 			$.ajax({
 				url: '<c:url value="/admin/gameAdmin?method:select"/>',
@@ -720,6 +721,7 @@
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
+			$('#btnStatus').val($(this).val());
 			$.ajax({
 				url: '<c:url value="/admin/gameAdmin?method:select"/>',
 				type: 'post',
