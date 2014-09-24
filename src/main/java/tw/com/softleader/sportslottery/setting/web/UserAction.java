@@ -498,6 +498,45 @@ public class UserAction extends ActionSupport {
 		return "updateUserInfo";
 	}
 	
+	//更新會員資料
+	public String updateUserPassword() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map session = ActionContext.getContext().getSession();
+		UserEntity userEntity = (UserEntity) session.get("user");
+		
+		log.debug("updateUserPassword()");
+		model.setModifier("Guest");
+		model.setModifiedTime(LocalDateTime.now());
+		
+		if (getFieldErrors().isEmpty()) {
+			log.debug("修改會員資料");
+			log.debug("Model = {}", model);
+			
+			// log.debug(""+userEntity);
+			try {
+				if (userPassword != null && userPassword.length() > 5) {
+					model.setUserPassword(oldUserPassword.getBytes());
+					model = service.encoding(model);
+					if (userEntity != null && Arrays.equals(userEntity.getUserPassword(), model.getUserPassword())) {
+						userEntity.setUserPassword(userPassword.getBytes());
+						log.debug("密碼驗證成功 可修改密碼");
+						service.update(userEntity);
+						log.debug("!!修改成功!!");
+						inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
+					} else {
+						log.debug("密碼不符合");
+						inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+					}
+				}
+			} catch (Exception e) {
+				log.debug("!!新增錯誤!!");
+				inputStream = new ByteArrayInputStream("false".getBytes(StandardCharsets.UTF_8));
+				e.printStackTrace();
+			}
+		}
+		return "updateUserPassword";
+	}
+
 	//身分證重複驗證
 	public String checkUserCardId() {
 		String result = ERROR;

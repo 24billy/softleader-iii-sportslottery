@@ -226,6 +226,13 @@
 			<param name="inputName">inputStream</param>
 		</result>
 	</action>	
+	<!-- 修改使用者密碼 -->
+	<action name="updateUserPassword" class="userAction" method="updateUserPassword">
+		<result name="updateUserPassword" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>
 	
 	<!-- 回首頁action -->
 	<action name="goIndex" class="passToAction" method="goIndex">

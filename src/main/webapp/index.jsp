@@ -899,6 +899,7 @@ $('#closeLotteryPanel').on("mouseout",function(){
 $('#closeLotteryPanel').on("click",function(){
 	
 });
+
 //-----------------------------------------------------
 //投注區更新結束
 </script>

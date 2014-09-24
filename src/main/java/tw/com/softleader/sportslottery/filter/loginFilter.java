@@ -87,8 +87,10 @@ public class loginFilter implements Filter {
 		HttpSession session = req.getSession();
 		UserEntity loginToken = (UserEntity) session.getAttribute("user");
 		if (loginToken == null) {
+			System.out.println("checkLogin !!FAIL!!");
 			return false;
 		} else {
+			System.out.println("checkLogin success");
 			return true;
 		}
 	}
