@@ -935,6 +935,8 @@ $('#closeLotteryPanel').on("click",function(){
 		$('#goVerify').trigger('click');
     };
 //投注區更新結束
+
+
 </script>
 </body>
 </html>

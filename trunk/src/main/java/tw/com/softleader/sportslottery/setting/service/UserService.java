@@ -153,6 +153,29 @@ public class UserService extends GenericService<UserEntity> {
 		return "success";
 	}
 	
+	public String updateUserPasswordMail(UserEntity userEntity) {
+		String body = "親愛的" + userEntity.getUserName() + "您已成功修改密碼,如果非本人更動請盡快連絡本網站";
+		try {
+			Session session = Session.getDefaultInstance(properties,
+					new javax.mail.Authenticator() {
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(from, password);
+						}
+					});
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(userEntity.getUserEmail()));
+			message.setSubject("Sport Lottery-更改密碼通知");
+			message.setText(body);
+			Transport.send(message);
+		} catch (Exception e) {
+			log.debug("認證信發信失敗");
+			return "error";
+		}
+		return "success";
+	}
+	
 	
 	@Override
 	public UserEntity update(UserEntity entity) {

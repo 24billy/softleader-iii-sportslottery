@@ -58,13 +58,17 @@ public class loginFilter implements Filter {
 			if(checkLogin(req)) {
 				System.out.println(loginToken);
 				if (loginToken != null) {
-					if (loginToken.getUserState() == null
-							|| loginToken.getUserState().isEmpty()
-							|| !loginToken.getUserState().equals("0")) {
-						req.setAttribute("locking", "true");
-						req.getRequestDispatcher("/index.jsp").forward(req,
-								resp);
-					} else {
+					if(req.getRequestURI().indexOf("/MustBeUser")==0){
+						if (loginToken.getUserState() == null
+								|| loginToken.getUserState().isEmpty()
+								|| !loginToken.getUserState().equals("0")) {
+							req.setAttribute("locking", "true");
+							req.getRequestDispatcher("/index.jsp").forward(req,
+									resp);
+						} else {
+							chain.doFilter(request, response);
+						}
+					}else {
 						chain.doFilter(request, response);
 					}
 				}else {
