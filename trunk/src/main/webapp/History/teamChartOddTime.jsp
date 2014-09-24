@@ -118,7 +118,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('#'+'${linkGameNum}'+'比賽之前(含)，"'+'${linkTeamSearch}'+'"熱門過關統計');
+		$('#searchMessage').text('#'+'${linkGameNum}'+'比賽之前(含)，以"'+'${linkTeamSearch}'+'"為搜尋對象的熱門過關統計');
 		//$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		$.post(url, {
@@ -362,23 +362,23 @@ $(function () {
 	                            versions[brand] = [];
 	                        }
 	                        if(version == 1){
-	                        	versions[brand].push(['主隊不讓分<br>('+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊不讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }else if(version == 2){
-	                        	versions[brand].push(['客隊不讓分<br>('+awayName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊不讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 3){
-	                        	versions[brand].push(['主隊讓分<br>('+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }else if(version == 4){
-	                        	versions[brand].push(['客隊讓分<br>('+awayName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 5){
-	                        	versions[brand].push(['高於總和', columns[1][i]]);
+	                        	versions[brand].push(['高於總和<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }else if(version == 6){
-	                        	versions[brand].push(['低於總和', columns[1][i]]);
+	                        	versions[brand].push(['低於總和<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }else if(version == 7){
-	                        	versions[brand].push(['總分奇數', columns[1][i]]);
+	                        	versions[brand].push(['總分奇數<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }else if(version == 8){
-	                        	versions[brand].push(['總分偶數', columns[1][i]]);
+	                        	versions[brand].push(['總分偶數<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
 	                        }
 	                       
 	                    }
