@@ -230,8 +230,8 @@
 					<h3 class="loginFont">全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
-				<c:if test="${not empty errorMsg}">
-					<div class="alert alert-danger" role="alert">${errorMsg}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
+				<c:if test="${not empty errorMsgLottery}">
+					<div class="alert alert-danger" role="alert">${errorMsgLottery}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
 				</c:if>
 					<form method="post" action="" name="login_form">
 						<p>

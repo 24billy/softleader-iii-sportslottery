@@ -536,6 +536,8 @@ hr {
 
 <script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 <script type="text/javascript">
+$(window).off('resize');
+
 function next(obj,n,next) {
 	(function($) {
 		if(obj.value.length==n) {
