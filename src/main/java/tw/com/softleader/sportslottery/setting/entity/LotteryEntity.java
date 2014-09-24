@@ -63,6 +63,9 @@ public class LotteryEntity extends GenericEntity {
 	@Column(name="COMBINATION_COM0")
 	private Long com0;
 	
+	@Column(name="LOTTERY_STATUS", columnDefinition="BIGINT default 0")
+	private Long lotteryStatus;
+	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "lotteryId", cascade = {CascadeType.ALL})
 	private Set<LotteryOddsEntity> lotteryOdds;
 
@@ -172,14 +175,20 @@ public class LotteryEntity extends GenericEntity {
 		this.com8 = com8;
 	}
 
-	
-	
 	public Long getCom0() {
 		return com0;
 	}
 
 	public void setCom0(Long com0) {
 		this.com0 = com0;
+	}
+	
+	public Long getLotteryStatus() {
+		return lotteryStatus;
+	}
+
+	public void setLotteryStatus(Long lotteryStatus) {
+		this.lotteryStatus = lotteryStatus;
 	}
 
 	@Override
@@ -189,11 +198,8 @@ public class LotteryEntity extends GenericEntity {
 				+ ", com1=" + com1 + ", com2=" + com2 + ", com3=" + com3
 				+ ", com4=" + com4 + ", com5=" + com5 + ", com6=" + com6
 				+ ", com7=" + com7 + ", com8=" + com8 + ", com0=" + com0
-				+ ", lotteryOdds=" + lotteryOdds + "]";
+				+ ", lotteryStatus=" + lotteryStatus + ", lotteryOdds="
+				+ lotteryOdds + "]";
 	}
-
-
-
-	
 
 }

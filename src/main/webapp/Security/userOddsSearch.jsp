@@ -206,6 +206,7 @@
 						//金額獎金
 						lottery.win = data.win;
 						lottery.capital = data.capital;
+						lottery.status = data.lotteryStatus;
 						//lottery.odds = data.lotteryOdds;
 						//console.log((data.lotteryOdds).length);
 						//判斷玩法
@@ -436,13 +437,21 @@
 					        		{"data": "capital" },
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == -1) {
-					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" data-toggle="modal" data-target="#statusModal">未開獎</button></td>';
+					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" >未開獎</button></td>';
 					        			} else {
-					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn" data-toggle="modal" data-target="#statusModal">'+row.win+'</button></td>';
+					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn" >'+row.win+'</button></td>';
 					        			}
 					        		}},
 					        		{"data": function(row, type, val, meta){
-					        			return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" data-toggle="modal" data-target="#statusModal">未做好</button></td>';
+					        			if(row.win == -1) {
+					        				return '<td><button type="button" class="btn btn-info btn-xs btn-status disabled" >NONE</button></td>';
+					        			} else 
+					        				if(row.status == 0) {
+					        					return '<td><button type="button" class="btn btn-warning btn-xs btn-status capitalBtn" >領獎</button></td>';
+					        				} else {
+					        					return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled" >已領獎</button></td>';
+					        				}
+					        		
 					        		}},
 					        		{"data": "play" },
 					        ],
@@ -460,6 +469,24 @@
 					    		tr.addClass('shown info');
 					    	}
 					    });
+						
+						$('.capitalBtn').click(function() {
+							var lotteryId = $('.sorting_1',$(this).parent().parent()).text();
+							//alert('haha123');
+							$.ajax({
+								url:"<c:url value='/updateWin' />",
+								type:'get',
+								data:{
+									'model.id':lotteryId
+								},
+								success:function(data) {
+									if(data == 'success') {
+										$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
+										$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+									}
+								}
+							})
+						});
 						
 					//});//ajaxStop	
 				}//success
