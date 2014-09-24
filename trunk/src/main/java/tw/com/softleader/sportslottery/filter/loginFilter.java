@@ -57,11 +57,18 @@ public class loginFilter implements Filter {
 			
 			if(checkLogin(req)) {
 				System.out.println(loginToken);
-				if(loginToken == null || loginToken.getUserState().isEmpty() || !loginToken.getUserState().equals("0")) {
-					req.setAttribute("locking", "true");
-					req.getRequestDispatcher("/index.jsp").forward(req, resp);
+				if (loginToken != null) {
+					if (loginToken.getUserState() == null
+							|| loginToken.getUserState().isEmpty()
+							|| !loginToken.getUserState().equals("0")) {
+						req.setAttribute("locking", "true");
+						req.getRequestDispatcher("/index.jsp").forward(req,
+								resp);
+					} else {
+						chain.doFilter(request, response);
+					}
 				}else {
-					chain.doFilter(request, response);
+					throw new ServletException("出現意外事件");
 				}
 			} else {				//  需要登入，尚未登入
 				HttpSession session = req.getSession();

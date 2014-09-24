@@ -122,6 +122,7 @@
 
 <script>
 	(function($) {
+		$(window).off('resize');
 		$('#timeBegin').datetimepicker({
 			format: 'Y-m-d',
 			onShow:function( ct ){

@@ -931,7 +931,7 @@ $('#closeLotteryPanel').on("click",function(){
 	<c:if test="${not empty locking}">locking()</c:if>
 	function locking(){
 		//setTimeout("$('#goVerify').trigger('click')" ,10);
-		$('#goVerify').trigger('click')
+		$('#goVerify').trigger('click');
     };
 //投注區更新結束
 </script>
