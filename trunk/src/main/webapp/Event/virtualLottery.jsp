@@ -347,7 +347,7 @@
    } 
    
    $('#back').on('click',function(){
-	   document.location.href='<c:url value="/index.jsp"/>';
+	   document.location.href='<c:url value="/goIndex"/>';
    })
 })(jQuery);
 

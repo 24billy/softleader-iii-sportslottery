@@ -109,9 +109,9 @@
 	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li class="dropdown">
-		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd">${user.coins} </span> 
-							</a>
+			            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd">${user.coins} </span> 
+								</a>
 		            	</li>
 						<li class="dropdown">
 							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
@@ -121,10 +121,12 @@
 							</ul>
 						</li>
 						<li class="dropdown">
+						<!--  系統訊息區
 			            	<a href="/index.jsp"class="dropdown-toggle" data-toggle="dropdown">
 			                	<span class="badge pull-right">42</span>
 		   				 		<span class="glyphicon glyphicon-envelope"></span>
 			                </a>
+			            -->
 			               	<ul class="dropdown-menu">
 			               		<li>系統訊息</li>
 				                <li class="divider"></li>
@@ -398,7 +400,12 @@
 	$('.coins').off('click');
 	$('.coins').on('click',function() {
 		console.log('coins...');
-		$("#target").load('<c:url value="/Security/coins.jsp"/>');
+		<c:if test="${user.userState=='0'}">
+			$("#target").load('<c:url value="/Security/coins.jsp"/>');
+		</c:if>
+		<c:if test="${user.userState!='0'}">
+			$('#goVerify').trigger('click');
+	</c:if>
 	});
 
 	$('#myModal').keyup(function() {

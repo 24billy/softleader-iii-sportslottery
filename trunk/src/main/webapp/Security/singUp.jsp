@@ -854,14 +854,8 @@ function next(obj,n,next) {
 						success : function(data) {
 							console.log(data);
 							if (data == "success") {
-								$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
-								$('#step2').removeClass("activestep");
-								$('#step3').addClass("activestep");
 								$('#page2').hide();
-								$('#page3').fadeIn(500);
-								$(".progress-bar").css("width", "92.9%").attr(
-										"aria-valuenow", 90);
-								$(".progress-completed").text(90 + "%");
+								document.location.href="<c:url value='/lottery'/>";
 							}else {
 								//
 							}
