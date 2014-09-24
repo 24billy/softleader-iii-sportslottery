@@ -273,7 +273,8 @@
      </action>
     <!-- lottery真實投注 -->
 	<action name="lottery" class="lotteryAction" method="lottery">
-        <result name="success" >/Event/lottery.jsp</result>
+        <result name="success">/Event/lottery.jsp</result>
+        <result name="error" >/</result>
 	</action>
     <!-- lottery虛擬投注 -->
     <action name="virtualLottery" class="lotteryAction" method="virtualLottery">
