@@ -303,29 +303,34 @@
     	$('#myModal').modal('show');
     }
 	
-	$('#forgetPass').click(function() {
+	$('#forgetPass').off('click');
+	$('#forgetPass').on('click',function() {
 		$('#close2').click();
 		//$('#myModal').modal('hide');
 		$('#myModal2').modal('show');
 		setTimeout("$('#forgetAccount').focus()" ,500);
 	});
 	
-	$('#toLogin').click(function() {
+	$('#toLogin').off('click');
+	$('#toLogin').on('click',function() {
 		$(window).off('resize');
 		$('#loginError').html('');
 		setTimeout('$("#loginAccount").focus()' ,200);
 		
 	});
 			
-	$('#goUser').click(function() {
+	$('#goUser').off('click');
+	$('#goUser').on('click',function() {
 		$("#target").load('<c:url value="/MustBeUser/memberInfo.jsp"/>');
 	});
 	
-	$('#regist').click(function() {
+	$('#regist').off('click');
+	$('#regist').on('click',function() {
 		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
 	});
 			
-	$('#login').click(function() {
+	$('#login').off('click');
+	$('#login').on('click',function() {
 		
 		$.ajax({
 	   		url:"<c:url value='/checkLogin'/>",
@@ -366,7 +371,8 @@
 		}
 	});//ajax
 	$(document).ajaxStop(function() {
-		$('.allOdds').click(function() {
+		$('.allOdds').off('click');
+		$('.allOdds').on('click',function() {
 			console.log('all check');
 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		});
@@ -380,8 +386,8 @@
 	};
 	fadeOut();
 	*/
-	
-	$('.coins').click(function() {
+	$('.coins').off('click');
+	$('.coins').on('click',function() {
 		console.log('coins...');
 		$("#target").load('<c:url value="/Security/coins.jsp"/>');
 	});
@@ -403,7 +409,8 @@
 	});
 	
 	//忘記密碼
-	$('#forgetSumbit').click(function() {
+	$('#forgetSumbit').off('click');
+	$('#forgetSumbit').on('click',function() {
 		$('.forgetPass').empty();
 		if($('#forgetAccount').val()!='' && $('#forgetEmail').val()!=''){
 			$.ajax({
@@ -448,20 +455,31 @@
 })(jQuery); 
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
-    	  $('.simple-menu').sidr();
+	$(document).off('ready');
+    $(document).on('ready', function(){
+    	$('.simple-menu').sidr();
     });
-
-  	$('.game').click(function() {		  		
+    $('.game').off('click');
+  	$('.game').on('click',function() {		  		
   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
  	});
-	$('.history').click(function() {
+  	$('.history').off('click');
+	$('.history').on('click',function() {
 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
-	$('.user').click(function() {
-		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+	$('.user').off('click');
+	$('.user').on('click',function() {
+		<c:if test="${user.userState!='0'}">
+			hasLocking = true;
+		</c:if>
+		if(hasLocking){
+			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+		}else{
+			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+		}
 	});
-	$('.lotteryBoard').click(function() {
+	$('.lotteryBoard').off('click');
+	$('.lotteryBoard').on('click',function() {
 		odds_refresh();
 	});
 </script>
