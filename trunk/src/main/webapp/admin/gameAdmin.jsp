@@ -747,10 +747,10 @@
 					'model.gameScoreHome':$('#gameScoreHome').val()
 				},
 				success: function(data) {
-					window.location.reload(true);
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnStatus
 		
@@ -807,7 +807,6 @@
 						    	'model.count':0,
 							},
 							success: function(data) {
-								window.location.reload(true);
 							},
 							async: false
 						});
@@ -815,6 +814,7 @@
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnMerge
 		
@@ -832,10 +832,10 @@
 					'model.id':$(this).val()
 				},
 				success: function(data) {
-					window.location.reload(true);
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnDelete
 		
@@ -853,10 +853,10 @@
 					'model.id':$(this).val()
 				},
 				success: function(data) {
-					window.location.reload(true);
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnPayout
 		
@@ -867,10 +867,10 @@
 				type: 'post',
 				dataType: 'json',
 				success: function(data) {
-					window.location.reload(true);
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnPayoutToday
 		
@@ -888,10 +888,10 @@
 					'model.id':$(this).val()
 				},
 				success: function() {
-					window.location.reload(true);
 				},
 				async: false
 			});
+			window.location.reload(true);
 		});
 		//End of btnOpen
 		
