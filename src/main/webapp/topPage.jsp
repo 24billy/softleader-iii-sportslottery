@@ -321,14 +321,7 @@
 			
 	$('#goUser').off('click');
 	$('#goUser').on('click',function() {
-		<c:if test="${user.userState!='0'}">
-			hasLocking = true;
-		</c:if>
-		if(hasLocking){
-			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
-		}else{
-			$("#target").load('<c:url value="/MustBeUser/memberInfo.jsp"/>');
-		}
+		$("#target").load('<c:url value="/MustBeUser/memberInfo.jsp"/>');
 	});
 	
 	$('#regist').off('click');
