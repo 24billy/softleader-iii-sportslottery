@@ -15,18 +15,18 @@ public class AdminAction extends ActionSupport {
 	@Autowired
 	private GameService gameService;
 	private Locale locale = ActionContext.getContext().getLocale();
-	private Long gameNum;
+	private Long maxGameNum;
 	
 	public Locale getLocale() {
 		return locale;
 	}
 	
-	public Long getGameNum() {
-		return gameNum;
+	public Long getMaxGameNum() {
+		return maxGameNum;
 	}
-
+	
 	public String execute() {
-		gameNum = gameService.maxGameNum();
+		maxGameNum = gameService.maxGameNum();
 		return Action.SUCCESS;
 	}
 }
