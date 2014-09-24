@@ -7,7 +7,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="hidden-xs navbar-brand" href="<c:url value="/admin"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left5">Sports Lottery Admin</span></a>
+			<a class="hidden-xs navbar-brand" href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left5">Sports Lottery Admin</span></a>
 		</div>
 		<!-- .navbar-header -->
 		

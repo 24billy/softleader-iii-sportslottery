@@ -501,7 +501,7 @@
 			}
 		}, 'json');
 		//End of gameForm
-		
+		alert('${maxGameNum}');
 		//Begin of btnGame
 		$('#btnGame').click(function() {
 			if ($('[name="model.gameTime"]').val().search(/[0-9]/) == -1) {
