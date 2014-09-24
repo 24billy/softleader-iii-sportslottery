@@ -929,6 +929,7 @@ $('#closeLotteryPanel').on("click",function(){
 //-----------------------------------------------------
 
 	<c:if test="${not empty locking}">locking()</c:if>
+	<c:if test="${not empty locking}">hasLocking = true</c:if>
 	function locking(){
 		//setTimeout("$('#goVerify').trigger('click')" ,10);
 		$('#goVerify').trigger('click');
