@@ -11,9 +11,7 @@
 <title><s:text name="admin.gameAdmin"/></title>
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
-<!-- <link rel="stylesheet" href="<c:url value="/css/metro-bootstrap.min.css"/>"> -->
 <link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
@@ -71,20 +69,22 @@
 			            <!-- Begin of gameTable -->    
 						<div class="row top20 container-table">
 							<div class="col-sm-12">
-								<table id="gameTable" class="table table-hover table-condensed order-column compact nowrap">
-									<thead>
-										<tr>
-											<th><s:text name="admin.game.gameNum"/></th>
-											<th><s:text name="admin.game.gameTime"/></th>
-											<th><s:text name="admin.game.teamAway"/></th>
-											<th><s:text name="admin.game.teamHome"/></th>
-											<th><s:text name="admin.game.gameStatus"/></th>
-											<th><s:text name="admin.btn.action"/></th>
-										</tr>
-									</thead>
-									<tbody id="gameList">
-									</tbody>
-								</table>
+								<div class="table-responsive">
+									<table id="gameTable" class="compact hover order-column row-border">
+										<thead>
+											<tr>
+												<th><s:text name="admin.game.gameNum"/></th>
+												<th><s:text name="admin.game.gameTime"/></th>
+												<th><s:text name="admin.game.teamAway"/></th>
+												<th><s:text name="admin.game.teamHome"/></th>
+												<th><s:text name="admin.game.gameStatus"/></th>
+												<th><s:text name="admin.btn.action"/></th>
+											</tr>
+										</thead>
+										<tbody id="gameList">
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 						<!-- .row -->
@@ -482,7 +482,6 @@
 <script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
 <script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
 <script src="<c:url value="/js/highcharts.js"/>"></script>
@@ -956,15 +955,7 @@
 				
 		if (zh) {
 			$('#gameTable').dataTable({
-				'responsive': false,
-				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
-				'columns': [{'width': '10%'},
-				            {'width': '25%'},
-				            {'width': '20%'},
-				            {'width': '20%'},
-				            {'width': '10%'},
-				            {'width': '15%'}],
 				'oLanguage': {
 					'sProcessing': '處理中...',
 					'sLengthMenu': '顯示 _MENU_ 項結果',
@@ -985,15 +976,7 @@
 			});
 		} else {
 			$('#gameTable').dataTable({
-				'responsive': false,
-				'autoWidth': false,
 				'order': [[ 0, 'desc' ]],
-				'columns': [{'width': '10%'},
-				            {'width': '25%'},
-				            {'width': '20%'},
-				            {'width': '20%'},
-				            {'width': '10%'},
-				            {'width': '15%'}]
 			});
 		}
 		
