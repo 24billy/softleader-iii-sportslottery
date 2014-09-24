@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import tw.com.softleader.sportslottery.setting.service.AdminLogService;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminLogAction extends ActionSupport {
@@ -26,6 +28,11 @@ public class AdminLogAction extends ActionSupport {
 	private AdminLogEntity model;
 	private String json;
 	private InputStream inputStream;
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	public String getJson() {
 		return json;

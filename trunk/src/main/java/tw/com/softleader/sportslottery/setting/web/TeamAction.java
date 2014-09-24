@@ -39,6 +39,10 @@ public class TeamAction extends ActionSupport {
 	
 	private Locale locale = ActionContext.getContext().getLocale();
 	
+	public Locale getLocale() {
+		return locale;
+	}
+	
 	public String getLeagueName() {
 		return leagueName;
 	}
@@ -62,10 +66,6 @@ public class TeamAction extends ActionSupport {
 	
 	public InputStream getInputStream() {
 		return inputStream;
-	}
-	
-	public Locale getLocale() {
-		return locale;
 	}
 	
 	@Override

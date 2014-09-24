@@ -1,9 +1,8 @@
 package tw.com.softleader.sportslottery.setting.web;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import tw.com.softleader.sportslottery.setting.service.GameService;
 import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class StatisticAction extends ActionSupport{
@@ -22,6 +22,12 @@ public class StatisticAction extends ActionSupport{
 	private InputStream inputStream;
 	private String json;
 	private int size;
+	
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
 	
 
 	public int getSize() {

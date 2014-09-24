@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -55,6 +56,12 @@ public class UserAction extends ActionSupport {
 	private String cardAccount;
 	private Long coins;		//把值送進coins讓使用者coins更新
 	private String lockCharacter;
+	
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	public String getLockCharacter() {
 		return lockCharacter;

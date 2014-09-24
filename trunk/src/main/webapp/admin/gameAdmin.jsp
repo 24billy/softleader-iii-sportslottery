@@ -565,7 +565,6 @@
 				}
 			});
 			$('#ballType').append(child);
-			;
 		}, 'json');
 		//End of listBallType
 		

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import tw.com.softleader.sportslottery.setting.service.OddsService;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -43,6 +45,12 @@ public class OddsAction extends ActionSupport {
     
     private String json;
 	
+    private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
+    
 	public String getJson() {
 		return json;
 	}

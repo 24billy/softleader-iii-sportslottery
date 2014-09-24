@@ -1,6 +1,7 @@
 package tw.com.softleader.sportslottery.setting.web;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import tw.com.softleader.sportslottery.setting.entity.ReportEntity;
 import tw.com.softleader.sportslottery.setting.service.ReportService;
 
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ReportAction extends ActionSupport {
@@ -20,6 +22,12 @@ public class ReportAction extends ActionSupport {
 	private ReportService service;
 	private ReportEntity model;
 	private List<ReportEntity> models;
+	
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	public ReportEntity getModel() {
 		return model;

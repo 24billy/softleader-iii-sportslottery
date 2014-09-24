@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.joda.time.LocalDate;
@@ -28,6 +29,7 @@ import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 
@@ -76,6 +78,12 @@ public class GameAction extends ActionSupport {
 	private List<Map<String, CountBean>> listMap;
 	private String linkGameTime;
 	
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
+
 	public String getLinkGameTime() {
 		return linkGameTime;
 	}

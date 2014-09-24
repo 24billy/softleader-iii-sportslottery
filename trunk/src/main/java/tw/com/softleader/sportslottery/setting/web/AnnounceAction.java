@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import tw.com.softleader.sportslottery.setting.service.AnnounceService;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AnnounceAction extends ActionSupport {
@@ -27,6 +29,11 @@ public class AnnounceAction extends ActionSupport {
 	private AnnounceEntity model;
 	private String json;
 	private InputStream inputStream;
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	public String getJson() {
 		return json;
