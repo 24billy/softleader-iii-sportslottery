@@ -265,6 +265,7 @@
                                     name="oddsIdList.oddId8" value="">
                                 <input type="text" name="model.com1"
                                     value="1">
+                                <input type="text" name="lotteryToken" value="" hidden>
                             </div>
                             <div>
                                 <button class="lottery btn btn-danger btn-xs checkOdds"
@@ -356,6 +357,7 @@
                                     name="oddsIdList.oddId8" value="">
                                 <input type="text" name="model.com0"
                                     value="1">
+                                <input type="text" name="lotteryToken" value="" hidden>
                             </div>
                             <div>
                                 <button class="lottery btn btn-danger btn-xs"
@@ -530,6 +532,7 @@
                                     name="oddsIdList.oddId7" value="">
                                 <input type="text" class="oddId8"
                                     name="oddsIdList.oddId8" value="">
+                                <input type="text" name="lotteryToken" value="" hidden>
                             </div>
                             <div>
                                 <button class="lottery btn btn-danger btn-xs">投注</button>     
@@ -569,6 +572,10 @@
 
 
 <script>
+//建立本次token
+$('input[name="lotteryToken"]').val(getUuid());
+console.log('本次Token=' + $('input[name="lotteryToken"]').val());
+
 //判斷錢夠不夠
 <c:if test="${not empty errorMsg}">callErrorModal()</c:if>
 function callErrorModal(){
