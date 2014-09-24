@@ -692,6 +692,7 @@ function sortGameTag(){
 		$('#game_list').jSort({
 			item: 'div.gametag',
 			sort_by: 'div.time',
+			order: 'desc'
 		});
 	} else if($('input:checked').val() == 'type') {
 		$('#game_list').jSort({
