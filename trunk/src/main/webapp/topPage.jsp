@@ -109,9 +109,9 @@
 	            <c:if test="${ not empty user }">
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li class="dropdown">
-			            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-usd">${user.coins} </span> 
-								</a>
+		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-usd" id="userCoins">${user.coins} </span> 
+							</a>
 		            	</li>
 						<li class="dropdown">
 							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
@@ -151,7 +151,7 @@
 		                                   	<div class="col-sm-4">
 		                                   		<p class="text-left"><strong>${user.userName}</strong></p>
 		                                   		<c:if test="${user.userState!='0'}">
-		                                   			<a id="goVerify" href="#"><p style="color:red"><strong>未認證</strong></p><a>        
+ 		                                   			<a id="goVerify" href="#"><p style="color:red"><strong>未認證</strong></p><a>         
 		                                   		</c:if>
 		                                   	</div>          
 		                                   	<div class="col-sm-8">
@@ -238,7 +238,7 @@
 					<form method="post" action="" name="login_form">
 						<p>
 							<input type="text" class="span3" name="model.userAccount" id="loginAccount"
-								placeholder="Account">
+								placeholder="Account" autofocus>
 						</p>
 						<p>
 							<input type="password" class="span3" name="userPassword" id="loginPassword"

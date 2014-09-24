@@ -219,6 +219,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    session.put("lotteryToken", lotteryToken);
 	    if (lastToken != null && lastToken.equals(lotteryToken)) {
 	    	log.debug("使用者重複送出請求!");
+	    	errorMsg = "按重新整理也沒用!!";
 	    	return ERROR;
 	    }
 	    
@@ -405,6 +406,35 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		log.debug("userOdds...");
 		
 		return SUCCESS;
+	}
+	
+	public String updateWin() {
+		log.debug("----------------"+model.getId());
+		String message;
+		Map session = ActionContext.getContext().getSession();
+		UserEntity user = (UserEntity)session.get("user");
+	    model = service.getById(model.getId());
+		Long status = model.getLotteryStatus();
+		try {
+			if(status==0) {
+				user.setCoins(user.getCoins() + model.getWin());
+				userService.update(user);
+				model.setLotteryStatus(1l);
+				service.update(model);
+				message = SUCCESS;
+				log.debug("獎金更新成功");
+			} else {
+				log.debug("獎金更新失敗");
+				message = ERROR;
+			}
+		} catch (Exception e) {
+			log.debug("獎金更新異常");
+			message = ERROR;
+			e.printStackTrace();
+		}
+		inputStream = new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8));
+		return "message";
+		
 	}
 //    private void getCombination(int[] source, int number, int begin, int[] tempArray, int index) {  
 //        

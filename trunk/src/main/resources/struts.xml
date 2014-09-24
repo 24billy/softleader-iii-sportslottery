@@ -197,6 +197,13 @@
 			<param name="inputName">inputStream</param>
 		</result>
 	</action>
+	<!-- 使用者本金修改 -->
+	<action name="updateWin" class="lotteryAction" method="updateWin">
+		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action>
 	<!-- 提取使用者資料 -->
 	<action name="userInfo" class="userAction" method="select">
 		<result name="select" type="stream">
@@ -274,7 +281,7 @@
     <!-- lottery真實投注 -->
 	<action name="lottery" class="lotteryAction" method="lottery">
         <result name="success">/Event/lottery.jsp</result>
-        <result name="error" >/</result>
+        <result name="error" >/index.jsp</result>
 	</action>
     <!-- lottery虛擬投注 -->
     <action name="virtualLottery" class="lotteryAction" method="virtualLottery">

@@ -563,7 +563,7 @@
 				<div class="modal-body">
 					<img src="images/success.png">
 					<h4>
-						<span id="forgetSuccess">抱歉 大哥你錢不夠用 請加值虛擬幣</span>
+						<span id="forgetSuccess">${errorMsg}</span>
 					</h4>
 				</div>
 			</div>
@@ -580,9 +580,17 @@ $('input[name="lotteryToken"]').val(getUuid());
 <c:if test="${not empty errorMsg}">callErrorModal()</c:if>
 function callErrorModal(){
 	$('#youAreSoPoor').modal('show');
-	setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,2000);
+	$(document).bind("keypress keydown keyup", function(e) {
+		if(e.which === 116) {
+			return false;
+			}
+			if(e.which === 82 && e.ctrlKey) {
+				return false;
+			}
+		 });
+	
+	setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
 }
-
 var galbalGames;
 var galbalOdds;
 function golbalInsert(games, odds){
