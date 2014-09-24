@@ -430,6 +430,9 @@
 						'model.userAccount':$('#inputAccount').val(),
 						'oldUserPassword':$('#inputOldPass').val(),
 						'userPassword':$('#inputNewPass').val()
+					}, 
+					beforeSend: function() {
+						
 					},
 					success:function(result){
 						console.log('接收到資料');

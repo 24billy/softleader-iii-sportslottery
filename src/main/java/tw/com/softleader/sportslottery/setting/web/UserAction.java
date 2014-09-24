@@ -503,8 +503,7 @@ public class UserAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map session = ActionContext.getContext().getSession();
 		UserEntity userEntity = (UserEntity) session.get("user");
-		
-		log.debug("updateUserPassword()");
+		//log.debug("updateUserPassword()");
 		model.setModifier("Guest");
 		model.setModifiedTime(LocalDateTime.now());
 		
@@ -519,9 +518,8 @@ public class UserAction extends ActionSupport {
 					model = service.encoding(model);
 					if (userEntity != null && Arrays.equals(userEntity.getUserPassword(), model.getUserPassword())) {
 						userEntity.setUserPassword(userPassword.getBytes());
-						log.debug("密碼驗證成功 可修改密碼");
 						service.update(userEntity);
-						log.debug("!!修改成功!!");
+						service.updateUserPasswordMail(userEntity);
 						inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
 					} else {
 						log.debug("密碼不符合");
