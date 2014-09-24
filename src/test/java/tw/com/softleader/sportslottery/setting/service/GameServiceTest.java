@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 public class GameServiceTest extends BaseTest  {
@@ -193,15 +195,18 @@ public class GameServiceTest extends BaseTest  {
 //		
 //	}
 	
+
 	@Test
-	public void testGetAllCountHistoryByTime(){
-		LocalDate date1 = new LocalDate();
-		date1 = LocalDate.parse("2014-09-17");//將時間自串轉成 LocalDate
-		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTime(date1);
-		log.debug("getAllCountHistoryByTime ={}",listMap );
-		System.out.println("size of map:"+listMap.size());
-		
-		
+	public void testGetGameByLocalDateTime(){
+		String gameTimeStr="2014-09-16T08:55";
+		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
+		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
+		List<GameEntity> games = gameService.getGameByLocalDateTime(gameTime);
+//		log.debug("testFindByLocalDateTime = {}", games);
+		for(GameEntity game:games){
+			System.out.println(game);
+		}
+		System.out.println("size of games = "+ games.size());
 	}
 
 }
