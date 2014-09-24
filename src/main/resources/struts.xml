@@ -337,13 +337,6 @@
   	<action name="statistic" class ="statisticAction" method="countAllHistoryByTeam">
   		<result name="countAllHistoryByTeam">/History/statisticResult.jsp</result>
   	</action>
-  
-  	<action name="admin">
-		<result type="redirect">
-			<param name="location">home</param>
-			<param name="namespace">admin</param>
-		</result>
-	</action>
   	
   </package>
 </struts>
