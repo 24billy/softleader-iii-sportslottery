@@ -27,6 +27,7 @@ public class AdminAction extends ActionSupport {
 	
 	public String execute() {
 		maxGameNum = gameService.maxGameNum();
+		System.out.println(maxGameNum);
 		return Action.SUCCESS;
 	}
 }
