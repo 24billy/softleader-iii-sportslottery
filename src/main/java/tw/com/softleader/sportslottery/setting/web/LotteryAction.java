@@ -1,25 +1,44 @@
 package tw.com.softleader.sportslottery.setting.web;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.apache.struts2.*;
-import org.apache.struts2.interceptor.*;
-import org.joda.time.*;
-import org.slf4j.*;
-import org.springframework.beans.factory.annotation.*;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import tw.com.softleader.sportslottery.setting.entity.*;
-import tw.com.softleader.sportslottery.setting.service.*;
-import tw.com.softleader.sportslottery.setting.util.*;
+import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.UserEntity;
+import tw.com.softleader.sportslottery.setting.service.GameService;
+import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
+import tw.com.softleader.sportslottery.setting.service.LotteryService;
+import tw.com.softleader.sportslottery.setting.service.OddsService;
+import tw.com.softleader.sportslottery.setting.service.UserService;
+import tw.com.softleader.sportslottery.setting.util.OddsIdList;
 
-import com.google.gson.*;
-import com.opensymphony.xwork2.*;
+import com.google.gson.Gson;
+import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 /**
 @Author:Billy 
  */
@@ -49,6 +68,13 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private OddsIdList oddsIdList;
 	private LocalDate timeFrom, timeTo;
 	private Long winOpen;
+	
+	private Locale locale = ActionContext.getContext().getLocale();
+	
+	public Locale getLocale() {
+		return locale;
+	}
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		log.debug("get Session...");

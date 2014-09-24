@@ -166,16 +166,20 @@
 																	<div class="row">
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
-																				<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+																				<label for="ballType"><s:text name="admin.team.ballType"/></label>
+																				<select class="form-control input-sm" id="ballType" name="model.ballType">
+																					
 																				</select>
 																			</div>
 																		</div>
 																		
 																		<div class="col-sm-12">
 																			<div class="form-group">
-																				<label for=""><s:text name="admin.game.gameNum"/></label>
-																				<input class="form-control input-sm" type="text" id="gameNum" name="model.gameNum" readonly>
+																				<div class="form-group">
+																					<label for="leagueName"><s:text name="admin.team.leagueName"/></label>
+																					<select class="form-control input-sm" id="leagueName" name="model.leagueName">
+																					</select>
+																				</div>
 																			</div>
 																		</div>
 																		
@@ -448,45 +452,55 @@
 		});
 		//End of teamListChangeEvent
 		
-		//Begin of listLeague
-		$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>', function(data) {
-			$.each(data, function(index, leagueName) {
-				var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-				$('#leagueName').append(str);
+		//Begin of gameForm
+		$.post('<c:url value="/admin/teamAdmin?method:getBallTypes"/>', function(data) {
+			var child = '';
+			$.each(data, function(index, ballType) {
+				switch(ballType) {
+					case 'Baseball': child += '<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>'; break;
+					case 'Basketball': child += '<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>'; break;
+					case 'Soccer': child += '<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>'; break;
+				}
 			});
-		}, 'json');
-		//End of listLeague
-		
-		//Begin of listTeam
-		$('#leagueName').change(function() {
-			listTeam();
-		});
-		
-		function listTeam() {
-			$('#teamAwayList,#teamHomeList').empty();
-
-			$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
-				'model.leagueName':$('#leagueName').val()
-			}, function(data) {
-				$.each(data, function(key, value) {
-					var str = "";
-					if (zh) {
-						str = '<option value=' + value.id + '>' + value.teamName + '</option>';
-					} else {
-						str = '<option value=' + value.id + '>' + value.teamNameEn + '</option>';
+			$('#ballType').append(child);
+			$('#ballType')[0].selectedIndex = 0;
+			$('#ballType').change(listLeague);
+			listLeague();
+			function listLeague() {
+				$('#leagueName').empty();
+				$.post('<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',{
+					'model.ballType':$('#ballType').val()
+				}, function(data) {
+					$.each(data, function(index, leagueName) {
+						var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+						$('#leagueName').append(str);
+					});
+					$('#leagueName')[0].selectedIndex = 0;
+					$('#leagueName').change(listTeam);
+					listTeam();
+					
+					function listTeam() {
+						$('#teamAwayList,#teamHomeList').empty();
+						$.post('<c:url value="/admin/teamAdmin?method:select"/>',{
+							'model.leagueName':$('#leagueName').val()
+						}, function(data) {
+							$.each(data, function(key, value) {
+								var teamName = zh? value.teamName:value.teamNameEn;
+								var str = '<option value=' + value.id + '>' + teamName + '</option>';
+								$('#teamAwayList,#teamHomeList').append(str);
+							});
+							
+							$('#teamAwayList')[0].selectedIndex = 0;
+							$('#teamAwayList').change();
+							$('#teamHomeList')[0].selectedIndex = 1;
+							$('#teamHomeList').change();
+							resetInput();
+						}, 'json');
 					}
-					$('#teamAwayList,#teamHomeList').append(str);
-				});
-				
-				$('#teamAwayList')[0].selectedIndex = 0;
-				$('#teamAwayList').change();
-				$('#teamHomeList')[0].selectedIndex = 1;
-				$('#teamHomeList').change();
-			}, 'json');
-		}
-		
-		listTeam();
-		//End of listTeam
+				}, 'json');
+			}
+		}, 'json');
+		//End of gameForm
 		
 		//Begin of btnGame
 		$('#btnGame').click(function() {
@@ -500,13 +514,12 @@
 			}
 			
 			$.post('<c:url value="/admin/gameAdmin?method:insert"/>', {
-				//'model.ballType':$('[name="catagory"]').val(),
-				'model.ballType':'Baseball',
-				'model.leagueName':$('[name="model.leagueName"]').val(),
-				'model.gameNum':$('[name="model.gameNum"]').val(),
-				'model.gameTime':$('[name="model.gameTime"]').val(),
-				'teamAwayId':$('[name="teamAwayId"]').val(),
-				'teamHomeId':$('[name="teamHomeId"]').val(),
+				'model.ballType':$('#ballType').val(),
+				'model.leagueName':$('#leagueName').val(),
+				'model.gameNum':'${maxGameNum + 1}',
+				'model.gameTime':$('#gameTime').val(),
+				'teamAwayId':$('#teamAwayList').val(),
+				'teamHomeId':$('#teamHomeList').val(),
 				'model.gameScoreAway':0,
 				'model.gameScoreHome':0
 			}, function(data) {
