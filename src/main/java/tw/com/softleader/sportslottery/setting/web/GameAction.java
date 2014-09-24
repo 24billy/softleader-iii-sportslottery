@@ -554,19 +554,41 @@ public class GameAction extends ActionSupport {
 	public String countAllHistoryByTime(){
 		
 //		System.out.println("linkGameTime......."+ linkGameTime);
-		//linkGameTime.......2014年03月26日 21:06(三)
-		//想要2014-03-26
-		linkGameTime=linkGameTime.substring(0, 4)+"-"+linkGameTime.substring(5,7)+"-"+linkGameTime.substring(8, 10);
-		System.out.println("linkGameTime......."+ linkGameTime);
 		
-		LocalDate date1 = new LocalDate();
-		date1 = LocalDate.parse(linkGameTime);
 		
-		json = new Gson().toJson(service.getAllCountHistoryByTime(date1));//輸入time取得之前的COUNT資訊
+		
+		this.useLocalDate();//使用LocalDate 為輸入時間
+		//this.useLocalDateTime();//使用LocalDateTime 為輸入時間，無法使用因為HIGHCHART取值的問題
+		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-		
 		return "countAllHistoryByTime";
 		//return "countInfoGraph";
+	}
+	
+	public void useLocalDate(){
+		//linkGameTime.......2014年03月26日 21:06(三)
+				//想要2014-03-26
+		linkGameTime=linkGameTime.substring(0, 4)+"-"+linkGameTime.substring(5,7)+"-"+linkGameTime.substring(8, 10);
+		/*		linkGameTime
+					.replace("年", "-")
+					.replace("月", "-")
+					.replace("日", "");*/
+		System.out.println("linkGameTime......."+ linkGameTime);
+		LocalDate date1 = LocalDate.parse(linkGameTime);
+		json = new Gson().toJson(service.getAllCountHistoryByTime(date1));//輸入time取得之前的COUNT資訊
+		
+	}
+	
+	public void useLocalDateTime(){
+		//linkGameTime.......2014年03月26日 21:06(三)
+				//想要2014-03-26T21:06
+		linkGameTime=linkGameTime.substring(0, 4)+"-"+linkGameTime.substring(5,7)+"-"+linkGameTime.substring(8, 10)+"T"+linkGameTime.substring(12, 17);
+		System.out.println("linkGameTime......."+ linkGameTime);
+		LocalDateTime date1 = LocalDateTime.parse(linkGameTime);
+		System.out.println(date1.toString());//2014-09-24T14:08:00.000
+		json = new Gson().toJson(service.getGameByLocalDateTime(date1));//輸入time取得之前的COUNT資訊
+		System.out.println(json);
+
 	}
 	
 	public String successCountAllHistoryByTime() {
