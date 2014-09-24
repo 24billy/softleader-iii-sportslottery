@@ -115,7 +115,7 @@
 					</div>
 					<div class="panel-body">
 						<form id="fixForm" class="form-horizontal" role="form">	
-							<div class="form-group has-feedback">
+							<div class="form-group has-feedback" id="oldPass">
 								<label class="col-sm-2 control-label">舊密碼</label>
 								<div class="col-sm-10">
 									<input id="inputOldPass" type="password" class="form-control editable" placeholder="請輸入舊密碼" name="oldPassword">
@@ -421,6 +421,7 @@
 				$('#alert2').show();
 			} else {
 				$('#alert2').hide();
+				$('#alert3').hide();
 				$.ajax({
 					url: '<c:url value="/updateUserPassword" />',
 					type:'post',
@@ -434,10 +435,14 @@
 						console.log('接收到資料');
 						if(result){
 							//成功
+							$('#oldPass').removeClass('has-error');
+							$('#oldPass .form-control-feedback').removeClass('glyphicon-remove');
 							$('#alert3').html('<strong>密碼修改成功:</strong>往後請使用新密碼登入');
 							$('#alert3').show();
 						} else {
 							//失敗
+							$('#oldPass').addClass('has-error');
+							$('#oldPass .form-control-feedback').addClass('glyphicon-remove');
 							$('#alert2').html('<strong>密碼有誤:</strong>請確認密碼是否正確');
 							$('#alert2').show();
 						}
