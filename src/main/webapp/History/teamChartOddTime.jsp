@@ -15,49 +15,25 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-<script>
+<!-- <script>
 $(document).ready(function(){
 	$('body').hide().fadeIn(1000);
 });
-</script>
+</script> -->
+<style type="text/css">
+#loading {
+	position:absolute;
+	left:30%;
+	top:30%;
+	
+	margin-top:-150px;
+	margin-left:-150px;
+}</style>
 </head>
 <body>
-
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-	
-	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
-	
-	 <div id="tsv" style="display:none"></div>  
-	 <!-- <div id="tsv"></div> -->
-	<br><br>
-<!-- 	<div >
-		<label>購買推薦: <span id="suggestion">t</span> </label>
-		<p>(推薦方式以歷史中最高的過關比為主)</p>
-	</div> -->
-	<br><br>
-<!-- 	<div id="selectInput" >
-		<button type="button" class="button" id="oddType" >以投注類型來看</button>
-		<button type="button" class="button" id="Count" >以購買數來看</button>
-		<button type="button" class="button" id="Count" >以過關比率來看</button>
-		<button type="button" class="button" id="money">以金額來看</button>
-		<button type="button" class="button" id="money">比分統計</button>
-	</div>  -->
-<!-- 	<div id="modalBox" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  		<div class="modal-dialog modal-sm">
-    		<div class="modal-content">
-    			
-    			<div class="modal-body">
-    				<div id="searchMessage">
-    				</div>
-    			</div>
-    		
-    			<div class="modal-footer">
-        			<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-      			</div>
-      			
-    		</div>
- 		</div>
-	</div> -->
+<div id="loading"><img src="<c:url value="/images/10secondsCountDown.gif"/>" />Loading.....  </div>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="tsv" style="display:none"></div>  
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
 $(function () {
@@ -67,8 +43,6 @@ $(function () {
 	$(document).ajaxStop(function() {//確認appendToDiv()先執行完，才執行 mainFunction()
 		mainFunction();
 	});
-	
-	
 	function appendToDiv(){
 		/* test1();  */
 		// test2();  
@@ -126,6 +100,7 @@ $(function () {
  			'linkTeamSearch':'${linkTeamSearch}',
  			'linkGameTime':'${linkGameTime}'
  			},function(data) { //用POST透過countInfoGraph取回的Json型式的值
+ 				loading();//資料顯示之前的圖示
  			//console.log(data);
 			$.each(data, function(key, value) { 
 				var type=value['ATS_A'];
@@ -287,6 +262,15 @@ $(function () {
 				alert(data);
 			}
 		});
+	}
+	//資料顯示出之前的圖示
+	function loading(){
+		$("#loading").ajaxStart(function(){
+			   $(this).show();
+			})
+			.ajaxStop(function(){
+			   $(this).hide();
+			});
 	}
 
 	function mainFunction(){
