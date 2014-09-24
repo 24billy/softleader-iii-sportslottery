@@ -223,14 +223,22 @@
 			resetInput();
 		});
 		$('.btn-edit').click(function() {
+			$('#btnMerge').val($(this).val());
 			$('#announceModalTitle').text('<s:text name="admin.announceAdmin.edit"/>');
-			$.post('<c:url value="/admin/announceAdmin?method:select"/>', {
-				'model.id':$(this).val()
-			}, function(data) {
-				$('#announceTitle').val(data.announceTitle);
-				$('#announceContent').val(data.announceContent);
-				$('#btnMerge').val(data.id);
-			}, 'json');
+			$.ajax({
+				url: '<c:url value="/admin/announceAdmin?method:select"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+					$('#announceTitle').val(data.announceTitle);
+					$('#announceContent').val(data.announceContent);
+					$('#btnMerge').val(data.id);
+				},
+				async: false
+			});
 		});
 		//End of listannounce
 		
@@ -260,16 +268,20 @@
 			if (error > 0) {
 				return;
 			}
-			
-			$.post('<c:url value="/admin/announceAdmin?method:insert"/>',{
-				'model.id':announceId,
-				'model.announceTitle':$('#announceTitle').val(),
-				'model.announceContent':$('#announceContent').val()
+			$.ajax({
+				url: '<c:url value="/admin/announceAdmin?method:insert"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':announceId,
+					'model.announceTitle':$('#announceTitle').val(),
+					'model.announceContent':$('#announceContent').val()
+				},
+				success: function(data) {
+				},
+				async: false
 			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
-			});
+			window.location.reload(true);
 		});
 		//End of btnMerge
 		
@@ -280,13 +292,18 @@
 		});
 		
 		$('#btnDelete').click(function() {
-			$.post('<c:url value="/admin/announceAdmin?method:delete"/>', {
-				'model.id':$(this).val()
+			$.ajax({
+				url: '<c:url value="/admin/announceAdmin?method:delete"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'model.id':$(this).val()
+				},
+				success: function(data) {
+				},
+				async: false
 			});
-			
-			$(document).ajaxStop(function() {
-				window.location.reload(true);
-			});
+			window.location.reload(true);
 		});
 		//End of btnDelete
 		
