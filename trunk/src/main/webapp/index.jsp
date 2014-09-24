@@ -574,7 +574,6 @@
 <script>
 //建立本次token
 $('input[name="lotteryToken"]').val(getUuid());
-console.log('本次Token=' + $('input[name="lotteryToken"]').val());
 
 //判斷錢夠不夠
 <c:if test="${not empty errorMsg}">callErrorModal()</c:if>

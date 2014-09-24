@@ -56,7 +56,8 @@ public class loginFilter implements Filter {
 			boolean isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 			if(checkLogin(req)) {
-				if(loginToken.getUserState().isEmpty() || !loginToken.getUserState().equals("0")) {
+				System.out.println(loginToken);
+				if(loginToken == null || loginToken.getUserState().isEmpty() || !loginToken.getUserState().equals("0")) {
 					req.setAttribute("locking", "true");
 					req.getRequestDispatcher("/index.jsp").forward(req, resp);
 				}else {
@@ -72,9 +73,9 @@ public class loginFilter implements Filter {
 				req.setAttribute("mustBeLogin", "true");
 				System.out.println(req.getRequestURI());
 				if(req.getRequestURI().indexOf("/lottery")>0){
-					req.setAttribute("errorMsg", "請登入後在進行投注!");
+					req.setAttribute("errorMsgLottery", "請登入後在進行投注!");
 				} else if(req.getRequestURI().indexOf("/userOddsSearch")>0){
-					req.setAttribute("errorMsg", "登入後才能觀看使用者投注資訊!");
+					req.setAttribute("errorMsgLottery", "登入後才能觀看使用者投注資訊!");
 				}
 				req.getRequestDispatcher("/index.jsp").forward(req, resp);
 				//resp.sendRedirect(contextPath + "/goIndex");
