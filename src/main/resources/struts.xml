@@ -11,7 +11,7 @@
   <constant name="struts.custom.i18n.resources" value="language" />
   
   <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
-  
+  	<default-action-ref name="home"/>
   	<action name="gameAdmin" class="gameAction" method="admin">
   		<result name="success">/admin/gameAdmin.jsp</result>
   		<result name="message" type="stream">
