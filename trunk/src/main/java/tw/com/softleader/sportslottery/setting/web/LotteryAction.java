@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -69,7 +70,16 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	private LocalDate timeFrom, timeTo;
 	private Long winOpen;
 	private String errorMsg;
+	private String lotteryToken;
 	
+	public String getLotteryToken() {
+		return lotteryToken;
+	}
+
+	public void setLotteryToken(String lotteryToken) {
+		this.lotteryToken = lotteryToken;
+	}
+
 	private Locale locale = ActionContext.getContext().getLocale();
 	
 	public Locale getLocale() {
@@ -192,7 +202,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	}
 
 	public String lottery() throws Exception {
-		
 		//System.out.println("oddsIdList="+oddsIdList);
 		//start insert
 		//測試用：設定UserId為2
@@ -200,7 +209,20 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    //從session中取出userId
 	    Map session = ActionContext.getContext().getSession();
 	        UserEntity user = (UserEntity)session.get("user");
-	        
+	    
+	    String lastToken = null;
+		try {
+			lastToken = (String)session.get("lotteryToken");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    session.put("lotteryToken", lotteryToken);
+	    if (lastToken != null && lastToken.equals(lotteryToken)) {
+	    	log.debug("使用者重複送出請求!");
+	    	return ERROR;
+	    }
+	    
+	    
 	    model.setUserId(user.getId());  
 	    model.setConfirmTime(new LocalDateTime());  
 	    model=service.insert(model);
