@@ -46,7 +46,7 @@ public class UserEntity extends GenericEntity {
 	@Column(name="USER_EMAIL", length=50, nullable=false, unique=true)
 	private String userEmail;
 	//電話
-	@Column(name="USER_PHONE", length=10)
+	@Column(name="USER_PHONE", length=15)
 	private String userPhone;
 	//驗證狀態
 	@Column(name="USER_STATE", length=10)

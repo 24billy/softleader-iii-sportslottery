@@ -222,13 +222,24 @@ public class UserAction extends ActionSupport {
 					if(model.getUserName()==null ||
 							!model.getUserName().matches("^[\\u4E00-\\u9FA5]+$")) {
 						addFieldError("name",this.getText("invalid.fieldvalue.name"));
-						log.debug("姓名只能輸入中文");
+						log.debug("姓名只能輸入中文" + model.getUserName());
 					}
 					if(model.getUserCardId()!=null && isValidTWPID(model.getUserCardId())) {
 						this.checkUserCardId();
 					}else {
 						this.addFieldError("userCardId", this.getText("invalid.fieldvalue.cardid"));
 						log.debug("身分證不符");
+					}
+					if(model.getUserPhone()!=null && model.getUserPhone().length()<14) {
+						try {
+							Double userBank = Double.parseDouble(model.getUserPhone());
+						} catch (NumberFormatException e) {
+							this.addFieldError("phone", this.getText("invalid.fieldvalue.bank"));
+							log.debug("電話不是數字");
+						}
+					}else {
+						this.addFieldError("phone", this.getText("invalid.fieldvalue.phone"));
+						log.debug("電話格式不對");
 					}
 					if(model.getUserBankAccount()!=null && model.getUserBankAccount().replaceAll("-", "").length()==14 &&
 							!model.getUserBankAccount().matches(".*[eE].*")) {
@@ -237,11 +248,11 @@ public class UserAction extends ActionSupport {
 							Double userBank = Double.parseDouble(temp);
 						} catch (NumberFormatException e) {
 							this.addFieldError("userBankAccount", this.getText("invalid.fieldvalue.bank"));
-							log.debug("營行帳不是數字");
+							log.debug("銀行帳不是數字");
 						}
 					}else {
 						this.addFieldError("userBankAccount", this.getText("invalid.fieldvalue.bank"));
-						log.debug("營行帳格式不符" + model.getUserBankAccount());
+						log.debug("銀行帳格式不符" + model.getUserBankAccount());
 					}
 					break;
 				case 2 : 
