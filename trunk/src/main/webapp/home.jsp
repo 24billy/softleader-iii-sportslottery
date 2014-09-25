@@ -59,7 +59,7 @@
 	
 	<c:if test="${ !empty user }">
 		<form id="form2" class="form-inline" action="<c:url value="/Security/Result/logout.jsp"/>" >	
-				<button type="sumit" class="btn btn-info">登出</button>
+				<button type="submit" class="btn btn-info">登出</button>
 		</form>
 		<a href="<c:url value='/goDeposit'/>">金額:${user.coins}</a>
 		<button id="update" class="btn btn-info">修改資料</button>
