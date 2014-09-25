@@ -294,7 +294,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public String virtualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
         System.out.println("去吧，虛擬投注!!");
 
-        model.setConfirmTime(new LocalDateTime());  
+        model.setConfirmTime(new LocalDateTime());
         model.setWin(-1L);
 
         
@@ -413,14 +413,19 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		String message;
 		Map session = ActionContext.getContext().getSession();
 		UserEntity user = (UserEntity)session.get("user");
-	    model = service.getById(model.getId());
-		Long status = model.getLotteryStatus();
+		log.debug("{}",model.getId());
+	    LotteryEntity entity = service.getById(model.getId());
+	    log.debug("dsfasdf"+entity);
+		Long status = entity.getLotteryStatus();
 		try {
 			if(status==0) {
-				user.setCoins(user.getCoins() + model.getWin());
+				user.setCoins(user.getCoins() + entity.getWin());
 				userService.update(user);
-				model.setLotteryStatus(1l);
-				service.update(model);
+//				Long win = user.getCoins() + entity.getWin();
+//				log.debug("111111111111111"+win);
+//				userService.updateUserCoin(user.getId(), win);
+				entity.setLotteryStatus(1l);
+				service.update(entity);
 				message = SUCCESS;
 				log.debug("獎金更新成功");
 			} else {

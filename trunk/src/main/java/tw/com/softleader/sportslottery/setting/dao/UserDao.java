@@ -34,6 +34,14 @@ public class UserDao extends GenericDao<UserEntity> {
 		Query query = getSession().createQuery("from UserEntity u where USER_CARD_ID = :userCardId");
 		return (UserEntity) query.setString("userCardId", userCardId).uniqueResult();
 	}
+	
+//	public long updateUserCoin(Long userId, Long coin) {
+//		Query query = getSession().createQuery("update UserEntity set COINS = :coin where ID = :userId");
+//		query.setLong("coin",coin);
+//        query.setLong("userId",userId);
+//        long rowCount = query.executeUpdate();
+//		return rowCount;
+//	}
 
 	
 }
