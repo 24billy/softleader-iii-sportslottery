@@ -945,7 +945,15 @@ $('#closeLotteryPanel').on("click",function(){
 
 $(document).ready(function() {
 	//判定是否有指定導向的頁面
-	switch(sessionStorage.hasLocated) {
+	var hasLocated = sessionStorage.hasLocated ? sessionStorage.hasLocated : "" ;
+	var isLocking;
+	<c:if test="${not empty locking}">
+		isLocking = ${locking};
+	</c:if>	
+	if(isLocking){
+		hasLocated = 'locking';
+	}
+	switch(hasLocated) {
 	case 'game':
 		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
 		break;
@@ -954,6 +962,9 @@ $(document).ready(function() {
 		break;
 	case 'user':
 		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+		break;
+	case 'locking':
+		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
 		break;
 	default:
 		$("#target").load('<c:url value="/Event/test-events.jsp"/>');

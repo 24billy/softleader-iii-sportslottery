@@ -480,14 +480,12 @@
     $('.game').off('click');
   	$('.game').on('click',function() {		
   		sessionStorage.hasLocated = 'game';
-		window.location.href = '<c:url value="/"/>';
-//   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
+		window.location.href = '<c:url value="/"/>'; 		
  	});
   	$('.history').off('click');
 	$('.history').on('click',function() {
 		sessionStorage.hasLocated = 'history';
 		window.location.href = '<c:url value="/"/>';
-// 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
 	$('.user').off('click');
 	$('.user').on('click',function() {
@@ -497,11 +495,11 @@
 			</c:if>	
 		</c:if>
 		if(hasLocking){
- 			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+			sessionStorage.hasLocated = 'locking';
+			window.location.href = '<c:url value="/"/>';
 		}else{
 			sessionStorage.hasLocated = 'user';
 			window.location.href = '<c:url value="/"/>';
-// 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		}
 	});
 	$('.lotteryBoard').off('click');
