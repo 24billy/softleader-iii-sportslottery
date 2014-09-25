@@ -28,18 +28,14 @@
 <script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 
 <!--sidepanel  -->  
-<script type="text/javascript" src="js/jquery.slidepanel.js"></script>
-<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/jquery.slidepanel.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.sidr.light.css">
+<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
+<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 
-<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
 
 
-<link rel="stylesheet" href="<c:url value="/css/jquery.sidr.light.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
