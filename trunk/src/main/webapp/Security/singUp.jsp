@@ -838,7 +838,7 @@ function next(obj,n,next) {
 				function() {
 					$.ajax({
 						url : "<c:url value='/addAccount'/>",
-						type : "get",
+						type : "post",
 						async : false,
 						data : {
 							'model.userAccount' : $('#accountf').val(),
