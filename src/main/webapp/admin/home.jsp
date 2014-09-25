@@ -510,9 +510,9 @@
 				},
 				async: false
 			});
+			$('#leagueName').change();
 		}
 		$('#leagueName').change(listTeam);
-		$('#leagueName').change();
 		//End of listLeague
 		
 		//Begin of listTeam
