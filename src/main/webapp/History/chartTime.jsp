@@ -290,14 +290,15 @@ $(function () {
 
 
 
-<button type="button" class="btn btn-default btn-lg" onclick="goBack()" >
+<button type="button" class="btn btn-default btn-lg" id="goback" >
  		<span class="glyphicon glyphicon-backward"></span> Back
 </button>
 
 <script>
-	 function goBack() {
-	     window.history.back()
-	 }
+	$('#goback').on('click', function(){
+		sessionStorage.hasLocated = 'history';
+		window.location.href = '<c:url value="/"/>';
+	});
 </script>
 
 </body>
