@@ -610,6 +610,7 @@
 					'model.leagueName':$('#leagueName').val()
 				},
 				success: function(data) {
+					console.log(data);
 					$.each(data, function(key, value) {
 						var teamName = zh? value.teamName:value.teamNameEn;
 						var str = '<option value=' + value.id + '>' + teamName + '</option>';
@@ -672,6 +673,7 @@
 					} else {
 						$('#leagueName').val(dataLeagueNameEn);
 					}
+					$('#leagueName').change();
 					if (teamAwayId != null && teamHomeId != null) {
 						$('#teamAwayList').val(teamAwayId);
 						$('#teamAwayList').change();
