@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.com.softleader.sportslottery.common.test.BaseTest;
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.util.CountBean;
 import tw.com.softleader.sportslottery.setting.util.OddCountBean;
 
 public class OddCountServiceTest extends BaseTest {
@@ -66,24 +67,34 @@ public class OddCountServiceTest extends BaseTest {
 //		
 //	}
 	
+//	@Test
+//
+//	public void testGetTotalCountOftheDay(){
+//		LocalDate gameTime =LocalDate.parse("2014-09-10");
+//		Long totalCount =service.getTotalCountOftheDay(gameTime);
+//		System.out.println("total count = "+totalCount );
+//		
+//		Long size = 0L;
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(101L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(102L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(103L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(104L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(105L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(106L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(107L).getTeamHome().getTeamName());
+//		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(108L).getTeamHome().getTeamName());
+//		System.out.println("expected count = "+ size);
+//		assertEquals(size, totalCount);
+//	}
+
 	@Test
-
-	public void testGetTotalCountOftheDay(){
+	public void testgetBeanListByGameDay(){
 		LocalDate gameTime =LocalDate.parse("2014-09-10");
-		Long totalCount =service.getTotalCountOftheDay(gameTime);
-		System.out.println("total count = "+totalCount );
+		List<CountBean> beanList = service.getBeanListByGameDay(gameTime);
+		for(CountBean bean: beanList){
+			System.out.println(bean);
+		}
+		System.out.println("the size of beanList: "+ beanList.size());
 		
-		Long size = 0L;
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(101L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(102L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(103L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(104L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(105L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(106L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(107L).getTeamHome().getTeamName());
-		size +=service.getTotalCountOftheDay(gameTime, gameDao.findByGameNum(108L).getTeamHome().getTeamName());
-		System.out.println("expected count = "+ size);
-		assertEquals(size, totalCount);
 	}
-
 }
