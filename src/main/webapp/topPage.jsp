@@ -97,7 +97,9 @@
             <span class="navbar navbar-toggle" data-toggle="collapse" >
                 <button class="btn btn-hot game">賽事</button>
                 <button class="btn btn-sunny history">歷史</button>
+                <c:if test="${not empty user}">
                 <button class="btn btn-sky user">使用者</button>
+                </c:if>
                 <button class="btn btn-tree lotteryBoard simple-menu">投注</button>
             </span>              
             
@@ -212,13 +214,14 @@
                     <button type="button"
                         class="btn btn-sunny text-uppercase btn-lg history"
                         >歷史紀錄</button>
+                    <c:if test="${not empty user}">
                     <button type="button"
                         class="btn btn-sky text-uppercase btn-lg user"
                         >使用者投注資訊</button>
-                    <button
-                            type="button"
-                            class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu"
-                            >顯示投注區</button>
+                    </c:if>
+                    <button type="button" class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu">
+                                                                 顯示投注區
+                    </button>
                 </div>
             </div>
         </div>        
