@@ -672,7 +672,6 @@
 					} else {
 						$('#leagueName').val(dataLeagueNameEn);
 					}
-					$('#leagueName').change();
 					if (teamAwayId != null && teamHomeId != null) {
 						$('#teamAwayList').val(teamAwayId);
 						$('#teamAwayList').change();
