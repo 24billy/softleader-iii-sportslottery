@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -138,8 +140,13 @@ public class OddCountService {
 				result.add(bean);	
 			}
 		}
-		
-		return result;
+		//依時間排序
+        Collections.sort(result, new Comparator<CountBean>() {
+			@Override
+			public int compare(CountBean o1, CountBean o2) {
+				return o1.getGameTime().compareTo(o2.getGameTime());
+			}
+        });
+        return result;
 	}
-
 }
