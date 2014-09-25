@@ -26,7 +26,7 @@
 	tr.shown td.details-control {
 	    background: url('<c:url value="/Security/images/icon.gif"/>') no-repeat center center;
 	}
-	.winBtn
+	.winBtn,.capitalBtn
 	{
 		display:inline-block;
 		width:50px;
@@ -439,17 +439,17 @@
 					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" >未開獎</button></td>';
 					        			} else {
-					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn" >'+row.win+'</button></td>';
+					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn active" >'+row.win+'</button></td>';
 					        			}
 					        		}},
 					        		{"data": function(row, type, val, meta){
-					        			if(row.win == -1) {
-					        				return '<td><button type="button" class="btn btn-info btn-xs btn-status disabled" >NONE</button></td>';
+					        			if(row.win == -1 || row.win == 0) {
+					        				return '<td><button type="button" class="btn btn-info btn-xs btn-status disabled capitalBtn">NONE</button></td>';
 					        			} else 
 					        				if(row.status == 0) {
 					        					return '<td><button type="button" class="btn btn-warning btn-xs btn-status capitalBtn" >領獎</button></td>';
 					        				} else {
-					        					return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled" >已領獎</button></td>';
+					        					return '<td><button type="button" class="btn btn-success btn-xs btn-status disabled capitalBtn" >已領獎</button></td>';
 					        				}
 					        		
 					        		}},
