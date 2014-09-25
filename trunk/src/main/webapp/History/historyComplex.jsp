@@ -31,7 +31,7 @@
 							<select class="form-control form-ball-type" id="ballType" >
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
-								<option value="Basketball">足球</option>
+								<option value="Soccer">足球</option>
 							</select>
 						</div>
                         <div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >

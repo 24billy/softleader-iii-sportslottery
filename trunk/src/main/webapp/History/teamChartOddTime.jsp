@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
 <!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
 <script src="<c:url value="/js/highcharts.js"/>"></script>
 <script src="http://code.highcharts.com/modules/data.js"></script>
@@ -449,14 +449,15 @@ $(function () {
 
 
 
-<button type="button" class="btn btn-default btn-lg" onclick="goBack()" >
+<button type="button" class="btn btn-default btn-lg" id="goback" >
  		<span class="glyphicon glyphicon-backward"></span> Back
 </button>
 
 <script>
-	 function goBack() {
-	     window.history.back()
-	 }
+	$('#goback').on('click', function(){
+		sessionStorage.hasLocated = 'history';
+		window.location.href = '<c:url value="/"/>';
+	});
 </script>
 
 </body>

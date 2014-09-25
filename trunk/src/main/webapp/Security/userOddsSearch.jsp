@@ -470,7 +470,7 @@
 					    	}
 					    });
 						
-						$('.capitalBtn').click(function() {
+						$('#oddList').on('click', 'button.capitalBtn', function () {
 							var lotteryId = $('.sorting_1',$(this).parent().parent()).text();
 							//alert('haha123');
 							$.ajax({
@@ -481,8 +481,11 @@
 								},
 								success:function(data) {
 									if(data == 'success') {
-										$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
-										$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+										sessionStorage.hasLocated = 'user';
+										window.location.href = '<c:url value="/"/>';
+										
+// 										$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
+// 										$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 									}
 								}
 							})

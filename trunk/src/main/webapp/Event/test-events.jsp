@@ -339,11 +339,6 @@
 			</div>
 		</div>
 	</div>
-
-<script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
-<script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
-
 <script>
 //先行隱藏警告
 $('div.gameList .alert').hide();
