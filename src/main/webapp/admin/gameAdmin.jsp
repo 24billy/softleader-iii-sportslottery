@@ -594,6 +594,7 @@
 				},
 				async: false
 			});
+			$('#leagueName').change();
 		}
 		$('#leagueName').change(listTeam);
 		//End of listLeague
@@ -629,7 +630,6 @@
 		$('#btnAddGame').click(function() {
 			$('#ballType')[0].selectedIndex = 0;
 			$('#ballType').change();
-			$('#leagueName').change();
 			resetInput();
 		});
 		//End of btnAddGame
@@ -666,7 +666,7 @@
 					}
 					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					$('#ballType').val(data.ballType);
-					$('#ballType').change()
+					$('#ballType').change();
 					if (zh) {
 						$('#leagueName').val(dataLeagueName);
 					} else {
