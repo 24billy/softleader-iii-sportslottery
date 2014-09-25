@@ -808,6 +808,7 @@ function next(obj,n,next) {
 						},
 						'model.userPhone' : {
 							number : true,
+							maxlength : 14,
 							input : true
 						},
 						post4 : {
@@ -822,6 +823,7 @@ function next(obj,n,next) {
 								'has-error');
 						$('.form-control-feedback', formGroup).removeClass(
 								'glyphicon-ok').addClass('glyphicon-remove');
+						$('div.errorMsg',formGroup).show();
 					},
 					success : function(element) {
 						console.log("success");
@@ -830,8 +832,9 @@ function next(obj,n,next) {
 								'has-success');
 						$('.form-control-feedback', formGroup).removeClass(
 								'glyphicon-remove').addClass('glyphicon-ok');
-						$('.error', formGroup).css('display','none');
-											  
+						$('.error', formGroup).hide();
+						$('div.errorMsg',formGroup).hide();
+						
 					},
 				});
 		$('#addUserButton').on('click',
