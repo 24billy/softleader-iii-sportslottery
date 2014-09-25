@@ -86,7 +86,7 @@
 
 
 
-<div id="sidr">
+<div id="sidr" hidden="true">
   <!-- lottery content -->
 <!--start lottery panel  -->
         <div class="panel panel-primary">
