@@ -81,7 +81,7 @@
                 
 			<div class="row top20">
 				<div class="col-lg-12">
-					<!-- <div class="table-responsive"> -->
+					<div class="table-responsive">
 						<table id="oddTable" class="table table-hover table-condensed table-bordered table-striped nowrap">
 							<thead>
 								<tr>
@@ -99,7 +99,7 @@
 							<tfoot>
 							</tfoot>   
 						</table>
-					<!-- </div>  -->
+					</div>
 					<!-- .table-responsive -->
 				</div>
 			</div>
