@@ -12,6 +12,7 @@
 			classpath:spring-service.xml
 			classpath:spring-struts.xml
 			classpath:spring-security.xml
+			classpath:spring-schedule.xml
     </param-value>
   </context-param>
   <filter>
