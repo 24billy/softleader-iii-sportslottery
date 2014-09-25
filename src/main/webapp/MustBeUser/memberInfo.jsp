@@ -244,6 +244,7 @@
 								success:function(updateResult){
 									if(updateResult){
 										console.log('修改成功');
+										$('#passConfirm .form-control-feedback').removeClass('glyphicon-remove');
 										editMode(false);
 										getUserInfo();
 									} else {
@@ -367,6 +368,7 @@
 					checkBirth : true
 				},
 				'model.userPhone' : {
+					maxlength : 10,
 					number : true,
 					input : true
 				}
@@ -438,10 +440,9 @@
 						console.log('接收到資料');
 						if(result){
 							//成功
-							$('#oldPass').removeClass('has-error');
-							$('#oldPass .form-control-feedback').removeClass('glyphicon-remove');
+							$('#oldPass').removeClass('has-error').addClass('has-success');
+							$('#oldPass .form-control-feedback').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 							$('#alert3').html('<strong>密碼修改成功:</strong>往後請使用新密碼登入');
-							
 							$('#alert3').show();
 						} else {
 							//失敗
@@ -505,10 +506,8 @@
 			highlight : function(element) {
 				validateFail=1;
 				var formGroup = $(element).closest('.form-group');
-				if(!formGroup.hasClass('has-error')){
-					formGroup.removeClass('has-success');
-					formGroup.addClass('has-error');
-				}
+				formGroup.removeClass('has-success');
+				formGroup.addClass('has-error');
 				$('.form-control-feedback', formGroup).removeClass('glyphicon-ok').addClass('glyphicon-remove');
 				var errorMsg = $('div.errorMsg',formGroup).text();
 				$('input',formGroup).tooltip('destroy');
@@ -522,10 +521,8 @@
 			},
 			success : function(element) {
 				var formGroup = $(element).closest('.form-group');
-				if(!formGroup.hasClass('has-success')){
-					formGroup.removeClass('has-error');
-					formGroup.addClass('has-success');
-				}
+				formGroup.removeClass('has-error');
+				formGroup.addClass('has-success');
 				$('.form-control-feedback', formGroup).removeClass('glyphicon-remove').addClass('glyphicon-ok');
 				$('input',formGroup).tooltip('hide');
 			},
