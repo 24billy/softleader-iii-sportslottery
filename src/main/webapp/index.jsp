@@ -23,7 +23,9 @@
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
 <script src="<c:url value="/js/jquery.jdigiclock.js"/>"></script>
-
+<script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
+<script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
+<script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 
 <!--sidepanel  -->  
 <script type="text/javascript" src="js/jquery.slidepanel.js"></script>
@@ -74,7 +76,7 @@
         <!-- TopPage end --> 
         <!-- content start -->
 	    <div  id="target" style="padding-top:60px;">	
-		  <jsp:include page="/Event/test-events.jsp" />
+<%-- 		  <jsp:include page="/Event/test-events.jsp" /> --%>
 	    </div>
         <!-- content end --> 
     </div>
@@ -945,6 +947,24 @@ $('#closeLotteryPanel').on("click",function(){
     };
 //投注區更新結束
 
+$(document).ready(function() {
+	//判定是否有指定導向的頁面
+	switch(sessionStorage.hasLocated) {
+	case 'game':
+		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
+		break;
+	case 'history':
+		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
+		break;
+	case 'user':
+		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+		break;
+	default:
+		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
+		break;
+	}
+	sessionStorage.hasLocated = "";
+});
 
 </script>
 </body>

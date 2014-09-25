@@ -474,17 +474,20 @@
 })(jQuery); 
 </script>
 <script type="text/javascript">
-	$(document).off('ready');
-    $(document).on('ready', function(){
+    $(window).on('load', function(){
     	$('.simple-menu').sidr();
     });
     $('.game').off('click');
-  	$('.game').on('click',function() {		  		
-  		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
+  	$('.game').on('click',function() {		
+  		sessionStorage.hasLocated = 'game';
+		window.location.href = '<c:url value="/"/>';
+//   		$("#target").load('<c:url value="/Event/test-events.jsp"/>');  		
  	});
   	$('.history').off('click');
 	$('.history').on('click',function() {
-		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
+		sessionStorage.hasLocated = 'history';
+		window.location.href = '<c:url value="/"/>';
+// 		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
 	$('.user').off('click');
 	$('.user').on('click',function() {
@@ -494,15 +497,18 @@
 			</c:if>	
 		</c:if>
 		if(hasLocking){
-			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+ 			$("#target").load('<c:url value="/Security/singUp.jsp"/>');
 		}else{
-			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+			sessionStorage.hasLocated = 'user';
+			window.location.href = '<c:url value="/"/>';
+// 			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		}
 	});
 	$('.lotteryBoard').off('click');
 	$('.lotteryBoard').on('click',function() {
 		odds_refresh();
 	});
+	
 </script>
 
 </body>
