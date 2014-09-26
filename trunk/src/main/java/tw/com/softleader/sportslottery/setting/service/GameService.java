@@ -234,6 +234,8 @@ public class GameService extends GenericService<GameEntity> {
 		
 		return null;
 	}
+
+	
 	
 	//將有最大count percentage的CountBean轉成map加入搜尋結果的List後
 	public List<Map<String, CountBean>> addMaxBeanToCountHistory(String teamName, Long gameId){
@@ -305,6 +307,39 @@ public class GameService extends GenericService<GameEntity> {
 
 			}else{
 				List<GameEntity> games = dao.findForHistory(timeTo.minusMonths(3), timeTo, null);//只取前三個月到輸入時間的資訊
+				List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
+				for(GameEntity game : games){
+					listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
+					return listMap;
+				}
+			}
+			
+
+			
+		} catch (Exception e) {
+			System.out.println("getAllCountHistoryByTime出問題..................................");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<Map<String, CountBean>> getAllCountHistoryByTimePrevious3Days (LocalDate timeTo){
+		try {
+			
+			if(timeTo ==null){
+				List<GameEntity> games = dao.findForHistory(LocalDate.now().minusDays(3), LocalDate.now(), null);//只取前三天到輸入時間的資訊
+				List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
+				for(GameEntity game : games){
+					listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
+				}
+				System.out.println("I am time null..current time is..............................."+LocalDate.now());
+				return listMap;
+
+			}else{
+				List<GameEntity> games = dao.findForHistory(timeTo.minusDays(3), timeTo, null);//只取前3天到輸入時間的資訊
+				System.out.println("timeTo: "+ timeTo);
+				System.out.println("timeTo.minusDays(3): "+ timeTo.minusDays(3));
 				List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
 				for(GameEntity game : games){
 					listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
