@@ -81,9 +81,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
             System.out.println("---------");
             System.out.println("GameStatus="+gameStatus+";GameId="+gameDao.findById(odds.getOddsId().getGameId()).getId());
             System.out.println("oddId="+odds.getOddsId().getId());
-            if(gameStatus!=2){
-                return -1L;
-            }
+            
             
             
             
