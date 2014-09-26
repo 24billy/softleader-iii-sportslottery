@@ -521,11 +521,12 @@ public class GameAction extends ActionSupport {
 	
 	public String countInfoGraph(){
 		try {
-			System.out.println("linkGameNum............................"+ linkGameNum);
-			System.out.println("linkTeamSearch........................."+ linkTeamSearch);
+			//System.out.println("linkGameNum............................"+ linkGameNum);
+			//System.out.println("linkTeamSearch........................."+ linkTeamSearch);
 			Long gameId= service.getGameIdByGameNum(linkGameNum);
 			//輸入gamiId 和teamName取得COUNT資訊
-			listMap= service.getCountInfoHistory(linkTeamSearch, gameId);
+			//listMap= service.getCountInfoHistory(linkTeamSearch, gameId);
+			listMap=service.getCountInfoHistoryPrevious3month(linkTeamSearch, gameId);
 			
 			//附加Max CountBean 於將要傳出的list中，要傳出的list已在addMaxBeanToCountHistory方法裡取出
 //			listMap = service.addMaxBeanToCountHistory(linkTeamSearch, gameId);
