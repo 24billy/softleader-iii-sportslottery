@@ -210,17 +210,37 @@ public class GameServiceTest extends BaseTest  {
 //		System.out.println("size of games = "+ games.size());
 //	}
 	
+//	@Test
+//	public void testGetCountInfoHistoryPrevious3month(){
+//		String teamName= "底特律老虎";
+//		Long gameId =null;
+//		List<Map<String, CountBean>> games=gameService.getCountInfoHistoryPrevious3month(teamName, gameId);
+//		Iterator it= games.iterator();
+//		while(it.hasNext()){
+//			System.out.println(it.next());
+//		}
+//		System.out.println("the size of games: "+games.size());
+//		
+//	}
+	
 	@Test
-	public void testGetCountInfoHistoryPrevious3month(){
-		String teamName= "底特律老虎";
-		Long gameId =null;
-		List<Map<String, CountBean>> games=gameService.getCountInfoHistoryPrevious3month(teamName, gameId);
-		Iterator it= games.iterator();
-		while(it.hasNext()){
-			System.out.println(it.next());
+	public void testGetAllCountHistoryByTimePrevious3Month(){
+		//List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(null);
+		LocalDate date1 = new LocalDate();
+		date1 = LocalDate.parse("2014-09-26");//將時間自串轉成 LocalDate
+		try {
+			List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(date1);
+
+			Iterator it= games.iterator();
+			while(it.hasNext()){
+				System.out.println(it.next());
+			}
+			
+			System.out.println("the size of games: "+ games.size());
+		} catch (Exception e) {
+			System.out.println("game is null in test");
+			e.printStackTrace();
 		}
-		System.out.println("the size of games: "+games.size());
-		
 	}
 
 }
