@@ -58,41 +58,49 @@ $(function () {
 				//console.log(i+' AAAway : '+teamNameAway[i]);
 				//console.log(i+' Home : '+teamNameHome[i]);
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
 
 				var type=value['ATS_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SU_A'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SU_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SC_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SC_L'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['ODD'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['EVEN'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
+				time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
 				
@@ -156,7 +164,7 @@ $(function () {
 	                	
 	                }
 	                
-					console.log(name);
+					//console.log(name);
 	                if (i > 0) {
 
 	                    // Remove special edition notes
@@ -178,8 +186,8 @@ $(function () {
 	                    } else {
 	                        brands[brand] += columns[1][i];
 	                    }
-	                    console.log(j+": "+homeName);
-	                    console.log(j+": "+awayName);
+	                    /* console.log(j+": "+homeName);
+	                    console.log(j+": "+awayName); */
 		
 	                    // Create the version data
 	                    if (version !== null) {
@@ -187,23 +195,23 @@ $(function () {
 	                            versions[brand] = [];
 	                        }
 	                        if(version == 1){
-	                        	versions[brand].push(['主隊不讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊不讓分<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }else if(version == 2){
-	                        	versions[brand].push(['客隊不讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊不讓分<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 3){
-	                        	versions[brand].push(['主隊讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['主隊讓分<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }else if(version == 4){
-	                        	versions[brand].push(['客隊讓分<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['客隊讓分<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        	//console.log(i+' Away : '+awayName);
 	                        }else if(version == 5){
-	                        	versions[brand].push(['高於總和<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['高於總和<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }else if(version == 6){
-	                        	versions[brand].push(['低於總和<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['低於總和<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }else if(version == 7){
-	                        	versions[brand].push(['總分奇數<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['總分奇數<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }else if(version == 8){
-	                        	versions[brand].push(['總分偶數<br>(客隊: '+awayName+')<br>(主隊: '+homeName+')', columns[1][i]]);
+	                        	versions[brand].push(['總分偶數<br>(客)'+awayName+'<br>(主)'+homeName, columns[1][i]]);
 	                        }
 	                       
 	                    }
@@ -240,7 +248,7 @@ $(function () {
 	                    	text: '過關的數目除以當場投注總數, 點擊長柱見投注細節'
 	                	},
 	                	xAxis: {
-	                    	/* type: 'category' */
+	                    	 type: 'category'
 	                	}, 
 	                	yAxis: {
 	                    	title: {
