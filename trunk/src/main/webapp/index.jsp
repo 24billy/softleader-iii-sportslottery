@@ -233,11 +233,11 @@
                                     <tr>
                                         <td colspan="2">每組合投注  100元
                                             X</td>
-                                        <td><input
+                                        <td><div class="form-group has-success"><input class='form-control'
                                             style="width: 40px"
                                             type="text"
                                             id="singleBetValue"
-                                            value="1"></td>
+                                            value="1"></div></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -296,7 +296,7 @@
                                     value="1">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-warning btn-xs" >虛擬投注</button>
+                                <button type="submit" class="btn btn-warning btn-xs virtualLottery" >虛擬投注</button>
                             </div>
                         </form>
                     </div>
@@ -327,10 +327,10 @@
                                     <tr>
                                         <td colspan="2">每組合投注  100元
                                             X</td>
-                                        <td><input
-                                            style="width: 40px"
+                                        <td><div class="form-group has-success"><input
+                                            style="width: 40px" class="form-control"
                                             type="text"
-                                            id="passBetValue" value="1"></td>
+                                            id="passBetValue" value="1"></div></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -390,7 +390,7 @@
                                     value="1">                                    
                             </div>                        
                             <div>
-                                <button type="submit" class="btn btn-warning btn-xs">虛擬投注</button>    
+                                <button type="submit" class="btn btn-warning btn-xs virtualLottery">虛擬投注</button>    
                             </div>
                         </form>
                     </div>
@@ -503,10 +503,10 @@
                                     <tr>
                                         <td colspan="2">每組合投注  100元
                                             X</td>
-                                        <td><input
-                                            style="width: 40px"
+                                        <td><div class="form-group has-success"><input
+                                            style="width: 40px" class="form-control"
                                             type="text" id="comBetValue"
-                                            value="1"></td>
+                                            value="1"></div></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -691,12 +691,18 @@ function odds_refresh(){
 	    refreshBetTable();
 	});
 	//更新總計
-	function refreshBetTable(){
-	    var bet=0;
+    function refreshBetTable(){
+		
+		var bet=0;
 	    var topPrize=0;
+	    //將未選取的checkbox對應的com設為0
+	    var uncheckedlabel=$('[name=comLabel] input:unchecked').parent().parent().parent();
+	    $.each(uncheckedlabel, function(index, uncheckedItem){           
+            $('input',uncheckedItem).val(0);                      
+        });   
+	  //將選取的checkbox對應的com設為1	    
 	    var checkedlabel=$('[name=comLabel] input:checked').parent().parent().parent();
-	    $.each(checkedlabel, function(index, checkedItem){
-	        
+	    $.each(checkedlabel, function(index, checkedItem){	       
 	        $('input',checkedItem).val(1);	        
 	        bet+=parseInt($('td:eq(1)', checkedItem).text());
 	        topPrize+=parseInt($('td:eq(2)', checkedItem).text());
@@ -708,26 +714,172 @@ function odds_refresh(){
 	}
 	//更改投注金額控制
 	$('#singleBetValue').off('keyup');
-	$('#singleBetValue').on('keyup', function(){            
-	    $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
-	    $('#singleTopPrize').html(Math.floor(singlePrize*$('#singleBetValue').val()*capitalValue));
-	    $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+	$('#singleBetValue').on('keyup', function(){
+		var positiveInteger = /^[0-9]*[1-9][0-9]*$/;
+		if(isNaN($('#singleBetValue').val()) || !positiveInteger.test($('#singleBetValue').val())){
+			$('#singleBetValue').tooltip({
+			 placement:'bottom',
+			 title:'請輸入正整數',
+			 triger:'hover focus'					
+			});
+			$('#singleBetValue').tooltip('show');
+			$('#singleBetValue').parent().removeClass();
+			$('#singleBetValue').parent().addClass('form-group has-error');
+			$('#singleCapital').html('0');
+            $('#singleTopPrize').html('0');
+            //禁止點選虛擬投注與真實投注
+            $('.lottery').on('click',function(e){
+                $('.lottery').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.lottery').tooltip('show');
+                e.preventDefault();
+            });
+            $('.virtualLottery').on('click',function(e){
+            	$('.virtualLottery').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.virtualLottery').tooltip('show');
+            	e.preventDefault();
+            });
+            
+		}else{
+			$('#singleBetValue').tooltip('destroy');
+			$('.virtualLottery').tooltip('destroy');
+			$('#singleBetValue').parent().removeClass();
+            $('#singleBetValue').parent().addClass('form-group has-success');
+            //顯示試算彩金
+            $('#singleCapital').html((userOddIds.length)*$('#singleBetValue').val()*capitalValue);
+            $('#singleTopPrize').html(Math.floor(singlePrize*$('#singleBetValue').val()*capitalValue));
+            $('.capitalValue').val($('#singleBetValue').val()*capitalValue);
+            //允許點選虛擬投注與真實投注
+            $('.lottery').off('click');
+            $('.lottery').on('click');
+            $('.virtualLottery').off('click');
+            $('.virtualLottery').on('click');
+		}
+
 	    
 	});
 	
 	$('#passBetValue').off('keyup');
-	$('#passBetValue').on('keyup', function(){          
-	    $('#passCapital').html($('#passBetValue').val()*capitalValue);
-	    $('#passTopPrize').html(Math.floor(passPrize*$('#passBetValue').val()*capitalValue));
-	    $('.capitalValue').val($('#passBetValue').val()*capitalValue);
+	$('#passBetValue').on('keyup', function(){
+		var positiveInteger = /^[0-9]*[1-9][0-9]*$/;
+        if(isNaN($('#passBetValue').val()) || !positiveInteger.test($('#passBetValue').val())){
+            $('#passBetValue').tooltip({
+             placement:'bottom',
+             title:'請輸入正整數',
+             triger:'hover focus'                   
+            });
+            $('#passBetValue').tooltip('show');
+            $('#passBetValue').parent().removeClass();
+            $('#passBetValue').parent().addClass('form-group has-error');
+            $('#passCapital').html('0');
+            $('#passTopPrize').html('0');
+            //禁止點選虛擬投注與真實投注
+            $('.lottery').on('click',function(e){
+                $('.lottery').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.lottery').tooltip('show');
+                e.preventDefault();
+            });
+            $('.virtualLottery').on('click',function(e){
+                $('.virtualLottery').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.virtualLottery').tooltip('show');
+                e.preventDefault();
+            });
+            
+        }else{
+            $('#passBetValue').tooltip('destroy');
+            $('.lottery').tooltip('destroy');
+            $('.virtualLottery').tooltip('destroy');
+            $('#passBetValue').parent().removeClass();
+            $('#passBetValue').parent().addClass('form-group has-success');
+            //顯示試算彩金
+            $('#passCapital').html($('#passBetValue').val()*capitalValue);
+            $('#passTopPrize').html(Math.floor(passPrize*$('#passBetValue').val()*capitalValue));
+            $('.capitalValue').val($('#passBetValue').val()*capitalValue);
+            //允許點選虛擬投注與真實投注
+            $('.lottery').off('click');
+            $('.lottery').on('click');
+            $('.virtualLottery').off('click');
+            $('.virtualLottery').on('click');
+        }		
 	    
 	});
 	
 	$('#comBetValue').off('keyup');
-	$('#comBetValue').on('keyup', function(){                       
-	    calculateComTopPrize();
-	    refreshBetTable();
-	    $('.capitalValue').val($('#comBetValue').val()*capitalValue);
+	$('#comBetValue').on('keyup', function(){
+        var positiveInteger = /^[0-9]*[1-9][0-9]*$/;
+        if(isNaN($('#comBetValue').val()) || !positiveInteger.test($('#comBetValue').val())){
+        	var comBet = $('#comBetValue').val();
+        	$('#comBetValue').val(0);
+            calculateComTopPrize();
+            refreshBetTable();
+            $('#comBetValue').val(comBet);
+        	$('#comBetValue').tooltip({
+             placement:'bottom',
+             title:'請輸入正整數',
+             triger:'hover focus'                   
+            });
+            $('#comBetValue').tooltip('show');
+            $('#comBetValue').parent().removeClass();
+            $('#comBetValue').parent().addClass('form-group has-error');
+            $('#comBetCapital').html('無');
+            $('#comBetTopPrize').html('無');
+            //禁止點選虛擬投注與真實投注
+            $('.lottery').on('click',function(e){
+                $('.lottery').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.lottery').tooltip('show');
+                e.preventDefault();
+            });
+            $('.virtualButton').off('click');
+            $('.virtualButton').on('click',function(e){
+                $('.virtualButton').tooltip({
+                    placement:'right',
+                    title:'請檢查投注金',
+                    triger:'hover focus'                   
+                   });
+                $('.virtualButton').tooltip('show');
+                e.preventDefault();
+            });
+            
+        }else{
+            $('#comBetValue').tooltip('destroy');
+            $('.lottery').tooltip('destroy');
+            $('.virtualButton').tooltip('destroy');
+            $('#comBetValue').parent().removeClass();
+            $('#comBetValue').parent().addClass('form-group has-success');
+            //顯示試算彩金
+            $('#comBetCapital').html($('#comBetValue').val()*capitalValue);
+            $('#comBetTopPrize').html(Math.floor(passPrize*$('#comBetValue').val()*capitalValue));
+            $('.capitalValue').val($('#comBetValue').val()*capitalValue);
+            //允許點選虛擬投注與真實投注
+            $('.lottery').off('click');
+            $('.lottery').on('click');
+            $('.virtualButton').off('click');
+            $('.virtualButton').on('click');
+            calculateComTopPrize();
+            refreshBetTable();
+            $('.capitalValue').val($('#comBetValue').val()*capitalValue);
+        }		
+		
+
 	});
 	//每一注投注金計算
 	$('.capitalValue').val($('#singleBetValue').val()*capitalValue);
@@ -740,6 +892,7 @@ function odds_refresh(){
 	        if($('#myTab li:eq(1)').hasClass("active")){
 	            sessionStorage.activeTab="1";
 	            $('#myTab li:eq(1) a').tab('show');
+	      
 	        }
 	        else if($('#myTab li:eq(2)').hasClass("active")){
 	            sessionStorage.activeTab="2";
@@ -748,17 +901,15 @@ function odds_refresh(){
 	        else if( $('#myTab li:eq(0)').hasClass("active")){
 	            sessionStorage.activeTab="0";
 	            $('#myTab li:eq(0) a').tab('show');
-	        }
-	
-	    //console.log("after:"+sessionStorage.activeTab);
-	    
-	
+	            
+	        }	
+	    //console.log("after:"+sessionStorage.activeTab);	
 	    $('#myTab li:eq(1) a').off('click');
 	    $('#myTab li:eq(2) a').off('click');
 	}
 	else{
 	    //單場
-	    $('#myTab li:eq(0) a').tab('show');
+	    $('#myTab li:eq(0) a').tab('show');	  
 	    //若同一場賽事過關或過關組合僅能選擇一種遊戲玩法，凍結過關與過關組合
 	    $('#myTab li:eq(1) a').off('click');
 	    $('#myTab li:eq(1) a').on('click',function(){
