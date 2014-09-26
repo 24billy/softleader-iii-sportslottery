@@ -142,7 +142,7 @@
 			      	 	</form>
 			      	 	<label class="col-sm-2 control-label"></label>
 			      	 	<div id="buttonGroup" class="form-group col-sm-10">
-							<button id="save2" class="btn btn-success">送出</button>
+							<button id="save2" class="btn btn-success" data-loading-text="修改中...">送出</button>
 							<button id="cancel2" class="btn btn-danger">取消</button>
 						</div>
 					</div>
@@ -415,15 +415,17 @@
 		});
 		
 		$('#save2').on('click', function(){
-			console.log('開始修改密碼');
-			console.log($('#inputOldPass').val());
-			console.log($('#inputNewPass').val());
+			//console.log('開始修改密碼');
+			//console.log($('#inputOldPass').val());
+			//console.log($('#inputNewPass').val());
 			if(!$('#fixForm').valid()){
 				$('#alert2').html('<strong>欄位填寫有誤:</strong>請檢查資料是否正確');
 				$('#alert2').show();
 			} else {
 				$('#alert2').hide();
 				$('#alert3').hide();
+				var btn = $(this);
+				btn.button('loading');
 				$.ajax({
 					url: '<c:url value="/updateUserPassword" />',
 					type:'post',
@@ -433,11 +435,10 @@
 						'oldUserPassword':$('#inputOldPass').val(),
 						'userPassword':$('#inputNewPass').val()
 					}, 
-					beforeSend: function() {
-						
+					complete: function() {
+						btn.button('reset');
 					},
 					success:function(result){
-						console.log('接收到資料');
 						if(result){
 							//成功
 							$('#oldPass').removeClass('has-error').addClass('has-success');

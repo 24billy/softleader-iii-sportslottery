@@ -64,9 +64,9 @@ public class loginFilter implements Filter {
 								|| loginToken.getUserState().isEmpty()
 								|| !loginToken.getUserState().equals("0")) {
 							req.setAttribute("locking", "true");
-							req.getRequestDispatcher("/index.jsp").forward(req,
-									resp);
+							req.getRequestDispatcher("/index.jsp").forward(req,resp);
 						} else {
+							req.removeAttribute("locking");
 							chain.doFilter(request, response);
 						}
 					}else {

@@ -176,7 +176,10 @@ public class UserService extends GenericService<UserEntity> {
 		return "success";
 	}
 	
-	
+	public UserEntity noPswdUpdate(UserEntity entity) {
+		dao.update(entity);
+		return entity;
+	}
 	@Override
 	public UserEntity update(UserEntity entity) {
 		UserEntity enEntity = this.encoding(entity);
