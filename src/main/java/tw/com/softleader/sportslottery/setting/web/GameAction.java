@@ -574,9 +574,11 @@ public class GameAction extends ActionSupport {
 					.replace("年", "-")
 					.replace("月", "-")
 					.replace("日", "");*/
-		System.out.println("linkGameTime......."+ linkGameTime);
+		//System.out.println("linkGameTime......."+ linkGameTime);
 		LocalDate date1 = LocalDate.parse(linkGameTime);
-		json = new Gson().toJson(service.getAllCountHistoryByTime(date1));//輸入time取得之前的COUNT資訊
+		//json = new Gson().toJson(service.getAllCountHistoryByTime(date1));//輸入time取得之前的COUNT資訊
+		json = new Gson().toJson(service.getAllCountHistoryByTimePrevious3Days(date1));//輸入time取得三天內的COUNT資訊
+		//json = new Gson().toJson(service.getAllCountHistoryByTimePrevious3Month(date1));//輸入time取得三月內的COUNT資訊
 		
 	}
 	
