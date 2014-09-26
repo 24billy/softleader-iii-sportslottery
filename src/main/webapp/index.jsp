@@ -958,8 +958,8 @@ function odds_refresh(){
 	    sessionStorage.userOddInfo = JSON.stringify(odds);
 	    
 	    $(this).parent().parent().parent().attr("hidden",true); 
+	    odds_refresh();
 	    gameRefresh(galbalGames, galbalOdds);
-	    odds_refresh();    
 	});
 	
 	//清除投注區
@@ -968,9 +968,8 @@ function odds_refresh(){
 	    sessionStorage.userOdds = "";
 	    sessionStorage.userOddInfo = [];
 	    sessionStorage.userGameInfo = [];
-	    gameRefresh(galbalGames, galbalOdds);
 	    odds_refresh();	    
-   
+	    gameRefresh(galbalGames, galbalOdds);
 	    
 	    
 	});

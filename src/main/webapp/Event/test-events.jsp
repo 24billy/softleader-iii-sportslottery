@@ -415,14 +415,14 @@ function gameRefresh(games, odds){
 				thisGame.addClass('resulted');
 				$('#gameMark', thisGame).addClass('glyphicon-usd');
 				$('#gameMark', thisGame).text('已派彩');
-				$('[name="teamAway"]', thisGame).text(game.teamAway.teamName + ' ' + game.gameScoreAway);
-				$('[name="teamHome"]', thisGame).text(game.teamHome.teamName + ' ' + game.gameScoreHome);
+				$('[name="teamAway"]', thisGame).html(game.teamAway.teamName + ' <span class="badge alert-danger">' + game.gameScoreAway + '</span>');
+				$('[name="teamHome"]', thisGame).html(game.teamHome.teamName + ' <span class="badge alert-danger">' + game.gameScoreHome + '</span>');
 			} else if(game.gameStatus == 2) {
 				thisGame.addClass('gameset');
 				$('#gameMark', thisGame).addClass('glyphicon-flag');
 				$('#gameMark', thisGame).text('已完賽');
-				$('[name="teamAway"]', thisGame).text(game.teamAway.teamName + ' ' + game.gameScoreAway);
-				$('[name="teamHome"]', thisGame).text(game.teamHome.teamName + ' ' + game.gameScoreHome);
+				$('[name="teamAway"]', thisGame).html(game.teamAway.teamName + ' <span class="badge alert-warning">' + game.gameScoreAway + '</span>');
+				$('[name="teamHome"]', thisGame).html(game.teamHome.teamName + ' <span class="badge alert-warning">' + game.gameScoreHome + '</span>');
 			} else if(game.gameStatus == 1 && todayMil > game.iMillis) {
 				thisGame.attr('gameStatus', '2');
 				thisGame.addClass('warning');
