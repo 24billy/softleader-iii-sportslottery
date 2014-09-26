@@ -3,6 +3,7 @@ package tw.com.softleader.sportslottery.filter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.UUID;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -81,14 +82,16 @@ public class loginFilter implements Filter {
 				}
 				System.out.println(contextPath);
 				//resp.getOutputStream().println("<script>callMyModal();</script>");
-				req.setAttribute("mustBeLogin", "true");
+				session.setAttribute("mustBeLogin", "true");
 				System.out.println(req.getRequestURI());
 				if(req.getRequestURI().indexOf("/lottery")>0){
-					req.setAttribute("errorMsgLottery", "請登入後在進行投注!");
+					session.setAttribute("errorMsgLottery", "請登入後再進行投注!");
 				} else if(req.getRequestURI().indexOf("/userOddsSearch")>0){
-					req.setAttribute("errorMsgLottery", "登入後才能觀看使用者投注資訊!");
+					session.setAttribute("errorMsgLottery", "登入後才能觀看使用者投注資訊!");
 				}
-				req.getRequestDispatcher("/index.jsp").forward(req, resp);
+				String uuid = UUID.randomUUID().toString(); 
+				session.setAttribute("errorToken", uuid);
+				req.getRequestDispatcher("/").forward(req, resp);
 				//resp.sendRedirect(contextPath + "/goIndex");
 				//chain.doFilter(request, response);
 				return;

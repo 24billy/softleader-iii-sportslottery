@@ -70,6 +70,10 @@
 {
 	margin-left:17px;
 }
+
+#errorMsgLottery{
+	display:none;
+}
 </style>
 
 
@@ -231,9 +235,7 @@
 					<h3 class="loginFont">全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
-				<c:if test="${not empty errorMsgLottery}">
-					<div class="alert alert-danger" role="alert">${errorMsgLottery}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
-				</c:if>
+					<div id="errorMsgLottery" class="alert alert-danger" role="alert">${errorMsgLottery}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
 					<form method="post" action="" name="login_form">
 						<p>
 							<input type="text" class="span3" name="model.userAccount" id="loginAccount"
@@ -299,7 +301,21 @@
 (function($) {
 	var str = "";
 	
-	<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
+	//檢查此次訊息是不是已經顯示過
+	var errorTokenHasDone = false;
+	if(sessionStorage.seerorToken == '${errorToken}'){
+		//此次訊息已重複
+		errorTokenHasDone = true;
+	}else{
+		sessionStorage.seerorToken = '${errorToken}';
+		errorTokenHasDone = false;
+	}
+	var errorMsg;
+	if(!errorTokenHasDone){
+		<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
+		errorMsg = '${errorMsgLottery}';
+		$('#errorMsgLottery').show();
+	}
 	function callMyModal(){
     	$('#myModal').modal('show');
     }
@@ -404,7 +420,7 @@
 		</c:if>
 		<c:if test="${user.userState!='0'}">
 			$('#goVerify').trigger('click');
-	</c:if>
+		</c:if>
 	});
 
 	$('#myModal').keyup(function() {
@@ -494,8 +510,7 @@
 			sessionStorage.hasLocated = 'locking';
 			window.location.href = '<c:url value="/"/>';
 		}else{
-			sessionStorage.hasLocated = 'user';
-			window.location.href = '<c:url value="/"/>';
+			$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		}
 	});
 	$('.lotteryBoard').off('click');
