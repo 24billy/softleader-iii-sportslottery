@@ -1140,6 +1140,11 @@ $(document).ready(function() {
 		break;
 	}
 	sessionStorage.hasLocated = "";
+	
+	$(document).on('touchend',function(){
+		$('*').tooltip('hide');
+	});
+		
 });
 
 </script>
