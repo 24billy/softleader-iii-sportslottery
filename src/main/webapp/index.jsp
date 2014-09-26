@@ -959,7 +959,9 @@ function odds_refresh(){
 	    
 	    $(this).parent().parent().parent().attr("hidden",true); 
 	    odds_refresh();
+	    if(galbalGames){
 	    gameRefresh(galbalGames, galbalOdds);
+	    }
 	});
 	
 	//清除投注區
@@ -969,7 +971,10 @@ function odds_refresh(){
 	    sessionStorage.userOddInfo = [];
 	    sessionStorage.userGameInfo = [];
 	    odds_refresh();	    
-	    gameRefresh(galbalGames, galbalOdds);
+	    if(galbalGames){
+	    	gameRefresh(galbalGames, galbalOdds);
+        }
+	    
 	    
 	    
 	});
@@ -1020,57 +1025,71 @@ function odds_refresh(){
 
 }
 $('#randomLottery').on('click',function(){
-    var randomOdd=0;
-    var userOddInfo = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
-    var userGameInfo = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
-    var hasGameToBet = -1;
-    $.each(galbalGames,function(index, game){
-
-    	if(game && game.gameStatus==1){
-    	    console.log(game);
-    		hasGameToBet=1;
-    	}
-    });
-    
-    if(hasGameToBet==-1){
-    	$('#hasGameForBet').prop('hidden',false);
-    	//$('#randomLottery').off('click');
-    	$('#hasGameForBet').fadeIn(1000);
-    	$('#hasGameForBet').fadeOut(2000);
-    	setTimeout(function(){    		
-    		$('#hasGameForBet').prop('hidden',true);
-    		$('#hasGameForBet').attr("disabled", false);
-    		//$('#randomLottery').on('click');
-    	},3000);
-    	return;
-    }else{
-    	$('#hasGameForBet').prop('hidden',true);
-    }
-   
-    
-    while(!galbalOdds[randomOdd] || galbalGames[galbalOdds[randomOdd].gameNum].gameStatus!=1){
-        randomOdd=parseInt(Math.random()*galbalOdds.length)+1;	                          
-    }
-    
-    console.log("game:"+randomOdd);
-    console.log(galbalGames[galbalOdds[randomOdd].gameNum]); 		
-    console.log(galbalGames[galbalOdds[randomOdd].gameNum].gameStatus==1); 
-    
-    
-    
-    if(!userOddInfo[randomOdd]){
-        var thisOdd = galbalOdds[randomOdd];
-        var thisGame = galbalGames[thisOdd.gameNum];
-        userOddInfo[randomOdd] = thisOdd;
-        userGameInfo[thisOdd.gameNum] = thisGame;
-    }
-    
-    sessionStorage.userOddInfo = JSON.stringify(userOddInfo);
-    sessionStorage.userGameInfo = JSON.stringify(userGameInfo);
-    sessionStorage.userOdds=galbalOdds[randomOdd].id;
-    
-    odds_refresh();
-    
+	if(!galbalGames){
+	    $('#randomLottery').tooltip({
+         placement:'bottom',
+         title:'查無賽事列表',
+         triger:'hover focus'                   
+        });
+        $('#randomLottery').tooltip('show');
+	}
+	else{
+		$('#randomLottery').tooltip('destroy');  
+	    var randomOdd=0;
+	    var userOddInfo = sessionStorage.userOddInfo ? JSON.parse(sessionStorage.userOddInfo) : [];
+	    var userGameInfo = sessionStorage.userGameInfo ? JSON.parse(sessionStorage.userGameInfo) : [];
+	    var hasGameToBet = -1;
+	    var todayMil = new Date().valueOf() - new Date().getTimezoneOffset()*60000;
+	    $.each(galbalGames,function(index, game){ 	 
+	        if(game && game.gameStatus==1 ){
+	        	var targetGameTime = game.gameTime.iLocalMillis;
+	        	if(targetGameTime>todayMil){
+	        		console.log(game);
+	                hasGameToBet=1;	
+	        	}	        
+	        }
+	    });
+	    
+	    if(hasGameToBet==-1){
+	        $('#hasGameForBet').prop('hidden',false);
+	        //$('#randomLottery').off('click');
+	        $('#hasGameForBet').fadeIn(1000);
+	        $('#hasGameForBet').fadeOut(2000);
+	        setTimeout(function(){          
+	            $('#hasGameForBet').prop('hidden',true);
+	            $('#hasGameForBet').attr("disabled", false);
+	            //$('#randomLottery').on('click');
+	        },3000);
+	        return;
+	    }else{
+	        $('#hasGameForBet').prop('hidden',true);
+	    }
+	   
+	    
+	    while(!galbalOdds[randomOdd] || (galbalGames[galbalOdds[randomOdd].gameNum].gameStatus!=1 || galbalGames[galbalOdds[randomOdd].gameNum].gameTime.iLocalMillis<todayMil)){
+	        randomOdd=parseInt(Math.random()*galbalOdds.length)+1;                            
+	    }
+	    
+	    console.log("game:"+randomOdd);
+	    console.log(galbalGames[galbalOdds[randomOdd].gameNum]);        
+	    console.log(galbalGames[galbalOdds[randomOdd].gameNum].gameStatus==1); 
+	    
+	    
+	    
+	    if(!userOddInfo[randomOdd]){
+	        var thisOdd = galbalOdds[randomOdd];
+	        var thisGame = galbalGames[thisOdd.gameNum];
+	        userOddInfo[randomOdd] = thisOdd;
+	        userGameInfo[thisOdd.gameNum] = thisGame;
+	    }
+	    
+	    sessionStorage.userOddInfo = JSON.stringify(userOddInfo);
+	    sessionStorage.userGameInfo = JSON.stringify(userGameInfo);
+	    sessionStorage.userOdds=galbalOdds[randomOdd].id;
+	    
+	    odds_refresh();
+	}
+        
 });
 $('#closeLotteryPanel').on("mouseover",function(){
     $(this).addClass("closeOver");
