@@ -814,7 +814,6 @@ function next(obj,n,next) {
 						post4 : {
 							postCheck : true 
 						}
-
 					},
 					highlight : function(element) {
 						console.log('fail');
@@ -834,15 +833,13 @@ function next(obj,n,next) {
 								'glyphicon-remove').addClass('glyphicon-ok');
 						$('.error', formGroup).hide();
 						$('div.errorMsg',formGroup).hide();
-						
 					},
 				});
 		$('#addUserButton').on('click',
 				function() {
-					$.ajax({
+					var jqXHR = $.ajax({
 						url : "<c:url value='/addAccount'/>",
 						type : "post",
-						async : false,
 						data : {
 							'model.userAccount' : $('#accountf').val(),
 							userPassword : $('#passwordf').val(),
@@ -864,7 +861,7 @@ function next(obj,n,next) {
 							}
 						}
 					});
-					
+					console.log(jqXHR.readyState);
 				});
 
 		//日期選擇器
