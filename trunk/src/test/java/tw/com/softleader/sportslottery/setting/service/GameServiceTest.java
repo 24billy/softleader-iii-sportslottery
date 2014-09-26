@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -196,17 +197,30 @@ public class GameServiceTest extends BaseTest  {
 //	}
 	
 
+//	@Test
+//	public void testGetGameByLocalDateTime(){
+//		String gameTimeStr="2014-09-16T08:55";
+//		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
+//		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
+//		List<GameEntity> games = gameService.getGameByLocalDateTime(gameTime);
+////		log.debug("testFindByLocalDateTime = {}", games);
+//		for(GameEntity game:games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of games = "+ games.size());
+//	}
+	
 	@Test
-	public void testGetGameByLocalDateTime(){
-		String gameTimeStr="2014-09-16T08:55";
-		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
-		System.out.println(gameTime.toString());//2014-09-16T08:55:00.000
-		List<GameEntity> games = gameService.getGameByLocalDateTime(gameTime);
-//		log.debug("testFindByLocalDateTime = {}", games);
-		for(GameEntity game:games){
-			System.out.println(game);
+	public void testGetCountInfoHistoryPrevious3month(){
+		String teamName= "底特律老虎";
+		Long gameId =null;
+		List<Map<String, CountBean>> games=gameService.getCountInfoHistoryPrevious3month(teamName, gameId);
+		Iterator it= games.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
 		}
-		System.out.println("size of games = "+ games.size());
+		System.out.println("the size of games: "+games.size());
+		
 	}
 
 }
