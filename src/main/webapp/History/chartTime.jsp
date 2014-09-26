@@ -26,7 +26,7 @@
 }</style>
 </head>
 <body>
-<div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />     Loading.....  </div>
+<%-- <div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />     Loading.....  </div> --%>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <div id="tsv" style="display:none"></div>  
 <script src="<c:url value="/js/misc.js"/>"></script>
@@ -45,7 +45,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('以'+'${linkGameTime}'+'為搜尋對象，之前的熱門過關統計');
+		$('#searchMessage').text('以'+'${linkGameTime}'+'為搜尋對象，前三天的熱門過關統計');
  		$.post(url, {
  			'linkGameTime':'${linkGameTime}'
  			},function(data) { //用POST透過countInfoGraph取回的Json型式的值
@@ -58,49 +58,49 @@ $(function () {
 				//console.log(i+' AAAway : '+teamNameAway[i]);
 				//console.log(i+' Home : '+teamNameHome[i]);
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'4'+'\t'+percent*100+'%'+'\n';
 
 				var type=value['ATS_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'3'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SU_A'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis); 
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'2'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SU_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'1'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SC_H'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'5'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['SC_L'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'6'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['ODD'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'7'+'\t'+percent*100+'%'+'\n';
 				
 				var type=value['EVEN'];
 				var time=millisecondToDate(type.gameTime.iLocalMillis)+millisecondToTime(type.gameTime.iLocalMillis);
-				time = time.substring(5, 16);
+				//time = time.substring(5, 16);
 				var percent=type.percentage;
 				child += time+' '+'8'+'\t'+percent*100+'%'+'\n';
 				
