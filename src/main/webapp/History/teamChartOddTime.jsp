@@ -31,7 +31,7 @@ $(document).ready(function(){
 }</style>
 </head>
 <body>
-<div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />Loading.....  </div>
+<%-- <div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />Loading.....  </div> --%>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <div id="tsv" style="display:none"></div>  
 <script src="<c:url value="/js/misc.js"/>"></script>
@@ -92,7 +92,7 @@ $(function () {
 		var i=0; //比賽的紀錄出現順序，主要用於抓取比賽的teamNameAway, teamNameHome
 		var child='';	
 		child += '過關	歷史\n'; 
-		$('#searchMessage').text('#'+'${linkGameNum}'+'比賽之前(含)，以"'+'${linkTeamSearch}'+'"為搜尋對象的熱門過關統計');
+		$('#searchMessage').text('#'+'${linkGameNum}'+'比賽之前三個月，以"'+'${linkTeamSearch}'+'"為搜尋對象的熱門過關統計');
 		//$('#modalBox').modal('show');
 		//alert('搜尋 "'+'${linkTeamSearch}'+'"比賽投注統計');
  		$.post(url, {
