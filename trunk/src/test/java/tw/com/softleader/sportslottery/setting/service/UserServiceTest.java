@@ -29,4 +29,13 @@ public class UserServiceTest extends BaseTest{
 		model=userService.getByUserEmail("wANg@gMail.Com");
 		log.debug("GetByUserEmail:{}",model);
 	}
+	
+	@Test
+	public void testUpdateUserCoin() {
+		int a  = userService.updateUserCoin(2l, 5002l);
+		log.debug("Test:updateUserCoin" + a);
+		
+		model=userService.getByUserAccount("chen");
+		log.debug("GetByUserAccount:{}",model);
+	}
 }

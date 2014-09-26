@@ -438,15 +438,18 @@
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" >未開獎</button></td>';
+					        			} else if(row.win == 0) {
+					        				return '<td><button type="button" class="btn btn-primary btn-xs btn-status active winBtn" >槓龜</button></td>';
 					        			} else {
-					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn active" >'+row.win+'</button></td>';
+					        				return '<td><button type="button" class="btn btn-danger btn-xs btn-status winBtn active" >' + row.win + '</button></td>';
 					        			}
 					        		}},
 					        		{"data": function(row, type, val, meta){
-					        			if(row.win == -1 || row.win == 0) {
+					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-info btn-xs btn-status disabled capitalBtn">NONE</button></td>';
-					        			} else 
-					        				if(row.status == 0) {
+					        			} else if(row.win == 0) {
+					        				return '<td><button type="button" class="btn btn-primary btn-xs btn-status active capitalBtn">再加油</button></td>';
+					        			} else if(row.status == 0) {
 					        					return '<td><button type="button" class="btn btn-warning btn-xs btn-status capitalBtn" >領獎</button></td>';
 					        				} else {
 					        					return '<td><button type="button" class="btn btn-success btn-xs btn-status disabled capitalBtn" >已領獎</button></td>';

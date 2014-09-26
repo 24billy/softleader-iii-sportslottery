@@ -212,7 +212,11 @@ public class UserService extends GenericService<UserEntity> {
 		return dao.findByCreateTime(CREATE_TIME);
 	}
 	
-//	public long updateUserCoin(Long userId, Long coin){
-//		return dao.updateUserCoin(userId, coin);
-//	}
+	public int updateUserCoin(Long userId, Long coin){
+		
+		
+		return dao.updateUserCoin(userId, coin);
+	}
+	
+	
 }

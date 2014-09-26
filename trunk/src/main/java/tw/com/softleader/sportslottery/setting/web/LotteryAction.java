@@ -231,6 +231,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    //將form的資料提取
         Long capital = model.getCapital();
         model.setWin(-1L);
+        model.setLotteryStatus(0l);
         System.out.println("capital:"+capital);
         
         Set<LotteryOddsEntity> lotteryOdds=new HashSet<LotteryOddsEntity>();
@@ -419,13 +420,11 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		Long status = entity.getLotteryStatus();
 		try {
 			if(status==0) {
-				user.setCoins(user.getCoins() + entity.getWin());
-				userService.update(user);
-//				Long win = user.getCoins() + entity.getWin();
-//				log.debug("111111111111111"+win);
-//				userService.updateUserCoin(user.getId(), win);
+				Long win = user.getCoins() + entity.getWin();
+				userService.updateUserCoin(user.getId(), win);
 				entity.setLotteryStatus(1l);
 				service.update(entity);
+				session.put("user", userService.getById(user.getId()));
 				message = SUCCESS;
 				log.debug("獎金更新成功");
 			} else {
