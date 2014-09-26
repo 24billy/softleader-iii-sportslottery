@@ -205,6 +205,36 @@ public class GameService extends GenericService<GameEntity> {
 		return null;
 	}
 	
+	//輸入 GameId和隊伍名稱，取得此game前三個月所有人購買的投注資訊 
+	//一個MAP是一場比賽的投注資訊，投注資訊包含投注數，和過關數比值
+	//這個LIST是之前所有比賽的投注資訊
+	public List<Map<String, CountBean>> getCountInfoHistoryPrevious3month (String teamName, Long gameId){
+		try {
+			List<GameEntity> games = new ArrayList<GameEntity>();
+			if(gameId ==null){//如果game不存在，則取今日時間前三個月
+				games = dao.findForHistory(LocalDate.now().minusMonths(3), LocalDate.now(), teamName);
+			}else{
+//			System.out.println("inside getCountInforHistory"+gameId);
+				games = dao.findForHistory(dao.findById(gameId).getGameTime().toLocalDate().minusMonths(3), dao.findById(gameId).getGameTime().toLocalDate(), teamName);//起始時間設為NULL代表取之前所有資訊
+			}	
+			//結束時間則以輸入gameId來尋找
+//			System.out.println(games.toString());
+			List<Map<String, CountBean>> listMap= new LinkedList<Map<String, CountBean>>();
+			for(GameEntity game : games){
+//				System.out.println("inside for GameEntity..................");
+//				System.out.println(game.toString());
+//				System.out.println("I am here!!!!!!!!!!!!!!!"+this.getCountInfoByGameId(game.getId()));
+				listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
+			}
+			return listMap;
+		} catch (Exception e) {
+			System.out.println("getCountInfoHistory出問題..................................");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	//將有最大count percentage的CountBean轉成map加入搜尋結果的List後
 	public List<Map<String, CountBean>> addMaxBeanToCountHistory(String teamName, Long gameId){
 		List<Map<String, CountBean>> listMap=this.getCountInfoHistory(teamName, gameId);
@@ -277,7 +307,7 @@ public class GameService extends GenericService<GameEntity> {
 			
 		}
 	
-		return this.getByGameNum(gameNum).getId();//如果gameNum = null 不會到達這裡
+		return null;//如果gameNum = null 不會到達這裡
 		
 	}
 	
