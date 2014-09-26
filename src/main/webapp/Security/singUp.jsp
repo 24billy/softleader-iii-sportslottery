@@ -74,6 +74,7 @@
 	height: 431px;
 }
 #page1 {
+	margin-top: 100px;
 	display: none;
 }
 #page2 {
@@ -103,6 +104,12 @@ hr {
 }
 .agree-textarea {
 	margin-bottom: 5px;
+	resize: none;
+}
+@media(min-width:325px) {
+	#page1 {
+		margin-top: 0px;
+	}
 }
 </style>
 
@@ -111,7 +118,8 @@ hr {
 	<div id="sigUp-body">
 		<div id="page1" class="page1-div" >
 			<h1>條約內容</h1>
-			<textarea rows="17" cols="100" class="agree-textarea" disabled >
+			<div class="col-sm-8 col-sm-offset-2">
+			<textarea rows="17" class="agree-textarea form-control" disabled >
 			■第1條 目的
 			以下條款和條件由本公司 TechWay 株式會社（以下簡稱「TechWay」）所負責企畫營運。
 			關於本公司所提供線上遊戲服務UNLIGHT（以下簡稱「本服務」）
@@ -282,9 +290,12 @@ hr {
 			倘若發生無法協商之情形，即由東京簡易裁判所，審理判決。
 			
 			本條約由2011年4月26日起實施
-			</textarea><br>
-			<button id="agree">我同意</button>
-			<button id="onAgree">不同意</button>
+			</textarea>
+			<button type="button" class="btn" id="agree">我同意</button>
+			<button type="button" class="btn" id="onAgree">不同意</button>
+			</div>
+			
+			
 		</div>
 		<div id="page2"><!-- 
 			<div class="jumbotron jumbotron-sm">
@@ -428,7 +439,7 @@ hr {
 										</div>
 									</div>
 									<div class="col-md-12">
-										<button class="btn btn-primary pull-right" id="addUserButton">送出</button>
+										<button class="btn btn-primary pull-right" id="addUserButton" data-loading-text="Loading...">送出</button>
 									</div>
 								</div>
 							</form>
@@ -490,7 +501,7 @@ hr {
 				<input name="lockCharacter" id="lockCharacter" type="text" ><br>
 				<div>
 					<button class="btn btn-primary">驗證</button>
-					<button class="btn btn-warning">重寄</button>
+					<button class="btn btn-warning" data-loading-text="送信中...">重寄</button>
 				</div>
 				<div class="onlock-error-div"></div>
 			</div>
@@ -560,7 +571,7 @@ function next(obj,n,next) {
 		$('#select-transfer').change(function(e) {
 			var optionSelected = $(this).find("option:selected");
 			var valueSelected = optionSelected.val();
-			console.log(valueSelected);
+			//console.log(valueSelected);
 			switch (valueSelected) {
 			case 'POST':
 				$('.post-div').show();
@@ -807,6 +818,7 @@ function next(obj,n,next) {
 							checkBirth : true
 						},
 						'model.userPhone' : {
+							required : true,
 							number : true,
 							maxlength : 14,
 							input : true
@@ -816,7 +828,7 @@ function next(obj,n,next) {
 						}
 					},
 					highlight : function(element) {
-						console.log('fail');
+						//console.log('fail');
 						var formGroup = $(element).closest('.form-group');
 						formGroup.removeClass('has-success').addClass(
 								'has-error');
@@ -825,7 +837,7 @@ function next(obj,n,next) {
 						$('div.errorMsg',formGroup).show();
 					},
 					success : function(element) {
-						console.log("success");
+						//console.log("success");
 						var formGroup = $(element).closest('.form-group');
 						formGroup.removeClass('has-error').addClass(
 								'has-success');
@@ -835,34 +847,46 @@ function next(obj,n,next) {
 						$('div.errorMsg',formGroup).hide();
 					},
 				});
-		$('#addUserButton').on('click',
-				function() {
-					var jqXHR = $.ajax({
-						url : "<c:url value='/addAccount'/>",
-						type : "post",
-						data : {
-							'model.userAccount' : $('#accountf').val(),
-							userPassword : $('#passwordf').val(),
-							'confirm_password' : $('#confirm_password').val(),
-							'model.userBirthday' : $('#userBirth').val(),
-							'model.userEmail' : $('#email').val(),
-							'model.userName' : $('#name').val(),
-							'model.userCardId' : $('#userId').val().toUpperCase(),
-							'model.userPhone' : $('#phone').val(),
-							'model.userBankAccount' : $('#credit').val()
-						},
-						success : function(data) {
-							console.log(data);
-							if (data == "success") {
-								$('#page2').hide();
-								document.location.href="<c:url value='/lottery'/>";
-							}else {
-								//
-							}
+		$('#addUserButton').on('click',function() {
+			if($('#registration-form').valid()) {
+				$(this).button('loading');
+				$.ajax({
+					url : "<c:url value='/addAccount'/>",
+					type : "post",
+					data : {
+					async : false,
+						'model.userAccount' : $('#accountf').val(),
+						userPassword : $('#passwordf').val(),
+						'confirm_password' : $('#confirm_password').val(),
+						'model.userBirthday' : $('#userBirth').val(),
+						'model.userEmail' : $('#email').val(),
+						'model.userName' : $('#name').val(),
+						'model.userCardId' : $('#userId').val().toUpperCase(),
+						'model.userPhone' : $('#phone').val(),
+						'model.userBankAccount' : $('#credit').val()
+					},
+					complete : function() {
+						$('#addUserButton').button('reset');
+					},
+					success : function(data) {
+						//console.log(data);
+						if (data == "success") {
+							sendLockMail();
+							$('#page2').hide();
+							document.location.href="<c:url value='/lottery'/>";
+						}else {
+							//
 						}
-					});
-					console.log(jqXHR.readyState);
+					}
 				});
+			}
+		});
+			
+		function sendLockMail() {
+			$.ajax({
+				url : "<c:url value='/sendLock'/>"
+			});
+		}
 
 		//日期選擇器
 		$('#userBirth').datepicker({
@@ -919,10 +943,14 @@ function next(obj,n,next) {
 			});
 		});
 		$('.btn-warning','.send-mail-div').on('click',function() {
+			var btn = $(this);
+		    btn.button('loading');
 			$.ajax({
 				url : "<c:url value='/sendLock'/>",
 				type : "get",
-				async : false,
+				complete : function() {
+					btn.button('reset');
+				},
 				success : function(data) {
 					if (data == "success") {
 						$('.onlock-error-div').html('驗證信已重新寄出,請查看').css('color','green');

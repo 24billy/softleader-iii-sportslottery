@@ -269,6 +269,8 @@ public class UserAction extends ActionSupport {
 		UserEntity user = (UserEntity)session.get("user");
 		if(user.getUserState().equals(lockCharacter)) {
 			user.setUserState("0");
+			user = service.noPswdUpdate(user);
+			session.put("user", user);
 		}else {
 			log.debug("驗證碼不正確");
 			return ERROR;
@@ -390,7 +392,6 @@ public class UserAction extends ActionSupport {
 				log.debug("新會員"+entity);
 				Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 				session.put("user", entity);
-				service.sendLockmail(entity);
 				log.debug("註冊成功");
 			} catch (Exception e) {
 				log.debug("!!新增錯誤!!");
