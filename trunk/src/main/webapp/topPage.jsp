@@ -496,8 +496,7 @@
  	});
   	$('.history').off('click');
 	$('.history').on('click',function() {
-		sessionStorage.hasLocated = 'history';
-		window.location.href = '<c:url value="/"/>';
+		$("#target").load('<c:url value="/History/historyComplex.jsp"/>');
 	});
 	$('.user').off('click');
 	$('.user').on('click',function() {
