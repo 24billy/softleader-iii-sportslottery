@@ -310,8 +310,9 @@ public class GameService extends GenericService<GameEntity> {
 				List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
 				for(GameEntity game : games){
 					listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
-					return listMap;
+					
 				}
+				return listMap;
 			}
 			
 
@@ -343,8 +344,9 @@ public class GameService extends GenericService<GameEntity> {
 				List<Map<String, CountBean>> listMap= new ArrayList<Map<String, CountBean>>();
 				for(GameEntity game : games){
 					listMap.add(this.getCountInfoByGameId(game.getId())); //從games 中取的每場比賽，再從每場比賽取得gameId，再得到八種投注數的相關資訊
-					return listMap;
+					
 				}
+				return listMap;
 			}
 			
 
