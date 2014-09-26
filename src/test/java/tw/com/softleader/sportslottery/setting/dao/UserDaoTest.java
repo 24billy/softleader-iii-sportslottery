@@ -32,7 +32,11 @@ public class UserDaoTest extends BaseTest {
 		
 		System.out.println("--------Test:findByUserCardId--------");
 		log.debug(dao.findByUserCardId("A223456788").toString());
-	
+		
+		System.out.println("--------Test:updateUserCoin--------");
+		log.debug("--------Test:updateUserCoin--------"+dao.updateUserCoin(2l, 5001l));
+		System.out.println("findByUserAccount :" + dao.findByUserAccount("chen"));
+		
 	}
 
 }
