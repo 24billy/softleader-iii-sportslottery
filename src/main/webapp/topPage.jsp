@@ -491,8 +491,7 @@
     });
     $('.game').off('click');
   	$('.game').on('click',function() {		
-  		sessionStorage.hasLocated = 'game';
-		window.location.href = '<c:url value="/"/>'; 		
+  		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
  	});
   	$('.history').off('click');
 	$('.history').on('click',function() {
