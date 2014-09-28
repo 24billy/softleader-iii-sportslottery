@@ -26,6 +26,7 @@ import tw.com.softleader.sportslottery.setting.util.CountBean;
 
 @Service
 public class GameService extends GenericService<GameEntity> {
+	
 	@Autowired
 	private GameDao dao;
 	@Autowired

@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminAction extends ActionSupport {
+	
 	private static final long serialVersionUID = 2014L;
 	@Autowired
 	private GameService gameService;

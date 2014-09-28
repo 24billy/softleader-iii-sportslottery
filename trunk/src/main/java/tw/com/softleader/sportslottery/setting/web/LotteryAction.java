@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,9 +39,7 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-/**
-@Author:Billy 
- */
+
 public class LotteryAction extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 2014L;
 	

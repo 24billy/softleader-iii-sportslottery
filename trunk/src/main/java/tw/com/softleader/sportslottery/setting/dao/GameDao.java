@@ -15,7 +15,6 @@ import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
-import tw.com.softleader.sportslottery.setting.entity.AdminLogEntity;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 

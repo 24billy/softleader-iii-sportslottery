@@ -33,7 +33,6 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 2014L;
 	

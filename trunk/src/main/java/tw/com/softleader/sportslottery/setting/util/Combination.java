@@ -3,10 +3,9 @@ package tw.com.softleader.sportslottery.setting.util;
 import java.io.Serializable;
 
 public class Combination implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6792593759319950502L;
+
+	private static final long serialVersionUID = 2014L;
+	
 	private Long com0;
 	private Long com1;
 	private Long com2;

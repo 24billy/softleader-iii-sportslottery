@@ -4,6 +4,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PassToAction  extends ActionSupport {
 	
+	private static final long serialVersionUID = 2014L;
+
 	public String goIndex() throws Exception {
 		return SUCCESS;
 	}

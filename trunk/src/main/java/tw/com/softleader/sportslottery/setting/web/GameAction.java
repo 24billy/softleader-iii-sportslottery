@@ -31,11 +31,7 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-/**
- * 
- * @author nick
- *
- */
+
 public class GameAction extends ActionSupport {
  
 	private static final long serialVersionUID = 2014L;
