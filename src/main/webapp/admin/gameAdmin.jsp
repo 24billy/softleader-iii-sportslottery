@@ -997,32 +997,26 @@
 			'title': '<s:text name="admin.gameAdmin.openOdds"/>'
 		});
 				
-		if (zh) {
-			$('#gameTable').dataTable({
-				'order': [[ 0, 'desc' ]],
-				'oLanguage': {
-					'sProcessing': '處理中...',
-					'sLengthMenu': '顯示 _MENU_ 項結果',
-					'sZeroRecords': '沒有匹配結果',
-					'sInfo': '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
-					'sInfoEmpty': '顯示第 0 至 0 項結果，共 0 項',
-					'sInfoFiltered': '(從 _MAX_ 項結果過濾)',
-					'sInfoPostFix': '',
-					'sSearch': '搜索:',
-					'sUrl': '',
-					'oPaginate': {
-						'sFirst': '首頁',
-						'sPrevious': '上頁',
-						'sNext': '下頁',
-						'sLast': '尾頁'
-					}
+		$('#gameTable').dataTable({
+			'order': [[ 0, 'desc' ]],
+			'oLanguage': {
+				'sProcessing': '<s:text name="dataTables.sProcessing"/>',
+				'sLengthMenu': '<s:text name="dataTables.sLengthMenu"/>',
+				'sZeroRecords': '<s:text name="dataTables.sZeroRecords"/>',
+				'sInfo': '<s:text name="dataTables.sInfo"/>',
+				'sInfoEmpty': '<s:text name="dataTables.sInfoEmpty"/>',
+				'sInfoFiltered': '<s:text name="dataTables.sInfoFiltered"/>',
+				'sInfoPostFix': '',
+				'sSearch': '<s:text name="dataTables.sSearch"/>',
+				'sUrl': '',
+				'oPaginate': {
+					'sFirst': '<s:text name="dataTables.oPaginate.sFirst"/>',
+					'sPrevious': '<s:text name="dataTables.oPaginate.sPrevious"/>',
+					'sNext': '<s:text name="dataTables.oPaginate.sNext"/>',
+					'sLast': '<s:text name="dataTables.oPaginate.sLast"/>'
 				}
-			});
-		} else {
-			$('#gameTable').dataTable({
-				'order': [[ 0, 'desc' ]],
-			});
-		}
+			}
+		});
 		
 		var currentUrl = document.location.pathname;
 		var currentPath = currentUrl.substr(currentUrl.lastIndexOf('/') + 1);
