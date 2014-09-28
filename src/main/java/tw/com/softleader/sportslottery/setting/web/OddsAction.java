@@ -25,12 +25,6 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-/**
- * 
- * @author ebikyatto
- *
- */
-
 public class OddsAction extends ActionSupport {
 	private static final long serialVersionUID = 2014L;
 	
@@ -80,31 +74,25 @@ public class OddsAction extends ActionSupport {
 	}
 
 	public String select() throws Exception {
-    	log.debug("select...");
-    	
+    	log.debug("OddsAction select()");
     	Long gameId = model.getGameId();
-    	if (gameId != null && gameId > 0) {
-    		json = new Gson().toJson(service.getByGameId(gameId));
-    	} else {
-    		json = new Gson().toJson(service.getAll());
-    	}
-    	
+    	List<OddsEntity> odds = gameId != null && gameId > 0?
+    								service.getByGameId(gameId):
+    								service.getAll();
+    	json = new Gson().toJson(odds);
     	inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-    	
     	return "select";
     }
     
     public String insert() {
     	log.debug("OddsAction insert()");
-    	
     	String result = null;
     	Long gameId = model.getGameId();
     	String oddType = model.getOddType();
     	BigDecimal oddCombination = model.getOddCombination();
     	BigDecimal oddValue = model.getOddValue();
+    	List<OddsEntity> list = service.getByGameIdWithOddType(gameId, oddType);
     	try {
-	    	List<OddsEntity> list = service.getByGameIdWithOddType(gameId, oddType);
-	    	
 	    	if (list != null && list.size() > 0) {
 	    		model = list.get(0);
 	    		model.setOddCombination(oddCombination);
@@ -113,28 +101,15 @@ public class OddsAction extends ActionSupport {
 	    	} else {
 	    		service.insert(model);
 	    	}
-	    	
     		result = "success";
     	} catch (Exception e) {
+    		e.printStackTrace();
     		result = "failed";
     	}
-    	
     	inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
     	return "message";
     }
     
-    public String update() throws Exception {
-    	log.debug("update...");
-    	service.update(model);
-    	return Action.SUCCESS;
-    }
-    
-    public String delete() throws Exception {
-    	log.debug("delete...");
-    	service.delete(model);
-    	return Action.SUCCESS;
-    }
-
 	@Override
 	public String execute() throws Exception {
 		log.debug("service...");
