@@ -415,8 +415,7 @@
 		//Begin of btnAnnounce
 		$('#btnAnnounce').click(function() {
 			var error = 0;
-			
-			if ($('#announceTitle').val() == "") {
+			if ($('#announceTitle').val() == "" || chkJS($('#announceTitle').val())) {
 				if (!$('#announceTitle').parent().hasClass('has-error')) {
 					$('#announceTitle').parent().addClass('has-error');
 				}
@@ -424,8 +423,7 @@
 			} else {
 				$('#announceTitle').parent().removeClass('has-error');
 			}
-			
-			if ($('#announceContent').val() == "") {
+			if ($('#announceContent').val() == "" || chkJS($('#announceContent').val())) {
 				if (!$('#announceContent').parent().hasClass('has-error')) {
 					$('#announceContent').parent().addClass('has-error');
 				}
@@ -434,6 +432,11 @@
 				$('#announceContent').parent().removeClass('has-error');
 			}
 			
+			function chkJS(str) {
+				var js = new RegExp('<script[^>]*?>[\\s\\S]*?<\/script>');
+				return js.test(str);
+			}
+				
 			if (error > 0) {
 				return;
 			}
