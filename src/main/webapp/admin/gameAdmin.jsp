@@ -695,9 +695,7 @@
 						}
 					} else {
 						$('#teamAwayList')[0].selectedIndex = 0;
-						$('#teamAwayList').change();
 						$('#teamHomeList')[0].selectedIndex = 1;
-						$('#teamHomeList').change();
 						resetInput();
 					}
 				},
@@ -705,20 +703,6 @@
 			});
 		});
 		//End of btnEdit
-		
-		//Begin of teamListChangeEvent
-		$('#teamAwayList').change(function() {
-			var value = $(this).val();
-			$('#teamHomeList option').prop('disabled', false).css('display', 'inline');
-			$('#teamHomeList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
-		});
-		
-		$('#teamHomeList').change(function() {
-			var value = $(this).val();
-			$('#teamAwayList option').prop('disabled', false).css('display', 'inline');
-			$('#teamAwayList option[value=' + value + ']').prop('disabled', true).css('display', 'none');
-		});
-		//End of teamListChangeEvent
 		
 		//Begin of btnStatus
 		$('.btn-status').click(function() {
@@ -759,13 +743,31 @@
 		
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
+			var error = 0;
 			if ($('#gameTime').val().search(/[0-9]/) == -1) {
 				if (!$('#gameTime').parent().hasClass('has-error')) {
 					$('#gameTime').parent().addClass('has-error');
 				}
-				return;
+				error++;
 			} else {
 				$('#gameTime').parent().removeClass('has-error');
+			}
+			
+			if ($('#teamAwayList').val() == $('#teamHomeList').val()) {
+				if (!$('#teamAwayList').parent().hasClass('has-error')) {
+					$('#teamAwayList').parent().addClass('has-error');
+				}
+				if (!$('#teamHomeList').parent().hasClass('has-error')) {
+					$('#teamHomeList').parent().addClass('has-error');
+				}
+				error++;
+			} else {
+				$('#teamAwayList').parent().removeClass('has-error');
+				$('#teamHomeList').parent().removeClass('has-error');
+			}
+			
+			if (error > 0) {
+				return;
 			}
 			
 			var gameId = $(this).val();
