@@ -246,7 +246,6 @@
 		$('#btnMerge').click(function() {
 			var announceId = $(this).val();
 			var error = 0;
-			
 			if ($('#announceTitle').val() == "" || chkJS($('#announceTitle').val())) {
 				if (!$('#announceTitle').parent().hasClass('has-error')) {
 					$('#announceTitle').parent().addClass('has-error');
@@ -269,6 +268,7 @@
 				var js = new RegExp('<script[^>]*?>[\\s\\S]*?<\/script>');
 				return js.test(str);
 			}
+			
 			if (error > 0) {
 				return;
 			}

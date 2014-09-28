@@ -300,8 +300,7 @@
 		//Begin of btnMerge
 		$('#btnMerge').click(function() {
 			var error = 0;
-			
-			if ($('#leagueName').val() == "") {
+			if ($('#leagueName').val() == "" || chkJS($('#leagueName').val())) {
 				if (!$('#leagueName').parent().hasClass('has-error')) {
 					$('#leagueName').parent().addClass('has-error');
 				}
@@ -310,7 +309,7 @@
 				$('#leagueName').parent().removeClass('has-error');
 			}
 			
-			if ($('#leagueNameEn').val() == "") {
+			if ($('#leagueNameEn').val() == "" || chkJS($('#leagueNameEn').val())) {
 				if (!$('#leagueNameEn').parent().hasClass('has-error')) {
 					$('#leagueNameEn').parent().addClass('has-error');
 				}
@@ -319,7 +318,7 @@
 				$('#leagueNameEn').parent().removeClass('has-error');
 			}
 			
-			if ($('#teamName').val() == "") {
+			if ($('#teamName').val() == "" || chkJS($('#teamName').val())) {
 				if (!$('#teamName').parent().hasClass('has-error')) {
 					$('#teamName').parent().addClass('has-error');
 				}
@@ -328,13 +327,18 @@
 				$('#teamName').parent().removeClass('has-error');
 			}
 			
-			if ($('#teamNameEn').val() == "") {
+			if ($('#teamNameEn').val() == "" || chkJS($('#teamNameEn').val())) {
 				if (!$('#teamNameEn').parent().hasClass('has-error')) {
 					$('#teamNameEn').parent().addClass('has-error');
 				}
 				error++;
 			} else {
 				$('#teamNameEn').parent().removeClass('has-error');
+			}
+			
+			function chkJS(str) {
+				var js = new RegExp('<script[^>]*?>[\\s\\S]*?<\/script>');
+				return js.test(str);
 			}
 			
 			if (error > 0) {
