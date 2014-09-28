@@ -34,7 +34,7 @@
 							<div class="col-sm-12">
 								<ul class="breadcrumb">
 		  							<li><a href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-home"></i><span class="left5"><s:text name="admin.home"/></span></a></li>
-		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i></i><span class="left5"><s:text name="admin.adminChart"/></span></li>
+		  							<li class="active"><i class="fa fa-fw fa-line-chart"></i><span class="left5"><s:text name="admin.adminChart"/></span></li>
 								</ul>
 							</div>
 						</div>
