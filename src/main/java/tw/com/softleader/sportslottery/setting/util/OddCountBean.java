@@ -1,6 +1,7 @@
 package tw.com.softleader.sportslottery.setting.util;
 
 import java.math.BigDecimal;
+
 import org.joda.time.LocalDate;
 //這個bean 主要用於儲存遊時間和隊伍名稱相關的odd資訊和以及購買數 和 odd在當天購賣的百分比
 public class OddCountBean {

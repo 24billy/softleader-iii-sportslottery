@@ -3,9 +3,7 @@ package tw.com.softleader.sportslottery.setting.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -28,6 +26,7 @@ import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 @Service
 public class UserService extends GenericService<UserEntity> {
+	
 	@Autowired
 	private UserDao dao;
 	private Logger log = LoggerFactory.getLogger(UserService.class);

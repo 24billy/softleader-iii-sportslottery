@@ -15,25 +15,25 @@ public class AdminLogDao extends GenericDao<AdminLogEntity> {
 	
 	public List<AdminLogEntity> findInLastMonth() {
 		return getSession().createCriteria(AdminLogEntity.class)
-				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(-1)))
+				.add(Restrictions.gt("enteredTime", LocalDateTime.now().minusMonths(1)))
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
 	}
 	
 	public List<AdminLogEntity> findInLastThreeMonths() {
 		return getSession().createCriteria(AdminLogEntity.class)
-				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(-3)))
+				.add(Restrictions.gt("enteredTime", LocalDateTime.now().minusMonths(3)))
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
 	}
 	
 	public List<AdminLogEntity> findInLastSixMonths() {
 		return getSession().createCriteria(AdminLogEntity.class)
-				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusMonths(-6)))
+				.add(Restrictions.gt("enteredTime", LocalDateTime.now().minusMonths(6)))
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
 	}
 	
 	public List<AdminLogEntity> findInLastYear() {
 		return getSession().createCriteria(AdminLogEntity.class)
-				.add(Restrictions.gt("enteredTime", LocalDateTime.now().plusYears(-1)))
+				.add(Restrictions.gt("enteredTime", LocalDateTime.now().minusYears(1)))
 				.add(Restrictions.le("enteredTime", LocalDateTime.now())).list();
 	}
 	

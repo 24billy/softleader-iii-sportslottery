@@ -10,10 +10,8 @@ import org.joda.time.LocalDateTime;
 //包含投注型態，投注數，是否過關，過關比數(此注過關數/此場比賽單筆總購買數)，比賽隊伍，比賽時間，比賽ID
 public class CountBean implements Comparable<CountBean>, Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2014L;
+	
 	private Long count;
 	private String oddType;
 
