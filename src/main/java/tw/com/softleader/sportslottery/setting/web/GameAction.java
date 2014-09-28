@@ -481,16 +481,12 @@ public class GameAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("GameAction admin()");
-		
 		maxGameNum = service.maxGameNum();
 		ballTypes = service.getBallTypes();
-		
-		if (!StringUtils.isEmpty(catagory)) {
-			json = new Gson().toJson(service.getByBallType(catagory));
-		} else {
-			json = new Gson().toJson(service.getByBallType(service.getBallTypes().get(0)));
-		}
-		
+		List<GameEntity> games = !StringUtils.isEmpty(catagory)?
+									service.getByBallType(catagory):
+									service.getByBallType(service.getBallTypes().get(0));
+		json = new Gson().toJson(games);
 		return Action.SUCCESS;
 	}
 	

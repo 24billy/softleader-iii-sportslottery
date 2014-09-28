@@ -27,6 +27,10 @@
   	
   	<action name="teamAdmin" class="teamAction" method="admin">
   		<result name="success">/admin/teamAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
   		<result name="select" type="stream">
 			<param name="contentType">text/plain</param>
 			<param name="inputName">inputStream</param>
