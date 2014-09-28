@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
 import tw.com.softleader.sportslottery.common.service.GenericService;
@@ -102,5 +103,17 @@ public class TeamService extends GenericService<TeamEntity> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<TeamEntity> getTeamList(String leagueName) {
+		return !StringUtils.isEmpty(leagueName)?
+				getTeamsByLeagueName(leagueName):
+				getTeamsByLeagueName(leagueNames().get(0));
+	}
+	
+	public List<TeamEntity> getTeamListEn(String leagueName) {
+		return !StringUtils.isEmpty(leagueName)?
+				getTeamsByLeagueNameEn(leagueName):
+				getTeamsByLeagueNameEn(leagueNamesEn().get(0));
 	}
 }

@@ -68,26 +68,20 @@ public class TeamAction extends ActionSupport {
 		return inputStream;
 	}
 	
-	@Override
-	public void validate() {
-		
-	}
-	
 	public String select() {
 		log.debug("TeamAction select()");
 		Long teamId = model.getId();
 		String leagueName = model.getLeagueName();
-		if (teamId != null && teamId > 0) {
-			json = new Gson().toJson(service.getById(teamId));
-		} else if (!StringUtils.isEmpty(leagueName)) {
-			if (locale.getLanguage().equals("zh")) {
-				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
-			} else {
-				json = new Gson().toJson(service.getTeamsByLeagueNameEn(leagueName));
-			}
+		TeamEntity team = teamId != null && teamId > 0? service.getById(teamId): null;
+		List<TeamEntity> teams = null;
+		if (!StringUtils.isEmpty(leagueName)) {
+			teams = locale.getLanguage().equals("zh")?
+						service.getTeamsByLeagueName(leagueName):
+						service.getTeamsByLeagueNameEn(leagueName);
 		} else {
-			json = new Gson().toJson(service.getAll());
+			teams = service.getAll();
 		}
+		json = team != null? new Gson().toJson(team): new Gson().toJson(teams);
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
@@ -96,88 +90,52 @@ public class TeamAction extends ActionSupport {
 		log.debug("execute TeamAction");
 		json = new Gson().toJson(service.getAll());
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-		
-		return SUCCESS;
+		return Action.SUCCESS;
 	}
 	
 	public String delete(){
 		log.debug("TeamAction delete()");
-		log.debug("Model = {}", model);
-		
+		String result = null;
 		try {
-			model = service.getById(model.getId());
-			service.delete(model);
+			service.delete(service.getById(model.getId()));
+			result = "success";
 		} catch (Exception e) {
-			log.debug("!!TeamAction deleteFail!!");
-			addFieldError("QueryFail", "Delete Fail : Target already delete");
+			e.printStackTrace();
+			result = "failed";
 		}
-
-		json = new Gson().toJson(service.getAll());
-		
-		return Action.SUCCESS;
-	}
-	
-	public String update() {
-		log.debug("TeamAction update()");
-//		model.setModifier("guest");
-//		model.setModifiedTime(LocalDateTime.now());
-		log.debug("Model = {}", model);
-		try {
-			service.update(model);
-		} catch (Exception e) {
-			log.debug("!!TeamAction updateFail!!");
-			addFieldError("QueryFail","Update Fail : update failed");
-		}
-
-		models = service.getAll();
-		
-		return SUCCESS;
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
 	}
 	
 	public String insert() {
 		log.debug("TeamAction insert()");
-		log.debug("Model = {}", model);
+		String result = null;
+		Long teamId = model.getId();
 		try {
-			if (model.getId() != null && model.getId() > 0) {
-				service.update(model);
-			} else {
-				service.insert(model);
-			}
+			if (teamId != null && teamId > 0) service.update(model);
+			else service.insert(model);
+			result = "success";
 		} catch (Exception e) {
-			log.debug("!!TeamAction insertFail!!");
-			addFieldError("QueryFail","Insert Fail : target not found");
+			e.printStackTrace();
+			result = "failed";
 		}
-		
-		json = new Gson().toJson(service.getAll());
-		
-		return Action.SUCCESS;
+		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+		return "message";
 	}
 	
 	public String admin() {
 		log.debug("TeamAction admin()");
-		System.out.println(locale.getLanguage());
-		if (locale.getLanguage().equals("zh")) {
-			if (!StringUtils.isEmpty(leagueName)) {
-				json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
-			} else {
-				json = new Gson().toJson(service.getTeamsByLeagueName(service.leagueNames().get(0)));
-			}
-		} else {
-			if (!StringUtils.isEmpty(leagueName)) {
-				json = new Gson().toJson(service.getTeamsByLeagueNameEn(leagueName));
-			} else {
-				json = new Gson().toJson(service.getTeamsByLeagueNameEn(service.leagueNamesEn().get(0)));
-			}
-		}
-		
+		List<TeamEntity> teams = 
+				locale.getLanguage().equals("zh")?
+				service.getTeamList(leagueName):
+				service.getTeamListEn(leagueName);
+		json = new Gson().toJson(teams);
 		return Action.SUCCESS;
 	}
 	
 	public String getTeamsByLeagueName(){
 		System.out.println("leagueName"+leagueName);
 		json = new Gson().toJson(service.getTeamsByLeagueName(leagueName));
-
-//		json = new Gson().toJson(service.getTeamsByLeagueName(model.getLeagueName()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "getTeamsByCountry";
 	}
@@ -185,30 +143,24 @@ public class TeamAction extends ActionSupport {
 	public String getLeagueNames() {
 		log.debug("TeamAction getLeagueNames()");
 		String ballType = model != null? model.getBallType():null;
-				
-		if (locale.getLanguage().equals("zh")) {
-			if (ballType != null) {
-				json = new Gson().toJson(service.getLeagueNamesByBallType(ballType));
-			} else {
-				json = new Gson().toJson(service.leagueNames());
-			}
+		List<String> leagueNames = null;
+		if (ballType != null) {
+			leagueNames = locale.getLanguage().equals("zh")?
+							service.getLeagueNamesByBallType(ballType):
+							service.getLeagueNamesByBallTypeEn(ballType);
 		} else {
-			if (ballType != null) {
-				json = new Gson().toJson(service.getLeagueNamesByBallTypeEn(ballType));
-			} else {
-				json = new Gson().toJson(service.leagueNamesEn());
-			}
+			leagueNames = locale.getLanguage().equals("zh")?
+							service.leagueNames():
+							service.leagueNamesEn();
 		}
-		
+		json = new Gson().toJson(leagueNames);
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
 	
 	public String getBallTypes() {
 		log.debug("TeamAction getBallTypes()");
-		
 		json = new Gson().toJson(service.getBallTypes());
-		
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
