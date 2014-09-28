@@ -1,6 +1,11 @@
 package tw.com.softleader.sportslottery.setting.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +64,43 @@ public class TeamService extends GenericService<TeamEntity> {
 	
 	public List<String> leagueCodes() {
 		return dao.leagueCodes();
+	}
+	
+	public void setToProperties(TeamEntity team) {
+		URL url = getClass().getClassLoader().getResource("/locale/team.properties");
+		URL urlEn = getClass().getClassLoader().getResource("/locale/team_en_US.properties");
+		URL urlZh = getClass().getClassLoader().getResource("/locale/team_zh_TW.properties");
+		
+		String leagueKey = "league." + team.getLeagueCode();
+		String leagueEn = team.getLeagueNameEn();
+		String leagueZh = team.getLeagueName();
+		String teamKey = "team." + team.getTeamCode();
+		String teamEn = team.getTeamNameEn();
+		String teamZh = team.getTeamName();
+		
+		setKeyToProperties(url, leagueKey, leagueEn);
+		setKeyToProperties(url, teamKey, teamEn);
+		setKeyToProperties(urlEn, teamKey, teamEn);
+		setKeyToProperties(urlEn, leagueKey, leagueEn);
+		setKeyToProperties(urlZh, teamKey, teamZh);
+		setKeyToProperties(urlZh, leagueKey, leagueZh);
+	}
+	
+	private void setKeyToProperties(URL url, String key, String value) {
+		try {
+			File file = new File(url.toURI());
+			if (file != null) {
+				FileInputStream in = new FileInputStream(file);
+				FileOutputStream out = new FileOutputStream(file);
+				Properties properties = new Properties();
+				properties.load(in);
+				in.close();
+				properties.setProperty(key, value);
+				properties.store(out, null);
+				out.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
