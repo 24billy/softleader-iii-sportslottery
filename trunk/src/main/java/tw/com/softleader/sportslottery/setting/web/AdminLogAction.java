@@ -56,30 +56,24 @@ public class AdminLogAction extends ActionSupport {
 
 	public String select() {
 		log.debug("AdminLogAction select()");
-		Long adminLogId = null;
-		if (model != null) {
-			adminLogId = model.getId();
-		}
-		if (adminLogId != null && adminLogId > 0) {
-			json = new Gson().toJson(service.getById(adminLogId));
-		}
+		json = new Gson().toJson(service.getById(model.getId()));
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-	
 		return "select";
 	}
 	
 	public String insert() {
 		log.debug("AdminLogAction insert()");
+		Long logId = model.getId();
 		String result = null;
 		try {
-			service.update(model);
+			if (logId != null && logId > 0) service.update(model);
+			else service.insert(model);
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "failed";
 		}
 		inputStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
-		
 		return "message";
 	}
 	
@@ -102,7 +96,6 @@ public class AdminLogAction extends ActionSupport {
 		log.debug("AdminLogAction admin()");
 		List<Long> sums = service.getSumOfLastYear();
 		json = new Gson().toJson(sums);
-		
 		return Action.SUCCESS;
 	}
 	
@@ -110,5 +103,4 @@ public class AdminLogAction extends ActionSupport {
 		log.debug("AdminLogAction execute()");
 		return Action.SUCCESS;
 	}
-
 }
