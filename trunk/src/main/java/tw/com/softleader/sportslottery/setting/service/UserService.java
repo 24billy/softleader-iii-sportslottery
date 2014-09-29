@@ -128,6 +128,7 @@ public class UserService extends GenericService<UserEntity> {
 		entity.setUserEmail(email);		
 		return dao.insert(this.encoding(entity));
 	}
+	
 	public String sendLockmail(UserEntity userEntity) {
 		String body = "親愛的" + userEntity.getUserName() + "您的驗證碼為:"
 				+ userEntity.getUserState();
@@ -210,13 +211,13 @@ public class UserService extends GenericService<UserEntity> {
 		return null;
 	}
 	
+	//根據創帳號時間蒐尋
 	public List<UserEntity> getByCreateTime(LocalDate CREATE_TIME) {
 		return dao.findByCreateTime(CREATE_TIME);
 	}
 	
+	//更新使用者虛擬幣
 	public int updateUserCoin(Long userId, Long coin){
-		
-		
 		return dao.updateUserCoin(userId, coin);
 	}
 	

@@ -205,7 +205,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		//model.setUserId(2L);		
 	    //從session中取出userId
 	    Map session = ActionContext.getContext().getSession();
-	        UserEntity user = (UserEntity)session.get("user");
+	    UserEntity user = (UserEntity)session.get("user");
 	    
 	    String lastToken = null;
 		try {

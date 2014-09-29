@@ -31,7 +31,7 @@
 		display:inline-block;
 		width:50px;
 	}
-	#pass3,#pass3-2
+	#pass3,#pass3-2,#ToolTables_oddTable_0,#ToolTables_oddTable_1,#ToolTables_oddTable_3,#ToolTables_oddTable_4
 	{
 		diaplay:none;
 	}
@@ -74,6 +74,7 @@
 							</label>
 						</div>
 						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
+						<button type="button" class="btn btn-default" id="write">匯出</button>
 					</form>
 				</div>
 			</div>
@@ -122,6 +123,7 @@
 
 <script>
 	(function($) {
+		
 		$(window).off('resize');
 		$('#timeBegin').datetimepicker({
 			format: 'Y-m-d',
@@ -418,7 +420,10 @@
 								}
 							},
 							'data': lotteryInfo,
-							
+							"dom": 'T<"clear">lfrtip',
+					        "tableTools": {
+					            "sSwfPath": '<c:url value="/swf/copy_csv_xls_pdf.swf"/>'
+					        },
 					        'columns': [
 					        		{
 					        		'class':'details-control',
@@ -473,6 +478,7 @@
 					    	}
 					    });
 						
+						//領獎
 						$('#oddList').on('click', 'button.capitalBtn', function () {
 							var lotteryId = $('.sorting_1',$(this).parent().parent()).text();
 							//alert('haha123');
@@ -494,6 +500,28 @@
 							})
 						});
 						
+						//write
+						$('#write').click(function () {
+							var input = JSON.stringify(lotteryInfo);
+							//$.each(lotteryInfo,function(index,lottery) {
+								//console.log(lottery);
+								//$.each(lottery.odds,function(index,odd) {
+									$.ajax({
+										url:"<c:url value='/writeDatas'/>",
+										type:'post',
+										data:{
+											//'id':lottery.id,
+											//'date':lottery.date,
+											//'gameTime':odd.gameTime,
+											'datas':input,
+										},
+										success:function(data) {
+											console.log("1231321321321");									
+										}
+									});
+								});
+							//})
+						//});
 					//});//ajaxStop	
 				}//success
 			});//ajax
