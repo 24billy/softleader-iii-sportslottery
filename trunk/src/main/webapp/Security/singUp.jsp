@@ -323,7 +323,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-user"></span> 
 												</span> 
-												<input type="text" class="form-control" id="accountf" name="model.userAccount"
+												<input type="text" class="input-sm form-control" id="accountf" name="model.userAccount"
 												placeholder="輸入帳號"  />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -335,7 +335,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-lock"></span> 
 												</span> 
-												<input type="password" class="form-control" id="passwordf" name="userPassword"
+												<input type="password" class="input-sm form-control" id="passwordf" name="userPassword"
 												placeholder="輸入密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -348,7 +348,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-check"></span> 
 												</span> 
-												<input type="password" class="form-control" id="confirm_password"
+												<input type="password" class="input-sm form-control" id="confirm_password"
 													name="confirm_password" placeholder="確認密碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -360,7 +360,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"></span> 
 												</span> 
-												<input type="text" class="form-control" id="userBirth"
+												<input type="text" class="input-sm form-control" id="userBirth"
 													name="model.userBirthday" placeholder="日期"/>
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -372,7 +372,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-envelope"></span> 
 												</span> 
-												<input type="email" class="form-control" id="email"
+												<input type="email" class="input-sm form-control" id="email"
 													name="model.userEmail" placeholder="user@email.com" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -386,7 +386,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-pencil"></span> 
 												</span> 
-												<input type="text" class="form-control" id="name" name="model.userName"
+												<input type="text" class="input-sm form-control" id="name" name="model.userName"
 												placeholder="輸入姓名" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -399,7 +399,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-tag"></span> 
 												</span> 
-												<input type="text"class="form-control" id="userId" name="model.userCardId"
+												<input type="text"class="input-sm form-control" id="userId" name="model.userCardId"
 												placeholder="輸入號碼" />
 											</div>
 											<span class="glyphicon form-control-feedback"></span>
@@ -412,7 +412,7 @@ hr {
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-phone"></span> 
 												</span> 
-												<input type="text" class="form-control" id="phone" name="model.userPhone"
+												<input type="text" class="input-sm form-control" id="phone" name="model.userPhone"
 												placeholder="輸入號碼" />
 											</div>
 											<span class="glyphicon"></span>
@@ -421,20 +421,20 @@ hr {
 										
 										<div>
 											<label for="ba">匯款帳號</label>&nbsp;
-											<select name="select-transfer" id="select-transfer">
+											<select name="select-transfer" class="input-sm" id="select-transfer">
 											  	<option value="POST">郵局帳戶</option>
 											  	<option value="BOT">台灣銀行</option>
 											</select>
-											<div class="post-div">
-												<input name="post1" class="post1" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
-												<input name="post2" class="post2" size="1.6" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
-												<input name="post3" class="post3" size="5" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
-												<input class="post4" size="1.6" type="text" placeholder="檢號" name="post4">&nbsp;
+											<div class="post-div top10">
+												<input name="post1" class="post1 input-sm" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
+												<input name="post2" class="post2 input-sm" size="1.6" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
+												<input name="post3" class="post3 input-sm" size="5" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
+												<input class="post4 input-sm" size="1.6" type="text" placeholder="檢號" name="post4">&nbsp;
 											</div>
 											<div class="bot-div">
-												<input type="text" class="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
+												<input type="text" class="input-sm form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
 											</div>
-											<input type="text" id="credit" name="model.userBankAccount" style="display:none;"/>
+											<input type="text" class="input-sm" id="credit" name="model.userBankAccount" style="display:none;"/>
 											<div class="errorMsg"></div>
 										</div>
 									</div>
@@ -445,7 +445,7 @@ hr {
 							</form>
 						</div>
 					</div>
-					<div id="info-form" class="col-md-4 hidden-sm hidden-xs">
+					<div id="info-form" class="col-md-4 hidden-xs">
 						<form>
 							<legend>
 								<span class="glyphicon glyphicon-user"></span>  
