@@ -1,10 +1,7 @@
 package tw.com.softleader.sportslottery.setting.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +24,68 @@ public class GameServiceTest extends BaseTest  {
 ////	GameEntity model=null;
 //	@Test
 //	public void testGetAll() {
-//
+//		List<GameEntity> games=gameService.getAll();
+//		assertNotNull(games);
+//		System.out.println("印出所有GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of all GameEntity: "+ games.size());
+//		
 //	}
+//	
+//	@Test
+//	public void testGetByBallType(){
+//		String ballType="Baseball";
+//		List<GameEntity> games = gameService.getByBallType(ballType);
+//		System.out.println("印出使用getByBallType得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of all getByBallType ("+ballType + "): "+ games.size());
+//		
+//	}
+//	
+//	@Test
+//	public void testGetForHistory(){
+//		LocalDate timeFrom = LocalDate.parse("2014-08-26"), timeTo = LocalDate.parse("2014-09-27");
+//		String teamName = "底特律老虎";
+//		List<GameEntity> games = gameService.getForHistory(timeFrom, timeTo, teamName);
+//		System.out.println("印出使用getForHistory得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of getForHistory("+timeFrom +", "+timeTo+", "+teamName+ "): "+ games.size());	
+//	}
+//	
+//	@Test
+//	public void testGetByGameNum(){
+//		Long gameNum=111L;
+//		GameEntity game = gameService.getByGameNum(gameNum);
+//		log.debug("getByGameNum={}", game);
+//	}
+//	
+//	@Test 
+//	public void testGetComplex(){
+//		Long gameNum =null, gameStatusMin=null, gameStatusMax=null;
+//		String teamName=null, ballType=null, leagueName=null;
+//		LocalDate timeBegin=null, timeEnd=null;
+//		List<GameEntity> games = gameService.getComplex(gameNum, teamName, gameStatusMin, gameStatusMax, timeBegin, timeEnd, ballType, leagueName);
+//		System.out.println("印出使用getComplex得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of getComplex("+gameNum +", "+teamName+", "+gameStatusMin+", "+gameStatusMax+", "+timeBegin+", "+timeEnd+", "+ballType+", "+leagueName+ "): "+ games.size());		
+//	}
+//	
+//	@Test
+//	public void testMaxGameNum(){
+//		Long max = gameService.maxGameNum();
+//		log.debug("maxGameNum ={}", max);//maxGameNum =150
+//	}
+//	
+
+	
 //
 //	@Test
 //	public void testGetById() {
@@ -63,6 +120,16 @@ public class GameServiceTest extends BaseTest  {
 //	public void testGetAllJSON() {
 //		
 //	}
+//	@Test
+//	public void testGetGameIdByGameNum(){
+//		Long gameNum;
+////		gameNum=111L;//gameId=11
+//		gameNum=null;//gameId=null
+//		
+//		Long gameId = gameService.getGameIdByGameNum(gameNum);
+//		log.debug("getGameIdByGameNum ={}", gameId);
+//	}
+	
 	
 //	@Test
 //	public void testGetTotalCount(){
@@ -118,9 +185,9 @@ public class GameServiceTest extends BaseTest  {
 //	}
 	
 //	@Test
-//	public void testGetGraphBarByGameId(){
+//	public void testGetCountInfoByGameId(){
 //		Long gameId=2L;
-//		Map<String, CountBean> map = gameService.getCountInfoByGameId(gameId);
+//		Map<String, CountBean> map = gameService.getgetCountInfoByGameId(gameId);
 //		log.debug("graphBar = {}", map.toString());
 //		//result:graphBar = {
 //		//ATS_H= CountBean [count=500, oddType=ATS_H, percentage=0, gameId=2, isPass=false], 
@@ -148,7 +215,7 @@ public class GameServiceTest extends BaseTest  {
 //		System.out.println("size of listMap: "+ listMap.size() );
 //
 //	}
-	
+//	
 //	@Test
 //	public void testGetAllCountHistoryByTeam(){
 //		String teamName= "紐約洋基";
@@ -164,7 +231,7 @@ public class GameServiceTest extends BaseTest  {
 //		map2 = gameService.getSortByComparator(gameService.getCountInfoByGameId(36L));
 //		log.debug("map2 = {}", map2.toString());
 //	}
-	
+//	
 //	@Test
 //	public void testGetPopularOdd(){
 //		String teamName= "密爾瓦基釀酒人";
@@ -179,7 +246,7 @@ public class GameServiceTest extends BaseTest  {
 //
 //
 //	}
-	
+//	
 //	@Test
 //	public void testAddMaxBeanToCountHistory(){
 ////		String teamName= "密爾瓦基釀酒人";
@@ -195,8 +262,8 @@ public class GameServiceTest extends BaseTest  {
 //
 //		
 //	}
-	
-
+//	
+//
 //	@Test
 //	public void testGetGameByLocalDateTime(){
 //		String gameTimeStr="2014-09-16T08:55";
@@ -209,10 +276,11 @@ public class GameServiceTest extends BaseTest  {
 //		}
 //		System.out.println("size of games = "+ games.size());
 //	}
-	
+//	
 //	@Test
 //	public void testGetCountInfoHistoryPrevious3month(){
-//		String teamName= "底特律老虎";
+//		String teamName= null;
+////		teamName= "底特律老虎";
 //		Long gameId =null;
 //		List<Map<String, CountBean>> games=gameService.getCountInfoHistoryPrevious3month(teamName, gameId);
 //		Iterator it= games.iterator();
@@ -222,27 +290,37 @@ public class GameServiceTest extends BaseTest  {
 //		System.out.println("the size of games: "+games.size());
 //		
 //	}
-	
-	@Test
-	public void testGetAllCountHistoryByTimePrevious3Month(){
-		//List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(null);
-		LocalDate date1 = new LocalDate();
-		date1 = LocalDate.parse("2014-09-26");//將時間自串轉成 LocalDate
-		try {
-			List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(date1);
-			System.out.println(games.toString());
-			Iterator it= games.iterator();
-			while(it.hasNext()){
-				System.out.println(it.next());
-			}
-			
-			System.out.println("the size of games: "+ games.size());
-		} catch (Exception e) {
-			System.out.println("game is null in test");
-			e.printStackTrace();
-		}
-	}
-	
+//	@Test
+//	public void testGetAllCountHistoryByTime(){
+//		LocalDate timeTo=LocalDate.parse("2014-09-26");
+//		List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTime(timeTo);
+//		Iterator it= games.iterator();
+//		while(it.hasNext()){
+//			System.out.println(it.next());
+//		}
+//		System.out.println("the size of games before "+timeTo.toString()+": "+games.size());
+//	}
+//	
+//	@Test
+//	public void testGetAllCountHistoryByTimePrevious3Month(){
+//		//List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(null);
+//		LocalDate date1 = new LocalDate();
+//		date1 = LocalDate.parse("2014-09-26");//將時間自串轉成 LocalDate
+//		try {
+//			List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(date1);
+//			System.out.println(games.toString());
+//			Iterator it= games.iterator();
+//			while(it.hasNext()){
+//				System.out.println(it.next());
+//			}
+//			
+//			System.out.println("the size of games: "+ games.size());
+//		} catch (Exception e) {
+//			System.out.println("game is null in test");
+//			e.printStackTrace();
+//		}
+//	}
+//	
 //	@Test
 //	public void testGetAllCountHistoryByTimePrevious3Days(){
 //		LocalDate date1 = new LocalDate();
@@ -254,5 +332,48 @@ public class GameServiceTest extends BaseTest  {
 //		}
 //		System.out.println("the size of games: "+ games.size());
 //	}
+//	@Test
+//	public void testGetFinishedGameToday(){
+//		List<GameEntity> games = gameService.getFinishedGameToday();
+//		System.out.println("印出使用getFinishedGameToday得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of getFinishedGameToday: "+ games.size());		
+//
+//	}
+//	
+//	@Test
+//	public void testGetLatestFiveRecord(){
+//		List<GameEntity> games = gameService.getLatestFiveRecord();
+//		System.out.println("印出使用getLatestFiveRecord得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of getLatestFiveRecord: "+ games.size());		
+//
+//	}
+//	
+//	@Test
+//	public void testGetGameOnComing(){
+//		List<GameEntity> games = gameService.getGameOnComing();
+//		System.out.println("印出使用getGameOnComing得出的 GameEntity內容:");
+//		for(GameEntity game : games){
+//			System.out.println(game);
+//		}
+//		System.out.println("size of getGameOnComing: "+ games.size());		
+//
+//	}
+	
+	@Test
+	public void testGetBallTypes(){
+		List<String> typeList = gameService.getBallTypes();
+		System.out.println("印出使用getBallTypes得出的 type內容:");
+		for(String type : typeList){
+			System.out.println(type);
+		}
+		System.out.println("size of getBallTypes: "+ typeList.size());		
+		
+	}
 
 }
