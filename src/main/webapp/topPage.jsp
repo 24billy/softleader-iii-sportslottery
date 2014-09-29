@@ -84,7 +84,7 @@
 	        <div class="navbar-header">
 	
 	                <a class="navbar-brand" href='<c:url value="/goIndex"/>'>Sports Lottery Mania</a>
-	                <span id="digiclock" class="hidden-xs" style="float: left"></span>
+	                <span id="digiclock" class="hidden-xs" style="float:left;"></span>
 	                       
 	        <script type="text/javascript">
 	            $(document).ready(function() {

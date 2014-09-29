@@ -107,8 +107,8 @@
 
 
 <!--  sidepanel start   -->
-<div id="sidr" hidden="true">
-  <!-- lottery content -->
+<div id="sidr" hidden="true" >
+<!-- lottery content -->
 <!--start lottery panel  -->
         <div class="panel panel-primary">
             <div class="panel-heading ">
