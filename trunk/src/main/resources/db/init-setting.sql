@@ -57,7 +57,37 @@ INSERT INTO TEAM(TEAM_NAME,TEAM_NAME_EN,LEAGUE_NAME,LEAGUE_NAME_EN,BALL_TYPE,TEA
 INSERT INTO TEAM(TEAM_NAME,TEAM_NAME_EN,LEAGUE_NAME,LEAGUE_NAME_EN,BALL_TYPE,TEAM_CODE,LEAGUE_CODE) VALUES ('樂天巨人','Lotte Giants','韓國職棒','Korea Baseball Organization','Baseball','LG','KBO');
 INSERT INTO TEAM(TEAM_NAME,TEAM_NAME_EN,LEAGUE_NAME,LEAGUE_NAME_EN,BALL_TYPE,TEAM_CODE,LEAGUE_CODE) VALUES ('韓華老鷹','Hanwha Eagles','韓國職棒','Korea Baseball Organization','Baseball','HE','KBO');
 INSERT INTO TEAM(TEAM_NAME,TEAM_NAME_EN,LEAGUE_NAME,LEAGUE_NAME_EN,BALL_TYPE,TEAM_CODE,LEAGUE_CODE) VALUES ('起亞老虎','Kia Tigers','韓國職棒','Korea Baseball Organization','Baseball','KT','KBO');
-
+/*NBA*/
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('波士頓塞爾提克','Boston Celtics','BC','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('布魯克林籃網','Brooklyn Nets','BN','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('紐約尼克','New York Knicks','NYK','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('費城76人','Philadelphia 76ers','P76','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('多倫多暴龍','Toronto Raptors','TR','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('芝加哥公牛','Chicago Bulls','CB','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('克里夫蘭騎士','Cleveland Cavaliers','CC','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('底特律活塞','Detroit Pistons','DP','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('印第安納溜馬','Indiana Pacers','IP','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('密爾瓦基公鹿','Milwaukee Bucks','MB','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('亞特蘭大老鷹','Atlanta Hawks','AH','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('夏洛特黃蜂','Charlotte Hornets','CH','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('邁阿密熱火','Miami Heat','MH','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('奧蘭多魔術','Orlando Magic','OM','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('華盛頓巫師','Washington Wizards','WW','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('達拉斯小牛','Dallas Mavericks','DM','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('休士頓火箭','Houston Rockets','HR','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('孟菲斯灰熊','Memphis Grizzlies','MG','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('紐奧良鵜鶘','New Orleans Pelicans','MOP','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('聖安東尼奧馬刺','San Antonio Spurs','SAS','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('丹佛掘金','Denver Nuggets','DN','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('明尼蘇達灰狼','Minnesota Timberwolves','MT','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('俄克拉何馬城雷霆','Oklahoma City Thunder','OCT','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('波特蘭拓荒者','Portland Trail Blazers','RTB','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('猶他爵士','Utah Jazz','UJ','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('金州勇士','Golden State Warriors','GSW','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯快船','Los Angeles Clippers','LAC','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯湖人','Los Angeles Lakers','LAL','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('菲尼克斯太陽','Phoenix Suns','PS','全美籃球協會','National Basketball Association','NBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('沙加緬度國王','Sacramento Kings','SK','全美籃球協會','National Basketball Association','NBA','Basketball');
 
 INSERT INTO game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,TEAM_HOME,TEAM_AWAY,BALL_TYPE,IS_END,GAME_STATUS) VALUES ('2014-09-10T17:35:00',101,4,3,9,4,'Baseball','TRUE',2);
 INSERT INTO game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,TEAM_HOME,TEAM_AWAY,BALL_TYPE,IS_END,GAME_STATUS) VALUES ('2014-09-10T17:25:00',102,4,3,13,10,'Baseball','TRUE',2);
