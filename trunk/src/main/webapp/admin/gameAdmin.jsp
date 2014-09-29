@@ -70,7 +70,7 @@
 						<div class="row top20 container-table">
 							<div class="col-sm-12">
 								<div class="table-responsive">
-									<table id="gameTable" class="compact hover order-column row-border">
+									<table id="gameTable" class="compact hover order-column row-border nowrap">
 										<thead>
 											<tr>
 												<th><s:text name="admin.game.gameNum"/></th>

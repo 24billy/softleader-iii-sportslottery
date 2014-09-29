@@ -15,13 +15,6 @@ textarea {
 	resize: none;
 }
 
-td {
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 #loginTitle {
 	color: #fff;
 }
@@ -47,6 +40,12 @@ td {
 
 #page-wrapper .container-right {
     background-color: transparent;
+}
+
+.table-responsive {
+   border: none;
+   overflow: auto;
+   width: 100%;
 }
 
 .container-table {

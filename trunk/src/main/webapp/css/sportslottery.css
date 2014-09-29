@@ -16,6 +16,12 @@ table {
 	border-radius: 5px;
 }
 
+.table-responsive {
+   border: none;
+   overflow: auto;
+   width: 100%;
+}
+
 .navbar-center {
 	float: left;
 	text-align: center;
