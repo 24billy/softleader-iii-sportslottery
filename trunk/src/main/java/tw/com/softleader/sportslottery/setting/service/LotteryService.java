@@ -202,29 +202,37 @@ public class LotteryService extends GenericService<LotteryEntity> {
             return win;    
 
     }
+    
+    //此方法用在getCombination
+    //在a組中，取出n個數的排列組合
+    //b 輔助空間，保存待輸出組合數
+    //begin 和 index使用時輸入是0，測試見下一個方法combine(BigDecimal[] a, int n)
     private void getCombination(BigDecimal[] a, int n, int begin, BigDecimal[] b, int index) {  
-        
-        if(n == 0){
+        if(n == 0){ //如果夠n個數了，輸出b數組
             BigDecimal temp=new BigDecimal(1);
             for(int i = 0; i < index; i++){  
                 System.out.print(b[i] + " ");
-                temp=temp.multiply(b[i]);
+                temp=temp.multiply(b[i]);//選出的組合數相乘
             }
             System.out.println();
             System.out.println("temp:"+temp); 
-            this.result=this.result.add(temp);
-            
+            this.result=this.result.add(temp);//測試時 需要注解掉，防止得到result的null
             return;
-        }  
-              
+        }       
         for(int i = begin; i < a.length; i++){  
-              
             b[index] = a[i];  
             getCombination(a, n-1, i+1, b, index+1);  
-        }
-   
-            
+        }   
     }
+    
+    //用來測試getCombination
+    //從數組a中，取出n個數的所有組合(不可重複取)
+	public void combine(BigDecimal[] a, int n) {
+		if(null == a || a.length == 0 || n <= 0 || n > a.length)
+			return;		
+		BigDecimal[] b = new BigDecimal[n];//輔助空間，保存待輸出組合數
+		this.getCombination(a, n , 0, b, 0);
+	}
     
     public List<LotteryEntity> getLotterysByGame(GameEntity game) {
 		List<LotteryEntity> lotterys = new ArrayList<LotteryEntity>();
@@ -238,4 +246,6 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		}
 		return lotterys;
 	}
+    
+    
 }
