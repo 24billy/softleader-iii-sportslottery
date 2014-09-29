@@ -83,7 +83,7 @@
 		<!-- 摺疊書籤 -->
 	        <div class="navbar-header">
 	
-	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sports Lottery Mania</a>
+	                <a class="navbar-brand" href='<c:url value="/goIndex"/>'>Sports Lottery Mania</a>
 	                <span id="digiclock" style="float: left"></span>
 	                       
 	        <script type="text/javascript">
@@ -117,7 +117,7 @@
 							</a>
 		            	</li>
 						<li class="dropdown">
-							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-comment"></span><span class="left5">最新投注<span class="caret"></span></span> 
 							</a>
 							<ul class="dropdown-menu" id="newOdds">
@@ -125,7 +125,7 @@
 						</li>
 						<li class="dropdown">
 						<!--  系統訊息區
-			            	<a href="/index.jsp"class="dropdown-toggle" data-toggle="dropdown">
+			            	<a href="/goIndex"class="dropdown-toggle" data-toggle="dropdown">
 			                	<span class="badge pull-right">42</span>
 		   				 		<span class="glyphicon glyphicon-envelope"></span>
 			                </a>
@@ -142,7 +142,7 @@
 		                </li> 
 		            
 		                <li class="dropdown">
-		                    <a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
+		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		                        <span class="glyphicon glyphicon-user"></span>
 		                        <span>${user.userAccount}<span class="caret"></span></span>
 		                    </a>
