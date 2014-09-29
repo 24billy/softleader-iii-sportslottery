@@ -226,17 +226,12 @@
 					<select class="form-ele form-control form-ball-type" id="ballType" >
 						<option value="Baseball">棒球</option>
 						<option value="Basketball">籃球</option>
-						<option value="Basketball">足球</option>
+						<option value="Soccer">足球</option>
 					</select>
 					</div>
 					<div class="form-group">
 					<select class="form-ele form-control" id="leagueName_form">
-						<option value="" selected>全部聯盟</option>
-						<option value="美國職棒">美國職棒</option>
-						<option value="中華職棒">中華職棒</option>
-						<option value="中央聯盟">中央聯盟</option>
-						<option value="太平洋聯盟">太平洋聯盟</option>
-						<option value="韓國職棒">韓國職棒</option>
+						<option id="allLeague" value="" selected>全部聯盟</option>
 					</select>
 					</div>
 					<div id="sortGroup" class="btn-group" data-toggle="buttons">
@@ -347,7 +342,37 @@
 //先行隱藏警告
 $('div.gameList .alert').hide();
 
+//取得當地即時時間
 var todayMil = new Date().valueOf() - new Date().getTimezoneOffset()*60000;
+
+//初始化聯盟選擇器
+function leagueSelector(){
+	$.ajax({
+		url: '<c:url value="/team?method:getLeagueNames" />',
+		type:'post',
+		dataType:'json',
+		data:{
+			'model.ballType':$('#ballType').val(),
+		},
+		success:function(datas){
+			//清除除了所有聯盟以外的option
+			$('#leagueName_form .byBallType').remove();
+			
+			//添加資料庫可選的聯盟
+			$.each(datas, function(index, data){
+				var sampleOption = $('#allLeague').clone();
+				sampleOption.prop('selected', false);
+				sampleOption.removeAttr('id');
+				sampleOption.addClass('byBallType');
+				sampleOption.text(data);
+				sampleOption.val(data);
+				$('#leagueName_form').append(sampleOption);
+			});
+		}
+	});
+}
+
+leagueSelector();
 
 //生成動態磚
 function gameRefresh(games, odds){
@@ -630,6 +655,7 @@ changeDate();
 //球種
 $('#ballType').off('change');
 $('#ballType').on('change', function(){
+	leagueSelector();
 	superRefresh();
 });
 

@@ -351,6 +351,18 @@
   		</result>
   	</action>
   	
+  	<action name="team" class="teamAction" method="admin">
+  		<result name="success">/admin/teamAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+  		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert,select,delete,getLeagueNames,getBallTypes</allowed-methods>
+  	</action>
   	
   	<action name="statistic" class ="statisticAction" method="countAllHistoryByTeam">
   		<result name="countAllHistoryByTeam">/History/statisticResult.jsp</result>
