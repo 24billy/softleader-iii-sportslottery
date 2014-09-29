@@ -59,10 +59,10 @@
 
 </script>
 </head>
-<body>
+<body style="padding-bottom: 70px;">
 
 <!-- page start -->
-<div>
+
     <div class="page-wraper">
         <div class="hidden visible-xs"><br></div>
         
@@ -73,11 +73,30 @@
         <!-- TopPage end --> 
         <!-- content start -->
 	    <div  id="target" style="padding-top:60px;">	
-<%-- 		  <jsp:include page="/Event/test-events.jsp" /> --%>
+           <%-- <jsp:include page="/Event/test-events.jsp" /> --%>
 	    </div>
-        <!-- content end --> 
+        <!-- content end -->
+        
+        <nav id="footerwrap" class="navbar navbar-default navbar-fixed-bottom " role="navigation">
+        
+            <div class="container-fluid bg-info">
+                <div class="col-sm-offset-4  col-md-offset-4 col-xs-6 col-sm-6 col-md-6">
+                    <div>
+                        <div>
+                        <h4>
+                        <i class="fa fa-fw fa-copyright"></i>2014  
+                        <a href="#">CECJ05 Team 01 </a>All Rights Reserved
+                        </h4>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2" >
+                    <img src="images/QRcode.png" style="width:60px;"></img>
+                </div>
+            </div>
+        </nav> 
     </div>
-</div>
+
 <!-- page end -->
 
 
@@ -86,7 +105,7 @@
 <!-- </script> -->
 
 
-
+<!--  sidepanel start   -->
 <div id="sidr" hidden="true">
   <!-- lottery content -->
 <!--start lottery panel  -->
@@ -552,11 +571,11 @@
 
         </div>
         <!-- End of BetBoard -->
-    </div>
+</div>
 <!--sidepanel  -->  
 
-	<div id="youAreSoPoor" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-		aria-hidden="true">
+<div id="youAreSoPoor" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true" hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -567,7 +586,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+</div>
 
 
 <script>
