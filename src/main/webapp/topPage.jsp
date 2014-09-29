@@ -79,35 +79,34 @@
 
 <body>
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		
+		<div class="container-fluid">
 		<!-- 摺疊書籤 -->
-        <div class="navbar-header">
-
-                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sport Lottery</a>
-                <span id="digiclock" style="float: left"></span>
-                       
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#digiclock').jdigiclock();
-            });
-        </script>
+	        <div class="navbar-header">
+	
+	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sport Lottery</a>
+	                <span id="digiclock" style="float: left"></span>
+	                       
+	        <script type="text/javascript">
+	            $(document).ready(function() {
+	                $('#digiclock').jdigiclock();
+	            });
+	        </script>
+	        
+	            <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse"
+	                data-target=".navbar-responsive-collapse.userinfo">
+	                <span class="icon-bar"></span> 
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <span class="navbar navbar-toggle" data-toggle="collapse" >
+	                <button class="btn btn-hot game">賽事</button>
+	                <button class="btn btn-sunny history">歷史</button>
+	                <button class="btn btn-sky user">使用者</button>
+	                <button class="btn btn-tree lotteryBoard simple-menu">投注</button>
+	            </span>              
+	            
+	        </div>
         
-            <button type="button" class="navbar-toggle navbar-right" data-toggle="collapse"
-                data-target=".navbar-responsive-collapse.userinfo">
-                <span class="icon-bar"></span> 
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <span class="navbar navbar-toggle" data-toggle="collapse" >
-                <button class="btn btn-hot game">賽事</button>
-                <button class="btn btn-sunny history">歷史</button>
-                <button class="btn btn-sky user">使用者</button>
-                <button class="btn btn-tree lotteryBoard simple-menu">投注</button>
-            </span>              
-            
-        </div>
-        
-        <div class="container-fluid">
             <div class="navbar-collapse collapse navbar-responsive-collapse userinfo">                
                 <!-- 登入後 -->
 	            <c:if test="${ not empty user }">
@@ -202,29 +201,23 @@
 		            	</li>
 		            </ul>
 	            </c:if>
+	            <div class="nav navbar-nav navbar-center">
+	            	<button type="button" class="btn btn-hot text-uppercase btn-lg game">
+	            		賽事投注
+	            	</button>
+	                <button type="button" class="btn btn-sunny text-uppercase btn-lg history">
+	                	歷史紀錄
+	                </button>
+	                <button type="button" class="btn btn-sky text-uppercase btn-lg user">
+	                	使用者投注資訊
+	                </button>
+	                <button type="button" class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu">
+	                	顯示投注區
+	                </button>
+	            </div>
 	        </div>
-
-
+			<!-- 登入區結束 -->
         </div>
-        <!-- 登入區結束 -->
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <div class="row">
-                <div class="navbar-header col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-3">
-                    <button type="button"
-                        class="btn btn-hot text-uppercase btn-lg game"
-                        >賽事投注</button>
-                    <button type="button"
-                        class="btn btn-sunny text-uppercase btn-lg history"
-                        >歷史紀錄</button>
-                    <button type="button"
-                        class="btn btn-sky text-uppercase btn-lg user"
-                        >使用者投注資訊</button>
-                    <button type="button" class="btn btn-right btn-tree text-uppercase btn-lg lotteryBoard simple-menu">
-                                                                 顯示投注區
-                    </button>
-                </div>
-            </div>
-        </div>        
 	</div>
 	<!--登入頁面 -->
 	<div class="modal fade" id="myModal">
