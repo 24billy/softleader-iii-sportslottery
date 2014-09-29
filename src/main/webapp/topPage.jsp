@@ -113,12 +113,12 @@
 		            <ul class="nav navbar-nav navbar-right">
 		            	<li class="dropdown">
 		            		<a href="#" class="dropdown-toggle coins" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-usd" id="userCoins">${user.coins} </span> 
+								<span class="glyphicon glyphicon-usd" id="userCoins"></span><span class="left5">${user.coins}</span> 
 							</a>
 		            	</li>
 						<li class="dropdown">
 							<a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-comment">最新投注</span>  
+								<span class="glyphicon glyphicon-comment"></span><span class="left5">最新投注<span class="caret"></span></span> 
 							</a>
 							<ul class="dropdown-menu" id="newOdds">
 							</ul>
@@ -144,8 +144,7 @@
 		                <li class="dropdown">
 		                    <a href="/index.jsp" class="dropdown-toggle" data-toggle="dropdown">
 		                        <span class="glyphicon glyphicon-user"></span>
-		                        <strong>${user.userAccount}</strong>
-		                        <span class="glyphicon glyphicon-chevron-down"></span>
+		                        <span>${user.userAccount}<span class="caret"></span></span>
 		                    </a>
 		                    <ul class="dropdown-menu">
 		                        <li>
@@ -153,17 +152,17 @@
 		                            	<div class="row">
 		                                   	<div class="col-sm-4">
 		                                   		<p class="text-left"><strong>${user.userName}</strong></p>
-		                                   		<c:if test="${user.userState!='0'}">
- 		                                   			<a id="goVerify" href="#"><p style="color:red"><strong>未認證</strong></p><a>         
-		                                   		</c:if>
 		                                   	</div>          
 		                                   	<div class="col-sm-8">
-		                                   		<button id="goUser" class="btn-primary btn-xs" data-dismiss="modal">個人資料</button>
+		                                   		<button type="button" id="goUser" class="btn-primary btn-sm" data-dismiss="modal">個人資料</button>
 		                                   	</div>                                                           
 		                            	</div>
 		                            	
-		                                <div class="row">
-		                                   	<div class="col-sm-4">                                   		
+		                                <div class="row top20">
+		                                   	<div class="col-sm-4">
+		                                   		<c:if test="${user.userState!='0'}">
+ 		                                   			<a id="goVerify" href="#"><p style="color:red"><strong>未認證</strong></p><a>         
+		                                   		</c:if>                                   		
 		                                   	</div>
 		                                    
 		                                    <div class="col-sm-8">
