@@ -83,7 +83,7 @@
 		<!-- 摺疊書籤 -->
 	        <div class="navbar-header">
 	
-	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sport Lottery</a>
+	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sports Lottery</a>
 	                <span id="digiclock" style="float: left"></span>
 	                       
 	        <script type="text/javascript">
