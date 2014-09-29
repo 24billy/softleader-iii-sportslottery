@@ -376,7 +376,7 @@ public class GameService extends GenericService<GameEntity> {
 			
 		}
 	
-		return null;//如果gameNum = null 不會到達這裡
+		return dao.findByGameNum(gameNum).getId();
 		
 	}
 	
