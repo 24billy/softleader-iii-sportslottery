@@ -10,6 +10,11 @@ table {
 	background-color: transparent;
 }
 
+#info-form {
+	background-color: #fff;
+	border-radius: 5px;
+}
+
 .navbar-center {
 	float: left;
 	text-align: center;
@@ -21,4 +26,3 @@ table {
 		float: none;
 	}
 }
-
