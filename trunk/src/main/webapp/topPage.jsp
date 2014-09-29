@@ -289,7 +289,6 @@
 	</div>
 	
 	<script>
-	
 (function($) {
 	var str = "";
 	
@@ -303,7 +302,7 @@
 		errorTokenHasDone = false;
 	}
 	var errorMsg;
-	if(!errorTokenHasDone){
+	if(!errorTokenHasDone && ${not empty errorMsgLottery}){
 		<c:if test="${mustBeLogin == 'true'}">callMyModal()</c:if>
 		errorMsg = '${errorMsgLottery}';
 		$('#errorMsgLottery').show();
