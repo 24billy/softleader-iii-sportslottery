@@ -443,7 +443,7 @@ hr {
 										</div>
 									</div>
 									<div class="col-md-12">
-										<button class="btn btn-primary pull-right" id="addUserButton" data-loading-text="Loading...">送出</button>
+										<button class="btn btn-primary pull-right" id="addUserButton" data-loading-text="處理中...">確認</button>
 									</div>
 								</div>
 							</form>
