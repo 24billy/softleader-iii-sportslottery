@@ -28,6 +28,10 @@ table {
 	padding-left: 15px;
 }
 
+.modal-content {
+	background-color: #f8f8f8;
+}
+
 @media(min-width:1100px) {
 	.navbar-center {
 		float: none;
