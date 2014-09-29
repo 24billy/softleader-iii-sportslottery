@@ -4,7 +4,7 @@ body {
 	background-color: #444;
 	/*default color #2e8bcc*/
 	/*inverse color #222*/
-	font-family: Meiryo, "微軟正黑體", "Microsoft JhengHei";
+	font-family: Meiryo, "微軟正黑體", "Microsoft JhengHei" !important;
 }
 
 footer * {
