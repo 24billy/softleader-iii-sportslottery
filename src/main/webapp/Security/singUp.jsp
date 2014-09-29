@@ -429,11 +429,12 @@ hr {
 											</div>
 											<div class="form-group">
 												<div class="post-div top10">
-													<input name="post1" class="post1 input-sm" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
-													<input name="post2" class="post2 input-sm" size="1.6" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
-													<input name="post3" class="post3 input-sm" size="5" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
-													<input class="post4 input-sm" size="1.6" type="text" placeholder="檢號" name="post4">&nbsp;
+													<input name="post1" class="post1 input-sm" size="4" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
+													<input name="post2" class="post2 input-sm" size="1" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
+													<input name="post3" class="post3 input-sm" size="4" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
+													<input class="post4 input-sm" size="1" type="text" placeholder="檢號" name="post4">&nbsp;
 												</div>
+												<div class="errorMsg"></div>
 											</div>
 											<div class="bot-div">
 												<input type="text" class="input-sm form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
@@ -770,8 +771,7 @@ function next(obj,n,next) {
 			}
 			return check;
 		},"格式錯誤,請檢查");
-		$('#registration-form').validate(
-				{
+		$('#registration-form').validate({
 					errorPlacement: function(error, element) {
 						var parent = element.parent().parent();
 						$('div.errorMsg',parent).html(error);
@@ -827,6 +827,7 @@ function next(obj,n,next) {
 							input : true
 						},
 						post4 : {
+							required : true,
 							postCheck : true 
 						}
 					},
