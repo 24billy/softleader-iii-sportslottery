@@ -350,39 +350,23 @@ public class GameAction extends ActionSupport {
 		Long gameScoreHome = model.getGameScoreHome();
 		Boolean isEnd = model.getIsEnd();
 		
-		if (gameScoreAway > gameScoreHome) {
-			su = "SU_A";
-		} else if (gameScoreAway < gameScoreHome) {
-			su = "SU_H";
-		}
+		su = gameScoreAway > gameScoreHome? "SU_A":null;
+		if (su == null) su = gameScoreAway < gameScoreHome? "SU_H":null;
 		combination = oddsService.getByGameIdWithOddType(gameId, "ATS_A").get(0).getOddCombination();
-		if (gameScoreAway + combination.doubleValue() > gameScoreHome) {
-			ats = "ATS_A";
-		} else {
-			ats = "ATS_H";
-		}
+		ats = gameScoreAway + combination.doubleValue() > gameScoreHome? "ATS_A":"ATS_H";
 		combination = oddsService.getByGameIdWithOddType(gameId, "SC_H").get(0).getOddCombination();
-		if ((gameScoreAway + gameScoreHome) > combination.doubleValue()) {
-			sc = "SC_H";
-		} else {
-			sc = "SC_L";
-		}
-		
-		if ((gameScoreAway + gameScoreHome) % 2 == 0) {
-			eo = "EVEN";
-		} else {
-			eo = "ODD";
-		}
+		sc = gameScoreAway + gameScoreHome > combination.doubleValue()? "SC_H":"SC_L";
+		eo = (gameScoreAway + gameScoreHome) % 2 == 0? "EVEN":"ODD";
 		
 		try {
 			oddsService.setIsPass(gameId, su, ats, sc, eo);
 			
-			model = service.getById(gameId);
-			model.setIsEnd(isEnd);
-			model.setGameScoreAway(gameScoreAway);
-			model.setGameScoreHome(gameScoreHome);
-			model.setGameStatus(2L);
-			service.update(model);
+			GameEntity game = service.getById(gameId);
+			game.setIsEnd(isEnd);
+			game.setGameScoreAway(gameScoreAway);
+			game.setGameScoreHome(gameScoreHome);
+			game.setGameStatus(2L);
+			service.update(game);
 			
 			result = "success";
 		} catch (Exception e) {
