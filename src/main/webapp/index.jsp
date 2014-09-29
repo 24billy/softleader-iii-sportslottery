@@ -77,7 +77,7 @@
 	    </div>
         <!-- content end -->
         
-        <nav id="footerwrap" class="navbar navbar-default navbar-fixed-bottom " role="navigation">
+        <nav id="footerwrap" class="navbar navbar-default navbar-fixed-bottom hidden-xs" role="navigation">
         
             <div class="container-fluid bg-info">
                 <div class="col-sm-offset-4  col-md-offset-4 col-xs-6 col-sm-6 col-md-6">
