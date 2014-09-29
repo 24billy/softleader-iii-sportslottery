@@ -74,7 +74,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		}
 		return oddValue;
 	}
-
+	
 	public Boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
 		
