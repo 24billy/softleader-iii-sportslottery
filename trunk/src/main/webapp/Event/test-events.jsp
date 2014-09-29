@@ -222,11 +222,14 @@
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2" >
 				<form role="form" class="form-inline" id="game_form">
+					<div class="form-group">
 					<select class="form-ele form-control form-ball-type" id="ballType" >
 						<option value="Baseball">棒球</option>
 						<option value="Basketball">籃球</option>
 						<option value="Basketball">足球</option>
 					</select>
+					</div>
+					<div class="form-group">
 					<select class="form-ele form-control" id="leagueName_form">
 						<option value="" selected>全部聯盟</option>
 						<option value="美國職棒">美國職棒</option>
@@ -235,6 +238,7 @@
 						<option value="太平洋聯盟">太平洋聯盟</option>
 						<option value="韓國職棒">韓國職棒</option>
 					</select>
+					</div>
 					<div id="sortGroup" class="btn-group" data-toggle="buttons">
 						<label id="sortByTime" class="form-ele btn btn-primary active"> 
 							<input type="radio" name="sortRadio" value="time" checked>依時間

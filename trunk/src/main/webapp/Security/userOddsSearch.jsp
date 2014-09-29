@@ -82,7 +82,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table id="oddTable" class="table table-hover table-condensed table-bordered table-striped nowrap">
+						<table id="oddTable" class="compact hover order-column row-border">
 							<thead>
 								<tr>
 									<th></th>
