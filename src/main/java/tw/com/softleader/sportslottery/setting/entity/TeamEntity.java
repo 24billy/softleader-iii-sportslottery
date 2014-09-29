@@ -17,7 +17,7 @@ public class TeamEntity extends GenericEntity {
 	@Column(name = "TEAM_NAME_EN", length = 50, nullable = false, unique = true)
 	private String teamNameEn;
 	
-	@Column(name = "TEAM_CODE", unique = true)
+	@Column(name = "TEAM_CODE")
 	private String teamCode;
 	
 	@Column(name="LEAGUE_NAME", length=50, nullable = false)
