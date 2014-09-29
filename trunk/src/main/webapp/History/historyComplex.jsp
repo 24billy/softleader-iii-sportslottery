@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History Complex</title>
 <style>
 	td.details-control {
 	    background: url('<c:url value="/History/images/details_open.png"/>') no-repeat center center;
@@ -90,7 +91,7 @@
 			<!-- .row -->
                 
 			<div class="row top20">
-				<div class="col-lg-12">
+				<div class="col-sm-12">
 					<div class="table-responsive">
 						<table id="gameTable" class="compact hover order-column row-border">
 							<thead>
