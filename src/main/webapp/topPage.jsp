@@ -223,7 +223,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" id="close2" data-dismiss="modal">x</button>
+					<button type="button" class="close" id="close2" data-dismiss="modal">&times;<span class="sr-only">Close</span></button>
 					<h3 class="loginFont">全民瘋運彩</h3>
 				</div>
 				<div class="modal-body">
@@ -255,22 +255,27 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">x</button>
+					<button type="button" class="close" data-dismiss="modal">&times;<span class="sr-only">Close</span></button>
 					<h3 class="loginFont">馬上找回您寶貝的密碼</h3>
 				</div>
-				<form role="form">
-				 	<div class="form-group">
-				    	<label for="forgetAccount" class="forgetLable">輸入您註冊的帳號:</label>
-				    	<input type="text" id="forgetAccount"/><br/>
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="forgetEmail" class="forgetLable">輸入您註冊的Email:</label>
-				    	<input type="text" id="forgetEmail"/><br/>
-				  	</div>
-				</form>
-				<button class="btn btn-success" id="forgetSumbit" >確認送出</button>
-				<span class="forgetPass"></span>
-				<img src="images/loader.gif" id="forgetImg">
+				
+				<div class="modal-body">
+					<form role="form">
+					 	<div class="form-group">
+					    	<label for="forgetAccount" class="forgetLable">輸入您註冊的帳號:</label>
+					    	<input class="input-sm" type="text" id="forgetAccount"/><br/>
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="forgetEmail" class="forgetLable">輸入您註冊的Email:</label>
+					    	<input class="input-sm" type="text" id="forgetEmail"/><br/>
+					  	</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" id="forgetSumbit" >確認送出</button>
+					<span class="forgetPass"></span>
+					<img src="images/loader.gif" id="forgetImg">
+				</div>
 			</div>
 		</div>
 	</div>
