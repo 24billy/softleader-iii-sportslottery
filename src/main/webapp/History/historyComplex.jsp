@@ -386,7 +386,7 @@
 						$(this).tooltip('destroy');
 						$(this).tooltip({
 							placement:'top',
-							title:'點擊可開啟詳細統計資訊',
+							title:'開啟三天內的詳細統計資訊',
 							container: 'body',
 						});
 						$(this).tooltip('show');
