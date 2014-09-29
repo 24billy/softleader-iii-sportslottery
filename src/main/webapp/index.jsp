@@ -79,7 +79,7 @@
         
         <nav id="footerwrap" class="navbar navbar-default navbar-fixed-bottom hidden-xs" role="navigation">
         
-            <div class="container-fluid bg-danger">
+            <div class="container-fluid">
                 <div class="col-sm-offset-4  col-md-offset-4 col-xs-6 col-sm-6 col-md-6">
                     <div>
                         <div>
