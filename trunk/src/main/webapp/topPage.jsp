@@ -201,7 +201,7 @@
 		            	</li>
 		            </ul>
 	            </c:if>
-	            <div class="nav navbar-nav navbar-center">
+	            <div class="nav navbar-nav navbar-center hidden-xs">
 	            	<button type="button" class="btn btn-hot text-uppercase btn-lg game">
 	            		賽事投注
 	            	</button>
