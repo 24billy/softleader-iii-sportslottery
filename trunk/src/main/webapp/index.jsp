@@ -26,6 +26,7 @@
 <script src="<c:url value="/js/jquery.shapeshift.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
+<script src="<c:url value="/js/jasny-bootstrap.min.js"/>"></script>
 
 <!--sidepanel  -->  
 
@@ -50,6 +51,7 @@
 <link rel="stylesheet" href="<c:url value="/css/coins.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.jdigiclock.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/sportslottery.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/jasny-bootstrap.min.css"/>">
 
 <style>
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
