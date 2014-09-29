@@ -1161,6 +1161,15 @@ $(document).ready(function() {
 		break;
 	}
 	sessionStorage.hasLocated = "";
+	
+	$('*').bind('touchend', function(e){
+		if ($(e.target).attr('rel') !== 'tooltip' && ($('div.tooltip.in').length > 0)){
+			$('[rel=tooltip]').mouseleave();
+			e.stopPropagation();
+		} else {
+			$(e.target).mouseenter();
+		}
+	});
 		
 });
 
