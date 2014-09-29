@@ -72,7 +72,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table id="gameTable" class="table table-hover table-condensed table-bordered table-striped nowrap">
+						<table id="gameTable" class="compact hover order-column row-border">
 							<thead>
 								<tr>
 									<th></th>
@@ -443,7 +443,7 @@
 					function writeRateHtml(rateName, rateA, rateH, teamA, teamH){
 						if(rateA||rateH){
 							return '<tr>'+
-						            '<td width="5%">' + rateName + ':</td>'+
+						            '<td width="6%">' + rateName + ':</td>'+
 									'<td>'+
 							            '<div class="progress">'+
 										  '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width: ' + rateA + '%">' + teamA + ' ' + rateA + '%</div>'+
@@ -453,7 +453,7 @@
 						        '</tr>';
 						} else {
 							return '<tr>'+
-				            		'<td width="5%">' + rateName + ':</td>'+
+				            		'<td width="6%">' + rateName + ':</td>'+
 									'<td>'+
 							            '<div class="progress">'+
 										  '<div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%">暫無資料</div>'+
