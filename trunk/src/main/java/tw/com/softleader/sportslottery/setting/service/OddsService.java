@@ -74,34 +74,7 @@ public class OddsService extends GenericService<OddsEntity> {
 		}
 		return oddValue;
 	}
-	/*
-	public boolean setIsPass(GameEntity game) {
-		Long gameScoreAway = game.getGameScoreAway();
-		Long gameScoreHome = game.getGameScoreHome();
-		
-		return true;
-	}
-	
-	private OddsEntity checkSUA(GameEntity game) {
-		return (OddsEntity) (game.getGameScoreAway() > game.getGameScoreHome() ? dao.findByGameIdWithOddType(game.getId(), "SU_A") : null);
-	}
-	
-	private OddsEntity checkSUH(GameEntity game) {
-		return (OddsEntity) (game.getGameScoreAway() > game.getGameScoreHome() ? dao.findByGameIdWithOddType(game.getId(), "SU_H") : null);
-	}
-	
-	private OddsEntity checkATS(GameEntity game) {
-		return (OddsEntity) (game.getGameScoreAway() + 1.5 > game.getGameScoreHome() ? dao.findByGameIdWithOddType(game.getId(), "ATS_A") : dao.findByGameIdWithOddType(game.getId(), "ATS_H"));
-	}
-	
-	private OddsEntity checkSC(GameEntity game) {
-		return (OddsEntity) (game.getGameScoreAway() + game.getGameScoreHome() > 7.5 ? dao.findByGameIdWithOddType(game.getId(), "SC_H") : dao.findByGameIdWithOddType(game.getId(), "SC_L"));
-	}
-	
-	private OddsEntity checkEO(GameEntity game) {
-		return (OddsEntity) (game.getGameScoreAway() + game.getGameScoreHome() % 2 == 0 ? dao.findByGameIdWithOddType(game.getId(), "EVEN") : dao.findByGameIdWithOddType(game.getId(), "ODD"));
-	}
-	*/
+
 	public Boolean setIsPass(Long gameId, String su, String ats, String sc, String eo) {
 		OddsEntity entity = null;
 		
