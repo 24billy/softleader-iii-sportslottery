@@ -291,8 +291,8 @@ hr {
 			
 			本條約由2011年4月26日起實施
 			</textarea>
-			<button type="button" class="btn" id="agree">我同意</button>
-			<button type="button" class="btn" id="onAgree">不同意</button>
+			<button type="button" class="btn btn-default" id="agree">我同意</button>
+			<button type="button" class="btn btn-default" id="onAgree">不同意</button>
 			</div>
 			
 			

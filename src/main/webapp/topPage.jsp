@@ -231,12 +231,12 @@
 					<div id="errorMsgLottery" class="alert alert-danger" role="alert">${errorMsgLottery}<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
 					<form method="post" action="" name="login_form">
 						<p>
-							<input type="text" class="span3" name="model.userAccount" id="loginAccount"
-								placeholder="Account" autofocus>
+							<input type="text" class="input-sm" name="model.userAccount" id="loginAccount"
+								placeholder="帳號" autofocus>
 						</p>
 						<p>
-							<input type="password" class="span3" name="userPassword" id="loginPassword"
-								placeholder="Password">
+							<input type="password" class="input-sm" name="userPassword" id="loginPassword"
+								placeholder="密碼">
 						</p>
 						<p>
 							<button type="button" id="login" class="btn btn-primary">登入</button>
