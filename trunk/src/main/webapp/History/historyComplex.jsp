@@ -17,6 +17,26 @@
 	.progress{
 		margin:0px;
 	}
+	
+	#gameTable .gameTimeDetail{
+		cursor: pointer;
+	}
+	#gameTable .teamAwayDetail{
+		cursor: pointer;
+	}
+	#gameTable .teamHomeDetail{
+		cursor: pointer;
+	}
+	
+	#gameTable .gameTimeDetail:HOVER{
+		background-color: #cccccc;
+	}
+	#gameTable .teamAwayDetail:HOVER{
+		background-color: #cccccc;
+	}
+	#gameTable .teamHomeDetail:HOVER{
+		background-color: #cccccc;
+	}
 </style>
 </head>
 <body>
@@ -320,7 +340,7 @@
 									timeString += " ";
 									timeString += millisecondToTime(row.gameTime.iLocalMillis);
 									return timeString;
-				        		},
+				        			},
 				        		"class":"gameTimeDetail"
 				        		},
 				        		{
@@ -353,13 +373,41 @@
 				        			if(row.gameStatus == 3){
 				        				return '<td><button type="button" class="btn btn-success btn-xs disabled">已派彩</button></td>';
 				        			} else {
-				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status" data-toggle="modal" data-target="#statusModal">未派彩</button></td>'	
+				        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disable" data-toggle="modal" data-target="#statusModal" disabled>未派彩</button></td>'	
 				        			}
 				        		}}//"data": function(row, type, val, meta)
 				        ],
 				        
 				        "order": [[2, 'asc']]
 					});//table = $('#gameTable').dataTable
+					
+					$('#gameList').on('mouseover ', 'td.gameTimeDetail', function () {
+						$(this).tooltip('destroy');
+						$(this).tooltip({
+							placement:'top',
+							title:'點擊可開啟詳細統計資訊',
+							container: 'body',
+						});
+						$(this).tooltip('show');
+				    });
+					$('#gameList').on('mouseover ', 'td.teamAwayDetail', function () {
+						$(this).tooltip('destroy');
+						$(this).tooltip({
+							placement:'top',
+							title:'開啟' + $(this).text() + '的統計資訊',
+							container: 'body',
+						});
+						$(this).tooltip('show');
+				    });
+					$('#gameList').on('mouseover ', 'td.teamHomeDetail', function () {
+						$(this).tooltip('destroy');
+						$(this).tooltip({
+							placement:'top',
+							title:'開啟' + $(this).text() + '的統計資訊',
+							container: 'body',
+						});
+						$(this).tooltip('show');
+				    });
 					
 					$('#gameList').on('click', 'td.details-control', function () {
 				    	var tr = $(this).closest('tr');

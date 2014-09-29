@@ -549,7 +549,6 @@ hr {
 </div>
 </body>
 
-<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 <script type="text/javascript">
 $(window).off('resize');
 
