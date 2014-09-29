@@ -119,7 +119,7 @@ hr {
 		<div id="page1" class="page1-div" >
 			<h1>條約內容</h1>
 			<div class="col-sm-8 col-sm-offset-2">
-			<textarea rows="17" class="agree-textarea form-control" disabled >
+			<textarea rows="17" class="agree-textarea form-control" readonly>
 			■第1條 目的
 			以下條款和條件由本公司 TechWay 株式會社（以下簡稱「TechWay」）所負責企畫營運。
 			關於本公司所提供線上遊戲服務UNLIGHT（以下簡稱「本服務」）
@@ -420,16 +420,20 @@ hr {
 										</div>
 										
 										<div>
-											<label for="ba">匯款帳號</label>&nbsp;
-											<select name="select-transfer" class="input-sm" id="select-transfer">
-											  	<option value="POST">郵局帳戶</option>
-											  	<option value="BOT">台灣銀行</option>
-											</select>
-											<div class="post-div top10">
-												<input name="post1" class="post1 input-sm" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
-												<input name="post2" class="post2 input-sm" size="1.6" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
-												<input name="post3" class="post3 input-sm" size="5" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
-												<input class="post4 input-sm" size="1.6" type="text" placeholder="檢號" name="post4">&nbsp;
+											<div class="form-group">
+												<label for="ba">匯款帳號</label>&nbsp;
+												<select name="select-transfer" class="input-sm" id="select-transfer">
+												  	<option value="POST">郵局帳戶</option>
+												  	<option value="BOT">台灣銀行</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<div class="post-div top10">
+													<input name="post1" class="post1 input-sm" size="5" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
+													<input name="post2" class="post2 input-sm" size="1.6" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
+													<input name="post3" class="post3 input-sm" size="5" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
+													<input class="post4 input-sm" size="1.6" type="text" placeholder="檢號" name="post4">&nbsp;
+												</div>
 											</div>
 											<div class="bot-div">
 												<input type="text" class="input-sm form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
