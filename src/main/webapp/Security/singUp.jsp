@@ -474,7 +474,7 @@ hr {
 								<HR>
 								<div>
 									<p>
-										<span class="infot">E mail :</span> 
+										<span class="infot">Email :</span> 
 										<a class="user-column" id="info-mail" href="mailto:#">&nbsp;</a>
 									</p>
 								</div>
