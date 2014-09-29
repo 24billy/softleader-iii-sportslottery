@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Navigation</title>
 </head>
 <style>
 .navbar-login
@@ -83,7 +83,7 @@
 		<!-- 摺疊書籤 -->
 	        <div class="navbar-header">
 	
-	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sports Lottery</a>
+	                <a class="navbar-brand" href='<c:url value="/index.jsp"/>'>Sports Lottery Mania</a>
 	                <span id="digiclock" style="float: left"></span>
 	                       
 	        <script type="text/javascript">
@@ -168,7 +168,7 @@
 		                                    <div class="col-sm-8">
 		                                        <p class="text-left small">${user.userEmail}</p>
 		                                    	<p class="text-left small">${user.userPhone}</p>
-		                                    	<p class="text-left small glyphicon glyphicon-usd">${user.coins}</p>
+		                                    	<p class="text-left small glyphicon glyphicon-usd"><span class="left5">${user.coins}</span></p>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -376,7 +376,7 @@
 				}
 				count++;
 			});
-			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>View All</a></li>");
+			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>所有投注</a></li>");
 		}
 	});//ajax
 	$(document).ajaxStop(function() {
