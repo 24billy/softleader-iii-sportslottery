@@ -225,10 +225,7 @@ public class GameAction extends ActionSupport {
 	
 	public String select() {
 		log.debug("GameAction select()");
-		Long gameId = null;
-		if (model != null) {
-			gameId = model.getId();
-		}
+		Long gameId = model != null? model.getId():null;
 		if (gameId != null && gameId > 0) {
 			json = new Gson().toJson(service.getById(gameId));
 		} else {
