@@ -87,14 +87,22 @@ public class OddCountServiceTest extends BaseTest {
 //		assertEquals(size, totalCount);
 //	}
 
+//	@Test
+//	public void testgetBeanListByGameDay(){
+//		LocalDate gameTime =LocalDate.parse("2014-09-10");
+//		List<CountBean> beanList = service.getBeanListByGameDay(gameTime);
+//		for(CountBean bean: beanList){
+//			System.out.println(bean);
+//		}
+//		System.out.println("the size of beanList: "+ beanList.size());
+//		
+//	}
+	
 	@Test
-	public void testgetBeanListByGameDay(){
-		LocalDate gameTime =LocalDate.parse("2014-09-10");
-		List<CountBean> beanList = service.getBeanListByGameDay(gameTime);
-		for(CountBean bean: beanList){
-			System.out.println(bean);
-		}
-		System.out.println("the size of beanList: "+ beanList.size());
-		
+	public void testGetCountPercentage(){
+////	MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
+////	BigDecimal expectedValue= new BigDecimal(new Long(100)).divide(new BigDecimal(new Long(3300)), mc);//100除以3300 取得BigDecimal
+////
+		log.debug("getCountPercentage ={}",service.getCountPercentage(null, null));
 	}
 }
