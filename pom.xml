@@ -240,6 +240,14 @@
 			<artifactId>quartz</artifactId>
 			<version>1.5.2</version>
 		</dependency>
+
+		<!-- Apache Poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+			
 		
 	</dependencies>
 

@@ -282,6 +282,17 @@
 			<param name="inputName">inputStream</param>
          </result>
      </action>
+     
+     <!-- Write -->
+    <action name="writeDatas" class="writeFileAction" method="exportLotterysDetails">
+         <result name="success">/Security/Result/success.jsp</result>
+         <result name="error" type="stream">
+         	<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+         </result>
+     </action>
+     
+     
     <!-- lottery真實投注 -->
 	<action name="lottery" class="lotteryAction" method="lottery">
         <result name="success">/Event/lottery.jsp</result>
