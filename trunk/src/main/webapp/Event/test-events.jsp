@@ -223,41 +223,45 @@
 				<div class="col-sm-8 col-sm-offset-2" >
 				<form role="form" class="form-inline" id="game_form">
 					<div class="form-group">
-					<select class="form-ele form-control form-ball-type" id="ballType" >
-						<option value="Baseball">棒球</option>
-						<option value="Basketball">籃球</option>
-						<option value="Soccer">足球</option>
-					</select>
+						<select class="form-ele form-control form-ball-type" id="ballType" >
+							<option value="Baseball">棒球</option>
+							<option value="Basketball">籃球</option>
+							<option value="Soccer">足球</option>
+						</select>
 					</div>
 					<div class="form-group">
-					<select class="form-ele form-control" id="leagueName_form">
-						<option id="allLeague" value="" selected>全部聯盟</option>
-					</select>
+						<select class="form-ele form-control" id="leagueName_form">
+							<option id="allLeague" value="" selected>全部聯盟</option>
+						</select>
 					</div>
-					<div id="sortGroup" class="btn-group" data-toggle="buttons">
-						<label id="sortByTime" class="form-ele btn btn-primary active"> 
-							<input type="radio" name="sortRadio" value="time" checked>依時間
-						</label> 
-						<label id="sortByStatus" class="form-ele btn btn-primary"> 
-							<input type="radio" name="sortRadio" value="type" id="option2">依狀態
-						</label> 
-					</div>
-					<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-						<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
-							<span class="glyphicon glyphicon-backward"></span>
-						</a>
-						<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
-							<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
-						</a>
-						<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
-							<span id="searchDefault"></span>
-						</a>
-						<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
-							<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
-						</a>
-						<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
-							<span class="glyphicon glyphicon-forward"></span>
-						</a>
+					<div class="form-group">
+						<div id="sortGroup" class="btn-group" data-toggle="buttons">
+							<label id="sortByTime" class="form-ele btn btn-primary active"> 
+								<input type="radio" name="sortRadio" value="time" checked>依時間
+							</label> 
+							<label id="sortByStatus" class="form-ele btn btn-primary"> 
+								<input type="radio" name="sortRadio" value="type" id="option2">依狀態
+							</label> 
+						</div>
+					</div>	
+					<div class="form-group">
+						<div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+							<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
+								<span class="glyphicon glyphicon-backward"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
+								<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+								<span id="searchDefault"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
+								<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+							<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
+								<span class="glyphicon glyphicon-forward"></span>
+							</a>
+						</div>
 					</div>
 				</form>
 				</div>
