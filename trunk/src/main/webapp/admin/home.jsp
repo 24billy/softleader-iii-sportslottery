@@ -637,6 +637,7 @@
 			
 			$('.form-score').TouchSpin({
 				'min': 0,
+				'max': 999,
 				'initval': 0,
 				'step': 1,
 				'buttondown_class': 'btn btn-info',
@@ -644,8 +645,6 @@
 			});
 			
 			$('#ATS_A_Combination, #ATS_H_Combination').TouchSpin({
-				'min': -3.50,
-				'max': 3.50,
 				'step': 0.05,
 				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
@@ -673,8 +672,8 @@
 			});
 			
 			$('#SC_Combination').TouchSpin({
-				'min': 6.50,
-				'max': 8.50,
+				'min': 0,
+				'max': 999,
 				'step': 0.05,
 				'decimals': 2,
 				'buttondown_class': 'btn btn-info',
