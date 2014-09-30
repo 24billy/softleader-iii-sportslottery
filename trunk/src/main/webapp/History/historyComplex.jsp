@@ -47,7 +47,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/gameManager"/>">
+					<form role="form" class="form-inline" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
 							<select class="form-control form-ball-type" id="ballType" >
 								<option value="Baseball">棒球</option>
@@ -55,36 +55,42 @@
 								<option value="Soccer">足球</option>
 							</select>
 						</div>
-                        <div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
-							<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
-								<span class="glyphicon glyphicon-backward"></span>
-							</a>
-							<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
-								<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
-							</a>
-							<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
-								<span id="searchDefault"></span>
-							</a>
-							<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
-								<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
-							</a>
-							<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
-								<span class="glyphicon glyphicon-forward"></span>
-							</a>
+						<div class="form-group">
+	                        <div id="searchScopeGroup" class="btn-group" data-toggle="buttons" >
+								<a href="#" role="button" class="form-ele btn btn-success" id="back3" name="searchScope" data-toggle="button">
+									<span class="glyphicon glyphicon-backward"></span>
+								</a>
+								<a href="#" role="button" class="form-ele btn btn-success" id="back1" name="searchScope" data-toggle="button">
+									<span id="searchPreview"></span><span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a href="#" role="button" class="form-ele btn btn-default" id="searchScopeDefault" name="searchScope" data-toggle="button" >
+									<span id="searchDefault"></span>
+								</a>
+								<a href="#" role="button" class="form-ele btn btn-success" id="next1" name="searchScope" data-toggle="button">
+									<span id="searchNextview"></span><span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+								<a href="#" role="button" class="form-ele btn btn-success" id="next3" name="searchScope" data-toggle="button">
+									<span class="glyphicon glyphicon-forward"></span>
+								</a>
+							</div>
 						</div>
-                        <input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
-                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
-							<label class="btn btn-default active" id="isEndLabelDefault">
-								<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
-							</label>
-							<label class="btn btn-success">
-								<input type="radio" name="isEnd" id="option2" value="true" >已派彩
-							</label>
-							<label class="btn btn-warning">
-								<input type="radio" name="isEnd" id="option3" value="false">未派彩
-							</label>
+						<div class="form-group">
+                        	<input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
+                        </div>
+                        <div class="form-group">
+	                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default active" id="isEndLabelDefault">
+									<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
+								</label>
+								<label class="btn btn-success">
+									<input type="radio" name="isEnd" id="option2" value="true" >已派彩
+								</label>
+								<label class="btn btn-warning">
+									<input type="radio" name="isEnd" id="option3" value="false">未派彩
+								</label>
+							</div>
+							<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
 						</div>
-						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
 					</form>
 				</div>
 			</div>
