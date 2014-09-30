@@ -396,7 +396,7 @@
 				}
 			});
 		},
-		async:false
+		async:false;
 	});//ajax
 	
 	/*	function fadeOut() {
