@@ -99,9 +99,6 @@
 hr {
 	margin-top: 0px;
 }
-.post-div {
-	float:left;
-}
 .agree-textarea {
 	margin-bottom: 5px;
 	resize: none;
@@ -312,11 +309,11 @@ hr {
 
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-sm-8">
 						<div class="well well-sm">
 							<form id="registration-form">
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group has-feedback">
 											<label  for="accountf">帳號</label>
 											<div class="input-group">
@@ -379,7 +376,7 @@ hr {
 											<div class="errorMsg"></div>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-sm-6">
 										<div class="form-group has-feedback">
 											<label for="name">姓名</label>
 											<div class="input-group">
@@ -419,38 +416,39 @@ hr {
 											<div class="errorMsg"></div>
 										</div>
 										
-										<div>
-											<div class="form-group">
-												<label for="ba">匯款帳號</label>&nbsp;
-												<select name="select-transfer" class="input-sm" id="select-transfer">
-												  	<option value="POST">郵局帳戶</option>
-												  	<option value="BOT">台灣銀行</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<div class="post-div top10">
-													<input name="post1" class="post1 input-sm" size="4" type="text" placeholder="局號" onKeyUp="next(this,6,'.post2')">&nbsp;
-													<input name="post2" class="post2 input-sm" size="1" type="text" placeholder="檢號" onKeyUp="next(this,1,'.post3')">&nbsp;
-													<input name="post3" class="post3 input-sm" size="4" type="text" placeholder="帳號" onKeyUp="next(this,6,'.post4')">&nbsp;
-													<input class="post4 input-sm" size="1" type="text" placeholder="檢號" name="post4">&nbsp;
+										<div class="form-group">
+											<label for="ba">匯款帳號</label>
+											<div class="row">
+												<div class="col-sm-4 col-xs-4">
+													<select name="select-transfer" class="input-sm form-control" id="select-transfer">
+													  	<option value="POST">郵局帳戶</option>
+													  	<option value="BOT">台灣銀行</option>
+													</select>
 												</div>
-												<div class="errorMsg"></div>
+												<div class="post-div col-sm-8 col-xs-8">
+													<div class="form-group">
+														<input name="post" class="post input-sm form-control" type="text" data-mask="999999-9-999999-9" placeholder="999999-9-999999-9">
+													</div>
+													<div class="errorMsg"></div>
+												</div>
+												<div class="bot-div col-sm-8 col-xs-8">
+													<div class="form-group">
+														<input name="bot" class="bot input-sm form-control" type="text" data-mask="9999-9999-9999-9999" placeholder="9999-9999-9999-9999" />
+													</div>
+													<div class="errorMsg"></div>
+												</div>
 											</div>
-											<div class="bot-div">
-												<input type="text" class="input-sm form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
-											</div>
-											<input type="text" class="input-sm" id="credit" name="model.userBankAccount" style="display:none;"/>
-											<div class="errorMsg"></div>
 										</div>
+										<input type="text" class="input-sm form-control" id="credit" name="model.userBankAccount" style="display:none;"/>
 									</div>
-									<div class="col-md-12">
+									<div class="col-sm-12">
 										<button class="btn btn-primary pull-right" id="addUserButton" data-loading-text="處理中...">確認</button>
 									</div>
 								</div>
 							</form>
 						</div>
 					</div>
-					<div id="info-form" class="col-md-4 hidden-xs">
+					<div id="info-form" class="col-sm-4 hidden-xs">
 						<form>
 							<legend>
 								<span class="glyphicon glyphicon-user"></span>  
@@ -756,8 +754,7 @@ function next(obj,n,next) {
 		
 		//匯款帳號驗證
 		jQuery.validator.addMethod('postCheck', function() {
-			var bankAccount = $('.post1').val() + "-" + $('.post2').val()
-								+ "-" + $('.post3').val() + "-" + $('.post4').val();
+			var bankAccount = $('.post').val();
 			$('#credit').val(bankAccount);
 			$('#info-card').html(" " + $('#credit').val());
 			//console.log(bankAccount.replace(/-/g, ""));
@@ -826,7 +823,7 @@ function next(obj,n,next) {
 							maxlength : 14,
 							input : true
 						},
-						post4 : {
+						'post' : {
 							required : true,
 							postCheck : true 
 						}
