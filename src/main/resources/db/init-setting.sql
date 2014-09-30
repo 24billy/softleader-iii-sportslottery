@@ -88,6 +88,26 @@ INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,lea
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯湖人','Los Angeles Lakers','LAL','全美籃球協會','National Basketball Association','NBA','Basketball');
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('菲尼克斯太陽','Phoenix Suns','PS','全美籃球協會','National Basketball Association','NBA','Basketball');
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('沙加緬度國王','Sacramento Kings','SK','全美籃球協會','National Basketball Association','NBA','Basketball');
+/*MLS*/
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('芝加哥火焰','Chicago Fire','CF','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('哥倫布機員','Columbus Crew','CC','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('華盛頓特區聯','D.C. United','DCU','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('休士頓迪納摩','Houston Dynamo','HD','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('蒙特婁衝擊','Montreal Impact','MI','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('新英格蘭革命','New England Revolution','NER','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('紐約紅牛','New York Red Bulls','NYRB','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('費城聯','Philadelphia Union','PU','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('堪薩斯城運動','Sporting Kansas City','SKC','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('多倫多FC','Toronto FC','TFC','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('美國芝華士','Chivas USA','CU','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('科羅拉多急流','Colorado Rapids','CR','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('FC達拉斯','FC Dallas','FCD','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯銀河','LA Galaxy','LAG','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('波特蘭木材','Portland Timbers','RT','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('皇家鹽湖城','Real Salt Lake','RSL','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('聖荷西地震','San Jose Earthquakes','SJE','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('西雅圖海灣人','Seattle Sounders FC','SSFC','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('溫哥華白浪','Vancouver Whitecaps FC','VWFC','美國職業足球大聯盟','Major League Soccer','MLS','Soccer');
 
 INSERT INTO game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,TEAM_HOME,TEAM_AWAY,BALL_TYPE,IS_END,GAME_STATUS) VALUES ('2014-09-10T17:35:00',101,4,3,9,4,'Baseball','TRUE',2);
 INSERT INTO game (GAME_TIME, GAME_NUM, GAME_SCORE_HOME,GAME_SCORE_AWAY,TEAM_HOME,TEAM_AWAY,BALL_TYPE,IS_END,GAME_STATUS) VALUES ('2014-09-10T17:25:00',102,4,3,13,10,'Baseball','TRUE',2);
