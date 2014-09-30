@@ -21,7 +21,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
-	private static int GAME_ROWS_NUM = 100;
+	private static final Integer GAME_ROWS_NUM = 500;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -39,11 +39,11 @@ public class InitialData implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent arg0)  { 
     }
     
-	private void createGames(int num) {
+	private void createGames(Integer num) {
 		List<String> leagueNames = teamService.leagueNames();
 		
-		for (int i = 0; i < num; i ++) {
-			int leagueIndex = rand.nextInt(leagueNames.size());
+		for (Integer i = 0; i < num; i ++) {
+			Integer leagueIndex = rand.nextInt(leagueNames.size());
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
 			LocalDateTime gameTime = LocalDateTime.now()
@@ -76,8 +76,20 @@ public class InitialData implements ServletContextListener {
 				isEnd = false;
 			} else {
 				isEnd = true;
-				gameScoreAway = Long.valueOf(rand.nextInt(10));
-				gameScoreHome = Long.valueOf(rand.nextInt(10));
+				switch (ballType) {
+					case "Baseball":
+						gameScoreAway = Long.valueOf(rand.nextInt(10));
+						gameScoreHome = Long.valueOf(rand.nextInt(10));
+						break;
+					case "Basketball":
+						gameScoreAway = Long.valueOf(rand.nextInt(60) + 60);
+						gameScoreHome = Long.valueOf(rand.nextInt(60) + 60);
+						break;
+					case "Soccer":
+						gameScoreAway = Long.valueOf(rand.nextInt(5));
+						gameScoreHome = Long.valueOf(rand.nextInt(5));
+						break;
+				}
 			}
 			if (gameTime.isBefore(LocalDateTime.now().plusDays(-1))) {
 				gameStatus = 3L;
@@ -98,7 +110,12 @@ public class InitialData implements ServletContextListener {
 			game.setIsEnd(isEnd);
 			game.setGameStatus(gameStatus);
 			game = gameService.insert(game);
-			createOdds(game, getPassedTypes(game));
+			System.out.println(game);
+			System.out.println("createOdds: " + createOdds(game));
+			game = gameService.getById(game.getId());
+			System.out.println(game);
+			System.out.println("setPassedTypes: " + setPassedTypes(game));
+			System.out.println("setCount: " + setCount(game));
 		}
 	}
 	
@@ -106,24 +123,25 @@ public class InitialData implements ServletContextListener {
 		List<TeamEntity> teams = new ArrayList<TeamEntity>();
 		List<TeamEntity> teamList = teamService.getTeamsByLeagueName(leagueName);
 		
-		int teamAwayIndex = rand.nextInt(teamList.size());
+		Integer teamAwayIndex = rand.nextInt(teamList.size());
 		TeamEntity teamAway = teamList.get(teamAwayIndex);
 		teams.add(teamAway);
 		teamList.remove(teamAwayIndex);
 		
 		
-		int teamHomeIndex = rand.nextInt(teamList.size());
+		Integer teamHomeIndex = rand.nextInt(teamList.size());
 		TeamEntity teamHome = teamList.get(teamHomeIndex);
 		teams.add(teamHome);
 		
 		return teams;
 	}
 	
-	private void createOdds(GameEntity game, String[] passedTypes) {
+	private Boolean createOdds(GameEntity game) {
 		Long gameId = game.getId();
+		String ballType = game.getBallType();
 		
 		String[] oddType = {"SU_A", "SU_H", "ATS_A", "ATS_H", "SC_H", "SC_L", "EVEN", "ODD"};
-		for (int i = 0; i < oddType.length; i++) {
+		for (Integer i = 0; i < oddType.length; i++) {
 			OddsEntity odds = new OddsEntity();
 			BigDecimal stdValue = new BigDecimal("1.5");
 			BigDecimal diffValue = new BigDecimal("0.05");
@@ -134,32 +152,61 @@ public class InitialData implements ServletContextListener {
 			odds.setOddType(oddType[i]);
 			odds.setOddValue(oddValue);
 			
+			List<BigDecimal> atsCombinations = new ArrayList<BigDecimal>();
+			BigDecimal scCombination = null;
+			Integer atsRnd = null;
+			Integer scRnd = null;
+			switch (ballType) {
+				case "Baseball":
+					atsRnd = 1;
+					scRnd = rand.nextInt(3) + 6;
+					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+					scCombination = new BigDecimal(scRnd.toString() + ".5");
+					break;
+				case "Basketball":
+					atsRnd = rand.nextInt(20) + 6;
+					scRnd = rand.nextInt(70) + 110;
+					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+					scCombination = new BigDecimal(scRnd.toString() + ".5");
+					break;
+				case "Soccer":
+					atsRnd = 1;
+					scRnd = rand.nextInt(4) + 3;
+					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+					scCombination = new BigDecimal(scRnd.toString() + ".5");
+					break;
+			}
+			Integer atsIndex = rand.nextInt(2);
 			switch(oddType[i]) {
-				case "ATS_A": odds.setOddCombination(new BigDecimal("1.5")); break;
-				case "ATS_H": odds.setOddCombination(new BigDecimal("-1.5")); break;
-				case "SC_L": odds.setOddCombination(new BigDecimal("7.5")); break;
-				case "SC_H": odds.setOddCombination(new BigDecimal("7.5")); break;
-				default: odds.setOddCombination(new BigDecimal("0"));
+				case "ATS_A": 
+					odds.setOddCombination(atsCombinations.get(atsIndex));
+					atsCombinations.remove(atsIndex);
+					break;
+				case "ATS_H": 
+					odds.setOddCombination(atsCombinations.get(0)); break;
+				case "SC_L": 
+					odds.setOddCombination(scCombination); break;
+				case "SC_H": 
+					odds.setOddCombination(scCombination); break;
+				default: 
+					odds.setOddCombination(new BigDecimal("0"));
 			}
-			
-			if (game.getIsEnd()) {
-				odds.setCount(Long.valueOf(rand.nextInt(1000) + 1));
-				for (String passedType : passedTypes) {
-					if (passedType != null) {
-						if (passedType.equals(oddType[i])) {
-							odds.setIsPass(true);
-							break;
-						} else {
-							odds.setIsPass(false);
-						}
-					}
-				}
+			try {
+				oddsService.insert(odds);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
 			}
-			oddsService.insert(odds);
 		}
+		return true;
 	}
 	
-	private String[] getPassedTypes(GameEntity game) {
+	private Boolean setPassedTypes(GameEntity game) {
+		Long gameId = game.getId();
+		BigDecimal combination = null;
 		String su = null;
 		String ats = null;
 		String sc = null;
@@ -167,31 +214,37 @@ public class InitialData implements ServletContextListener {
 		Long gameScoreAway = game.getGameScoreAway();
 		Long gameScoreHome = game.getGameScoreHome();
 		
-		if (gameScoreAway > gameScoreHome) {
-			su = "SU_A";
-		} else if (gameScoreAway < gameScoreHome) {
-			su = "SU_H";
+		su = gameScoreAway > gameScoreHome? "SU_A":null;
+		if (su == null) su = gameScoreAway < gameScoreHome? "SU_H":null;
+		combination = oddsService.getByGameIdWithOddType(gameId, "ATS_A").get(0).getOddCombination();
+		ats = gameScoreAway + combination.doubleValue() > gameScoreHome? "ATS_A":"ATS_H";
+		combination = oddsService.getByGameIdWithOddType(gameId, "SC_H").get(0).getOddCombination();
+		sc = gameScoreAway + gameScoreHome > combination.doubleValue()? "SC_H":"SC_L";
+		eo = (gameScoreAway + gameScoreHome) % 2 == 0? "EVEN":"ODD";
 		
+		try {
+			oddsService.setIsPass(gameId, su, ats, sc, eo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		
-		if (gameScoreAway > gameScoreHome + 1.5) {
-			ats = "ATS_A";
-		} else if (gameScoreAway < gameScoreHome + 1.5) {
-			ats = "ATS_H";
+		return true;
+	}
+	
+	private Boolean setCount(GameEntity game) {
+		Integer count = null;
+		List<OddsEntity> odds = game.getOdds();
+		for (OddsEntity odd : odds) {
+			count = rand.nextInt(5000) + 1; 
+			odd.setCount(new Long(count));
+			try {
+				oddsService.update(odd);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			
 		}
-		
-		if ((gameScoreAway + gameScoreHome) > 7.5) {
-			sc = "SC_H";
-		} else {
-			sc = "SC_L";
-		}
-		
-		if ((gameScoreAway + gameScoreHome) % 2 == 0) {
-			eo = "EVEN";
-		} else {
-			eo = "ODD";
-		}
-		String[] passedTypes = {su, ats, sc, eo};
-		return passedTypes;
+		return true;
 	}
 }
