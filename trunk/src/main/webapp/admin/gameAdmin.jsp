@@ -572,7 +572,11 @@
 			},
 			async: false
 		});
-		$('#ballType').change(listLeague);
+		$('#ballType').change(function() {
+			resetInput();
+			listLeague();
+		});
+				
 		//End of listBallType
 		
 		//Begin of listLeague
@@ -905,9 +909,23 @@
 			$('#gameTime').val('');
 			$('#btnMerge').val('');
 			$('.form-decimal').val('2.00');
-			$('#ATS_A_Combination').val('1.50');
-			$('#ATS_H_Combination').val('-1.50');
-			$('#SC_Combination').val('7.50');
+			switch ($('#ballType').val()) {
+				case 'Baseball':
+					$('#ATS_A_Combination').val('1.50');
+					$('#ATS_H_Combination').val('-1.50');
+					$('#SC_Combination').val('7.50');
+					break;
+				case 'Basketball':
+					$('#ATS_A_Combination').val('15.50');
+					$('#ATS_H_Combination').val('-15.50');
+					$('#SC_Combination').val('125.50');
+					break;
+				case 'Soccer':
+					$('#ATS_A_Combination').val('1.50');
+					$('#ATS_H_Combination').val('-1.50');
+					$('#SC_Combination').val('3.50');
+					break;
+			}
 			
 			$('#gameTime').datetimepicker({
 				'defaultDate': new Date(),
