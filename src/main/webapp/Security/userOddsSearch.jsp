@@ -60,21 +60,29 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<form role="form" class="form-inline pull-left" action="<c:url value="/userOdds?method:selectByUser"/>">
-                        <input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
-                        <input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
-                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
-							<label class="btn btn-default active" id="isEndLabelDefault">
-								<input type="radio" name="win" id="isEndInputDefault" value="none" checked >全選
-							</label>
-							<label class="btn btn-success">
-								<input type="radio" name="win" id="option2" value="true" >已開獎
-							</label>
-							<label class="btn btn-warning">
-								<input type="radio" name="win" id="option3" value="false" >未開獎
-							</label>
+                        <div class="form-group">
+                        	<input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
+                        </div>
+                        <div class="form-group">
+                        	<input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
+                        </div>
+                        <div class="form-group">
+	                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default active" id="isEndLabelDefault">
+									<input type="radio" name="win" id="isEndInputDefault" value="none" checked >全選
+								</label>
+								<label class="btn btn-success">
+									<input type="radio" name="win" id="option2" value="true" >已開獎
+								</label>
+								<label class="btn btn-warning">
+									<input type="radio" name="win" id="option3" value="false" >未開獎
+								</label>
+							</div>
 						</div>
-						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
-						<button type="button" class="btn btn-default" id="write">匯出</button>
+						<div class="form-group">
+							<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
+							<button type="button" class="btn btn-default" id="write">匯出</button>
+						</div>
 					</form>
 				</div>
 			</div>
