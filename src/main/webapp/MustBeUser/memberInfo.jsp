@@ -155,7 +155,6 @@
 	<div class="panel-footer"></div>
 </footer>
 
-<script src="<c:url value='/Security/js/jquery.validate.min.js'/>"></script> 
 <script>
 	(function($) {
 		//
