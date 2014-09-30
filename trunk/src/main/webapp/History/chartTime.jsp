@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>點選時間前三天的過關統計</title>
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
