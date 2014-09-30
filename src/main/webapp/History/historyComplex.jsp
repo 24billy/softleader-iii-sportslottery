@@ -49,7 +49,7 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline" action="<c:url value="/gameManager"/>">
 						<div class="form-group">
-							<select class="form-control form-ball-type" id="ballType" >
+							<select class="form-control form-ball-type form-ele" id="ballType" >
 								<option value="Baseball">棒球</option>
 								<option value="Basketball">籃球</option>
 								<option value="Soccer">足球</option>
@@ -75,21 +75,21 @@
 							</div>
 						</div>
 						<div class="form-group">
-                        	<input type="text" class="form-control" id="teamName" placeholder="隊伍名稱" value="" >
+                        	<input type="text" class="form-control form-ele" id="teamName" placeholder="隊伍名稱" value="" >
                         </div>
                         <div class="form-group">
 	                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
-								<label class="btn btn-default active" id="isEndLabelDefault">
+								<label class="btn btn-default active form-ele" id="isEndLabelDefault">
 									<input type="radio" name="isEnd" id="isEndInputDefault" value="none" checked >全選
 								</label>
-								<label class="btn btn-success">
+								<label class="btn btn-success form-ele">
 									<input type="radio" name="isEnd" id="option2" value="true" >已派彩
 								</label>
-								<label class="btn btn-warning">
+								<label class="btn btn-warning form-ele">
 									<input type="radio" name="isEnd" id="option3" value="false">未派彩
 								</label>
 							</div>
-							<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
+							<button type="button" class="btn btn-default form-ele" id="cleanQuery">清除搜尋條件</button>
 						</div>
 					</form>
 				</div>
