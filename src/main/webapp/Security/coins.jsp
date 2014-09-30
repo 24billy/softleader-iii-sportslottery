@@ -73,32 +73,32 @@
                 		<tr class="bg-success money">
                 			<td style='vertical-align:middle'>100元</td>
                 			<td style='vertical-align:middle'>100虛幣</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="100">購買</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="100"><span class="left5">購買</span></button></td>
                 		</tr>
                 		<tr class="bg-success money">
                 			<td style='vertical-align:middle'>500元</td>
                 			<td style='vertical-align:middle'>500虛幣</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="500">購買</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="500"><span class="left5">購買</span></button></td>
                 		</tr>
                 		<tr class="bg-success money">
                 			<td style='vertical-align:middle'>1000元</td>
                 			<td style='vertical-align:middle'>1000虛幣</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="1000">購買</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="1000"><span class="left5">購買</span></button></td>
                 		</tr>
                 		<tr class="bg-success money">
                 			<td style='vertical-align:middle'>2000元</td>
                 			<td style='vertical-align:middle'>2000虛幣</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="2000">購買</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="2000"><span class="left5">購買</span></button></td>
                 		</tr>
                 		<tr class="bg-success money">
                 			<td style='vertical-align:middle'>5000元</td>
                 			<td style='vertical-align:middle'>5000虛幣</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="5000">購買</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn2" value="5000"><span class="left5">購買</span></button></td>
                 		</tr>
                 		<tr class="bg-danger money">
                 			<td style='vertical-align:middle'>Card點數</td>
                 			<td style='vertical-align:middle'>Card點數</td>
-                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn3" value="5000">加值</button></td>
+                			<td><button type="button" class="btn btn-primary glyphicon glyphicon-shopping-cart btn3" value="5000"><span class="left5">加值</span></button></td>
                 		</tr>
                 	</tbody>
                 </table>
