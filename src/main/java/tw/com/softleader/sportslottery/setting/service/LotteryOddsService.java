@@ -40,31 +40,16 @@ public class LotteryOddsService extends GenericService<LotteryOddsEntity> {
 		return dao.findPassedOddsByLotteryId(lotteryId);
 	}
 	
-	public boolean checkStatus(List<LotteryOddsEntity> los) {
-		for (LotteryOddsEntity lo : los) {
-			
-			LotteryEntity lottery = lotteryService.getById(lo.getLotteryId());
-			lotteryService.calculatePrize(lottery);
-			/*
-			if (lottery.getWin() == null) {
-				List<LotteryOddsEntity> entitys = dao.findByLotteryId(lottery.getId());
-				List<LotteryOddsEntity> passed = dao.findPassedOddsByLotteryId(lottery.getId());
-				
-				if (entitys.size() == passed.size()) {
-					BigDecimal value = new BigDecimal(1);
-					
-					for (LotteryOddsEntity entity : entitys) {
-						value = value.multiply(entity.getOddsId().getOddValue());
-					}
-					BigDecimal capital = new BigDecimal(lottery.getCapital());
-					lottery.setWin(value.multiply(capital).longValue());
-					lotteryDao.update(lottery);
-				} else {
-					lottery.setWin(0L);
-					lotteryDao.update(lottery);
-				}
+	//中間沒出錯得true
+	public Boolean checkStatus(List<LotteryOddsEntity> los) {
+		try {
+			for (LotteryOddsEntity lo : los) {
+				LotteryEntity lottery = lotteryService.getById(lo.getLotteryId());
+				lotteryService.calculatePrize(lottery);
 			}
-			*/
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
