@@ -21,7 +21,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
-	private static final Integer GAME_ROWS_NUM = 500;
+	private static final Integer GAME_ROWS_NUM = 100;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -109,7 +109,8 @@ public class InitialData implements ServletContextListener {
 			game.setGameTime(gameTime);
 			game.setIsEnd(isEnd);
 			game.setGameStatus(gameStatus);
-			game = gameService.insert(game);
+			gameService.insert(game);
+			game = gameService.getById(game.getId());
 			System.out.println(game);
 			System.out.println("createOdds: " + createOdds(game));
 			game = gameService.getById(game.getId());
@@ -140,6 +141,34 @@ public class InitialData implements ServletContextListener {
 		Long gameId = game.getId();
 		String ballType = game.getBallType();
 		
+		List<BigDecimal> atsCombinations = new ArrayList<BigDecimal>();
+		BigDecimal scCombination = null;
+		Integer atsRnd = null;
+		Integer scRnd = null;
+		
+		switch (ballType) {
+			case "Baseball":
+				atsRnd = 1;
+				scRnd = rand.nextInt(3) + 6;
+				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+				scCombination = new BigDecimal(scRnd.toString() + ".5");
+				break;
+			case "Basketball":
+				atsRnd = rand.nextInt(20) + 6;
+				scRnd = rand.nextInt(70) + 110;
+				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+				scCombination = new BigDecimal(scRnd.toString() + ".5");
+				break;
+			case "Soccer":
+				atsRnd = 1;
+				scRnd = rand.nextInt(4) + 3;
+				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
+				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
+				scCombination = new BigDecimal(scRnd.toString() + ".5");
+				break;
+		}
 		String[] oddType = {"SU_A", "SU_H", "ATS_A", "ATS_H", "SC_H", "SC_L", "EVEN", "ODD"};
 		for (Integer i = 0; i < oddType.length; i++) {
 			OddsEntity odds = new OddsEntity();
@@ -152,33 +181,8 @@ public class InitialData implements ServletContextListener {
 			odds.setOddType(oddType[i]);
 			odds.setOddValue(oddValue);
 			
-			List<BigDecimal> atsCombinations = new ArrayList<BigDecimal>();
-			BigDecimal scCombination = null;
-			Integer atsRnd = null;
-			Integer scRnd = null;
-			switch (ballType) {
-				case "Baseball":
-					atsRnd = 1;
-					scRnd = rand.nextInt(3) + 6;
-					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
-					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
-					scCombination = new BigDecimal(scRnd.toString() + ".5");
-					break;
-				case "Basketball":
-					atsRnd = rand.nextInt(20) + 6;
-					scRnd = rand.nextInt(70) + 110;
-					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
-					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
-					scCombination = new BigDecimal(scRnd.toString() + ".5");
-					break;
-				case "Soccer":
-					atsRnd = 1;
-					scRnd = rand.nextInt(4) + 3;
-					atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
-					atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
-					scCombination = new BigDecimal(scRnd.toString() + ".5");
-					break;
-			}
+			System.out.println(ballType);
+			System.out.println(atsCombinations);
 			Integer atsIndex = rand.nextInt(2);
 			switch(oddType[i]) {
 				case "ATS_A": 
