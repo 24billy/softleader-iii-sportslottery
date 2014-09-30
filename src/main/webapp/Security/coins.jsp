@@ -153,8 +153,8 @@
         </div>
     </div>
     <div class="row setup-content" id="step-3" >
-        <div class="col-xs-12">
-            <div class="col-md-12 well">
+        <div class="col-sm-12 col-xs-12">
+            <div class="well col-sm-12 col-xs-12">
                 <table class="table text-center table1">
                 	<thead>
                 		<tr>
