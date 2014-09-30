@@ -61,27 +61,27 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline" action="<c:url value="/userOdds?method:selectByUser"/>">
                         <div class="form-group">
-                        	<input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
+                        	<input type="text" class="form-control form-game-time form-ele" id="timeBegin" placeholder="From" name="timeFrom" >
                         </div>
                         <div class="form-group">
-                        	<input type="text" class="form-control form-game-time" id="timeEnd" placeholder="To" name="timeTo" >
+                        	<input type="text" class="form-control form-game-time form-ele" id="timeEnd" placeholder="To" name="timeTo" >
                         </div>
                         <div class="form-group">
 	                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
-								<label class="btn btn-default active" id="isEndLabelDefault">
+								<label class="btn btn-default active form-ele" id="isEndLabelDefault">
 									<input type="radio" name="win" id="isEndInputDefault" value="none" checked >全選
 								</label>
-								<label class="btn btn-success">
+								<label class="btn btn-success form-ele">
 									<input type="radio" name="win" id="option2" value="true" >已開獎
 								</label>
-								<label class="btn btn-warning">
+								<label class="btn btn-warning form-ele">
 									<input type="radio" name="win" id="option3" value="false" >未開獎
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
-							<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
-							<button type="button" class="btn btn-default" id="write">匯出</button>
+							<button type="button" class="btn btn-default form-ele" id="cleanQuery">清除搜尋條件</button>
+							<button type="button" class="btn btn-default form-ele" id="write">匯出</button>
 						</div>
 					</form>
 				</div>
@@ -132,7 +132,46 @@
 <script>
 	(function($) {
 		
+		//響應頁面大小
+		function responseSize(){
+			d = new Date(Date.parse(searchDay));
+			searchDayPre = $.format.date(d.setDate(d.getDate()), 'yyyy-MM-dd');
+			searchDayNex = $.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd');
+			d = new Date(Date.parse(searchDay));
+			
+			if ($(window).width() < 1543){
+				$('#sortGroup').css('float', 'none');
+			} else {
+				$('#sortGroup').css('float', 'right');
+			}
+			if ($(window).width() < 895) {
+				if(!$('form .form-ele').hasClass('input-sm')){
+					$('form .form-ele').addClass('input-sm');
+				}
+				$('#searchPreview').text('');
+				d = new Date(Date.parse(searchDay));
+				$('#searchDefault').html('<span class="glyphicon glyphicon-repeat"></span>');
+				d = new Date(Date.parse(searchDay));
+				$('#searchNextview').text('');
+				d = new Date(Date.parse(searchDay));
+			} else {
+				if($('form .form-ele').hasClass('input-sm')){
+					$('form .form-ele').removeClass('input-sm');
+				}
+				$('#searchPreview').text($.format.date(d.setDate(d.getDate()-1), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+				$('#searchDefault').text($.format.date(d.getTime(), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+				$('#searchNextview').text($.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd'));
+				d = new Date(Date.parse(searchDay));
+			}
+		}
+		
 		$(window).off('resize');
+		$(window).resize(function() {
+			responseSize();
+		});
+		
 		$('#timeBegin').datetimepicker({
 			format: 'Y-m-d',
 			onShow:function( ct ){
