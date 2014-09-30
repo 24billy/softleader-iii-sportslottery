@@ -21,7 +21,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
-	private static final Integer GAME_ROWS_NUM = 100;
+	private static final Integer GAME_ROWS_NUM = 5;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -115,22 +115,26 @@ public class InitialData implements ServletContextListener {
 			System.out.println("createOdds: " + createOdds(game));
 			game = gameService.getById(game.getId());
 			System.out.println(game);
-			System.out.println("setPassedTypes: " + setPassedTypes(game));
 			System.out.println("setCount: " + setCount(game));
+			game = gameService.getById(game.getId());
+			System.out.println(game);
+			System.out.println("setPassedTypes: " + setPassedTypes(game));
 		}
 	}
 	
 	private List<TeamEntity> getTeams(String leagueName) {
 		List<TeamEntity> teams = new ArrayList<TeamEntity>();
 		List<TeamEntity> teamList = teamService.getTeamsByLeagueName(leagueName);
-		
+		System.out.println("teamList: " + teamList.size());
 		Integer teamAwayIndex = rand.nextInt(teamList.size());
+		Integer teamHomeIndex = null;
+		while (true) {
+			teamHomeIndex = rand.nextInt(teamList.size());
+			if (teamHomeIndex != teamAwayIndex) break;
+		}
+		
 		TeamEntity teamAway = teamList.get(teamAwayIndex);
 		teams.add(teamAway);
-		teamList.remove(teamAwayIndex);
-		
-		
-		Integer teamHomeIndex = rand.nextInt(teamList.size());
 		TeamEntity teamHome = teamList.get(teamHomeIndex);
 		teams.add(teamHome);
 		
@@ -183,20 +187,29 @@ public class InitialData implements ServletContextListener {
 			
 			System.out.println(ballType);
 			System.out.println(atsCombinations);
-			Integer atsIndex = rand.nextInt(2);
+			Integer atsAIndex = rand.nextInt(2);
+			Integer atsHIndex = null;
+			while (true) {
+				atsHIndex = rand.nextInt(2);
+				if (atsAIndex != atsHIndex) break;
+			}
+			
 			switch(oddType[i]) {
 				case "ATS_A": 
-					odds.setOddCombination(atsCombinations.get(atsIndex));
-					atsCombinations.remove(atsIndex);
+					odds.setOddCombination(atsCombinations.get(atsAIndex));
 					break;
 				case "ATS_H": 
-					odds.setOddCombination(atsCombinations.get(0)); break;
+					odds.setOddCombination(atsCombinations.get(atsHIndex));
+					break;
 				case "SC_L": 
-					odds.setOddCombination(scCombination); break;
+					odds.setOddCombination(scCombination);
+					break;
 				case "SC_H": 
-					odds.setOddCombination(scCombination); break;
+					odds.setOddCombination(scCombination);
+					break;
 				default: 
 					odds.setOddCombination(new BigDecimal("0"));
+					break;
 			}
 			try {
 				oddsService.insert(odds);
