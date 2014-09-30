@@ -59,7 +59,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<form role="form" class="form-inline pull-left" action="<c:url value="/userOdds?method:selectByUser"/>">
+					<form role="form" class="form-inline" action="<c:url value="/userOdds?method:selectByUser"/>">
                         <div class="form-group">
                         	<input type="text" class="form-control form-game-time" id="timeBegin" placeholder="From" name="timeFrom" >
                         </div>
