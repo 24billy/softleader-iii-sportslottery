@@ -419,19 +419,19 @@ hr {
 										<div class="form-group">
 											<label for="ba">匯款帳號</label>
 											<div class="row">
-												<div class="col-sm-4 col-xs-4">
+												<div class="col-md-4 col-sm-12 col-xs-4">
 													<select name="select-transfer" class="input-sm form-control" id="select-transfer">
 													  	<option value="POST">郵局帳戶</option>
 													  	<option value="BOT">台灣銀行</option>
 													</select>
 												</div>
-												<div class="post-div col-sm-8 col-xs-8">
+												<div class="post-div col-md-8 col-sm-12 col-xs-8">
 													<div class="form-group">
 														<input name="post" class="post input-sm form-control" type="text" data-mask="999999-9-999999-9" placeholder="999999-9-999999-9">
 													</div>
 													<div class="errorMsg"></div>
 												</div>
-												<div class="bot-div col-sm-8 col-xs-8">
+												<div class="bot-div col-md-8 col-sm-12 col-xs-8">
 													<div class="form-group">
 														<input name="bot" class="bot input-sm form-control" type="text" data-mask="9999-9999-9999-9999" placeholder="9999-9999-9999-9999" />
 													</div>
