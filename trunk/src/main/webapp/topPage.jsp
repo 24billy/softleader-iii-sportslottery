@@ -381,24 +381,23 @@
 				count++;
 			});
 			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>所有投注</a></li>");
-		}
+			$('.allOdds').off('click');
+			$('.allOdds').on('click',function() {
+				console.log('all check');
+				<c:if test="${user.userState!='0'}">
+					<c:if test="${not empty user}">
+						hasLocking = true;
+					</c:if>	
+				</c:if>
+				if(hasLocking){
+					$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+				}else{
+					$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
+				}
+			});
+		},
+		async:false
 	});//ajax
-	$(document).ajaxStop(function() {
-		$('.allOdds').off('click');
-		$('.allOdds').on('click',function() {
-			console.log('all check');
-			<c:if test="${user.userState!='0'}">
-				<c:if test="${not empty user}">
-					hasLocking = true;
-				</c:if>	
-			</c:if>
-			if(hasLocking){
-				$("#target").load('<c:url value="/Security/singUp.jsp"/>');
-			}else{
-				$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
-			}
-		});
-	});
 	
 	/*	function fadeOut() {
 	    $('#coins').fadeOut(500, fadeIn);
