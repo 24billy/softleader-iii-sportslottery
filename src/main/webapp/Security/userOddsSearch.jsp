@@ -61,10 +61,10 @@
 				<div class="col-sm-12">
 					<form role="form" class="form-inline" action="<c:url value="/userOdds?method:selectByUser"/>">
                         <div class="form-group">
-                        	<input type="text" class="form-control form-game-time form-ele" id="timeBegin" placeholder="From" name="timeFrom" >
+                        	<input type="text" class="form-control form-game-time form-ele" id="timeBegin" name="timeFrom" placeholder="起日" >
                         </div>
                         <div class="form-group">
-                        	<input type="text" class="form-control form-game-time form-ele" id="timeEnd" placeholder="To" name="timeTo" >
+                        	<input type="text" class="form-control form-game-time form-ele" id="timeEnd" name="timeTo" placeholder="迄日">
                         </div>
                         <div class="form-group">
 	                        <div id="isEndGroup" class="btn-group" data-toggle="buttons">
@@ -173,6 +173,7 @@
 		});
 		
 		$('#timeBegin').datetimepicker({
+			'lang': 'ch',
 			format: 'Y-m-d',
 			onShow:function( ct ){
 				this.setOptions({
@@ -185,6 +186,7 @@
 			timepicker: false //取消掉顯示時間
 		});
 		$('#timeEnd').datetimepicker({
+			'lang': 'ch',
 			format: 'Y-m-d',
 			onShow:function( ct ){
 				this.setOptions({
