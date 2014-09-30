@@ -43,7 +43,7 @@
 <script src="<c:url value="/js/jquery-dateFormat.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 <script src="<c:url value="/js/jasny-bootstrap.min.js"/>"></script>
-
+<script src="<c:url value="/js/jquery.fileDownload.js"/>"></script>
 <!--sidepanel  -->  
 
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>

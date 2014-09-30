@@ -285,10 +285,11 @@
      
      <!-- Write -->
     <action name="writeDatas" class="writeFileAction" method="exportLotterysDetails">
-         <result name="success">/Security/Result/success.jsp</result>
-         <result name="error" type="stream">
-         	<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
+         <result name="success" type="stream">
+         	  <param name="contentDisposition">attachment;filename="${#request['filename']}"</param>  
+         	  <param name="contentType">application/vnd.ms-excel</param>
+         	  <param name="inputName">inputStream</param>
+         	  <param name="bufferSize">1024</param>
          </result>
      </action>
      

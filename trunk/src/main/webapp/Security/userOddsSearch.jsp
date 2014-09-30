@@ -79,10 +79,8 @@
 								</label>
 							</div>
 						</div>
-						<div class="form-group">
-							<button type="button" class="btn btn-default form-ele" id="cleanQuery">清除搜尋條件</button>
-							<button type="button" class="btn btn-default form-ele" id="write">匯出</button>
-						</div>
+						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
+						<button type="button" class="btn btn-danger" id="write">匯出</button>
 					</form>
 				</div>
 			</div>
@@ -238,8 +236,8 @@
 					$('#oddList').off('click');
 					$('#oddTable').DataTable().rows().remove();
 					$('#oddTable').DataTable().destroy();
-					//console.log("-----datas-----");
-					//console.log(datas);
+					console.log("-----datas-----");
+					console.log(datas);
 					
 					var detail = [];
 					var lotterys = [];
@@ -380,7 +378,15 @@
 								}
 								info['teamAwayName'] = game.teamAway.teamName;
 								info['teamHomeName'] = game.teamHome.teamName;
-								info['ballType'] = game.ballType;
+								
+								if(game.ballType == "Baseball") {
+									info['ballType'] = "<img src='images/baseball.gif'/>";
+								} else if(game.ballType == "Basketball") {
+									info['ballType'] = "<img src='images/basketball.png'/>";
+								} else if(game.ballType == "Soccer") {
+									info['ballType'] = "<img src='images/soccer.png'/>";
+								}
+								console.log(game.ballType);
 								timeString = "";
 								timeString += millisecondToDate(game.gameTime.iLocalMillis);
 								timeString += " ";
@@ -470,10 +476,10 @@
 								}
 							},
 							'data': lotteryInfo,
-							"dom": 'T<"clear">lfrtip',
-					        "tableTools": {
-					            "sSwfPath": '<c:url value="/swf/copy_csv_xls_pdf.swf"/>'
-					        },
+							//"dom": 'T<"clear">lfrtip',
+					        //"tableTools": {
+					        //    "sSwfPath": '<c:url value="/swf/copy_csv_xls_pdf.swf"/>'
+					        //},
 					        'columns': [
 					        		{
 					        		'class':'details-control',
@@ -542,7 +548,6 @@
 									if(data == 'success') {
 										sessionStorage.hasLocated = 'user';
 										window.location.href = '<c:url value="/"/>';
-										
 // 										$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
 // 										$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 									}
@@ -550,23 +555,25 @@
 							})
 						});
 						
-						//write
-						$('#write').click(function () {
-							//console.log(lotteryInfo)
-							//delete lotteryInfo["odds"];
-							var input = JSON.stringify(lotteryInfo);
-							$.ajax({
-								url:"<c:url value='/writeDatas'/>",
-								type:'post',
-								data:{
-									'datas':input,
-								},
-								success:function(data) {
-									console.log(data);									
-								}
+						if(lotteryInfo.length != 0) {
+							$('#write').click(function () {
+								console.log(lotteryInfo.length);
+								 
+								var input = JSON.stringify(lotteryInfo);
+								
+								$.fileDownload("<c:url value='/writeDatas'/>", {
+									httpMethod: "post",
+									data:{
+										'datas':input,
+									},
+									contentType: "application/json"
+									})
+									.done(function() {console.log('File download a success!');})
+									.fail(function() {console.log("Error during export");});
 							});
-						});
-						
+						}
+					//});//ajaxStop	
+
 				}//success
 			});//ajax
 			
@@ -596,7 +603,7 @@
 				
 				temp += '<tbody>'+
 				'<tr>'+
-		            '<td><img src="images/baseball.gif"/></td>'+
+		            '<td>'+odd.ballType+'</td>'+
 		            '<td style="vertical-align:middle">' + odd.gameTime+ '</td>'+
 		            '<td style="vertical-align:middle">' + odd.teamAwayName+'VS.'+ odd.teamHomeName+'</td>'+
 		            '<td style="vertical-align:middle">' + odd.labelText+ '</td>'+
@@ -613,7 +620,7 @@
 				temp2 += '<table class="table" cellspacing="0" border="0";">'+
 		        '<thead>'+
 		        	'<tr>'+
-		        		'<th><img src="images/baseball.gif"/></th>'+
+		        		'<th></th>'+
 		        		'<th style="vertical-align:middle">單場</th>'+
 		        		'<th style="vertical-align:middle">過兩關</th>'+
 		        		'<th id="pass3" style="vertical-align:middle">過三關</th>'+

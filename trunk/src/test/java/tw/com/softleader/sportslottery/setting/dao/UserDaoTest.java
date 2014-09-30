@@ -37,6 +37,9 @@ public class UserDaoTest extends BaseTest {
 		log.debug("--------Test:updateUserCoin--------"+dao.updateUserCoin(2l, 5001l));
 		System.out.println("findByUserAccount :" + dao.findByUserAccount("chen"));
 		
+		System.out.println("--------Test:findByUserEmail--------");
+		log.debug("--------Test:findByUserEmail--------"+dao.findByUserEmail("chen@gmail.com"));
+		
 	}
 
 }
