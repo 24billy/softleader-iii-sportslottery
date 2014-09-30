@@ -167,7 +167,7 @@ public class InitialData implements ServletContextListener {
 				break;
 			case "Soccer":
 				atsRnd = 1;
-				scRnd = rand.nextInt(4) + 3;
+				scRnd = rand.nextInt(3) + 3;
 				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
 				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
 				scCombination = new BigDecimal(scRnd.toString() + ".5");
