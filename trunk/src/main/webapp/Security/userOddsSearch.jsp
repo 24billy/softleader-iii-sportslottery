@@ -134,6 +134,7 @@
 		
 		//響應頁面大小
 		function responseSize(){
+			var searchDay;
 			d = new Date(Date.parse(searchDay));
 			searchDayPre = $.format.date(d.setDate(d.getDate()), 'yyyy-MM-dd');
 			searchDayNex = $.format.date(d.setDate(d.getDate()+1), 'yyyy-MM-dd');
@@ -551,27 +552,21 @@
 						
 						//write
 						$('#write').click(function () {
+							//console.log(lotteryInfo)
+							//delete lotteryInfo["odds"];
 							var input = JSON.stringify(lotteryInfo);
-							//$.each(lotteryInfo,function(index,lottery) {
-								//console.log(lottery);
-								//$.each(lottery.odds,function(index,odd) {
-									$.ajax({
-										url:"<c:url value='/writeDatas'/>",
-										type:'post',
-										data:{
-											//'id':lottery.id,
-											//'date':lottery.date,
-											//'gameTime':odd.gameTime,
-											'datas':input,
-										},
-										success:function(data) {
-											console.log("1231321321321");									
-										}
-									});
-								});
-							//})
-						//});
-					//});//ajaxStop	
+							$.ajax({
+								url:"<c:url value='/writeDatas'/>",
+								type:'post',
+								data:{
+									'datas':input,
+								},
+								success:function(data) {
+									console.log(data);									
+								}
+							});
+						});
+						
 				}//success
 			});//ajax
 			

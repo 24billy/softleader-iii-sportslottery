@@ -153,7 +153,7 @@
     //存放投注資訊
     var odds = '${json}' ? JSON.parse('${json}') : [];
     var games = '${jsonGame}' ? JSON.parse('${jsonGame}') : [];
-    
+
     //比賽分數暫存區
     var awayScoreByGameId=[];
     var homeScoreByGameId=[];

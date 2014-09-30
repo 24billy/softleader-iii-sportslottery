@@ -930,7 +930,10 @@ function next(obj,n,next) {
 				},
 				success : function(data) {
 					if (data == "success") {
-						$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
+						//$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
+						if(hasLocking){
+							hasLocking = false;
+						}
 						$(".progress-bar").css("width", "100%").attr(
 								"aria-valuenow", 100);
 						$(".progress-completed").text(100 + "%");
