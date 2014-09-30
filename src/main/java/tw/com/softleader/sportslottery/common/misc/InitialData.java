@@ -21,7 +21,7 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
-	private static final Integer GAME_ROWS_NUM = 5;
+	private static final Integer GAME_ROWS_NUM = 1000;
 	@Autowired
 	private GameService gameService;
 	@Autowired
