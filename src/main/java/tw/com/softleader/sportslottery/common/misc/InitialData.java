@@ -111,21 +111,17 @@ public class InitialData implements ServletContextListener {
 			game.setGameStatus(gameStatus);
 			gameService.insert(game);
 			game = gameService.getById(game.getId());
-			System.out.println(game);
-			System.out.println("createOdds: " + createOdds(game));
+			createOdds(game);
 			game = gameService.getById(game.getId());
-			System.out.println(game);
-			System.out.println("setCount: " + setCount(game));
+			setCount(game);
 			game = gameService.getById(game.getId());
-			System.out.println(game);
-			System.out.println("setPassedTypes: " + setPassedTypes(game));
+			setPassedTypes(game);
 		}
 	}
 	
 	private List<TeamEntity> getTeams(String leagueName) {
 		List<TeamEntity> teams = new ArrayList<TeamEntity>();
 		List<TeamEntity> teamList = teamService.getTeamsByLeagueName(leagueName);
-		System.out.println("teamList: " + teamList.size());
 		Integer teamAwayIndex = rand.nextInt(teamList.size());
 		Integer teamHomeIndex = null;
 		while (true) {
@@ -185,8 +181,6 @@ public class InitialData implements ServletContextListener {
 			odds.setOddType(oddType[i]);
 			odds.setOddValue(oddValue);
 			
-			System.out.println(ballType);
-			System.out.println(atsCombinations);
 			Integer atsAIndex = rand.nextInt(2);
 			Integer atsHIndex = null;
 			while (true) {
