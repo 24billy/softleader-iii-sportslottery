@@ -185,6 +185,7 @@
 			}
 		}
 
+		$(window).off('resize');
 		$(window).resize(function() {
 			responseSize();
 		});
