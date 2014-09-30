@@ -54,6 +54,7 @@ public class loginFilter implements Filter {
 			servletPath = req.getServletPath();  
 			contextPath = req.getContextPath();
 			requestURI  = req.getRequestURI();
+			HttpSession session = req.getSession();
 			boolean isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 			if(checkLogin(req)) {
@@ -63,10 +64,10 @@ public class loginFilter implements Filter {
 						if (loginToken.getUserState() == null
 								|| loginToken.getUserState().isEmpty()
 								|| !loginToken.getUserState().equals("0")) {
-							req.setAttribute("locking", "true");
+							session.setAttribute("locking", "true");
 							req.getRequestDispatcher("/index.jsp").forward(req,resp);
 						} else {
-							req.removeAttribute("locking");
+							session.removeAttribute("locking");
 							chain.doFilter(request, response);
 						}
 					}else {
@@ -76,7 +77,6 @@ public class loginFilter implements Filter {
 					throw new ServletException("出現意外事件");
 				}
 			} else {				//  需要登入，尚未登入
-				HttpSession session = req.getSession();
 				if (!isRequestedSessionIdValid ) {
 					session.setAttribute("timeOut", "使用逾時，請重新登入");
 				}

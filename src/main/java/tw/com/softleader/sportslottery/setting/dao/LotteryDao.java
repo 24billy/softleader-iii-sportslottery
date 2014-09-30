@@ -61,7 +61,7 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 				sql4 = " and WIN < 0";
 			}
 		}
-		String sql5 = " order by confirmTime desc";
+		String sql5 = " order by id desc";
 		
 		if (userId == null && timeBegin == null && timeEnd == null && win == null) {
 			//全部條件都沒輸入的情況下 findAll

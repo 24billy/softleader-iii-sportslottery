@@ -482,6 +482,11 @@
 </script>
 <script type="text/javascript">
     $(window).on('load', function(){
+		<c:if test="${user.userState!='0'}">
+			<c:if test="${not empty user}">
+				hasLocking = true;
+			</c:if>	
+		</c:if>
     	$('.simple-menu').sidr();
     });
     $('.game').off('click');
@@ -494,11 +499,6 @@
 	});
 	$('.user').off('click');
 	$('.user').on('click',function() {
-		<c:if test="${user.userState!='0'}">
-			<c:if test="${not empty user}">
-				hasLocking = true;
-			</c:if>	
-		</c:if>
 		if(hasLocking){
 			sessionStorage.hasLocated = 'locking';
 			window.location.href = '<c:url value="/"/>';
