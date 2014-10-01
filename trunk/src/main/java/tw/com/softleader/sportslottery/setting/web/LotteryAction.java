@@ -206,6 +206,8 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    //從session中取出userId
 	    Map session = ActionContext.getContext().getSession();
 	    UserEntity user = (UserEntity)session.get("user");
+
+	    
 	    
 	    String lastToken = null;
 		try {
@@ -219,8 +221,10 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    	errorMsg = "按重新整理也沒用!!";
 	    	return ERROR;
 	    }
-	    
-	    
+
+        
+        
+        
 	    model.setUserId(user.getId());  
 	    model.setConfirmTime(new LocalDateTime());  
 	    model=service.insert(model);
@@ -262,13 +266,61 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
         }
         System.out.println("lotteryOdds:"+lotteryOdds);
         System.out.println("oddsCount:"+oddsCount);
-        
+        //取出過關組合數
+        Long com0 = model.getCom0();
+        Long com1 = model.getCom1();
+        Long com2 = model.getCom2();
+        Long com3 = model.getCom3();
+        Long com4 = model.getCom4();
+        Long com5 = model.getCom5();
+        Long com6 = model.getCom6();
+        Long com7 = model.getCom7();
+        Long com8 = model.getCom8();
+        Long combinations = 0L;  //紀錄總組合數，用來計算投注總金額用
+        Long denominator=1L;  //分母
+        Long numerator=1L;  //分子
+        List<Long> longArray = new ArrayList<Long>();
+        //排列組合可能數一次算給你！
+        for (int i = 1 ; i<=oddsCount ; i++){
+            numerator=numerator*(oddsCount+1-i);
+            denominator=denominator*i;
+            longArray.add(numerator/denominator);
+        }       
+        if(com0!=null && com0==1L){
+            combinations=1L;  //過關則組合數為1
+        }else {
+            if(com1!=null && 1<=oddsCount && com1==1L){
+                combinations=combinations+longArray.get(0);  //(單場=過一關)組合數
+            }
+            if(com2!=null && 2<=oddsCount && com2==1L){
+                combinations=combinations+longArray.get(1);
+            }
+            if(com3!=null && 3<=oddsCount && com3==1L){
+                combinations=combinations+longArray.get(2);
+            }
+            if(com4!=null && 4<=oddsCount && com4==1L){
+                combinations=combinations+longArray.get(3);
+            }
+            if(com5!=null && 5<=oddsCount && com5==1L){
+                combinations=combinations+longArray.get(4);
+            }
+            if(com6!=null && 6<=oddsCount && com6==1L){
+                combinations=combinations+longArray.get(5);
+            }
+            if(com7!=null && 7<=oddsCount && com7==1L){
+                combinations=combinations+longArray.get(6);
+            }
+            if(com8!=null && 8<=oddsCount && com1==8L){
+                combinations=combinations+longArray.get(7);
+            }
+        }
         //更新coins
-        if(capital <= user.getCoins()) {
-        	user.setCoins(user.getCoins() - capital*oddsCount);
+        if(capital*combinations <= user.getCoins()) { //現有金額大於投注金額，投注成功
+        	user.setCoins(user.getCoins() - capital*combinations);
         	userService.update(user);
         	log.debug("更新成功");
-        } else {
+         
+        } else {  //現有金額大於投注金額，投注成功  
         	service.delete(model);
         	log.debug("更新失敗");
         	errorMsg = "虛擬幣不足 請加值!!!";
@@ -456,6 +508,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 //        }  
 //          
 //    } 
-	
+
 	
 }
