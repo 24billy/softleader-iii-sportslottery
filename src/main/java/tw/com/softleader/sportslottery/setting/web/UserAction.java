@@ -325,7 +325,7 @@ public class UserAction extends ActionSupport {
 						message = card.getPoint().toString();
 						card.setUserId(user);
 						card.setState(false);
-						service.update(user);
+						service.noPswdUpdate(user);
 						log.debug("儲值成功");
 						card.setUseTime(LocalDateTime.now());
 						cardService.update(card);
