@@ -272,9 +272,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="forgetSumbit" >確認送出</button>
+					<button type="button" class="btn btn-success" id="forgetSumbit" data-loading-text="發信中...">確認送出</button>
 					<span class="forgetPass"></span>
-					<img src="images/loader.gif" id="forgetImg">
 				</div>
 			</div>
 		</div>
@@ -438,6 +437,10 @@
 	$('#forgetSumbit').off('click');
 	$('#forgetSumbit').on('click',function() {
 		$('.forgetPass').empty();
+		var btn = $(this);
+		$('#forgetAccount').addClass('disable');
+		$('#forgetEmail').addClass('disable');
+		btn.button('loading');
 		if($('#forgetAccount').val()!='' && $('#forgetEmail').val()!=''){
 			$.ajax({
 				url:"<c:url value='/emailer'/>",
@@ -462,11 +465,11 @@
 					}
 					
 				},
-				beforeSend:function(){
-	                $('#forgetImg').show();
-	            },
-	            complete:function(){
-	                $('#forgetImg').hide();
+				beforeSend:function() {
+					
+				},
+	            complete:function() {
+	            	btn.button('reset');
 	            }
 			});
 		} else {
