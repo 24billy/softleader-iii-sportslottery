@@ -1172,7 +1172,7 @@ $(document).ready(function() {
 		$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 		break;
 	case 'locking':
-		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+		$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 		break;
 	default:
 		$("#target").load('<c:url value="/Event/test-events.jsp"/>');

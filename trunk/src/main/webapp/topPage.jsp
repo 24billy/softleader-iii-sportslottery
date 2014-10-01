@@ -339,7 +339,7 @@
 	
 	$('#regist').off('click');
 	$('#regist').on('click',function() {
-		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+		$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 	});
 			
 	$('#login').off('click');
@@ -390,7 +390,7 @@
 					</c:if>	
 				</c:if>
 				if(hasLocking){
-					$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+					$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 				}else{
 					$("#target").load('<c:url value="/Security/userOddsSearch.jsp"/>');
 				}
@@ -475,7 +475,7 @@
 	});
 	
 	$('#goVerify').on('click',function() {
-		$("#target").load('<c:url value="/Security/singUp.jsp"/>');
+		$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 	});
 	
 })(jQuery); 
