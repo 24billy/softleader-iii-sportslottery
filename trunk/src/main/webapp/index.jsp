@@ -20,7 +20,7 @@
    
   -->
 
-<title>運動彩卷</title>
+<title>全民瘋運彩-Sports Lottery Mania</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,14 +44,11 @@
 <script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 <script src="<c:url value="/js/jasny-bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.fileDownload.js"/>"></script>
-<!--sidepanel  -->  
 
 <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 <link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-
-
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
@@ -73,9 +70,6 @@
 		@import url(http://fonts.googleapis.com/css?family=Oswald);
 </style>
 
-<script>
-
-</script>
 </head>
 <body style="padding-bottom: 70px;">
 
