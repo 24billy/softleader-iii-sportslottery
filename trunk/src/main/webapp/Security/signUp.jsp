@@ -934,12 +934,14 @@ function next(obj,n,next) {
 						if(hasLocking){
 							hasLocking = false;
 						}
-						$(".progress-bar").css("width", "100%").attr(
-								"aria-valuenow", 100);
-						$(".progress-completed").text(100 + "%");
-						$('#step1').removeClass("activestep");
-						$('#page3').hide();
-						$('#page4').fadeIn(500);
+						
+						window.location.href = '<c:url value="/"/>';
+// 						$(".progress-bar").css("width", "100%").attr(
+// 								"aria-valuenow", 100);
+// 						$(".progress-completed").text(100 + "%");
+// 						$('#step1').removeClass("activestep");
+// 						$('#page3').hide();
+// 						$('#page4').fadeIn(500);
 					}else {
 						$('.onlock-error-div').html('驗證失敗,請重新填入').css('color','red');
 					}
