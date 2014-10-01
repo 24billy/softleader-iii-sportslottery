@@ -374,7 +374,7 @@
 						keyboard: false
 					});
 					$('#addCoins').text(data);
-					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,3000);
+					setTimeout('document.location.href="<c:url value='/goIndex'/>"' ,2000);
 					
 				} else {
 					data = data.replace('error ', '');
