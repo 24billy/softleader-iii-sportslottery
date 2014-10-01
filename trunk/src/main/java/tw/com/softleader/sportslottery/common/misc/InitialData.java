@@ -40,9 +40,9 @@ public class InitialData implements ServletContextListener {
 		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		LocalDateTime startDate = LocalDate.now().minusMonths(6).plusDays(3).toLocalDateTime(new LocalTime(0,0));
-		System.out.println(startDate);
+		System.out.println("startDate: " + startDate);
 		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0,0));
-		System.out.println(endDate);
+		System.out.println("endDate: " + endDate);
 		Integer diffDay = 0;
 		while (!startDate.plusDays(diffDay).equals(endDate)) {
 			createGames(startDate.plusDays(diffDay));
