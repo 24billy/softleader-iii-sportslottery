@@ -6,17 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!--  
-<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/font-awesome.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/bootstrap-dialog.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.bootstrap-touchspin.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/jquery.dataTables_themeroller.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dataTables.responsive.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/global.css"/>">
--->
 
 <style>
 	td.details-control {
@@ -115,17 +104,6 @@
 		<!-- .container-fluid -->
 	</div>
 	<!-- #page-wrapper -->
-<!--  
-<script src="<c:url value="/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui.min.js"/>"></script>
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.js"/>"></script>
-<script src="<c:url value="/js/bootstrap-dialog.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.bootstrap-touchspin.min.js"/>"></script>
-<script src="<c:url value="/js/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
-<script src="<c:url value="/js/misc.js"/>"></script>
--->
 
 <script>
 	(function($) {
@@ -242,79 +220,89 @@
 					var detail = [];
 					var lotterys = [];
 					var lotteryInfo = [];
+					
 					//每張彩券
 					$.each(datas,function(index,data) {
-						//console.log(data);
+						console.log(data);
 						lotterys = [];
 						detail = [];
 						var lottery = {};
+						var count = 0;
 						lottery.id = data.id;
 						//下注時間
 						lottery.iMillis = data.confirmTime.iLocalMillis;
 						lottery.date = millisecondToDate(lottery.iMillis); //下注日期
 						lottery.time = millisecondToTime(lottery.iMillis); //下注時間
 						//金額獎金
-						lottery.win = data.win;
 						lottery.capital = data.capital;
+						console.log("1..."+lottery.capital)
+						lottery.win = data.win;
 						lottery.status = data.lotteryStatus;
-						//lottery.odds = data.lotteryOdds;
-						//console.log((data.lotteryOdds).length);
+						lottery.odds = data.lotteryOdds;
+						console.log((data.lotteryOdds).length);
 						//判斷玩法
-						lottery.unique = data.com1;
-						
-						if(typeof(lottery.unique) == "undefined") {
+						if(data.com1==null) {
 							lottery.unique = "<h4 style='color:red'>未勾選</h4>";
 						} else {
 							lottery.unique = "<img src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,1);
 						}
-						lottery.com2 = data.com2;
-						if(typeof(lottery.com2) == "undefined") {
+						
+						if(data.com2==null) {
 							lottery.com2 = "<h4 style='color:red'>未勾選</h4>";
 						} else {
 							lottery.com2 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,2);
 						}
-						lottery.com3 = data.com3;
-						if(typeof(lottery.com3) == "undefined") {
+						
+						if(data.com3==null) {
 							lottery.com3 = "<h4 style='color:red'>未勾選</h4>";
 						} else {
 							lottery.com3 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,3);
 						}
-						lottery.com4 = data.com4;
-						if(typeof(lottery.com4) == "undefined") {
+						
+						if(data.com4==null) {
 							lottery.com4 = "未勾選";
 						} else {
 							lottery.com4 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,4);
 						}
-						lottery.com5 = data.com5;
-						if(typeof(lottery.com5) == "undefined") {
+						
+						if(data.com5==null) {
 							lottery.com5 = "未勾選";
 						} else {
 							lottery.com5 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,5);
 						}
-						lottery.com6 = data.com6;
-						if(typeof(lottery.com6) == "undefined") {
+						
+						if(data.com6==null) {
 							lottery.com6 = "未勾選";
 						} else {
 							lottery.com6 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,6);
 						}
-						lottery.com7 = data.com7;
-						if(typeof(lottery.com7) == "undefined") {
+						
+						if(data.com7==null) {
 							lottery.com7 = "未勾選";
 						} else {
 							lottery.com7 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,7);
 						}
-						lottery.com8 = data.com8;
-						if(typeof(lottery.com8) == "undefined") {
+						
+						if(data.com8==null) {
 							lottery.com8 = "未勾選";
 						} else {
 							lottery.com8 = "<img class='successImg' src='images/success2.png' />";
+							count+=cngm((data.lotteryOdds).length,8);
 						}
+						
 						lottery.com = data.com0;
 						if(data.com1!=null && data.com2==null && data.com3==null && 
 								data.com4==null && data.com5==null && data.com6==null && 
 								data.com7==null && data.com8==null && data.com==null) {
-						
-						   lottery.play = "單場";
+							
+							lottery.play = "單場";
 						   
 						} else if(data.com1==null && data.com2==null && data.com3==null && 
 								data.com4==null && data.com5==null && data.com6==null && 
@@ -327,6 +315,9 @@
 								  
 								  lottery.play = "過關組合";
 						}
+						
+						lottery.capital2 = data.capital*count;
+						console.log("111..."+lottery.capital2+"count...."+count)
 						
 						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
 							lottery.com4 = "<img class='successImg' src='images/error.png' />";
@@ -453,9 +444,6 @@
 					//$(document).ajaxStop(function() {
 						console.log("=====lotteryInfo=====");
 						console.log(lotteryInfo);
-						//$('.details-control').click(function() {
-						//	$('#dialog').modal();
-						//});
 						//塞第一層資料
 						table = $('#oddTable').dataTable({
 							oLanguage: {
@@ -476,10 +464,6 @@
 								}
 							},
 							'data': lotteryInfo,
-							//"dom": 'T<"clear">lfrtip',
-					        //"tableTools": {
-					        //    "sSwfPath": '<c:url value="/swf/copy_csv_xls_pdf.swf"/>'
-					        //},
 					        'columns': [
 					        		{
 					        		'class':'details-control',
@@ -495,7 +479,13 @@
 										timeString += millisecondToTime(row.iMillis);
 										return timeString;
 					        		}},
-					        		{"data": "capital" },
+					        		{"data": function(row, type, val, meta){
+					        			if(row.play == "過關組合") {
+					        				return row.capital2;
+					        			} else {
+					        				return row.capital;
+					        			}
+					        		}},
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" >未開獎</button></td>';
@@ -651,6 +641,17 @@
 			}
 		}
 		renewData();
+		//計算排列組合數 
+		function cngm(n,m){
+			var numerator=1;
+			var denominator=1;
+			for(var i=1;i<=m;i++){
+		    	numerator=numerator*n;
+		    	denominator=denominator*i;
+		    	n=n-1;
+		   	}
+		    return numerator/denominator;
+		   }
 	})(jQuery);
 </script>
 </body>
