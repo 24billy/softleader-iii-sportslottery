@@ -17,22 +17,22 @@
 				<div class="bb-custom-wrapper">
 					<div id="bb-bookblock" class="bb-bookblock">
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/1.jpg" alt="image01"/>
+							<img height="300" width="400" src="images/navigation2/1.jpg" alt="image01"/>
 						</div>
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/2.jpg" alt="image02"/>
+							<img height="300" width="400" src="images/navigation2/2.jpg" alt="image02"/>
 						</div>
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/3.jpg" alt="image03"/>
+							<img height="300" width="400" src="images/navigation2/3.jpg" alt="image03"/>
 						</div>
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/4.jpg" alt="image04"/>
+							<img height="300" width="400" src="images/navigation2/4.jpg" alt="image04"/>
 						</div>
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/5.jpg" alt="image05"/>
+							<img height="300" width="400" src="images/navigation2/5.jpg" alt="image05"/>
 						</div>
 						<div class="bb-item">
-							<img height="300" width="400" src="images/navigation/6.jpg" alt="image06"/>
+							<img height="300" width="400" src="images/navigation2/6.jpg" alt="image06"/>
 						</div>
 					</div>
 					<nav>
