@@ -219,6 +219,14 @@ ServletResponseAware{
 					Map odd = (Map)lotteryOdds.get(oddsSize);
 					String oddGameTime = (String)odd.get("gameTime");
 					String oddBall = (String)odd.get("ballType");
+					if(oddBall.equals("<img src='images/baseball.gif'/>")) {
+						oddBall = "棒球";
+					} else if(oddBall.equals("<img src='images/basketball.png'/>")) {
+						oddBall = "籃球";
+					} else if(oddBall.equals("<img src='images/soccer.png'/>")) {
+						oddBall = "足球";
+					}
+					System.out.println(oddBall);
 					String oddHome = (String)odd.get("teamHomeName");
 					String oddAway = (String)odd.get("teamAwayName");
 					String oddType = (String)odd.get("labelText");
