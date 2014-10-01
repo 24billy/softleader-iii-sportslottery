@@ -68,11 +68,7 @@ public class InitialData implements ServletContextListener {
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
 			Long gameNum = gameService.maxGameNum();
-			if (gameNum != null) {
-				gameNum += 1;
-			} else {
-				gameNum = 100L;
-			}
+			gameNum = gameNum != null? gameNum + 1L:100L;
 			String ballType = teamAway.getBallType();
 			Boolean isEnd = null;
 			Long gameScoreAway = 0L;
