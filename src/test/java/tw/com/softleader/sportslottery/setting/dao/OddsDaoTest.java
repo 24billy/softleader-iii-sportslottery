@@ -31,14 +31,19 @@ public class OddsDaoTest extends BaseTest {
 		
 		List<OddsEntity> models = null;
 		
-		int originSize = 0;
-		int currentSize = 0;
+//		int originSize = 0;
+//		int currentSize = 0;
+//		
+//		models = oddsDao.findAll();
+//		
+//		if(models != null) {
+//			originSize = models.size();
+//		}
 		
-		models = oddsDao.findAll();
-		
-		if(models != null) {
-			originSize = models.size();
-		}
+		//測試findHotOdd(Long gameStatus, Long amount) 搜索熱門賽事
+		//搜索條件為 賽事狀態=1 取出前5筆資料
+		System.out.println("result");
+		System.out.println(oddsDao.findHotOdd(1L, 5));
 	
 /*		OddsEntity entity = new OddsEntity();
 		entity.setGameId(1L);
@@ -67,8 +72,8 @@ public class OddsDaoTest extends BaseTest {
 //		models = oddsDao.findByOddType("ODD");
 //		log.debug("findByOddType models = {}", models);
 //		
-		models = oddsDao.findByGameId(2L);
-		log.debug("findByGameId models = {}", models);
+//		models = oddsDao.findByGameId(2L);
+//		log.debug("findByGameId models = {}", models);
 		
 //		oddsDao.delete(entity);
 //		
@@ -212,8 +217,8 @@ public class OddsDaoTest extends BaseTest {
 		
 //------------------------------test Long countByOddTypeAndGameID(String oddType, Long gameId)--------
 		
-		Long count59 = oddsDao.countByOddTypeAndGameID("SU_H", 2L);
-		log.debug("count of SU_H= {} ", count59);
+//		Long count59 = oddsDao.countByOddTypeAndGameID("SU_H", 2L);
+//		log.debug("count of SU_H= {} ", count59);
 		
 		
 
