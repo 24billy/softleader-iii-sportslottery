@@ -8,7 +8,9 @@ import java.util.Random;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -21,7 +23,8 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 
 public class InitialData implements ServletContextListener {
 	
-	private static final Integer GAME_ROWS_NUM = 1000;
+	//private static final String START_DATE = "2014-08-01";
+	//private static final String END_DATE = "2014-10-31";
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -33,31 +36,34 @@ public class InitialData implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent arg0)  {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-		createGames(GAME_ROWS_NUM);
+		//DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
+		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
+		LocalDateTime startDate = LocalDate.now().minusMonths(6).plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		System.out.println(startDate);
+		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		System.out.println(endDate);
+		Integer diffDay = 0;
+		while (!startDate.plusDays(diffDay).equals(endDate)) {
+			createGames(startDate.plusDays(diffDay));
+			diffDay ++;
+		}
     }
 	
     public void contextDestroyed(ServletContextEvent arg0)  { 
     }
     
-	private void createGames(Integer num) {
+	private void createGames(LocalDateTime currentDate) {
 		List<String> leagueNames = teamService.leagueNames();
-		
+		Integer num = rand.nextInt(20);
 		for (Integer i = 0; i < num; i ++) {
 			Integer leagueIndex = rand.nextInt(leagueNames.size());
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
-			LocalDateTime gameTime = LocalDateTime.now()
-										.plusMinutes(rand.nextInt(60) - 30)
-										.withSecondOfMinute(0)
-										.withMillisOfSecond(0);
-			if (i == num - 1) {
-				gameTime = gameTime.plusHours(-1);
-			} else {
-				gameTime = gameTime
-							.plusMonths(rand.nextInt(8) - 6)
-							.plusDays(rand.nextInt(30) - 15)
-							.plusHours(rand.nextInt(24) - 12);
-			}
+			LocalDateTime gameTime = null;
+			gameTime = currentDate
+							.plusHours(rand.nextInt(24))
+							.plusMinutes(rand.nextInt(2) * 30 + rand.nextInt(2) * 5);
 			
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
@@ -78,12 +84,12 @@ public class InitialData implements ServletContextListener {
 				isEnd = true;
 				switch (ballType) {
 					case "Baseball":
-						gameScoreAway = Long.valueOf(rand.nextInt(10));
-						gameScoreHome = Long.valueOf(rand.nextInt(10));
+						gameScoreAway = Long.valueOf(rand.nextInt(11));
+						gameScoreHome = Long.valueOf(rand.nextInt(11));
 						break;
 					case "Basketball":
-						gameScoreAway = Long.valueOf(rand.nextInt(60) + 60);
-						gameScoreHome = Long.valueOf(rand.nextInt(60) + 60);
+						gameScoreAway = Long.valueOf(rand.nextInt(61) + 60);
+						gameScoreHome = Long.valueOf(rand.nextInt(61) + 60);
 						break;
 					case "Soccer":
 						gameScoreAway = Long.valueOf(rand.nextInt(5));
@@ -156,7 +162,7 @@ public class InitialData implements ServletContextListener {
 				break;
 			case "Basketball":
 				atsRnd = rand.nextInt(20) + 6;
-				scRnd = rand.nextInt(70) + 110;
+				scRnd = rand.nextInt(70) + 120;
 				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
 				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
 				scCombination = new BigDecimal(scRnd.toString() + ".5");
