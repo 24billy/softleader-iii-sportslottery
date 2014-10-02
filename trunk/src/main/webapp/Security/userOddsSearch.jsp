@@ -303,6 +303,7 @@
 								data.com7==null && data.com8==null && data.com==null) {
 							
 							lottery.play = "單場";
+							lottery.capital = data.capital*count
 						   
 						} else if(data.com1==null && data.com2==null && data.com3==null && 
 								data.com4==null && data.com5==null && data.com6==null && 
@@ -428,10 +429,10 @@
 							    	info.labelText = type;
 							    	break;
 							    case 'SC_H':
-							    	info.labelText = "總分合大於";
+							    	info.labelText = "總分合大";
 							    	break;
 							    case 'SC_L':
-							    	info.labelText = "總分合小於";
+							    	info.labelText = "總分合小";
 							    	break;
 							    case 'ODD':
 							    	info.labelText = "總分合為單數";
