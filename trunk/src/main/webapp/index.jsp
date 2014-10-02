@@ -1120,7 +1120,8 @@ $('#randomLottery').on('click',function(){
 	    sessionStorage.userGameInfo = JSON.stringify(userGameInfo);
 	    sessionStorage.userOdds=galbalOdds[randomOdd].id;
 	    
-	    odds_refresh();
+	    odds_refresh();  //刷新投注區	    
+	    gameRefresh(galbalGames,galbalOdds);  //刷新賽事列表
 	}
         
 });
