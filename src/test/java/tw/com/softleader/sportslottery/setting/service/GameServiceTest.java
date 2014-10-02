@@ -25,7 +25,7 @@ public class GameServiceTest extends BaseTest  {
 	
 ////	List<GameEntity> models=null;
 ////	GameEntity model=null;
-	@Test
+	//@Test
 	public void testGetAll() {
 		List<GameEntity> games=gameService.getAll();
 		assertNotNull(games);
@@ -37,7 +37,7 @@ public class GameServiceTest extends BaseTest  {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetByBallType(){
 		String ballType="Baseball";
 		List<GameEntity> games = gameService.getByBallType(ballType);
@@ -49,7 +49,7 @@ public class GameServiceTest extends BaseTest  {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetForHistory(){
 		LocalDate timeFrom = LocalDate.parse("2014-08-26"), timeTo = LocalDate.parse("2014-09-27");
 		String teamName = "底特律老虎";
@@ -61,14 +61,14 @@ public class GameServiceTest extends BaseTest  {
 		System.out.println("size of getForHistory("+timeFrom +", "+timeTo+", "+teamName+ "): "+ games.size());	
 	}
 	
-	@Test
+	//@Test
 	public void testGetByGameNum(){
 		Long gameNum=111L;
 		GameEntity game = gameService.getByGameNum(gameNum);
 		log.debug("getByGameNum={}", game);
 	}
 	
-	@Test 
+	//@Test 
 	public void testGetComplex(){
 		Long gameNum =null, gameStatusMin=null, gameStatusMax=null;
 		String teamName=null, ballType=null, leagueName=null;
@@ -81,20 +81,20 @@ public class GameServiceTest extends BaseTest  {
 		System.out.println("size of getComplex("+gameNum +", "+teamName+", "+gameStatusMin+", "+gameStatusMax+", "+timeBegin+", "+timeEnd+", "+ballType+", "+leagueName+ "): "+ games.size());		
 	}
 	
-	@Test
+	//@Test
 	public void testMaxGameNum(){
 		Long max = gameService.maxGameNum();
 		log.debug("maxGameNum ={}", max);//maxGameNum =150
 	}
 
 
-	@Test
+	//@Test
 	public void testGetById() {
 //		model=gameService.getById(1L);
 //		System.out.println(model);
 	}
 
-	@Test
+	//@Test
 	public void testInsert() {
 		
 	}
@@ -104,7 +104,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 
-	@Test
+	//@Test
 	public void testDelete() {
 		List<GameEntity> models = gameService.getAll();
 		int originSize = models.size();
@@ -117,11 +117,11 @@ public class GameServiceTest extends BaseTest  {
 		assertEquals(originSize - 1, currentSize);
 	}
 
-	@Test
+	//@Test
 	public void testGetAllJSON() {
 		
 	}
-	@Test
+	//@Test
 	public void testGetGameIdByGameNum(){
 		Long gameNum;
 //		gameNum=111L;//gameId=11
@@ -130,7 +130,7 @@ public class GameServiceTest extends BaseTest  {
 		Long gameId = gameService.getGameIdByGameNum(gameNum);
 		log.debug("getGameIdByGameNum ={}", gameId);
 	}
-	@Test
+	//@Test
 	public void testGetTotalCount(){
 		Long totalCount=gameService.getTotalCount(2L);
 		log.debug("total count= {}", totalCount);
@@ -139,7 +139,7 @@ public class GameServiceTest extends BaseTest  {
 		log.debug("total count2= {}", totalCount2);
 	}
 	
-	@Test
+	//@Test
 	public void testGetCount(){
 		Long gameId=2L;
 		String oddType= "SU_H";
@@ -148,7 +148,7 @@ public class GameServiceTest extends BaseTest  {
 		assertEquals(expectedCount, count);
 	}
 
-	@Test
+	//@Test
 	public void testGetIsPass(){
 		Long gameId=2L;
 		String oddType= "SU_H";
@@ -157,7 +157,7 @@ public class GameServiceTest extends BaseTest  {
 		assertEquals(expectedBoolean, isPass);
 	}
 	
-	@Test
+	//@Test
 	public void testIsPassPercentage(){
 		Long gameId=2L;
 		String oddType= "SU_H";
@@ -171,7 +171,7 @@ public class GameServiceTest extends BaseTest  {
 		assertEquals(expPercent2, percent2);
 	}
 	
-	@Test
+	//@Test
 	public void testGetCountBean(){
 		Long gameId=2L;
 		String oddType= "SU_H";
@@ -183,7 +183,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetCountInfoByGameId(){
 		Long gameId=2L;
 		Map<String, CountBean> map = gameService.getCountInfoByGameId(gameId);
@@ -198,7 +198,7 @@ public class GameServiceTest extends BaseTest  {
 		//ODD  =  CountBean [count=200, oddType=ODD, percentage=0.061, gameId=2, isPass=true], 
 		//SC_H =  CountBean [count=600, oddType=SC_H, percentage=0.18, gameId=2, isPass=true]
 		}
-	@Test
+	//@Test
 	public void testGetCountInfoHistory(){
 		
 //		Long gameNum = 136L;
@@ -215,7 +215,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetAllCountHistoryByTeam(){
 		String teamName= "紐約洋基";
 		List<Map<String, CountBean>> listMap = gameService.getAllCountHistoryByTeam(teamName);
@@ -224,14 +224,14 @@ public class GameServiceTest extends BaseTest  {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testSortByComparator(){
 		
 		map2 = gameService.getSortByComparator(gameService.getCountInfoByGameId(36L));
 		log.debug("map2 = {}", map2.toString());
 	}
 	
-	@Test
+	//@Test
 	public void testGetPopularOdd(){
 		String teamName= "密爾瓦基釀酒人";
 		Long gameId= 36L;
@@ -246,7 +246,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testAddMaxBeanToCountHistory(){
 //		String teamName= "密爾瓦基釀酒人";
 		
@@ -263,7 +263,7 @@ public class GameServiceTest extends BaseTest  {
 	}
 	
 
-	@Test
+	//@Test
 	public void testGetGameByLocalDateTime(){
 		String gameTimeStr="2014-09-16T08:55";
 		LocalDateTime gameTime = LocalDateTime.parse(gameTimeStr);
@@ -276,7 +276,7 @@ public class GameServiceTest extends BaseTest  {
 		System.out.println("size of games = "+ games.size());
 	}
 	
-	@Test
+	//@Test
 	public void testGetCountInfoHistoryPrevious3month(){
 		String teamName= null;
 //		teamName= "底特律老虎";
@@ -289,7 +289,7 @@ public class GameServiceTest extends BaseTest  {
 		System.out.println("the size of games: "+games.size());
 		
 	}
-	@Test
+	//@Test
 	public void testGetAllCountHistoryByTime(){
 		LocalDate timeTo=LocalDate.parse("2014-09-26");
 		List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTime(timeTo);
@@ -300,7 +300,7 @@ public class GameServiceTest extends BaseTest  {
 		System.out.println("the size of games before "+timeTo.toString()+": "+games.size());
 	}
 	
-	@Test
+	//@Test
 	public void testGetAllCountHistoryByTimePrevious3Month(){
 		//List<Map<String, CountBean>> games=gameService.getAllCountHistoryByTimePrevious3Month(null);
 		LocalDate date1 = new LocalDate();
@@ -320,7 +320,7 @@ public class GameServiceTest extends BaseTest  {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testGetAllCountHistoryByTimePrevious3Days(){
 		LocalDate date1 = new LocalDate();
 		date1 = LocalDate.parse("2014-09-26");
@@ -331,7 +331,7 @@ public class GameServiceTest extends BaseTest  {
 		}
 		System.out.println("the size of games: "+ games.size());
 	}
-	@Test
+	//@Test
 	public void testGetFinishedGameToday(){
 		List<GameEntity> games = gameService.getFinishedGameToday();
 		System.out.println("印出使用getFinishedGameToday得出的 GameEntity內容:");
@@ -342,7 +342,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetLatestFiveRecord(){
 		List<GameEntity> games = gameService.getLatestFiveRecord();
 		System.out.println("印出使用getLatestFiveRecord得出的 GameEntity內容:");
@@ -353,7 +353,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetGameOnComing(){
 		List<GameEntity> games = gameService.getGameOnComing();
 		System.out.println("印出使用getGameOnComing得出的 GameEntity內容:");
@@ -364,7 +364,7 @@ public class GameServiceTest extends BaseTest  {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetBallTypes(){
 		List<String> typeList = gameService.getBallTypes();
 		System.out.println("印出使用getBallTypes得出的 type內容:");
@@ -375,4 +375,10 @@ public class GameServiceTest extends BaseTest  {
 		
 	}
 
+	@Test
+	public void testGetHotGames(){
+		List<GameEntity> games = gameService.getHotGames(1L, 5, "Basketball");
+		System.out.println(games);	
+	}
+	
 }

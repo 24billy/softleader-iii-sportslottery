@@ -140,9 +140,6 @@ public class OddsService extends GenericService<OddsEntity> {
 		}
 	}
 	
-	
-	
-	
 	//將OddsList 變成 Map
 	public Map<String, OddCountBean> from_OddsEntityList_To_OddsEntityMap(String teamName , LocalDate gameTime){
 		Map<String,OddCountBean> map=new HashMap<String,OddCountBean>();

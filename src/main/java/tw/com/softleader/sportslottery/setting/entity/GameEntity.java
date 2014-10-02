@@ -55,6 +55,8 @@ public class GameEntity extends GenericEntity {
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "gameId", cascade = {CascadeType.ALL})
 	private List<OddsEntity> odds;
 
+	private Long countTotal;
+	
 	public LocalDateTime getGameTime() {
 		return gameTime;
 	}
@@ -135,14 +137,27 @@ public class GameEntity extends GenericEntity {
 		this.odds = odds;
 	}
 
+	public Long getCountTotal() {
+		countTotal = 0L;
+		for (OddsEntity odd : this.odds) {
+			countTotal += odd.getCount();
+		}
+		return countTotal;
+	}
+
+	public void setCountTotal(Long countTotal) {
+		this.countTotal = countTotal;
+	}
+
 	@Override
 	public String toString() {
 		return "GameEntity [gameTime=" + gameTime + ", gameNum=" + gameNum
 				+ ", teamHome=" + teamHome + ", teamAway=" + teamAway
 				+ ", gameScoreHome=" + gameScoreHome + ", gameScoreAway="
 				+ gameScoreAway + ", ballType=" + ballType + ", isEnd=" + isEnd
-				+ ", gameStatus=" + gameStatus + ", odds=" + odds + ", id="
-				+ id + "]";
+				+ ", gameStatus=" + gameStatus + ", odds=" + odds
+				+ ", countTotal=" + countTotal + ", id=" + id + "]";
 	}
+
 
 }

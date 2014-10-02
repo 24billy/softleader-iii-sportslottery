@@ -106,7 +106,11 @@
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>execute,select,selectNearDays,selectNotEnd,selectNearNotEnd</allowed-methods>
+		<result name="getHotGames" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>execute,select,selectNearDays,selectNotEnd,selectNearNotEnd,getHotGames</allowed-methods>
 	</action> 
 	
 	<action name="searchHistory" class="gameAction" method="gameHistory">
@@ -159,6 +163,10 @@
 			<param name="inputName">inputStream</param>
 		</result>
 		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="getHotOdds" type="stream">
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>

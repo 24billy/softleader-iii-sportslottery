@@ -445,7 +445,22 @@ public class GameService extends GenericService<GameEntity> {
     }
 	
 
-	
+	public List<GameEntity> getHotGames(Long gameStatus, int amount, String ballType){
+		//針對list內的物件進行排序
+		//使用Collections.sort方法，並實作Comparator內的compare辦法
+		//此方法可以針對list內的物件中的特定條件如屬性進行排序
+		List<GameEntity> games = dao.findComplex(null, null, gameStatus, gameStatus, null, null, ballType, null);
+		Collections.sort(games, new Comparator<GameEntity>() {
+			@Override
+			public int compare(GameEntity o1, GameEntity o2) {
+				return (int)(o2.getCountTotal() - o1.getCountTotal());
+			}
+		});
+
+		List<GameEntity> result = games.subList(0, games.size()>amount?amount:games.size());
+		
+		return result;
+	}
 
 	public List<GameEntity> getLatestFiveRecord() {
 		return dao.findLatestFiveRecord();

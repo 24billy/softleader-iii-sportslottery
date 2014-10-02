@@ -935,6 +935,7 @@ function next(obj,n,next) {
 							hasLocking = false;
 						}
 						
+						sessionStorage.hasLocated = 'verifySuccess',
 						window.location.href = '<c:url value="/"/>';
 // 						$(".progress-bar").css("width", "100%").attr(
 // 								"aria-valuenow", 100);
