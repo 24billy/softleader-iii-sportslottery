@@ -1,12 +1,12 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import tw.com.softleader.sportslottery.common.dao.GenericDao;
@@ -87,24 +87,6 @@ public class OddsDao extends GenericDao<OddsEntity> {
 		
 		
 		return count;	
-	}
-	
-	//取出熱門投注
-	public List<OddsEntity> findHotOdd(Long gameStatus, int amount){
-		//select * from odds odds left outer join game game on odds.game_id = game.id where game.game_status = 1 order by odds.count desc
-		Query query = getSession().createQuery("from OddsEntity odds left outer join GameEntity game where game.gameStatus = :gameStatus order by odds.count");
-		query.setLong("amount", amount);
-		query.setLong("gameStatus", gameStatus);
-		query.setMaxResults(amount);
-		List<OddsEntity> odds = (List<OddsEntity>)query.list();
-//		Criteria criteria = getSession().createCriteria(OddsEntity.class);
-//		
-//		criteria.add(Restrictions.eq("gameStatus", gameStatus));
-//		criteria.addOrder(Order.desc("odds.count"));
-//		criteria.setMaxResults(amount);
-//		List<OddsEntity> odds = (List<OddsEntity>) criteria.list();
-		
-		return odds;
 	}
 	
 /*	//以odd_type，時間，查投注數加總

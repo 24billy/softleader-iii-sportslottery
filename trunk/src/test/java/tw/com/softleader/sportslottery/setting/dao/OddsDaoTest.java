@@ -42,8 +42,6 @@ public class OddsDaoTest extends BaseTest {
 		
 		//測試findHotOdd(Long gameStatus, Long amount) 搜索熱門賽事
 		//搜索條件為 賽事狀態=1 取出前5筆資料
-		System.out.println("result");
-		System.out.println(oddsDao.findHotOdd(1L, 5));
 	
 /*		OddsEntity entity = new OddsEntity();
 		entity.setGameId(1L);

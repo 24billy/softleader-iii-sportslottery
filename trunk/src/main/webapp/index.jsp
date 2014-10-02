@@ -1169,6 +1169,9 @@ $(document).ready(function() {
 	case 'locking':
 		$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 		break;
+	case 'verifySuccess':
+		$("#target").load('<c:url value="/Security/verifySuccess.jsp"/>');
+		break;
 	default:
 		$("#target").load('<c:url value="/Event/test-events.jsp"/>');
 		break;

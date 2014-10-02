@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -631,5 +634,18 @@ public class GameAction extends ActionSupport {
 
 	public void setLinkTeamSearch(String linkTeamSearch) {
 		this.linkTeamSearch = linkTeamSearch;
+	}
+	
+	//取得熱門賽事(由使用者發送請求)
+	public String getHotGames(){
+		
+		log.debug("要求熱門賽事");
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		List<GameEntity> hotOdds = (List<GameEntity>)servletContext.getAttribute((complexBallType));
+			
+		json = new Gson().toJson(hotOdds);
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+			
+	return "getHotGames";
 	}
 }
