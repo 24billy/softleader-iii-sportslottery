@@ -336,4 +336,10 @@ public class GameDao extends GenericDao<GameEntity>{
 				.setFetchMode("odds", FetchMode.SELECT)
 				.add(Restrictions.le("gameTime",gameTime)).list();
 	}
+	
+	public List<GameEntity> findByNearDays(LocalDateTime gameTime) {
+		return getSession().createCriteria(GameEntity.class)
+				.setFetchMode("odds", FetchMode.SELECT)
+				.add(Restrictions.between("gameTime", gameTime, gameTime.plusDays(1))).list();
+	}
 }
