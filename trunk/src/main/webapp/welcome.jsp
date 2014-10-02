@@ -18,7 +18,6 @@
 <script src="<c:url value="/js/dataTables.responsive.js"/>"></script>
 <script src="<c:url value="/js/jquery.sidr.min.js"/>"></script>
 <script src="<c:url value="/js/misc.js"/>"></script>
-<script src="<c:url value='/js/jquery.validate.min.js'/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.zh-TW.js"/>"></script>
 <script src="<c:url value="/js/jquery.jdigiclock.js"/>"></script>
@@ -27,14 +26,7 @@
 <script src="<c:url value="/js/jquery.jsort.0.4.min.js"/>"></script>
 <script src="<c:url value="/js/jasny-bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.fileDownload.js"/>"></script>
-
-
 <script src="<c:url value="/js/highcharts_zh.js"/>"></script>
-<script src="http://code.highcharts.com/modules/data.js"></script>
-<script src="http://code.highcharts.com/modules/drilldown.js"></script>
-
-<script type="text/javascript" src="js/jquery.sidr.min.js"></script>
-<link rel="stylesheet" href="<c:url value="css/jquery.sidr.light.css"/>">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
@@ -76,6 +68,11 @@
 		width: 300px;
 		height: 300px;
 	}
+	
+	#hotGames{
+		text-align: center;
+		font-family: Meiryo, "Microsoft JhengHei" !important;
+	}
 </style>
 </head>
 <body>
@@ -85,10 +82,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                	<span class="titleBox">
+                	<div class="titleBox">
                 		<h1 class="tagline title">全民瘋運彩</h1>
                     	<h5 class="tagline subtitle">-Sports Lottery Maina-</h5>
-                	</span>
+                	</div>
                 </div>
             </div>
         </div>
@@ -127,7 +124,7 @@
 
         <hr>
 
-        <div class="row">
+        <div class="row" id="hotGames">
         	<div class="btn-group col-sm-12" id="ballType" data-toggle="buttons">
 				<label class="btn btn-primary active">
 					<input type="radio" ballType="hotBaseballGames" id="option1" checked> 棒球
@@ -172,118 +169,122 @@
     </div>
     <!-- /.container -->
  <script>
- 	(function($){
- 		$('.btn').button();
- 		
- 		$('#ballType input').on('change', function(){
- 			changeBalltype($(this).attr('ballType'));
- 		});
- 		
- 		var charts;
- 		function changeBalltype(ballType){
- 			$.ajax({
- 				url: '<c:url value="/game?method:getHotGames" />',
- 				type:'post',
- 				dataType:'json',
- 				data:{
- 					'complexBallType':ballType,
- 				},
- 				success:function(datas){
- 					console.log(datas);
- 					try {
-						$('div.chartBox:eq(0) .chart').highcharts().destroy();
-					} catch (e) {
+	$('.btn').button();
+	
+	$('#ballType input').on('change', function(){
+		changeBalltype($(this).attr('ballType'));
+	});
+	
+	var charts;
+	function changeBalltype(ballType){
+		$.ajax({
+			url: '<c:url value="/game?method:getHotGames" />',
+			type:'post',
+			dataType:'json',
+			data:{
+				'complexBallType':ballType,
+			},
+			success:function(datas){
+				console.log(datas);
+				try {
+				$('div.chartBox:eq(0) .chart').highcharts().destroy();
+				} catch (e) {
+				}
+				try {
+					$('div.chartBox:eq(1) .chart').highcharts().destroy();
+				} catch (e) {
+				}
+				try {
+					$('div.chartBox:eq(2) .chart').highcharts().destroy();
+				} catch (e) {
+				}
+				$('div.chartBox .chart').removeAttr('data-highcharts-chart');
+				$('div.chartBox h2').text('');
+				$('div.chartBox p').text('');
+				$.each($('div.chartBox .chart'), function(index, chart){
+					if(datas[index] && datas[index].countTotal != 0){
+						var sortedOdds = sortGameOdds(datas[index].odds);
+						var data = [
+									[datas[index].teamAway.teamName + '(不讓分)', sortedOdds['SU_A'].count],
+									[datas[index].teamHome.teamName + '(不讓分)', sortedOdds['SU_H'].count],
+									[datas[index].teamAway.teamName + '(讓分)', sortedOdds['ATS_A'].count],
+									[datas[index].teamHome.teamName + '(讓分)', sortedOdds['ATS_H'].count],
+									['總分合(大)', sortedOdds['SC_H'].count],
+									['總分合(小)', sortedOdds['SC_L'].count],
+									['總分(單)', sortedOdds['ODD'].count],
+									['總分(雙)', sortedOdds['EVEN'].count]
+ 					    ];
+						highChatFn('總投注數<br/>' + datas[index].countTotal + '人次', $(chart), data);
+						$('div.chartBox:eq(' + index + ') h2').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
+						$('div.chartBox:eq(' + index + ') p').html(
+								'<strong>比賽日期：</strong>' + millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis) + '<br>' +
+								'<strong>讓分賠率：</strong>客隊(' + sortedOdds['SU_A'].oddValue +')主隊(' + sortedOdds['SU_H'].oddValue + ')' + '<br>' +
+								'<strong>不讓分賠率：</strong>客隊(' + sortedOdds['ATS_A'].oddValue +') 主隊(' + sortedOdds['ATS_H'].oddValue + ')' + '<br>' +
+								'<strong>總和大小賠率：</strong>大隊(' + sortedOdds['SC_H'].oddValue +') 小隊(' + sortedOdds['SC_L'].oddValue + ')' + '<br>' +
+								'<strong>總和單雙賠率：</strong>單隊(' + sortedOdds['ODD'].oddValue +') 雙隊(' + sortedOdds['EVEN'].oddValue + ')'
+								);
+					} else {
+						highChatFn('抱歉，暫無資料', $(chart), null);
 					}
-					try {
-						$('div.chartBox:eq(1) .chart').highcharts().destroy();
-					} catch (e) {
-					}
-					try {
-						$('div.chartBox:eq(2) .chart').highcharts().destroy();
-					} catch (e) {
-					}
- 					$('div.chartBox .chart').removeAttr('data-highcharts-chart');
- 					$('div.chartBox h2').text('');
- 					$.each($('div.chartBox .chart'), function(index, chart){
- 						if(datas[index] && datas[index].countTotal != 0){
- 							var sortedOdds = sortGameOdds(datas[index].odds);
- 							var data = [
- 										[datas[index].teamAway.teamName + '(不讓分)', sortedOdds['SU_A'].count],
- 										[datas[index].teamHome.teamName + '(不讓分)', sortedOdds['SU_H'].count],
- 										[datas[index].teamAway.teamName + '(讓分)', sortedOdds['ATS_A'].count],
- 										[datas[index].teamHome.teamName + '(讓分)', sortedOdds['ATS_H'].count],
- 										['總分合(大)', sortedOdds['SC_H'].count],
- 										['總分合(小)', sortedOdds['SC_L'].count],
- 										['總分(單)', sortedOdds['ODD'].count],
- 										['總分(雙)', sortedOdds['EVEN'].count]
- 	 					    ]
- 							
- 							highChatFn('總投注數<br/>' + datas[index].countTotal + '人次', $(chart), data);
- 							$('div.chartBox:eq(' + index + ') h2').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
- 						} else {
- 							highChatFn('抱歉，暫無資料', $(chart), null);
- 						}
- 					});
+				});
 
- 					
- 					
- 				}
- 			});
- 		}
+				
+				
+			}
+		});
+	}
 
- 		function highChatFn(title, target, data){
- 			target.highcharts({
- 	 	        chart: {
- 	 	            plotBackgroundColor: null,
- 	 	            plotBorderWidth: 0,
- 	 	            plotShadow: true,
- 	 	        	backgroundColor: 'none',
- 	 	        	height: 300,
- 	 	        	weigth: 300,
- 	 	        },
- 	 	        title: {
- 	 	            text: title,
- 	 	            align: 'center',
- 	 	            verticalAlign: 'middle',
- 	 	            y: 0
- 	 	        },
- 	 	        tooltip: {
- 	 	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
- 	 	        },
- 	 	        plotOptions: {
- 	 	            pie: {
- 	 	            	colors: [
- 	 	            	        '#3FC63F', '#8CE08C',
- 	 	            	       	'#3D6AA2', '#84A2C9',
- 	 	            	     	'#F7B74F', '#FFDA9F',
- 	 	            	   		'#F74F4F', '#FF9F9F',],
- 	 	                dataLabels: {
- 	 	                    enabled: false,
- 	 	                    distance: 50,
- 	 	                    style: {
- 	 	                        fontWeight: 'bold',
- 	 	                        color: 'black',
- 	 	                        textShadow: '0px 0px 3px white'
- 	 	                    }
- 	 	                },
- 	 	                startAngle: 0,
- 	 	                endAngle: 360,
- 	 	                center: ['50%', '50%'],
- 	 	             	showInLegendL: true,
- 	 	            }
- 	 	        },
- 	 	        series: [{
- 	 	            type: 'pie',
- 	 	            name: '投注比率',
- 	 	            innerSize: '50%',
- 	 	            data: data
- 	 	        }]
- 	 	    });
- 		}
- 		
- 		changeBalltype("hotBaseballGames");
- 		
- 	})(jQuery);
+	function highChatFn(title, target, data){
+		target.highcharts({
+ 	        chart: {
+ 	            plotBackgroundColor: null,
+ 	            plotBorderWidth: 0,
+ 	            plotShadow: true,
+ 	        	backgroundColor: 'none',
+ 	        	height: 300,
+ 	        	weigth: 300,
+ 	        },
+ 	        title: {
+ 	            text: title,
+ 	            align: 'center',
+ 	            verticalAlign: 'middle',
+ 	            y: 0
+ 	        },
+ 	        tooltip: {
+ 	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+ 	        },
+ 	        plotOptions: {
+ 	            pie: {
+ 	            	colors: [
+ 	            	        '#3FC63F', '#8CE08C',
+ 	            	       	'#3D6AA2', '#84A2C9',
+ 	            	     	'#F7B74F', '#FFDA9F',
+ 	            	   		'#F74F4F', '#FF9F9F',],
+ 	                dataLabels: {
+ 	                    enabled: false,
+ 	                    distance: 50,
+ 	                    style: {
+ 	                        fontWeight: 'bold',
+ 	                        color: 'black',
+ 	                        textShadow: '0px 0px 3px white'
+ 	                    }
+ 	                },
+ 	                startAngle: 0,
+ 	                endAngle: 360,
+ 	                center: ['50%', '50%'],
+ 	             	showInLegendL: true,
+ 	            }
+ 	        },
+ 	        series: [{
+ 	            type: 'pie',
+ 	            name: '投注比率',
+ 	            innerSize: '50%',
+ 	            data: data
+ 	        }]
+ 	    });
+	}
+	
+	changeBalltype("hotBaseballGames");
  </script>   
  
 </body>
