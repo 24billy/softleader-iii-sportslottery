@@ -206,9 +206,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    //從session中取出userId
 	    Map session = ActionContext.getContext().getSession();
 	    UserEntity user = (UserEntity)session.get("user");
-
-	    
-	    
 	    String lastToken = null;
 		try {
 			lastToken = (String)session.get("lotteryToken");
@@ -222,9 +219,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	    	return ERROR;
 	    }
 
-        
-        
-        
 	    model.setUserId(user.getId());  
 	    model.setConfirmTime(new LocalDateTime());  
 	    model=service.insert(model);
@@ -251,6 +245,8 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
                     Long oddId= (Long)method.invoke(oddsIdList, null);
                     OddsEntity odd=new OddsEntity();
                     odd=oddsService.getById(oddId);
+                    odd.setCount(odd.getCount()+1);
+                    oddsService.update(odd);
                     odds.add(odd);
                     lotteryOdd = new LotteryOddsEntity();
                     lotteryOdd.setLotteryId(model.getId());
