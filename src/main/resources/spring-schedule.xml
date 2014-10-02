@@ -3,14 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<bean id="servletContext" class="org.springframework.web.context.support.ServletContextFactoryBean"/>
+	
 	<bean id="jobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="tw.com.softleader.sportslottery.common.misc.OddsCountJob"/>
+		<property name="jobDataAsMap">
+		<map>
+			<entry key="servletContext"><ref bean="servletContext"/></entry>
+		</map>
+	  </property>
 	</bean>
 	
 	<bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="jobDetailBean"/>
 		<property name="repeatInterval" value="300000"/>
-		<property name="startDelay" value="300000"/>
+		<property name="startDelay" value="1000"/>
 	</bean>
 	
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
