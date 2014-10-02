@@ -642,7 +642,7 @@ public class GameAction extends ActionSupport {
 		log.debug("要求熱門賽事");
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		List<GameEntity> hotOdds = (List<GameEntity>)servletContext.getAttribute((complexBallType));
-			
+		
 		json = new Gson().toJson(hotOdds);
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 			
