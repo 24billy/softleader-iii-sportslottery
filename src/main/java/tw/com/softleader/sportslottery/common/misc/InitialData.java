@@ -2,8 +2,10 @@ package tw.com.softleader.sportslottery.common.misc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,11 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
+import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.TeamEntity;
+import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 import tw.com.softleader.sportslottery.setting.service.GameService;
+import tw.com.softleader.sportslottery.setting.service.LotteryOddsService;
+import tw.com.softleader.sportslottery.setting.service.LotteryService;
 import tw.com.softleader.sportslottery.setting.service.OddsService;
 import tw.com.softleader.sportslottery.setting.service.TeamService;
+import tw.com.softleader.sportslottery.setting.service.UserService;
 
 public class InitialData implements ServletContextListener {
 	
@@ -31,6 +39,12 @@ public class InitialData implements ServletContextListener {
 	private OddsService oddsService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private LotteryService lotteryService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private LotteryOddsService lotteryOddsService;
 	
 	private Random rand = new Random();
 	
@@ -39,7 +53,7 @@ public class InitialData implements ServletContextListener {
 		//DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
-		LocalDateTime startDate = LocalDate.now().minusMonths(6).plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		LocalDateTime startDate = LocalDate.now().minusMonths(1).plusDays(3).toLocalDateTime(new LocalTime(0,0));
 		System.out.println("startDate: " + startDate);
 		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0,0));
 		System.out.println("endDate: " + endDate);
@@ -48,6 +62,13 @@ public class InitialData implements ServletContextListener {
 			createGames(startDate.plusDays(diffDay));
 			diffDay ++;
 		}
+		/*
+		diffDay = 0;
+		while (!startDate.plusDays(diffDay).equals(endDate)) {
+			createLottery(startDate.plusDays(diffDay));
+			diffDay ++;
+		}
+		*/
     }
 	
     public void contextDestroyed(ServletContextEvent arg0)  { 
@@ -218,6 +239,9 @@ public class InitialData implements ServletContextListener {
 	}
 	
 	private Boolean setPassedTypes(GameEntity game) {
+		if (!game.getIsEnd()) {
+			return true;
+		}
 		Long gameId = game.getId();
 		BigDecimal combination = null;
 		String su = null;
@@ -259,5 +283,81 @@ public class InitialData implements ServletContextListener {
 			
 		}
 		return true;
+	}
+	
+	private Boolean createLottery(LocalDateTime currentDate) {
+		List<UserEntity> users = userService.getAll();
+		List<GameEntity> games = gameService.getByGameTime(currentDate);
+		List<LotteryEntity> lotterys = new ArrayList<LotteryEntity>();
+		Integer lotteryNum = rand.nextInt(200);
+		if (games != null && games.size() > 0) {
+			for (Integer num = 0; num < lotteryNum; num ++) {
+				LotteryEntity lottery = new LotteryEntity();
+				Long userId = new Long(rand.nextInt(users.size()) + 1);
+				lottery.setUserId(userId);
+				lottery.setLotteryStatus(0L);
+				lottery = lotteryService.insert(lottery);
+				lotterys.add(lottery);
+			}
+			
+			for (LotteryEntity lottery : lotterys) {
+				LotteryOddsEntity lotteryOdds = null;
+				Set<LotteryOddsEntity> lotteryOddsList = new HashSet<LotteryOddsEntity>();
+				for (Integer num = 0; num < games.size(); num ++) {
+					lotteryOdds = new LotteryOddsEntity();
+					List<OddsEntity> odds = games.get(num).getOdds();
+					OddsEntity odd = odds.get(rand.nextInt(odds.size()));
+					if (rand.nextInt(10) > 3) {
+						lotteryOdds.setLotteryId(lottery.getId());
+						lotteryOdds.setOddsId(odd);
+						lotteryOddsList.add(lotteryOdds);
+						if (lotteryOddsList.size() == 8) {
+							break;
+						}
+					}
+					if (num == games.size() - 1 && lotteryOddsList.size() == 0) {
+						lotteryOdds.setLotteryId(lottery.getId());
+						lotteryOdds.setOddsId(odd);
+						lotteryOddsList.add(lotteryOdds);
+					}
+				}
+				
+				if (lotteryOddsList.size() == 1) {
+					lottery.setCom0(1L);
+				} else if (rand.nextInt(10) > 3) {
+					lottery.setCom0(1L);
+				} else {
+					Integer[] comSet = {1, 2, 3, 4, 5, 6, 7, 8};
+					Set<Integer> coms = new HashSet<Integer>();
+					Integer comNum = rand.nextInt(lotteryOddsList.size());
+					while (coms.size() != comNum) {
+						Integer index = rand.nextInt(comSet.length);
+						if (index < lotteryOddsList.size()) {
+							coms.add(index);
+						}
+					}
+					lottery = setCom(lottery, coms);
+					
+				}
+				lotteryService.update(lottery);
+			}
+		}
+		return true;
+	}
+	
+	private LotteryEntity setCom(LotteryEntity lottery, Set<Integer> coms) {
+		for (Integer com : coms) {
+			switch (com) {
+				case 1: lottery.setCom1(1L); break;
+				case 2: lottery.setCom2(1L); break;
+				case 3: lottery.setCom3(1L); break;
+				case 4: lottery.setCom4(1L); break;
+				case 5: lottery.setCom5(1L); break;
+				case 6: lottery.setCom6(1L); break;
+				case 7: lottery.setCom7(1L); break;
+				case 8: lottery.setCom8(1L); break;
+			}
+		}
+		return lottery;
 	}
 }
