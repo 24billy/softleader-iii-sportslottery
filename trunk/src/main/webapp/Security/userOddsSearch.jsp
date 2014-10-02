@@ -318,8 +318,16 @@
 						}
 						
 						lottery.capital2 = data.capital*count;
-						console.log("111..."+lottery.capital2+"count...."+count)
+						console.log("111..."+lottery.capital2+"count...."+count);
 						
+						if((data.lotteryOdds).length == 2 && lottery.play == "過關組合") {
+							lottery.com3 = "<img class='successImg' src='images/error.png' />";
+							lottery.com4 = "<img class='successImg' src='images/error.png' />";
+							lottery.com5 = "<img class='successImg' src='images/error.png' />";
+							lottery.com6 = "<img class='successImg' src='images/error.png' />";
+							lottery.com7 = "<img class='successImg' src='images/error.png' />";
+							lottery.com8 = "<img class='successImg' src='images/error.png' />";
+						}
 						if((data.lotteryOdds).length == 3 && lottery.play == "過關組合") {
 							lottery.com4 = "<img class='successImg' src='images/error.png' />";
 							lottery.com5 = "<img class='successImg' src='images/error.png' />";
