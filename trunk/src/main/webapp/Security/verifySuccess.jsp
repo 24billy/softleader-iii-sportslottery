@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <div id="page4">
-			<div class="send-mail-div">
-				<div style="font-size:2em">${user.userName}感謝您的註冊您可以開始。。。↓</div>
-				<img src="<c:url value='/images/gameValidate.JPG'/>" alt="玩法介紹">
-			</div>
+    <div class="row">
+		<div class="send-mail-div col-sm-8 col-sm-offset-2">
+			<div style="font-size:2em">${user.userName}感謝您的註冊您可以開始。。。↓</div>
+			<img src="<c:url value='/images/gameValidate.JPG'/>" alt="玩法介紹">
+		</div>
 	</div>
 </body>
 </html>
