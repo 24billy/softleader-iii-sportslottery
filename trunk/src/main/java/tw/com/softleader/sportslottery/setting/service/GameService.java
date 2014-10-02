@@ -478,7 +478,7 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.findByLocalDateTime(gameTime);
 	}
 	
-	public List<GameEntity> getByGameTime(LocalDateTime gameTime) {
-		return dao.findGameTime(gameTime.toDate());
+	public List<GameEntity> getByNearDays(LocalDateTime gameTime) {
+		return dao.findByNearDays(gameTime);
 	}
 }
