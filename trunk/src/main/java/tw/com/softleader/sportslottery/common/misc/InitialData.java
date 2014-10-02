@@ -30,9 +30,10 @@ import tw.com.softleader.sportslottery.setting.service.TeamService;
 import tw.com.softleader.sportslottery.setting.service.UserService;
 
 public class InitialData implements ServletContextListener {
-	
 	//private static final String START_DATE = "2014-08-01";
 	//private static final String END_DATE = "2014-10-31";
+	private static final Integer MINUS_MONTH = 2;
+	private static final Integer MAX_LOTTERY_NUM = 200;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -53,11 +54,12 @@ public class InitialData implements ServletContextListener {
 		//DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
-		LocalDateTime startDate = LocalDate.now().minusMonths(1).plusDays(3).toLocalDateTime(new LocalTime(0,0));
-		System.out.println("startDate: " + startDate);
+		LocalDateTime startDate = LocalDate.now().minusMonths(MINUS_MONTH).plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		System.out.println("START_DATE: " + startDate);
 		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0,0));
-		System.out.println("endDate: " + endDate);
+		System.out.println("END_DATE: " + endDate);
 		Integer diffDay = 0;
+		Long startTime = System.currentTimeMillis();
 		while (!startDate.plusDays(diffDay).equals(endDate)) {
 			createGames(startDate.plusDays(diffDay));
 			diffDay ++;
@@ -65,26 +67,26 @@ public class InitialData implements ServletContextListener {
 		/*
 		diffDay = 0;
 		while (!startDate.plusDays(diffDay).equals(endDate)) {
-			createLottery(startDate.plusDays(diffDay));
+			createLotterys(startDate.plusDays(diffDay));
 			diffDay ++;
 		}
+		countLotterys();
+		Long endTime = System.currentTimeMillis();
+		System.out.println((endTime - startTime) / 1000 / 60 + " sec");
 		*/
     }
 	
-    public void contextDestroyed(ServletContextEvent arg0)  { 
-    }
-    
 	private void createGames(LocalDateTime currentDate) {
 		List<String> leagueNames = teamService.leagueNames();
-		Integer num = rand.nextInt(20);
+		Integer num = rand.nextInt(21);
 		for (Integer i = 0; i < num; i ++) {
 			Integer leagueIndex = rand.nextInt(leagueNames.size());
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
 			
 			LocalDateTime gameTime = null;
 			gameTime = currentDate
-							.plusHours(rand.nextInt(24))
-							.plusMinutes(rand.nextInt(2) * 30 + rand.nextInt(2) * 5);
+						.plusHours(rand.nextInt(24))
+						.plusMinutes(rand.nextInt(2) * 30 + rand.nextInt(2) * 5);
 			
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
@@ -95,7 +97,7 @@ public class InitialData implements ServletContextListener {
 			Long gameScoreAway = 0L;
 			Long gameScoreHome = 0L;
 			Long gameStatus = 0L;
-			if (gameTime.isAfter(LocalDateTime.now().plusHours(-3))) {
+			if (gameTime.isAfter(LocalDateTime.now().minusHours(3))) {
 				isEnd = false;
 			} else {
 				isEnd = true;
@@ -114,9 +116,9 @@ public class InitialData implements ServletContextListener {
 						break;
 				}
 			}
-			if (gameTime.isBefore(LocalDateTime.now().plusDays(-1))) {
+			if (gameTime.isBefore(LocalDateTime.now().minusDays(1))) {
 				gameStatus = 3L;
-			} else if (gameTime.isBefore(LocalDateTime.now().plusHours(-3))) {
+			} else if (gameTime.isBefore(LocalDateTime.now().minusHours(3))) {
 				gameStatus = 2L;
 			} else if (gameTime.isBefore(LocalDateTime.now().plusDays(2))) {
 				gameStatus = 1L;
@@ -271,93 +273,141 @@ public class InitialData implements ServletContextListener {
 	private Boolean setCount(GameEntity game) {
 		Integer count = null;
 		List<OddsEntity> odds = game.getOdds();
-		for (OddsEntity odd : odds) {
-			count = rand.nextInt(5000) + 1; 
-			odd.setCount(new Long(count));
-			try {
+		try {
+			for (OddsEntity odd : odds) {
+				count = rand.nextInt(5000) + 1; 
+				odd.setCount(new Long(count));
 				oddsService.update(odd);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
 			}
-			
+		} catch (Exception e) {
+			return false;
 		}
 		return true;
 	}
 	
-	private Boolean createLottery(LocalDateTime currentDate) {
+	private Boolean createLotterys(LocalDateTime currentDate) {
 		List<UserEntity> users = userService.getAll();
-		List<GameEntity> games = gameService.getByGameTime(currentDate);
+		List<GameEntity> games = gameService.getByNearDays(currentDate);
 		List<LotteryEntity> lotterys = new ArrayList<LotteryEntity>();
-		Integer lotteryNum = rand.nextInt(200);
-		if (games != null && games.size() > 0) {
-			for (Integer num = 0; num < lotteryNum; num ++) {
-				LotteryEntity lottery = new LotteryEntity();
-				Long userId = new Long(rand.nextInt(users.size()) + 1);
-				lottery.setUserId(userId);
-				lottery.setLotteryStatus(0L);
-				lottery = lotteryService.insert(lottery);
-				lotterys.add(lottery);
-			}
-			
-			for (LotteryEntity lottery : lotterys) {
-				LotteryOddsEntity lotteryOdds = null;
-				Set<LotteryOddsEntity> lotteryOddsList = new HashSet<LotteryOddsEntity>();
-				for (Integer num = 0; num < games.size(); num ++) {
-					lotteryOdds = new LotteryOddsEntity();
-					List<OddsEntity> odds = games.get(num).getOdds();
-					OddsEntity odd = odds.get(rand.nextInt(odds.size()));
-					if (rand.nextInt(10) > 3) {
-						lotteryOdds.setLotteryId(lottery.getId());
-						lotteryOdds.setOddsId(odd);
-						lotteryOddsList.add(lotteryOdds);
-						if (lotteryOddsList.size() == 8) {
-							break;
+		Integer lotteryNum = rand.nextInt(MAX_LOTTERY_NUM);
+		Integer gamesSize = games != null? games.size():null;
+		Integer usersSize = users.size();
+		try {
+			if (gamesSize != null && gamesSize > 0) {
+				for (Integer num = 0; num < lotteryNum; num ++) {
+					LotteryEntity lottery = new LotteryEntity();
+					Long userId = new Long(rand.nextInt(usersSize) + 1);
+					lottery.setUserId(userId);
+					lottery.setLotteryStatus(0L);
+					lottery.setWin(-1L);
+					lottery = lotteryService.insert(lottery);
+					lotterys.add(lottery);
+				}
+				for (LotteryEntity lottery : lotterys) {
+					LotteryOddsEntity lotteryOdds = null;
+					Set<LotteryOddsEntity> lotteryOddsList = new HashSet<LotteryOddsEntity>();
+					Integer lotteryOddsListSize = lotteryOddsList.size();
+					for (Integer num = 0; num < gamesSize; num ++) {
+						lotteryOdds = new LotteryOddsEntity();
+						List<OddsEntity> odds = games.get(num).getOdds();
+						Integer oddsSize = odds.size();
+						LocalDateTime confirmTime = currentDate
+														.minusHours(rand.nextInt(48))
+														.minusMinutes(rand.nextInt(60))
+														.minusSeconds(rand.nextInt(60));
+						lottery.setConfirmTime(confirmTime);
+						OddsEntity odd = odds.get(rand.nextInt(oddsSize));
+						if (rand.nextInt(11) >= 9) {
+							lotteryOdds.setLotteryId(lottery.getId());
+							lotteryOdds.setOddsId(odd);
+							lotteryOdds = lotteryOddsService.insert(lotteryOdds);
+							lotteryOddsList.add(lotteryOdds);
+							lotteryOddsListSize = lotteryOddsList.size();
+							if (lotteryOddsListSize == 8) {
+								break;
+							}
+						}
+						if (num == gamesSize - 1 && lotteryOddsListSize == 0) {
+							lotteryOdds.setLotteryId(lottery.getId());
+							lotteryOdds.setOddsId(odd);
+							lotteryOdds = lotteryOddsService.insert(lotteryOdds);
+							lotteryOddsList.add(lotteryOdds);
+							lotteryOddsListSize = lotteryOddsList.size();
 						}
 					}
-					if (num == games.size() - 1 && lotteryOddsList.size() == 0) {
-						lotteryOdds.setLotteryId(lottery.getId());
-						lotteryOdds.setOddsId(odd);
-						lotteryOddsList.add(lotteryOdds);
-					}
-				}
-				
-				if (lotteryOddsList.size() == 1) {
-					lottery.setCom0(1L);
-				} else if (rand.nextInt(10) > 3) {
-					lottery.setCom0(1L);
-				} else {
-					Integer[] comSet = {1, 2, 3, 4, 5, 6, 7, 8};
-					Set<Integer> coms = new HashSet<Integer>();
-					Integer comNum = rand.nextInt(lotteryOddsList.size());
-					while (coms.size() != comNum) {
-						Integer index = rand.nextInt(comSet.length);
-						if (index < lotteryOddsList.size()) {
-							coms.add(index);
+					if (lotteryOddsListSize == 1) {
+						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)));
+						lottery.setCom0(1L);
+					} else if (rand.nextInt(11) >= 6) {
+						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)) * lotteryOddsListSize);
+						lottery.setCom0(1L);
+					} else {
+						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)));
+						Set<Integer> coms = new HashSet<Integer>();
+						Integer comNum = rand.nextInt(lotteryOddsListSize) + 1;
+						while (coms.size() != comNum) {
+							Integer index = rand.nextInt(8) + 1;
+							if (index <= lotteryOddsListSize) {
+								coms.add(index);
+							}
 						}
+						lottery = setComs(lottery, coms);
+						
 					}
-					lottery = setCom(lottery, coms);
-					
+					lotteryService.update(lottery);
 				}
-				lotteryService.update(lottery);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
 	
-	private LotteryEntity setCom(LotteryEntity lottery, Set<Integer> coms) {
+	private LotteryEntity setComs(LotteryEntity lottery, Set<Integer> coms) {
 		for (Integer com : coms) {
 			switch (com) {
-				case 1: lottery.setCom1(1L); break;
-				case 2: lottery.setCom2(1L); break;
-				case 3: lottery.setCom3(1L); break;
-				case 4: lottery.setCom4(1L); break;
-				case 5: lottery.setCom5(1L); break;
-				case 6: lottery.setCom6(1L); break;
-				case 7: lottery.setCom7(1L); break;
-				case 8: lottery.setCom8(1L); break;
+				case 1: 
+					lottery.setCom1(1L);
+					break;
+				case 2: 
+					lottery.setCom2(1L);
+					break;
+				case 3: 
+					lottery.setCom3(1L); 
+					break;
+				case 4: 
+					lottery.setCom4(1L);
+					break;
+				case 5: 
+					lottery.setCom5(1L);
+					break;
+				case 6: 
+					lottery.setCom6(1L);
+					break;
+				case 7: 
+					lottery.setCom7(1L);
+					break;
+				case 8: 
+					lottery.setCom8(1L);
+					break;
 			}
 		}
 		return lottery;
+	}
+	
+	private Boolean countLotterys() {
+		List<LotteryEntity> lotterys = lotteryService.getAll();
+		try {
+			for (LotteryEntity lottery : lotterys) {
+				lotteryService.calculatePrize(lottery);
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void contextDestroyed(ServletContextEvent arg0) {
 	}
 }

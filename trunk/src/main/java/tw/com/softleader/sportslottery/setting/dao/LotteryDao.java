@@ -2,6 +2,7 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -20,6 +21,12 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 	public List<LotteryEntity> findByUserId(Long userId){
 		Query query = getSession().createQuery("from LotteryEntity where USER_ID = :userId");
 		return (List<LotteryEntity>)query.setLong("userId", userId).list();
+	}
+	
+	@Override
+	public List<LotteryEntity> findAll() {
+		return getSession().createCriteria(LotteryEntity.class)
+					.setFetchMode("lotteryOdds", FetchMode.SELECT).list();
 	}
 	
 	public List<LotteryEntity> findByTime(LocalDateTime timeBegin, LocalDateTime timeEnd){
