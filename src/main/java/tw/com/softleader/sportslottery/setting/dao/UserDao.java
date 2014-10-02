@@ -3,6 +3,7 @@ package tw.com.softleader.sportslottery.setting.dao;
 
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,12 @@ import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 @Repository
 public class UserDao extends GenericDao<UserEntity> {
 	
+	@Override
+	public List<UserEntity> findAll() {
+		return getSession().createCriteria(UserEntity.class)
+						.setFetchMode("lotterys", FetchMode.SELECT).list();
+	}
+
 	public UserEntity findByUserAccount(String userAccount) {
 		Query query = getSession().createQuery("from UserEntity u where USER_ACCOUNT = :userAccount");
 		return  (UserEntity) query.setString("userAccount", userAccount).uniqueResult();	
