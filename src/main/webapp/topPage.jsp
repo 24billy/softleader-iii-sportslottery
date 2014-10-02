@@ -365,16 +365,56 @@
 		type:'post',
 		dataType:'json',
 		success:function(datas){
-			var count = 0;
+			var count = 0;			
 			$.each(datas, function(index,data) {
 				console.log(data);
 				var lottery = {};
 				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
+				//計算投注組合數
+				var betcount = 0;
+				if(data.com0!=null){
+					betcount = 1;
+				}else{
+					if(data.com1!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,1);
+	                }
+	                
+	                if(data.com2!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,2);
+	                }
+	                
+	                if(data.com3!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,3);
+	                }
+	                
+	                if(data.com4!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,4);
+	                }
+	                
+	                if(data.com5!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,5);
+	                }
+	                
+	                if(data.com6!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,6);
+	                }
+	                
+	                if(data.com7!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,7);
+	                }
+	                
+	                if(data.com8!=null) {
+	                    betcount+=cngm((data.lotteryOdds).length,8);
+	                }
+					
+				}
+				
+                
 				if(data.win>=0 && count<3) {
-					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
 					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
 				} else if(count<3){
-					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
 					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
 				}
 				count++;
@@ -480,7 +520,17 @@
 	$('#goVerify').on('click',function() {
 		$("#target").load('<c:url value="/Security/signUp.jsp"/>');
 	});
-	
+    //計算排列組合數 
+    function cngm(n,m){
+        var numerator=1;
+        var denominator=1;
+        for(var i=1;i<=m;i++){
+            numerator=numerator*n;
+            denominator=denominator*i;
+            n=n-1;
+        }
+        return numerator/denominator;
+       }
 })(jQuery); 
 </script>
 <script type="text/javascript">
