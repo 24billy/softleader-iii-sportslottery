@@ -122,7 +122,7 @@
 						</div>
 						<ul>
 							<li class="plan-feature">
-							<button id="activate-step-3" class="btn btn-primary btn-lg" >Select</button>
+							<button id="activate-step-3" class="btn btn-primary btn-lg glyphicon glyphicon-shopping-cart" >選擇</button>
 							</li>
 						</ul>
 					</div>
@@ -132,7 +132,7 @@
 						</div>
 						<ul>
 							<li class="plan-feature">
-							<button id="activate-step-4" class="btn btn-primary btn-lg" >Select</button>
+							<button id="activate-step-4" class="btn btn-primary btn-lg glyphicon glyphicon-shopping-cart" >選擇</button>
 							</li>
 						</ul>
 					</div>

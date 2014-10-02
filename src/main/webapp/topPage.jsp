@@ -367,7 +367,24 @@
 		success:function(datas){
 			var count = 0;			
 			$.each(datas, function(index,data) {
-				console.log(data);
+				//console.log(data);
+				if(data.com1!=null && data.com2==null && data.com3==null && 
+						data.com4==null && data.com5==null && data.com6==null && 
+						data.com7==null && data.com8==null && data.com==null) {
+					
+					data.play = "單場";
+				   
+				} else if(data.com1==null && data.com2==null && data.com3==null && 
+						data.com4==null && data.com5==null && data.com6==null && 
+						data.com7==null && data.com8==null && data.com0!=null) {
+						  
+						data.play = "過關";
+						  
+				} else if(data.com2!=null || data.com3!=null || data.com4!=null || data.com5!=null ||
+						data.com6!=null || data.com7!=null || data.com8!=null) {
+						  
+						data.play = "過關組合";
+				}
 				var lottery = {};
 				lottery.date = millisecondToDate(data.confirmTime.iLocalMillis);
 				//計算投注組合數
@@ -405,19 +422,30 @@
 	                
 	                if(data.com8!=null) {
 	                    betcount+=cngm((data.lotteryOdds).length,8);
-	                }
+	                };
 					
 				}
 				
-                
-				if(data.win>=0 && count<3) {
-					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
-					"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
-				} else if(count<3){
-					str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
-					"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
+				if(data.play == "過關組合" || data.play == "單場") {
+					if(data.win>=0 && count<3) {
+						str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
+						"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
+					} else if(count<3){
+						str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital*betcount + 
+						"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
+					}
+					count++;
+				} else {
+					if(data.win>=0 && count<3) {
+						str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+						"</span><span class='label label-success'>獎金:"+ data.win +"</span></a></li>";
+					} else if(count<3){
+						str+= "<li><a href='#' class='allOdds' ><span class='label label-warning'>下注時間:"+ lottery.date +"</span><span class='label label-info'>下注金額:" + data.capital + 
+						"</span><span class='label label-danger'>獎金:未開獎 </span></a></li>";
+					}
+					count++;
 				}
-				count++;
+				
 			});
 			$('#newOdds').append(str+= "<li class='divider'></li><li><a href='#' class='text-center allOdds'>所有投注</a></li>");
 			$('.allOdds').off('click');
