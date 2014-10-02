@@ -314,6 +314,7 @@
 								data.com6!=null || data.com7!=null || data.com8!=null) {
 								  
 								  lottery.play = "過關組合";
+								  lottery.capital = data.capital*count;
 						}
 						
 						lottery.capital2 = data.capital*count;
@@ -479,13 +480,7 @@
 										timeString += millisecondToTime(row.iMillis);
 										return timeString;
 					        		}},
-					        		{"data": function(row, type, val, meta){
-					        			if(row.play == "過關組合") {
-					        				return row.capital2;
-					        			} else {
-					        				return row.capital;
-					        			}
-					        		}},
+					        		{"data": "capital"},
 					        		{"data": function(row, type, val, meta){
 					        			if(row.win == -1) {
 					        				return '<td><button type="button" class="btn btn-warning btn-xs btn-status disabled winBtn" >未開獎</button></td>';
@@ -544,7 +539,7 @@
 								}
 							})
 						});
-						
+						//Excel
 						if(lotteryInfo.length != 0) {
 							$('#write').click(function () {
 								console.log(lotteryInfo.length);

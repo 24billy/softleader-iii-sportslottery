@@ -592,7 +592,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
-					<img src="images/success.png">
+					<img src="images/error2.jpg">
 					<h4>
 						<span id="forgetSuccess">${errorMsg}</span>
 					</h4>
