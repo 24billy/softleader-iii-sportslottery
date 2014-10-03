@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,5 +125,9 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		return query.list();
 		
 	}
-	
+	public List<LotteryEntity> findByLotteryStatus(Long lotteryStatus) {
+		return getSession().createCriteria(LotteryEntity.class)
+					.setFetchMode("lotteryOdds", FetchMode.SELECT)
+					.add(Restrictions.eq("lotteryStatus", lotteryStatus)).list();
+	}
 }

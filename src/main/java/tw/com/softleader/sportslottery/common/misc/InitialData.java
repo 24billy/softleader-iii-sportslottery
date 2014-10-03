@@ -32,8 +32,8 @@ import tw.com.softleader.sportslottery.setting.service.UserService;
 public class InitialData implements ServletContextListener {
 	//private static final String START_DATE = "2014-08-01";
 	//private static final String END_DATE = "2014-10-31";
-	private static final Integer MINUS_MONTH = 2;
-	private static final Integer MAX_LOTTERY_NUM = 200;
+	private static final Integer MINUS_MONTH = 3;
+	private static final Integer MAX_LOTTERY_NUM = 300;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -54,9 +54,9 @@ public class InitialData implements ServletContextListener {
 		//DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
-		LocalDateTime startDate = LocalDate.now().minusMonths(MINUS_MONTH).plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		LocalDateTime startDate = LocalDate.now().minusMonths(MINUS_MONTH).plusDays(3).toLocalDateTime(new LocalTime(0, 0));
 		System.out.println("START_DATE: " + startDate);
-		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0,0));
+		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0, 0));
 		System.out.println("END_DATE: " + endDate);
 		Integer diffDay = 0;
 		Long startTime = System.currentTimeMillis();
@@ -64,7 +64,7 @@ public class InitialData implements ServletContextListener {
 			createGames(startDate.plusDays(diffDay));
 			diffDay ++;
 		}
-		/*
+		
 		diffDay = 0;
 		while (!startDate.plusDays(diffDay).equals(endDate)) {
 			createLotterys(startDate.plusDays(diffDay));
@@ -72,8 +72,9 @@ public class InitialData implements ServletContextListener {
 		}
 		countLotterys();
 		Long endTime = System.currentTimeMillis();
-		System.out.println((endTime - startTime) / 1000 / 60 + " sec");
-		*/
+		lotteryOddsService.countAllOddsOfGame();
+		lotteryService.paidWinsToUser();
+		System.out.println((endTime - startTime) / 1000 / 60 + " mins");
     }
 	
 	private void createGames(LocalDateTime currentDate) {

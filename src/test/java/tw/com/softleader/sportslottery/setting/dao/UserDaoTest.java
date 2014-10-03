@@ -1,20 +1,22 @@
 package tw.com.softleader.sportslottery.setting.dao;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.softleader.sportslottery.common.test.BaseTest;
-import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 public class UserDaoTest extends BaseTest {
 
 	@Autowired
 	private UserDao dao;
+	
+	@Test
+	public void testFindById() {
+		System.out.println(dao.findById(1L));
+	}
 	
 	@Test
 	public void test() throws ParseException {
@@ -41,5 +43,5 @@ public class UserDaoTest extends BaseTest {
 		log.debug("--------Test:findByUserEmail--------"+dao.findByUserEmail("chen@gmail.com"));
 		
 	}
-
+	
 }
