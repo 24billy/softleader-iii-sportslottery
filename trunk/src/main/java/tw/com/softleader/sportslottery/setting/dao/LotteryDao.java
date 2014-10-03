@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -129,5 +130,12 @@ public class LotteryDao extends GenericDao<LotteryEntity>{
 		return getSession().createCriteria(LotteryEntity.class)
 					.setFetchMode("lotteryOdds", FetchMode.SELECT)
 					.add(Restrictions.eq("lotteryStatus", lotteryStatus)).list();
+	}
+	public List<LotteryEntity> findNewestLotterysByUserId(Long userId) {
+		return getSession().createCriteria(LotteryEntity.class)
+					.setFetchMode("lotteryOdds", FetchMode.SELECT)
+					.addOrder(Order.desc("id"))
+					.add(Restrictions.eq("userId", userId))
+					.setMaxResults(3).list();
 	}
 }

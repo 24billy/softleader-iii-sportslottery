@@ -454,6 +454,25 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return SUCCESS;
 	}
 	
+	public String getNewestLotterys() {
+		log.debug("Lottery by User...");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		UserEntity user = (UserEntity) session.get("user");
+		
+		try {
+			if (user != null) {
+				Long userId = user.getId();
+				List<LotteryEntity> lotterys = service.getNewestLotterysByUserId(userId);
+				json = new Gson().toJson(lotterys);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+		return "selectByUser";
+	}
+	
 	public String updateWin() {
 		log.debug("----------------"+model.getId());
 		String message;

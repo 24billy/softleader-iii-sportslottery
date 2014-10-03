@@ -361,7 +361,7 @@
 		});
 	});
 	$.ajax({
-		url:'<c:url value="/userOdds?method:selectByUser" />',
+		url:'<c:url value="/userOdds?method:getNewestLotterys" />',
 		type:'post',
 		dataType:'json',
 		success:function(datas){
