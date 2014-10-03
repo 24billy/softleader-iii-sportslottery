@@ -279,7 +279,7 @@
 			<param name="contentType">appliction/json</param>
 			<param name="inputName">inputStream</param>
 		</result>
-		<allowed-methods>selectByUser</allowed-methods>
+		<allowed-methods>selectByUser,getNewestLotterys</allowed-methods>
 	</action>
 
 	<!-- email -->
