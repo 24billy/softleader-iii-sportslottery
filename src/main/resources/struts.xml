@@ -388,5 +388,17 @@
   		<result name="countAllHistoryByTeam">/History/statisticResult.jsp</result>
   	</action>
   	
+  	<action name="announceFive" class="announceAction" method="selectLatestFiveRecord">
+  		<result name="message" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>selectLatestFiveRecord</allowed-methods>
+  	</action>
+  	
   </package>
 </struts>

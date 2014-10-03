@@ -67,11 +67,36 @@
 	.chart{
 		width: 300px;
 		height: 300px;
+		margin: auto;
 	}
 	
 	#hotGames{
 		text-align: center;
 		font-family: Meiryo, "Microsoft JhengHei" !important;
+	}
+	
+	.board footer{
+		margin: 0px 10px;
+	}
+	.board p{
+		margin: 5px 10px;
+	}
+	
+	.sample{
+		display: none;
+	}
+	
+	blockquote{
+		padding: 1px 20px;
+	}
+	blockquote.warning{
+	    border-color: #f0ad4e;
+	}
+	blockquote.info{
+	    border-color: #5bc0de;
+	}
+	blockquote.danger{
+	    border-color: #d9534f;
 	}
 </style>
 </head>
@@ -98,13 +123,16 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <h2>近期公告</h2>
-                <p>Introduce the visitor to the business using clear, informative text. Use well-targeted keywords within your sentences to make sure search engines can find the business.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et molestiae similique eligendi reiciendis sunt distinctio odit? Quia, neque, ipsa, adipisci quisquam ullam deserunt accusantium illo iste exercitationem nemo voluptates asperiores.</p>
-                <p>
-                    <a class="btn btn-default btn-lg" href="#">Call to Action &raquo;</a>
-                </p>
+            	<h2>近期公告</h2>
+            	<blockquote class="board sample info">
+            		<h3>公告標題#0</h3>
+	                <p>公告內容#0</p>
+	                <footer>公告時間#0</footer>
+				</blockquote>
+				<div id="boardBox">
+				</div>
             </div>
+            
             <div class="col-sm-4">
                 <h2>Contact Us</h2>
                 <address>
@@ -124,32 +152,38 @@
 
         <hr>
 
-        <div class="row" id="hotGames">
-        	<div class="btn-group col-sm-12" id="ballType" data-toggle="buttons">
-				<label class="btn btn-primary active">
+		<div class="row">
+			<div class="btn-group col-sm-8">
+        		<h2 style="text-align: left">熱門投注賽事</h2>
+        	</div>
+        	<div class="btn-group col-sm-4" id="ballType" data-toggle="buttons" style="margin:15px 0px 6px 0px;">
+				<label class="btn btn-default active">
 					<input type="radio" ballType="hotBaseballGames" id="option1" checked> 棒球
 				</label>
-				<label class="btn btn-primary">
+				<label class="btn btn-default">
 					<input type="radio" ballType="hotBasketballGames" id="option2"> 籃球
 				</label>
-				<label class="btn btn-primary">
+				<label class="btn btn-default">
 					<input type="radio" ballType="hotSoccerGames" id="option3"> 足球
 				</label>
 			</div>
+		</div>
+
+        <div class="row" id="hotGames">
             <div class="col-sm-4 chartBox" id="hotGame1">
+                <h3>球隊資訊 #1</h3>
                 <div class="chart"></div>
-                <h2>Marketing Box #1</h2>
-                <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
+                <p>賠率資訊 #1</p>
             </div>
             <div class="col-sm-4 chartBox" id="hotGame2">
+            	<h3>球隊資訊 #2</h3>
                 <div class="chart"></div>
-                <h2>Marketing Box #2</h2>
-                <p>The images are set to be circular and responsive. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <p>賠率資訊 #2</p>
             </div>
             <div class="col-sm-4 chartBox" id="hotGame3">
+                <h3>球隊資訊 #3</h3>
                 <div class="chart"></div>
-                <h2>Marketing Box #3</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <p>賠率資訊 #3</p>
             </div>
         </div>
         <!-- /.row -->
@@ -170,7 +204,49 @@
     <!-- /.container -->
  <script>
 	$('.btn').button();
+	//--公告處理--
+	function announceLoad(){
+		var todayMil = new Date().valueOf() - new Date().getTimezoneOffset()*60000;
+		var threeAgoMil = (new Date().setDate(new Date().getDate()-3)).valueOf() - new Date().getTimezoneOffset()*60000;
+		
+		console.log(todayMil);
+		console.log(threeAgoMil);
+		
+		$('#boardBox *').remove();
+		$.ajax({
+			url: '<c:url value="/announceFive" />',
+			type:'post',
+			dataType:'json',
+			success:function(datas){
+				console.log(datas);
+				$.each(datas, function(index, data){
+					var thisBoard = $('blockquote.board.sample').clone();
+					thisBoard.removeClass('sample');
+					
+					$('h3', thisBoard).text(data.announceTitle);
+					$('p', thisBoard).text(data.announceContent);
+					$('footer', thisBoard).text(millisecondToDate(data.modifiedTime.iLocalMillis));
+					
+					console.log(data.modifiedTime.iLocalMillis);
+
+					if(data.modifiedTime.iLocalMillis > todayMil){
+						thisBoard.removeClass('info');
+						thisBoard.addClass('danger');
+					} else if(data.modifiedTime.iLocalMillis > threeAgoMil){
+						thisBoard.removeClass('info');
+						thisBoard.addClass('warning');
+					}
+
+					$('#boardBox').append(thisBoard);
+				});
+				
+			}
+		});
+	}
+	announceLoad();
 	
+	
+	//--熱門賽事處理--
 	$('#ballType input').on('change', function(){
 		changeBalltype($(this).attr('ballType'));
 	});
@@ -199,7 +275,7 @@
 				} catch (e) {
 				}
 				$('div.chartBox .chart').removeAttr('data-highcharts-chart');
-				$('div.chartBox h2').text('');
+				$('div.chartBox h3').text('');
 				$('div.chartBox p').text('');
 				$.each($('div.chartBox .chart'), function(index, chart){
 					if(datas[index] && datas[index].countTotal != 0){
@@ -214,14 +290,14 @@
 									['總分(單)', sortedOdds['ODD'].count],
 									['總分(雙)', sortedOdds['EVEN'].count]
  					    ];
-						highChatFn('總投注數<br/>' + datas[index].countTotal + '人次', $(chart), data);
-						$('div.chartBox:eq(' + index + ') h2').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
+						highChatFn('總投注次數<br/>' + datas[index].countTotal + '注', $(chart), data);
+						$('div.chartBox:eq(' + index + ') h3').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
 						$('div.chartBox:eq(' + index + ') p').html(
-								'<strong>比賽日期：</strong>' + millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis) + '<br>' +
-								'<strong>讓分賠率：</strong>客隊(' + sortedOdds['SU_A'].oddValue +')主隊(' + sortedOdds['SU_H'].oddValue + ')' + '<br>' +
-								'<strong>不讓分賠率：</strong>客隊(' + sortedOdds['ATS_A'].oddValue +') 主隊(' + sortedOdds['ATS_H'].oddValue + ')' + '<br>' +
-								'<strong>總和大小賠率：</strong>大隊(' + sortedOdds['SC_H'].oddValue +') 小隊(' + sortedOdds['SC_L'].oddValue + ')' + '<br>' +
-								'<strong>總和單雙賠率：</strong>單隊(' + sortedOdds['ODD'].oddValue +') 雙隊(' + sortedOdds['EVEN'].oddValue + ')'
+								'<table class="table table-hover " style="text-align: left;background: none;"><tr><td><strong style="color:#000000">■</strong></td><td><strong>比賽日期：</strong></td><td colspan="2">' + millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis) + '</td></tr>' +
+								'<tr><td><strong style="color:#008500">■</strong></td><td><strong>讓分賠率：</strong></td><td>客隊(' + sortedOdds['SU_A'].oddValue +')</td><td>主隊(' + sortedOdds['SU_H'].oddValue + ')</td>' + '</tr>' +
+								'<tr><td><strong style="color:#08356D">■</strong></td><td><strong>不讓分賠率：</strong></td><td>客隊(' + sortedOdds['ATS_A'].oddValue +')</td><td>主隊(' + sortedOdds['ATS_H'].oddValue + ')</td>' + '</tr>' +
+								'<tr><td><strong style="color:#A66700">■</strong></td><td><strong>總和大小賠率：</strong></td><td>大隊(' + sortedOdds['SC_H'].oddValue +')</td><td>小隊(' + sortedOdds['SC_L'].oddValue + ')</td>' + '</tr>' +
+								'<tr><td><strong style="color:#A60000">■</strong></td><td><strong >總和單雙賠率：</strong></td><td>單數(' + sortedOdds['ODD'].oddValue +')</td><td>雙數(' + sortedOdds['EVEN'].oddValue + ')</td>' + '</tr><table>'
 								);
 					} else {
 						highChatFn('抱歉，暫無資料', $(chart), null);
@@ -242,7 +318,8 @@
  	            plotShadow: true,
  	        	backgroundColor: 'none',
  	        	height: 300,
- 	        	weigth: 300,
+ 	        	width: 300,
+ 	        	style: { margin: '0px auto'}
  	        },
  	        title: {
  	            text: title,
@@ -251,7 +328,7 @@
  	            y: 0
  	        },
  	        tooltip: {
- 	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+ 	            pointFormat: '{series.name}: <b>{point.y}注</b>'
  	        },
  	        plotOptions: {
  	            pie: {

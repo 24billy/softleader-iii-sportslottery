@@ -741,6 +741,10 @@ insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) va
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告1', '測試公告內容1', '2014-08-10T10:50:20', '2014-08-12T7:20:50');
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告2', '測試公告內容2', '2014-08-13T8:20:10', '2014-08-13T8:21:45');
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告3', '測試公告內容3', '2014-08-14T10:00:00', '2014-08-15T10:30:00');
+insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告4', '測試公告內容4', '2014-08-18T10:00:00', '2014-08-18T10:00:00');
+insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告5', '測試公告內容5', timestamp 'yesterday', timestamp 'yesterday');
+insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告6', '測試公告內容6', timestamp 'today', timestamp 'today');
+insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告7', '測試公告內容7', timestamp 'tomorrow', timestamp 'tomorrow');
 
 INSERT INTO admin_log(profit,entered_time) VALUES (91200,'2014-9-6T17:3:26');
 INSERT INTO admin_log(profit,entered_time) VALUES (25696,'2014-2-11T11:28:22');

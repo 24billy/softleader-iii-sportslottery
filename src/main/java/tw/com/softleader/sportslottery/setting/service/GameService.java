@@ -450,6 +450,12 @@ public class GameService extends GenericService<GameEntity> {
 		//使用Collections.sort方法，並實作Comparator內的compare辦法
 		//此方法可以針對list內的物件中的特定條件如屬性進行排序
 		List<GameEntity> games = dao.findComplex(null, null, gameStatus, gameStatus, null, null, ballType, null);
+		
+		//解決只有一筆資料時，不進行排序而不會運作getCountTotal()方法來獲得總投注數的BUG
+		if(games.size() == 1){
+			games.get(0).getCountTotal();
+		}
+		
 		Collections.sort(games, new Comparator<GameEntity>() {
 			@Override
 			public int compare(GameEntity o1, GameEntity o2) {
