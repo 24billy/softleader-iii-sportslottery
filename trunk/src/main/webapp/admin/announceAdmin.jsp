@@ -50,7 +50,7 @@
 						<div class="row top20 container-table">
 							<div class="col-sm-12">
 								<div class="table-responsive">
-									<table id="announceTable" class="compact hover order-column row-border nowrap">
+									<table id="announceTable" class="table compact hover order-column row-border nowrap">
 										<thead>
 											<tr>
 												<th>Id</th>
