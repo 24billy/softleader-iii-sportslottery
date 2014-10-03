@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>點選對名前三個月的過關統計</title>
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
@@ -32,7 +33,19 @@ $(document).ready(function(){
 </head>
 <body>
 <%-- <div id="loading"><img src="<c:url value="/images/countdown1.gif"/>" />Loading.....  </div> --%>
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<div id="container" style="width: 1280px; height: 400px; margin: 0 auto"></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 <div id="tsv" style="display:none"></div>  
 <script src="<c:url value="/js/misc.js"/>"></script>
 <script>
