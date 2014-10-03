@@ -40,7 +40,7 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LotteryAction extends ActionSupport implements ServletRequestAware {
+public class LotteryAction extends ActionSupport {
 	private static final long serialVersionUID = 2014L;
 	
 	@Autowired
@@ -53,7 +53,6 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
     private GameService gameService;
 	@Autowired
 	private LotteryOddsService lotteryOddsService;
-	
 	
 	private LotteryEntity model;
 	private List<LotteryEntity> models;
@@ -83,16 +82,10 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return locale;
 	}
 	
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		log.debug("get Session...");
-		session = request.getSession();
-	}
-		
-
 	public OddsIdList getOddsIdList() {
 		return oddsIdList;
 	}
+	
 	public void setOddsIdList(OddsIdList oddsIdList) {
 		this.oddsIdList = oddsIdList;
 	}
@@ -100,6 +93,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public InputStream getInputStream() {
 		return inputStream;
 	}
+	
 	public String getJson() {
 		return json;
 	}
@@ -109,30 +103,25 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
         this.json = json;
     }
 
-
     public String getJsonLottery()
     {
         return jsonLottery;
     }
-
 
     public void setJsonLottery(String jsonLottery)
     {
         this.jsonLottery = jsonLottery;
     }
     
-
     public String getJsonGame()
     {
         return jsonGame;
     }
 
-
     public void setJsonGame(String jsonGame)
     {
         this.jsonGame = jsonGame;
     }
-
 
     public LotteryEntity getModel() {
 		return model;
@@ -146,31 +135,25 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		return models;
 	}
 	
-	
 	public LocalDate getTimeFrom() {
 		return timeFrom;
 	}
-
 
 	public void setTimeFrom(LocalDate timeFrom) {
 		this.timeFrom = timeFrom;
 	}
 
-
 	public LocalDate getTimeTo() {
 		return timeTo;
 	}
-
 
 	public void setTimeTo(LocalDate timeTo) {
 		this.timeTo = timeTo;
 	}
 	
-
 	public Long getWinOpen() {
 		return winOpen;
 	}
-
 
 	public void setWinOpen(Long winOpen) {
 		this.winOpen = winOpen;
@@ -188,6 +171,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	public void validate() {
 				
 	}
+	
 	@Override
 	public String execute() throws Exception {
 		log.debug("execute LotteryAction");
@@ -337,6 +321,7 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 	
 		return Action.SUCCESS;
 	}
+	
 	public String virtualLottery() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
         System.out.println("去吧，虛擬投注!!");
 
@@ -430,10 +415,12 @@ public class LotteryAction extends ActionSupport implements ServletRequestAware 
 		log.debug("Lottery by User...");
 		
 		try {
-			Map<String, UserEntity> session2 = (Map) ServletActionContext.getContext().getSession();
-			UserEntity entity = (UserEntity) session2.get("user");
+//			Map<String, UserEntity> session2 = (Map) ServletActionContext.getContext().getSession();
+//			UserEntity entity = (UserEntity) session2.get("user");
 			
-//			UserEntity entity = (UserEntity)session.getAttribute("user");
+			Map session = ActionContext.getContext().getSession();
+		    UserEntity entity = (UserEntity)session.get("user");
+			
 			if(entity!=null){
 				Long id = entity.getId();
 				log.debug("id..." + id);
