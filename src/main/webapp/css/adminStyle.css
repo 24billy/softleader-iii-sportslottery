@@ -15,6 +15,10 @@ textarea {
 	resize: none;
 }
 
+#profitChart {
+	width: 800px;
+}
+
 #loginTitle {
 	color: #fff;
 }
