@@ -306,6 +306,7 @@ public class InitialData implements ServletContextListener {
 					LotteryOddsEntity lotteryOdds = null;
 					Set<LotteryOddsEntity> lotteryOddsList = new HashSet<LotteryOddsEntity>();
 					Integer lotteryOddsListSize = lotteryOddsList.size();
+					Long capital = 0L;
 					for (Integer num = 0; num < gamesSize; num ++) {
 						lotteryOdds = new LotteryOddsEntity();
 						List<OddsEntity> odds = games.get(num).getOdds();
@@ -335,13 +336,13 @@ public class InitialData implements ServletContextListener {
 						}
 					}
 					if (lotteryOddsListSize == 1) {
-						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)));
+						capital = new Long(100 * (rand.nextInt(100) + 1));
 						lottery.setCom0(1L);
 					} else if (rand.nextInt(11) >= 6) {
-						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)) * lotteryOddsListSize);
+						capital = new Long(100 * (rand.nextInt(100) + 1)) * lotteryOddsListSize;
 						lottery.setCom0(1L);
 					} else {
-						lottery.setCapital(new Long(100 * (rand.nextInt(100) + 1)));
+						capital = new Long(100 * (rand.nextInt(100) + 1));
 						Set<Integer> coms = new HashSet<Integer>();
 						Integer comNum = rand.nextInt(lotteryOddsListSize) + 1;
 						while (coms.size() != comNum) {
@@ -353,7 +354,11 @@ public class InitialData implements ServletContextListener {
 						lottery = setComs(lottery, coms);
 						
 					}
+					lottery.setCapital(capital);
 					lotteryService.update(lottery);
+					//UserEntity user = userService.getById(lottery.getUserId());
+					//user.setCoins(user.getCoins() - capital);
+					//userService.update(user);
 				}
 			}
 		} catch (Exception e) {
