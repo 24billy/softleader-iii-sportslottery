@@ -78,7 +78,7 @@
 			<div class="row top20">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<table id="oddTable" class="compact hover order-column row-border nowrap">
+						<table id="oddTable" class="table compact hover order-column row-border nowrap">
 							<thead>
 								<tr>
 									<th></th>
