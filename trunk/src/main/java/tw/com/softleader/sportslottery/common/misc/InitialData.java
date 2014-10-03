@@ -32,8 +32,9 @@ import tw.com.softleader.sportslottery.setting.service.UserService;
 public class InitialData implements ServletContextListener {
 	//private static final String START_DATE = "2014-08-01";
 	//private static final String END_DATE = "2014-10-31";
-	private static final Integer MINUS_MONTH = 3;
-	private static final Integer MAX_LOTTERY_NUM = 300;
+	private static final Integer MAX_GAME_NUM_OF_A_DAY = 20;
+	private static final Integer PAST_MONTHS_OF_BEGIN = 3;
+	private static final Integer MAX_LOTTERY_NUM_OF_A_DAY = 100;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -54,32 +55,29 @@ public class InitialData implements ServletContextListener {
 		//DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		//LocalDateTime startDate = LocalDate.parse(START_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
 		//LocalDateTime endDate = LocalDate.parse(END_DATE, formatter).toLocalDateTime(new LocalTime(0,0));
-		LocalDateTime startDate = LocalDate.now().minusMonths(MINUS_MONTH).plusDays(3).toLocalDateTime(new LocalTime(0, 0));
-		System.out.println("START_DATE: " + startDate);
+		LocalDateTime beginDate = LocalDate.now().minusMonths(PAST_MONTHS_OF_BEGIN).plusDays(3).toLocalDateTime(new LocalTime(0, 0));
+		System.out.println("BEGIN_DATE: " + beginDate);
 		LocalDateTime endDate = LocalDate.now().plusDays(3).toLocalDateTime(new LocalTime(0, 0));
 		System.out.println("END_DATE: " + endDate);
 		Integer diffDay = 0;
-		Long startTime = System.currentTimeMillis();
-		while (!startDate.plusDays(diffDay).equals(endDate)) {
-			createGames(startDate.plusDays(diffDay));
+		while (!beginDate.plusDays(diffDay).equals(endDate)) {
+			createGames(beginDate.plusDays(diffDay));
 			diffDay ++;
 		}
 		
 		diffDay = 0;
-		while (!startDate.plusDays(diffDay).equals(endDate)) {
-			createLotterys(startDate.plusDays(diffDay));
+		while (!beginDate.plusDays(diffDay).equals(endDate)) {
+			createLotterys(beginDate.plusDays(diffDay));
 			diffDay ++;
 		}
 		countLotterys();
-		Long endTime = System.currentTimeMillis();
 		lotteryOddsService.countAllOddsOfGame();
 		lotteryService.paidWinsToUser();
-		System.out.println((endTime - startTime) / 1000 / 60 + " mins");
     }
 	
 	private void createGames(LocalDateTime currentDate) {
 		List<String> leagueNames = teamService.leagueNames();
-		Integer num = rand.nextInt(21);
+		Integer num = rand.nextInt(MAX_GAME_NUM_OF_A_DAY + 1);
 		for (Integer i = 0; i < num; i ++) {
 			Integer leagueIndex = rand.nextInt(leagueNames.size());
 			List<TeamEntity> teams = getTeams(leagueNames.get(leagueIndex));
@@ -92,7 +90,7 @@ public class InitialData implements ServletContextListener {
 			TeamEntity teamAway = teams.get(0);
 			TeamEntity teamHome = teams.get(1);
 			Long gameNum = gameService.maxGameNum();
-			gameNum = gameNum != null? gameNum + 1L:100L;
+			gameNum = gameNum != null? gameNum + 1L:101L;
 			String ballType = teamAway.getBallType();
 			Boolean isEnd = null;
 			Long gameScoreAway = 0L;
@@ -138,8 +136,8 @@ public class InitialData implements ServletContextListener {
 			gameService.insert(game);
 			game = gameService.getById(game.getId());
 			createOdds(game);
-			game = gameService.getById(game.getId());
-			setCount(game);
+			//game = gameService.getById(game.getId());
+			//setCount(game);
 			game = gameService.getById(game.getId());
 			setPassedTypes(game);
 		}
@@ -270,7 +268,7 @@ public class InitialData implements ServletContextListener {
 		}
 		return true;
 	}
-	
+	/*
 	private Boolean setCount(GameEntity game) {
 		Integer count = null;
 		List<OddsEntity> odds = game.getOdds();
@@ -285,12 +283,12 @@ public class InitialData implements ServletContextListener {
 		}
 		return true;
 	}
-	
+	*/
 	private Boolean createLotterys(LocalDateTime currentDate) {
 		List<UserEntity> users = userService.getAll();
 		List<GameEntity> games = gameService.getByNearDays(currentDate);
 		List<LotteryEntity> lotterys = new ArrayList<LotteryEntity>();
-		Integer lotteryNum = rand.nextInt(MAX_LOTTERY_NUM);
+		Integer lotteryNum = rand.nextInt(MAX_LOTTERY_NUM_OF_A_DAY);
 		Integer gamesSize = games != null? games.size():null;
 		Integer usersSize = users.size();
 		try {
