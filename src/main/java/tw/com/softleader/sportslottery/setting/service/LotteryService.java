@@ -278,4 +278,7 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		}
 		return true;
 	}
+    public List<LotteryEntity> getNewestLotterysByUserId(Long userId) {
+    	return dao.findNewestLotterysByUserId(userId);
+    }
 }
