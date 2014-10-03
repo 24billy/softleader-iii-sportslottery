@@ -16,10 +16,12 @@ import tw.com.softleader.sportslottery.common.service.GenericService;
 import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
+import tw.com.softleader.sportslottery.setting.dao.UserDao;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
 import tw.com.softleader.sportslottery.setting.entity.OddsEntity;
+import tw.com.softleader.sportslottery.setting.entity.UserEntity;
 
 @Service
 public class LotteryService extends GenericService<LotteryEntity> {
@@ -32,6 +34,9 @@ public class LotteryService extends GenericService<LotteryEntity> {
 	
 	@Autowired
 	private GameDao gameDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@Override
 	protected GenericDao<LotteryEntity> getDao() {
@@ -247,5 +252,30 @@ public class LotteryService extends GenericService<LotteryEntity> {
 		return lotterys;
 	}
     
+    public List<LotteryEntity> getByLotteryStatus(Long lotteryStatus) {
+    	return dao.findByLotteryStatus(lotteryStatus);
+    }
     
+    public Boolean paidWinsToUser() {
+		List<LotteryEntity> lotterys = dao.findByLotteryStatus(0L);
+		try {
+			for (LotteryEntity lottery : lotterys) {
+				Long lotteryStatus = lottery.getLotteryStatus();
+				Long win = lottery.getWin();
+				Long userId = lottery.getUserId();
+				if (lotteryStatus == 0L && win != -1) {
+					UserEntity user = userDao.findById(userId);
+					Long coins = user.getCoins();
+					user.setCoins(coins + win);
+					userDao.update(user);
+					lottery.setLotteryStatus(1L);
+					update(lottery);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
