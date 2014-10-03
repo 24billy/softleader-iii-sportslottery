@@ -49,7 +49,7 @@
 										<tbody>
 											<tr>
 												<td>
-													<div id="profitChart" style="width:100%;"></div>
+													<div id="profitChart"></div>
 												</td>
 											</tr>
 										</tbody>									
