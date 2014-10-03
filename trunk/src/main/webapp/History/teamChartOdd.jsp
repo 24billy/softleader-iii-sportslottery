@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value="/css/sophia.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
@@ -23,7 +24,19 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<div id="container" style="width: 1280px; height: 400px; margin: 0 auto"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	
 	<!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
 	
