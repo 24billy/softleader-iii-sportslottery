@@ -42,7 +42,18 @@
 						
 						<div class="row container-table">
 							<div class="col-sm-12">
-								<div id="profitChart">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<div id="profitChart" style="width:100%;"></div>
+												</td>
+											</tr>
+										</tbody>									
+									</table>
 								</div>
 							</div>
 						</div>
@@ -117,6 +128,7 @@
 		
 		$('#profitChart').highcharts({
 			'chart': {
+				'renderTo': 'profitChart',
 				'type': 'area',
 			},
 			'title': {
