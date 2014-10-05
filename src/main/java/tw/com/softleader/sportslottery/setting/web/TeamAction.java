@@ -37,8 +37,18 @@ public class TeamAction extends ActionSupport {
 
 	private String leagueName;
 	
+	private String catagory;
+	
 	private Locale locale = ActionContext.getContext().getLocale();
 	
+	public String getCatagory() {
+		return catagory;
+	}
+
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
+	}
+
 	public Locale getLocale() {
 		return locale;
 	}
@@ -125,6 +135,7 @@ public class TeamAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("TeamAction admin()");
+		System.out.println(leagueName);
 		List<TeamEntity> teams = 
 				locale.getLanguage().equals("zh")?
 				service.getTeamList(leagueName):
@@ -143,6 +154,7 @@ public class TeamAction extends ActionSupport {
 	public String getLeagueNames() {
 		log.debug("TeamAction getLeagueNames()");
 		String ballType = model != null? model.getBallType():null;
+		if (ballType == null) ballType = catagory;
 		List<String> leagueNames = null;
 		if (ballType != null) {
 			leagueNames = locale.getLanguage().equals("zh")?

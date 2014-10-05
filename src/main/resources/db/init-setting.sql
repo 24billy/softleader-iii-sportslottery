@@ -89,18 +89,18 @@ INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,lea
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('菲尼克斯太陽','Phoenix Suns','PS','美國職業籃球聯賽','National Basketball Association','NBA','Basketball');
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('沙加緬度國王','Sacramento Kings','SK','美國職業籃球聯賽','National Basketball Association','NBA','Basketball');
 /*WNBA*/
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('亞特蘭大美夢','Atlanta Dream','AD','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('芝加哥天空','Chicago Sky','CSK','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('康乃狄克太陽','Connecticut Sun','CSU','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('印第安納狂熱','Indiana Fever','IF','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('紐約自由人','New York Liberty','NYL','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('華盛頓神秘','Washington Mystics','WM','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯火花','Los Angeles Sparks','LAS','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('明尼蘇達山貓','Minnesota Lynx','ML','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('鳳凰城水星','Phoenix Mercury','PM','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('聖安東尼奧銀星','San Antonio Silver Stars','SASS','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('西雅圖風暴','Seattle Storm','SS','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
-INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('圖爾薩震動','Tulsa Shock','TS','美國職業女子籃球聯賽','Women''s National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('亞特蘭大美夢','Atlanta Dream','AD','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('芝加哥天空','Chicago Sky','CSK','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('康乃狄克太陽','Connecticut Sun','CSU','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('印第安納狂熱','Indiana Fever','IF','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('紐約自由人','New York Liberty','NYL','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('華盛頓神秘','Washington Mystics','WM','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('洛杉磯火花','Los Angeles Sparks','LAS','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('明尼蘇達山貓','Minnesota Lynx','ML','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('鳳凰城水星','Phoenix Mercury','PM','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('聖安東尼奧銀星','San Antonio Silver Stars','SASS','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('西雅圖風暴','Seattle Storm','SS','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
+INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('圖爾薩震動','Tulsa Shock','TS','美國職業女子籃球聯賽','Womens National Basketball Association','WNBA','Basketball');
 /*EUL*/
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('馬卡比特拉維夫','Maccabi Tel Aviv','MTA','歐洲籃球聯賽','Euroleague','EUL','Basketball');
 INSERT INTO team(team_name,team_name_en,team_code,league_name,league_name_en,league_code,ball_type) VALUES ('考納斯綠林','Zalgiris Kaunas','ZK','歐洲籃球聯賽','Euroleague','EUL','Basketball');

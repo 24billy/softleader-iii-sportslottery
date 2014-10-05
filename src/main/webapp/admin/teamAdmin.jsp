@@ -42,12 +42,21 @@
 						
 						<div class="row">
 							<div class="col-sm-12">
-								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/teamAdmin"/>" method="post">
-									<select class="input-sm" id="leagueNameList" name="leagueName">
-									</select>
+								<form role="form" class="form-inline" action="<c:url value="/admin/teamAdmin"/>" method="post">
+									<div class="form-group">
+										<select class="input-sm form-control" id="catagory" name="catagory">
+											<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
+											<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
+											<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="input-sm form-control" id="leagueNameList" name="leagueName">
+										</select>
+									</div>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+									<button id="btnAddTeam" class="btn btn-success btn-sm pull-right" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.teamAdmin.add"/></span></button>
 								</form>
-								<button id="btnAddTeam" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#teamModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.teamAdmin.add"/></span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -225,6 +234,17 @@
 	(function($) {
 		var zh = '${locale.language}' == 'zh';
 		
+		//Begin of catagory
+		var catagory = '${catagory}';
+		if (catagory == null || catagory == "") {
+			$('#catagory')[0].selectedIndex = 0;
+		} else {
+			$('#catagory').val(catagory);
+		}
+		$('#catagory').change(listLeague);
+		$('#catagory').change();
+		//End of catagory
+		
 		//Begin of teamTable
 		var teamList = $.parseJSON('${json}');
 		$.each(teamList, function(index, team) {
@@ -250,24 +270,31 @@
 		//End of teamTable
 		
 		//Begin of listLeague
-		$.ajax({
-			url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
-			type: 'post',
-			dataType: 'json',
-			success: function(data) {
-				$.each(data, function(index, leagueName) {
-					var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-					$('#leagueNameList').append(str);
-				});
-				var leagueName = '${leagueName}';
-				if (leagueName == null || leagueName == "") {
+		var leagueName = '${leagueName}';
+		if (leagueName == null || leagueName == "") {
+			$('#leagueNameList')[0].selectedIndex = 0;
+		} else {
+			$('#leagueNameList').val(leagueName);
+		}
+		function listLeague() {
+			$('#leagueNameList').empty();
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'catagory':$('#catagory').val()
+				},
+				success: function(data) {
+					$.each(data, function(index, leagueName) {
+						var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+						$('#leagueNameList').append(str);
+					});
 					$('#leagueNameList')[0].selectedIndex = 0;
-				} else {
-					$('#leagueNameList').val(leagueName);
-				}
-			},
-			async: false
-		});
+				},
+				async: false
+			});
+		}
 		//End of listLeague
 		
 		//Begin of listTeam
