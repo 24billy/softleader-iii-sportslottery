@@ -487,4 +487,8 @@ public class GameService extends GenericService<GameEntity> {
 	public List<GameEntity> getByLeagueName(String leagueName) {
 		return dao.findByLeagueName(leagueName);
 	}
+	
+	public List<GameEntity> getByBallTypeAndGameStatus(String ballType, Long gameStatus) {
+		return dao.findByBallTypeAndGameStatus(ballType, gameStatus);
+	}
 }

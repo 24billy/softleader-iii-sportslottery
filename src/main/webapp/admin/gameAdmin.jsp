@@ -61,7 +61,12 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<select class="input-sm form-control" id="leagueNameList" name="leagueName">
+										<select class="input-sm form-control" id="gameStatus" name="gameStatus">
+											<option value="0" selected><s:text name="admin.gameAdmin.status.unopened"/></option>
+											<option value="1"><s:text name="admin.gameAdmin.status.opened"/></option>
+											<option value="progress"><s:text name="admin.gameAdmin.status.progress"/></option>
+											<option value="2"><s:text name="admin.gameAdmin.status.finished"/></option>
+											<option value="3"><s:text name="admin.gameAdmin.status.paid"/></option>
 										</select>
 									</div>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
@@ -505,9 +510,16 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
-		$('#catagory').change(getLeagueList);
-		$('#catagory').change();
 		//End of catagory
+		
+		//Begin of gameStatus
+		var gameStatus = '${gameStatus}';
+		if (gameStatus == null || gameStatus == "") {
+			$('#gameStatus')[0].selectedIndex = 0;
+		} else {
+			$('#gameStatus').val(gameStatus);
+		}
+		//End of gameStatus
 		
 		//Begin of gameTable
 		var gameList = $.parseJSON('${json}');
@@ -586,34 +598,6 @@
 		});
 				
 		//End of listBallType
-		
-		//Begin of getLeagueList
-		var leagueName = '${leagueName}';
-		if (leagueName == null || leagueName == "") {
-			$('#leagueNameList')[0].selectedIndex = 0;
-		} else {
-			$('#leagueNameList').val(leagueName);
-		}
-		function getLeagueList() {
-			$('#leagueNameList').empty();
-			$.ajax({
-				url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
-				type: 'post',
-				dataType: 'json',
-				data: {
-					'catagory':$('#catagory').val()
-				},
-				success: function(data) {
-					$.each(data, function(index, leagueName) {
-						var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
-						$('#leagueNameList').append(str);
-					});
-					$('#leagueNameList')[0].selectedIndex = 0;
-				},
-				async: false
-			});
-		}
-		//End of getLeagueList
 		
 		//Begin of listLeague
 		function listLeague() {
