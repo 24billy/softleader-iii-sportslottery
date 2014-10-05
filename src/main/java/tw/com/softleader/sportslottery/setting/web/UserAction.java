@@ -651,13 +651,14 @@ public class UserAction extends ActionSupport {
 		log.debug("login...");
 		
 		//測試期間用 無法改密碼
+		/*
 		UserEntity entity2 = service.getById(2l);
 		entity2.setUserPassword("a123456".getBytes());
 		service.update(entity2);
 		UserEntity entity3 = service.getById(3l);
 		entity3.setUserPassword("a123456".getBytes());
 		service.update(entity3);
-		
+		*/
 		
 		//正式程式碼
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
