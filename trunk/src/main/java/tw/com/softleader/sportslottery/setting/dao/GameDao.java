@@ -348,4 +348,26 @@ public class GameDao extends GenericDao<GameEntity>{
 		Criterion criterion = Restrictions.or(firstCri, secondCri);
 		return criteria.add(criterion).list();
 	}
+	
+	public List<GameEntity> findByBallTypeAndGameStatus(String ballType, Long gameStatus) {
+		Criteria criteria = getSession().createCriteria(GameEntity.class);
+		criteria = criteria.setFetchMode("odds", FetchMode.SELECT);
+		Criterion firstCri = Restrictions.eq("ballType", ballType);
+		Criterion secondCri = Restrictions.eq("gameStatus", gameStatus);
+		Criterion thirdCri = Restrictions.gt("gameTime", LocalDateTime.now());
+		Criterion extraCri = Restrictions.le("gameTime", LocalDateTime.now());
+		System.out.println(gameStatus);
+		if (gameStatus != null) {
+			System.out.println("if");
+			if (gameStatus == 1L) criteria = criteria.add(firstCri).add(secondCri).add(thirdCri);
+			else criteria = criteria.add(firstCri).add(secondCri);
+		} else {
+			System.out.println("else");
+			gameStatus = 1L;
+			secondCri = Restrictions.eq("gameStatus", gameStatus);
+			criteria = criteria.add(firstCri).add(secondCri).add(extraCri);
+		}
+		
+		return criteria.list();
+	}
 }

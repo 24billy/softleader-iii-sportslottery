@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -60,7 +61,7 @@ public class GameAction extends ActionSupport {
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
-	private String leagueName;
+	private String gameStatus;
 	private LocalDate timeFrom, timeTo;
 	private String teamName;
 	
@@ -79,12 +80,12 @@ public class GameAction extends ActionSupport {
 	
 	private Locale locale = ActionContext.getContext().getLocale();
 	
-	public String getLeagueName() {
-		return leagueName;
+	public String getGameStatus() {
+		return gameStatus;
 	}
 
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
+	public void setGameStatus(String gameStatus) {
+		this.gameStatus = gameStatus;
 	}
 
 	public Locale getLocale() {
@@ -471,12 +472,12 @@ public class GameAction extends ActionSupport {
 		log.debug("GameAction admin()");
 		maxGameNum = service.maxGameNum();
 		ballTypes = service.getBallTypes();
-		if (leagueName == null) {
-			leagueName = locale.getLanguage().equals("zh")?
-							teamService.getLeagueNamesByBallType(ballTypes.get(0)).get(0):
-							teamService.getLeagueNamesByBallTypeEn(ballTypes.get(0)).get(0);
+		String ballType = catagory != null? catagory:ballTypes.get(0);
+		Long gameStatus = 0L;
+		if (!StringUtils.isEmpty(this.gameStatus)) { 
+			gameStatus = !this.gameStatus.equals("progress")? Long.parseLong(this.gameStatus):null;
 		}
-		List<GameEntity> games = service.getByLeagueName(leagueName);
+		List<GameEntity> games = service.getByBallTypeAndGameStatus(ballType, gameStatus);
 		json = new Gson().toJson(games);
 		return Action.SUCCESS;
 	}
