@@ -18,7 +18,6 @@ import tw.com.softleader.sportslottery.setting.dao.GameDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryDao;
 import tw.com.softleader.sportslottery.setting.dao.LotteryOddsDao;
 import tw.com.softleader.sportslottery.setting.dao.UserDao;
-import tw.com.softleader.sportslottery.setting.entity.AdminLogEntity;
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryOddsEntity;
@@ -269,19 +268,22 @@ public class LotteryService extends GenericService<LotteryEntity> {
 				Long win = lottery.getWin();
 				if (lotteryStatus == 0L && win != -1) {
 					Long userId = lottery.getUserId();
-					AdminLogEntity adminLog = new AdminLogEntity();
-					adminLog.setEnteredTime(lottery.getConfirmTime());
+					//AdminLogEntity adminLog = new AdminLogEntity();
+					//adminLog.setEnteredTime(lottery.getConfirmTime());
 					if (win > 0) {
 						UserEntity user = userDao.findById(userId);
 						Long coins = user.getCoins();
 						user.setCoins(coins + win);
 						userDao.update(user);
+						/*
 						adminLog.setProfit(win * -1);
 						adminLogDao.insert(adminLog);
+						*/
 					} else {
-						adminLog.setEnteredTime(lottery.getConfirmTime());
+						/*
 						adminLog.setProfit(lottery.getCapital());
 						adminLogDao.insert(adminLog);
+						*/
 					}
 					lottery.setLotteryStatus(1L);
 					update(lottery);

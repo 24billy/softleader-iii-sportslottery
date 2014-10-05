@@ -394,11 +394,11 @@ public class InitialData implements ServletContextListener {
 						capital = capital * count;
 						
 					}
-					lottery.setCapital(capital);
-					lotteryService.update(lottery);
 					//UserEntity user = userService.getById(lottery.getUserId());
 					//user.setCoins(user.getCoins() - capital);
 					//userService.update(user);
+					lottery.setCapital(capital);
+					lotteryService.update(lottery);
 				}
 			}
 		} catch (Exception e) {
