@@ -3,6 +3,7 @@ package tw.com.softleader.sportslottery.setting.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
@@ -39,11 +40,6 @@ public class GameDao extends GenericDao<GameEntity>{
 	public List<GameEntity> findGameTime(Date gameTime){
 		Query query = getSession().createQuery("from GameEntity where GAME_TIME = :gameTime order by GAME_TIME");
 		return query.setDate("gameTime", gameTime).list();
-	}
-	
-	public List<GameEntity> findGameByLeagueName(String leagueName){
-		Query query = getSession().createQuery("from GameEntity where league_name = :leagueName order by GAME_TIME");
-		return query.setString("leagueName", leagueName).list();
 	}
 	
 	public List<GameEntity> findGameByPeriod(LocalDate timeFrom, LocalDate timeTo){
@@ -341,5 +337,15 @@ public class GameDao extends GenericDao<GameEntity>{
 		return getSession().createCriteria(GameEntity.class)
 				.setFetchMode("odds", FetchMode.SELECT)
 				.add(Restrictions.between("gameTime", gameTime, gameTime.plusDays(1))).list();
+	}
+	
+	public List<GameEntity> findByLeagueName(String leagueName) {
+		Criteria criteria = getSession().createCriteria(GameEntity.class);
+		criteria = criteria.createAlias("teamAway", "team");
+		criteria = criteria.setFetchMode("odds", FetchMode.SELECT);
+		Criterion firstCri = Restrictions.eq("team.leagueName", leagueName);
+		Criterion secondCri = Restrictions.eq("team.leagueNameEn", leagueName);
+		Criterion criterion = Restrictions.or(firstCri, secondCri);
+		return criteria.add(criterion).list();
 	}
 }

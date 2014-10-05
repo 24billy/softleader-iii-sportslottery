@@ -56,10 +56,6 @@ public class GameService extends GenericService<GameEntity> {
 		return dao.findForHistory(timeFrom, timeTo, teamName);
 	}
 	
-	public List<GameEntity> getByLeagueName(String leagueName){
-		return dao.findGameByLeagueName(leagueName);
-	}
-	
 	public GameEntity getByGameNum(Long gameNum) {
 		return dao.findByGameNum(gameNum);
 	}
@@ -486,5 +482,9 @@ public class GameService extends GenericService<GameEntity> {
 	
 	public List<GameEntity> getByNearDays(LocalDateTime gameTime) {
 		return dao.findByNearDays(gameTime);
+	}
+	
+	public List<GameEntity> getByLeagueName(String leagueName) {
+		return dao.findByLeagueName(leagueName);
 	}
 }
