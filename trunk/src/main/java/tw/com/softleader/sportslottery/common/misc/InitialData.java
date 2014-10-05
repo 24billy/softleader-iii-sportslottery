@@ -34,7 +34,7 @@ public class InitialData implements ServletContextListener {
 	//private static final String END_DATE = "2014-10-31";
 	private static final Integer MAX_GAME_NUM_OF_A_DAY = 20;
 	private static final Integer PAST_MONTHS_OF_BEGIN = 3;
-	private static final Integer MAX_LOTTERY_NUM_OF_A_DAY = 100;
+	private static final Integer MAX_LOTTERY_NUM_OF_A_DAY = 200;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -102,16 +102,16 @@ public class InitialData implements ServletContextListener {
 				isEnd = true;
 				switch (ballType) {
 					case "Baseball":
-						gameScoreAway = Long.valueOf(rand.nextInt(11));
-						gameScoreHome = Long.valueOf(rand.nextInt(11));
+						gameScoreAway = Long.valueOf(rand.nextInt(13));
+						gameScoreHome = Long.valueOf(rand.nextInt(13));
 						break;
 					case "Basketball":
 						gameScoreAway = Long.valueOf(rand.nextInt(61) + 60);
 						gameScoreHome = Long.valueOf(rand.nextInt(61) + 60);
 						break;
 					case "Soccer":
-						gameScoreAway = Long.valueOf(rand.nextInt(5));
-						gameScoreHome = Long.valueOf(rand.nextInt(5));
+						gameScoreAway = Long.valueOf(rand.nextInt(7));
+						gameScoreHome = Long.valueOf(rand.nextInt(7));
 						break;
 				}
 			}
@@ -173,7 +173,7 @@ public class InitialData implements ServletContextListener {
 		switch (ballType) {
 			case "Baseball":
 				atsRnd = 1;
-				scRnd = rand.nextInt(3) + 6;
+				scRnd = rand.nextInt(4) + 6;
 				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
 				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
 				scCombination = new BigDecimal(scRnd.toString() + ".5");
@@ -187,7 +187,7 @@ public class InitialData implements ServletContextListener {
 				break;
 			case "Soccer":
 				atsRnd = 1;
-				scRnd = rand.nextInt(3) + 3;
+				scRnd = rand.nextInt(4) + 3;
 				atsCombinations.add(new BigDecimal(atsRnd.toString() + ".5"));
 				atsCombinations.add(new BigDecimal("-" + atsRnd.toString() + ".5"));
 				scCombination = new BigDecimal(scRnd.toString() + ".5");
@@ -196,9 +196,9 @@ public class InitialData implements ServletContextListener {
 		String[] oddType = {"SU_A", "SU_H", "ATS_A", "ATS_H", "SC_H", "SC_L", "EVEN", "ODD"};
 		for (Integer i = 0; i < oddType.length; i++) {
 			OddsEntity odds = new OddsEntity();
-			BigDecimal stdValue = new BigDecimal("1.5");
+			BigDecimal stdValue = new BigDecimal("1.1");
 			BigDecimal diffValue = new BigDecimal("0.05");
-			BigDecimal range = new BigDecimal(rand.nextInt(21));
+			BigDecimal range = new BigDecimal(rand.nextInt(31));
 			BigDecimal oddValue = diffValue.multiply(range).add(stdValue);
 			odds.setGameId(gameId);
 			odds.setCount(0L);
@@ -317,7 +317,7 @@ public class InitialData implements ServletContextListener {
 														.minusSeconds(rand.nextInt(60));
 						lottery.setConfirmTime(confirmTime);
 						OddsEntity odd = odds.get(rand.nextInt(oddsSize));
-						if (rand.nextInt(11) >= 9) {
+						if (rand.nextInt(11) > 9) { //10%機率買lottery
 							lotteryOdds.setLotteryId(lottery.getId());
 							lotteryOdds.setOddsId(odd);
 							lotteryOdds = lotteryOddsService.insert(lotteryOdds);
@@ -335,23 +335,63 @@ public class InitialData implements ServletContextListener {
 							lotteryOddsListSize = lotteryOddsList.size();
 						}
 					}
-					if (lotteryOddsListSize == 1) {
-						capital = new Long(100 * (rand.nextInt(100) + 1));
+					if (lotteryOddsListSize == 1) { //投注數1，只買單場
+						capital = new Long(100 * (rand.nextInt(10) + 1));
+						lottery.setCom1(1L);
+					} else if (rand.nextInt(11) >= 2) { //80%機率買過關
+						capital = new Long(100 * (rand.nextInt(10) + 1));
 						lottery.setCom0(1L);
-					} else if (rand.nextInt(11) >= 6) {
-						capital = new Long(100 * (rand.nextInt(100) + 1)) * lotteryOddsListSize;
-						lottery.setCom0(1L);
-					} else {
-						capital = new Long(100 * (rand.nextInt(100) + 1));
+					} else { //過關組合
+						capital = new Long(100 * (rand.nextInt(10) + 1));
 						Set<Integer> coms = new HashSet<Integer>();
-						Integer comNum = rand.nextInt(lotteryOddsListSize) + 1;
-						while (coms.size() != comNum) {
+						Integer comNum = rand.nextInt(lotteryOddsListSize) + 1; //選取多少過關組合
+						while (coms.size() != comNum) { //隨機選取過關組合直到comNum
 							Integer index = rand.nextInt(8) + 1;
 							if (index <= lotteryOddsListSize) {
 								coms.add(index);
 							}
 						}
-						lottery = setComs(lottery, coms);
+						Long count = 0L;
+						for (Integer com : coms) { //選定過關組合併計算組合數
+							switch (com) {
+								case 1: 
+									lottery.setCom1(1L);
+									count += lotteryOddsListSize;
+									break;
+								case 2: 
+									lottery.setCom2(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) / 2;
+									break;
+								case 3: 
+									lottery.setCom3(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) * (lotteryOddsListSize - 2) / 6;
+									break;
+								case 4: 
+									lottery.setCom4(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) * (lotteryOddsListSize - 2) * (lotteryOddsListSize - 3) / 24;
+									break;
+								case 5: 
+									lottery.setCom5(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) * (lotteryOddsListSize - 2) * (lotteryOddsListSize - 3)
+												* (lotteryOddsListSize - 4) / 120;
+									break;
+								case 6: 
+									lottery.setCom6(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) * (lotteryOddsListSize - 2) * (lotteryOddsListSize - 3)
+												* (lotteryOddsListSize - 4) * (lotteryOddsListSize - 5) / 720;
+									break;
+								case 7: 
+									lottery.setCom7(1L);
+									count += lotteryOddsListSize * (lotteryOddsListSize - 1) * (lotteryOddsListSize - 2) * (lotteryOddsListSize - 3)
+												* (lotteryOddsListSize - 4) * (lotteryOddsListSize - 5) * (lotteryOddsListSize - 6) / 5040;
+									break;
+								case 8: 
+									lottery.setCom8(1L);
+									count += 1;
+									break;
+							}
+						}
+						capital = capital * count;
 						
 					}
 					lottery.setCapital(capital);
@@ -367,7 +407,7 @@ public class InitialData implements ServletContextListener {
 		}
 		return true;
 	}
-	
+	/*
 	private LotteryEntity setComs(LotteryEntity lottery, Set<Integer> coms) {
 		for (Integer com : coms) {
 			switch (com) {
@@ -399,7 +439,7 @@ public class InitialData implements ServletContextListener {
 		}
 		return lottery;
 	}
-	
+	*/
 	private Boolean countLotterys() {
 		List<LotteryEntity> lotterys = lotteryService.getAll();
 		try {
