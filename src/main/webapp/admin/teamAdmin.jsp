@@ -241,7 +241,7 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
-		$('#catagory').change(listLeague);
+		$('#catagory').change(getLeagueList);
 		$('#catagory').change();
 		//End of catagory
 		
@@ -276,7 +276,7 @@
 		} else {
 			$('#leagueNameList').val(leagueName);
 		}
-		function listLeague() {
+		function getLeagueList() {
 			$('#leagueNameList').empty();
 			$.ajax({
 				url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
@@ -295,7 +295,7 @@
 				async: false
 			});
 		}
-		//End of listLeague
+		//End of getLeagueList
 		
 		//Begin of listTeam
 		$('#btnAddTeam').click(function() {

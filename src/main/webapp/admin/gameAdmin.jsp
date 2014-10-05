@@ -42,26 +42,32 @@
 						
 						<div class="row">
 							<div class="col-sm-12">
-								<form role="form" class="form-inline pull-left" action="<c:url value="/admin/gameAdmin"/>" method="post">
-									<select class="input-sm" id="catagory" name="catagory">
-										<c:forEach var="ballType" items="${ballTypes}">
-											<c:choose>
-												<c:when test="${ballType eq 'Baseball'}">
-													<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
-												</c:when>
-												<c:when test="${ballType eq 'Basketball'}">
-													<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
-												</c:when>
-												<c:when test="${ballType eq 'Soccer'}">
-													<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</select>
+								<form role="form" class="form-inline" action="<c:url value="/admin/gameAdmin"/>" method="post">
+									<div class="form-group">
+										<select class="input-sm form-control" id="catagory" name="catagory">
+											<c:forEach var="ballType" items="${ballTypes}">
+												<c:choose>
+													<c:when test="${ballType eq 'Baseball'}">
+														<option value="Baseball" selected><s:text name="admin.teamAdmin.ballType.baseball"/></option>
+													</c:when>
+													<c:when test="${ballType eq 'Basketball'}">
+														<option value="Basketball"><s:text name="admin.teamAdmin.ballType.basketball"/></option>
+													</c:when>
+													<c:when test="${ballType eq 'Soccer'}">
+														<option value="Soccer"><s:text name="admin.teamAdmin.ballType.soccer"/></option>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="input-sm form-control" id="leagueNameList" name="leagueName">
+										</select>
+									</div>
 									<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-fw fa-search"></i></button>
+									<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.gameAdmin.add"/></span></button>
+									<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="fa fa-fw fa-trophy"></i><span class="left5"><s:text name="admin.gameAdmin.payoutToday"/></span></button>
 								</form>
-								<button id="btnAddGame" class="btn btn-success pull-right btn-sm" type="button" data-toggle="modal" data-target="#gameModal"><i class="fa fa-fw fa-plus"></i><span class="left5"><s:text name="admin.gameAdmin.add"/></span></button>
-								<button class="btn btn-warning pull-right btn-sm btn-payoutToday" type="button" data-toggle="modal" data-target="#payoutTodayModal"><i class="fa fa-fw fa-trophy"></i><span class="left5"><s:text name="admin.gameAdmin.payoutToday"/></span></button>
 							</div>
 						</div>
 						<!-- .row -->
@@ -499,6 +505,8 @@
 		} else {
 			$('#catagory').val(catagory);
 		}
+		$('#catagory').change(getLeagueList);
+		$('#catagory').change();
 		//End of catagory
 		
 		//Begin of gameTable
@@ -578,6 +586,34 @@
 		});
 				
 		//End of listBallType
+		
+		//Begin of getLeagueList
+		var leagueName = '${leagueName}';
+		if (leagueName == null || leagueName == "") {
+			$('#leagueNameList')[0].selectedIndex = 0;
+		} else {
+			$('#leagueNameList').val(leagueName);
+		}
+		function getLeagueList() {
+			$('#leagueNameList').empty();
+			$.ajax({
+				url: '<c:url value="/admin/teamAdmin?method:getLeagueNames"/>',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'catagory':$('#catagory').val()
+				},
+				success: function(data) {
+					$.each(data, function(index, leagueName) {
+						var str = '<option value="' + leagueName + '">' + leagueName + '</option>';
+						$('#leagueNameList').append(str);
+					});
+					$('#leagueNameList')[0].selectedIndex = 0;
+				},
+				async: false
+			});
+		}
+		//End of getLeagueList
 		
 		//Begin of listLeague
 		function listLeague() {
