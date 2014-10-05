@@ -135,7 +135,11 @@ public class TeamAction extends ActionSupport {
 	
 	public String admin() {
 		log.debug("TeamAction admin()");
-		System.out.println(leagueName);
+		if (leagueName == null) {
+			leagueName = locale.getLanguage().equals("zh")?
+							service.getLeagueNamesByBallType("Baseball").get(0):
+							service.getLeagueNamesByBallTypeEn("Baseball").get(0);
+		}
 		List<TeamEntity> teams = 
 				locale.getLanguage().equals("zh")?
 				service.getTeamList(leagueName):

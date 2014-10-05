@@ -16,7 +16,6 @@ import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import tw.com.softleader.sportslottery.setting.entity.GameEntity;
 import tw.com.softleader.sportslottery.setting.entity.LotteryEntity;
@@ -61,6 +60,7 @@ public class GameAction extends ActionSupport {
 	private InputStream inputStream;
 	private String json;
 	private String catagory;
+	private String leagueName;
 	private LocalDate timeFrom, timeTo;
 	private String teamName;
 	
@@ -79,6 +79,14 @@ public class GameAction extends ActionSupport {
 	
 	private Locale locale = ActionContext.getContext().getLocale();
 	
+	public String getLeagueName() {
+		return leagueName;
+	}
+
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
+
 	public Locale getLocale() {
 		return locale;
 	}
@@ -463,9 +471,12 @@ public class GameAction extends ActionSupport {
 		log.debug("GameAction admin()");
 		maxGameNum = service.maxGameNum();
 		ballTypes = service.getBallTypes();
-		List<GameEntity> games = !StringUtils.isEmpty(catagory)?
-									service.getByBallType(catagory):
-									service.getByBallType(service.getBallTypes().get(0));
+		if (leagueName == null) {
+			leagueName = locale.getLanguage().equals("zh")?
+							teamService.getLeagueNamesByBallType(ballTypes.get(0)).get(0):
+							teamService.getLeagueNamesByBallTypeEn(ballTypes.get(0)).get(0);
+		}
+		List<GameEntity> games = service.getByLeagueName(leagueName);
 		json = new Gson().toJson(games);
 		return Action.SUCCESS;
 	}
