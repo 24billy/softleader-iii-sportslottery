@@ -9,7 +9,7 @@
 				<p class="lead">
 					<i class="fa fa-fw fa-copyright"></i><span class="left5">2014 CECJ05 Team 01 All Rights Reserved.</span>
 					<span class="pull-right hidden-xs">
-						<a href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left">Sports Lottery Mania</span></a>
+						<a href="<c:url value="/admin/home"/>"><i class="fa fa-fw fa-futbol-o"></i><span class="left">Sports Lottery Admin</span></a>
 					</span>
 				</p>
 			</div>
