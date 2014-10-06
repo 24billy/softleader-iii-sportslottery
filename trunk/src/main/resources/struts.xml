@@ -313,10 +313,8 @@
     </action>
 	<!-- 驗證狀態 -->
   	<action name="verify" class="userAction" method="onLock">
-  		<result name="message" type="stream">
-  			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
+  		<result name="success">/Security/Result/success.jsp</result>
+		<result name="error">/Security/Result/fail.jsp</result>
   	</action>
 	<action name="sendLock" class="userAction" method="sendLock">
 		<result name="success">/Security/Result/success.jsp</result>
