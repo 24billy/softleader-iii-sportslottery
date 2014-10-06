@@ -315,7 +315,7 @@ hr {
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group has-feedback">
-											<label  for="accountf">帳號</label>
+											<label  for="accountf" id="demoInfo">帳號</label>
 											<div class="input-group">
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-user"></span> 
@@ -426,13 +426,13 @@ hr {
 													</select>
 												</div>
 												<div class="post-div col-md-7 col-sm-12 col-xs-8">
-													<div class="form-group">
-														<input name="post" class="post input-sm form-control" type="text" data-mask="999999-9-999999-9" placeholder="999999-9-999999-9">
+													<div class="form-grou">
+														<input name="post" class="post input-sm form-control" id="post-num" type="text" data-mask="999999-9-999999-9" placeholder="999999-9-999999-9">
 													</div>
 													<div class="errorMsg"></div>
 												</div>
 												<div class="bot-div col-md-7 col-sm-12 col-xs-8">
-													<div class="form-group">
+													<div class="form-grou">
 														<input name="bot" class="bot input-sm form-control" type="text" data-mask="9999-9999-9999-9999" placeholder="9999-9999-9999-9999" />
 													</div>
 													<div class="errorMsg"></div>
@@ -970,7 +970,18 @@ function next(obj,n,next) {
 				}
 			});
 		});
-		
+		$('#demoInfo').on('click',function() {
+			$('#accountf').val('xxxxxx');
+			$('#passwordf').val('a123123');
+			$('#confirm_password').val('a123123');
+			$('#userBirth').val('1988-01-01');
+			$('#email').val('xxx123@gmail.com');
+			$('#name').val('王大蠻');
+			$('#userId').val('a123456789');
+			$('#phone').val('0911234567');
+			$('#userId').val('a123456789');
+			$('#post-num').val('112312-3-123213-2');
+		});
 	})(jQuery);
 </script>
 </html>
