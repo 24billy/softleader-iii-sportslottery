@@ -48,7 +48,7 @@ public class CreateCSV {
 			data = br.readLine();
 			System.out.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", 
 					userAccount.toString(),
-					"a123456",
+					"\334H>\200\247\240\275\236\367\035\214\371sg9$",
 					userName,
 					userCardId,
 					"1988-11-11",
