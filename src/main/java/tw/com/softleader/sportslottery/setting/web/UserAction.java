@@ -270,15 +270,14 @@ public class UserAction extends ActionSupport {
 		log.debug(lockCharacter);
 		if(user.getUserState().equals(lockCharacter)) {
 			user.setUserState("0");
+			session.remove("locking");
 			user = service.noPswdUpdate(user);
 			session.put("user", user);
 		}else {
 			log.debug("驗證碼不正確");
-			inputStream = new ByteArrayInputStream("error".getBytes(StandardCharsets.UTF_8));
-			return "message";
+			return ERROR;
 		}
-		inputStream = new ByteArrayInputStream("success".getBytes(StandardCharsets.UTF_8));
-		return "message";
+		return SUCCESS;
 	}
 	public String sendLock() {
 		Map session = ActionContext.getContext().getSession();

@@ -924,7 +924,6 @@ function next(obj,n,next) {
 			$.ajax({
 				url : "<c:url value='/verify'/>",
 				type : "get",
-				dataType:'json',
 				async : false,
 				data : {
 					lockCharacter:$('#lockCharacter').val()
