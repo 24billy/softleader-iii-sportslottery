@@ -126,7 +126,8 @@ public class UserService extends GenericService<UserEntity> {
 		String email = entity.getUserEmail().toLowerCase();
 		entity.setUserAccount(account);
 		entity.setUserEmail(email);		
-		return dao.insert(this.encoding(entity));
+		//return dao.insert(this.encoding(entity));
+		return dao.insert(entity);
 	}
 	
 	public String sendLockmail(UserEntity userEntity) {
@@ -182,8 +183,8 @@ public class UserService extends GenericService<UserEntity> {
 	}
 	@Override
 	public UserEntity update(UserEntity entity) {
-		UserEntity enEntity = this.encoding(entity);
-		dao.update(enEntity);
+		//UserEntity enEntity = this.encoding(entity);
+		dao.update(entity);
 		return entity;
 	}
 	//單一欄位搜尋User
@@ -201,7 +202,7 @@ public class UserService extends GenericService<UserEntity> {
 	//登入
 	public UserEntity checkLogin(String userAccount,UserEntity checkEntity) {
 		UserEntity entity = this.getByUserAccount(userAccount);
-		checkEntity = this.encoding(checkEntity);
+		//checkEntity = this.encoding(checkEntity);
 		if(entity!=null && checkEntity!=null
 				&& Arrays.equals(entity.getUserPassword(), checkEntity.getUserPassword())) {
 			log.debug("驗證成功");

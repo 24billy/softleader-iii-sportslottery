@@ -924,12 +924,15 @@ function next(obj,n,next) {
 			$.ajax({
 				url : "<c:url value='/verify'/>",
 				type : "get",
+				dataType:'json',
 				async : false,
 				data : {
 					lockCharacter:$('#lockCharacter').val()
 				},
 				success : function(data) {
+					console.log('收到回應');
 					if (data == "success") {
+						console.log('驗證成功');
 						//$('#top-page-div').load('<c:url value="/topPage.jsp"/>');
 						if(hasLocking){
 							hasLocking = false;
@@ -944,6 +947,7 @@ function next(obj,n,next) {
 // 						$('#page3').hide();
 // 						$('#page4').fadeIn(500);
 					}else {
+						console.log('驗證失敗');
 						$('.onlock-error-div').html('驗證失敗,請重新填入').css('color','red');
 					}
 				}
