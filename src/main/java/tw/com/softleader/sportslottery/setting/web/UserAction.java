@@ -266,15 +266,19 @@ public class UserAction extends ActionSupport {
 	public String onLock() {
 		Map session = ActionContext.getContext().getSession();
 		UserEntity user = (UserEntity)session.get("user");
+		log.debug(user.getUserState());
+		log.debug(lockCharacter);
 		if(user.getUserState().equals(lockCharacter)) {
 			user.setUserState("0");
 			user = service.noPswdUpdate(user);
 			session.put("user", user);
 		}else {
 			log.debug("驗證碼不正確");
-			return ERROR;
+			inputStream = new ByteArrayInputStream("error".getBytes(StandardCharsets.UTF_8));
+			return "message";
 		}
-		return SUCCESS;
+		inputStream = new ByteArrayInputStream("success".getBytes(StandardCharsets.UTF_8));
+		return "message";
 	}
 	public String sendLock() {
 		Map session = ActionContext.getContext().getSession();
@@ -386,7 +390,7 @@ public class UserAction extends ActionSupport {
 			log.debug("Model = {}", model);
 			
 			try {
-				service.insert(model);
+				service.insert(service.encoding(model));
 				UserEntity entity = service.getByUserAccount(model.getUserAccount());
 				log.debug("新會員"+entity);
 				Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
@@ -437,14 +441,16 @@ public class UserAction extends ActionSupport {
 						model = service.encoding(model);
 						if(userEntity!=null
 								&& Arrays.equals(userEntity.getUserPassword(), model.getUserPassword())) {
-							userEntity.setUserPassword(userPassword.getBytes());
 							log.debug("密碼驗證成功 可修改密碼");
+							
+							model.setUserPassword(userPassword.getBytes());
 						} else {
 							log.debug("密碼不符合");
 							this.addFieldError("passwordError", this.getText("invalid.fieldvalue.password"));
 							return ERROR;
 						}
 					}
+					userEntity.setUserPassword(service.encoding(model).getUserPassword());
 					userEntity.setUserName(model.getUserName());
 					userEntity.setUserBirthday(model.getUserBirthday());
 					userEntity.setUserEmail(model.getUserEmail());
@@ -467,7 +473,7 @@ public class UserAction extends ActionSupport {
 	//驗證會員登入 
 	public String checkUser(){
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
-		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
+		UserEntity entity = service.checkLogin(model.getUserAccount(), service.encoding(model));
 		if(entity!=null) {
 			log.debug("登入驗證成功");
 			inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
@@ -492,6 +498,7 @@ public class UserAction extends ActionSupport {
 		// log.debug(""+userEntity);
 		try {
 			if (model != null) {
+				model = service.encoding(model);
 				userEntity.setUserPassword(model.getUserPassword());
 				userEntity.setUserName(model.getUserName());
 				userEntity.setUserBirthday(model.getUserBirthday());
@@ -528,7 +535,9 @@ public class UserAction extends ActionSupport {
 					model.setUserPassword(oldUserPassword.getBytes());
 					model = service.encoding(model);
 					if (userEntity != null && Arrays.equals(userEntity.getUserPassword(), model.getUserPassword())) {
-						userEntity.setUserPassword(userPassword.getBytes());
+						model.setUserPassword(userPassword.getBytes());
+						
+						userEntity.setUserPassword(service.encoding(model).getUserPassword());
 						service.update(userEntity);
 						service.updateUserPasswordMail(userEntity);
 						inputStream = new ByteArrayInputStream("true".getBytes(StandardCharsets.UTF_8));
@@ -654,15 +663,15 @@ public class UserAction extends ActionSupport {
 		/*
 		UserEntity entity2 = service.getById(2l);
 		entity2.setUserPassword("a123456".getBytes());
-		service.update(entity2);
+		service.update(service.encoding(entity2));
 		UserEntity entity3 = service.getById(3l);
 		entity3.setUserPassword("a123456".getBytes());
-		service.update(entity3);
+		service.update(service.encoding(entity3));
 		*/
 		
 		//正式程式碼
 		log.debug(model.getUserAccount() + " : " + model.getUserPassword());
-		UserEntity entity = service.checkLogin(model.getUserAccount(), model);
+		UserEntity entity = service.checkLogin(model.getUserAccount(), service.encoding(model));
 		if(entity!=null) {
 			Map<String,UserEntity> session = (Map) ServletActionContext.getContext().getSession();
 			session.put("user", entity);
