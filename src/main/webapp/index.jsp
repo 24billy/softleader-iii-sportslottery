@@ -97,7 +97,7 @@
                         <div>
                             <h4>
                                 <i class="fa fa-fw fa-copyright"></i>2014  
-                                <a href="#">CECJ05 Team 01 </a>All Rights Reserved
+                                <a href="#">CECJ05 Team 01 </a>All Rights Reserved.
                             </h4>
                             <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcecj05team01.cloudapp.net%3A8080%2Fsoftleader-iii-sportslottery%2FgoIndex;width=130&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=112989545392380" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:20px;" class="facebook-btn" allowtransparency="true"></iframe>
                         </div>
