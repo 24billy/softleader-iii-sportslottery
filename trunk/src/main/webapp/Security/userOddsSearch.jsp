@@ -69,7 +69,7 @@
 							</div>
 						</div>
 						<button type="button" class="btn btn-default" id="cleanQuery">清除搜尋條件</button>
-						<button type="button" class="btn btn-danger" id="write">匯出</button>
+						<button type="button" class="btn btn-danger glyphicon glyphicon-floppy-save" id="write">Excel</button>
 					</form>
 				</div>
 			</div>
@@ -187,6 +187,11 @@
 			$('#isEndLabelDefault').addClass('active');
 			$('#isEndInputDefault').prop('checked', true);
 			renewData();
+		});
+		$('#write').tooltip({
+			placement:'top',
+			title:'匯出彩券資料',
+			container: 'body'
 		});
 		
 		var table;

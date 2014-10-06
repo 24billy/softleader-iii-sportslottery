@@ -1191,9 +1191,27 @@ INSERT INTO usern(user_account,user_password,user_name,user_card_id,user_birthda
 INSERT INTO usern(user_account,user_password,user_name,user_card_id,user_birthday,user_address,user_email,user_bank_account,user_phone,coins,user_state) VALUES ('eszqvugboc','\334H>\200\247\240\275\236\367\035\214\371sg9$','葉淑菁','E193779808','1988-11-11','Taipei','eszqvugboc@gmail.com','1234-5678-1111',0912345678,1000,'0');
 INSERT INTO usern(user_account,user_password,user_name,user_card_id,user_birthday,user_address,user_email,user_bank_account,user_phone,coins,user_state) VALUES ('fqvqqbziwvzt','\334H>\200\247\240\275\236\367\035\214\371sg9$','林玄珠','G199193359','1988-11-11','Taipei','fqvqqbziwvzt@gmail.com','1234-5678-1111',0912345678,1000,'0');
 
-insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('aaa', 'bbb', 1000, null, true);
-insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('ccc', 'ddd', 2000, null, true);
-insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('AAAA', 'BBBB', 3000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('ZqLQexXKcCSLM', 'SLMSwT7ewz78Q', 1000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('AJjrNdzP4vSLM', 'SLMb9YGspyvQw', 1000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('RTeNx4TcdtSLM', 'SLMKyZUpBeVGY', 1000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('s3eRJbcj4dSLM', 'SLMEdnrqNQddW', 1000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('w57hMvyz3fSLM', 'SLMAXpPEuSWs4', 1000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('MwK6Dx7Yj2SLM', 'SLM4fnkF6Ehhn', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('ya7345WWeBSLM', 'SLMUnFhZ9FyHm', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('davAUR59c2SLM', 'SLM23sBRAdbzu', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('qZUYae939NSLM', 'SLMpFbn4kNmZ3', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('KrUreRaBtMSLM', 'SLMhbH4Z6uE7Q', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('k48LYbzDkxSLM', 'SLMwzHM4GtdHU', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('8KSDBU9wyUSLM', 'SLMQ2NjxSeFTw', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('eaHDexjSQcSLM', 'SLMuEEabbCa8t', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('Xs7SvwebAJSLM', 'SLMfee2eZVE7E', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('6cpG3nx8pZSLM', 'SLMdpbxxG8ASk', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('hqRCwZF4tYSLM', 'SLMrtZNWnWeSu', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('E8QcHJaBkxSLM', 'SLM7kYpBCXCLz', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('UZZ5MbAYQ9SLM', 'SLMzAH3budS7S', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('447Y7hFs6DSLM', 'SLMaVSVkB7nZ2', 2000, null, true);
+insert into depositCard (CARD_PASSWORD, CARD_ACCOUNT, POINT, USE_TIME, STATE) values ('HGEUSpcSNrSLM', 'SLMVp4zJNvrWc', 2000, null, true);
+insert into depositCard (CARD_ACCOUNT, CARD_PASSWORD, POINT, USE_TIME, STATE) values ('aaa', 'bbb', 2000, null, true);
 
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告1', '測試公告內容1', '2014-08-10T10:50:20', '2014-08-12T7:20:50');
 insert into announce (announce_title, announce_content, announce_time, modified_time) values ('測試公告2', '測試公告內容2', '2014-08-13T8:20:10', '2014-08-13T8:21:45');
