@@ -689,9 +689,9 @@
 						}
 						return str;
 					}
-					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					$('#ballType').val(data.ballType);
 					$('#ballType').change();
+					$('#gameTime').val(year + '-' + month + '-' + date + ' ' + hours + ':' + minutes);
 					if (zh) {
 						$('#leagueName').val(dataLeagueName);
 					} else {
