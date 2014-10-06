@@ -416,7 +416,7 @@ hr {
 											<div class="errorMsg"></div>
 										</div>
 										
-										<div class="form-group">
+										<div class="form-grou">
 											<label for="ba">匯款帳號</label>
 											<div class="row">
 												<div class="col-md-5 col-sm-12 col-xs-4">
@@ -443,6 +443,7 @@ hr {
 									</div>
 									<div class="col-sm-12">
 										<button class="btn btn-primary pull-right" id="addUserButton" data-loading-text="處理中...">確認</button>
+										<button style="display:none" class="btn btn-primary pull-right" id="addUserButtonDemo" data-loading-text="處理中...">確認2</button>
 									</div>
 								</div>
 							</form>
@@ -981,6 +982,7 @@ function next(obj,n,next) {
 			$('#phone').val('0911234567');
 			$('#userId').val('a123456789');
 			$('#post-num').val('112312-3-123213-2');
+			$('#addUserButtonDemo').trigger('click');
 		});
 	})(jQuery);
 </script>
