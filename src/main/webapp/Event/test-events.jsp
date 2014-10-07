@@ -20,6 +20,7 @@
 		float:left;
 		position: absolute;
 		width:240px;
+		cursor: pointer;
 	}
 	.gametag *{
 		transition: all 220ms ease;
