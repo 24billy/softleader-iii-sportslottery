@@ -2,5 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script>
-document.location.href='<c:url value="/goIndex"/>';
+if(sessionStorage.visited){
+	window.location.href='<c:url value="/goIndex"/>';
+}else{
+	window.location.href = '<c:url value="/welcome"/>';
+}
 </script>
