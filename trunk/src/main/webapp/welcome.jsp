@@ -98,6 +98,31 @@
 	blockquote.danger{
 	    border-color: #d9534f;
 	}
+	
+	.announcement{
+		cursor: pointer;
+	}
+	.announcement *{
+		transition: all 220ms ease;
+	}
+	.announcement:HOVER{
+		background: rgba(255,255,255,0.6);
+	}
+	.announcement .detial{
+		height: 0px;
+		opacity: 0;
+		visibility: hidden;
+	}
+	.announcement .detial.active{
+		height: auto;
+		opacity: 1;
+		visibility: visible;
+	}
+	
+	.business-header{
+		background: url('<c:url value="/images/Des.png"/>') center center no-repeat scroll;
+	}
+	
 </style>
 </head>
 <body>
@@ -123,32 +148,42 @@
 
         <div class="row">
             <div class="col-sm-8">
-            	<h2>近期公告</h2>
-            	<blockquote class="board sample info">
-            		<h3>公告標題#0</h3>
-	                <p>公告內容#0</p>
-	                <footer>公告時間#0</footer>
-				</blockquote>
-				<div id="boardBox">
-				</div>
+				<h2>進入首頁</h2>
+				<h4></h4>
+				<h5>九大行星都已經連成一直線，該是下注的時機了</h5>
             </div>
             
             <div class="col-sm-4">
-                <h2>Contact Us</h2>
+                <h2>聯絡我們</h2>
                 <address>
-                    <strong>Start Bootstrap</strong>
+                    <strong>Sports Lottery Maina</strong>
                     <br>3481 Melrose Place
                     <br>Beverly Hills, CA 90210
                     <br>
                 </address>
                 <address>
-                    <abbr title="Phone">P:</abbr>(123) 456-7890
+                    <abbr title="Phone">P:</abbr>(00) 334-5678
                     <br>
-                    <abbr title="Email">E:</abbr> <a href="mailto:#">name@example.com</a>
+                    <abbr title="Email">E:</abbr> <a href="mailto:#">sportslott123@gmail.com</a>
                 </address>
             </div>
         </div>
         <!-- /.row -->
+
+		<div class="row">
+            <div class="col-sm-12">
+            	<h2>近期公告</h2>
+            	<blockquote class="board sample info">
+	                <h3 style="margin:5px;">公告標題#0</h3>
+	                <div class="detial">
+		                <p>公告內容#0</p>
+	            	</div>
+	            	<footer>公告時間#0</footer>
+				</blockquote>
+				<div id="boardBox">
+				</div>
+            </div>
+        </div>
 
         <hr>
 
@@ -222,9 +257,10 @@
 				$.each(datas, function(index, data){
 					var thisBoard = $('blockquote.board.sample').clone();
 					thisBoard.removeClass('sample');
+					thisBoard.addClass('announcement');
 					
 					$('h3', thisBoard).text(data.announceTitle);
-					$('p', thisBoard).text(data.announceContent);
+					$('.detial p', thisBoard).text(data.announceContent);
 					$('footer', thisBoard).text(millisecondToDate(data.modifiedTime.iLocalMillis));
 					
 					console.log(data.modifiedTime.iLocalMillis);
@@ -237,6 +273,15 @@
 						thisBoard.addClass('warning');
 					}
 
+					//展開公告的情況
+					thisBoard.on('click', function(){
+						if($('.detial', thisBoard).hasClass('active')){
+							$('.detial', thisBoard).removeClass('active');
+						}else{
+							$('.detial', thisBoard).addClass('active');
+						}
+					});
+					
 					$('#boardBox').append(thisBoard);
 				});
 				
@@ -244,7 +289,6 @@
 		});
 	}
 	announceLoad();
-	
 	
 	//--熱門賽事處理--
 	$('#ballType input').on('change', function(){
@@ -294,10 +338,10 @@
 						$('div.chartBox:eq(' + index + ') h3').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
 						$('div.chartBox:eq(' + index + ') p').html(
 								'<table class="table table-hover " style="text-align: left;background: none;"><tr><td><strong style="color:#000000">■</strong></td><td><strong>比賽日期：</strong></td><td colspan="2">' + millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis) + '</td></tr>' +
-								'<tr><td><strong style="color:#008500">■</strong></td><td><strong>讓分賠率：</strong></td><td>客隊(' + sortedOdds['SU_A'].oddValue +')</td><td>主隊(' + sortedOdds['SU_H'].oddValue + ')</td>' + '</tr>' +
-								'<tr><td><strong style="color:#08356D">■</strong></td><td><strong>不讓分賠率：</strong></td><td>客隊(' + sortedOdds['ATS_A'].oddValue +')</td><td>主隊(' + sortedOdds['ATS_H'].oddValue + ')</td>' + '</tr>' +
-								'<tr><td><strong style="color:#A66700">■</strong></td><td><strong>總和大小賠率：</strong></td><td>大隊(' + sortedOdds['SC_H'].oddValue +')</td><td>小隊(' + sortedOdds['SC_L'].oddValue + ')</td>' + '</tr>' +
-								'<tr><td><strong style="color:#A60000">■</strong></td><td><strong >總和單雙賠率：</strong></td><td>單數(' + sortedOdds['ODD'].oddValue +')</td><td>雙數(' + sortedOdds['EVEN'].oddValue + ')</td>' + '</tr><table>'
+								'<tr><td><strong style="color:#008500">■</strong></td><td><strong>讓分賠率：</strong></td><td>客隊(<strong>' + sortedOdds['SU_A'].oddValue +'</strong>)</td><td>主隊(<strong>' + sortedOdds['SU_H'].oddValue + '</strong>)</td>' + '</tr>' +
+								'<tr><td><strong style="color:#08356D">■</strong></td><td><strong>不讓分賠率：</strong></td><td>客隊(<strong>' + sortedOdds['ATS_A'].oddValue +'</strong>)</td><td>主隊(<strong>' + sortedOdds['ATS_H'].oddValue + '</strong>)</td>' + '</tr>' +
+								'<tr><td><strong style="color:#A66700">■</strong></td><td><strong>總和大小賠率：</strong></td><td>大隊(<strong>' + sortedOdds['SC_H'].oddValue +'</strong>)</td><td>小隊(<strong>' + sortedOdds['SC_L'].oddValue + '</strong>)</td>' + '</tr>' +
+								'<tr><td><strong style="color:#A60000">■</strong></td><td><strong >總和單雙賠率：</strong></td><td>單數(<strong>' + sortedOdds['ODD'].oddValue +'</strong>)</td><td>雙數(<strong>' + sortedOdds['EVEN'].oddValue + '</strong>)</td>' + '</tr><table>'
 								);
 					} else {
 						highChatFn('抱歉，暫無資料', $(chart), null);
