@@ -64,6 +64,23 @@
 	.subtitle{
 		font-family: Meiryo, "Microsoft JhengHei" !important;
 	}
+	.business-header{
+		position:relative;
+	}
+	.titleFooter{
+		color: white;
+		margin: 0px 20px;
+		position:absolute;
+		bottom:0px;
+		right:0px;
+	}
+	.goIndex{
+		position:absolute;
+		bottom:0px;
+		left:50%;
+		margin:-20px -20px 40px -80px;
+	}
+	
 	.chart{
 		width: 300px;
 		height: 300px;
@@ -130,15 +147,17 @@
     <!-- Note: The background image is set within the business-casual.css file. -->
     <header class="business-header">
         <div class="container">
-            <div class="row">
+            <div class="row header">
                 <div class="col-lg-12">
                 	<div class="titleBox">
                 		<h1 class="tagline title">全民瘋運彩</h1>
-                    	<h5 class="tagline subtitle">-Sports Lottery Maina-</h5>
+                    	<h5 class="tagline subtitle">-Sports Lottery Maina-</h5>'
                 	</div>
                 </div>
             </div>
         </div>
+        <h3 class="titleFooter">九大行星都已連成一線 投注的時機來臨了!</h3>
+        <button class="goIndex btn btn-lg btn-default">&lt;&lt;投注去&gt;&gt;</button>
     </header>
 
     <!-- Page Content -->
@@ -147,31 +166,7 @@
         <hr>
 
         <div class="row">
-            <div class="col-sm-8">
-				<h2>進入首頁</h2>
-				<h4></h4>
-				<h5>九大行星都已經連成一直線，該是下注的時機了</h5>
-            </div>
-            
-            <div class="col-sm-4">
-                <h2>聯絡我們</h2>
-                <address>
-                    <strong>Sports Lottery Maina</strong>
-                    <br>3481 Melrose Place
-                    <br>Beverly Hills, CA 90210
-                    <br>
-                </address>
-                <address>
-                    <abbr title="Phone">P:</abbr>(00) 334-5678
-                    <br>
-                    <abbr title="Email">E:</abbr> <a href="mailto:#">sportslott123@gmail.com</a>
-                </address>
-            </div>
-        </div>
-        <!-- /.row -->
-
-		<div class="row">
-            <div class="col-sm-12">
+			<div class="col-sm-8">
             	<h2>近期公告</h2>
             	<blockquote class="board sample info">
 	                <h3 style="margin:5px;">公告標題#0</h3>
@@ -183,7 +178,23 @@
 				<div id="boardBox">
 				</div>
             </div>
+            
+            <div class="col-sm-4">
+                <h2>聯絡我們</h2>
+                <address>
+                    <strong>Sports Lottery Maina</strong>
+                    <br>台北市大安區
+                    <br>信義路三段153號
+                    <br>
+                </address>
+                <address>
+                    <abbr title="Phone">P:</abbr>(00) 334-5678
+                    <br>
+                    <abbr title="Email">E:</abbr> <a href="mailto:#">sportslott123@gmail.com</a>
+                </address>
+            </div>
         </div>
+        <!-- /.row -->
 
         <hr>
 
@@ -406,6 +417,11 @@
 	}
 	
 	changeBalltype("hotBaseballGames");
+	
+	$('.goIndex').on('click', function(){
+		sessionStorage.visited = "true";
+		window.location.href = '<c:url value="/"/>';
+	});
  </script>   
  
 </body>

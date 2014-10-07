@@ -399,6 +399,8 @@
 		</result>
 		<allowed-methods>selectLatestFiveRecord</allowed-methods>
   	</action>
-  	
+  	<action name="welcome">
+  		<result>/welcome.jsp</result>
+  	</action>
   </package>
 </struts>
