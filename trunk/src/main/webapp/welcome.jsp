@@ -241,7 +241,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; 2014 <a href="#">CECJ05 Team 01 </a>All Rights Reserved.</p>
                 </div>
             </div>
             <!-- /.row -->
