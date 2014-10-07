@@ -68,6 +68,7 @@
 		position:relative;
 	}
 	.titleFooter{
+		font-family: "標楷體", "Microsoft JhengHei" !important;
 		color: white;
 		margin: 0px 20px;
 		position:absolute;
@@ -151,7 +152,7 @@
                 <div class="col-lg-12">
                 	<div class="titleBox">
                 		<h1 class="tagline title">全民瘋運彩</h1>
-                    	<h5 class="tagline subtitle">-Sports Lottery Maina-</h5>'
+                    	<h5 class="tagline subtitle">-Sports Lottery Mania-</h5>'
                 	</div>
                 </div>
             </div>
@@ -182,7 +183,7 @@
             <div class="col-sm-4">
                 <h2>聯絡我們</h2>
                 <address>
-                    <strong>Sports Lottery Maina</strong>
+                    <strong>Sports Lottery Mania</strong>
                     <br>台北市大安區
                     <br>信義路三段153號
                     <br>
