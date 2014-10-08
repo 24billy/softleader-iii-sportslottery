@@ -92,14 +92,19 @@
         <nav id="footerwrap" class="navbar navbar-default navbar-fixed-bottom hidden-xs" role="navigation">
         
             <div class="container-fluid">
-                <div class="col-sm-offset-4  col-md-offset-4 col-xs-6 col-sm-6 col-md-6">
+                <div class="col-sm-offset-2  col-md-offset-2 col-xs-8 col-sm-8 col-md-8">
                     <div>
                         <div>
                             <h4>
                                 <i class="fa fa-fw fa-copyright"></i>2014  
-                                <a href="#">CECJ05 Team 01 </a>All Rights Reserved.
+                                <a href="#">CECJ05 Team 01 </a>All Rights Reserved. 
+                                <button class="btn btn-primary"  onclick="window.open(' http://fromtobilly0930.appspot.com/ ', '全民瘋運彩使用教學', config='height=400,width=500');">使用教學</button>
                             </h4>
-                            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcecj05team01.cloudapp.net%3A8080%2Fsoftleader-iii-sportslottery%2FgoIndex;width=130&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=112989545392380" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:20px;" class="facebook-btn" allowtransparency="true"></iframe>
+                            <span Sytle="vertical-align:middle;">
+                                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcecj05team01.cloudapp.net%3A8080%2Fsoftleader-iii-sportslottery%2FgoIndex;width=130&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=112989545392380" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:20px;" class="facebook-btn" allowtransparency="true"></iframe>
+                                
+                            </span>
+                            
                         </div>
                     </div>                    
                 </div>
