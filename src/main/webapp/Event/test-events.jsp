@@ -759,6 +759,13 @@ function superRefresh(){
 	$('#game_list').fadeOut(110, function(){
 		$('#game_list *').remove();
 		$('#game_list').prepend(gameTagSample);
+		
+		if(sessionStorage.hotGameType){
+			$('#ballType [value = '+sessionStorage.hotGameType+']').prop('selected', true);
+			leagueSelector();
+			sessionStorage.removeItem('hotGameType');
+		}
+		var ballType = $('#ballType').val();
 
 		$('#loader').css('display','flex');
 		userOddsCount = 0;
@@ -767,7 +774,7 @@ function superRefresh(){
 			type:'post',
 			dataType:'json',
 			data:{
-				'complexBallType':$('#ballType').val(),
+				'complexBallType':ballType,
 				'complexTimeBegin':searchDay,
 				'complexTimeEnd':searchDay,
 				'complexLeagueName':$('#leagueName_form').val(),
