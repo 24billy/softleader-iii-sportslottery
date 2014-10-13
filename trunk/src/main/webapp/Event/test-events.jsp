@@ -380,7 +380,14 @@ function leagueSelector(){
 leagueSelector();
 
 //生成動態磚
+var hotGame;
 function gameRefresh(games, odds){
+	//熱門賽事資料取出
+	if(sessionStorage.hotGame){
+		hotGame = games[parseInt(sessionStorage.hotGame)];
+		sessionStorage.removeItem('hotGame');
+	}
+	
 	//初始化gameList
 	var gameTagSample = $('#gametagSample').clone();
 	$('#game_list').html('');
@@ -470,6 +477,14 @@ function gameRefresh(games, odds){
 			}
 			//根據投注情形判斷展開與否
 			tagColorfn(thisGame);
+			//根據熱門賽事判斷展開與否
+			if(hotGame && hotGame.gameNum == game.gameNum){
+				console.log(hotGame);
+				if(!$('.detial', thisGame).hasClass('active')){
+					$('.detial', thisGame).addClass('active');
+				}
+			}
+			
 			$('#game_list').prepend(thisGame);
 		}
 	});
@@ -587,7 +602,14 @@ function tagColorfn(target){
 
 //取得今天日期
 var d = new Date();
+//目標搜尋日期
 var searchDay = $.format.date(d.getTime(), 'yyyy-MM-dd');
+
+if(sessionStorage.hotGameTime){
+	searchDay = $.format.date(new Date(parseInt(sessionStorage.hotGameTime) + d.getTimezoneOffset()*60000), 'yyyy-MM-dd');
+	sessionStorage.removeItem('hotGameTime');
+}
+
 
 //響應頁面大小
 function responseSize(){
