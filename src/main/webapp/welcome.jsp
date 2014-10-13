@@ -141,6 +141,15 @@
 		background: url('<c:url value="/images/Des.png"/>') center center no-repeat scroll;
 	}
 	
+	.chartDetial tr:HOVER{
+		background: rgba(255,255,255,0.6);
+	}
+	
+	.chartDetial .hoverDetial:HOVER{
+		background: rgba(0,0,0,0.2);
+		cursor: pointer;
+	}
+	
 </style>
 </head>
 <body>
@@ -220,17 +229,125 @@
             <div class="col-sm-4 chartBox" id="hotGame1">
                 <h3>球隊資訊 #1</h3>
                 <div class="chart"></div>
-                <p>賠率資訊 #1</p>
+                <div class="chartDetial">
+	                <table class="table " style="text-align: left;background: none;">
+						<tr>
+							<td><strong style="color:#000000">■</strong></td>
+							<td><strong>比賽日期：</strong></td>
+							<td colspan="2"></td>
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#008500">■</strong></td>
+							<td><strong>讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#08356D">■</strong></td>
+							<td><strong>不讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A66700">■</strong></td>
+							<td><strong>總和大小賠率：</strong></td>
+							<td class="hoverDetial">大隊 <strong></strong></td>
+							<td class="hoverDetial">小隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A60000">■</strong></td>
+							<td><strong >總和單雙賠率：</strong></td>
+							<td class="hoverDetial">單數 <strong></strong></td>
+							<td class="hoverDetial">雙數 <strong></strong></td> 
+						</tr>
+					</table>
+				</div>
             </div>
             <div class="col-sm-4 chartBox" id="hotGame2">
             	<h3>球隊資訊 #2</h3>
                 <div class="chart"></div>
-                <p>賠率資訊 #2</p>
+                <div class="chartDetial">
+	                <table class="table " style="text-align: left;background: none;">
+						<tr>
+							<td><strong style="color:#000000">■</strong></td>
+							<td><strong>比賽日期：</strong></td>
+							<td colspan="2"></td>
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#008500">■</strong></td>
+							<td><strong>讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#08356D">■</strong></td>
+							<td><strong>不讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A66700">■</strong></td>
+							<td><strong>總和大小賠率：</strong></td>
+							<td class="hoverDetial">大隊 <strong></strong></td>
+							<td class="hoverDetial">小隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A60000">■</strong></td>
+							<td><strong >總和單雙賠率：</strong></td>
+							<td class="hoverDetial">單數 <strong></strong></td>
+							<td class="hoverDetial">雙數 <strong></strong></td> 
+						</tr>
+					</table>
+				</div>
             </div>
             <div class="col-sm-4 chartBox" id="hotGame3">
                 <h3>球隊資訊 #3</h3>
                 <div class="chart"></div>
-                <p>賠率資訊 #3</p>
+                <div class="chartDetial">
+	                <table class="table " style="text-align: left;background: none;">
+						<tr>
+							<td><strong style="color:#000000">■</strong></td>
+							<td><strong>比賽日期：</strong></td>
+							<td colspan="2"></td>
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#008500">■</strong></td>
+							<td><strong>讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#08356D">■</strong></td>
+							<td><strong>不讓分賠率：</strong></td>
+							<td class="hoverDetial">客隊 <strong></strong></td>
+							<td class="hoverDetial">主隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A66700">■</strong></td>
+							<td><strong>總和大小賠率：</strong></td>
+							<td class="hoverDetial">大隊 <strong></strong></td>
+							<td class="hoverDetial">小隊 <strong></strong></td> 
+						</tr>
+					
+						<tr>
+							<td><strong style="color:#A60000">■</strong></td>
+							<td><strong >總和單雙賠率：</strong></td>
+							<td class="hoverDetial">單數 <strong></strong></td>
+							<td class="hoverDetial">雙數 <strong></strong></td> 
+						</tr>
+					</table>
+				</div>
             </div>
         </div>
         <!-- /.row -->
@@ -348,13 +465,64 @@
  					    ];
 						highChatFn('總投注次數<br/>' + datas[index].countTotal + '注', $(chart), data);
 						$('div.chartBox:eq(' + index + ') h3').text(datas[index].teamAway.teamName + ' vs ' + datas[index].teamHome.teamName );
-						$('div.chartBox:eq(' + index + ') p').html(
-								'<table class="table table-hover " style="text-align: left;background: none;"><tr><td><strong style="color:#000000">■</strong></td><td><strong>比賽日期：</strong></td><td colspan="2">' + millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis) + '</td></tr>' +
-								'<tr><td><strong style="color:#008500">■</strong></td><td><strong>讓分賠率：</strong></td><td>客隊(<strong>' + sortedOdds['SU_A'].oddValue +'</strong>)</td><td>主隊(<strong>' + sortedOdds['SU_H'].oddValue + '</strong>)</td>' + '</tr>' +
-								'<tr><td><strong style="color:#08356D">■</strong></td><td><strong>不讓分賠率：</strong></td><td>客隊(<strong>' + sortedOdds['ATS_A'].oddValue +'</strong>)</td><td>主隊(<strong>' + sortedOdds['ATS_H'].oddValue + '</strong>)</td>' + '</tr>' +
-								'<tr><td><strong style="color:#A66700">■</strong></td><td><strong>總和大小賠率：</strong></td><td>大隊(<strong>' + sortedOdds['SC_H'].oddValue +'</strong>)</td><td>小隊(<strong>' + sortedOdds['SC_L'].oddValue + '</strong>)</td>' + '</tr>' +
-								'<tr><td><strong style="color:#A60000">■</strong></td><td><strong >總和單雙賠率：</strong></td><td>單數(<strong>' + sortedOdds['ODD'].oddValue +'</strong>)</td><td>雙數(<strong>' + sortedOdds['EVEN'].oddValue + '</strong>)</td>' + '</tr><table>'
-								);
+						
+						var thisDetial = $('div.chartBox:eq(' + index + ') .chartDetial');
+						$('tr:eq(0) td:eq(2)', thisDetial).text(millisecondToDate(datas[index].gameTime.iLocalMillis) + ' ' + millisecondToTime(datas[index].gameTime.iLocalMillis));
+						$('tr:eq(0) td:eq(2)', thisDetial).attr('gameTime', datas[index].gameTime.iLocalMillis);
+						
+						$('tr:eq(1) td:eq(2) strong', thisDetial).text(sortedOdds['SU_A'].oddValue);
+						$('tr:eq(1) td:eq(2)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(1) td:eq(2)', thisDetial).attr('oddId', sortedOdds['SU_A'].id);
+						$('tr:eq(1) td:eq(2)', thisDetial).attr('oddType', 'SU_A');
+						
+						$('tr:eq(1) td:eq(3) strong', thisDetial).text(sortedOdds['SU_H'].oddValue);
+						$('tr:eq(1) td:eq(3)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(1) td:eq(3)', thisDetial).attr('oddId', sortedOdds['SU_H'].id);
+						$('tr:eq(1) td:eq(3)', thisDetial).attr('oddType', 'SU_H');
+						
+						$('tr:eq(2) td:eq(2) strong', thisDetial).text(sortedOdds['ATS_A'].oddValue);
+						$('tr:eq(2) td:eq(2)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(2) td:eq(2)', thisDetial).attr('oddId', sortedOdds['ATS_A'].id);
+						$('tr:eq(2) td:eq(2)', thisDetial).attr('oddType', 'ATS_A');
+						
+						$('tr:eq(2) td:eq(3) strong', thisDetial).text(sortedOdds['ATS_H'].oddValue);
+						$('tr:eq(2) td:eq(3)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(2) td:eq(3)', thisDetial).attr('oddId', sortedOdds['ATS_H'].id);
+						$('tr:eq(2) td:eq(3)', thisDetial).attr('oddType', 'ATS_H');
+						
+						$('tr:eq(3) td:eq(2) strong', thisDetial).text(sortedOdds['SC_H'].oddValue);
+						$('tr:eq(3) td:eq(2)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(3) td:eq(2)', thisDetial).attr('oddId', sortedOdds['SC_H'].id);
+						$('tr:eq(3) td:eq(2)', thisDetial).attr('oddType', 'SC_H');
+						
+						$('tr:eq(3) td:eq(3) strong', thisDetial).text(sortedOdds['SC_L'].oddValue);
+						$('tr:eq(3) td:eq(3)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(3) td:eq(3)', thisDetial).attr('oddId', sortedOdds['SC_L'].id);
+						$('tr:eq(3) td:eq(3)', thisDetial).attr('oddType', 'SC_L');
+						
+						$('tr:eq(4) td:eq(2) strong', thisDetial).text(sortedOdds['ODD'].oddValue);
+						$('tr:eq(4) td:eq(2)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(4) td:eq(2)', thisDetial).attr('oddId', sortedOdds['ODD'].id);
+						$('tr:eq(4) td:eq(2)', thisDetial).attr('oddType', 'ODD');
+						
+						$('tr:eq(4) td:eq(3) strong', thisDetial).text(sortedOdds['EVEN'].oddValue);
+						$('tr:eq(4) td:eq(3)', thisDetial).attr('gameId', datas[index].gameNum);
+						$('tr:eq(4) td:eq(3)', thisDetial).attr('oddId', sortedOdds['EVEN'].id);
+						$('tr:eq(4) td:eq(3)', thisDetial).attr('oddType', 'EVEN');
+						
+						$('.hoverDetial', thisDetial).off('click');
+						$('.hoverDetial', thisDetial).on('click', function(){
+							console.log($(this));
+							console.log($(this).attr('gameId'));
+							console.log($(this).attr('oddId'));
+							console.log($(this).attr('oddType'));
+							
+							sessionStorage.hotGame = $(this).attr('gameId');
+							sessionStorage.hotGameTime = datas[index].gameTime.iLocalMillis;
+							sessionStorage.hasLocated = 'game';
+							sessionStorage.visited = "true";
+							window.location.href = '<c:url value="/"/>';
+						});
 					} else {
 						highChatFn('抱歉，暫無資料', $(chart), null);
 					}
