@@ -380,13 +380,7 @@ function leagueSelector(){
 leagueSelector();
 
 //生成動態磚
-var hotGame;
 function gameRefresh(games, odds){
-	//熱門賽事資料取出
-	if(sessionStorage.hotGame){
-		hotGame = games[parseInt(sessionStorage.hotGame)];
-		sessionStorage.removeItem('hotGame');
-	}
 	
 	//初始化gameList
 	var gameTagSample = $('#gametagSample').clone();
@@ -478,10 +472,10 @@ function gameRefresh(games, odds){
 			//根據投注情形判斷展開與否
 			tagColorfn(thisGame);
 			//根據熱門賽事判斷展開與否
-			if(hotGame && hotGame.gameNum == game.gameNum){
-				console.log(hotGame);
-				if(!$('.detial', thisGame).hasClass('active')){
+			if(sessionStorage.hotGame){
+				if(parseInt(sessionStorage.hotGame) == game.gameNum && !$('.detial', thisGame).hasClass('active')){
 					$('.detial', thisGame).addClass('active');
+					sessionStorage.removeItem('hotGame');
 				}
 			}
 			
