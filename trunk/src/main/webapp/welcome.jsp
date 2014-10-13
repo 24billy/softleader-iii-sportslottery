@@ -511,14 +511,10 @@
 						$('tr:eq(4) td:eq(3)', thisDetial).attr('oddType', 'EVEN');
 						
 						$('.hoverDetial', thisDetial).off('click');
-						$('.hoverDetial', thisDetial).on('click', function(){
-							console.log($(this));
-							console.log($(this).attr('gameId'));
-							console.log($(this).attr('oddId'));
-							console.log($(this).attr('oddType'));
-							
+						$('.hoverDetial', thisDetial).on('click', function(){			
 							sessionStorage.hotGame = $(this).attr('gameId');
 							sessionStorage.hotGameTime = datas[index].gameTime.iLocalMillis;
+							sessionStorage.hotGameType = datas[index].ballType;
 							sessionStorage.hasLocated = 'game';
 							sessionStorage.visited = "true";
 							window.location.href = '<c:url value="/"/>';
