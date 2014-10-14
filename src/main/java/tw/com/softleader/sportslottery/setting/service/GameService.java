@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -450,14 +451,13 @@ public class GameService extends GenericService<GameEntity> {
 		List<GameEntity> games = dao.findComplex(null, null, gameStatus, gameStatus, timeBegin, null, ballType, null);
 		
 		LocalDateTime timeBeginTime = LocalDateTime.now();
-		int i = 0;
-		for (GameEntity game : games) {
+		for (Iterator iterator = games.iterator(); iterator.hasNext();) {
+			GameEntity game = (GameEntity) iterator.next();
 			if(game.getGameTime().toDate().compareTo(timeBeginTime.toDate()) <= 0){
-				games.remove(i);
+				iterator.remove();
 			}
-			i++;
 		}
-		
+
 		//解決只有一筆資料時，不進行排序而不會運作getCountTotal()方法來獲得總投注數的BUG
 		if(games.size() == 1){
 			games.get(0).getCountTotal();
