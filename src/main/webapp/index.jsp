@@ -96,8 +96,8 @@
                     <div>
                         <div>
                             <h4>
-                                <i class="fa fa-fw fa-copyright"></i>2014  
-                                <a href="http://fromtobilly1006.appspot.com">CECJ05 Team 01 </a>All Rights Reserved. 
+                                <i class="fa fa-fw fa-copyright"></i>2014
+                                <a onclick="window.open(' http://fromtobilly1006.appspot.com/ ', '全民瘋運彩組員名單', config='height=768,width=1024');">CECJ05 Team 01 </a>All Rights Reserved. 
                                 <a onclick="window.open(' http://fromtobilly0930.appspot.com/ ', '全民瘋運彩使用教學', config='height=400,width=500');">使用教學</a>
                             </h4>
                             <span Sytle="vertical-align:middle;">
