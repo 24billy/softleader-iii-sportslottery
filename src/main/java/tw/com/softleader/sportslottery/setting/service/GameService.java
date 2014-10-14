@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -445,7 +446,17 @@ public class GameService extends GenericService<GameEntity> {
 		//針對list內的物件進行排序
 		//使用Collections.sort方法，並實作Comparator內的compare辦法
 		//此方法可以針對list內的物件中的特定條件如屬性進行排序
-		List<GameEntity> games = dao.findComplex(null, null, gameStatus, gameStatus, null, null, ballType, null);
+		LocalDate timeBegin = LocalDate.now();
+		List<GameEntity> games = dao.findComplex(null, null, gameStatus, gameStatus, timeBegin, null, ballType, null);
+		
+		LocalDateTime timeBeginTime = LocalDateTime.now();
+		int i = 0;
+		for (GameEntity game : games) {
+			if(game.getGameTime().toDate().compareTo(timeBeginTime.toDate()) <= 0){
+				games.remove(i);
+			}
+			i++;
+		}
 		
 		//解決只有一筆資料時，不進行排序而不會運作getCountTotal()方法來獲得總投注數的BUG
 		if(games.size() == 1){
