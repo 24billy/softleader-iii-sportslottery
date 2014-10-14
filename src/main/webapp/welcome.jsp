@@ -519,8 +519,11 @@
 							sessionStorage.visited = "true";
 							window.location.href = '<c:url value="/"/>';
 						});
+						
+						thisDetial.show();
 					} else {
 						highChatFn('抱歉，暫無資料', $(chart), null);
+						$('.chartDetial', $(chart).parent()).hide();
 					}
 				});
 
