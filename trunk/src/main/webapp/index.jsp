@@ -97,12 +97,11 @@
                         <div>
                             <h4>
                                 <i class="fa fa-fw fa-copyright"></i>2014  
-                                <a href="#">CECJ05 Team 01 </a>All Rights Reserved. 
-                                <button class="btn btn-primary"  onclick="window.open(' http://fromtobilly0930.appspot.com/ ', '全民瘋運彩使用教學', config='height=400,width=500');">使用教學</button>
+                                <a href="http://fromtobilly1006.appspot.com">CECJ05 Team 01 </a>All Rights Reserved. 
+                                <a onclick="window.open(' http://fromtobilly0930.appspot.com/ ', '全民瘋運彩使用教學', config='height=400,width=500');">使用教學</a>
                             </h4>
                             <span Sytle="vertical-align:middle;">
-                                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcecj05team01.cloudapp.net%3A8080%2Fsoftleader-iii-sportslottery%2FgoIndex;width=130&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=112989545392380" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:20px;" class="facebook-btn" allowtransparency="true"></iframe>
-                                
+                                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcecj05team01.cloudapp.net%3A8080%2Fsoftleader-iii-sportslottery%2FgoIndex;width=130&amp;height=20&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=112989545392380" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:20px;" class="facebook-btn" allowtransparency="true"></iframe>                                
                             </span>
                             
                         </div>
