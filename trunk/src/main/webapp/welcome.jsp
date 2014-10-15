@@ -370,7 +370,7 @@
 	$('.btn').button();
 	//--公告處理--
 	function announceLoad(){
-		var todayMil = new Date().valueOf() - new Date().getTimezoneOffset()*60000;
+		var todayMil = (new Date().setDate(new Date().getDate()-1)).valueOf() - new Date().getTimezoneOffset()*60000;
 		var threeAgoMil = (new Date().setDate(new Date().getDate()-3)).valueOf() - new Date().getTimezoneOffset()*60000;
 		
 		console.log(todayMil);
