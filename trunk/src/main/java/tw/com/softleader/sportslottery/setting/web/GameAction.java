@@ -362,7 +362,7 @@ public class GameAction extends ActionSupport {
 		su = gameScoreAway > gameScoreHome? "SU_A":null;
 		if (su == null) su = gameScoreAway < gameScoreHome? "SU_H":null;
 		combination = oddsService.getByGameIdWithOddType(gameId, "ATS_A").get(0).getOddCombination();
-		ats = gameScoreAway - combination.doubleValue() > gameScoreHome? "ATS_A":"ATS_H";
+		ats = gameScoreAway + combination.doubleValue() > gameScoreHome? "ATS_A":"ATS_H";
 		combination = oddsService.getByGameIdWithOddType(gameId, "SC_H").get(0).getOddCombination();
 		sc = gameScoreAway + gameScoreHome > combination.doubleValue()? "SC_H":"SC_L";
 		eo = (gameScoreAway + gameScoreHome) % 2 == 0? "EVEN":"ODD";
