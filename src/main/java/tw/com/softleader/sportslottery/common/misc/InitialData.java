@@ -33,7 +33,7 @@ public class InitialData implements ServletContextListener {
 	//private static final String START_DATE = "2014-08-01";
 	//private static final String END_DATE = "2014-10-31";
 	private static final Integer MAX_GAME_NUM_OF_A_DAY = 20;
-	private static final Integer PAST_MONTHS_OF_BEGIN = 3;
+	private static final Integer PAST_MONTHS_OF_BEGIN = 1;
 	private static final Integer MAX_LOTTERY_NUM_OF_A_DAY = 200;
 	@Autowired
 	private GameService gameService;
@@ -206,18 +206,20 @@ public class InitialData implements ServletContextListener {
 			odds.setOddValue(oddValue);
 			
 			Integer atsAIndex = rand.nextInt(2);
+			/*
 			Integer atsHIndex = null;
 			while (true) {
 				atsHIndex = rand.nextInt(2);
 				if (atsAIndex != atsHIndex) break;
 			}
-			
+			*/
 			switch(oddType[i]) {
 				case "ATS_A": 
 					odds.setOddCombination(atsCombinations.get(atsAIndex));
+					atsCombinations.remove(atsCombinations.get(atsAIndex));
 					break;
 				case "ATS_H": 
-					odds.setOddCombination(atsCombinations.get(atsHIndex));
+					odds.setOddCombination(atsCombinations.get(0));
 					break;
 				case "SC_L": 
 					odds.setOddCombination(scCombination);
