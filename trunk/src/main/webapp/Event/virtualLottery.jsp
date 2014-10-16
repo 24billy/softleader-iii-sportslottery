@@ -227,10 +227,10 @@
     	if(oddType=='SU_A' && (homeScore-awayScore)<0){
             return '過關'; //不讓分客隊贏           
         }
-        if(oddType=='ATS_H' && (homeScore-awayScore)>oddCombination){
+        if(oddType=='ATS_H' && (homeScore-awayScore)<oddCombination){
             return '過關'; //讓分主隊贏           
         }
-        if(oddType=='ATS_A' && (awayScore-homeScore)>oddCombination){
+        if(oddType=='ATS_A' && (awayScore-homeScore)<oddCombination){
             return '過關'; //讓分客隊贏           
         }
         if(oddType=='SC_H' && (homeScore+awayScore)>oddCombination){
